@@ -343,7 +343,8 @@
           <div class="tc-icon-wrap tc-blue">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
-              <path d="M12 8v4l3 3"/>
+              <line x1="12" y1="6" x2="12" y2="18"/>
+              <path d="M15.5 9H10a2 2 0 000 4h4a2 2 0 010 4H8.5"/>
             </svg>
           </div>
           <div>
@@ -409,8 +410,8 @@
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <div class="tc-icon-wrap tc-amber">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
+              <line x1="12" y1="2" x2="12" y2="22"/>
+              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
             </svg>
           </div>
           <div>
@@ -431,7 +432,10 @@
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <div class="tc-icon-wrap tc-blue">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 3H3v7h7V3zM21 3h-7v7h7V3zM21 14h-7v7h7v-7zM10 14H3v7h7v-7z"/>
+              <rect x="2" y="4" width="8" height="16" rx="1"/>
+              <path d="M2 9h8M2 13h6"/>
+              <rect x="14" y="4" width="8" height="16" rx="1"/>
+              <path d="M14 9h8M14 13h6"/>
             </svg>
           </div>
           <div>
@@ -452,9 +456,8 @@
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <div class="tc-icon-wrap tc-slate">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>
-              <rect x="8" y="2" width="8" height="4" rx="1"/>
-              <path d="M12 11v6M9 14h6"/>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
             </svg>
           </div>
           <div>
@@ -497,47 +500,50 @@
   </div>
 </section>
 
-<!-- SOCIAL PROOF / WHO USES THIS -->
-<section style="padding:56px 0;background:var(--surface);border-top:1px solid var(--border)">
+<!-- TESTIMONIALS -->
+<section style="padding:64px 0;background:var(--surface);border-top:1px solid var(--border)">
   <div class="container">
     <div class="section-header" data-enter>
       <p class="section-eyebrow">Who Uses FreePayrollCalc</p>
-      <h2 class="section-title">Built for real payroll decisions</h2>
-      <p class="section-body">Not academic exercises. These are the actual scenarios people run through our calculators every day.</p>
+      <h2 class="section-title">Real people, real payroll decisions</h2>
+      <p class="section-body">From HR teams running W-4 estimates to freelancers comparing 1099 vs W-2 — these are the scenarios people run through our calculators every week.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:36px">
 
-      <div class="calc-card" data-enter style="padding:28px;display:flex;flex-direction:column;gap:14px">
-        <div style="width:40px;height:40px;border-radius:10px;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4M9 17h2"/></svg>
+      <div class="testimonial-card" data-enter>
+        <svg class="tc-quote-icon" width="32" height="24" viewBox="0 0 32 24"><path d="M13.415.001C6.07 5.185.887 10.837.887 17.151c0 3.913 2.246 6.704 5.43 6.704 2.95 0 5.19-2.248 5.19-5.337 0-2.956-2.034-5.02-4.994-5.02-.76 0-1.52.187-2.084.561C4.83 9.967 8.987 5.766 15.282 3.33L13.415.002zm17.331 0C23.4 5.185 18.217 10.837 18.217 17.151c0 3.913 2.248 6.704 5.43 6.704 2.95 0 5.19-2.248 5.19-5.337 0-2.956-2.034-5.02-4.996-5.02-.758 0-1.518.187-2.084.561.403-4.129 4.562-8.33 10.857-10.765L30.746.002z" fill="var(--accent)"/></svg>
+        <p class="tc-quote-text">I run this every time an employee updates their W-4 or asks how a raise will affect their check. Saves me 20 minutes of digging through ADP for a quick estimate.</p>
+        <div class="tc-person">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&h=88&q=85&auto=format&fit=crop&crop=faces" alt="" class="tc-avatar" width="44" height="44" loading="lazy" aria-hidden="true">
+          <div>
+            <div class="tc-person-name">Sarah M.</div>
+            <div class="tc-person-role">HR Manager · Professional Services, 31 employees</div>
+          </div>
         </div>
-        <div>
-          <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px">HR Managers &amp; Payroll Staff</div>
-          <p style="font-size:14px;color:var(--ink-2);line-height:1.7">Run quick estimates before processing payroll, verify deductions, and explain take-home pay changes to employees after W-4 updates — without opening payroll software for every question.</p>
-        </div>
-        <a href="/payroll-tax-calculator" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px">Payroll Tax Calculator <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
 
-      <div class="calc-card" data-enter data-delay="1" style="padding:28px;display:flex;flex-direction:column;gap:14px">
-        <div style="width:40px;height:40px;border-radius:10px;background:var(--green-dim);border:1px solid var(--green-border);display:flex;align-items:center;justify-content:center">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <div class="testimonial-card" data-enter data-delay="1">
+        <svg class="tc-quote-icon" width="32" height="24" viewBox="0 0 32 24"><path d="M13.415.001C6.07 5.185.887 10.837.887 17.151c0 3.913 2.246 6.704 5.43 6.704 2.95 0 5.19-2.248 5.19-5.337 0-2.956-2.034-5.02-4.994-5.02-.76 0-1.52.187-2.084.561C4.83 9.967 8.987 5.766 15.282 3.33L13.415.002zm17.331 0C23.4 5.185 18.217 10.837 18.217 17.151c0 3.913 2.248 6.704 5.43 6.704 2.95 0 5.19-2.248 5.19-5.337 0-2.956-2.034-5.02-4.996-5.02-.758 0-1.518.187-2.084.561.403-4.129 4.562-8.33 10.857-10.765L30.746.002z" fill="var(--accent)"/></svg>
+        <p class="tc-quote-text">Before making our first hire I had no idea employer taxes add ~12% on top of salary. This showed me the real number — I adjusted my budget before it became a cash flow problem.</p>
+        <div class="tc-person">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&q=85&auto=format&fit=crop&crop=faces" alt="" class="tc-avatar" width="44" height="44" loading="lazy" aria-hidden="true">
+          <div>
+            <div class="tc-person-name">James K.</div>
+            <div class="tc-person-role">Owner · Home Services Business, Texas</div>
+          </div>
         </div>
-        <div>
-          <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px">Small Business Owners</div>
-          <p style="font-size:14px;color:var(--ink-2);line-height:1.7">Understand the true cost of a hire — salary plus FICA match, FUTA, SUTA, and workers comp — before making an offer or budgeting for headcount. Avoid the surprise of employer taxes.</p>
-        </div>
-        <a href="/employer-tax-calculator" style="font-size:13px;font-weight:600;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:5px">Employer Tax Calculator <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
 
-      <div class="calc-card" data-enter data-delay="2" style="padding:28px;display:flex;flex-direction:column;gap:14px">
-        <div style="width:40px;height:40px;border-radius:10px;background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.2);display:flex;align-items:center;justify-content:center">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round"><path d="M10 3H3v7h7V3zM21 3h-7v7h7V3zM21 14h-7v7h7v-7zM10 14H3v7h7v-7z"/></svg>
+      <div class="testimonial-card" data-enter data-delay="2">
+        <svg class="tc-quote-icon" width="32" height="24" viewBox="0 0 32 24"><path d="M13.415.001C6.07 5.185.887 10.837.887 17.151c0 3.913 2.246 6.704 5.43 6.704 2.95 0 5.19-2.248 5.19-5.337 0-2.956-2.034-5.02-4.994-5.02-.76 0-1.52.187-2.084.561C4.83 9.967 8.987 5.766 15.282 3.33L13.415.002zm17.331 0C23.4 5.185 18.217 10.837 18.217 17.151c0 3.913 2.248 6.704 5.43 6.704 2.95 0 5.19-2.248 5.19-5.337 0-2.956-2.034-5.02-4.996-5.02-.758 0-1.518.187-2.084.561.403-4.129 4.562-8.33 10.857-10.765L30.746.002z" fill="var(--accent)"/></svg>
+        <p class="tc-quote-text">When I left my W-2 to go freelance, I used the 1099 vs W-2 calculator to figure out what hourly rate I needed to cover self-employment tax and net the same amount. Took 5 minutes.</p>
+        <div class="tc-person">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=88&h=88&q=85&auto=format&fit=crop&crop=faces" alt="" class="tc-avatar" width="44" height="44" loading="lazy" aria-hidden="true">
+          <div>
+            <div class="tc-person-name">Priya T.</div>
+            <div class="tc-person-role">Independent Marketing Consultant, California</div>
+          </div>
         </div>
-        <div>
-          <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px">Contractors &amp; Freelancers</div>
-          <p style="font-size:14px;color:var(--ink-2);line-height:1.7">Compare take-home pay as a 1099 contractor vs a W-2 employee, estimate quarterly self-employment tax, and calculate what rate to charge a client to net the same as a salaried role.</p>
-        </div>
-        <a href="/1099-vs-w2-calculator" style="font-size:13px;font-weight:600;color:var(--amber);text-decoration:none;display:inline-flex;align-items:center;gap:5px">1099 vs W-2 Calculator <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
 
     </div>

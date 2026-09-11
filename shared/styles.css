@@ -557,6 +557,37 @@ label.field-label{
 .text-mono{font-family:var(--mono)}
 .divider{border:none;border-top:1px solid var(--border);margin:24px 0}
 
+/* ── Testimonial Cards ── */
+.testimonial-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  display:flex;flex-direction:column;gap:18px;
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow var(--transition),transform var(--transition);
+}
+.testimonial-card:hover{
+  box-shadow:0 8px 32px rgba(12,15,26,.10),0 3px 10px rgba(12,15,26,.06);
+  transform:translateY(-2px);
+}
+.tc-quote-icon{opacity:.2;flex-shrink:0}
+.tc-quote-text{
+  font-size:15px;color:var(--ink);line-height:1.72;flex:1;
+  font-style:italic;
+}
+.tc-person{
+  display:flex;align-items:center;gap:13px;
+  padding-top:18px;border-top:1px solid var(--border);
+}
+.tc-avatar{
+  width:44px;height:44px;border-radius:50%;
+  object-fit:cover;flex-shrink:0;
+  border:2px solid var(--border);
+}
+.tc-person-name{font-size:14px;font-weight:700;color:var(--ink)}
+.tc-person-role{font-size:12px;color:var(--ink-3);margin-top:2px;line-height:1.4}
+
 /* ── Hero Split Layout ── */
 .hero-split{
   display:grid;
