@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salary to Hourly Calculator 2026 — Convert Annual Pay to Hourly Rate | FreePayrollCalc</title>
+<meta name="description" content="Free salary to hourly calculator. Convert any annual salary to hourly wage — and reverse. Shows hourly, daily, weekly, biweekly, monthly pay. Adjusts for vacation days and work hours.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/salary-to-hourly-calculator">
+<meta property="og:title" content="Salary to Hourly Calculator 2026 — Convert Annual Pay to Hourly Rate">
+<meta property="og:description" content="Convert any annual salary to hourly wage — and reverse. Shows all pay periods at once. Adjusts for vacation days and custom work schedules.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=1200&h=630&q=85&auto=format&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=1200&h=630&q=85&auto=format&fit=crop">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Salary to Hourly Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/salary-to-hourly-calculator",
+  "description": "Convert any annual salary to hourly wage — or reverse. Shows hourly, daily, weekly, biweekly, semimonthly, and monthly pay. Adjusts for vacation days and custom work hours.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["Bidirectional: annual-to-hourly and hourly-to-annual","All 7 pay periods displayed at once","Vacation day adjustment","Custom hours per week and weeks per year"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many hours are in a work year?",
+      "acceptedAnswer": {"@type":"Answer","text":"A standard work year contains 2,080 hours — calculated as 40 hours per week × 52 weeks. If you account for 10 days of paid vacation (the US average), your actual working hours drop to 2,000 per year. Federal government employees often use 2,087 hours, and teachers or academic-year employees typically calculate on 1,560–1,800 hours depending on contract length."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert a $50,000 salary to hourly?",
+      "acceptedAnswer": {"@type":"Answer","text":"Divide $50,000 by 2,080 (standard work hours per year) to get $24.04 per hour. If you take 10 vacation days, divide by 2,000 hours instead to get exactly $25.00 per hour. The formula is: hourly rate = annual salary ÷ (hours per week × weeks worked per year)."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good hourly rate in the US?",
+      "acceptedAnswer": {"@type":"Answer","text":"The median US hourly wage was approximately $23–$24 in 2025–2026, equivalent to $48,000–$50,000 annually. Entry-level positions often start at $15–$18/hr, skilled trades earn $25–$45/hr, and professional roles in tech, finance, and healthcare typically range from $40–$100+/hr. The federal minimum wage is $7.25/hr, though many states and cities set higher floors."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I calculate my hourly rate if I get paid biweekly?",
+      "acceptedAnswer": {"@type":"Answer","text":"Multiply your biweekly paycheck by 26 (there are 26 biweekly pay periods per year) to get your annual salary, then divide by 2,080. Example: a $2,000 biweekly paycheck × 26 = $52,000 annual ÷ 2,080 = $25.00/hr. Note that biweekly pay gives 26 paychecks per year vs. 24 for semimonthly — two extra paychecks annually."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does a salary include overtime?",
+      "acceptedAnswer": {"@type":"Answer","text":"Generally no — a stated annual salary assumes a standard 40-hour work week. Exempt (salaried) employees are typically not entitled to overtime pay under the FLSA regardless of hours worked. Non-exempt employees who work over 40 hours per week must be paid 1.5× their regular rate. If your role involves regular overtime, your effective hourly rate may differ from a simple conversion."}
+    }
+  ]
+}
+</script>
+<style>
+/* ── Salary-to-Hourly page overrides ── */
+.s2h-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  align-items:start;
+}
+
+/* Mode toggle */
+.mode-toggle-row{
+  display:flex;
+  gap:0;
+  background:var(--surface-2);
+  border:1.5px solid var(--border-dark);
+  border-radius:10px;
+  padding:4px;
+  margin-bottom:24px;
+}
+.mode-btn{
+  flex:1;height:40px;border-radius:8px;
+  font-size:13.5px;font-weight:600;color:var(--ink-2);
+  transition:background var(--transition),color var(--transition),box-shadow var(--transition);
+  white-space:nowrap;
+}
+.mode-btn.active{
+  background:var(--surface);
+  color:var(--accent);
+  box-shadow:0 1px 5px rgba(12,15,26,.10);
+}
+.mode-btn:not(.active):hover{color:var(--ink)}
+
+/* Vacation toggle switch */
+.vac-toggle-row{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;
+}
+.toggle-switch{
+  position:relative;
+  width:36px;height:20px;
+  flex-shrink:0;display:inline-block;
+}
+.toggle-switch input{
+  opacity:0;width:0;height:0;
+  position:absolute;
+}
+.toggle-track{
+  position:absolute;inset:0;
+  border-radius:100px;
+  background:var(--border-dark);
+  transition:background var(--transition);
+  cursor:pointer;
+}
+.toggle-switch input:checked + .toggle-track{background:var(--accent)}
+.toggle-thumb{
+  position:absolute;
+  top:3px;left:3px;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#fff;
+  pointer-events:none;
+  transition:transform var(--transition);
+  box-shadow:0 1px 3px rgba(12,15,26,.2);
+}
+.toggle-switch input:checked ~ .toggle-thumb{transform:translateX(16px)}
+.vac-toggle-label{font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;user-select:none}
+
+.vac-days-row{display:none;margin-bottom:20px}
+.vac-days-row.visible{display:block}
+
+/* Results table */
+.pay-table-wrap{overflow:hidden}
+.pay-table{width:100%;border-collapse:collapse}
+.pay-table thead th{
+  font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  color:var(--ink-3);
+  padding:12px 20px;
+  border-bottom:2px solid var(--border-dark);
+  text-align:left;
+}
+.pay-table thead th:last-child{text-align:right}
+.pay-table tbody tr{
+  border-bottom:1px solid var(--border);
+  transition:background var(--transition);
+}
+.pay-table tbody tr:last-child{border-bottom:none}
+.pay-table tbody tr:hover{background:var(--surface-2)}
+.pay-table td{
+  padding:12px 20px;
+  font-size:14px;
+  color:var(--ink-2);
+  line-height:1.4;
+}
+.pay-table td:last-child{
+  text-align:right;
+  font-family:var(--mono);
+  font-weight:600;
+  color:var(--ink);
+  font-size:15px;
+}
+
+/* Highlighted rows */
+.pay-row--hourly{background:var(--accent-dim)}
+.pay-row--hourly td{color:var(--accent) !important;font-weight:700}
+.pay-row--hourly:hover{background:rgba(27,79,216,.11) !important}
+.pay-row--annual{border-top:2px solid var(--border-dark) !important}
+.pay-row--annual td{font-weight:700;color:var(--ink) !important}
+
+/* Stats row */
+.pay-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:16px 20px;
+  border-top:1px solid var(--border);
+  background:var(--surface-2);
+}
+.pay-stat-label{
+  font-size:10.5px;font-weight:700;letter-spacing:.6px;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:4px;
+}
+.pay-stat-value{
+  font-family:var(--mono);font-size:14px;
+  font-weight:600;color:var(--ink);
+}
+
+/* Vacation effective rate callout */
+.vac-callout{
+  display:none;
+  margin:0 16px 16px;
+  padding:11px 15px;
+  background:rgba(5,150,105,.07);
+  border:1px solid var(--green-border);
+  border-radius:9px;
+  font-size:13px;color:var(--ink-2);line-height:1.65;
+}
+.vac-callout.visible{display:block}
+.vac-callout strong{color:var(--green)}
+
+/* Empty state */
+.results-empty-state{
+  padding:48px 24px;
+  text-align:center;
+  color:var(--ink-3);
+  font-size:14px;
+  line-height:1.6;
+}
+.results-empty-state svg{margin:0 auto 14px;opacity:.28}
+
+@media(max-width:860px){
+  .s2h-layout{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .mode-btn{font-size:12px}
+  .pay-table td{padding:11px 14px}
+  .pay-stats{padding:12px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator">PTO</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/salary-to-hourly-calculator">Salary to Hourly Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Salary to Hourly Calculator</span>
+    </nav>
+
+    <!-- Ad zone top -->
+    <div class="ad-zone ad-zone--leaderboard"></div>
+
+    <!-- Title -->
+    <h1 class="calc-title" data-enter>Salary to Hourly Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Convert any annual salary to hourly rate — or reverse. Shows every pay period at once.<br>
+      Adjusts for vacation days, custom hours, and non-standard work schedules.
+    </p>
+    <div class="calc-updated">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Last updated: September 2026
+    </div>
+
+    <!-- Calculator: 2-col layout -->
+    <div class="s2h-layout">
+
+      <!-- LEFT: Inputs -->
+      <div data-enter data-delay="2">
+        <div class="calc-card">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
+            <span class="calc-card-head-title">Pay Rate Converter</span>
+            <span class="calc-card-head-badge">Bidirectional</span>
+          </div>
+          <div class="calc-body">
+
+            <!-- Mode Toggle -->
+            <div class="mode-toggle-row" role="radiogroup" aria-label="Conversion direction">
+              <button id="mode-a-btn" class="mode-btn active" role="radio" aria-checked="true">Annual → Hourly</button>
+              <button id="mode-b-btn" class="mode-btn" role="radio" aria-checked="false">Hourly → Annual</button>
+            </div>
+
+            <!-- Input: Annual Salary (Mode A) -->
+            <div class="field-group" id="annual-input-wrap">
+              <label class="field-label" for="annual_salary">Annual Salary</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="annual_salary" class="field-input has-prefix"
+                  placeholder="75,000" min="0" step="1" inputmode="decimal"
+                  aria-label="Annual salary in dollars">
+              </div>
+            </div>
+
+            <!-- Input: Hourly Rate (Mode B) -->
+            <div class="field-group" id="hourly-input-wrap" style="display:none">
+              <label class="field-label" for="hourly_rate">Hourly Rate</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="hourly_rate" class="field-input has-prefix"
+                  placeholder="36.06" min="0" step="0.01" inputmode="decimal"
+                  aria-label="Hourly rate in dollars">
+              </div>
+            </div>
+
+            <!-- Hours / Weeks -->
+            <div class="field-row">
+              <div>
+                <label class="field-label" for="hours_per_week">Hours per Week</label>
+                <input type="number" id="hours_per_week" class="field-input"
+                  value="40" min="1" max="168" step="0.5" inputmode="decimal"
+                  aria-label="Hours worked per week">
+              </div>
+              <div>
+                <label class="field-label" for="weeks_per_year">Weeks per Year</label>
+                <input type="number" id="weeks_per_year" class="field-input"
+                  value="52" min="1" max="52" step="1" inputmode="decimal"
+                  aria-label="Weeks worked per year">
+              </div>
+            </div>
+
+            <!-- Vacation toggle -->
+            <div class="vac-toggle-row">
+              <label class="toggle-switch">
+                <input type="checkbox" id="vac-toggle" aria-label="Use vacation days adjustment">
+                <span class="toggle-track"></span>
+                <span class="toggle-thumb"></span>
+              </label>
+              <label class="vac-toggle-label" for="vac-toggle">Adjust for vacation days</label>
+            </div>
+
+            <!-- Vacation days input (hidden until toggled) -->
+            <div class="vac-days-row" id="vac-days-row">
+              <label class="field-label" for="vacation_days">Paid Vacation Days per Year</label>
+              <div class="input-wrap">
+                <input type="number" id="vacation_days" class="field-input has-suffix"
+                  value="10" min="0" max="365" step="1" placeholder="10" inputmode="decimal"
+                  aria-label="Paid vacation days per year">
+                <span class="input-suffix">days</span>
+              </div>
+              <div class="field-hint">Reduces actual working hours; your effective hourly rate rises</div>
+            </div>
+
+            <button class="btn-calc" id="calc-btn" type="button" aria-label="Calculate pay conversion">
+              Calculate →
+            </button>
+
+          </div><!-- /calc-body -->
+        </div><!-- /calc-card -->
+
+        <!-- In-content ad -->
+        <div class="ad-zone ad-zone--in-content"></div>
+
+      </div><!-- /left col -->
+
+      <!-- RIGHT: Output Table -->
+      <div data-enter data-delay="3">
+        <div class="calc-card" id="results-card">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M3 8h14M8 3v14"/></svg>
+            <span class="calc-card-head-title">Pay Period Breakdown</span>
+            <span id="results-live-badge" class="calc-card-head-badge" style="display:none">Live</span>
+          </div>
+
+          <!-- Empty state -->
+          <div id="s2h-empty" class="results-empty-state">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4M9 17h2"/>
+            </svg>
+            <p>Enter a salary or hourly rate<br>to see all pay periods instantly.</p>
+          </div>
+
+          <!-- Results -->
+          <div id="s2h-results" hidden>
+            <div class="pay-table-wrap">
+              <table class="pay-table" aria-label="Pay period conversion table">
+                <thead>
+                  <tr>
+                    <th scope="col">Pay Period</th>
+                    <th scope="col">Gross Pay</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="pay-row--hourly">
+                    <td><strong>Hourly</strong></td>
+                    <td id="r-hourly">$0.00</td>
+                  </tr>
+                  <tr>
+                    <td id="r-daily-label">Daily (8 hrs)</td>
+                    <td id="r-daily">$0.00</td>
+                  </tr>
+                  <tr>
+                    <td>Weekly</td>
+                    <td id="r-weekly">$0.00</td>
+                  </tr>
+                  <tr>
+                    <td>Biweekly <span style="font-size:12px;color:var(--ink-3);font-weight:400">(every 2 wks)</span></td>
+                    <td id="r-biweekly">$0.00</td>
+                  </tr>
+                  <tr>
+                    <td>Semimonthly <span style="font-size:12px;color:var(--ink-3);font-weight:400">(twice/month)</span></td>
+                    <td id="r-semimonthly">$0.00</td>
+                  </tr>
+                  <tr>
+                    <td>Monthly</td>
+                    <td id="r-monthly">$0.00</td>
+                  </tr>
+                  <tr class="pay-row--annual">
+                    <td><strong>Annual</strong></td>
+                    <td id="r-annual">$0.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Stats -->
+            <div class="pay-stats">
+              <div>
+                <div class="pay-stat-label">Working Hours / Year</div>
+                <div class="pay-stat-value" id="r-work-hours">2,080</div>
+              </div>
+              <div>
+                <div class="pay-stat-label">Effective Hourly Rate</div>
+                <div class="pay-stat-value" id="r-eff-hourly">—</div>
+              </div>
+            </div>
+
+            <!-- Vacation effective rate callout -->
+            <div class="vac-callout" id="vac-callout"></div>
+
+          </div><!-- /s2h-results -->
+
+        </div><!-- /calc-card -->
+
+        <!-- Disclaimer -->
+        <div class="disclaimer" style="margin-top:20px">
+          <strong>Note:</strong> Results show gross pay before taxes and deductions. To see your actual take-home, use the <a href="/payroll-tax-calculator" style="color:var(--amber)">payroll tax calculator</a> or the <a href="/free-payroll-calculator" style="color:var(--amber)">full payroll calculator</a>.
+        </div>
+
+      </div><!-- /right col -->
+
+    </div><!-- /s2h-layout -->
+
+    <!-- SEO Article -->
+    <article style="margin-top:60px;max-width:780px" data-enter>
+
+      <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">How to convert salary to hourly rate</h2>
+      <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">The conversion formula is straightforward: divide your annual salary by the total hours you work in a year. For a standard 40-hour week across all 52 weeks, that's <strong>2,080 hours</strong> — the most commonly used denominator. A $75,000 salary divided by 2,080 yields <strong>$36.06 per hour</strong>. Going the other direction, multiply your hourly rate by 2,080 to get the equivalent annual salary.</p>
+
+      <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:24px 0 8px">How many hours are in a work year?</h3>
+      <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">The two figures you'll encounter most often are <strong>2,080 hours</strong> (no vacation: 40 hrs × 52 weeks) and <strong>2,000 hours</strong> (with 10 paid vacation days, the US median). Federal government pay tables use 2,087 hours; many corporate HR departments use 1,950 for workers who take full PTO. The difference matters: a $60,000 salary equals $28.85/hr over 2,080 hours but $30.77/hr over 1,950 — a $1.92 gap that compounds significantly when comparing job offers.</p>
+      <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Teachers and academic-year employees — typically working 9–10 months — often base hourly calculations on 1,560–1,800 hours, which is why a teacher's annual salary can look inflated relative to a calendar-year employee's. Nurses frequently work three 12-hour shifts per week (36 hours), not 40, meaning a $90,000 nursing salary equals <strong>$48.08/hr</strong> at 1,872 annual hours — not $43.27 that the default 40-hr formula would produce. Use the hours-per-week field above to match your actual schedule.</p>
+
+      <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:24px 0 8px">Common salary benchmarks converted to hourly</h3>
+      <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:10px">Based on the standard 2,080-hour work year:</p>
+      <ul style="font-size:15px;color:var(--ink-2);line-height:1.9;margin-bottom:14px;padding-left:22px;list-style:disc">
+        <li><strong>$15/hr</strong> = $31,200/year &nbsp;·&nbsp; <strong>$20/hr</strong> = $41,600/year &nbsp;·&nbsp; <strong>$25/hr</strong> = $52,000/year</li>
+        <li><strong>$50,000/year</strong> = $24.04/hr &nbsp;·&nbsp; <strong>$75,000/year</strong> = $36.06/hr</li>
+        <li><strong>$100,000/year</strong> = $48.08/hr &nbsp;·&nbsp; <strong>$150,000/year</strong> = $72.12/hr</li>
+        <li><strong>$200,000/year</strong> = $96.15/hr &nbsp;·&nbsp; <strong>$250,000/year</strong> = $120.19/hr</li>
+      </ul>
+
+      <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:24px 0 8px">How overtime affects your effective hourly rate</h3>
+      <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">If you regularly work overtime as a non-exempt employee, your effective annual earnings exceed what the simple hours × rate formula implies. Under the FLSA, overtime hours (over 40 per week) must be paid at <strong>1.5× the regular rate</strong>. A worker earning $20/hr who regularly works 45 hours earns $20 × 40 + $30 × 5 = $950/week rather than $900 — a meaningful 5.6% premium that adds up over the year. Use the <a href="/overtime-pay-calculator" style="color:var(--accent)">overtime pay calculator</a> to model this precisely alongside regular hours.</p>
+      <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Salaried exempt employees receive the same pay regardless of hours. If your employer regularly expects 50+ hours but your salary is set for 40, your true hourly rate is materially lower than the simple conversion shows. This is a critical factor when comparing a salaried W-2 offer to a 1099 contract rate — the <a href="/1099-vs-w2-calculator" style="color:var(--accent)">1099 vs W-2 calculator</a> handles that comparison including self-employment tax.</p>
+      <p style="font-size:15px;color:var(--ink-2);line-height:1.75">Once you know your gross hourly rate, run it through the <a href="/payroll-tax-calculator" style="color:var(--accent)">payroll tax calculator</a> to see your actual take-home after federal income tax, Social Security, Medicare, and state withholding. For a full paycheck breakdown that includes 401(k) contributions and health insurance premiums, use the <a href="/free-payroll-calculator" style="color:var(--accent)">free payroll calculator</a>.</p>
+
+    </article>
+
+  </div><!-- /container -->
+</main>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Salary to hourly questions answered</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          How many hours are in a work year?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          A standard work year contains <strong>2,080 hours</strong> — 40 hours per week × 52 weeks. If you take 10 paid vacation days (the US average), actual working hours fall to 2,000. Federal government employees commonly use 2,087 hours, while teachers and academic-year workers typically calculate on 1,560–1,800 hours. Use this calculator's vacation adjustment to enter your exact situation.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          How do I convert a $50,000 salary to hourly?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Divide $50,000 by 2,080 to get <strong>$24.04 per hour</strong> on a standard 40-hr/52-week schedule. If you take 10 vacation days, divide by 2,000 hours to get exactly $25.00/hr. The formula: hourly = annual salary ÷ (hours per week × weeks worked per year). This calculator handles both directions — enter the hourly and it returns the equivalent annual salary across all pay periods.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          What is a good hourly rate in the US?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          The US median hourly wage was approximately $23–$24 in 2025–2026, equivalent to $48,000–$50,000 annually. Entry-level roles often start at $15–$18/hr; skilled trades earn $25–$45/hr; professional and tech roles typically range $40–$100+/hr. The federal minimum wage remains $7.25/hr, though many states and cities set higher floors — California and Washington top $17–$18/hr as of 2026.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="3">
+        <button class="faq-q" aria-expanded="false">
+          How do I calculate my hourly rate if I get paid biweekly?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Multiply your biweekly paycheck by 26 (there are 26 biweekly pay periods per year) to get your annual salary, then divide by 2,080. Example: $2,000 biweekly × 26 = $52,000 ÷ 2,080 = <strong>$25.00/hr</strong>. Note that biweekly pays yield 26 paychecks vs. 24 for semimonthly — two extra paychecks per year, which is why some months feel like a "bonus paycheck" month.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="4">
+        <button class="faq-q" aria-expanded="false">
+          Does a salary include overtime?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Generally no — a stated annual salary assumes a 40-hour standard work week. Exempt (salaried) employees are typically not entitled to overtime pay under the FLSA, regardless of hours worked. Non-exempt employees who exceed 40 hours per week must receive 1.5× their regular rate. If your role involves regular overtime, your effective hourly rate will differ from the simple conversion. See the <a href="/overtime-pay-calculator">overtime pay calculator</a> for a complete picture.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4M9 17h2"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Federal income tax, Social Security, Medicare, and all 50 state taxes from any gross pay.</div></div>
+        </div>
+      </a>
+      <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><div class="tool-card-title">Overtime Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">Calculate regular + overtime earnings under FLSA 1.5× and 2× rules.</div></div>
+        </div>
+      </a>
+      <a href="/free-payroll-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <div><div class="tool-card-title">Free Payroll Calculator</div><div class="tool-card-desc" style="font-size:13px">Full gross-to-net with 401(k), health insurance, and all deductions included.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/salary-to-hourly-calculator">Salary to Hourly</a></li>
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+          <li><a href="https://www.bls.gov/cps/earnings.htm" rel="nofollow noopener" target="_blank">BLS Wage Data</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+/* ── Salary to Hourly Calculator ── */
+(function(){
+  'use strict';
+
+  var mode = 'a'; /* 'a' = annual→hourly, 'b' = hourly→annual */
+
+  /* ── DOM refs ── */
+  var modeABtn      = document.getElementById('mode-a-btn');
+  var modeBBtn      = document.getElementById('mode-b-btn');
+  var annualWrap    = document.getElementById('annual-input-wrap');
+  var hourlyWrap    = document.getElementById('hourly-input-wrap');
+  var annualInput   = document.getElementById('annual_salary');
+  var hourlyInput   = document.getElementById('hourly_rate');
+  var hoursInput    = document.getElementById('hours_per_week');
+  var weeksInput    = document.getElementById('weeks_per_year');
+  var vacToggle     = document.getElementById('vac-toggle');
+  var vacDaysRow    = document.getElementById('vac-days-row');
+  var vacDaysInput  = document.getElementById('vacation_days');
+  var calcBtn       = document.getElementById('calc-btn');
+
+  var emptyState    = document.getElementById('s2h-empty');
+  var resultsDiv    = document.getElementById('s2h-results');
+  var liveBadge     = document.getElementById('results-live-badge');
+
+  var rHourly       = document.getElementById('r-hourly');
+  var rDailyLabel   = document.getElementById('r-daily-label');
+  var rDaily        = document.getElementById('r-daily');
+  var rWeekly       = document.getElementById('r-weekly');
+  var rBiweekly     = document.getElementById('r-biweekly');
+  var rSemimonthly  = document.getElementById('r-semimonthly');
+  var rMonthly      = document.getElementById('r-monthly');
+  var rAnnual       = document.getElementById('r-annual');
+  var rWorkHours    = document.getElementById('r-work-hours');
+  var rEffHourly    = document.getElementById('r-eff-hourly');
+  var vacCallout    = document.getElementById('vac-callout');
+
+  /* ── Helpers ── */
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function clamp(val, min, max) {
+    return Math.min(Math.max(val, min), max);
+  }
+
+  /* ── Mode switching ── */
+  function setMode(m) {
+    mode = m;
+    if (m === 'a') {
+      modeABtn.classList.add('active');    modeABtn.setAttribute('aria-checked', 'true');
+      modeBBtn.classList.remove('active'); modeBBtn.setAttribute('aria-checked', 'false');
+      annualWrap.style.display = '';
+      hourlyWrap.style.display = 'none';
+    } else {
+      modeBBtn.classList.add('active');    modeBBtn.setAttribute('aria-checked', 'true');
+      modeABtn.classList.remove('active'); modeABtn.setAttribute('aria-checked', 'false');
+      hourlyWrap.style.display = '';
+      annualWrap.style.display = 'none';
+    }
+    calculate();
+  }
+
+  modeABtn.addEventListener('click', function(){ setMode('a'); });
+  modeBBtn.addEventListener('click', function(){ setMode('b'); });
+
+  /* ── Vacation toggle ── */
+  vacToggle.addEventListener('change', function(){
+    vacDaysRow.classList.toggle('visible', vacToggle.checked);
+    calculate();
+  });
+
+  /* ── Live updates ── */
+  var liveInputs = [annualInput, hourlyInput, hoursInput, weeksInput, vacDaysInput];
+  liveInputs.forEach(function(el){
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  /* Enter key triggers calculate */
+  [annualInput, hourlyInput].forEach(function(el){
+    el.addEventListener('keydown', function(e){ if (e.key === 'Enter') calculate(); });
+  });
+
+  /* Button fallback */
+  calcBtn.addEventListener('click', calculate);
+
+  /* ── Core calculation ── */
+  function calculate() {
+    var hoursPerWeek  = clamp(parseFloat(hoursInput.value) || 40, 1, 168);
+    var weeksPerYear  = clamp(parseFloat(weeksInput.value) || 52, 1, 52);
+    var useVacation   = vacToggle.checked;
+    var vacDays       = useVacation ? clamp(parseFloat(vacDaysInput.value) || 0, 0, 365) : 0;
+
+    /* Working hours — standard and vacation-adjusted */
+    var stdHours = hoursPerWeek * weeksPerYear;
+    var workHours;
+    if (useVacation && vacDays > 0) {
+      var workDays = (weeksPerYear * 5) - vacDays;
+      workHours = Math.max(workDays * (hoursPerWeek / 5), 1);
+    } else {
+      workHours = stdHours;
+    }
+
+    /* Derive annual and hourly */
+    var annual, hourly;
+    if (mode === 'a') {
+      annual = parseFloat(annualInput.value);
+      if (!annual || annual <= 0) { showEmpty(); return; }
+      hourly = annual / workHours;
+    } else {
+      hourly = parseFloat(hourlyInput.value);
+      if (!hourly || hourly <= 0) { showEmpty(); return; }
+      annual = hourly * workHours;
+    }
+
+    /* All pay period values */
+    var hoursPerDay  = hoursPerWeek / 5;
+    var daily        = hourly * hoursPerDay;
+    var weekly       = hourly * hoursPerWeek;
+    var biweekly     = weekly * 2;
+    var semimonthly  = annual / 24;
+    var monthly      = annual / 12;
+
+    /* Update daily label to reflect actual hours per day */
+    var hpdDisplay = Math.round(hoursPerDay * 10) / 10;
+    rDailyLabel.textContent = 'Daily (' + hpdDisplay + ' hrs)';
+
+    /* Populate table */
+    rHourly.textContent      = fmt(hourly);
+    rDaily.textContent       = fmt(daily);
+    rWeekly.textContent      = fmt(weekly);
+    rBiweekly.textContent    = fmt(biweekly);
+    rSemimonthly.textContent = fmt(semimonthly);
+    rMonthly.textContent     = fmt(monthly);
+    rAnnual.textContent      = fmt(annual);
+
+    /* Stats strip */
+    rWorkHours.textContent = Math.round(workHours).toLocaleString() + ' hrs';
+    rEffHourly.textContent = fmt(hourly) + '/hr';
+
+    /* Vacation callout — only meaningful in Mode A */
+    if (useVacation && vacDays > 0 && mode === 'a') {
+      var stdHourly = annual / stdHours;
+      vacCallout.innerHTML =
+        'After <strong>' + vacDays + ' vacation day' + (vacDays !== 1 ? 's' : '') + '</strong>: ' +
+        'effective rate is <strong>' + fmt(hourly) + '/hr</strong> ' +
+        '(vs. ' + fmt(stdHourly) + '/hr standard) — ' +
+        'based on ' + Math.round(workHours).toLocaleString() + ' working hrs ' +
+        'vs. ' + Math.round(stdHours).toLocaleString() + ' standard.';
+      vacCallout.classList.add('visible');
+    } else {
+      vacCallout.classList.remove('visible');
+      vacCallout.innerHTML = '';
+    }
+
+    showResults();
+  }
+
+  function showEmpty() {
+    emptyState.hidden  = false;
+    resultsDiv.hidden  = true;
+    liveBadge.style.display = 'none';
+  }
+
+  function showResults() {
+    emptyState.hidden  = true;
+    resultsDiv.hidden  = false;
+    liveBadge.style.display = '';
+  }
+
+})();
+</script>
+</body>
+</html>

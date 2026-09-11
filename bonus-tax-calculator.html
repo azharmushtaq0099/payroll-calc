@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bonus Tax Calculator 2026 — Federal &amp; State Bonus Withholding | FreePayrollCalc</title>
+<meta name="description" content="Free bonus tax calculator for 2026. Calculate federal withholding on your bonus using the flat 22% supplemental rate or the aggregate method. Includes state tax, Social Security, and Medicare. Instant results.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/bonus-tax-calculator">
+<meta property="og:title" content="Bonus Tax Calculator 2026 — Federal &amp; State Bonus Withholding">
+<meta property="og:description" content="Calculate federal withholding on your bonus using the flat 22% supplemental rate or the aggregate method. Includes state tax, Social Security, and Medicare.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bonus Tax Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/bonus-tax-calculator",
+  "description": "Calculate federal withholding on bonuses using the flat 22% supplemental rate or the aggregate method. Includes state tax, Social Security, and Medicare. Updated for 2026 IRS rates.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["Flat 22% supplemental rate","Aggregate method calculation","All 50 states + DC","Social Security and Medicare withholding","2026 IRS Publication 15 rates"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is my bonus taxed at 22%?",
+      "acceptedAnswer": {"@type":"Answer","text":"Bonuses are classified as supplemental wages under IRS rules. The IRS allows employers to withhold federal income tax on supplemental wages at a flat 22% rate for amounts up to $1 million in a calendar year. This flat rate is a withholding convenience — your actual tax owed depends on your total annual income and filing status. If your marginal rate is lower than 22%, you will likely get a refund when you file; if it is higher, you may owe additional tax."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the aggregate method for bonus tax?",
+      "acceptedAnswer": {"@type":"Answer","text":"The aggregate method calculates withholding by combining your bonus with your annualized regular wages and applying the standard income tax withholding tables. The employer calculates federal income tax on (annualized wages + bonus), then subtracts the tax on just the annualized wages. The difference is withheld from the bonus. This method produces a more accurate effective rate than the flat 22% for employees at higher or lower income levels."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I put my bonus in a 401(k) to avoid taxes?",
+      "acceptedAnswer": {"@type":"Answer","text":"Yes — if your employer allows bonus contributions to a traditional 401(k) or 403(b), you can defer part or all of your bonus to reduce federal and state income tax withholding. The 2026 401(k) elective deferral limit is $23,500 ($31,000 with age 50+ catch-up). Note that FICA taxes (Social Security 6.2% + Medicare 1.45%) still apply to 401(k) contributions — only income tax withholding is reduced by the deferral."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is a bonus taxed higher than regular pay?",
+      "acceptedAnswer": {"@type":"Answer","text":"Not necessarily. With the flat-rate method, your bonus is withheld at exactly 22% federal — which may be higher or lower than your marginal rate on regular wages. If you are in the 12% bracket, the 22% flat withholding is too high and you would likely get a refund. If you are in the 32% or higher bracket, the flat 22% is actually lower than your marginal rate. With the aggregate method, the effective withholding rate on the bonus equals your marginal bracket."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the bonus tax rate for 2026?",
+      "acceptedAnswer": {"@type":"Answer","text":"For 2026, the federal supplemental withholding rate is 22% for bonus amounts up to $1,000,000 and 37% for any portion exceeding $1 million in the same calendar year. Social Security tax of 6.2% (up to the $176,100 wage base) and Medicare tax of 1.45% also apply to bonus pay. State supplemental withholding rates vary from 0% in the nine no-income-tax states to over 10% in states like California and New York."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator">PTO</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/bonus-tax-calculator" class="active">Bonus Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Bonus Tax Calculator</span>
+    </nav>
+
+    <!-- Ad zone top -->
+    <div class="ad-zone ad-zone--leaderboard"></div>
+
+    <!-- Title -->
+    <h1 class="calc-title" data-enter>Bonus Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Federal supplemental withholding (flat 22% or aggregate method) + Social Security + Medicare + state tax.<br>
+      Covers bonuses, commissions, severance, and other supplemental wages.
+    </p>
+    <div class="calc-updated">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Last updated: September 2026 — rates sourced from IRS Publication 15
+    </div>
+
+    <!-- Calculator Layout -->
+    <div class="calc-layout">
+
+      <!-- INPUT FORM -->
+      <div class="calc-main">
+
+        <div class="calc-card" data-enter data-delay="2">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l2.5 2.5"/></svg>
+            <span class="calc-card-head-title">Bonus &amp; Withholding Details</span>
+            <span class="calc-card-head-badge">2026 Rates</span>
+          </div>
+          <div class="calc-body">
+
+            <!-- Bonus Amount -->
+            <div class="field-group">
+              <label class="field-label" for="bonus_amount">Bonus Amount</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="bonus_amount" class="field-input has-prefix" placeholder="5,000.00" min="0" step="0.01" inputmode="decimal" aria-label="Bonus amount in dollars">
+              </div>
+            </div>
+
+            <!-- Calculation Method -->
+            <div class="field-group">
+              <label class="field-label">Calculation Method</label>
+              <div class="pill-group" role="radiogroup" aria-label="Calculation method">
+                <button class="pill-btn active" data-method="flat" role="radio" aria-checked="true">Flat Rate (22%)</button>
+                <button class="pill-btn" data-method="aggregate" role="radio" aria-checked="false">Aggregate Method</button>
+              </div>
+              <div class="field-hint" id="method-hint">Federal withholding at flat 22% supplemental rate (37% if bonus exceeds $1 million)</div>
+            </div>
+
+            <!-- Aggregate Method Inputs (shown when Aggregate selected) -->
+            <div id="aggregate-inputs" style="display:none">
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="regular_gross">Regular Gross Pay per Period</label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="regular_gross" class="field-input has-prefix" placeholder="3,500.00" min="0" step="0.01" inputmode="decimal" aria-label="Regular gross pay per pay period">
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="pay_frequency">Pay Frequency</label>
+                  <select id="pay_frequency" class="field-select" aria-label="Pay frequency">
+                    <option value="52">Weekly (52/yr)</option>
+                    <option value="26" selected>Bi-Weekly (26/yr)</option>
+                    <option value="24">Semi-Monthly (24/yr)</option>
+                    <option value="12">Monthly (12/yr)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Filing Status -->
+            <div class="field-group">
+              <label class="field-label" for="filing_status">Filing Status</label>
+              <select id="filing_status" class="field-select" aria-label="Federal filing status">
+                <option value="single">Single</option>
+                <option value="mfj">Married Filing Jointly</option>
+                <option value="hoh">Head of Household</option>
+              </select>
+            </div>
+
+            <!-- State -->
+            <div class="field-group">
+              <label class="field-label" for="state">State</label>
+              <select id="state" class="field-select" aria-label="State for state income tax calculation">
+                <option value="AL">Alabama — 5.00%</option>
+                <option value="AK">Alaska — No state income tax</option>
+                <option value="AZ">Arizona — 2.50%</option>
+                <option value="AR">Arkansas — 3.90%</option>
+                <option value="CA">California — 10.23%</option>
+                <option value="CO">Colorado — 4.40%</option>
+                <option value="CT">Connecticut — 6.99%</option>
+                <option value="DE">Delaware — 6.60%</option>
+                <option value="FL">Florida — No state income tax</option>
+                <option value="GA">Georgia — 5.49%</option>
+                <option value="HI">Hawaii — 11.00%</option>
+                <option value="ID">Idaho — 5.80%</option>
+                <option value="IL">Illinois — 4.95%</option>
+                <option value="IN">Indiana — 3.05%</option>
+                <option value="IA">Iowa — 5.70%</option>
+                <option value="KS">Kansas — 5.70%</option>
+                <option value="KY">Kentucky — 4.00%</option>
+                <option value="LA">Louisiana — 4.25%</option>
+                <option value="ME">Maine — 7.15%</option>
+                <option value="MD">Maryland — 5.75%</option>
+                <option value="MA">Massachusetts — 5.00%</option>
+                <option value="MI">Michigan — 4.05%</option>
+                <option value="MN">Minnesota — 9.85%</option>
+                <option value="MS">Mississippi — 4.70%</option>
+                <option value="MO">Missouri — 4.95%</option>
+                <option value="MT">Montana — 6.75%</option>
+                <option value="NE">Nebraska — 6.64%</option>
+                <option value="NV">Nevada — No state income tax</option>
+                <option value="NH">New Hampshire — No state income tax</option>
+                <option value="NJ">New Jersey — 10.75%</option>
+                <option value="NM">New Mexico — 5.90%</option>
+                <option value="NY" selected>New York — 9.65%</option>
+                <option value="NC">North Carolina — 4.50%</option>
+                <option value="ND">North Dakota — 2.50%</option>
+                <option value="OH">Ohio — 3.50%</option>
+                <option value="OK">Oklahoma — 4.75%</option>
+                <option value="OR">Oregon — 9.90%</option>
+                <option value="PA">Pennsylvania — 3.07%</option>
+                <option value="RI">Rhode Island — 5.99%</option>
+                <option value="SC">South Carolina — 6.40%</option>
+                <option value="SD">South Dakota — No state income tax</option>
+                <option value="TN">Tennessee — No state income tax</option>
+                <option value="TX">Texas — No state income tax</option>
+                <option value="UT">Utah — 4.55%</option>
+                <option value="VT">Vermont — 8.75%</option>
+                <option value="VA">Virginia — 5.75%</option>
+                <option value="WA">Washington — No state income tax</option>
+                <option value="WV">West Virginia — 5.12%</option>
+                <option value="WI">Wisconsin — 7.65%</option>
+                <option value="WY">Wyoming — No state income tax</option>
+                <option value="DC">D.C. — 10.75%</option>
+              </select>
+            </div>
+
+            <!-- YTD Wages -->
+            <div class="field-group">
+              <label class="field-label" for="ytd_wages">YTD Wages Before This Bonus <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="ytd_wages" class="field-input has-prefix" placeholder="0.00" min="0" step="0.01" inputmode="decimal" aria-label="Year-to-date wages before this bonus">
+              </div>
+              <div class="field-hint">Used to check if Social Security wage cap ($176,100) has been reached. Leave blank to assume no prior wages.</div>
+            </div>
+
+            <button class="btn-calc" id="calc-btn" type="button" aria-label="Calculate bonus taxes">
+              Calculate Bonus Taxes →
+            </button>
+
+          </div>
+        </div>
+
+        <!-- In-content Ad -->
+        <div class="ad-zone ad-zone--in-content"></div>
+
+        <!-- SEO Article -->
+        <article style="margin-top:40px" data-enter>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">How bonus taxes work in 2026</h2>
+
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">When your employer pays a bonus, commission, severance, or any other one-time payment, the IRS classifies it as a <strong>supplemental wage</strong>. Supplemental wages follow different withholding rules than your regular paycheck — and understanding those rules can help you plan ahead and avoid surprise tax bills when you file. For regular paycheck withholding, use our <a href="/payroll-tax-calculator" style="color:var(--accent)">payroll tax calculator</a>.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">Why the flat 22% rate exists</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Under <a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank" style="color:var(--accent)">IRS Publication 15 (Circular E)</a>, employers may withhold federal income tax on supplemental wages at a flat 22% rate for combined supplemental wages up to $1,000,000 per calendar year. For the portion of a bonus that exceeds $1 million, the rate jumps to 37%. The flat method is simple — it requires no knowledge of the employee's W-4 filing status or annualized income. Critically, the 22% is a <em>withholding</em> rate, not your final tax liability. If your marginal income tax bracket is lower than 22% — for example, if you're in the 12% bracket — you will likely receive a refund on that difference when you file. If you are in the 32% or 35% bracket, you may owe additional tax at filing since withholding underpays your actual obligation.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">The aggregate method: more precise, more complex</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Some employers use the aggregate method, which treats the bonus as if it were part of regular wages for the pay period. To calculate, your employer annualizes your regular gross pay (gross per period × pay periods per year), adds the bonus to that figure, applies the 2026 federal income tax brackets to the combined amount, then subtracts the estimated annual tax on just the regular wages. The remainder is withheld from the bonus. The aggregate method tends to produce a withholding rate that closely matches your actual marginal bracket — making it preferable for employees whose income level is far above or below the 22% bracket. For a full gross-to-net paycheck breakdown with 401(k) and health insurance deductions, see the <a href="/free-payroll-calculator" style="color:var(--accent)">full paycheck calculator</a>.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">FICA taxes always apply to bonuses</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Regardless of which federal income tax withholding method your employer uses, Social Security (6.2%) and Medicare (1.45%) taxes are always withheld from bonus pay. Social Security only applies up to the 2026 wage base of $176,100 — if your year-to-date W-2 wages have already surpassed that limit, no Social Security tax will be withheld from your bonus. State income taxes also apply based on your state's supplemental wage rate, which ranges from 0% in the nine no-income-tax states (Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, Wyoming) to over 10% in California and New Jersey.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">How to reduce bonus tax withholding</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">If your employer allows bonus-to-retirement contributions, directing your bonus into a traditional 401(k) or 403(b) reduces both federal and state income tax withholding — though FICA taxes still apply. The 2026 401(k) elective deferral limit is $23,500 ($31,000 for those age 50 and older with catch-up contributions). You can also update your W-4 to request additional withholding on regular paychecks throughout the year, smoothing out the gap between what is withheld from your bonus and your actual tax liability. If you receive bonus-type payments as a <a href="/1099-vs-w2-calculator" style="color:var(--accent)">1099 contractor</a>, self-employment tax (15.3%) applies in addition to income tax — use the 1099 vs W-2 calculator to see the full comparison.</p>
+        </article>
+
+      </div><!-- /calc-main -->
+
+      <!-- RESULTS SIDEBAR -->
+      <div>
+        <div class="results-panel" id="results-panel">
+          <div class="results-head">
+            <span class="results-head-label">Bonus Breakdown</span>
+            <span class="results-head-period" id="results-period">One-Time Bonus</span>
+          </div>
+          <!-- Empty state -->
+          <div class="results-empty" id="results-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+            </svg>
+            <p>Enter your bonus amount and click <strong>Calculate</strong> to see the full tax breakdown.</p>
+          </div>
+          <!-- Results body -->
+          <div class="results-body" id="results-body" hidden>
+
+            <div class="net-pay-display">
+              <div class="net-pay-label">Net Bonus</div>
+              <div class="net-pay-amount" id="result-net">$0.00</div>
+              <div class="net-pay-sub">after all withholding</div>
+            </div>
+
+            <div class="breakdown-section-label">Gross Bonus</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--green)"></span>
+                Gross bonus
+              </div>
+              <div class="breakdown-row-amount amount-green" id="r-gross">$0.00</div>
+            </div>
+
+            <div class="breakdown-section-label">Federal Taxes</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--red)"></span>
+                <span id="r-fed-label">Federal income tax (22%)</span>
+              </div>
+              <div class="breakdown-row-amount amount-red" id="r-fed">−$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--red)"></span>
+                Social Security (6.2%)
+              </div>
+              <div class="breakdown-row-amount amount-red" id="r-ss">−$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--red)"></span>
+                Medicare (1.45%)
+              </div>
+              <div class="breakdown-row-amount amount-red" id="r-medicare">−$0.00</div>
+            </div>
+
+            <div class="breakdown-section-label">State Tax</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--amber)"></span>
+                <span id="r-state-label">State income tax</span>
+              </div>
+              <div class="breakdown-row-amount" id="r-state" style="color:var(--amber)">−$0.00</div>
+            </div>
+
+            <div class="breakdown-total">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="breakdown-row-dot" style="background:var(--green);width:10px;height:10px"></span>
+                Net Bonus
+              </div>
+              <div class="breakdown-row-amount amount-green" id="r-net-total">$0.00</div>
+            </div>
+
+            <!-- Effective rate + take-home bar -->
+            <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:12px;color:var(--ink-3);font-weight:600;letter-spacing:.5px;text-transform:uppercase">Effective Tax Rate</span>
+                <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-eff-rate">0.0%</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <span style="font-size:12px;color:var(--ink-3)">Take-home percentage</span>
+                <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--green)" id="r-takehome-pct">0.0%</span>
+              </div>
+              <div style="height:8px;background:var(--border);border-radius:100px;overflow:hidden">
+                <div id="r-rate-bar" style="height:100%;background:var(--green);border-radius:100px;width:0%;transition:width .65s cubic-bezier(.4,0,.2,1)"></div>
+              </div>
+              <!-- SS cap note (shown conditionally) -->
+              <div id="r-ss-note" hidden style="margin-top:12px;padding:10px 12px;background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.18);border-radius:8px;font-size:12px;color:var(--amber);line-height:1.55"></div>
+            </div>
+
+          </div><!-- /results-body -->
+
+          <div class="results-actions" id="results-actions" hidden>
+            <button class="results-action-btn" data-copy-results aria-label="Copy results to clipboard">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="8" width="10" height="10" rx="2"/><path d="M5 8V5a2 2 0 012-2h7"/></svg>
+              Copy
+            </button>
+            <button class="results-action-btn" id="print-btn" aria-label="Print results">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print
+            </button>
+          </div>
+
+        </div><!-- /results-panel -->
+
+        <!-- Sidebar ad -->
+        <div class="ad-zone ad-zone--sidebar"></div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <strong>Disclaimer:</strong> Results are estimates based on 2026 IRS Publication 15 supplemental wage withholding rules, the SSA wage base, and state supplemental withholding rates. Not a substitute for licensed payroll software or professional tax advice. Verify figures with your accountant or payroll provider.
+        </div>
+
+      </div><!-- /sidebar -->
+    </div><!-- /calc-layout -->
+
+  </div>
+</main>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Bonus tax questions answered</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          Why is my bonus taxed at 22%?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Bonuses are classified as supplemental wages under IRS rules. The IRS permits employers to withhold federal income tax at a flat 22% rate on supplemental wages up to $1,000,000 per calendar year. This is a withholding convenience — not your final tax rate. When you file your return, your bonus is combined with all other income and taxed at your actual marginal rate. If your bracket is below 22%, you will likely get a refund on the over-withheld amount; if your bracket is above 22%, you may owe the difference.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          What is the aggregate method for bonus tax?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          The aggregate method calculates bonus withholding by combining the bonus with annualized regular wages and running the total through normal income tax withholding tables. The employer calculates the estimated annual tax on (regular wages annualized + bonus), subtracts the estimated annual tax on just the regular wages, and the difference is withheld from the bonus. This produces an effective withholding rate equal to the employee's marginal bracket — more accurate than the flat 22% for high or low earners, but it requires knowing the employee's regular pay and filing status.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          Can I put my bonus in a 401(k) to avoid taxes?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Yes — if your employer allows it, you can direct part or all of your bonus into a traditional 401(k) or 403(b) to defer federal and state income tax withholding. The 2026 elective deferral limit is $23,500 ($31,000 with the age-50 catch-up contribution). Keep in mind that FICA taxes (Social Security 6.2% + Medicare 1.45%) still apply to pre-tax 401(k) contributions — only income tax withholding is reduced. Roth 401(k) contributions do not reduce current withholding since they are made with after-tax dollars.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="3">
+        <button class="faq-q" aria-expanded="false">
+          Is a bonus taxed higher than regular pay?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          In terms of withholding, it depends on your income level. With the flat-rate method, your federal withholding is exactly 22% — lower than regular-pay withholding for employees in the 32%–37% bracket, but higher for employees in the 10%–12% range (who would be over-withheld and get a refund). With the aggregate method, the effective rate on the bonus equals your marginal bracket, producing a result closer to your actual tax owed. Either way, bonuses are not taxed at a special higher rate by law — they are simply subject to different withholding mechanics.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="4">
+        <button class="faq-q" aria-expanded="false">
+          What is the bonus tax rate for 2026?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          For 2026, the federal supplemental withholding rate is <strong>22%</strong> for bonus amounts up to $1,000,000 and <strong>37%</strong> for the portion exceeding $1 million in the same calendar year. Social Security (6.2%) applies on wages up to the $176,100 SSA wage base, and Medicare (1.45%) applies on all wages. State withholding rates on bonuses vary: nine states levy no income tax at all, while others range from about 2.5% (Arizona, North Dakota) to over 13% at the top bracket in California.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4M9 17h2"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Federal + state + FICA withholding on regular paychecks. All 50 states, all pay frequencies.</div></div>
+        </div>
+      </a>
+      <a href="/free-payroll-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div><div class="tool-card-title">Free Payroll Calculator</div><div class="tool-card-desc" style="font-size:13px">Full gross-to-net with 401(k), health insurance, and all pre-tax deductions included.</div></div>
+        </div>
+      </a>
+      <a href="/1099-vs-w2-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3H3v7h7V3zM21 3h-7v7h7V3zM21 14h-7v7h7v-7zM10 14H3v7h7v-7z"/></svg></div>
+          <div><div class="tool-card-title">1099 vs W-2 Calculator</div><div class="tool-card-desc" style="font-size:13px">Compare self-employment tax vs W-2 withholding side by side for any income level.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+/* ── 2026 Bonus Tax Engine ── */
+(function(){
+  'use strict';
+
+  /* ── State supplemental withholding rates ── */
+  var STATE_RATES = {
+    AL:0.050,  AK:0,      AZ:0.025,  AR:0.039,  CA:0.1023,
+    CO:0.044,  CT:0.0699, DE:0.066,  FL:0,      GA:0.0549,
+    HI:0.110,  ID:0.058,  IL:0.0495, IN:0.0305, IA:0.057,
+    KS:0.057,  KY:0.040,  LA:0.0425, ME:0.0715, MD:0.0575,
+    MA:0.050,  MI:0.0405, MN:0.0985, MS:0.047,  MO:0.0495,
+    MT:0.0675, NE:0.0664, NV:0,      NH:0,      NJ:0.1075,
+    NM:0.059,  NY:0.0965, NC:0.045,  ND:0.025,  OH:0.035,
+    OK:0.0475, OR:0.099,  PA:0.0307, RI:0.0599, SC:0.064,
+    SD:0,      TN:0,      TX:0,      UT:0.0455, VT:0.0875,
+    VA:0.0575, WA:0,      WV:0.0512, WI:0.0765, WY:0,
+    DC:0.1075
+  };
+
+  var NO_STATE_TAX = {AK:1,FL:1,NV:1,NH:1,SD:1,TN:1,TX:1,WA:1,WY:1};
+
+  var STATE_NAMES = {
+    AL:'Alabama',       AK:'Alaska',         AZ:'Arizona',       AR:'Arkansas',
+    CA:'California',    CO:'Colorado',        CT:'Connecticut',   DE:'Delaware',
+    FL:'Florida',       GA:'Georgia',         HI:'Hawaii',        ID:'Idaho',
+    IL:'Illinois',      IN:'Indiana',         IA:'Iowa',          KS:'Kansas',
+    KY:'Kentucky',      LA:'Louisiana',       ME:'Maine',         MD:'Maryland',
+    MA:'Massachusetts', MI:'Michigan',        MN:'Minnesota',     MS:'Mississippi',
+    MO:'Missouri',      MT:'Montana',         NE:'Nebraska',      NV:'Nevada',
+    NH:'New Hampshire', NJ:'New Jersey',      NM:'New Mexico',    NY:'New York',
+    NC:'North Carolina',ND:'North Dakota',    OH:'Ohio',          OK:'Oklahoma',
+    OR:'Oregon',        PA:'Pennsylvania',    RI:'Rhode Island',  SC:'South Carolina',
+    SD:'South Dakota',  TN:'Tennessee',       TX:'Texas',         UT:'Utah',
+    VT:'Vermont',       VA:'Virginia',        WA:'Washington',    WV:'West Virginia',
+    WI:'Wisconsin',     WY:'Wyoming',         DC:'D.C.'
+  };
+
+  /* 2026 Federal brackets [upper_limit, rate, bracket_floor] */
+  var BRACKETS = {
+    single: [
+      [11925,    0.10, 0],
+      [48475,    0.12, 11925],
+      [103350,   0.22, 48475],
+      [197300,   0.24, 103350],
+      [250525,   0.32, 197300],
+      [626350,   0.35, 250525],
+      [Infinity, 0.37, 626350]
+    ],
+    mfj: [
+      [23850,    0.10, 0],
+      [96950,    0.12, 23850],
+      [206700,   0.22, 96950],
+      [394600,   0.24, 206700],
+      [501050,   0.32, 394600],
+      [751600,   0.35, 501050],
+      [Infinity, 0.37, 751600]
+    ],
+    hoh: [
+      [17000,    0.10, 0],
+      [64850,    0.12, 17000],
+      [103350,   0.22, 64850],
+      [197300,   0.24, 103350],
+      [250500,   0.32, 197300],
+      [626350,   0.35, 250500],
+      [Infinity, 0.37, 626350]
+    ]
+  };
+
+  /* 2026 standard deductions */
+  var STD_DED = {single:15000, mfj:30000, hoh:22500};
+
+  var SS_WAGE_BASE = 176100;
+
+  /* Calculate annual federal income tax on annualized taxable wages */
+  function calcFedTax(annualTaxable, status) {
+    var bkts = BRACKETS[status] || BRACKETS.single;
+    var tax = 0;
+    var prev = 0;
+    for(var i = 0; i < bkts.length; i++) {
+      var b = bkts[i];
+      if(annualTaxable <= prev) break;
+      var inBracket = Math.min(annualTaxable, b[0]) - b[2];
+      if(inBracket > 0) tax += inBracket * b[1];
+      prev = b[0];
+    }
+    return Math.max(0, tax);
+  }
+
+  /* ── Method toggle ── */
+  var activeMethod = 'flat';
+  document.querySelectorAll('[data-method]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-method]').forEach(function(b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-checked', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-checked', 'true');
+      activeMethod = btn.dataset.method;
+      var aggInputs = document.getElementById('aggregate-inputs');
+      var hint = document.getElementById('method-hint');
+      if(activeMethod === 'aggregate') {
+        aggInputs.style.display = '';
+        hint.textContent = 'Bonus withholding calculated using annualized wages + 2026 federal tax brackets';
+      } else {
+        aggInputs.style.display = 'none';
+        hint.textContent = 'Federal withholding at flat 22% supplemental rate (37% if bonus exceeds $1 million)';
+      }
+    });
+  });
+
+  /* Print */
+  document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
+
+  /* Calculate triggers */
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+  document.getElementById('bonus_amount').addEventListener('keydown', function(e) {
+    if(e.key === 'Enter') calculate();
+  });
+
+  function fmt(n) {
+    return '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function shakeInput(el) {
+    el.style.borderColor = 'var(--red)';
+    el.focus();
+    setTimeout(function(){ el.style.borderColor = ''; }, 2000);
+  }
+
+  function calculate() {
+    var bonus = parseFloat(document.getElementById('bonus_amount').value) || 0;
+    var status = document.getElementById('filing_status').value;
+    var state  = document.getElementById('state').value;
+    var ytd    = parseFloat(document.getElementById('ytd_wages').value) || 0;
+
+    if(bonus <= 0) {
+      shakeInput(document.getElementById('bonus_amount'));
+      return;
+    }
+
+    /* ── Federal income tax ── */
+    var fedTax = 0;
+    var fedLabel = '';
+
+    if(activeMethod === 'flat') {
+      if(bonus <= 1000000) {
+        fedTax = bonus * 0.22;
+        fedLabel = 'Federal income tax (22% flat)';
+      } else {
+        fedTax = 1000000 * 0.22 + (bonus - 1000000) * 0.37;
+        fedLabel = 'Federal income tax (22% / 37%)';
+      }
+    } else {
+      /* Aggregate method */
+      var regularGross   = parseFloat(document.getElementById('regular_gross').value) || 0;
+      var periodsPerYear = parseInt(document.getElementById('pay_frequency').value, 10) || 26;
+
+      if(regularGross <= 0) {
+        shakeInput(document.getElementById('regular_gross'));
+        return;
+      }
+
+      var annualRegular        = regularGross * periodsPerYear;
+      var stdDed               = STD_DED[status] || STD_DED.single;
+      var taxableRegular       = Math.max(0, annualRegular - stdDed);
+      var taxableWithBonus     = Math.max(0, annualRegular + bonus - stdDed);
+      var fedTaxRegular        = calcFedTax(taxableRegular, status);
+      var fedTaxWithBonus      = calcFedTax(taxableWithBonus, status);
+      fedTax = Math.max(0, fedTaxWithBonus - fedTaxRegular);
+      var aggRate = bonus > 0 ? (fedTax / bonus * 100).toFixed(1) : '0.0';
+      fedLabel = 'Federal income tax (' + aggRate + '% aggregate)';
+    }
+
+    /* ── Social Security ── */
+    var ssApplies    = ytd < SS_WAGE_BASE;
+    var ssableAmount = ssApplies ? Math.min(bonus, Math.max(0, SS_WAGE_BASE - ytd)) : 0;
+    var ssTax        = ssableAmount * 0.062;
+    var ssCapped     = ssApplies && (ytd + bonus > SS_WAGE_BASE) && ssTax > 0;
+
+    /* ── Medicare ── */
+    var medicareTax = bonus * 0.0145;
+
+    /* ── State ── */
+    var stateRate = STATE_RATES[state] || 0;
+    var stateTax  = bonus * stateRate;
+    var noStateTax = !!NO_STATE_TAX[state];
+    var stateName  = STATE_NAMES[state] || state;
+
+    /* ── Net / Effective rate ── */
+    var totalWithheld = fedTax + ssTax + medicareTax + stateTax;
+    var netBonus      = bonus - totalWithheld;
+    var effRate       = bonus > 0 ? (totalWithheld / bonus * 100) : 0;
+    var takeHomePct   = bonus > 0 ? Math.max(0, netBonus / bonus * 100) : 0;
+
+    /* ── Render results ── */
+    document.getElementById('result-net').textContent   = fmt(netBonus);
+    document.getElementById('r-gross').textContent      = fmt(bonus);
+    document.getElementById('r-fed-label').textContent  = fedLabel;
+    document.getElementById('r-fed').textContent        = '−' + fmt(fedTax);
+    document.getElementById('r-medicare').textContent   = '−' + fmt(medicareTax);
+    document.getElementById('r-net-total').textContent  = fmt(netBonus);
+    document.getElementById('r-eff-rate').textContent   = effRate.toFixed(1) + '%';
+    document.getElementById('r-takehome-pct').textContent = takeHomePct.toFixed(1) + '%';
+
+    /* Social Security */
+    if(!ssApplies) {
+      document.getElementById('r-ss').textContent  = '$0.00';
+      document.getElementById('r-ss').className    = 'breakdown-row-amount';
+      document.getElementById('r-ss').style.color  = 'var(--ink-3)';
+      var ssNoteEl = document.getElementById('r-ss-note');
+      ssNoteEl.hidden = false;
+      ssNoteEl.textContent = 'Social Security wage cap ($176,100) already reached — no SS withheld from this bonus.';
+    } else {
+      document.getElementById('r-ss').textContent = '−' + fmt(ssTax);
+      document.getElementById('r-ss').className   = 'breakdown-row-amount amount-red';
+      document.getElementById('r-ss').style.color = '';
+      var ssNoteEl2 = document.getElementById('r-ss-note');
+      if(ssCapped) {
+        ssNoteEl2.hidden = false;
+        ssNoteEl2.textContent = 'SS cap reached mid-bonus. Only the portion below $176,100 (YTD + bonus) is subject to Social Security tax.';
+      } else {
+        ssNoteEl2.hidden = true;
+      }
+    }
+
+    /* State tax */
+    document.getElementById('r-state-label').textContent = stateName + ' Tax';
+    if(noStateTax) {
+      document.getElementById('r-state').textContent = '$0.00 — No state income tax';
+      document.getElementById('r-state').style.color = 'var(--ink-3)';
+    } else {
+      document.getElementById('r-state').textContent = '−' + fmt(stateTax);
+      document.getElementById('r-state').style.color = 'var(--amber)';
+    }
+
+    /* Rate bar animation */
+    var bar = document.getElementById('r-rate-bar');
+    bar.style.width = '0%';
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        bar.style.width = Math.min(100, takeHomePct).toFixed(1) + '%';
+      });
+    });
+
+    /* Show results panel */
+    document.getElementById('results-empty').hidden   = true;
+    document.getElementById('results-body').hidden    = false;
+    document.getElementById('results-actions').hidden = false;
+
+    /* Scroll on mobile */
+    if(window.innerWidth < 900) {
+      document.getElementById('results-panel').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+})();
+</script>
+</body>
+</html>

@@ -46,6 +46,31 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.freepayrollcalc.com/bonus-tax-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/salary-to-hourly-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/commission-pay-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/final-paycheck-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://www.freepayrollcalc.com/guides</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
