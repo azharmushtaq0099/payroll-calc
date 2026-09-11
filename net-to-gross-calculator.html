@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Net to Gross Paycheck Calculator 2026 — Gross-Up Calculator | FreePayrollCalc</title>
+<meta name="description" content="Calculate the gross pay needed to achieve any desired net (take-home) pay. Free gross-up calculator for bonuses, reimbursements, and salary negotiations. All 50 states, 2026 IRS rates.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/net-to-gross-calculator">
+<meta property="og:title" content="Net to Gross Calculator 2026 — Gross-Up Any Bonus or Salary">
+<meta property="og:description" content="Enter your desired take-home pay and instantly see the gross amount needed after all federal, FICA, and state taxes. Free gross-up calculator for 2026.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&q=85&auto=format&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&q=85&auto=format&fit=crop">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Net to Gross Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/net-to-gross-calculator",
+  "description": "Calculate the gross pay required to deliver any desired net take-home pay. Supports bonus gross-up (IRS 22% supplemental rate) and regular salary reverse calculation. All 50 states, 2026 IRS rates.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["Bonus gross-up using IRS 22% supplemental rate","Regular salary iterative gross-up solver","All 50 states + D.C.","2026 federal tax brackets and FICA rates","Gross-up factor display","Salary negotiation mode"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does it mean to gross up a payment?",
+      "acceptedAnswer": {"@type":"Answer","text":"Grossing up a payment means increasing the gross (pre-tax) amount so that the employee's net (after-tax) amount equals a specific target. For example, if you want an employee to receive exactly $1,000 after taxes, you calculate the gross needed — perhaps $1,421 — then withhold the taxes from that gross, and the employee nets $1,000. The employer effectively pays the taxes on behalf of the employee. Gross-ups are common for bonuses, relocation packages, spot awards, and signing bonuses."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I calculate a gross-up for a bonus?",
+      "acceptedAnswer": {"@type":"Answer","text":"For a bonus using the IRS supplemental withholding rate, the formula is: Gross = Desired Net ÷ (1 − Total Tax Rate). The total tax rate for a bonus is 22% (federal flat) + 6.2% (Social Security) + 1.45% (Medicare) + your state rate. In a no-state-tax state that gives a total of 29.65%, so Gross = Net ÷ 0.7035, or a gross-up factor of approximately 1.42×. Add your state rate to get the exact factor for your situation."}
+    },
+    {
+      "@type": "Question",
+      "name": "Why would an employer gross up a payment?",
+      "acceptedAnswer": {"@type":"Answer","text":"Employers gross up payments to guarantee the employee receives a specific net dollar amount. This is most common for: (1) signing bonuses where a recruiter promises '$5,000 in your pocket'; (2) relocation packages covering moving expenses; (3) achievement awards and spot bonuses; (4) executive compensation supplements. Without grossing up, a $5,000 bonus in a high-tax state could net the employee only $3,200 — far less than the promised amount. Grossing up ensures the advertised amount is actually what the employee receives."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the gross-up factor for the 22% bonus tax rate?",
+      "acceptedAnswer": {"@type":"Answer","text":"With no state income tax (e.g., Florida, Texas, Nevada), the gross-up factor for a bonus is approximately 1.421×: total rate = 22% federal + 6.2% Social Security + 1.45% Medicare = 29.65%, so factor = 1 ÷ (1 − 0.2965) ≈ 1.421. With state taxes the factor rises: in California (top rate 13.3%) the factor reaches approximately 1.724×; in New York (6.85%) approximately 1.575×. Use this calculator to get the exact factor for your state, filing status, and pay frequency."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I calculate what gross salary I need for a desired take-home pay?",
+      "acceptedAnswer": {"@type":"Answer","text":"Because federal income tax uses progressive brackets, you cannot use a simple one-step formula for regular salary. You must solve iteratively: (1) Start with an estimate — divide your desired net by 0.72 (assuming roughly 28% total taxes). (2) Calculate all taxes on that gross using IRS Publication 15-T withholding tables. (3) Subtract taxes to get the estimated net. (4) Add the difference between desired and estimated net to your gross estimate. (5) Repeat until the estimated net is within $0.01 of your target. This calculator runs up to 100 iterations to converge. Enter your target take-home in Salary Negotiation mode and it solves automatically."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator">PTO</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Net to Gross Calculator</span>
+    </nav>
+
+    <!-- Ad zone top -->
+    <div class="ad-zone ad-zone--leaderboard"></div>
+
+    <!-- Title -->
+    <h1 class="calc-title" data-enter>Net to Gross Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Enter your desired take-home pay — this calculator works backward to find the exact gross needed.<br>
+      Gross-up bonuses, reimbursements, and salary targets. All 50 states, 2026 IRS rates.
+    </p>
+    <div class="calc-updated">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Last updated: September 2026 — rates sourced from IRS Publication 15-T, SSA &amp; state revenue departments
+    </div>
+
+    <!-- Calculator Layout -->
+    <div class="calc-layout">
+
+      <!-- INPUT FORM -->
+      <div class="calc-main">
+
+        <div class="calc-card" data-enter data-delay="2">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
+            <span class="calc-card-head-title">Net to Gross Calculator</span>
+            <span class="calc-card-head-badge">2026 Rates</span>
+          </div>
+          <div class="calc-body">
+
+            <!-- Mode toggle -->
+            <div class="field-group">
+              <label class="field-label">Calculation Mode</label>
+              <div class="pill-group" role="radiogroup" aria-label="Calculation mode">
+                <button class="pill-btn active" data-mode="grossup" role="radio" aria-checked="true">Gross-Up (Employer Pays Taxes)</button>
+                <button class="pill-btn" data-mode="negotiation" role="radio" aria-checked="false">Salary Negotiation</button>
+              </div>
+              <div class="field-hint" id="mode-desc">Employer gross-up: calculate the gross needed so an employee nets exactly your target amount after all taxes.</div>
+            </div>
+
+            <!-- Desired Net Amount -->
+            <div class="field-group">
+              <label class="field-label" for="desired_net" id="desired-net-label">Desired Net Amount per Pay Period</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="desired_net" class="field-input has-prefix" placeholder="1,000.00" min="0.01" step="0.01" inputmode="decimal" aria-label="Desired net take-home amount in dollars">
+              </div>
+              <div class="field-hint" id="desired-net-hint">The after-tax amount you want the employee to receive.</div>
+            </div>
+
+            <!-- Pay Type (Mode A only) -->
+            <div class="field-group" id="paytype-group">
+              <label class="field-label">Payment Type</label>
+              <div class="pill-group" role="radiogroup" aria-label="Payment type">
+                <button class="pill-btn active" data-paytype="bonus" role="radio" aria-checked="true">Bonus / Supplemental</button>
+                <button class="pill-btn" data-paytype="regular" role="radio" aria-checked="false">Regular Salary</button>
+              </div>
+              <div class="field-hint" id="paytype-desc">Bonus uses the IRS flat 22% supplemental rate. Regular salary uses progressive 2026 brackets.</div>
+            </div>
+
+            <!-- Pay Frequency -->
+            <div class="field-group">
+              <label class="field-label">Pay Frequency</label>
+              <div class="pill-group" role="radiogroup" aria-label="Pay frequency">
+                <button class="pill-btn" data-freq="weekly" role="radio" aria-checked="false">Weekly</button>
+                <button class="pill-btn active" data-freq="biweekly" role="radio" aria-checked="true">Bi-Weekly</button>
+                <button class="pill-btn" data-freq="semimonthly" role="radio" aria-checked="false">Semi-Monthly</button>
+                <button class="pill-btn" data-freq="monthly" role="radio" aria-checked="false">Monthly</button>
+              </div>
+            </div>
+
+            <!-- Filing Status + State -->
+            <div class="field-row">
+              <div>
+                <label class="field-label" for="filing_status">Federal Filing Status</label>
+                <select id="filing_status" class="field-select" aria-label="Federal filing status">
+                  <option value="single">Single</option>
+                  <option value="mfj">Married Filing Jointly</option>
+                  <option value="hoh">Head of Household</option>
+                  <option value="mfs">Married Filing Separately</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="state">State</label>
+                <select id="state" class="field-select" aria-label="State for state income tax">
+                  <option value="AL">Alabama — 5.00%</option>
+                  <option value="AK">Alaska — No state income tax</option>
+                  <option value="AZ">Arizona — 2.50%</option>
+                  <option value="AR">Arkansas — 3.90%</option>
+                  <option value="CA">California — up to 13.30%</option>
+                  <option value="CO">Colorado — 4.40%</option>
+                  <option value="CT">Connecticut — up to 6.99%</option>
+                  <option value="DE">Delaware — up to 6.60%</option>
+                  <option value="FL">Florida — No state income tax</option>
+                  <option value="GA">Georgia — 5.49%</option>
+                  <option value="HI">Hawaii — up to 11.00%</option>
+                  <option value="ID">Idaho — 5.80%</option>
+                  <option value="IL">Illinois — 4.95% flat</option>
+                  <option value="IN">Indiana — 3.05%</option>
+                  <option value="IA">Iowa — up to 5.70%</option>
+                  <option value="KS">Kansas — up to 5.70%</option>
+                  <option value="KY">Kentucky — 4.00% flat</option>
+                  <option value="LA">Louisiana — up to 4.25%</option>
+                  <option value="ME">Maine — up to 7.15%</option>
+                  <option value="MD">Maryland — up to 5.75%</option>
+                  <option value="MA">Massachusetts — 5.00%</option>
+                  <option value="MI">Michigan — 4.05%</option>
+                  <option value="MN">Minnesota — up to 9.85%</option>
+                  <option value="MS">Mississippi — 4.70%</option>
+                  <option value="MO">Missouri — up to 4.95%</option>
+                  <option value="MT">Montana — up to 6.75%</option>
+                  <option value="NE">Nebraska — up to 6.64%</option>
+                  <option value="NV">Nevada — No state income tax</option>
+                  <option value="NH">New Hampshire — No state income tax</option>
+                  <option value="NJ">New Jersey — up to 10.75%</option>
+                  <option value="NM">New Mexico — up to 5.90%</option>
+                  <option value="NY" selected>New York — up to 10.90%</option>
+                  <option value="NC">North Carolina — 4.50%</option>
+                  <option value="ND">North Dakota — up to 2.50%</option>
+                  <option value="OH">Ohio — up to 3.50%</option>
+                  <option value="OK">Oklahoma — up to 4.75%</option>
+                  <option value="OR">Oregon — up to 9.90%</option>
+                  <option value="PA">Pennsylvania — 3.07% flat</option>
+                  <option value="RI">Rhode Island — up to 5.99%</option>
+                  <option value="SC">South Carolina — up to 6.40%</option>
+                  <option value="SD">South Dakota — No state income tax</option>
+                  <option value="TN">Tennessee — No state income tax</option>
+                  <option value="TX">Texas — No state income tax</option>
+                  <option value="UT">Utah — 4.55% flat</option>
+                  <option value="VT">Vermont — up to 8.75%</option>
+                  <option value="VA">Virginia — up to 5.75%</option>
+                  <option value="WA">Washington — No state income tax</option>
+                  <option value="WV">West Virginia — up to 5.12%</option>
+                  <option value="WI">Wisconsin — up to 7.65%</option>
+                  <option value="WY">Wyoming — No state income tax</option>
+                  <option value="DC">D.C. — up to 10.75%</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="btn-calc" id="calc-btn" type="button" aria-label="Calculate gross-up">
+              Calculate Gross-Up →
+            </button>
+
+          </div>
+        </div>
+
+        <!-- In-content Ad -->
+        <div class="ad-zone ad-zone--in-content"></div>
+
+        <!-- Article (SEO) -->
+        <article style="margin-top:40px" data-enter>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">What is gross-up and when do employers use it?</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">A gross-up is when an employer increases a payment so an employee receives a specific net (after-tax) amount. Instead of paying an employee a $1,000 bonus and watching them net only $650 after withholding, the employer calculates the gross amount needed — perhaps $1,575 in New York — so exactly $1,000 lands in the employee's pocket after all taxes are deducted. The employer effectively absorbs the tax burden on behalf of the employee.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Gross-ups are standard practice for <strong>signing bonuses</strong> where an offer letter promises a specific net amount, <strong>relocation packages</strong> covering moving expenses, <strong>employee achievement awards</strong>, and executive supplemental compensation. They're also useful during salary negotiations: knowing the gross required to produce a target take-home lets you anchor discussions to a specific number.</p>
+
+          <h3 style="font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 10px">The gross-up formula</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">When all tax rates are known, the direct formula is: <strong>Gross = Desired Net ÷ (1 − Total Tax Rate)</strong>. For a bonus in a no-income-tax state, the components are 22% federal supplemental + 6.2% Social Security + 1.45% Medicare = 29.65% total, giving a gross-up factor of <strong>1.421×</strong>. Add New York's 6.85% state rate and the factor rises to <strong>1.575×</strong>; in California's top bracket (13.3%) the factor reaches <strong>1.724×</strong>. This calculator displays the exact factor for your state and filing status after every calculation, so you can multiply any future net amount instantly.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Run the resulting gross through the <a href="/bonus-tax-calculator" style="color:var(--accent)">bonus tax calculator</a> to verify all withholding line items before processing payroll, or use the <a href="/payroll-tax-calculator" style="color:var(--accent)">payroll tax calculator</a> to see the full federal + FICA + state breakdown for any gross amount.</p>
+
+          <h3 style="font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 10px">Flat-rate vs. aggregate gross-up</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">There are two IRS-recognized methods. The <strong>flat-rate (supplemental) method</strong> applies a fixed 22% federal withholding to bonuses — it makes the math clean and predictable, and is what this calculator uses for the Bonus mode. The <strong>aggregate method</strong> combines the bonus with the employee's regular wages and applies their actual bracket, which generally produces a higher withholding for high earners but a lower withholding for lower earners. For regular salary gross-up, this calculator uses the employee's progressive 2026 brackets via an iterative solver that converges within $0.01.</p>
+
+          <h3 style="font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 10px">Employee use: engineering a salary target</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Job seekers use the reverse problem constantly. If your monthly budget requires $5,500 take-home — rent, loan payments, savings, and living expenses — what annual gross salary must you negotiate for? Because federal income tax uses progressive brackets, higher gross income pushes you into higher marginal rates, which changes the effective rate you need to account for. Switch to Salary Negotiation mode, enter your target monthly net, select your state, and the calculator solves backward iteratively. Confirm the resulting gross against any offer using the <a href="/take-home-pay-calculator" style="color:var(--accent)">take-home pay calculator</a>. For a full paycheck view that includes 401(k) contributions and health insurance deductions, run the gross through the <a href="/free-payroll-calculator" style="color:var(--accent)">free payroll calculator</a>.</p>
+        </article>
+
+      </div><!-- /calc-main -->
+
+      <!-- RESULTS SIDEBAR -->
+      <div>
+        <div class="results-panel" id="results-panel">
+          <div class="results-head">
+            <span class="results-head-label" id="results-head-label">Gross-Up Calculation</span>
+            <span class="results-head-period" id="results-period">Bi-Weekly</span>
+          </div>
+
+          <!-- Empty state -->
+          <div class="results-empty" id="results-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/>
+            </svg>
+            <p>Enter your desired net amount and click <strong>Calculate</strong> to see the required gross and full tax breakdown.</p>
+          </div>
+
+          <!-- Results body -->
+          <div class="results-body" id="results-body" hidden>
+
+            <!-- Required Gross — main answer -->
+            <div class="net-pay-display" style="background:linear-gradient(135deg,var(--green-dim),rgba(5,150,105,.03));border:1px solid var(--green-border)">
+              <div class="net-pay-label" id="result-gross-label">Required Gross Pay</div>
+              <div class="net-pay-amount" id="result-gross" style="color:var(--green)">$0.00</div>
+              <div class="net-pay-sub" id="result-gross-sub">per bi-weekly paycheck</div>
+            </div>
+
+            <!-- Target Net confirmation chip -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:10px;margin-bottom:16px">
+              <span style="font-size:13px;font-weight:600;color:var(--accent)">Target Net Pay</span>
+              <span style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--accent)" id="result-target-net">$0.00</span>
+            </div>
+
+            <!-- Gross-Up Factor -->
+            <div style="margin-bottom:18px;padding:14px 16px;background:var(--surface-2);border:1px solid var(--border-dark);border-radius:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+                <span style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-3)">Gross-Up Factor</span>
+                <span style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-0.5px" id="result-factor">1.00×</span>
+              </div>
+              <div style="font-size:12px;color:var(--ink-3)" id="result-factor-desc">Multiply any net by 1.00× to get required gross.</div>
+            </div>
+
+            <!-- Tax breakdown -->
+            <div class="breakdown-section-label">Tax Breakdown at This Gross</div>
+
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--red)"></span>
+                Federal Income Tax
+              </div>
+              <div class="breakdown-row-amount amount-red" id="r-fed">−$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--red)"></span>
+                Social Security (6.2%)
+              </div>
+              <div class="breakdown-row-amount amount-red" id="r-ss">−$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--red)"></span>
+                Medicare (1.45%)
+              </div>
+              <div class="breakdown-row-amount amount-red" id="r-medicare">−$0.00</div>
+            </div>
+            <div class="breakdown-row" id="r-row-addl-medicare" hidden>
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--red)"></span>
+                Additional Medicare (0.9%)
+              </div>
+              <div class="breakdown-row-amount amount-red" id="r-addl-medicare">−$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--amber)"></span>
+                State Income Tax
+              </div>
+              <div class="breakdown-row-amount" id="r-state" style="color:var(--amber)">−$0.00</div>
+            </div>
+
+            <div class="breakdown-total">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="breakdown-row-dot" style="background:var(--red);width:10px;height:10px"></span>
+                Total Withheld
+              </div>
+              <div class="breakdown-row-amount amount-red" id="r-total-withheld">−$0.00</div>
+            </div>
+
+            <!-- Net confirm row -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:14px;border-top:1px solid var(--border);margin-top:2px">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--ink-2)">
+                <span class="breakdown-row-dot" style="background:var(--green);width:8px;height:8px"></span>
+                Net Pay (confirmed)
+              </div>
+              <div style="font-family:var(--mono);font-weight:700;font-size:14px;color:var(--green)" id="r-net-confirm">$0.00</div>
+            </div>
+
+            <!-- Gross-up premium (Mode A bonus only) -->
+            <div id="r-row-premium" hidden style="margin-top:14px;padding:12px 14px;background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.18);border-radius:10px">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--amber);margin-bottom:4px">Employer Tax Premium</div>
+              <div style="font-size:13px;color:var(--amber)">Employer pays <strong style="font-family:var(--mono)" id="r-premium">$0.00</strong> extra in taxes to gross up this payment.</div>
+            </div>
+
+            <!-- Tax bracket (Mode B negotiation only) -->
+            <div id="r-row-bracket" hidden style="margin-top:14px;padding:12px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:10px">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--accent);margin-bottom:4px">Federal Tax Bracket at This Gross</div>
+              <div style="font-size:13px;color:var(--accent)">Marginal rate: <strong style="font-family:var(--mono);font-size:15px" id="r-bracket">0%</strong></div>
+            </div>
+
+            <!-- Effective tax rate + Annualized -->
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Annual Gross</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-annual-gross">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Annual Net</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--green)" id="r-annual-net">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Annual Tax</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--red)" id="r-annual-tax">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Eff. Tax Rate</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-eff-rate">0.0%</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /results-body -->
+
+          <div class="results-actions" id="results-actions" hidden>
+            <button class="results-action-btn" data-copy-results aria-label="Copy results to clipboard">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="8" width="10" height="10" rx="2"/><path d="M5 8V5a2 2 0 012-2h7"/></svg>
+              Copy
+            </button>
+            <button class="results-action-btn" id="print-btn" aria-label="Print results">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print
+            </button>
+          </div>
+
+        </div><!-- /results-panel -->
+
+        <!-- Sidebar ad -->
+        <div class="ad-zone ad-zone--sidebar"></div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <strong>Disclaimer:</strong> Results are estimates based on 2026 IRS Publication 15-T rates (22% supplemental withholding), SSA wage base, and state tax schedules. Actual gross-up amounts may vary based on year-to-date wages, pre-tax deductions, and aggregate withholding method. Not a substitute for licensed payroll software or tax advice.
+        </div>
+
+      </div><!-- /sidebar -->
+    </div><!-- /calc-layout -->
+
+  </div>
+</main>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Gross-up questions answered</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          What does it mean to gross up a payment?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Grossing up a payment means increasing the gross (pre-tax) amount so that the employee's net (after-tax) amount equals a specific target. For example, to give an employee exactly $1,000, you calculate the gross that — after all taxes are withheld — leaves exactly $1,000. In New York, that gross might be $1,575. The employer pays the taxes; the employee receives the promised amount. This is common for bonuses, relocation payments, spot awards, and signing bonuses.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          How do I calculate a gross-up for a bonus?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Use the formula: <strong>Gross = Desired Net ÷ (1 − Total Tax Rate)</strong>. For a bonus, total tax rate = 22% (federal flat rate) + 6.2% (Social Security, up to wage base) + 1.45% (Medicare) + state rate. In Florida (no state tax): 29.65% total, so Gross = $1,000 ÷ 0.7035 = $1,421. In New York (6.85%): 36.5% total, Gross = $1,000 ÷ 0.635 = $1,575. This calculator handles all states and also checks the SS wage base edge case for high earners.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          Why would an employer gross up a payment?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Employers gross up payments for several reasons: (1) <strong>Recruiting commitments</strong> — offer letters that promise a specific dollar amount to the employee. (2) <strong>Relocation</strong> — covering moving costs in full without the employee losing a third to taxes. (3) <strong>Fairness</strong> — ensuring all employees in different states receive the same effective amount regardless of their state tax rate. (4) <strong>Executive compensation</strong> — supplemental plans where the promise is a specific net figure. The employer deducts the full gross (including taxes paid on behalf of the employee) as a compensation expense.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="3">
+        <button class="faq-q" aria-expanded="false">
+          What is the gross-up factor for the 22% bonus tax rate?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Without state tax: 22% + 6.2% + 1.45% = 29.65% total, so the gross-up factor is <strong>1 ÷ (1 − 0.2965) ≈ 1.421×</strong>. That means every $1 you want the employee to net costs you $1.42 in gross pay. Add your state rate: Pennsylvania (3.07%) → factor ≈ 1.485×; New York (6.85%) → factor ≈ 1.575×; California (9.3%) → factor ≈ 1.647×; California top bracket (13.3%) → factor ≈ 1.724×. This calculator shows the exact computed factor after each calculation — you can use it to gross up any amount by multiplying.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="4">
+        <button class="faq-q" aria-expanded="false">
+          How do I calculate what gross salary I need for a desired take-home pay?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          For regular salary you cannot use a single-step formula because the marginal tax rate changes as gross income rises. You need an iterative approach: (1) Start with gross estimate = desired net ÷ 0.72 (assumes ~28% effective rate). (2) Calculate all taxes on that gross. (3) Compute net = gross − taxes. (4) Error = desired net − computed net. (5) Add error to gross estimate. (6) Repeat until error &lt; $0.01. Use the <strong>Salary Negotiation</strong> mode on this calculator — it runs this loop automatically in milliseconds. Once you have the gross, verify the take-home with the <a href="/take-home-pay-calculator">take-home pay calculator</a>.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/bonus-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div><div class="tool-card-title">Bonus Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">See exactly how much tax is withheld from any bonus amount using the IRS 22% supplemental rate.</div></div>
+        </div>
+      </a>
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Full gross-to-net breakdown: federal income tax, Social Security, Medicare, and all 50 state taxes.</div></div>
+        </div>
+      </a>
+      <a href="/take-home-pay-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div><div class="tool-card-title">Take-Home Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">Enter any gross salary and see your exact net paycheck for all 50 states.</div></div>
+        </div>
+      </a>
+      <a href="/free-payroll-calculator" class="tool-card" data-enter data-delay="4">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div><div class="tool-card-title">Free Payroll Calculator</div><div class="tool-card-desc" style="font-size:13px">Full gross-to-net with 401(k), health insurance, and all pre-tax deductions included.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+/* ── 2026 Net-to-Gross Tax Engine ── */
+(function(){
+  'use strict';
+
+  /* ── Federal brackets 2026 — annualized ── */
+  var FED = {
+    single: [
+      [11925, .10, 0],
+      [48475, .12, 11925],
+      [103350, .22, 48475],
+      [197300, .24, 103350],
+      [250525, .32, 197300],
+      [626350, .35, 250525],
+      [Infinity, .37, 626350]
+    ],
+    mfj: [
+      [23850, .10, 0],
+      [96950, .12, 23850],
+      [206700, .22, 96950],
+      [394600, .24, 206700],
+      [501050, .32, 394600],
+      [751600, .35, 501050],
+      [Infinity, .37, 751600]
+    ],
+    hoh: [
+      [17000, .10, 0],
+      [64850, .12, 17000],
+      [103350, .22, 64850],
+      [197300, .24, 103350],
+      [250500, .32, 197300],
+      [626350, .35, 250500],
+      [Infinity, .37, 626350]
+    ],
+    mfs: [
+      [11925, .10, 0],
+      [48475, .12, 11925],
+      [103350, .22, 48475],
+      [197300, .24, 103350],
+      [250525, .32, 197300],
+      [313175, .35, 250525],
+      [Infinity, .37, 313175]
+    ]
+  };
+
+  /* Standard deductions 2026 */
+  var STD_DED = {single:15000, mfj:30000, hoh:22500, mfs:15000};
+
+  /* SS wage base — 2025 value; updated when 2026 SSA announcement is made */
+  var SS_WAGE_BASE = 176100;
+
+  /* State flat/effective rates — 0 = progressive (handled by stateEffRate) */
+  var STATE_TAX = {
+    AL:0.050, AK:0, AZ:0.025, AR:0.039, CA:0, CO:0.044,
+    CT:0, DE:0, FL:0, GA:0.0549, HI:0, ID:0.058,
+    IL:0.0495, IN:0.0305, IA:0, KS:0, KY:0.040, LA:0,
+    ME:0, MD:0, MA:0.050, MI:0.0405, MN:0, MS:0.047,
+    MO:0, MT:0, NE:0, NV:0, NH:0, NJ:0, NM:0,
+    NY:0.0685, NC:0.045, ND:0.0150, OH:0, OK:0,
+    OR:0, PA:0.0307, RI:0, SC:0, SD:0, TN:0,
+    TX:0, UT:0.0455, VT:0, VA:0.0575, WA:0, WV:0,
+    WI:0, WY:0, DC:0
+  };
+
+  /* Progressive state effective rates for key states */
+  function stateEffRate(state, annualIncome) {
+    if(state === 'CA') {
+      if(annualIncome <= 10099) return 0.010;
+      if(annualIncome <= 23942) return 0.020;
+      if(annualIncome <= 37788) return 0.040;
+      if(annualIncome <= 52455) return 0.060;
+      if(annualIncome <= 66295) return 0.080;
+      if(annualIncome <= 338639) return 0.093;
+      if(annualIncome <= 406364) return 0.103;
+      if(annualIncome <= 677275) return 0.113;
+      return 0.133;
+    }
+    if(state === 'NY') {
+      if(annualIncome <= 17150) return 0.040;
+      if(annualIncome <= 23600) return 0.045;
+      if(annualIncome <= 27900) return 0.0525;
+      if(annualIncome <= 161550) return 0.055;
+      if(annualIncome <= 323200) return 0.060;
+      if(annualIncome <= 2155350) return 0.0685;
+      if(annualIncome <= 5000000) return 0.0965;
+      if(annualIncome <= 25000000) return 0.103;
+      return 0.109;
+    }
+    if(state === 'NJ') {
+      if(annualIncome <= 20000) return 0.014;
+      if(annualIncome <= 35000) return 0.0175;
+      if(annualIncome <= 40000) return 0.035;
+      if(annualIncome <= 75000) return 0.05525;
+      if(annualIncome <= 500000) return 0.0637;
+      if(annualIncome <= 1000000) return 0.0897;
+      return 0.1075;
+    }
+    if(state === 'MN') {
+      if(annualIncome <= 31690) return 0.0535;
+      if(annualIncome <= 104090) return 0.068;
+      if(annualIncome <= 193240) return 0.0785;
+      return 0.0985;
+    }
+    if(state === 'OR') {
+      if(annualIncome <= 18400) return 0.0475;
+      if(annualIncome <= 250000) return 0.0675;
+      return 0.099;
+    }
+    if(state === 'HI') {
+      if(annualIncome <= 9600) return 0.014;
+      if(annualIncome <= 19200) return 0.032;
+      if(annualIncome <= 28800) return 0.055;
+      if(annualIncome <= 38400) return 0.064;
+      if(annualIncome <= 48000) return 0.068;
+      if(annualIncome <= 150000) return 0.072;
+      if(annualIncome <= 175000) return 0.079;
+      if(annualIncome <= 200000) return 0.083;
+      return 0.110;
+    }
+    return STATE_TAX[state] || 0;
+  }
+
+  /* Pay period multipliers */
+  var PERIODS = {weekly:52, biweekly:26, semimonthly:24, monthly:12};
+  var PERIOD_LABELS = {weekly:'per week', biweekly:'bi-weekly', semimonthly:'semi-monthly', monthly:'per month'};
+  var PERIOD_LABELS_CAP = {weekly:'Weekly', biweekly:'Bi-Weekly', semimonthly:'Semi-Monthly', monthly:'Monthly'};
+
+  /* Federal income tax (annualized percentage method) */
+  function calcFedTax(annualTaxableWages, status) {
+    var brackets = FED[status] || FED.single;
+    var tax = 0;
+    var prev = 0;
+    for(var i = 0; i < brackets.length; i++) {
+      var b = brackets[i];
+      if(annualTaxableWages <= prev) break;
+      var taxable = Math.min(annualTaxableWages, b[0]) - b[2];
+      if(taxable > 0) tax += taxable * b[1];
+      prev = b[0];
+    }
+    return Math.max(0, tax);
+  }
+
+  /* Get marginal federal rate for a given annualized taxable income */
+  function getMarginalRate(annualTaxableIncome, status) {
+    var brackets = FED[status] || FED.single;
+    for(var i = 0; i < brackets.length; i++) {
+      if(annualTaxableIncome <= brackets[i][0]) return brackets[i][1];
+    }
+    return 0.37;
+  }
+
+  /* ── Core tax engine: given gross per period, return all tax components ── */
+  function calcTaxes(grossPerPeriod, status, state, freq, flatFedRate) {
+    var periods = PERIODS[freq];
+    var annualGross = grossPerPeriod * periods;
+
+    /* Federal */
+    var annualFedTax;
+    if(flatFedRate) {
+      /* Bonus/supplemental: IRS flat 22% */
+      annualFedTax = annualGross * 0.22;
+    } else {
+      /* Regular salary: progressive brackets (annualized percentage method) */
+      var annualFedTaxable = Math.max(0, annualGross - STD_DED[status]);
+      annualFedTax = calcFedTax(annualFedTaxable, status);
+    }
+    var fedPeriod = annualFedTax / periods;
+
+    /* Social Security — respects wage base */
+    var annualSSWages = Math.min(annualGross, SS_WAGE_BASE);
+    var annualSSTax = annualSSWages * 0.062;
+    var ssPeriod = annualSSTax / periods;
+
+    /* Medicare (1.45%) */
+    var medicarePeriod = grossPerPeriod * 0.0145;
+
+    /* Additional Medicare (0.9% over $200k single / $250k MFJ) */
+    var addlThreshold = (status === 'mfj') ? 250000 : 200000;
+    var annualAddlMedicare = Math.max(0, annualGross - addlThreshold) * 0.009;
+    var addlMedicarePeriod = annualAddlMedicare / periods;
+
+    /* State */
+    var sRate = stateEffRate(state, annualGross);
+    var statePeriod = grossPerPeriod * sRate;
+
+    var totalPeriod = fedPeriod + ssPeriod + medicarePeriod + addlMedicarePeriod + statePeriod;
+
+    return {
+      federal:      fedPeriod,
+      ss:           ssPeriod,
+      medicare:     medicarePeriod,
+      addlMedicare: addlMedicarePeriod,
+      state:        statePeriod,
+      stateRate:    sRate,
+      total:        totalPeriod,
+      annualGross:  annualGross,
+      annualFed:    annualFedTax,
+      annualSS:     annualSSTax,
+      annualMed:    grossPerPeriod * periods * 0.0145,
+      annualAddlMed: annualAddlMedicare,
+      annualState:  grossPerPeriod * periods * sRate
+    };
+  }
+
+  /* ── Iterative gross solver: find gross that produces desired net ──
+     Newton-style additive correction. Converges in ~5–15 iterations for all
+     practical pay ranges. Cap at 100 iterations for safety. */
+  function solveGross(desiredNetPerPeriod, status, state, freq, flatFedRate) {
+    /* Defensive floor */
+    if(desiredNetPerPeriod <= 0) return 0;
+
+    /* Initial estimate: assume ~28% effective total tax */
+    var grossEst = desiredNetPerPeriod / (1 - 0.28);
+
+    for(var i = 0; i < 100; i++) {
+      var t = calcTaxes(grossEst, status, state, freq, flatFedRate);
+      var actualNet = grossEst - t.total;
+      var err = desiredNetPerPeriod - actualNet;
+
+      /* Converged? */
+      if(Math.abs(err) < 0.005) break;
+
+      /* Additive correction. Since d(net)/d(gross) = 1 - marginal_rate < 1,
+         adding the error moves us toward the target each iteration.
+         Clamp to avoid overshoot on extreme edge cases. */
+      var step = Math.max(-grossEst * 0.5, Math.min(err, grossEst * 2));
+      grossEst = Math.max(0.01, grossEst + step);
+    }
+
+    return grossEst;
+  }
+
+  /* ── UI State ── */
+  var activeMode    = 'grossup';   /* 'grossup' | 'negotiation' */
+  var activePayType = 'bonus';     /* 'bonus'   | 'regular' */
+  var activeFreq    = 'biweekly';  /* default */
+
+  /* Mode pills */
+  document.querySelectorAll('[data-mode]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activeMode = btn.dataset.mode;
+      document.querySelectorAll('[data-mode]').forEach(function(b) {
+        var on = b.dataset.mode === activeMode;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      /* Update label + hint */
+      var modeDesc = document.getElementById('mode-desc');
+      var netLabel = document.getElementById('desired-net-label');
+      var netHint  = document.getElementById('desired-net-hint');
+      var calcBtn  = document.getElementById('calc-btn');
+      if(activeMode === 'grossup') {
+        modeDesc.textContent = 'Employer gross-up: calculate the gross needed so an employee nets exactly your target amount after all taxes.';
+        netLabel.textContent = 'Desired Net Amount per Pay Period';
+        netHint.textContent  = 'The after-tax amount you want the employee to receive.';
+        calcBtn.textContent  = 'Calculate Gross-Up →';
+        document.getElementById('paytype-group').hidden = false;
+      } else {
+        modeDesc.textContent = 'Salary negotiation: enter your desired take-home per period and find the gross salary to ask for.';
+        netLabel.textContent = 'Desired Take-Home per Pay Period';
+        netHint.textContent  = 'How much you want to keep after all taxes each pay period.';
+        calcBtn.textContent  = 'Calculate Required Gross →';
+        document.getElementById('paytype-group').hidden = true;
+      }
+      resetResults();
+    });
+  });
+
+  /* Pay type pills */
+  document.querySelectorAll('[data-paytype]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activePayType = btn.dataset.paytype;
+      document.querySelectorAll('[data-paytype]').forEach(function(b) {
+        var on = b.dataset.paytype === activePayType;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      var pt = document.getElementById('paytype-desc');
+      if(activePayType === 'bonus') {
+        pt.textContent = 'Bonus uses the IRS flat 22% supplemental rate. Regular salary uses progressive 2026 brackets.';
+      } else {
+        pt.textContent = 'Regular salary gross-up uses 2026 progressive brackets with an iterative solver (converges within $0.01).';
+      }
+    });
+  });
+
+  /* Frequency pills */
+  document.querySelectorAll('[data-freq]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-freq]').forEach(function(b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-checked', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-checked', 'true');
+      activeFreq = btn.dataset.freq;
+    });
+  });
+
+  /* Print */
+  document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
+
+  /* Copy results */
+  document.querySelector('[data-copy-results]').addEventListener('click', function() {
+    var btn = this;
+    var gross  = document.getElementById('result-gross').textContent;
+    var net    = document.getElementById('result-target-net').textContent;
+    var factor = document.getElementById('result-factor').textContent;
+    var fed    = document.getElementById('r-fed').textContent;
+    var ss     = document.getElementById('r-ss').textContent;
+    var med    = document.getElementById('r-medicare').textContent;
+    var state  = document.getElementById('r-state').textContent;
+    var eff    = document.getElementById('r-eff-rate').textContent;
+    var text = [
+      'Net to Gross Calculation — FreePayrollCalc',
+      'Target Net: ' + net,
+      'Required Gross: ' + gross,
+      'Gross-Up Factor: ' + factor,
+      '---',
+      'Federal Income Tax: ' + fed,
+      'Social Security: ' + ss,
+      'Medicare: ' + med,
+      'State Tax: ' + state,
+      'Effective Tax Rate: ' + eff
+    ].join('\n');
+    navigator.clipboard.writeText(text).then(function() {
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+      setTimeout(function() { btn.innerHTML = orig; }, 1800);
+    }).catch(function() {});
+  });
+
+  /* Enter key on input */
+  document.getElementById('desired_net').addEventListener('keydown', function(e) {
+    if(e.key === 'Enter') calculate();
+  });
+
+  /* Calculate button */
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+
+  function fmt(n) {
+    return '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function resetResults() {
+    document.getElementById('results-empty').hidden = false;
+    document.getElementById('results-body').hidden = true;
+    document.getElementById('results-actions').hidden = true;
+  }
+
+  function calculate() {
+    var desiredNet = parseFloat(document.getElementById('desired_net').value) || 0;
+    var status     = document.getElementById('filing_status').value;
+    var state      = document.getElementById('state').value;
+
+    /* Validation */
+    if(desiredNet <= 0) {
+      var inp = document.getElementById('desired_net');
+      inp.focus();
+      inp.style.borderColor = 'var(--red)';
+      setTimeout(function() { inp.style.borderColor = ''; }, 1500);
+      return;
+    }
+
+    var useFlatRate = (activeMode === 'grossup' && activePayType === 'bonus');
+
+    /* Solve for gross */
+    var gross   = solveGross(desiredNet, status, state, activeFreq, useFlatRate);
+    var taxes   = calcTaxes(gross, status, state, activeFreq, useFlatRate);
+    var periods = PERIODS[activeFreq];
+
+    /* Verified net (should match desiredNet within $0.01) */
+    var confirmedNet  = gross - taxes.total;
+    var annualGross   = gross * periods;
+    var annualNet     = desiredNet * periods;
+    var annualTaxTotal = taxes.annualFed + taxes.annualSS + taxes.annualMed + taxes.annualAddlMed + taxes.annualState;
+    var effRate       = (taxes.total / gross) * 100;
+    var factor        = gross / desiredNet;
+    var premium       = gross - desiredNet; /* employer extra cost for Mode A bonus */
+
+    /* ── Render ── */
+    var periodLabel = PERIOD_LABELS[activeFreq];
+
+    /* Header */
+    document.getElementById('results-head-label').textContent =
+      activeMode === 'grossup' ? 'Gross-Up Calculation' : 'Salary Target';
+    document.getElementById('result-gross-label').textContent =
+      activeMode === 'grossup' ? 'Required Gross Pay' : 'Gross Salary Needed';
+    document.getElementById('results-period').textContent = PERIOD_LABELS_CAP[activeFreq];
+
+    /* Main gross display */
+    document.getElementById('result-gross').textContent = fmt(gross);
+    document.getElementById('result-gross-sub').textContent = periodLabel;
+
+    /* Target net chip */
+    document.getElementById('result-target-net').textContent = fmt(desiredNet);
+
+    /* Gross-up factor */
+    var factorStr = factor.toFixed(4) + '×';
+    document.getElementById('result-factor').textContent = factorStr;
+    document.getElementById('result-factor-desc').textContent =
+      'Multiply any net × ' + factor.toFixed(4) + ' to get required gross.';
+
+    /* Tax breakdown */
+    document.getElementById('r-fed').textContent      = '−' + fmt(taxes.federal);
+    document.getElementById('r-ss').textContent       = '−' + fmt(taxes.ss);
+    document.getElementById('r-medicare').textContent = '−' + fmt(taxes.medicare);
+    document.getElementById('r-state').textContent    = taxes.stateRate > 0 ? '−' + fmt(taxes.state) : '$0.00 (no state tax)';
+    document.getElementById('r-total-withheld').textContent = '−' + fmt(taxes.total);
+    document.getElementById('r-net-confirm').textContent    = fmt(confirmedNet);
+
+    /* Additional Medicare */
+    var showAddl = taxes.addlMedicare > 0.005;
+    document.getElementById('r-row-addl-medicare').hidden = !showAddl;
+    if(showAddl) document.getElementById('r-addl-medicare').textContent = '−' + fmt(taxes.addlMedicare);
+
+    /* Gross-up premium (Mode A bonus only) */
+    var showPremium = (activeMode === 'grossup' && activePayType === 'bonus');
+    document.getElementById('r-row-premium').hidden = !showPremium;
+    if(showPremium) document.getElementById('r-premium').textContent = fmt(premium);
+
+    /* Tax bracket (Mode B only) */
+    var showBracket = (activeMode === 'negotiation');
+    document.getElementById('r-row-bracket').hidden = !showBracket;
+    if(showBracket) {
+      var annualTaxable = Math.max(0, annualGross - STD_DED[status]);
+      var margRate = getMarginalRate(annualTaxable, status);
+      document.getElementById('r-bracket').textContent = Math.round(margRate * 100) + '%';
+    }
+
+    /* Effective rate + annualized grid */
+    document.getElementById('r-eff-rate').textContent   = effRate.toFixed(1) + '%';
+    document.getElementById('r-annual-gross').textContent = fmt(annualGross);
+    document.getElementById('r-annual-net').textContent   = fmt(annualNet);
+    document.getElementById('r-annual-tax').textContent   = fmt(annualTaxTotal);
+
+    /* Show results */
+    document.getElementById('results-empty').hidden  = true;
+    document.getElementById('results-body').hidden   = false;
+    document.getElementById('results-actions').hidden = false;
+
+    /* Scroll on mobile */
+    if(window.innerWidth < 900) {
+      document.getElementById('results-panel').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+})();
+</script>
+</body>
+</html>

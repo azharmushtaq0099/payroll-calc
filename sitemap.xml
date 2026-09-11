@@ -71,6 +71,21 @@
     <priority>0.90</priority>
   </url>
   <url>
+    <loc>https://www.freepayrollcalc.com/net-to-gross-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/self-employment-tax-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/w4-withholding-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://www.freepayrollcalc.com/guides</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
@@ -85,6 +100,58 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  <!-- Take Home Pay Calculator — State Pages -->
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/california</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/texas</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/new-york</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/florida</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/illinois</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/pennsylvania</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/ohio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/georgia</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/north-carolina</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/take-home-pay-calculator/washington</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <url>
     <loc>https://www.freepayrollcalc.com/about</loc>
     <changefreq>yearly</changefreq>

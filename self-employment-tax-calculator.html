@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Self-Employment Tax Calculator 2026 — Schedule SE &amp; Quarterly Taxes | FreePayrollCalc</title>
+<meta name="description" content="Free self-employment tax calculator for 2026. Calculate Schedule SE taxes (15.3% on net earnings), the deductible half, quarterly estimated payments, and your total tax burden as a freelancer or 1099 contractor.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/self-employment-tax-calculator">
+<meta property="og:title" content="Self-Employment Tax Calculator 2026 — Schedule SE &amp; Quarterly Taxes">
+<meta property="og:description" content="Calculate your 2026 self-employment tax, SE deduction, federal + state income tax, and quarterly estimated payments. Built for freelancers and 1099 contractors.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Self-Employment Tax Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/self-employment-tax-calculator",
+  "description": "Calculate self-employment tax (Schedule SE), the deductible half, federal and state income taxes, and quarterly estimated payments for freelancers and independent contractors. 2026 IRS rates.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["Schedule SE tax calculation","Social Security and Medicare split","SE tax deduction (50%)","Federal income tax with SE deduction","State income tax all 50 states","Quarterly estimated payment schedule","W-2 equivalent cost comparison"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is self-employment tax?",
+      "acceptedAnswer": {"@type":"Answer","text":"Self-employment (SE) tax is the combined Social Security and Medicare tax that freelancers, independent contractors, and sole proprietors must pay. For 2026, SE tax is 15.3% — 12.4% Social Security (on net earnings up to $176,100) plus 2.9% Medicare (no wage cap). Unlike W-2 employees who split FICA 50/50 with their employer, self-employed individuals pay both halves themselves."}
+    },
+    {
+      "@type": "Question",
+      "name": "How is self-employment tax calculated for 2026?",
+      "acceptedAnswer": {"@type":"Answer","text":"Self-employment tax is calculated on Schedule SE: (1) Multiply net self-employment earnings by 92.35% — this IRS factor accounts for the employer-equivalent deduction. (2) Apply 12.4% Social Security on the result up to $176,100 (2026 wage base), plus 2.9% Medicare on the full amount. (3) An additional 0.9% Medicare applies on earnings over $200,000 (single) or $250,000 (married filing jointly)."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I deduct half of my self-employment tax?",
+      "acceptedAnswer": {"@type":"Answer","text":"Yes. IRS allows self-employed individuals to deduct 50% of SE tax paid from their adjusted gross income on Schedule 1 (Form 1040). This deduction reduces the income subject to federal income tax — it does not reduce the SE tax itself. For example, if your SE tax is $10,000, you can deduct $5,000 from your AGI, saving roughly $550–$2,400 in income taxes depending on your bracket."}
+    },
+    {
+      "@type": "Question",
+      "name": "How much should I set aside for quarterly estimated taxes?",
+      "acceptedAnswer": {"@type":"Answer","text":"Most tax professionals recommend setting aside 25–30% of gross self-employment income for taxes. Quarterly estimated payments are due April 15, June 16, September 15, and January 15. To avoid underpayment penalties, each payment should cover at least 25% of your expected annual tax liability, or equal 100% of the prior year's tax if your prior-year AGI was under $150,000."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between self-employment tax and income tax?",
+      "acceptedAnswer": {"@type":"Answer","text":"Self-employment tax (Schedule SE) covers Social Security and Medicare — it replaces the FICA that employers normally withhold from W-2 paychecks. Income tax (Form 1040) is a separate, additional obligation based on your taxable income and filing status. As a freelancer you owe both: SE tax on your net earnings plus federal income tax and state income tax on your adjusted gross income after the SE deduction."}
+    }
+  ]
+}
+</script>
+<style>
+.se-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media(max-width:600px){.se-results-grid{grid-template-columns:1fr}}
+.se-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.se-box-label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.se-box-amount{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--ink-1)}
+.se-box-amount.green{color:var(--green)}
+.se-box-amount.red{color:var(--red)}
+.se-box-amount.blue{color:var(--accent)}
+.se-breakdown{margin-top:24px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.se-row{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border);font-size:14px}
+.se-row:last-child{border-bottom:none}
+.se-row.se-total{background:var(--bg);font-weight:700;font-size:15px}
+.se-row.se-net{background:rgba(5,150,105,.06);font-weight:700;font-size:15px}
+.se-row-val{font-family:'JetBrains Mono',monospace;font-weight:600}
+.se-row-val.neg{color:var(--red)}
+.se-row-val.pos{color:var(--green)}
+.se-row-val.blue{color:var(--accent)}
+.quarterly-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:24px}
+.quarterly-title{font-weight:700;font-size:15px;margin-bottom:16px;color:var(--ink-1)}
+.qrow{display:flex;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px}
+.qrow:last-child{border-bottom:none}
+.qbadge{background:var(--accent);color:#fff;border-radius:6px;padding:3px 10px;font-size:12px;font-weight:700;min-width:30px;text-align:center;flex-shrink:0}
+.qdate{color:var(--ink-3);flex:1}
+.qamt{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--ink-1)}
+.compare-box{background:rgba(27,79,216,.05);border:1px solid rgba(27,79,216,.18);border-radius:12px;padding:20px;margin-top:24px;display:flex;gap:24px;flex-wrap:wrap}
+.compare-col{flex:1;min-width:180px}
+.compare-col-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.compare-col-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700}
+.compare-col-val.accent{color:var(--accent)}
+#se-results{display:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/take-home-pay-calculator">Take Home Pay</a>
+        <a href="/self-employment-tax-calculator" class="active">SE Tax</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+    <a href="/take-home-pay-calculator">Take Home Pay Calculator</a>
+    <a href="/self-employment-tax-calculator" class="active">Self-Employment Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Self-Employment Tax Calculator</span>
+    </nav>
+
+    <div class="ad-zone ad-zone--leaderboard"></div>
+
+    <h1 class="calc-title" data-enter>Self-Employment Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Calculate Schedule SE taxes, the deductible half, federal and state income taxes, and quarterly estimated payments.<br>
+      Built for freelancers, 1099 contractors, and sole proprietors.
+    </p>
+    <div class="calc-updated">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Last updated: September 2026 — rates sourced from IRS, SSA &amp; state revenue departments
+    </div>
+
+    <!-- CALCULATOR CARD -->
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Schedule SE Calculator
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="se_income">Net Self-Employment Income (Annual)</label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input type="number" id="se_income" class="form-input form-input--prefixed" placeholder="75,000" min="0" step="100">
+          </div>
+          <p class="form-hint">Gross revenue minus business expenses (what you'd report on Schedule C)</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="w2_income">W-2 Income from Other Jobs <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input type="number" id="w2_income" class="form-input form-input--prefixed" placeholder="0" min="0" step="100">
+          </div>
+          <p class="form-hint">Affects Social Security wage base — reduces SS portion of SE tax</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="filing_status">Filing Status</label>
+          <select id="filing_status" class="form-select">
+            <option value="single">Single</option>
+            <option value="mfj">Married Filing Jointly</option>
+            <option value="hoh">Head of Household</option>
+            <option value="mfs">Married Filing Separately</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="state">State</label>
+          <select id="state" class="form-select">
+            <option value="AL">Alabama</option><option value="AK">Alaska (no income tax)</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida (no income tax)</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada (no income tax)</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota (no income tax)</option><option value="TN">Tennessee (no income tax)</option><option value="TX">Texas (no income tax)</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington (no income tax)</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming (no income tax)</option><option value="DC">Washington D.C.</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Calculate Self-Employment Tax
+      </button>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="se-results">
+
+      <!-- Top stat boxes -->
+      <div class="se-results-grid" data-enter>
+        <div class="se-box">
+          <div class="se-box-label">SE Tax (Schedule SE)</div>
+          <div class="se-box-amount red" id="r-se-total">—</div>
+          <p style="font-size:12px;color:var(--ink-3);margin-top:6px">Social Security + Medicare</p>
+        </div>
+        <div class="se-box">
+          <div class="se-box-label">SE Tax Deduction</div>
+          <div class="se-box-amount blue" id="r-se-ded">—</div>
+          <p style="font-size:12px;color:var(--ink-3);margin-top:6px">Deduct half of SE tax from AGI</p>
+        </div>
+        <div class="se-box">
+          <div class="se-box-label">Total Tax Burden</div>
+          <div class="se-box-amount red" id="r-total-tax">—</div>
+          <p style="font-size:12px;color:var(--ink-3);margin-top:6px">SE + federal income + state</p>
+        </div>
+        <div class="se-box">
+          <div class="se-box-label">Net After All Taxes</div>
+          <div class="se-box-amount green" id="r-net">—</div>
+          <p style="font-size:12px;color:var(--ink-3);margin-top:6px">Effective rate: <span id="r-eff-rate" style="font-weight:700">—</span></p>
+        </div>
+      </div>
+
+      <!-- Full breakdown -->
+      <div class="se-breakdown" data-enter data-delay="1">
+        <div class="se-row" style="background:var(--bg);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3)">
+          <span>Tax Breakdown</span><span>Amount</span>
+        </div>
+        <div class="se-row">
+          <span>Net SE Income (92.35% of gross)</span>
+          <span class="se-row-val blue" id="r-net-earnings">—</span>
+        </div>
+        <div class="se-row">
+          <span>Social Security (12.4%, up to $176,100)</span>
+          <span class="se-row-val neg" id="r-ss">—</span>
+        </div>
+        <div class="se-row">
+          <span>Medicare (2.9%)</span>
+          <span class="se-row-val neg" id="r-med">—</span>
+        </div>
+        <div class="se-row" id="r-addl-med-row" style="display:none">
+          <span>Additional Medicare (0.9% over threshold)</span>
+          <span class="se-row-val neg" id="r-addl-med">—</span>
+        </div>
+        <div class="se-row se-total">
+          <span>Total SE Tax</span>
+          <span class="se-row-val neg" id="r-se-total2">—</span>
+        </div>
+        <div class="se-row" style="background:rgba(27,79,216,.04)">
+          <span>SE Tax Deduction (−50% of SE tax from AGI)</span>
+          <span class="se-row-val pos" id="r-se-ded2">—</span>
+        </div>
+        <div class="se-row">
+          <span>Federal Taxable Income (AGI − standard deduction)</span>
+          <span class="se-row-val blue" id="r-fed-taxable">—</span>
+        </div>
+        <div class="se-row">
+          <span>Federal Income Tax</span>
+          <span class="se-row-val neg" id="r-fed">—</span>
+        </div>
+        <div class="se-row" id="r-state-row">
+          <span>State Income Tax (<span id="r-state-name">—</span>)</span>
+          <span class="se-row-val neg" id="r-state">—</span>
+        </div>
+        <div class="se-row se-total">
+          <span>Total Tax (SE + Federal + State)</span>
+          <span class="se-row-val neg" id="r-total2">—</span>
+        </div>
+        <div class="se-row se-net">
+          <span>Net After All Taxes</span>
+          <span class="se-row-val pos" id="r-net2">—</span>
+        </div>
+      </div>
+
+      <!-- Quarterly payments -->
+      <div class="quarterly-card" data-enter data-delay="2">
+        <div class="quarterly-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Quarterly Estimated Tax Payments
+        </div>
+        <p style="font-size:13px;color:var(--ink-3);margin-bottom:16px">Pay approximately <strong id="r-quarterly-amt">$—</strong> each quarter to cover your tax liability and avoid underpayment penalties.</p>
+        <div class="qrow">
+          <div class="qbadge">Q1</div>
+          <div class="qdate"><strong>April 15, 2026</strong> — Jan–Mar income</div>
+          <div class="qamt" id="r-q1">—</div>
+        </div>
+        <div class="qrow">
+          <div class="qbadge">Q2</div>
+          <div class="qdate"><strong>June 16, 2026</strong> — Apr–May income</div>
+          <div class="qamt" id="r-q2">—</div>
+        </div>
+        <div class="qrow">
+          <div class="qbadge">Q3</div>
+          <div class="qdate"><strong>September 15, 2026</strong> — Jun–Aug income</div>
+          <div class="qamt" id="r-q3">—</div>
+        </div>
+        <div class="qrow">
+          <div class="qbadge">Q4</div>
+          <div class="qdate"><strong>January 15, 2027</strong> — Sep–Dec income</div>
+          <div class="qamt" id="r-q4">—</div>
+        </div>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:16px">Safe harbor: Each payment ≥ 25% of prior year tax (100% if prior AGI &lt; $150K; 110% if above) avoids IRS underpayment penalty.</p>
+      </div>
+
+      <!-- W-2 comparison -->
+      <div class="compare-box" data-enter data-delay="3">
+        <div class="compare-col">
+          <div class="compare-col-label">As a freelancer (1099)</div>
+          <div class="compare-col-val red" id="r-cmp-1099">—</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-top:4px">You pay both halves of FICA</div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-col-label">Same income as W-2 employee</div>
+          <div class="compare-col-val accent" id="r-cmp-w2">—</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-top:4px">Employer pays half of FICA</div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-col-label">Freelancer premium</div>
+          <div class="compare-col-val red" id="r-cmp-diff">—</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-top:4px">Extra tax cost of being self-employed</div>
+        </div>
+        <div style="width:100%;padding-top:8px;border-top:1px solid rgba(27,79,216,.15);font-size:13px">
+          <a href="/1099-vs-w2-calculator" style="color:var(--accent);font-weight:600">Compare full 1099 vs W-2 breakdown including business deductions →</a>
+        </div>
+      </div>
+
+      <!-- Print / Copy -->
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <button class="calc-btn calc-btn--secondary" id="print-btn" style="flex:1;min-width:140px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Results
+        </button>
+        <button class="calc-btn calc-btn--secondary" id="reset-btn" style="flex:1;min-width:140px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Reset
+        </button>
+      </div>
+    </div><!-- /se-results -->
+
+    <!-- ARTICLE -->
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How Self-Employment Tax Works in 2026</h2>
+        <p>When you work as a freelancer, independent contractor, or sole proprietor, you are responsible for paying both the employee and employer portions of Social Security and Medicare taxes — collectively called self-employment (SE) tax. W-2 employees only pay the employee half (7.65%); their employer silently covers the other 7.65%. As a self-employed person, you pay the full 15.3% yourself via Schedule SE.</p>
+
+        <h3>The 92.35% Factor</h3>
+        <p>The IRS does not apply SE tax to 100% of your net earnings. Instead, it multiplies your net self-employment income by 92.35% before calculating the tax. This factor exists because employees pay FICA only on wages that have already been reduced by the employer's 7.65% matching contribution. The 92.35% adjustment gives self-employed individuals the same rough treatment. On $100,000 net income: $100,000 × 92.35% = $92,350 subject to SE tax → $92,350 × 15.3% = $14,130 SE tax.</p>
+
+        <h3>The Deductible Half</h3>
+        <p>IRS allows you to deduct 50% of your SE tax from your adjusted gross income (AGI) on Schedule 1. This deduction does not reduce SE tax — it reduces the income on which your federal income tax is calculated. On $100,000 net income with $14,130 SE tax: SE deduction = $7,065. Your federal income tax is calculated on $100,000 − $7,065 − $15,000 (standard deduction) = $77,935 taxable income instead of $85,000. This saves roughly $900–$2,800 depending on your bracket.</p>
+
+        <h3>Social Security Wage Base Cap</h3>
+        <p>The Social Security portion of SE tax (12.4%) only applies to net earnings up to the Social Security wage base, which is $176,100 for 2026. Above that threshold, you continue to pay Medicare (2.9%) with no cap, and the additional 0.9% Medicare surtax applies on earnings over $200,000 (single) or $250,000 (married filing jointly). If you also have W-2 wages, those wages count toward the wage base first — this calculator accounts for that.</p>
+
+        <h3>Quarterly Estimated Payments</h3>
+        <p>Self-employed individuals must make quarterly estimated tax payments to IRS throughout the year. Payments cover both SE tax and federal income tax. The 2026 due dates are April 15 (Q1), June 16 (Q2), September 15 (Q3), and January 15, 2027 (Q4). To avoid a penalty, each payment should equal at least 25% of your estimated annual tax liability — or meet the safe harbor rule (100% of prior year tax, or 110% if prior AGI exceeded $150,000).</p>
+
+        <p><strong>Related tools:</strong> <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a> · <a href="/payroll-tax-calculator">Payroll Tax Calculator</a> · <a href="/take-home-pay-calculator">Take Home Pay Calculator</a> · <a href="/bonus-tax-calculator">Bonus Tax Calculator</a></p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter>
+          <p class="section-eyebrow">FAQ</p>
+          <h2 class="section-title">Common questions about SE tax</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1">
+            <summary class="faq-q">What is self-employment tax?</summary>
+            <div class="faq-a">Self-employment tax is the combined Social Security and Medicare tax paid by freelancers, contractors, and sole proprietors. For 2026, the rate is 15.3% (12.4% SS + 2.9% Medicare) applied to 92.35% of your net self-employment earnings. Unlike W-2 employees who split FICA with an employer, self-employed individuals pay both halves themselves.</div>
+          </details>
+          <details class="faq-item" data-enter data-delay="2">
+            <summary class="faq-q">How is self-employment tax calculated for 2026?</summary>
+            <div class="faq-a">Multiply net earnings by 92.35% to get the SE tax base. Then apply 12.4% SS (on earnings up to $176,100) plus 2.9% Medicare (no cap). An additional 0.9% Medicare applies on SE earnings over $200,000 (single) or $250,000 (married). The total equals your Schedule SE tax.</div>
+          </details>
+          <details class="faq-item" data-enter data-delay="3">
+            <summary class="faq-q">Can I deduct half of my self-employment tax?</summary>
+            <div class="faq-a">Yes. IRS allows you to deduct 50% of SE tax paid from your adjusted gross income on Schedule 1 (Form 1040). This deduction lowers your taxable income for federal (and usually state) income tax purposes, saving you hundreds to thousands of dollars depending on your bracket.</div>
+          </details>
+          <details class="faq-item" data-enter data-delay="4">
+            <summary class="faq-q">How much should I set aside for quarterly estimated taxes?</summary>
+            <div class="faq-a">Most tax professionals recommend 25–30% of gross self-employment income. Quarterly estimated payments are due April 15, June 16, September 15, and January 15. To avoid underpayment penalties, pay at least 100% of last year's tax (110% if prior AGI exceeded $150,000), or 90% of the current year's estimated tax.</div>
+          </details>
+          <details class="faq-item" data-enter data-delay="5">
+            <summary class="faq-q">What is the difference between self-employment tax and income tax?</summary>
+            <div class="faq-a">They are separate obligations. SE tax (Schedule SE) covers Social Security and Medicare — replacing the FICA that W-2 employers withhold. Income tax (Form 1040) is based on your taxable income and filing status. As a freelancer you owe both: SE tax on your net earnings, plus federal income tax and state income tax on AGI after the SE deduction.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED TOOLS -->
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter>
+          <p class="section-eyebrow">Related Tools</p>
+          <h2 class="section-title">More payroll calculators</h2>
+        </div>
+        <div class="related-grid">
+          <a href="/1099-vs-w2-calculator" class="tool-card" data-enter data-delay="1">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="tool-card-title">1099 vs W-2 Calculator</div><div class="tool-card-desc" style="font-size:13px">Full side-by-side tax comparison — contractor vs employee for the same income.</div></div>
+            </div>
+          </a>
+          <a href="/take-home-pay-calculator" class="tool-card" data-enter data-delay="2">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+              <div><div class="tool-card-title">Take Home Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">W-2 paycheck after federal, state, and FICA deductions. All 50 states.</div></div>
+            </div>
+          </a>
+          <a href="/bonus-tax-calculator" class="tool-card" data-enter data-delay="3">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div><div class="tool-card-title">Bonus Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">How much of a bonus or commission you keep after the 22% flat federal rate.</div></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/self-employment-tax-calculator">SE Tax Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/take-home-pay-calculator">Take Home Pay</a></li>
+          <li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li>
+          <li><a href="/net-to-gross-calculator">Net to Gross Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes" rel="nofollow noopener" target="_blank">IRS SE Tax Guide</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+
+  var FED = {
+    single:[[11925,.10,0],[48475,.12,11925],[103350,.22,48475],[197300,.24,103350],[250525,.32,197300],[626350,.35,250525],[Infinity,.37,626350]],
+    mfj:[[23850,.10,0],[96950,.12,23850],[206700,.22,96950],[394600,.24,206700],[501050,.32,394600],[751600,.35,501050],[Infinity,.37,751600]],
+    hoh:[[17000,.10,0],[64850,.12,17000],[103350,.22,64850],[197300,.24,103350],[250500,.32,197300],[626350,.35,250500],[Infinity,.37,626350]],
+    mfs:[[11925,.10,0],[48475,.12,11925],[103350,.22,48475],[197300,.24,103350],[250525,.32,197300],[313175,.35,250525],[Infinity,.37,313175]]
+  };
+  var STD_DED = {single:15000,mfj:30000,hoh:22500,mfs:15000};
+  var SS_WAGE_BASE = 176100;
+  var ADDL_MED_THRESH = {single:200000,mfj:250000,hoh:200000,mfs:125000};
+  var STATE_TAX = {AL:.050,AK:0,AZ:.025,AR:.039,CA:0,CO:.044,CT:0,DE:0,FL:0,GA:.0549,HI:0,ID:.058,IL:.0495,IN:.0305,IA:0,KS:0,KY:.040,LA:0,ME:0,MD:0,MA:.050,MI:.0405,MN:0,MS:.047,MO:0,MT:0,NE:0,NV:0,NH:0,NJ:0,NM:0,NY:.0685,NC:.045,ND:.0150,OH:0,OK:0,OR:0,PA:.0307,RI:0,SC:0,SD:0,TN:0,TX:0,UT:.0455,VT:0,VA:.0575,WA:0,WV:0,WI:0,WY:0,DC:0};
+  var STATE_NAMES = {AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',DC:'D.C.'};
+
+  function stateEffRate(s,i){
+    if(s==='CA'){if(i<=10099)return.01;if(i<=23942)return.02;if(i<=37788)return.04;if(i<=52455)return.06;if(i<=66295)return.08;if(i<=338639)return.093;if(i<=406364)return.103;if(i<=677275)return.113;return.133;}
+    if(s==='NY'){if(i<=17150)return.04;if(i<=23600)return.045;if(i<=27900)return.0525;if(i<=161550)return.055;if(i<=323200)return.06;if(i<=2155350)return.0685;if(i<=5000000)return.0965;if(i<=25000000)return.103;return.109;}
+    if(s==='NJ'){if(i<=20000)return.014;if(i<=35000)return.0175;if(i<=40000)return.035;if(i<=75000)return.05525;if(i<=500000)return.0637;if(i<=1000000)return.0897;return.1075;}
+    if(s==='MN'){if(i<=31690)return.0535;if(i<=104090)return.068;if(i<=193240)return.0785;return.0985;}
+    if(s==='OR'){if(i<=18400)return.0475;if(i<=250000)return.0675;return.099;}
+    if(s==='HI'){if(i<=9600)return.014;if(i<=19200)return.032;if(i<=28800)return.055;if(i<=38400)return.064;if(i<=48000)return.068;if(i<=150000)return.072;if(i<=175000)return.079;if(i<=200000)return.083;return.11;}
+    return STATE_TAX[s]||0;
+  }
+
+  function calcFedTax(w,status){
+    var b=FED[status]||FED.single,t=0,p=0;
+    for(var i=0;i<b.length;i++){if(w<=p)break;var tx=Math.min(w,b[i][0])-b[i][2];if(tx>0)t+=tx*b[i][1];p=b[i][0];}
+    return Math.max(0,t);
+  }
+
+  function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+  document.getElementById('se_income').addEventListener('keydown',function(e){if(e.key==='Enter')calculate();});
+  document.getElementById('print-btn').addEventListener('click',function(){window.print();});
+  document.getElementById('reset-btn').addEventListener('click',function(){
+    document.getElementById('se_income').value='';
+    document.getElementById('w2_income').value='';
+    document.getElementById('se-results').style.display='none';
+  });
+
+  function calculate(){
+    var seIncome = parseFloat(document.getElementById('se_income').value)||0;
+    if(seIncome<=0){document.getElementById('se_income').focus();return;}
+    var w2Income = parseFloat(document.getElementById('w2_income').value)||0;
+    var status = document.getElementById('filing_status').value;
+    var state = document.getElementById('state').value;
+
+    // Schedule SE
+    var netEarnings = seIncome * 0.9235;
+    var ssBase = Math.max(0, SS_WAGE_BASE - w2Income);
+    var ssTax = Math.min(netEarnings, ssBase) * 0.124;
+    var medTax = netEarnings * 0.029;
+
+    // Additional Medicare 0.9%
+    var combinedIncome = seIncome + w2Income;
+    var addlMedThresh = ADDL_MED_THRESH[status]||200000;
+    var addlMed = Math.max(0, combinedIncome - addlMedThresh) * 0.009;
+
+    var seTaxTotal = ssTax + medTax + addlMed;
+    var seDed = seTaxTotal * 0.50;
+
+    // Federal income tax
+    var agi = Math.max(0, seIncome - seDed);
+    var fedTaxable = Math.max(0, agi - STD_DED[status]);
+    var fedTax = calcFedTax(fedTaxable, status);
+
+    // State tax
+    var stateRate = stateEffRate(state, agi);
+    var stateTax = agi * stateRate;
+
+    var totalTax = seTaxTotal + fedTax + stateTax;
+    var netAfterTax = Math.max(0, seIncome - totalTax);
+    var effRate = seIncome > 0 ? (totalTax/seIncome*100).toFixed(1) : 0;
+    var quarterly = totalTax / 4;
+
+    // W-2 equivalent comparison
+    var w2SS = Math.min(seIncome, SS_WAGE_BASE) * 0.062;
+    var w2Med = seIncome * 0.0145;
+    var w2FedTaxable = Math.max(0, seIncome - STD_DED[status]);
+    var w2FedTax = calcFedTax(w2FedTaxable, status);
+    var w2StateTax = seIncome * stateEffRate(state, seIncome);
+    var w2Total = w2SS + w2Med + w2FedTax + w2StateTax;
+
+    // Render
+    document.getElementById('r-se-total').textContent = fmt(seTaxTotal);
+    document.getElementById('r-se-ded').textContent = fmt(seDed);
+    document.getElementById('r-total-tax').textContent = fmt(totalTax);
+    document.getElementById('r-net').textContent = fmt(netAfterTax);
+    document.getElementById('r-eff-rate').textContent = effRate+'%';
+
+    document.getElementById('r-net-earnings').textContent = fmt(netEarnings);
+    document.getElementById('r-ss').textContent = '−'+fmt(ssTax);
+    document.getElementById('r-med').textContent = '−'+fmt(medTax);
+
+    if(addlMed > 0){
+      document.getElementById('r-addl-med-row').style.display='flex';
+      document.getElementById('r-addl-med').textContent = '−'+fmt(addlMed);
+    } else {
+      document.getElementById('r-addl-med-row').style.display='none';
+    }
+
+    document.getElementById('r-se-total2').textContent = '−'+fmt(seTaxTotal);
+    document.getElementById('r-se-ded2').textContent = '+'+fmt(seDed);
+    document.getElementById('r-fed-taxable').textContent = fmt(fedTaxable);
+    document.getElementById('r-fed').textContent = '−'+fmt(fedTax);
+    document.getElementById('r-state-name').textContent = STATE_NAMES[state]||state;
+    document.getElementById('r-state').textContent = stateTax > 0 ? '−'+fmt(stateTax) : '$0';
+    document.getElementById('r-total2').textContent = '−'+fmt(totalTax);
+    document.getElementById('r-net2').textContent = fmt(netAfterTax);
+
+    var qAmt = fmt(quarterly);
+    document.getElementById('r-quarterly-amt').textContent = qAmt;
+    document.getElementById('r-q1').textContent = qAmt;
+    document.getElementById('r-q2').textContent = qAmt;
+    document.getElementById('r-q3').textContent = qAmt;
+    document.getElementById('r-q4').textContent = qAmt;
+
+    document.getElementById('r-cmp-1099').textContent = fmt(totalTax);
+    document.getElementById('r-cmp-w2').textContent = fmt(w2Total);
+    document.getElementById('r-cmp-diff').textContent = '+'+fmt(Math.max(0,totalTax-w2Total));
+
+    document.getElementById('se-results').style.display = 'block';
+    document.getElementById('se-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

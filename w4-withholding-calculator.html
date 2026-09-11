@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>W-4 Withholding Calculator 2026 — What to Put on Your W-4 | FreePayrollCalc</title>
+<meta name="description" content="Free W-4 withholding calculator for 2026. See exactly what to enter on each line of your W-4 form to withhold the right amount — no underpayment penalty, no big refund. Updated for 2026 IRS rates.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/w4-withholding-calculator">
+<meta property="og:title" content="W-4 Withholding Calculator 2026 — What to Put on Your W-4">
+<meta property="og:description" content="Free W-4 withholding calculator for 2026. See exactly what to enter on each line of your W-4 form.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "W-4 Withholding Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/w4-withholding-calculator",
+  "description": "Calculate exactly what to enter on each line of your 2026 W-4 form. Covers all steps: filing status, multiple jobs, dependents, deductions, and extra withholding.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["2026 federal tax brackets","W-4 step-by-step output","Multiple jobs and spouse income","Child tax credit and dependent credits","Itemized vs standard deduction comparison"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I fill out a W-4 for 2026?",
+      "acceptedAnswer": {"@type":"Answer","text":"To fill out a 2026 W-4: Step 1, enter your name, address, SSN, and filing status. Step 2, check the box if you have multiple jobs or a working spouse. Step 3, enter your total dependent credits (children under 17 × $2,000 + other dependents × $500). Step 4(a), enter other annual income not from jobs. Step 4(b), enter deductions above the standard deduction. Step 4(c), enter any extra withholding per pay period. Use our calculator above to get the exact dollar amounts for steps 3 through 4(c)."}
+    },
+    {
+      "@type": "Question",
+      "name": "Should I claim 0 or 1 on my W-4?",
+      "acceptedAnswer": {"@type":"Answer","text":"The 2020 and later W-4 no longer uses allowances (0 or 1). Instead, you enter actual dollar amounts in Steps 3 and 4. If you want maximum withholding (to guarantee a refund), leave Steps 3 and 4 blank. If you want to optimize withholding (no big refund, no underpayment), use our calculator to get the exact amounts for each step. The old 'claim 0' approach was equivalent to leaving everything blank; 'claim 1' roughly meant entering your standard deduction effect — but the new W-4 does this more precisely with real dollar amounts."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is Step 2 on the W-4 for?",
+      "acceptedAnswer": {"@type":"Answer","text":"Step 2 on the W-4 addresses multiple jobs or a working spouse. When you (or your household) have income from more than one job, the default withholding from each job is calculated as if that's your only income — which can under-withhold because combined income pushes you into higher tax brackets. Checking the box in Step 2(c) tells your employer to use a higher withholding table to compensate. Alternatively, you can use Step 4(c) to add a specific dollar amount of extra withholding per period."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I change my W-4 withholding?",
+      "acceptedAnswer": {"@type":"Answer","text":"You can submit a new W-4 to your employer at any time — there is no limit on how often you can update it. Fill out a new Form W-4 (available from the IRS at irs.gov or from your HR department), enter your updated information, sign it, and hand it to your employer. Changes typically take effect on the next payroll cycle. Good times to update your W-4: after getting married or divorced, having a baby, taking on a second job, or receiving a large one-time income (bonus, freelance payment, investment sale)."}
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I don't fill out a W-4?",
+      "acceptedAnswer": {"@type":"Answer","text":"If you don't fill out a W-4, your employer is required by IRS rules to withhold taxes at the highest withholding rate — as if you are a single filer with no adjustments. This means maximum federal income tax is withheld from every paycheck. You will likely receive a large refund at tax time, but you will have given the government an interest-free loan throughout the year. Filing a properly completed W-4 (using our calculator) lets you keep more of your money in each paycheck."}
+    }
+  ]
+}
+</script>
+<style>
+/* ── W-4 Wizard ── */
+.wizard-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);
+}
+.wizard-head{
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.wizard-head-title{font-size:15px;font-weight:600;color:var(--ink)}
+.wizard-head-badge{
+  font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  background:var(--green-dim);color:var(--green);border:1px solid var(--green-border);
+  padding:3px 9px;border-radius:100px;margin-left:auto;
+}
+
+/* Progress bar */
+.wizard-progress{
+  display:flex;align-items:center;padding:18px 24px 0;gap:0;
+}
+.wp-step{
+  display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;position:relative;
+}
+.wp-step:not(:last-child)::after{
+  content:'';position:absolute;top:16px;left:50%;right:-50%;
+  height:2px;background:var(--border);z-index:0;
+  transition:background .3s ease;
+}
+.wp-step.completed:not(:last-child)::after{background:var(--accent)}
+.wp-dot{
+  width:32px;height:32px;border-radius:50%;border:2px solid var(--border);
+  background:var(--surface);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--ink-3);z-index:1;position:relative;
+  transition:all .3s ease;
+}
+.wp-step.active .wp-dot{
+  border-color:var(--accent);background:var(--accent);color:#fff;
+}
+.wp-step.completed .wp-dot{
+  border-color:var(--accent);background:var(--accent);color:#fff;
+}
+.wp-label{
+  font-size:11px;font-weight:600;color:var(--ink-3);text-align:center;
+  transition:color .3s ease;letter-spacing:.2px;
+}
+.wp-step.active .wp-label{color:var(--accent)}
+.wp-step.completed .wp-label{color:var(--accent)}
+
+/* Wizard panes */
+.wizard-panes{padding:24px}
+.wizard-pane{display:none}
+.wizard-pane.active{display:block}
+
+/* Wizard nav */
+.wizard-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 24px;border-top:1px solid var(--border);
+  background:var(--surface-2);
+}
+.wizard-nav-info{font-size:13px;color:var(--ink-3);font-weight:500}
+.wizard-nav-btns{display:flex;gap:10px}
+.btn-wiz-back{
+  height:40px;padding:0 20px;border-radius:9px;
+  border:1.5px solid var(--border-dark);background:var(--surface);
+  font-size:14px;font-weight:600;color:var(--ink-2);
+  transition:all var(--transition);
+}
+.btn-wiz-back:hover{border-color:var(--accent-border);color:var(--accent);background:var(--accent-dim)}
+.btn-wiz-next{
+  height:40px;padding:0 24px;border-radius:9px;
+  background:var(--accent);color:#fff;
+  font-size:14px;font-weight:700;
+  transition:all var(--transition);
+  box-shadow:0 2px 8px rgba(27,79,216,.25);
+}
+.btn-wiz-next:hover{background:var(--accent-hov);transform:translateY(-1px)}
+
+/* Conditional fields */
+.cond-field{display:none;margin-top:14px}
+.cond-field.visible{display:block}
+
+/* ── W-4 Output Card ── */
+.w4-output-card{
+  background:var(--surface);
+  border:2px solid var(--accent-border);
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  box-shadow:0 4px 24px rgba(27,79,216,.1),0 2px 8px rgba(27,79,216,.06);
+}
+.w4oc-head{
+  padding:18px 24px;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;
+}
+.w4oc-head-title{font-size:15px;font-weight:700;letter-spacing:-.2px}
+.w4oc-head-sub{font-size:12px;opacity:.75;font-weight:500}
+.w4oc-body{padding:0}
+.w4-form-line{
+  display:flex;align-items:center;
+  padding:14px 24px;border-bottom:1px solid var(--border);
+  gap:12px;transition:background var(--transition);
+}
+.w4-form-line:last-of-type{border-bottom:none}
+.w4-form-line:hover{background:var(--surface-2)}
+.w4fl-step{
+  font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-3);
+  text-transform:uppercase;min-width:80px;flex-shrink:0;
+}
+.w4fl-label{font-size:13.5px;color:var(--ink-2);flex:1;line-height:1.4}
+.w4fl-arrow{color:var(--ink-3);font-size:14px;margin:0 4px;flex-shrink:0}
+.w4fl-value{
+  font-family:var(--mono);font-size:14px;font-weight:700;
+  color:var(--accent);min-width:120px;text-align:right;flex-shrink:0;
+}
+.w4fl-value.check{color:var(--green)}
+.w4fl-value.zero{color:var(--ink-3)}
+.w4fl-value.highlight{
+  background:var(--accent);color:#fff;
+  padding:4px 12px;border-radius:6px;font-size:13px;
+}
+.w4oc-divider{
+  height:2px;background:repeating-linear-gradient(90deg,var(--accent) 0,var(--accent) 8px,transparent 8px,transparent 14px);
+  opacity:.25;margin:0 24px;
+}
+.w4oc-result{
+  padding:16px 24px;
+  background:linear-gradient(135deg,var(--surface-2),var(--surface));
+  border-top:1px solid var(--border);
+}
+.w4oc-result-line{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:14px;padding:5px 0;
+}
+.w4oc-result-line strong{font-weight:700;color:var(--ink)}
+.w4oc-result-line span{font-family:var(--mono);font-weight:700}
+.span-green{color:var(--green)}
+.span-red{color:var(--red)}
+.span-neutral{color:var(--ink-2)}
+
+/* Refund/Owe banner */
+.w4-verdict{
+  margin-top:20px;padding:18px 20px;
+  border-radius:14px;text-align:center;
+  border:2px solid;
+}
+.w4-verdict.refund{
+  background:var(--green-dim);border-color:var(--green-border);
+}
+.w4-verdict.owe{
+  background:var(--red-dim);border-color:rgba(220,38,38,.2);
+}
+.w4-verdict.balanced{
+  background:var(--accent-dim);border-color:var(--accent-border);
+}
+.w4v-label{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;opacity:.7;margin-bottom:4px}
+.w4v-amount{font-family:var(--mono);font-size:clamp(28px,5vw,40px);font-weight:700;letter-spacing:-1px;line-height:1}
+.w4v-sub{font-size:13px;opacity:.7;margin-top:6px}
+.refund .w4v-label,.refund .w4v-amount,.refund .w4v-sub{color:var(--green)}
+.owe .w4v-label,.owe .w4v-amount,.owe .w4v-sub{color:var(--red)}
+.balanced .w4v-label,.balanced .w4v-amount,.balanced .w4v-sub{color:var(--accent)}
+
+/* Fine-tune tip */
+.finetune-tip{
+  margin-top:14px;padding:12px 16px;
+  background:var(--surface-2);border-radius:10px;
+  font-size:13px;color:var(--ink-2);line-height:1.55;
+  border:1px solid var(--border);
+}
+.finetune-tip strong{color:var(--ink);font-weight:700}
+
+/* Results recalc button */
+.btn-restart{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;height:44px;margin-top:20px;
+  border-radius:10px;border:1.5px solid var(--border-dark);
+  background:var(--surface);font-size:14px;font-weight:600;color:var(--ink-2);
+  transition:all var(--transition);
+}
+.btn-restart:hover{border-color:var(--accent-border);color:var(--accent);background:var(--accent-dim)}
+
+/* Results sidebar sticky */
+.w4-sidebar-sticky{position:sticky;top:80px}
+
+/* Toggle row for yes/no */
+.toggle-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;
+}
+.toggle-row-label{font-size:14px;color:var(--ink-2);font-weight:500}
+.toggle-pills{display:flex;gap:6px}
+.toggle-pill{
+  height:32px;padding:0 16px;border-radius:100px;
+  border:1.5px solid var(--border-dark);background:var(--surface);
+  font-size:13px;font-weight:600;color:var(--ink-3);
+  transition:all var(--transition);cursor:pointer;
+}
+.toggle-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Summary stats row in results */
+.result-stats-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;
+}
+.rstat{
+  background:var(--surface-2);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;text-align:center;
+}
+.rstat-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.rstat-value{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--ink)}
+
+/* Info note */
+.info-note{
+  display:flex;align-items:flex-start;gap:9px;
+  background:var(--accent-dim);border:1px solid var(--accent-border);
+  border-radius:8px;padding:10px 14px;font-size:13px;color:var(--ink-2);line-height:1.5;
+  margin-top:12px;
+}
+.info-note svg{color:var(--accent);flex-shrink:0;margin-top:1px}
+
+@media(max-width:640px){
+  .wizard-progress{padding:14px 16px 0}
+  .wp-label{font-size:9.5px}
+  .wizard-panes{padding:16px}
+  .wizard-nav{padding:12px 16px}
+  .w4-form-line{flex-wrap:wrap;gap:8px}
+  .w4fl-step{min-width:60px}
+  .w4fl-value{min-width:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator">PTO</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/w4-withholding-calculator">W-4 Withholding Calculator</a>
+    <a href="/take-home-pay-calculator">Take-Home Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/bonus-tax-calculator">Bonus Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">W-4 Withholding Calculator</span>
+    </nav>
+
+    <!-- Ad zone top -->
+    <div class="ad-zone ad-zone--leaderboard"></div>
+
+    <!-- Title -->
+    <h1 class="calc-title" data-enter>W-4 Withholding Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Answer 3 quick questions. Get exact dollar amounts to enter on every line of your W-4.<br>
+      Stop guessing — see precisely what Step 3, 4(a), 4(b), and 4(c) should say.
+    </p>
+    <div class="calc-updated">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Last updated: September 2026 — based on 2026 IRS Publication 15-T brackets and standard deductions
+    </div>
+
+    <!-- Calculator Layout -->
+    <div class="calc-layout">
+
+      <!-- WIZARD COLUMN -->
+      <div class="calc-main">
+
+        <div class="wizard-card" data-enter data-delay="2">
+          <div class="wizard-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span class="wizard-head-title">W-4 Withholding Wizard</span>
+            <span class="wizard-head-badge">2026 Rates</span>
+          </div>
+
+          <!-- Progress -->
+          <div class="wizard-progress" id="wizard-progress" role="list" aria-label="Wizard steps">
+            <div class="wp-step active" id="wp-1" role="listitem">
+              <div class="wp-dot">1</div>
+              <div class="wp-label">Income</div>
+            </div>
+            <div class="wp-step" id="wp-2" role="listitem">
+              <div class="wp-dot">2</div>
+              <div class="wp-label">Other Income</div>
+            </div>
+            <div class="wp-step" id="wp-3" role="listitem">
+              <div class="wp-dot">3</div>
+              <div class="wp-label">Credits</div>
+            </div>
+            <div class="wp-step" id="wp-4" role="listitem">
+              <div class="wp-dot">
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="wp-label">Your W-4</div>
+            </div>
+          </div>
+
+          <!-- Panes -->
+          <div class="wizard-panes">
+
+            <!-- Step 1: Income -->
+            <div class="wizard-pane active" id="pane-1">
+              <div class="field-group">
+                <label class="field-label" for="w_salary">Annual salary / wages from THIS job</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" id="w_salary" class="field-input has-prefix" placeholder="65,000" min="0" step="1" inputmode="decimal" aria-label="Annual salary from this job">
+                </div>
+                <div class="field-hint">Enter your gross annual salary (before any deductions)</div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label">Pay Frequency</label>
+                <div class="pill-group" role="radiogroup" aria-label="Pay frequency">
+                  <button class="pill-btn" data-wfreq="weekly" role="radio" aria-checked="false">Weekly</button>
+                  <button class="pill-btn active" data-wfreq="biweekly" role="radio" aria-checked="true">Bi-Weekly</button>
+                  <button class="pill-btn" data-wfreq="semimonthly" role="radio" aria-checked="false">Semi-Monthly</button>
+                  <button class="pill-btn" data-wfreq="monthly" role="radio" aria-checked="false">Monthly</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="w_status">Filing Status</label>
+                <select id="w_status" class="field-select" aria-label="Federal filing status">
+                  <option value="single">Single</option>
+                  <option value="mfj">Married Filing Jointly (MFJ)</option>
+                  <option value="hoh">Head of Household (HOH)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Step 2: Other Income -->
+            <div class="wizard-pane" id="pane-2">
+              <div class="toggle-row" id="spouse-toggle-row">
+                <div class="toggle-row-label">Does your spouse have a job?</div>
+                <div class="toggle-pills" role="radiogroup" aria-label="Spouse works">
+                  <button class="toggle-pill" data-spouse="yes" role="radio" aria-checked="false">Yes</button>
+                  <button class="toggle-pill active" data-spouse="no" role="radio" aria-checked="true">No</button>
+                </div>
+              </div>
+
+              <div class="cond-field" id="spouse-income-field">
+                <label class="field-label" for="w_spouse">Spouse's annual income</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" id="w_spouse" class="field-input has-prefix" placeholder="0" min="0" step="1" inputmode="decimal" aria-label="Spouse annual income">
+                </div>
+              </div>
+
+              <div class="field-group" style="margin-top:14px">
+                <label class="field-label" for="w_otherjobs">Other jobs you hold (annual income)</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" id="w_otherjobs" class="field-input has-prefix" placeholder="0" min="0" step="1" inputmode="decimal" aria-label="Other jobs annual income">
+                </div>
+                <div class="field-hint">Leave at $0 if you only have this one job</div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="w_otherincome">Other income (investments, freelance, dividends)</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" id="w_otherincome" class="field-input has-prefix" placeholder="0" min="0" step="1" inputmode="decimal" aria-label="Other non-job income">
+                </div>
+                <div class="field-hint">Annual income NOT from jobs — capital gains, rental income, side business, etc.</div>
+              </div>
+            </div>
+
+            <!-- Step 3: Deductions & Credits -->
+            <div class="wizard-pane" id="pane-3">
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="w_children">Children under age 17</label>
+                  <input type="number" id="w_children" class="field-input" placeholder="0" min="0" step="1" value="0" aria-label="Number of qualifying children under 17">
+                  <div class="field-hint">$2,000 credit each</div>
+                </div>
+                <div>
+                  <label class="field-label" for="w_otherdeps">Other dependents</label>
+                  <input type="number" id="w_otherdeps" class="field-input" placeholder="0" min="0" step="1" value="0" aria-label="Number of other dependents">
+                  <div class="field-hint">$500 credit each</div>
+                </div>
+              </div>
+
+              <div class="toggle-row" id="itemize-toggle-row" style="margin-top:4px">
+                <div class="toggle-row-label">Will you itemize deductions?</div>
+                <div class="toggle-pills" role="radiogroup" aria-label="Itemize deductions">
+                  <button class="toggle-pill" data-itemize="yes" role="radio" aria-checked="false">Yes</button>
+                  <button class="toggle-pill active" data-itemize="no" role="radio" aria-checked="true">No</button>
+                </div>
+              </div>
+
+              <div class="cond-field" id="itemized-amt-field">
+                <label class="field-label" for="w_itemized">Expected total itemized deductions</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" id="w_itemized" class="field-input has-prefix" placeholder="0" min="0" step="1" inputmode="decimal" aria-label="Total itemized deductions">
+                </div>
+                <div class="field-hint">Mortgage interest + state taxes (up to $10k) + charitable contributions + medical expenses</div>
+              </div>
+
+              <div class="field-group" style="margin-top:14px">
+                <label class="field-label" for="w_aboveline">Above-the-line deductions (optional)</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" id="w_aboveline" class="field-input has-prefix" placeholder="0" min="0" step="1" inputmode="decimal" aria-label="Above the line deductions">
+                </div>
+                <div class="field-hint">Student loan interest, educator expenses, HSA contributions, alimony paid (pre-2019 divorces)</div>
+              </div>
+            </div>
+
+            <!-- Step 4: Results pane (empty placeholder — output rendered in sidebar) -->
+            <div class="wizard-pane" id="pane-4">
+              <div style="text-align:center;padding:8px 0 16px">
+                <div style="display:inline-flex;align-items:center;gap:8px;background:var(--green-dim);border:1px solid var(--green-border);color:var(--green);font-size:13px;font-weight:600;padding:8px 16px;border-radius:100px;margin-bottom:16px">
+                  <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Your W-4 is ready
+                </div>
+                <p style="font-size:14px;color:var(--ink-2);line-height:1.65">Your personalized W-4 instructions are shown to the right. Enter these amounts on your paper or electronic W-4 form exactly as shown.</p>
+              </div>
+
+              <div class="info-note">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="9"/><path d="M10 6v4M10 14h.01"/></svg>
+                <span>These are estimates based on 2026 federal tax rates. State taxes are not reflected in the W-4 — your state may have a separate withholding form. See a tax professional for complex situations.</span>
+              </div>
+
+              <button class="btn-restart" id="btn-restart" type="button">
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+                Start Over / Recalculate
+              </button>
+            </div>
+
+          </div><!-- /wizard-panes -->
+
+          <!-- Wizard Nav -->
+          <div class="wizard-nav" id="wizard-nav">
+            <span class="wizard-nav-info" id="wiz-step-info">Step 1 of 3</span>
+            <div class="wizard-nav-btns">
+              <button class="btn-wiz-back" id="btn-back" type="button" style="display:none">← Back</button>
+              <button class="btn-wiz-next" id="btn-next" type="button">Next →</button>
+            </div>
+          </div>
+
+        </div><!-- /wizard-card -->
+
+        <!-- In-content Ad -->
+        <div class="ad-zone ad-zone--in-content"></div>
+
+        <!-- SEO Article -->
+        <article style="margin-top:44px" data-enter>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:14px">How to fill out your W-4 in 2026</h2>
+
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">The W-4 form was redesigned in 2020 — replacing the old allowance system (0, 1, 2…) with actual dollar amounts. The new design is more accurate but less intuitive, which is exactly why this calculator exists. Instead of outputting a generic "withholding amount," our tool tells you exactly what to write on each line of the form.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:22px 0 10px">Why the W-4 changed from allowances to dollar amounts</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Under the old system, "claiming 1 allowance" reduced withholding by a fixed amount per allowance ($4,300 in 2019). The problem: that flat reduction didn't match reality for people with varying incomes, multiple jobs, or significant investment income. The new W-4 asks you to enter actual estimated income and deduction amounts — so your employer's withholding calculation more closely mirrors what you'll actually owe at tax time. The 2026 standard deductions are $15,000 (single/MFS), $30,000 (married filing jointly), and $22,500 (head of household).</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:22px 0 10px">What each W-4 step does</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:8px"><strong>Step 1</strong> is just your personal info and filing status. Single and Married Filing Separately use the same withholding tables. Head of Household gets a slightly more favorable table. Married Filing Jointly gets the most favorable (lowest withholding) table — which can under-withhold if both spouses work.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:8px"><strong>Step 2</strong> addresses the multi-job gap. When both spouses work (or you have a second job), each employer withholds as if that job's income is your entire income. But combined income puts you in higher brackets. Checking Step 2(c) triggers the employer to use a higher withholding table. It works best when both jobs have similar pay. For unequal incomes, use Step 4(c) to add a precise per-period dollar amount instead.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:8px"><strong>Step 3</strong> reduces your withholding for dependent credits. Enter $2,000 per qualifying child under 17, plus $500 per other dependent. If you have two children under 17, enter $4,000. This tells the employer to reduce your annual withholding by that amount (spread across all pay periods).</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>Steps 4(a), 4(b), and 4(c)</strong> are fine-tuning tools. Step 4(a) adds investment or freelance income so it gets withheld for. Step 4(b) reduces withholding if your itemized deductions exceed the standard deduction. Step 4(c) is a flat extra per-period amount for any remaining gap.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:22px 0 10px">Common W-4 mistakes</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:8px"><strong>Leaving everything blank:</strong> This is the equivalent of "claiming 0" — maximum withholding, largest refund, but you're giving the IRS an interest-free loan all year. Some people prefer the forced savings. Most would rather have accurate withholding.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>Not updating after life changes:</strong> Marriage, divorce, a new baby, a pay raise, a second job, or selling investments that trigger capital gains — all of these change your tax liability. The IRS recommends checking your withholding after any major event. You can submit a new W-4 to your employer at any time, and changes take effect on the next payroll cycle.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:22px 0 10px">When to update your W-4</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Update your W-4 when you: get married or divorced, have or adopt a child, start a second job (or your spouse starts working), receive a large bonus or one-time income event, begin receiving investment income, change your deduction strategy (start or stop itemizing), or owe a large tax bill or receive a very large refund. Use our <a href="/payroll-tax-calculator" style="color:var(--accent)">payroll tax calculator</a> to see your per-paycheck withholding after updating, and the <a href="/take-home-pay-calculator" style="color:var(--accent)">take-home pay calculator</a> to see the net effect on your paycheck. For the full gross-to-net picture including 401(k) and health insurance, use the <a href="/free-payroll-calculator" style="color:var(--accent)">free payroll calculator</a>. If you received a year-end bonus, the <a href="/bonus-tax-calculator" style="color:var(--accent)">bonus tax calculator</a> shows how supplemental wage withholding works.</p>
+        </article>
+
+      </div><!-- /calc-main -->
+
+      <!-- RESULTS SIDEBAR -->
+      <div>
+        <div class="w4-sidebar-sticky">
+
+          <!-- W-4 Output Card -->
+          <div class="w4-output-card" id="w4-output-card" data-enter data-delay="3">
+            <div class="w4oc-head">
+              <div>
+                <div class="w4oc-head-title">What to Enter on Your W-4</div>
+                <div class="w4oc-head-sub">Complete your form using these exact values</div>
+              </div>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.75"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+
+            <!-- Empty state -->
+            <div id="w4-empty" style="padding:40px 24px;text-align:center;color:var(--ink-3)">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 12px;opacity:.3"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <p style="font-size:14px;line-height:1.6">Complete the 3-step wizard to see your personalized W-4 instructions.</p>
+            </div>
+
+            <!-- Results body -->
+            <div id="w4-results" style="display:none">
+              <div class="w4-form-line">
+                <div class="w4fl-step">Step 1</div>
+                <div class="w4fl-label">Filing Status</div>
+                <div class="w4fl-arrow">→</div>
+                <div class="w4fl-value" id="r-step1">—</div>
+              </div>
+              <div class="w4-form-line">
+                <div class="w4fl-step">Step 2</div>
+                <div class="w4fl-label">Multiple jobs / spouse works</div>
+                <div class="w4fl-arrow">→</div>
+                <div class="w4fl-value" id="r-step2">—</div>
+              </div>
+              <div class="w4-form-line">
+                <div class="w4fl-step">Step 3</div>
+                <div class="w4fl-label">Dependent credits total</div>
+                <div class="w4fl-arrow">→</div>
+                <div class="w4fl-value" id="r-step3">—</div>
+              </div>
+              <div class="w4oc-divider"></div>
+              <div class="w4-form-line">
+                <div class="w4fl-step">Step 4(a)</div>
+                <div class="w4fl-label">Other income (not from jobs)</div>
+                <div class="w4fl-arrow">→</div>
+                <div class="w4fl-value" id="r-step4a">—</div>
+              </div>
+              <div class="w4-form-line">
+                <div class="w4fl-step">Step 4(b)</div>
+                <div class="w4fl-label">Excess deductions over standard</div>
+                <div class="w4fl-arrow">→</div>
+                <div class="w4fl-value" id="r-step4b">—</div>
+              </div>
+              <div class="w4-form-line" style="border-bottom:none">
+                <div class="w4fl-step">Step 4(c)</div>
+                <div class="w4fl-label">Extra withholding per pay period</div>
+                <div class="w4fl-arrow">→</div>
+                <div class="w4fl-value" id="r-step4c">—</div>
+              </div>
+
+              <div class="w4oc-result">
+                <div class="w4oc-result-line">
+                  <strong>Federal tax withheld / paycheck:</strong>
+                  <span class="span-neutral" id="r-per-period">—</span>
+                </div>
+                <div class="w4oc-result-line" style="margin-top:3px">
+                  <strong>Annual net tax liability:</strong>
+                  <span class="span-neutral" id="r-annual-tax">—</span>
+                </div>
+              </div>
+
+              <!-- Refund/Owe Verdict -->
+              <div style="padding:16px 20px 20px">
+                <div class="w4-verdict" id="w4-verdict">
+                  <div class="w4v-label" id="verd-label">Projected</div>
+                  <div class="w4v-amount" id="verd-amount">$0</div>
+                  <div class="w4v-sub" id="verd-sub">with these W-4 settings</div>
+                </div>
+
+                <div class="result-stats-row">
+                  <div class="rstat">
+                    <div class="rstat-label">Total Income</div>
+                    <div class="rstat-value" id="rstat-income">—</div>
+                  </div>
+                  <div class="rstat">
+                    <div class="rstat-label">Effective Rate</div>
+                    <div class="rstat-value" id="rstat-rate">—</div>
+                  </div>
+                  <div class="rstat">
+                    <div class="rstat-label">Pay Periods</div>
+                    <div class="rstat-value" id="rstat-periods">—</div>
+                  </div>
+                  <div class="rstat">
+                    <div class="rstat-label">Total Credits</div>
+                    <div class="rstat-value" id="rstat-credits">—</div>
+                  </div>
+                </div>
+
+                <div class="finetune-tip" id="finetune-tip" style="display:none">
+                  <strong>Fine-tune Step 4(c):</strong> <span id="finetune-text"></span>
+                </div>
+              </div>
+
+            </div><!-- /w4-results -->
+          </div>
+
+          <!-- Sidebar ad -->
+          <div class="ad-zone ad-zone--sidebar"></div>
+
+          <!-- Disclaimer -->
+          <div class="disclaimer" style="margin-top:20px">
+            <strong>Disclaimer:</strong> Results are estimates based on 2026 IRS Publication 15-T federal brackets and standard deductions. State income tax withholding is handled separately and varies by state. Not a substitute for licensed tax software or a CPA. Verify with your tax professional for complex situations.
+          </div>
+
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /calc-layout -->
+
+  </div>
+</main>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">W-4 questions answered</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          How do I fill out a W-4 for 2026?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Use the wizard above for exact amounts, then transfer them to the IRS Form W-4. Step 1: enter name, address, SSN, and filing status. Step 2: check the box if you have multiple jobs or a working spouse. Step 3: enter your dependent credits (children under 17 × $2,000 + other dependents × $500). Step 4(a): other annual income not from jobs. Step 4(b): deductions above the standard deduction. Step 4(c): any extra withholding per pay period. Sign and give the completed form to your employer's payroll or HR department.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          Should I claim 0 or 1 on my W-4?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          The 2020 and later W-4 no longer uses allowances — there is no "0 or 1" to claim. The new form uses actual dollar amounts. Leaving Steps 3 and 4 completely blank is the equivalent of the old "claim 0" (maximum withholding). To optimize withholding — neither over- nor under-withholding — use this calculator to get the specific dollar amounts for each step. The goal is to have your annual withholding match your annual tax liability as closely as possible.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          What is Step 2 on the W-4 for?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Step 2 addresses the multiple-jobs problem. When you or your household have income from more than one job, each employer withholds based only on that job's income — ignoring the other. Since higher combined income hits higher tax brackets, the default withholding isn't enough. Checking Step 2(c) tells your employer to use a higher withholding table. It works best when both jobs pay roughly the same. For unequal incomes, using Step 4(c) to add a specific extra amount per period is more precise. Our calculator handles both scenarios and tells you which approach to use.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="3">
+        <button class="faq-q" aria-expanded="false">
+          How do I change my W-4 withholding?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          You can submit a new W-4 to your employer at any time — there is no annual limit on how many times you can update it. Download Form W-4 from <a href="https://www.irs.gov/forms-pubs/about-form-w-4" rel="nofollow noopener" target="_blank">irs.gov</a> or get it from your HR department. Fill in the new values, sign it, and return it. Changes take effect on the next payroll cycle (some employers may take up to 30 days). If you're behind on withholding mid-year, you can temporarily increase Step 4(c) to catch up, then reduce it next year.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="4">
+        <button class="faq-q" aria-expanded="false">
+          What happens if I don't fill out a W-4?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          If you don't submit a W-4, your employer must withhold at the single filer rate with no adjustments — the highest possible withholding rate. This guarantees a refund at tax time but reduces every paycheck unnecessarily. If you're starting a new job, you typically must fill out a W-4 as part of onboarding paperwork. If you already have a W-4 on file from a prior year, your employer continues using that — but if your situation has changed (new baby, marriage, pay raise), it's worth updating to avoid a large refund or unexpected tax bill.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4M9 17h2"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc">Federal, Social Security, Medicare, and all 50 state taxes from any gross pay.</div></div>
+        </div>
+      </a>
+      <a href="/take-home-pay-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <div><div class="tool-card-title">Take-Home Pay Calculator</div><div class="tool-card-desc">See your actual net paycheck after all taxes and deductions are applied.</div></div>
+        </div>
+      </a>
+      <a href="/free-payroll-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div><div class="tool-card-title">Free Payroll Calculator</div><div class="tool-card-desc">Full gross-to-net with 401(k), health insurance, and all pre-tax deductions.</div></div>
+        </div>
+      </a>
+      <a href="/bonus-tax-calculator" class="tool-card" data-enter data-delay="4">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div><div class="tool-card-title">Bonus Tax Calculator</div><div class="tool-card-desc">See how supplemental wage withholding applies to bonuses and commissions.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses and employees. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/w4-withholding-calculator">W-4 Withholding Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15-T</a></li>
+          <li><a href="https://www.irs.gov/forms-pubs/about-form-w-4" rel="nofollow noopener" target="_blank">IRS Form W-4</a></li>
+          <li><a href="https://www.irs.gov/individuals/tax-withholding-estimator" rel="nofollow noopener" target="_blank">IRS Withholding Estimator</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+'use strict';
+
+/* ── 2026 Tax Engine ── */
+var FED = {
+  single: [
+    [11925,.10,0],[48475,.12,11925],[103350,.22,48475],
+    [197300,.24,103350],[250525,.32,197300],[626350,.35,250525],[Infinity,.37,626350]
+  ],
+  mfj: [
+    [23850,.10,0],[96950,.12,23850],[206700,.22,96950],
+    [394600,.24,206700],[501050,.32,394600],[751600,.35,501050],[Infinity,.37,751600]
+  ],
+  hoh: [
+    [17000,.10,0],[64850,.12,17000],[103350,.22,64850],
+    [197300,.24,103350],[250500,.32,197300],[626350,.35,250500],[Infinity,.37,626350]
+  ]
+};
+
+var STD_DED = {single:15000, mfj:30000, hoh:22500};
+var STATUS_LABELS = {single:'Single', mfj:'Married Filing Jointly', hoh:'Head of Household'};
+var PERIODS = {weekly:52, biweekly:26, semimonthly:24, monthly:12};
+var PERIOD_LABELS = {weekly:'per week', biweekly:'bi-weekly', semimonthly:'semi-monthly', monthly:'per month'};
+var PERIOD_NAMES = {weekly:'week', biweekly:'pay period', semimonthly:'period', monthly:'month'};
+
+function calcFedTax(taxableIncome, status) {
+  var brackets = FED[status] || FED.single;
+  var tax = 0;
+  var prev = 0;
+  for (var i = 0; i < brackets.length; i++) {
+    var b = brackets[i];
+    if (taxableIncome <= prev) break;
+    var chunk = Math.min(taxableIncome, b[0]) - b[2];
+    if (chunk > 0) tax += chunk * b[1];
+    prev = b[0];
+  }
+  return Math.max(0, tax);
+}
+
+function fmt(n, decimals) {
+  decimals = decimals === undefined ? 0 : decimals;
+  return '$' + n.toLocaleString('en-US', {minimumFractionDigits:decimals, maximumFractionDigits:decimals});
+}
+
+/* ── State ── */
+var state = {
+  freq: 'biweekly',
+  spouseWorks: false,
+  itemize: false,
+  currentStep: 1
+};
+
+/* ── Frequency pills ── */
+document.querySelectorAll('[data-wfreq]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-wfreq]').forEach(function(b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-checked','false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-checked','true');
+    state.freq = btn.dataset.wfreq;
+  });
+});
+
+/* ── Spouse toggle ── */
+document.querySelectorAll('[data-spouse]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-spouse]').forEach(function(b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-checked','false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-checked','true');
+    state.spouseWorks = btn.dataset.spouse === 'yes';
+    document.getElementById('spouse-income-field').classList.toggle('visible', state.spouseWorks);
+  });
+});
+
+/* ── Itemize toggle ── */
+document.querySelectorAll('[data-itemize]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-itemize]').forEach(function(b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-checked','false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-checked','true');
+    state.itemize = btn.dataset.itemize === 'yes';
+    document.getElementById('itemized-amt-field').classList.toggle('visible', state.itemize);
+  });
+});
+
+/* ── Wizard navigation ── */
+function showStep(n) {
+  state.currentStep = n;
+  // Panes
+  document.querySelectorAll('.wizard-pane').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('pane-' + n).classList.add('active');
+  // Progress dots
+  for (var i = 1; i <= 4; i++) {
+    var dot = document.getElementById('wp-' + i);
+    dot.classList.remove('active','completed');
+    if (i < n) dot.classList.add('completed');
+    else if (i === n) dot.classList.add('active');
+  }
+  // Nav buttons
+  var btnBack = document.getElementById('btn-back');
+  var btnNext = document.getElementById('btn-next');
+  var stepInfo = document.getElementById('wiz-step-info');
+  var wizNav = document.getElementById('wizard-nav');
+
+  if (n === 1) {
+    btnBack.style.display = 'none';
+    btnNext.textContent = 'Next →';
+    stepInfo.textContent = 'Step 1 of 3';
+    wizNav.style.display = 'flex';
+  } else if (n === 2) {
+    btnBack.style.display = 'block';
+    btnNext.textContent = 'Next →';
+    stepInfo.textContent = 'Step 2 of 3';
+    wizNav.style.display = 'flex';
+  } else if (n === 3) {
+    btnBack.style.display = 'block';
+    btnNext.textContent = 'Calculate My W-4 →';
+    stepInfo.textContent = 'Step 3 of 3';
+    wizNav.style.display = 'flex';
+  } else if (n === 4) {
+    wizNav.style.display = 'none';
+  }
+}
+
+document.getElementById('btn-next').addEventListener('click', function() {
+  if (state.currentStep < 3) {
+    // Validate step 1 before advancing
+    if (state.currentStep === 1) {
+      var salary = parseFloat(document.getElementById('w_salary').value) || 0;
+      if (salary <= 0) {
+        document.getElementById('w_salary').focus();
+        document.getElementById('w_salary').style.borderColor = 'var(--red)';
+        setTimeout(function() { document.getElementById('w_salary').style.borderColor = ''; }, 2000);
+        return;
+      }
+    }
+    showStep(state.currentStep + 1);
+  } else if (state.currentStep === 3) {
+    calculateAndShow();
+  }
+});
+
+document.getElementById('btn-back').addEventListener('click', function() {
+  if (state.currentStep > 1) showStep(state.currentStep - 1);
+});
+
+document.getElementById('btn-restart').addEventListener('click', function() {
+  // Reset form
+  ['w_salary','w_spouse','w_otherjobs','w_otherincome','w_itemized','w_aboveline'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['w_children','w_otherdeps'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = '0';
+  });
+  // Reset toggles
+  state.spouseWorks = false;
+  state.itemize = false;
+  document.querySelectorAll('[data-spouse]').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.spouse === 'no');
+    b.setAttribute('aria-checked', b.dataset.spouse === 'no' ? 'true' : 'false');
+  });
+  document.querySelectorAll('[data-itemize]').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.itemize === 'no');
+    b.setAttribute('aria-checked', b.dataset.itemize === 'no' ? 'true' : 'false');
+  });
+  document.getElementById('spouse-income-field').classList.remove('visible');
+  document.getElementById('itemized-amt-field').classList.remove('visible');
+  // Hide results
+  document.getElementById('w4-results').style.display = 'none';
+  document.getElementById('w4-empty').style.display = 'block';
+  showStep(1);
+});
+
+/* ── Main calculation ── */
+function calculateAndShow() {
+  var salary = parseFloat(document.getElementById('w_salary').value) || 0;
+  var status = document.getElementById('w_status').value;
+  var periods = PERIODS[state.freq];
+  var spouseIncome = state.spouseWorks ? (parseFloat(document.getElementById('w_spouse').value) || 0) : 0;
+  var otherJobs = parseFloat(document.getElementById('w_otherjobs').value) || 0;
+  var otherIncome = parseFloat(document.getElementById('w_otherincome').value) || 0;
+  var children = parseInt(document.getElementById('w_children').value) || 0;
+  var otherDeps = parseInt(document.getElementById('w_otherdeps').value) || 0;
+  var itemizedAmt = state.itemize ? (parseFloat(document.getElementById('w_itemized').value) || 0) : 0;
+  var aboveLine = parseFloat(document.getElementById('w_aboveline').value) || 0;
+
+  var stdDed = STD_DED[status] || 15000;
+
+  /* Credits */
+  var childCredit = children * 2000;
+  var otherDepCredit = otherDeps * 500;
+  var totalCredits = childCredit + otherDepCredit;
+
+  /* Total income */
+  var totalIncome = salary + spouseIncome + otherJobs + otherIncome;
+
+  /* Total deductions */
+  var bestItemized = Math.max(itemizedAmt, 0);
+  var deductionsForTax = (state.itemize && bestItemized > stdDed ? bestItemized : stdDed) + aboveLine;
+
+  /* Net tax liability */
+  var taxableIncome = Math.max(0, totalIncome - deductionsForTax);
+  var grossTax = calcFedTax(taxableIncome, status);
+  var netTax = Math.max(0, grossTax - totalCredits);
+
+  /* W-4 field values */
+  var step3 = totalCredits;
+
+  /* Step 4(a): other income NOT from jobs (investments, SE) */
+  var step4a = otherIncome;
+
+  /* Step 4(b): excess deductions over standard deduction */
+  var excessDeductions = (state.itemize ? bestItemized : 0) + aboveLine - stdDed;
+  var step4b = Math.max(0, excessDeductions);
+
+  /* Expected withholding from this job with Step 3/4a/4b applied:
+     Employer computes: annualizedWage = salary + step4a - step4b
+     Then: taxableForWithholding = max(0, annualizedWage - stdDed)
+     Then: withholding = calcFedTax(taxableForWithholding, status) - step3
+  */
+  var annualizedForW4 = salary + step4a - step4b;
+  var taxableForW4 = Math.max(0, annualizedForW4 - stdDed);
+  var w4Withholding = Math.max(0, calcFedTax(taxableForW4, status) - totalCredits);
+
+  /* Gap = additional income from spouse/other jobs not covered by this W-4 */
+  var gap = netTax - w4Withholding;
+  var step4c = Math.max(0, Math.ceil(gap / periods));
+
+  /* Projected annual withholding with all our recommendations */
+  var projectedAnnual = w4Withholding + step4c * periods;
+  var refundOrOwe = projectedAnnual - netTax; /* positive = refund, negative = owe */
+
+  /* Step 2 recommendation */
+  var hasMultipleJobs = spouseIncome > 0 || otherJobs > 0;
+  var step2Rec, step2Class;
+  if (hasMultipleJobs) {
+    step2Rec = 'Check box in Step 2(c)';
+    step2Class = 'check';
+  } else {
+    step2Rec = 'Leave blank';
+    step2Class = 'zero';
+  }
+
+  /* ── Render ── */
+  var s1 = document.getElementById('r-step1');
+  s1.textContent = STATUS_LABELS[status];
+  s1.className = 'w4fl-value';
+
+  var s2 = document.getElementById('r-step2');
+  s2.textContent = step2Rec;
+  s2.className = 'w4fl-value ' + step2Class;
+
+  var s3 = document.getElementById('r-step3');
+  if (step3 > 0) {
+    s3.textContent = 'Enter ' + fmt(step3) + (children > 0 || otherDeps > 0 ?
+      ' (' + (children > 0 ? 'children ' + fmt(childCredit) : '') +
+      (children > 0 && otherDeps > 0 ? ' + ' : '') +
+      (otherDeps > 0 ? 'other ' + fmt(otherDepCredit) : '') + ')' : '');
+    // shorten if too long
+    if (step3 > 0) s3.textContent = 'Enter ' + fmt(step3);
+    s3.className = 'w4fl-value';
+  } else {
+    s3.textContent = 'Enter $0 (or leave blank)';
+    s3.className = 'w4fl-value zero';
+  }
+
+  var s4a = document.getElementById('r-step4a');
+  if (step4a > 0) {
+    s4a.textContent = 'Enter ' + fmt(step4a);
+    s4a.className = 'w4fl-value';
+  } else {
+    s4a.textContent = 'Enter $0';
+    s4a.className = 'w4fl-value zero';
+  }
+
+  var s4b = document.getElementById('r-step4b');
+  if (step4b > 0) {
+    s4b.textContent = 'Enter ' + fmt(step4b);
+    s4b.className = 'w4fl-value';
+  } else {
+    s4b.textContent = 'Enter $0';
+    s4b.className = 'w4fl-value zero';
+  }
+
+  var s4c = document.getElementById('r-step4c');
+  if (step4c > 0) {
+    s4c.textContent = 'Enter ' + fmt(step4c, 0) + ' / ' + PERIOD_NAMES[state.freq];
+    s4c.className = 'w4fl-value highlight';
+  } else {
+    s4c.textContent = 'Enter $0';
+    s4c.className = 'w4fl-value zero';
+  }
+
+  /* Per-period breakdown */
+  var totalWithheldPerPeriod = (w4Withholding + step4c * periods) / periods;
+  document.getElementById('r-per-period').textContent = fmt(totalWithheldPerPeriod, 2) + ' / ' + PERIOD_NAMES[state.freq];
+  document.getElementById('r-annual-tax').textContent = fmt(netTax);
+
+  /* Verdict */
+  var verd = document.getElementById('w4-verdict');
+  var verdLabel = document.getElementById('verd-label');
+  var verdAmount = document.getElementById('verd-amount');
+  var verdSub = document.getElementById('verd-sub');
+  verd.className = 'w4-verdict';
+  var absRoa = Math.abs(refundOrOwe);
+  if (refundOrOwe >= 50) {
+    verd.classList.add('refund');
+    verdLabel.textContent = 'Estimated Refund';
+    verdAmount.textContent = fmt(absRoa);
+    verdSub.textContent = 'with these W-4 settings at tax time';
+  } else if (refundOrOwe < -50) {
+    verd.classList.add('owe');
+    verdLabel.textContent = 'Estimated Amount Owed';
+    verdAmount.textContent = fmt(absRoa);
+    verdSub.textContent = 'increase Step 4(c) to cover the gap';
+  } else {
+    verd.classList.add('balanced');
+    verdLabel.textContent = 'Roughly Balanced';
+    verdAmount.textContent = '~$0';
+    verdSub.textContent = 'withholding closely matches tax liability';
+  }
+
+  /* Stats */
+  document.getElementById('rstat-income').textContent = fmt(totalIncome);
+  var effRate = totalIncome > 0 ? (netTax / totalIncome * 100) : 0;
+  document.getElementById('rstat-rate').textContent = effRate.toFixed(1) + '%';
+  document.getElementById('rstat-periods').textContent = periods + '/yr';
+  document.getElementById('rstat-credits').textContent = fmt(totalCredits);
+
+  /* Fine-tune tip */
+  var tipEl = document.getElementById('finetune-tip');
+  var tipText = document.getElementById('finetune-text');
+  if (step4c > 0) {
+    var extra10 = fmt(absRoa + 10 * periods, 0);
+    tipText.textContent = 'Add $10 more to Step 4(c) → ' + extra10 + ' larger refund. Subtract $10 → smaller refund / owe more at filing.';
+    tipEl.style.display = 'block';
+  } else if (refundOrOwe > 200) {
+    tipText.textContent = 'Reduce Step 4(c) by $' + Math.ceil((refundOrOwe - 200) / periods) + '/period to cut your refund by $200 and take home more each paycheck.';
+    tipEl.style.display = 'block';
+  } else {
+    tipEl.style.display = 'none';
+  }
+
+  /* Show results, hide empty state */
+  document.getElementById('w4-empty').style.display = 'none';
+  document.getElementById('w4-results').style.display = 'block';
+
+  /* Advance wizard to step 4 */
+  showStep(4);
+
+  /* Scroll to output on mobile */
+  if (window.innerWidth < 900) {
+    document.getElementById('w4-output-card').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+
+/* Initialize */
+showStep(1);
+
+})();
+</script>
+</body>
+</html>
