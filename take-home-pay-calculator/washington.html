@@ -5,10 +5,10 @@
 <link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Washington State Take Home Pay Calculator 2026 — WA Paycheck After Taxes | FreePayrollCalc</title>
-<meta name="description" content="Free Washington state take home pay calculator for 2026. Washington has no state income tax — see your exact paycheck after federal taxes and FICA only. All pay frequencies. WA Cares Fund included.">
+<meta name="description" content="Free Washington State take home pay calculator for 2026. WA has no state income tax on wages — see your exact paycheck after federal income tax and FICA only. Note: WA's 7% capital gains tax applies to investment gains over $250,000, not to wages.">
 <link rel="canonical" href="https://www.freepayrollcalc.com/take-home-pay-calculator/washington">
 <meta property="og:title" content="Washington State Take Home Pay Calculator 2026 — WA Paycheck After Taxes">
-<meta property="og:description" content="Free California take home pay calculator for 2026. See your exact paycheck after California's 1%–13.3% state income tax, SDI (1.1%), and federal taxes. All pay frequencies. CA has the highest state income tax rate in the nation.">
+<meta property="og:description" content="Free Washington State take home pay calculator for 2026. WA has no state income tax on wages — see your exact paycheck after federal income tax and FICA only. Note: WA's 7% capital gains tax applies to investment gains over $250,000, not to wages.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
 <meta property="og:image:width" content="1200">
@@ -22,15 +22,14 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Washington State Take Home Pay Calculator 2026",
-  "url": "https://www.freepayrollcalc.com/take-home-pay-calculator/california",
-  "description": "Free California take home pay calculator for 2026. See your exact paycheck after California's 1%–13.3% state income tax, SDI (1.1%), and federal taxes. All pay frequencies.",
+  "url": "https://www.freepayrollcalc.com/take-home-pay-calculator/washington",
+  "description": "Free Washington State take home pay calculator for 2026. WA has no state income tax on wages. See your exact paycheck after federal income tax and FICA only. All pay frequencies.",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
   "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
   "featureList": [
     "2026 federal income tax brackets",
-    "Washington state income tax",
-    "Washington state deductions",
+    "Washington State — no state income tax on wages",
     "Social Security 6.2% and Medicare 1.45%",
     "401k, health insurance, FSA, HSA pre-tax deductions",
     "Effective tax rate and keep percentage",
@@ -60,8 +59,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "California Take Home Pay Calculator",
-      "item": "https://www.freepayrollcalc.com/take-home-pay-calculator/california"
+      "name": "Washington State Take Home Pay Calculator",
+      "item": "https://www.freepayrollcalc.com/take-home-pay-calculator/washington"
     }
   ]
 }
@@ -73,13 +72,13 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is California's SDI tax and how does it affect my paycheck?",
-      "acceptedAnswer": {"@type":"Answer","text":"California's State Disability Insurance (SDI) is a mandatory payroll deduction of 1.1% of gross wages in 2026, with no wage cap. Unlike Social Security which stops at $176,100, California SDI applies to every dollar you earn. On a $100,000 salary, that's $1,100 per year withheld in addition to state income tax. SDI funds California's disability insurance and paid family leave programs. It does not appear in most generic national calculators, making CA take-home estimates from other tools often too high."}
+      "name": "Does Washington State have an income tax?",
+      "acceptedAnswer": {"@type":"Answer","text":"No — Washington State has no individual income tax on wages, salaries, tips, or most other forms of earned income. Washington's constitution has historically made it difficult to impose a graduated income tax. Seattle and other WA cities also have no local income tax. Workers in Washington pay only federal income tax and FICA (Social Security + Medicare). Note: Washington does have a 7% capital gains excise tax on net investment gains above $250,000 per year, but this does not apply to wages or retirement income and has no effect on your paycheck."}
     },
     {
       "@type": "Question",
-      "name": "Why does California's effective tax rate feel higher than the brackets suggest?",
-      "acceptedAnswer": {"@type":"Answer","text":"Three reasons. First, California's standard deduction for single filers is only $5,202 versus the federal $15,000 — so far more of your income is taxable at the state level. Second, California does not recognize many federal tax benefits (like student loan interest deductions). Third, once your income exceeds $66,295, California taxes the entire amount above that threshold at 9.3% — and that's before SDI. A California worker earning $80,000 pays more to the state than a New York worker at the same salary despite NY's higher headline rate, because NY's standard deduction is more generous."}
+      "name": "What is Washington's WA Cares Fund deduction?",
+      "acceptedAnswer": {"@type":"Answer","text":"The WA Cares Fund is Washington State's long-term care insurance program, funded by a payroll deduction of 0.58% of gross wages. Starting in 2023, most Washington employees have this amount withheld each paycheck. On a $75,000 salary, that's approximately $435 per year ($16.73 per biweekly paycheck). The program provides up to $36,500 in lifetime long-term care benefits. Workers who purchased qualifying private long-term care insurance before November 1, 2021, and applied for an exemption by a deadline, are permanently exempt. Self-employed workers can opt in voluntarily. This deduction is separate from state income tax and appears as a distinct line item on Washington pay stubs."}
     },
     {
       "@type": "Question",
@@ -205,14 +204,6 @@
   background: var(--surface);
 }
 .deduct-body.open { display: block; }
-
-<style>
-.state-tax-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
-.state-tax-table th{background:var(--bg);padding:10px 12px;text-align:left;font-weight:600;border-bottom:2px solid var(--border)}
-.state-tax-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
-.state-tax-table .net-row{background:rgba(5,150,105,.06)}
-.state-tax-table .net-row td{font-weight:700;color:var(--green)}
-</style>
 </style>
 </head>
 <body>
@@ -267,9 +258,9 @@
     <!-- Ad zone: insert AdSense code here when approved -->
     <div class="ad-zone ad-zone--leaderboard"></div>
 
-    <h1 class="calc-title" data-enter>California Take Home Pay Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <h1 class="calc-title" data-enter>Washington State Take Home Pay Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
     <p class="calc-subtitle" data-enter data-delay="1">
-      California workers face the highest state income tax rate in the nation — up to 13.3% — plus a mandatory State Disability Insurance (SDI) deduction of 1.1% with no wage cap. Use this calculator to see your exact California take-home pay after all 2026 federal and CA state withholdings.
+      Washington State has no income tax on wages or salaries — your paycheck is reduced only by federal income tax and FICA. Washington does have a 7% capital gains tax on investment gains above $250,000 (not applicable to wages), plus a small Long-Term Care payroll deduction. This calculator shows your exact Washington take-home pay for earned income.
     </p>
     <div class="calc-updated">
       <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -354,7 +345,7 @@
                   <option value="NH">New Hampshire — No state tax</option>
                   <option value="NJ">New Jersey — up to 10.75%</option>
                   <option value="NM">New Mexico — up to 5.90%</option>
-                  <option value="NY" selected>New York — up to 10.90%</option>
+                  <option value="NY">New York — up to 10.90%</option>
                   <option value="NC">North Carolina — 4.50%</option>
                   <option value="ND">North Dakota — up to 2.50%</option>
                   <option value="OH">Ohio — up to 3.50%</option>
@@ -433,56 +424,55 @@
 
         <!-- ARTICLE -->
         <article style="margin-top:40px" data-enter>
-          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:14px">About California Income Tax (2026)</h2>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:14px">About Washington State Taxes (2026)</h2>
 
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:18px">California uses a 10-bracket progressive income tax system, with rates ranging from 1% on the first dollar of income to 13.3% on income over $1 million. For most wage earners, the effective marginal rate falls in the 6%–9.3% range. California does not conform to the federal standard deduction, meaning more of your income is taxable at the state level than at the federal level.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:18px">Washington State has no individual income tax and no tax on wages, salaries, or retirement income. The Washington State Constitution has historically been interpreted to require uniformity in taxation, which has made it legally difficult to impose a graduated income tax. Washington does have unique tax features — a 7% capital gains excise tax (on investment gains over $250,000, not wages), a Business &amp; Occupation (B&amp;O) tax on gross business revenue, and starting in 2022, a Long-Term Care payroll deduction of 0.58% of wages for most workers.</p>
 
-          <h3 style="font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 10px">2026 California Income Tax Brackets (Single Filers)</h3>
+          <h3 style="font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 10px">Washington State Tax Summary for Workers (2026)</h3>
           <div style="overflow-x:auto;margin-bottom:20px">
             <table style="width:100%;border-collapse:collapse;font-size:14px">
               <thead>
                 <tr style="background:var(--surface-2)">
-                  <th style="padding:10px 14px;text-align:left;font-weight:700;color:var(--ink);border-bottom:2px solid var(--border-dark)">Taxable Income</th>
-                  <th style="padding:10px 14px;text-align:right;font-weight:700;color:var(--ink);border-bottom:2px solid var(--border-dark)">Rate</th>
+                  <th style="padding:10px 14px;text-align:left;font-weight:700;color:var(--ink);border-bottom:2px solid var(--border-dark)">Tax Type</th>
+                  <th style="padding:10px 14px;text-align:right;font-weight:700;color:var(--ink);border-bottom:2px solid var(--border-dark)">Rate on Wages</th>
+                  <th style="padding:10px 14px;text-align:right;font-weight:700;color:var(--ink);border-bottom:2px solid var(--border-dark)">Notes</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;color:var(--ink-2)">$0 – $10,099</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">1.0%</td></tr>
-                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 14px;color:var(--ink-2)">$10,100 – $23,942</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">2.0%</td></tr>
-                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;color:var(--ink-2)">$23,943 – $37,788</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">4.0%</td></tr>
-                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 14px;color:var(--ink-2)">$37,789 – $52,455</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">6.0%</td></tr>
-                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;color:var(--ink-2)">$52,456 – $66,295</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">8.0%</td></tr>
-                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 14px;color:var(--ink-2)">$66,296 – $338,639</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">9.3%</td></tr>
-                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;color:var(--ink-2)">$338,640 – $406,364</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">10.3%</td></tr>
-                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 14px;color:var(--ink-2)">$406,365 – $677,275</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">11.3%</td></tr>
-                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;color:var(--ink-2)">$677,276 – $1,000,000</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">12.3%</td></tr>
-                <tr><td style="padding:9px 14px;color:var(--ink-2)">Over $1,000,000</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--red);font-weight:700">13.3%</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;color:var(--ink-2)">WA state income tax</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);font-weight:700;color:var(--green)">0%</td><td style="padding:9px 14px;text-align:right;color:var(--ink-3);font-size:13px">No income tax on wages</td></tr>
+                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 14px;color:var(--ink-2)">WA capital gains tax</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">7% (on gains, not wages)</td><td style="padding:9px 14px;text-align:right;color:var(--ink-3);font-size:13px">Gains over $250,000 only</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;color:var(--ink-2)">WA Cares Fund (LTC)</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">0.58% of wages</td><td style="padding:9px 14px;text-align:right;color:var(--ink-3);font-size:13px">Long-Term Care; opt-out available</td></tr>
+                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 14px;color:var(--ink-2)">WA Paid Family &amp; Medical Leave</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">~0.74% employee share</td><td style="padding:9px 14px;text-align:right;color:var(--ink-3);font-size:13px">Varies by employer size</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;color:var(--ink-2)">Federal income tax</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">10%–37%</td><td style="padding:9px 14px;text-align:right;color:var(--ink-3);font-size:13px">2026 IRS brackets</td></tr>
+                <tr><td style="padding:9px 14px;color:var(--ink-2)">FICA (SS + Medicare)</td><td style="padding:9px 14px;text-align:right;font-family:var(--mono);color:var(--ink);font-weight:600">7.65%</td><td style="padding:9px 14px;text-align:right;color:var(--ink-3);font-size:13px">SS wage base $176,100</td></tr>
               </tbody>
             </table>
           </div>
 
-          <h3 style="font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 8px">Key California Tax Facts</h3>
+          <h3 style="font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 8px">Key Washington State Tax Facts</h3>
           <ul style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:18px;padding-left:20px;list-style:disc">
-            <li style="margin-bottom:8px"><strong>SDI (State Disability Insurance):</strong> California withholds 1.1% of your gross wages for SDI with no annual wage cap. On a $75,000 salary, that's an additional $825 per year — a deduction that does not appear in most generic calculators.</li>
-            <li style="margin-bottom:8px"><strong>No federal standard deduction conformity:</strong> California's standard deduction is only $5,202 for single filers (2026) vs. the federal $15,000. This means your CA taxable income is significantly higher than your federal taxable income.</li>
-            <li><strong>13.3% — highest in the nation:</strong> California's top rate of 13.3% (12.3% + 1% Mental Health Services Tax on income over $1 million) is the highest individual income tax rate of any US state.</li>
+            <li style="margin-bottom:8px"><strong>No state income tax on wages — unique in the West:</strong> Among Pacific Coast states, only Washington (and Nevada, to the south) imposes no income tax. Oregon has rates up to 9.9%, and California up to 13.3%. A Seattle tech worker at $150,000 keeps roughly $14,000–$19,000 more per year than the same worker in San Francisco, solely due to state income tax.</li>
+            <li style="margin-bottom:8px"><strong>WA Cares Fund (Long-Term Care):</strong> Starting in 2023, Washington workers pay 0.58% of wages into the WA Cares Fund, which funds long-term care benefits. On a $75,000 salary, that's $435/year. Workers who purchased qualifying private long-term care insurance before November 2021 and applied for exemption are exempt. This deduction is not reflected in this calculator's state tax field — you can use the pre-tax deduction section as a workaround.</li>
+            <li><strong>Capital gains tax doesn't affect your paycheck:</strong> Washington's 7% capital gains excise tax (upheld by the WA Supreme Court in 2023) applies only to net capital gains above $250,000 per year from the sale of stocks, bonds, and similar assets. Wages, salaries, retirement distributions, and real estate gains are all exempt. It has no effect on your biweekly paycheck calculation.</li>
           </ul>
 
-          <h3 style="font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 8px">Example: $75,000 Salary in California (Single, Biweekly)</h3>
+          <h3 style="font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 8px">Example: $75,000 Salary in Washington State (Single, Biweekly)</h3>
           <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:18px">
             <div style="display:grid;grid-template-columns:1fr auto;gap:6px 24px;font-size:14px">
               <span style="color:var(--ink-2)">Gross pay (biweekly)</span><span style="font-family:var(--mono);font-weight:600;color:var(--ink);text-align:right">$2,884.62</span>
               <span style="color:var(--ink-2)">Federal income tax</span><span style="font-family:var(--mono);font-weight:600;color:var(--red);text-align:right">−$312.08</span>
               <span style="color:var(--ink-2)">Social Security (6.2%)</span><span style="font-family:var(--mono);font-weight:600;color:var(--red);text-align:right">−$178.85</span>
               <span style="color:var(--ink-2)">Medicare (1.45%)</span><span style="font-family:var(--mono);font-weight:600;color:var(--red);text-align:right">−$41.83</span>
-              <span style="color:var(--ink-2)">CA state income tax (~9.3%)</span><span style="font-family:var(--mono);font-weight:600;color:var(--red);text-align:right">−$268.27</span>
-              <span style="color:var(--ink-2)">CA SDI (1.1%)</span><span style="font-family:var(--mono);font-weight:600;color:var(--red);text-align:right">−$31.73</span>
-              <span style="font-weight:700;color:var(--ink);padding-top:8px;border-top:1px solid var(--border-dark)">Estimated take-home pay</span><span style="font-family:var(--mono);font-weight:700;color:var(--green);text-align:right;padding-top:8px;border-top:1px solid var(--border-dark)">$2,051.86</span>
+              <span style="color:var(--ink-2)">WA state income tax</span><span style="font-family:var(--mono);font-weight:600;color:var(--green);text-align:right">$0.00</span>
+              <span style="color:var(--ink-2)">WA Cares Fund (0.58%)</span><span style="font-family:var(--mono);font-weight:600;color:var(--red);text-align:right">−$16.73</span>
+              <span style="font-weight:700;color:var(--ink);padding-top:8px;border-top:1px solid var(--border-dark)">Estimated take-home (without WA Cares)</span><span style="font-family:var(--mono);font-weight:700;color:var(--green);text-align:right;padding-top:8px;border-top:1px solid var(--border-dark)">$2,351.86</span>
+              <span style="font-weight:700;color:var(--ink)">With WA Cares Fund deduction</span><span style="font-family:var(--mono);font-weight:700;color:var(--amber);text-align:right">$2,335.13</span>
             </div>
-            <p style="font-size:12px;color:var(--ink-3);margin-top:10px;line-height:1.5">Assumes standard federal deduction ($15,000), CA standard deduction ($5,202), single filing status, no pre-tax deductions. Annual take-home: ~$53,348. Effective combined tax rate: ~28.9%.</p>
+            <p style="font-size:12px;color:var(--ink-3);margin-top:10px;line-height:1.5">Assumes standard federal deduction ($15,000), single filing status, no pre-tax deductions. Annual take-home without WA Cares: ~$61,148. Annual WA Cares deduction: ~$435. Compare to California: a WA worker at $75k keeps roughly $7,500–$8,000 more per year in state taxes alone.</p>
           </div>
 
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">Compare California to <a href="/take-home-pay-calculator/texas" style="color:var(--accent)">Texas</a> or <a href="/take-home-pay-calculator/washington" style="color:var(--accent)">Washington</a> — both with zero state income tax — and a $75,000 earner keeps roughly $7,500 more per year. For a complete employer-side tax picture, see the <a href="/payroll-tax-calculator" style="color:var(--accent)">Payroll Tax Calculator</a>. For the full take-home pay comparison across all 50 states, visit the <a href="/take-home-pay-calculator" style="color:var(--accent)">Take Home Pay Calculator</a> main page.</p>
+          <h3 style="font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 8px">Other States with No Income Tax</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">Washington is joined by Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, and Wyoming in having no wage income tax. Compare: <a href="/take-home-pay-calculator/texas" style="color:var(--accent)">Texas Take Home Pay Calculator</a> · <a href="/take-home-pay-calculator/florida" style="color:var(--accent)">Florida Take Home Pay Calculator</a>. For the full 50-state comparison, see the <a href="/take-home-pay-calculator" style="color:var(--accent)">Take Home Pay Calculator</a> main page.</p>
         </article>
 
       </div><!-- /calc-main -->
@@ -628,27 +618,27 @@
   <div class="container--narrow">
     <div class="section-header" data-enter>
       <p class="section-eyebrow">FAQ</p>
-      <h2 class="section-title">California take-home pay questions answered</h2>
+      <h2 class="section-title">Washington State take-home pay questions answered</h2>
     </div>
     <div class="faq-list">
 
       <div class="faq-item" data-enter>
         <button class="faq-q" aria-expanded="false">
-          What is California's SDI tax and how does it affect my paycheck?
+          Does Washington State have an income tax?
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
         </button>
         <div class="faq-a">
-          California's State Disability Insurance (SDI) is a mandatory payroll deduction of 1.1% of gross wages in 2026, with no wage cap. Unlike Social Security which stops at $176,100, California SDI applies to every dollar you earn. On a $100,000 salary, that's $1,100 per year withheld in addition to state income tax. SDI funds California's disability insurance and paid family leave programs. It does not appear in most generic national calculators, making CA take-home estimates from other tools often too high.
+          No — Washington State has no individual income tax on wages, salaries, tips, or most other forms of earned income. Washington's constitution has historically made it difficult to impose a graduated income tax. Seattle and other WA cities also have no local income tax. Workers in Washington pay only federal income tax and FICA (Social Security + Medicare). Note: Washington does have a 7% capital gains excise tax on net investment gains above $250,000 per year, but this does not apply to wages or retirement income and has no effect on your paycheck.
         </div>
       </div>
 
       <div class="faq-item" data-enter data-delay="1">
         <button class="faq-q" aria-expanded="false">
-          Why does California's effective tax rate feel higher than the brackets suggest?
+          What is Washington's WA Cares Fund deduction?
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
         </button>
         <div class="faq-a">
-          Three reasons. First, California's standard deduction for single filers is only $5,202 versus the federal $15,000 — so far more of your income is taxable at the state level. Second, California does not recognize many federal tax benefits (like student loan interest deductions). Third, once your income exceeds $66,295, California taxes the entire amount above that threshold at 9.3% — and that's before SDI. A California worker earning $80,000 pays more to the state than a New York worker at the same salary despite NY's higher headline rate, because NY's standard deduction is more generous.
+          The WA Cares Fund is Washington State's long-term care insurance program, funded by a payroll deduction of 0.58% of gross wages. Starting in 2023, most Washington employees have this amount withheld each paycheck. On a $75,000 salary, that's approximately $435 per year ($16.73 per biweekly paycheck). The program provides up to $36,500 in lifetime long-term care benefits. Workers who purchased qualifying private long-term care insurance before November 1, 2021, and applied for an exemption by a deadline, are permanently exempt. Self-employed workers can opt in voluntarily. This deduction is separate from state income tax and appears as a distinct line item on Washington pay stubs.
         </div>
       </div>
 
@@ -1122,7 +1112,7 @@
   /* Pre-select state on page load */
   document.addEventListener('DOMContentLoaded', function() {
     var sel = document.getElementById('state');
-    if (sel) { sel.value = 'CA'; }
+    if (sel) { sel.value = 'WA'; }
   });
 
 })();
