@@ -497,16 +497,11 @@ label.field-label{
 }
 .disclaimer strong{font-weight:700}
 
-/* ── Ad zones ── */
-.ad-zone{
-  background:var(--surface-2);border:1px dashed var(--border-dark);
-  border-radius:10px;display:flex;align-items:center;justify-content:center;
-  color:var(--ink-3);font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
-  position:relative;overflow:hidden;
-}
-.ad-zone--leaderboard{width:100%;min-height:90px;max-width:728px;margin:0 auto}
-.ad-zone--in-content{width:100%;min-height:250px}
-.ad-zone--sidebar{min-height:250px}
+/* ── Ad zones — hidden until AdSense code is inserted ── */
+.ad-zone{display:none}
+.ad-zone--leaderboard{width:100%;max-width:728px;margin:0 auto}
+.ad-zone--in-content{width:100%}
+.ad-zone--sidebar{}
 
 /* ── Entrance animations ── */
 [data-enter]{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
@@ -546,6 +541,14 @@ label.field-label{
   .hero{padding:56px 0 48px}
   .trust-inner{gap:16px}
 }
+
+/* ── Last updated tag ── */
+.calc-updated{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;color:var(--ink-3);font-weight:500;
+  margin-bottom:28px;
+}
+.calc-updated svg{color:var(--green);flex-shrink:0}
 
 /* ── Utilities ── */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}

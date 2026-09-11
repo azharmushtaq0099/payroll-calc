@@ -45,4 +45,19 @@
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/about</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
 </urlset>
