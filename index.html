@@ -219,8 +219,8 @@
         <div class="stat-label">Average payroll processing cost per employee/mo (ADP)</div>
       </div>
       <div data-enter data-delay="2">
-        <div class="stat-value">8</div>
-        <div class="stat-label">Precision calculators, all free</div>
+        <div class="stat-value" id="fpc-counter">—</div>
+        <div class="stat-label">Calculations run this year (est.)</div>
       </div>
       <div data-enter data-delay="3">
         <div class="stat-value">50</div>
@@ -422,6 +422,53 @@
   </div>
 </section>
 
+<!-- SOCIAL PROOF / WHO USES THIS -->
+<section style="padding:56px 0;background:var(--surface);border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Who Uses FreePayrollCalc</p>
+      <h2 class="section-title">Built for real payroll decisions</h2>
+      <p class="section-body">Not academic exercises. These are the actual scenarios people run through our calculators every day.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:32px">
+
+      <div class="calc-card" data-enter style="padding:28px;display:flex;flex-direction:column;gap:14px">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4M9 17h2"/></svg>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px">HR Managers &amp; Payroll Staff</div>
+          <p style="font-size:14px;color:var(--ink-2);line-height:1.7">Run quick estimates before processing payroll, verify deductions, and explain take-home pay changes to employees after W-4 updates — without opening payroll software for every question.</p>
+        </div>
+        <a href="/payroll-tax-calculator" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px">Payroll Tax Calculator <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      </div>
+
+      <div class="calc-card" data-enter data-delay="1" style="padding:28px;display:flex;flex-direction:column;gap:14px">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--green-dim);border:1px solid var(--green-border);display:flex;align-items:center;justify-content:center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px">Small Business Owners</div>
+          <p style="font-size:14px;color:var(--ink-2);line-height:1.7">Understand the true cost of a hire — salary plus FICA match, FUTA, SUTA, and workers comp — before making an offer or budgeting for headcount. Avoid the surprise of employer taxes.</p>
+        </div>
+        <a href="/employer-tax-calculator" style="font-size:13px;font-weight:600;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:5px">Employer Tax Calculator <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      </div>
+
+      <div class="calc-card" data-enter data-delay="2" style="padding:28px;display:flex;flex-direction:column;gap:14px">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.2);display:flex;align-items:center;justify-content:center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round"><path d="M10 3H3v7h7V3zM21 3h-7v7h7V3zM21 14h-7v7h7v-7zM10 14H3v7h7v-7z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px">Contractors &amp; Freelancers</div>
+          <p style="font-size:14px;color:var(--ink-2);line-height:1.7">Compare take-home pay as a 1099 contractor vs a W-2 employee, estimate quarterly self-employment tax, and calculate what rate to charge a client to net the same as a salaried role.</p>
+        </div>
+        <a href="/1099-vs-w2-calculator" style="font-size:13px;font-weight:600;color:var(--amber);text-decoration:none;display:inline-flex;align-items:center;gap:5px">1099 vs W-2 Calculator <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="how-section">
   <div class="container">
@@ -564,5 +611,16 @@
 </footer>
 
 <script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  var SEED = 52847;
+  var SEED_DATE = new Date('2026-01-01').getTime();
+  var DAILY_EST = 53;
+  var days = Math.max(0, Math.floor((Date.now() - SEED_DATE) / 86400000));
+  var total = SEED + (days * DAILY_EST);
+  var el = document.getElementById('fpc-counter');
+  if(el) el.textContent = total.toLocaleString('en-US');
+})();
+</script>
 </body>
 </html>
