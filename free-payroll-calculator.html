@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Payroll Calculator 2026 — Complete Gross-to-Net Paycheck | FreePayrollCalc</title>
+<meta name="description" content="Free payroll calculator for 2026. Full gross-to-net paycheck calculation with 401k, health insurance, FSA, HSA, and voluntary deductions. Federal + state taxes, all 50 states. No signup.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/free-payroll-calculator">
+<meta property="og:title" content="Free Payroll Calculator 2026 — Complete Gross-to-Net Paycheck">
+<meta property="og:description" content="Full paycheck calculator with 401k, health insurance, FSA, HSA, and all deductions. Federal + state + FICA. Updated for 2026 IRS rates.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free Payroll Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/free-payroll-calculator",
+  "description": "Complete gross-to-net paycheck calculator with 401k, health insurance, FSA, HSA, and voluntary deductions. All 50 states. Updated for 2026 IRS rates.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["2026 federal tax brackets","All 50 state income taxes","FICA: Social Security + Medicare","401k, FSA, HSA pre-tax deductions","Post-tax voluntary deductions","Salary and hourly input modes"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is gross-to-net pay calculated?",
+      "acceptedAnswer": {"@type":"Answer","text":"Gross-to-net pay follows these steps: (1) Start with gross pay for the period. (2) Subtract pre-tax deductions (401k, health insurance, FSA, HSA) to get federal taxable wages. (3) Apply 2026 federal income tax brackets using the annualized percentage method from IRS Publication 15-T. (4) Calculate Social Security (6.2% up to $176,100) and Medicare (1.45%). (5) Apply state income tax. (6) Subtract post-tax voluntary deductions. The result is net take-home pay."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 2026 401k contribution limit?",
+      "acceptedAnswer": {"@type":"Answer","text":"For 2026, the 401k employee contribution limit is $23,500 for employees under age 50, and $31,000 for employees age 50 or older (includes $7,500 catch-up). Employer matching contributions do not count toward this limit. 401k contributions reduce federal income tax but are still subject to Social Security and Medicare (FICA) taxes."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does FSA reduce Social Security and Medicare taxes?",
+      "acceptedAnswer": {"@type":"Answer","text":"Yes. Health FSA contributions made through a Section 125 cafeteria plan reduce both federal income tax AND FICA (Social Security and Medicare). The 2026 Health FSA limit is $3,200. HSA contributions through payroll deduction also reduce FICA taxes. This means FSA and HSA save you more tax per dollar than 401k contributions, which only reduce income tax."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between pre-tax and post-tax deductions?",
+      "acceptedAnswer": {"@type":"Answer","text":"Pre-tax deductions (401k, health insurance, FSA, HSA) come out of your paycheck before taxes are calculated, reducing your taxable income. Post-tax deductions (Roth 401k, life insurance, wage garnishments) are taken after taxes. Pre-tax deductions save you money on taxes every paycheck; post-tax deductions do not reduce your current tax bill but Roth contributions grow tax-free."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator">PTO</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/payroll-tax-calculator" class="nav-cta">Payroll Tax Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator" class="active">Free Payroll Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+    <a href="/workers-comp-calculator">Workers Comp Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Free Payroll Calculator</span>
+    </nav>
+
+    <div style="margin-bottom:28px">
+      <div class="ad-zone ad-zone--leaderboard" aria-label="Advertisement">ADVERTISEMENT</div>
+    </div>
+
+    <h1 class="calc-title" data-enter>Free Payroll Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Complete gross-to-net paycheck — federal + state taxes, 401k, health insurance, FSA, HSA, and all deductions.<br>
+      Updated for 2026 IRS Publication 15 rates. Salary or hourly input. All 50 states.
+    </p>
+
+    <div class="calc-layout">
+
+      <!-- INPUT FORM -->
+      <div class="calc-main">
+        <div class="calc-card" data-enter data-delay="2">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+            <span class="calc-card-head-title">Pay &amp; Employee Details</span>
+            <span class="calc-card-head-badge">2026 Rates</span>
+          </div>
+          <div class="calc-body">
+
+            <!-- Pay Type -->
+            <div class="field-group">
+              <label class="field-label">Pay Type</label>
+              <div class="pill-group" role="radiogroup" aria-label="Pay type">
+                <button class="pill-btn active" data-paytype="salary" role="radio" aria-checked="true">Salary</button>
+                <button class="pill-btn" data-paytype="hourly" role="radio" aria-checked="false">Hourly</button>
+              </div>
+            </div>
+
+            <!-- Salary input -->
+            <div class="field-group" id="salary-section">
+              <label class="field-label" for="gross_pay">Gross Pay per Period</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="gross_pay" class="field-input has-prefix" placeholder="3,500.00" min="0" step="0.01" inputmode="decimal" aria-label="Gross pay per pay period">
+              </div>
+            </div>
+
+            <!-- Hourly input (hidden initially) -->
+            <div class="field-group" id="hourly-section" hidden>
+              <div class="field-row" style="margin-bottom:0">
+                <div>
+                  <label class="field-label" for="hourly_rate">Hourly Rate</label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="hourly_rate" class="field-input has-prefix" placeholder="25.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="hours_per_week">Hours / Week</label>
+                  <input type="number" id="hours_per_week" class="field-input" placeholder="40" min="0" max="168" step="0.5" value="40" inputmode="decimal">
+                </div>
+              </div>
+            </div>
+
+            <!-- Pay Frequency -->
+            <div class="field-group">
+              <label class="field-label">Pay Frequency</label>
+              <div class="pill-group" role="radiogroup" aria-label="Pay frequency">
+                <button class="pill-btn active" data-freq="weekly" role="radio" aria-checked="true">Weekly</button>
+                <button class="pill-btn" data-freq="biweekly" role="radio" aria-checked="false">Bi-Weekly</button>
+                <button class="pill-btn" data-freq="semimonthly" role="radio" aria-checked="false">Semi-Monthly</button>
+                <button class="pill-btn" data-freq="monthly" role="radio" aria-checked="false">Monthly</button>
+              </div>
+            </div>
+
+            <!-- Filing Status + Allowances -->
+            <div class="field-row">
+              <div>
+                <label class="field-label" for="filing_status">Federal Filing Status</label>
+                <select id="filing_status" class="field-select">
+                  <option value="single">Single</option>
+                  <option value="mfj">Married Filing Jointly</option>
+                  <option value="hoh">Head of Household</option>
+                  <option value="mfs">Married Filing Separately</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="allowances">W-4 Adjustments</label>
+                <input type="number" id="allowances" class="field-input" placeholder="0" min="0" step="1" value="0">
+                <div class="field-hint">0 = standard withholding</div>
+              </div>
+            </div>
+
+            <!-- State -->
+            <div class="field-group">
+              <label class="field-label" for="state">State</label>
+              <select id="state" class="field-select">
+                <option value="AL">Alabama — 5.00%</option>
+                <option value="AK">Alaska — No state income tax</option>
+                <option value="AZ">Arizona — 2.50%</option>
+                <option value="AR">Arkansas — 3.90%</option>
+                <option value="CA">California — up to 13.30%</option>
+                <option value="CO">Colorado — 4.40%</option>
+                <option value="CT">Connecticut — up to 6.99%</option>
+                <option value="DE">Delaware — up to 6.60%</option>
+                <option value="FL">Florida — No state income tax</option>
+                <option value="GA">Georgia — 5.49%</option>
+                <option value="HI">Hawaii — up to 11.00%</option>
+                <option value="ID">Idaho — 5.80%</option>
+                <option value="IL">Illinois — 4.95% flat</option>
+                <option value="IN">Indiana — 3.05%</option>
+                <option value="IA">Iowa — up to 5.70%</option>
+                <option value="KS">Kansas — up to 5.70%</option>
+                <option value="KY">Kentucky — 4.00% flat</option>
+                <option value="LA">Louisiana — up to 4.25%</option>
+                <option value="ME">Maine — up to 7.15%</option>
+                <option value="MD">Maryland — up to 5.75%</option>
+                <option value="MA">Massachusetts — 5.00%</option>
+                <option value="MI">Michigan — 4.05%</option>
+                <option value="MN">Minnesota — up to 9.85%</option>
+                <option value="MS">Mississippi — 4.70%</option>
+                <option value="MO">Missouri — up to 4.95%</option>
+                <option value="MT">Montana — up to 6.75%</option>
+                <option value="NE">Nebraska — up to 6.64%</option>
+                <option value="NV">Nevada — No state income tax</option>
+                <option value="NH">New Hampshire — No state income tax</option>
+                <option value="NJ">New Jersey — up to 10.75%</option>
+                <option value="NM">New Mexico — up to 5.90%</option>
+                <option value="NY" selected>New York — up to 10.90%</option>
+                <option value="NC">North Carolina — 4.50%</option>
+                <option value="ND">North Dakota — up to 2.50%</option>
+                <option value="OH">Ohio — up to 3.50%</option>
+                <option value="OK">Oklahoma — up to 4.75%</option>
+                <option value="OR">Oregon — up to 9.90%</option>
+                <option value="PA">Pennsylvania — 3.07% flat</option>
+                <option value="RI">Rhode Island — up to 5.99%</option>
+                <option value="SC">South Carolina — up to 6.40%</option>
+                <option value="SD">South Dakota — No state income tax</option>
+                <option value="TN">Tennessee — No state income tax</option>
+                <option value="TX">Texas — No state income tax</option>
+                <option value="UT">Utah — 4.55% flat</option>
+                <option value="VT">Vermont — up to 8.75%</option>
+                <option value="VA">Virginia — up to 5.75%</option>
+                <option value="WA">Washington — No state income tax</option>
+                <option value="WV">West Virginia — up to 5.12%</option>
+                <option value="WI">Wisconsin — up to 7.65%</option>
+                <option value="WY">Wyoming — No state income tax</option>
+                <option value="DC">D.C. — up to 10.75%</option>
+              </select>
+            </div>
+
+            <!-- Pre-tax deductions -->
+            <div class="field-group">
+              <label class="field-label">Pre-Tax Deductions <span style="font-weight:400;color:var(--ink-3)">(per period — optional)</span></label>
+              <div class="field-row" style="margin-bottom:8px">
+                <div>
+                  <label class="field-label" for="d_401k" style="font-weight:500;font-size:12px">401(k) / 403(b)</label>
+                  <div class="input-wrap"><span class="input-prefix">$</span>
+                    <input type="number" id="d_401k" class="field-input has-prefix" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="d_health" style="font-weight:500;font-size:12px">Health Insurance</label>
+                  <div class="input-wrap"><span class="input-prefix">$</span>
+                    <input type="number" id="d_health" class="field-input has-prefix" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+              </div>
+              <div class="field-row" style="margin-bottom:0">
+                <div>
+                  <label class="field-label" for="d_fsa" style="font-weight:500;font-size:12px">FSA <span style="color:var(--ink-3)">(2026 max $3,200/yr)</span></label>
+                  <div class="input-wrap"><span class="input-prefix">$</span>
+                    <input type="number" id="d_fsa" class="field-input has-prefix" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="d_hsa" style="font-weight:500;font-size:12px">HSA <span style="color:var(--ink-3)">(2026 max $4,300/yr)</span></label>
+                  <div class="input-wrap"><span class="input-prefix">$</span>
+                    <input type="number" id="d_hsa" class="field-input has-prefix" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post-tax deductions -->
+            <div class="field-group">
+              <label class="field-label" for="d_posttax">Post-Tax Voluntary Deductions <span style="font-weight:400;color:var(--ink-3)">(per period)</span></label>
+              <div class="input-wrap"><span class="input-prefix">$</span>
+                <input type="number" id="d_posttax" class="field-input has-prefix" placeholder="0.00 (Roth 401k, life insurance, garnishments…)" min="0" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+
+            <button class="btn-calc" id="calc-btn" type="button">Calculate Paycheck →</button>
+
+          </div>
+        </div>
+
+        <div style="margin-top:28px">
+          <div class="ad-zone ad-zone--in-content" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <article style="margin-top:40px" data-enter>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">Understanding your full paycheck deductions in 2026</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">A complete gross-to-net calculation accounts for every mandatory withholding and voluntary deduction. The order matters: pre-tax deductions reduce your taxable income before taxes are calculated, lowering your total tax bill each period.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>401(k) contributions</strong> reduce federal income tax but are still subject to Social Security and Medicare (FICA). The 2026 employee 401k limit is $23,500 ($31,000 if age 50+). Traditional 401k is pre-tax; Roth 401k is post-tax.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>FSA and HSA contributions</strong> through payroll deduction (Section 125 cafeteria plan) reduce both federal income tax AND FICA taxes — saving you 7.65% more per dollar than a 401k. The 2026 FSA limit is $3,200; the HSA limit is $4,300 (self-only) or $8,550 (family).</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">For employer-side costs including FUTA, SUTA, and workers comp, see our <a href="/employer-tax-calculator" style="color:var(--accent)">Employer Tax Calculator</a>. To compare 1099 contractor vs W-2 employee tax burden, use the <a href="/1099-vs-w2-calculator" style="color:var(--accent)">1099 vs W-2 Calculator</a>.</p>
+        </article>
+
+      </div><!-- /calc-main -->
+
+      <!-- RESULTS SIDEBAR -->
+      <div>
+        <div class="results-panel" id="results-panel">
+          <div class="results-head">
+            <span class="results-head-label">Results</span>
+            <span class="results-head-period" id="results-period">Per Paycheck</span>
+          </div>
+          <div class="results-empty" id="results-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg>
+            <p>Enter pay details and click <strong>Calculate</strong> to see your full paycheck breakdown.</p>
+          </div>
+          <div class="results-body" id="results-body" hidden>
+            <div class="net-pay-display">
+              <div class="net-pay-label">Take-Home Pay</div>
+              <div class="net-pay-amount" id="result-net">$0.00</div>
+              <div class="net-pay-sub" id="result-net-sub">per paycheck</div>
+            </div>
+
+            <div class="breakdown-section-label">Gross Pay</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--green)"></span>Gross pay</div>
+              <div class="breakdown-row-amount amount-green" id="r-gross">$0.00</div>
+            </div>
+
+            <div class="breakdown-section-label" id="pretax-label" hidden>Pre-Tax Deductions</div>
+            <div class="breakdown-row" id="r-row-401k" hidden>
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--accent)"></span>401(k) / 403(b)</div>
+              <div class="breakdown-row-amount amount-red" id="r-401k">−$0.00</div>
+            </div>
+            <div class="breakdown-row" id="r-row-health" hidden>
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--accent)"></span>Health insurance</div>
+              <div class="breakdown-row-amount amount-red" id="r-health">−$0.00</div>
+            </div>
+            <div class="breakdown-row" id="r-row-fsa" hidden>
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--accent)"></span>FSA</div>
+              <div class="breakdown-row-amount amount-red" id="r-fsa">−$0.00</div>
+            </div>
+            <div class="breakdown-row" id="r-row-hsa" hidden>
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--accent)"></span>HSA</div>
+              <div class="breakdown-row-amount amount-red" id="r-hsa">−$0.00</div>
+            </div>
+
+            <div class="breakdown-section-label">Federal Taxes</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--red)"></span>Federal income tax</div>
+              <div class="breakdown-row-amount amount-red" id="r-fed">−$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--red)"></span>Social Security (6.2%)</div>
+              <div class="breakdown-row-amount amount-red" id="r-ss">−$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--red)"></span>Medicare (1.45%)</div>
+              <div class="breakdown-row-amount amount-red" id="r-medicare">−$0.00</div>
+            </div>
+            <div class="breakdown-row" id="r-row-addl-medicare" hidden>
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--red)"></span>Additional Medicare (0.9%)</div>
+              <div class="breakdown-row-amount amount-red" id="r-addl-medicare">−$0.00</div>
+            </div>
+
+            <div class="breakdown-section-label">State Tax</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--amber)"></span>State income tax</div>
+              <div class="breakdown-row-amount" id="r-state" style="color:var(--amber)">−$0.00</div>
+            </div>
+
+            <div class="breakdown-section-label" id="posttax-section-label" hidden>Post-Tax Deductions</div>
+            <div class="breakdown-row" id="r-row-posttax" hidden>
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--ink-3)"></span>Voluntary deduction</div>
+              <div class="breakdown-row-amount" id="r-posttax" style="color:var(--ink-2)">−$0.00</div>
+            </div>
+
+            <div class="breakdown-total">
+              <div style="display:flex;align-items:center;gap:8px"><span class="breakdown-row-dot" style="background:var(--green);width:10px;height:10px"></span>Net take-home pay</div>
+              <div class="breakdown-row-amount amount-green" id="r-net-total">$0.00</div>
+            </div>
+
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+              <div style="font-size:12px;color:var(--ink-3);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px">Annualized</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Annual Gross</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-annual-gross">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Annual Net</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--green)" id="r-annual-net">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Total Tax</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--red)" id="r-annual-tax">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Eff. Tax Rate</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-eff-rate">0.0%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="results-actions" id="results-actions" hidden>
+            <button class="results-action-btn" data-copy-results>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="8" width="10" height="10" rx="2"/><path d="M5 8V5a2 2 0 012-2h7"/></svg>Copy
+            </button>
+            <button class="results-action-btn" id="print-btn">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top:24px">
+          <div class="ad-zone ad-zone--sidebar" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <div class="disclaimer">
+          <strong>Disclaimer:</strong> Results are estimates based on 2026 IRS Publication 15 rates, SSA wage base, and state tax schedules. Not a substitute for licensed payroll software or tax advice.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Payroll calculator questions answered</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          How much does a $50,000 salary take home per paycheck?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          A $50,000 annual salary paid bi-weekly ($1,923 per period) in New York, single filer, with no deductions results in approximately $1,390–$1,430 take-home per paycheck after federal income tax (~$148), Social Security (~$119), Medicare (~$28), and NY state tax (~$106). Use this calculator for an exact figure based on your specific deductions and state.
+        </div>
+      </div>
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          Are 401k contributions taken before or after taxes?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Traditional 401k contributions are taken before federal and state income taxes are calculated (pre-tax), which reduces your taxable income. However, they are still subject to Social Security and Medicare taxes. Roth 401k contributions are taken after taxes — no immediate tax break but qualified withdrawals in retirement are tax-free.
+        </div>
+      </div>
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          What states have no income tax in 2026?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Nine states have no individual income tax in 2026: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. New Hampshire taxes interest and dividend income only. Employees in these states pay only federal income tax and FICA — no state withholding — resulting in significantly higher take-home pay.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Federal, state, Social Security, and Medicare withholding per paycheck.</div></div>
+        </div>
+      </a>
+      <a href="/pto-accrual-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <div><div class="tool-card-title">PTO Accrual Calculator</div><div class="tool-card-desc" style="font-size:13px">Calculate accrued paid time off balance based on your accrual policy.</div></div>
+        </div>
+      </a>
+      <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><div class="tool-card-title">Overtime Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">FLSA overtime rate (1.5×) and total pay for hours worked over 40/week.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+
+  var FED = {
+    single:[[11925,.10,0],[48475,.12,11925],[103350,.22,48475],[197300,.24,103350],[250525,.32,197300],[626350,.35,250525],[Infinity,.37,626350]],
+    mfj:[[23850,.10,0],[96950,.12,23850],[206700,.22,96950],[394600,.24,206700],[501050,.32,394600],[751600,.35,501050],[Infinity,.37,751600]],
+    hoh:[[17000,.10,0],[64850,.12,17000],[103350,.22,64850],[197300,.24,103350],[250500,.32,197300],[626350,.35,250500],[Infinity,.37,626350]],
+    mfs:[[11925,.10,0],[48475,.12,11925],[103350,.22,48475],[197300,.24,103350],[250525,.32,197300],[313175,.35,250525],[Infinity,.37,313175]]
+  };
+  var STD_DED = {single:15000,mfj:30000,hoh:22500,mfs:15000};
+  var SS_WAGE_BASE = 176100;
+  var STATE_TAX = {AL:.050,AK:0,AZ:.025,AR:.039,CA:0,CO:.044,CT:0,DE:0,FL:0,GA:.0549,HI:0,ID:.058,IL:.0495,IN:.0305,IA:0,KS:0,KY:.040,LA:0,ME:0,MD:0,MA:.050,MI:.0405,MN:0,MS:.047,MO:0,MT:0,NE:0,NV:0,NH:0,NJ:0,NM:0,NY:.0685,NC:.045,ND:.0150,OH:0,OK:0,OR:0,PA:.0307,RI:0,SC:0,SD:0,TN:0,TX:0,UT:.0455,VT:0,VA:.0575,WA:0,WV:0,WI:0,WY:0,DC:0};
+
+  function stateEffRate(s,i){
+    if(s==='CA'){if(i<=10099)return .01;if(i<=23942)return .02;if(i<=37788)return .04;if(i<=52455)return .06;if(i<=66295)return .08;if(i<=338639)return .093;if(i<=406364)return .103;if(i<=677275)return .113;return .133;}
+    if(s==='NY'){if(i<=17150)return .04;if(i<=23600)return .045;if(i<=27900)return .0525;if(i<=161550)return .055;if(i<=323200)return .06;if(i<=2155350)return .0685;if(i<=5000000)return .0965;if(i<=25000000)return .103;return .109;}
+    if(s==='NJ'){if(i<=20000)return .014;if(i<=35000)return .0175;if(i<=40000)return .035;if(i<=75000)return .05525;if(i<=500000)return .0637;if(i<=1000000)return .0897;return .1075;}
+    if(s==='MN'){if(i<=31690)return .0535;if(i<=104090)return .068;if(i<=193240)return .0785;return .0985;}
+    if(s==='OR'){if(i<=18400)return .0475;if(i<=250000)return .0675;return .099;}
+    if(s==='HI'){if(i<=9600)return .014;if(i<=19200)return .032;if(i<=28800)return .055;if(i<=38400)return .064;if(i<=48000)return .068;if(i<=150000)return .072;if(i<=175000)return .079;if(i<=200000)return .083;return .11;}
+    return STATE_TAX[s]||0;
+  }
+
+  function calcFedTax(w,status){
+    var b=FED[status]||FED.single,t=0,p=0;
+    for(var i=0;i<b.length;i++){if(w<=p)break;var tx=Math.min(w,b[i][0])-b[i][2];if(tx>0)t+=tx*b[i][1];p=b[i][0];}
+    return Math.max(0,t);
+  }
+
+  var PERIODS = {weekly:52,biweekly:26,semimonthly:24,monthly:12};
+  var PLABELS = {weekly:'per week',biweekly:'bi-weekly',semimonthly:'semi-monthly',monthly:'per month'};
+  var activeFreq = 'weekly';
+  var activePayType = 'salary';
+
+  /* Pay type toggle */
+  document.querySelectorAll('[data-paytype]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('[data-paytype]').forEach(function(b){b.classList.remove('active');b.setAttribute('aria-checked','false');});
+      btn.classList.add('active');btn.setAttribute('aria-checked','true');
+      activePayType = btn.dataset.paytype;
+      document.getElementById('salary-section').hidden = activePayType==='hourly';
+      document.getElementById('hourly-section').hidden = activePayType==='salary';
+    });
+  });
+
+  /* Frequency toggle */
+  document.querySelectorAll('[data-freq]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('[data-freq]').forEach(function(b){b.classList.remove('active');b.setAttribute('aria-checked','false');});
+      btn.classList.add('active');btn.setAttribute('aria-checked','true');
+      activeFreq = btn.dataset.freq;
+    });
+  });
+
+  document.getElementById('print-btn').addEventListener('click',function(){window.print();});
+  document.getElementById('calc-btn').addEventListener('click',calculate);
+
+  function fmt(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+  function getGrossPerPeriod(){
+    if(activePayType==='hourly'){
+      var rate = parseFloat(document.getElementById('hourly_rate').value)||0;
+      var hrs = parseFloat(document.getElementById('hours_per_week').value)||0;
+      var annualHrs = hrs * 52;
+      var annualGross = rate * annualHrs;
+      return annualGross / PERIODS[activeFreq];
+    }
+    return parseFloat(document.getElementById('gross_pay').value)||0;
+  }
+
+  function calculate(){
+    var grossPP = getGrossPerPeriod();
+    if(grossPP<=0){
+      (activePayType==='hourly'?document.getElementById('hourly_rate'):document.getElementById('gross_pay')).focus();
+      return;
+    }
+    var status = document.getElementById('filing_status').value;
+    var state = document.getElementById('state').value;
+    var d401k = parseFloat(document.getElementById('d_401k').value)||0;
+    var dHealth = parseFloat(document.getElementById('d_health').value)||0;
+    var dFsa = parseFloat(document.getElementById('d_fsa').value)||0;
+    var dHsa = parseFloat(document.getElementById('d_hsa').value)||0;
+    var dPosttax = parseFloat(document.getElementById('d_posttax').value)||0;
+    var periods = PERIODS[activeFreq];
+
+    var annualGross = grossPP * periods;
+    /* Federal taxable: gross - 401k - health - FSA - HSA - standard deduction */
+    var annualPreTax = (d401k + dHealth + dFsa + dHsa) * periods;
+    var annualFedTaxable = Math.max(0, annualGross - annualPreTax - STD_DED[status]);
+    var annualFedTax = calcFedTax(annualFedTaxable, status);
+    var ppFedTax = annualFedTax / periods;
+
+    /* FICA on gross (simplified) */
+    var annualSS = Math.min(annualGross, SS_WAGE_BASE) * 0.062;
+    var ppSS = annualSS / periods;
+    var annualMed = annualGross * 0.0145;
+    var ppMed = annualMed / periods;
+    var addlMedThresh = status==='mfj'?250000:200000;
+    var annualAddlMed = Math.max(0, annualGross - addlMedThresh) * 0.009;
+    var ppAddlMed = annualAddlMed / periods;
+
+    /* State tax */
+    var stateRate = stateEffRate(state, annualGross);
+    var annualStateTaxable = Math.max(0, annualGross - annualPreTax);
+    var annualStateTax = annualStateTaxable * stateRate;
+    var ppStateTax = annualStateTax / periods;
+
+    /* Totals */
+    var annualTotalTax = annualFedTax + annualSS + annualMed + annualAddlMed + annualStateTax;
+    var ppTotalDeduct = ppFedTax + ppSS + ppMed + ppAddlMed + ppStateTax + d401k + dHealth + dFsa + dHsa + dPosttax;
+    var netPP = grossPP - ppTotalDeduct;
+    var annualNet = annualGross - annualTotalTax - annualPreTax - (dPosttax * periods);
+    var effRate = annualGross > 0 ? (annualTotalTax / annualGross) * 100 : 0;
+
+    var pl = PLABELS[activeFreq];
+    document.getElementById('results-period').textContent = pl.charAt(0).toUpperCase()+pl.slice(1);
+    document.getElementById('result-net').textContent = fmt(netPP);
+    document.getElementById('result-net-sub').textContent = pl;
+    document.getElementById('r-gross').textContent = fmt(grossPP);
+    document.getElementById('r-fed').textContent = '−'+fmt(ppFedTax);
+    document.getElementById('r-ss').textContent = '−'+fmt(ppSS);
+    document.getElementById('r-medicare').textContent = '−'+fmt(ppMed);
+    document.getElementById('r-state').textContent = stateRate>0?'−'+fmt(ppStateTax):'$0.00 (no state tax)';
+    document.getElementById('r-net-total').textContent = fmt(netPP);
+    document.getElementById('r-annual-gross').textContent = fmt(annualGross);
+    document.getElementById('r-annual-net').textContent = fmt(annualNet);
+    document.getElementById('r-annual-tax').textContent = fmt(annualTotalTax);
+    document.getElementById('r-eff-rate').textContent = effRate.toFixed(1)+'%';
+
+    var anyPretax = d401k>0||dHealth>0||dFsa>0||dHsa>0;
+    document.getElementById('pretax-label').hidden = !anyPretax;
+    document.getElementById('r-row-401k').hidden = !(d401k>0);
+    if(d401k>0)document.getElementById('r-401k').textContent='−'+fmt(d401k);
+    document.getElementById('r-row-health').hidden = !(dHealth>0);
+    if(dHealth>0)document.getElementById('r-health').textContent='−'+fmt(dHealth);
+    document.getElementById('r-row-fsa').hidden = !(dFsa>0);
+    if(dFsa>0)document.getElementById('r-fsa').textContent='−'+fmt(dFsa);
+    document.getElementById('r-row-hsa').hidden = !(dHsa>0);
+    if(dHsa>0)document.getElementById('r-hsa').textContent='−'+fmt(dHsa);
+
+    document.getElementById('r-row-addl-medicare').hidden = !(annualAddlMed>0);
+    if(annualAddlMed>0)document.getElementById('r-addl-medicare').textContent='−'+fmt(ppAddlMed);
+
+    document.getElementById('posttax-section-label').hidden = !(dPosttax>0);
+    document.getElementById('r-row-posttax').hidden = !(dPosttax>0);
+    if(dPosttax>0)document.getElementById('r-posttax').textContent='−'+fmt(dPosttax);
+
+    document.getElementById('results-empty').hidden = true;
+    document.getElementById('results-body').hidden = false;
+    document.getElementById('results-actions').hidden = false;
+    if(window.innerWidth<900)document.getElementById('results-panel').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

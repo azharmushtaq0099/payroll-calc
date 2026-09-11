@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1099 vs W-2 Tax Calculator 2026 — Independent Contractor vs Employee | FreePayrollCalc</title>
+<meta name="description" content="Compare 1099 contractor vs W-2 employee tax burden for 2026. See self-employment tax, quarterly payments, and true net income side by side. All 50 states.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/1099-vs-w2-calculator">
+<meta property="og:title" content="1099 vs W-2 Tax Calculator 2026 — Contractor vs Employee Tax Comparison">
+<meta property="og:description" content="Side-by-side tax comparison: 1099 self-employment tax vs W-2 withholding. See which status results in lower total taxes. 2026 IRS rates.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "1099 vs W-2 Tax Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/1099-vs-w2-calculator",
+  "description": "Compare 1099 contractor self-employment tax versus W-2 employee withholding side by side. Includes SE tax deduction, quarterly estimated payments, and business expense deductions. 2026 IRS rates.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["1099 self-employment tax (15.3%)","SE tax deduction (50%)","Business expense deductions","W-2 federal and state withholding","Quarterly estimated payment calculation","Side-by-side tax comparison"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is self-employment tax calculated for 1099 contractors?",
+      "acceptedAnswer": {"@type":"Answer","text":"Self-employment (SE) tax for 2026 is calculated as: (net self-employment income × 92.35%) × 15.3%. The 92.35% factor accounts for the fact that self-employed individuals can deduct half of SE tax from gross income. Of the 15.3% rate, 12.4% is Social Security (on earnings up to $176,100) and 2.9% is Medicare (no wage cap). Contractors can deduct 50% of the SE tax amount from their adjusted gross income on Schedule 1, partially offsetting the cost."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does a 1099 contractor pay more tax than a W-2 employee?",
+      "acceptedAnswer": {"@type":"Answer","text":"Yes, typically. A 1099 contractor pays both the employee and employer halves of FICA (total 15.3% SE tax), while a W-2 employee only pays 7.65% — the employer silently pays the other half. However, 1099 contractors can offset this by deducting legitimate business expenses before calculating taxable income, and can deduct 50% of SE tax from adjusted gross income. At higher incomes with significant business expenses, the gap narrows considerably."}
+    },
+    {
+      "@type": "Question",
+      "name": "How much should I set aside for taxes as a 1099 contractor?",
+      "acceptedAnswer": {"@type":"Answer","text":"Most financial advisors recommend setting aside 25–30% of gross income for taxes as a 1099 contractor. This covers federal income tax, self-employment tax (15.3% on 92.35% of net earnings), and state income tax. Make quarterly estimated tax payments by the IRS deadlines (April 15, June 15, September 15, January 15) to avoid underpayment penalties. Use this calculator to get your specific quarterly payment estimate."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can 1099 contractors deduct business expenses?",
+      "acceptedAnswer": {"@type":"Answer","text":"Yes. Legitimate business expenses (home office, equipment, software, professional development, health insurance premiums, half of SE tax) reduce the net self-employment income before both SE tax and income tax are calculated. This is a key advantage over W-2 employees, who lost the ability to deduct unreimbursed employee expenses under the 2017 Tax Cuts and Jobs Act. Deducting $10,000 in business expenses can save $2,500–$5,000+ in total taxes depending on your bracket."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator">PTO</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/1099-vs-w2-calculator" class="active">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator" class="active">1099 vs W-2 Calculator</a>
+    <a href="/workers-comp-calculator">Workers Comp Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">1099 vs W-2 Calculator</span>
+    </nav>
+
+    <div style="margin-bottom:28px">
+      <div class="ad-zone ad-zone--leaderboard" aria-label="Advertisement">ADVERTISEMENT</div>
+    </div>
+
+    <h1 class="calc-title" data-enter>1099 vs W-2 Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Side-by-side tax comparison — independent contractor (1099) vs W-2 employee for the same income.<br>
+      Includes SE tax, business expense deductions, quarterly payments, and net income comparison.
+    </p>
+
+    <div class="calc-layout">
+
+      <!-- INPUT FORM -->
+      <div class="calc-main">
+        <div class="calc-card" data-enter data-delay="2">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3H3v7h7V3zM21 3h-7v7h7V3zM21 14h-7v7h7v-7zM10 14H3v7h7v-7z"/></svg>
+            <span class="calc-card-head-title">Income &amp; Tax Details</span>
+            <span class="calc-card-head-badge">2026 Rates</span>
+          </div>
+          <div class="calc-body">
+
+            <!-- Annual Income -->
+            <div class="field-group">
+              <label class="field-label" for="annual_income">Annual Income</label>
+              <div class="input-wrap"><span class="input-prefix">$</span>
+                <input type="number" id="annual_income" class="field-input has-prefix" placeholder="75,000" min="0" step="100" inputmode="decimal" aria-label="Annual income in dollars">
+              </div>
+              <div class="field-hint">Same income amount compared under both 1099 and W-2 status</div>
+            </div>
+
+            <!-- Filing Status + State -->
+            <div class="field-row">
+              <div>
+                <label class="field-label" for="filing_status">Filing Status</label>
+                <select id="filing_status" class="field-select">
+                  <option value="single">Single</option>
+                  <option value="mfj">Married Filing Jointly</option>
+                  <option value="hoh">Head of Household</option>
+                  <option value="mfs">Married Filing Separately</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="state">State</label>
+                <select id="state" class="field-select">
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY" selected>New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                  <option value="DC">D.C.</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 1099 Business Expenses -->
+            <div class="field-group">
+              <label class="field-label" for="biz_expenses">1099 Business Expenses <span style="font-weight:400;color:var(--ink-3)">(annual — optional)</span></label>
+              <div class="input-wrap"><span class="input-prefix">$</span>
+                <input type="number" id="biz_expenses" class="field-input has-prefix" placeholder="0.00 (home office, equipment, software, travel…)" min="0" step="100" inputmode="decimal">
+              </div>
+              <div class="field-hint">Only applies to the 1099 column — reduces net SE income and federal income tax</div>
+            </div>
+
+            <button class="btn-calc" id="calc-btn" type="button">Compare 1099 vs W-2 →</button>
+
+          </div>
+        </div>
+
+        <div style="margin-top:28px">
+          <div class="ad-zone ad-zone--in-content" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <article style="margin-top:40px" data-enter>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">1099 vs W-2: understanding the real tax difference in 2026</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">The biggest tax difference between 1099 contractors and W-2 employees is the employer's invisible contribution. W-2 employees pay 7.65% FICA (6.2% SS + 1.45% Medicare) and their employer quietly pays another 7.65% that never shows up on the employee's paycheck. Contractors pay both halves — the full 15.3% self-employment tax — which is why 1099 income generally feels more expensive from a tax perspective.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>The 1099 advantage:</strong> Contractors can deduct legitimate business expenses (home office, equipment, software, health insurance, professional development) before income tax is calculated. These deductions reduce both SE tax and federal income tax, narrowing the gap. At $20,000+ in legitimate business expenses, a 1099 contractor can sometimes match or beat the W-2 tax burden.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">For employer-side costs, see the <a href="/employer-tax-calculator" style="color:var(--accent)">Employer Tax Calculator</a>. For a detailed W-2 paycheck breakdown, see the <a href="/payroll-tax-calculator" style="color:var(--accent)">Payroll Tax Calculator</a>.</p>
+        </article>
+
+      </div>
+
+      <!-- RESULTS SIDEBAR -->
+      <div>
+        <div class="results-panel" id="results-panel">
+          <div class="results-head">
+            <span class="results-head-label">Comparison</span>
+            <span class="results-head-period">Annual</span>
+          </div>
+          <div class="results-empty" id="results-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3H3v7h7V3zM21 3h-7v7h7V3zM21 14h-7v7h7v-7zM10 14H3v7h7v-7z"/></svg>
+            <p>Enter annual income and click <strong>Compare</strong> to see the tax difference between 1099 and W-2 status.</p>
+          </div>
+          <div class="results-body" id="results-body" hidden>
+
+            <!-- Winner banner -->
+            <div id="winner-banner" style="border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px"></div>
+
+            <!-- Side-by-side comparison -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+              <!-- W-2 Column -->
+              <div id="w2-col" style="border:1.5px solid var(--border);border-radius:10px;padding:12px;background:var(--surface)">
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ink-3);margin-bottom:10px;text-align:center">W-2 Employee</div>
+                <div style="margin-bottom:6px">
+                  <div style="font-size:11px;color:var(--ink-3)">Gross wages</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--green)" id="w2-gross">$0</div>
+                </div>
+                <div style="margin-bottom:6px">
+                  <div style="font-size:11px;color:var(--ink-3)">Fed income tax</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)" id="w2-fed">−$0</div>
+                </div>
+                <div style="margin-bottom:6px">
+                  <div style="font-size:11px;color:var(--ink-3)">SS tax (6.2%)</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)" id="w2-ss">−$0</div>
+                </div>
+                <div style="margin-bottom:6px">
+                  <div style="font-size:11px;color:var(--ink-3)">Medicare (1.45%)</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)" id="w2-med">−$0</div>
+                </div>
+                <div style="margin-bottom:10px">
+                  <div style="font-size:11px;color:var(--ink-3)">State tax</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--amber)" id="w2-state">−$0</div>
+                </div>
+                <div style="border-top:1px solid var(--border);padding-top:8px">
+                  <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-3);letter-spacing:.5px">Total Tax</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--red)" id="w2-total-tax">$0</div>
+                  <div style="margin-top:4px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-3);letter-spacing:.5px">Net Take-Home</div>
+                  <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--green)" id="w2-net">$0</div>
+                </div>
+              </div>
+
+              <!-- 1099 Column -->
+              <div id="c1099-col" style="border:1.5px solid var(--border);border-radius:10px;padding:12px;background:var(--surface)">
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ink-3);margin-bottom:10px;text-align:center">1099 Contractor</div>
+                <div style="margin-bottom:6px">
+                  <div style="font-size:11px;color:var(--ink-3)">Gross income</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--green)" id="c-gross">$0</div>
+                </div>
+                <div id="c-biz-row" style="margin-bottom:6px;display:none">
+                  <div style="font-size:11px;color:var(--ink-3)">Business expenses</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent)" id="c-biz">−$0</div>
+                </div>
+                <div style="margin-bottom:6px">
+                  <div style="font-size:11px;color:var(--ink-3)">SE tax (15.3%)</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)" id="c-se">−$0</div>
+                </div>
+                <div style="margin-bottom:6px">
+                  <div style="font-size:11px;color:var(--ink-3)">Fed income tax</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)" id="c-fed">−$0</div>
+                </div>
+                <div style="margin-bottom:10px">
+                  <div style="font-size:11px;color:var(--ink-3)">State tax</div>
+                  <div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--amber)" id="c-state">−$0</div>
+                </div>
+                <div style="border-top:1px solid var(--border);padding-top:8px">
+                  <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-3);letter-spacing:.5px">Total Tax</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--red)" id="c-total-tax">$0</div>
+                  <div style="margin-top:4px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-3);letter-spacing:.5px">Net After Tax</div>
+                  <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--green)" id="c-net">$0</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Key metrics -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+              <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Tax Difference</div>
+                <div style="font-family:var(--mono);font-size:14px;font-weight:600" id="r-tax-diff">$0</div>
+              </div>
+              <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">1099 W-2 Rate</div>
+                <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-breakeven">—</div>
+              </div>
+            </div>
+
+            <!-- Quarterly estimated payments (1099) -->
+            <div style="background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:10px;padding:14px">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:8px">1099 Quarterly Estimated Tax</div>
+              <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+                <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--accent)" id="r-quarterly">$0</div>
+                <div style="font-size:13px;color:var(--ink-3)">per quarter</div>
+              </div>
+              <div style="font-size:12px;color:var(--ink-2)">Due: Apr 15 · Jun 15 · Sep 15 · Jan 15</div>
+            </div>
+
+          </div>
+
+          <div class="results-actions" id="results-actions" hidden>
+            <button class="results-action-btn" data-copy-results>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="8" width="10" height="10" rx="2"/><path d="M5 8V5a2 2 0 012-2h7"/></svg>Copy
+            </button>
+            <button class="results-action-btn" id="print-btn">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top:24px">
+          <div class="ad-zone ad-zone--sidebar" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <div class="disclaimer">
+          <strong>Disclaimer:</strong> Estimates based on 2026 IRS rates. Business expense deductibility depends on your specific situation. Consult a tax professional for advice specific to your circumstances.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">1099 vs W-2 questions answered</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          What gross 1099 rate equals a $100,000 W-2 salary?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          To match a $100,000 W-2 salary (accounting for the extra employer FICA you now self-fund as a contractor), a 1099 rate needs to be approximately 7–12% higher — typically $107,000–$115,000 gross, depending on your business expenses and state. Use this calculator to find the exact crossover for your situation by comparing net income under both options.
+        </div>
+      </div>
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          How does the SE tax deduction work?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          When you pay self-employment tax as a 1099 contractor, the IRS lets you deduct 50% of the SE tax amount from your adjusted gross income (AGI) on Schedule 1, Line 15. This deduction is automatic — you don't need to itemize. It mirrors the fact that W-2 employers get to deduct their payroll tax match as a business expense. The deduction reduces your federal income tax (and state income tax in most states) but does not reduce the SE tax itself.
+        </div>
+      </div>
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          What are the quarterly estimated tax deadlines for 2026?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          For 2026, quarterly estimated tax payment due dates are: Q1 (Jan 1–Mar 31) → April 15, 2026; Q2 (Apr 1–May 31) → June 15, 2026; Q3 (Jun 1–Aug 31) → September 15, 2026; Q4 (Sep 1–Dec 31) → January 15, 2027. If you underpay by more than $1,000 (or more than 10% of your tax liability), the IRS charges an underpayment penalty. To avoid it, pay 90% of current year taxes or 100% of prior year taxes (110% if prior-year AGI exceeded $150,000).
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">W-2 withholding breakdown — federal, state, Social Security, Medicare.</div></div>
+        </div>
+      </a>
+      <a href="/pto-accrual-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <div><div class="tool-card-title">PTO Accrual Calculator</div><div class="tool-card-desc" style="font-size:13px">W-2 employees earn PTO; 1099 contractors don't. Calculate what you'd accrue.</div></div>
+        </div>
+      </a>
+      <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><div class="tool-card-title">Overtime Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">FLSA overtime applies to W-2 employees — not 1099 contractors.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+
+  var FED = {
+    single:[[11925,.10,0],[48475,.12,11925],[103350,.22,48475],[197300,.24,103350],[250525,.32,197300],[626350,.35,250525],[Infinity,.37,626350]],
+    mfj:[[23850,.10,0],[96950,.12,23850],[206700,.22,96950],[394600,.24,206700],[501050,.32,394600],[751600,.35,501050],[Infinity,.37,751600]],
+    hoh:[[17000,.10,0],[64850,.12,17000],[103350,.22,64850],[197300,.24,103350],[250500,.32,197300],[626350,.35,250500],[Infinity,.37,626350]],
+    mfs:[[11925,.10,0],[48475,.12,11925],[103350,.22,48475],[197300,.24,103350],[250525,.32,197300],[313175,.35,250525],[Infinity,.37,313175]]
+  };
+  var STD_DED = {single:15000,mfj:30000,hoh:22500,mfs:15000};
+  var SS_WAGE_BASE = 176100;
+  var STATE_TAX = {AL:.050,AK:0,AZ:.025,AR:.039,CA:0,CO:.044,CT:0,DE:0,FL:0,GA:.0549,HI:0,ID:.058,IL:.0495,IN:.0305,IA:0,KS:0,KY:.040,LA:0,ME:0,MD:0,MA:.050,MI:.0405,MN:0,MS:.047,MO:0,MT:0,NE:0,NV:0,NH:0,NJ:0,NM:0,NY:.0685,NC:.045,ND:.0150,OH:0,OK:0,OR:0,PA:.0307,RI:0,SC:0,SD:0,TN:0,TX:0,UT:.0455,VT:0,VA:.0575,WA:0,WV:0,WI:0,WY:0,DC:0};
+
+  function stateEffRate(s,i){
+    if(s==='CA'){if(i<=10099)return .01;if(i<=23942)return .02;if(i<=37788)return .04;if(i<=52455)return .06;if(i<=66295)return .08;if(i<=338639)return .093;if(i<=406364)return .103;if(i<=677275)return .113;return .133;}
+    if(s==='NY'){if(i<=17150)return .04;if(i<=23600)return .045;if(i<=27900)return .0525;if(i<=161550)return .055;if(i<=323200)return .06;if(i<=2155350)return .0685;if(i<=5000000)return .0965;if(i<=25000000)return .103;return .109;}
+    if(s==='NJ'){if(i<=20000)return .014;if(i<=35000)return .0175;if(i<=40000)return .035;if(i<=75000)return .05525;if(i<=500000)return .0637;if(i<=1000000)return .0897;return .1075;}
+    if(s==='MN'){if(i<=31690)return .0535;if(i<=104090)return .068;if(i<=193240)return .0785;return .0985;}
+    if(s==='OR'){if(i<=18400)return .0475;if(i<=250000)return .0675;return .099;}
+    if(s==='HI'){if(i<=9600)return .014;if(i<=19200)return .032;if(i<=28800)return .055;if(i<=38400)return .064;if(i<=48000)return .068;if(i<=150000)return .072;if(i<=175000)return .079;if(i<=200000)return .083;return .11;}
+    return STATE_TAX[s]||0;
+  }
+
+  function calcFedTax(w,status){
+    var b=FED[status]||FED.single,t=0,p=0;
+    for(var i=0;i<b.length;i++){if(w<=p)break;var tx=Math.min(w,b[i][0])-b[i][2];if(tx>0)t+=tx*b[i][1];p=b[i][0];}
+    return Math.max(0,t);
+  }
+
+  function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function fmtD(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
+
+  document.getElementById('print-btn').addEventListener('click',function(){window.print();});
+  document.getElementById('calc-btn').addEventListener('click',calculate);
+  document.getElementById('annual_income').addEventListener('keydown',function(e){if(e.key==='Enter')calculate();});
+
+  function calculate(){
+    var income = parseFloat(document.getElementById('annual_income').value)||0;
+    if(income<=0){document.getElementById('annual_income').focus();return;}
+    var status = document.getElementById('filing_status').value;
+    var state = document.getElementById('state').value;
+    var bizExp = parseFloat(document.getElementById('biz_expenses').value)||0;
+
+    /* ── W-2 CALCULATION ── */
+    /* Employee FICA */
+    var w2SS = Math.min(income, SS_WAGE_BASE) * 0.062;
+    var w2Med = income * 0.0145;
+    /* Federal income tax */
+    var w2FedTaxable = Math.max(0, income - STD_DED[status]);
+    var w2FedTax = calcFedTax(w2FedTaxable, status);
+    /* State tax */
+    var w2StateRate = stateEffRate(state, income);
+    var w2StateTax = income * w2StateRate;
+    /* Totals */
+    var w2TotalTax = w2FedTax + w2SS + w2Med + w2StateTax;
+    var w2Net = income - w2TotalTax;
+
+    /* ── 1099 CALCULATION ── */
+    /* Net SE income after business expenses */
+    var netSeIncome = Math.max(0, income - bizExp);
+    /* SE tax: 15.3% on 92.35% of net SE income */
+    var seTax = netSeIncome * 0.9235 * 0.153;
+    /* Note: SS portion capped at wage base */
+    var seTaxSS = Math.min(netSeIncome * 0.9235, SS_WAGE_BASE) * 0.124;
+    var seTaxMed = netSeIncome * 0.9235 * 0.029;
+    seTax = seTaxSS + seTaxMed; /* more accurate split */
+    /* SE tax deduction: 50% of SE tax reduces AGI */
+    var seTaxDed = seTax * 0.50;
+    /* 1099 federal taxable income */
+    var c1099AGI = Math.max(0, income - bizExp - seTaxDed);
+    var c1099FedTaxable = Math.max(0, c1099AGI - STD_DED[status]);
+    var c1099FedTax = calcFedTax(c1099FedTaxable, status);
+    /* State tax on AGI */
+    var c1099StateRate = stateEffRate(state, c1099AGI);
+    var c1099StateTax = c1099AGI * c1099StateRate;
+    /* Totals */
+    var c1099TotalTax = seTax + c1099FedTax + c1099StateTax;
+    var c1099Net = income - bizExp - c1099TotalTax;
+    /* Quarterly estimated payment */
+    var quarterly = c1099TotalTax / 4;
+
+    /* ── RENDER W-2 ── */
+    document.getElementById('w2-gross').textContent = fmt(income);
+    document.getElementById('w2-fed').textContent = '−'+fmt(w2FedTax);
+    document.getElementById('w2-ss').textContent = '−'+fmt(w2SS);
+    document.getElementById('w2-med').textContent = '−'+fmt(w2Med);
+    document.getElementById('w2-state').textContent = w2StateRate>0?'−'+fmt(w2StateTax):'$0';
+    document.getElementById('w2-total-tax').textContent = fmt(w2TotalTax);
+    document.getElementById('w2-net').textContent = fmt(w2Net);
+
+    /* ── RENDER 1099 ── */
+    document.getElementById('c-gross').textContent = fmt(income);
+    var cBizRow = document.getElementById('c-biz-row');
+    if(bizExp>0){cBizRow.style.display='block';document.getElementById('c-biz').textContent='−'+fmt(bizExp);}else{cBizRow.style.display='none';}
+    document.getElementById('c-se').textContent = '−'+fmt(seTax);
+    document.getElementById('c-fed').textContent = '−'+fmt(c1099FedTax);
+    document.getElementById('c-state').textContent = c1099StateRate>0?'−'+fmt(c1099StateTax):'$0';
+    document.getElementById('c-total-tax').textContent = fmt(c1099TotalTax);
+    document.getElementById('c-net').textContent = fmt(c1099Net);
+    document.getElementById('r-quarterly').textContent = '$'+Math.round(quarterly).toLocaleString();
+
+    /* ── TAX DIFFERENCE ── */
+    var taxDiff = c1099TotalTax - w2TotalTax;
+    var netDiff = w2Net - c1099Net;
+    document.getElementById('r-tax-diff').textContent = (taxDiff>=0?'+':'')+fmt(taxDiff);
+    document.getElementById('r-tax-diff').style.color = taxDiff>0?'var(--red)':'var(--green)';
+
+    /* Effective rates */
+    var w2EffRate = income>0?(w2TotalTax/income*100):0;
+    var c1099EffRate = income>0?(c1099TotalTax/income*100):0;
+    document.getElementById('r-breakeven').textContent = 'W-2: '+w2EffRate.toFixed(1)+'% vs 1099: '+c1099EffRate.toFixed(1)+'%';
+
+    /* Winner banner */
+    var banner = document.getElementById('winner-banner');
+    if(w2Net > c1099Net){
+      banner.style.background='var(--green-dim)';banner.style.color='var(--green)';banner.style.border='1px solid var(--green-border)';
+      banner.innerHTML='<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 10l4 4 7-7"/></svg>W-2 saves '+fmt(Math.abs(netDiff))+' more after-tax vs 1099 at this income level';
+    } else if(c1099Net > w2Net){
+      banner.style.background='var(--accent-dim)';banner.style.color='var(--accent)';banner.style.border='1px solid var(--accent-border)';
+      banner.innerHTML='<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 10l4 4 7-7"/></svg>1099 results in '+fmt(Math.abs(netDiff))+' more net income vs W-2 (due to business expenses)';
+    } else {
+      banner.style.background='var(--surface-2)';banner.style.color='var(--ink-2)';banner.style.border='1px solid var(--border)';
+      banner.innerHTML='Equal net income under both filing statuses at this income level';
+    }
+
+    document.getElementById('results-empty').hidden = true;
+    document.getElementById('results-body').hidden = false;
+    document.getElementById('results-actions').hidden = false;
+    if(window.innerWidth<900)document.getElementById('results-panel').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

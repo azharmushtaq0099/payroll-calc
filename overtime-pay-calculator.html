@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overtime Pay Calculator 2026 — FLSA Overtime Rate & Total Pay | FreePayrollCalc</title>
+<meta name="description" content="Free overtime pay calculator. Calculate FLSA overtime (1.5x), double time, and blended rates for hourly and salaried employees. Handles California overtime rules. Instant results.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/overtime-pay-calculator">
+<meta property="og:title" content="Overtime Pay Calculator 2026 — FLSA 1.5x Rate">
+<meta property="og:description" content="Calculate overtime pay for hourly and salaried non-exempt employees. FLSA 1.5x, California double time, blended rate — all covered. Free, no signup.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Overtime Pay Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/overtime-pay-calculator",
+  "description": "Calculate FLSA overtime pay for hourly and salaried employees. Supports standard 1.5x, double time, California overtime, and blended rates.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["FLSA 1.5x overtime","California double-time rules","Blended overtime rate","Salaried non-exempt calculation","Weekly and daily overtime"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the overtime pay rate under FLSA?",
+      "acceptedAnswer": {"@type":"Answer","text":"Under the Fair Labor Standards Act (FLSA), non-exempt employees must receive overtime pay at 1.5 times their regular rate of pay for all hours worked over 40 in a workweek. Some states, like California, require overtime for hours worked over 8 in a single day and double time for hours over 12 in a day."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do salaried employees get overtime pay?",
+      "acceptedAnswer": {"@type":"Answer","text":"Salaried employees earning below the FLSA exempt salary threshold (currently $684/week) must receive overtime pay. To calculate overtime for a salaried non-exempt employee, divide the weekly salary by the total hours worked to get the regular rate, then pay 0.5x that rate for each overtime hour (since the straight time is already covered by the salary)."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is California's overtime law?",
+      "acceptedAnswer": {"@type":"Answer","text":"California requires daily overtime (1.5x) for hours over 8 in a day, and double time (2x) for hours over 12 in a day or for all hours on the seventh consecutive workday (over 8 hours). California overtime applies in addition to, not instead of, federal FLSA weekly overtime."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is a blended overtime rate?",
+      "acceptedAnswer": {"@type":"Answer","text":"When an employee works at different pay rates in the same workweek, FLSA requires overtime to be calculated at a 'blended' or 'weighted average' rate. The blended rate equals total straight-time earnings divided by total hours worked. Overtime premium is then 0.5x the blended rate for each overtime hour."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator">PTO</a>
+        <a href="/overtime-pay-calculator" class="active">Overtime</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/payroll-tax-calculator" class="nav-cta">Payroll Tax Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Overtime Pay Calculator</span>
+    </nav>
+
+    <div style="margin-bottom:28px">
+      <div class="ad-zone ad-zone--leaderboard" aria-label="Advertisement">ADVERTISEMENT</div>
+    </div>
+
+    <h1 class="calc-title" data-enter>Overtime Pay Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      FLSA-compliant overtime for hourly, salaried, and blended-rate workers.<br>
+      Standard 1.5x, California daily overtime, double time — all in one calculator.
+    </p>
+
+    <div class="calc-layout">
+
+      <!-- INPUT -->
+      <div class="calc-main">
+        <div class="calc-card" data-enter data-delay="2">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="9"/><polyline points="10 6 10 10 13 12"/></svg>
+            <span class="calc-card-head-title">Overtime Details</span>
+            <span class="calc-card-head-badge">FLSA 2026</span>
+          </div>
+          <div class="calc-body">
+
+            <!-- Calc mode -->
+            <div class="field-group">
+              <label class="field-label">Employee Type</label>
+              <div class="pill-group" role="radiogroup" aria-label="Employee type">
+                <button class="pill-btn active" data-mode="hourly" role="radio" aria-checked="true">Hourly</button>
+                <button class="pill-btn" data-mode="salaried" role="radio" aria-checked="false">Salaried Non-Exempt</button>
+                <button class="pill-btn" data-mode="blended" role="radio" aria-checked="false">Blended Rate</button>
+              </div>
+            </div>
+
+            <!-- HOURLY section -->
+            <div id="section-hourly">
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="regular_rate">Regular Hourly Rate</label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="regular_rate" class="field-input has-prefix" placeholder="18.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="regular_hours">Regular Hours This Week</label>
+                  <input type="number" id="regular_hours" class="field-input" placeholder="40" min="0" max="40" step="0.5" value="40" inputmode="decimal">
+                  <div class="field-hint">FLSA overtime starts after 40 hrs/week</div>
+                </div>
+              </div>
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="overtime_hours">Overtime Hours This Week</label>
+                  <input type="number" id="overtime_hours" class="field-input" placeholder="8" min="0" step="0.5" value="0" inputmode="decimal">
+                </div>
+                <div>
+                  <label class="field-label" for="ot_multiplier">Overtime Multiplier</label>
+                  <select id="ot_multiplier" class="field-select">
+                    <option value="1.5">1.5x (FLSA standard)</option>
+                    <option value="2.0">2.0x (Double time)</option>
+                    <option value="1.0">1.0x (Straight time only)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- SALARIED section -->
+            <div id="section-salaried" hidden>
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="weekly_salary">Weekly Salary</label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="weekly_salary" class="field-input has-prefix" placeholder="800.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                  <div class="field-hint">Divide annual salary ÷ 52 weeks</div>
+                </div>
+                <div>
+                  <label class="field-label" for="total_hours_worked">Total Hours Worked This Week</label>
+                  <input type="number" id="total_hours_worked" class="field-input" placeholder="50" min="1" step="0.5" value="50" inputmode="decimal">
+                </div>
+              </div>
+            </div>
+
+            <!-- BLENDED section -->
+            <div id="section-blended" hidden>
+              <p style="font-size:13px;color:var(--ink-2);margin-bottom:16px;line-height:1.6">Enter up to 3 pay rates worked in the same week. FLSA blended rate = total earnings ÷ total hours.</p>
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="rate1">Rate 1 ($/hr)</label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="rate1" class="field-input has-prefix" placeholder="16.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="hours1">Hours at Rate 1</label>
+                  <input type="number" id="hours1" class="field-input" placeholder="30" min="0" step="0.5" inputmode="decimal">
+                </div>
+              </div>
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="rate2">Rate 2 ($/hr)</label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="rate2" class="field-input has-prefix" placeholder="20.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="hours2">Hours at Rate 2</label>
+                  <input type="number" id="hours2" class="field-input" placeholder="20" min="0" step="0.5" inputmode="decimal">
+                </div>
+              </div>
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="rate3">Rate 3 ($/hr) — optional</label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="rate3" class="field-input has-prefix" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="hours3">Hours at Rate 3</label>
+                  <input type="number" id="hours3" class="field-input" placeholder="0" min="0" step="0.5" inputmode="decimal">
+                </div>
+              </div>
+            </div>
+
+            <!-- California toggle -->
+            <div class="field-group" id="ca-section" hidden>
+              <label class="field-label">California Overtime Rules</label>
+              <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface-2);border-radius:9px;border:1px solid var(--border)">
+                <input type="checkbox" id="ca_rules" style="width:18px;height:18px;accent-color:var(--accent);cursor:pointer">
+                <label for="ca_rules" style="font-size:14px;color:var(--ink-2);cursor:pointer;margin:0">
+                  Apply California daily overtime (1.5x over 8 hrs/day; 2x over 12 hrs/day)
+                </label>
+              </div>
+            </div>
+
+            <div class="field-group" id="ca-daily-section" hidden>
+              <label class="field-label" for="daily_hours">Hours Worked Each Day (comma-separated)</label>
+              <input type="text" id="daily_hours" class="field-input" placeholder="9, 10, 8, 11, 8, 4" aria-label="Daily hours worked, comma separated">
+              <div class="field-hint">Enter up to 7 days. Example: 9, 10, 8, 11, 8 = Mon–Fri</div>
+            </div>
+
+            <button class="btn-calc" id="ot-calc-btn" type="button">Calculate Overtime Pay →</button>
+          </div>
+        </div>
+
+        <div style="margin-top:28px">
+          <div class="ad-zone ad-zone--in-content" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <article style="margin-top:40px" data-enter>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">How FLSA overtime pay works</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">The <a href="https://www.dol.gov/agencies/whd/overtime" rel="nofollow noopener" target="_blank" style="color:var(--accent)">Fair Labor Standards Act (FLSA)</a> requires employers to pay non-exempt employees 1.5 times their regular rate for all hours worked over 40 in a seven-day workweek. The workweek does not have to be Monday–Friday; employers can define any seven consecutive days as their workweek, but it must be fixed and consistent.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>Salaried non-exempt employees</strong> are entitled to overtime despite receiving a fixed salary. Under the "fluctuating workweek" method or the more common standard method, the employee's regular rate equals their weekly salary divided by total hours worked. The overtime premium is then 0.5x (since the salary already covers straight-time pay for all hours).</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>California overtime</strong> is more generous than federal law. California employees earn 1.5x for hours over 8 in a day (not just over 40 in a week), and 2x for hours over 12 in a day. On the seventh consecutive day of work in a week, California requires 1.5x for the first 8 hours and 2x beyond that.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">For payroll tax impact on overtime earnings, use the <a href="/payroll-tax-calculator" style="color:var(--accent)">Payroll Tax Calculator</a>. For the employer's total labor cost including overtime, see the <a href="/employer-tax-calculator" style="color:var(--accent)">Employer Tax Calculator</a>.</p>
+        </article>
+      </div>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="results-panel" id="ot-results">
+          <div class="results-head">
+            <span class="results-head-label">Overtime Breakdown</span>
+            <span class="results-head-period" id="ot-period-label">This Week</span>
+          </div>
+          <div class="results-empty" id="ot-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <p>Enter hours and rate, then click <strong>Calculate</strong> to see overtime breakdown.</p>
+          </div>
+          <div class="results-body" id="ot-body" hidden>
+
+            <div class="net-pay-display">
+              <div class="net-pay-label">Total Weekly Pay</div>
+              <div class="net-pay-amount" id="ot-total">$0.00</div>
+              <div class="net-pay-sub">gross, before taxes</div>
+            </div>
+
+            <div class="breakdown-section-label">Regular Pay</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--green)"></span><span id="ot-reg-label">40 hrs × $0.00</span></div>
+              <div class="breakdown-row-amount amount-green" id="ot-reg-pay">$0.00</div>
+            </div>
+
+            <div class="breakdown-section-label">Overtime Pay</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--accent)"></span><span id="ot-hours-label">0 OT hrs × $0.00</span></div>
+              <div class="breakdown-row-amount" id="ot-ot-pay" style="color:var(--accent)">$0.00</div>
+            </div>
+            <div class="breakdown-row" id="ot-dt-row" hidden>
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--red)"></span><span id="ot-dt-label">0 DT hrs × $0.00</span></div>
+              <div class="breakdown-row-amount amount-red" id="ot-dt-pay">$0.00</div>
+            </div>
+
+            <div class="breakdown-section-label">Rate Details</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">Regular rate</div>
+              <div class="breakdown-row-amount amount-neutral text-mono" id="ot-reg-rate">$0.00/hr</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">Overtime rate (1.5×)</div>
+              <div class="breakdown-row-amount amount-neutral text-mono" id="ot-ot-rate">$0.00/hr</div>
+            </div>
+            <div class="breakdown-row" id="ot-dt-rate-row" hidden>
+              <div class="breakdown-row-label">Double time rate (2×)</div>
+              <div class="breakdown-row-amount amount-neutral text-mono" id="ot-dt-rate">$0.00/hr</div>
+            </div>
+
+            <div class="breakdown-total">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="breakdown-row-dot" style="background:var(--green);width:10px;height:10px"></span>
+                Gross weekly pay
+              </div>
+              <div class="breakdown-row-amount amount-green" id="ot-gross-total">$0.00</div>
+            </div>
+
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+              <div style="font-size:12px;color:var(--ink-3);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px">Projections</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">OT Premium</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--accent)" id="ot-premium">$0.00</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Annual (52 wks)</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="ot-annual">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">% of Pay is OT</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="ot-pct">0%</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Eff. Hourly Rate</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="ot-eff-rate">$0.00/hr</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="results-actions" id="ot-actions" hidden>
+            <button class="results-action-btn" data-copy-results>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="8" width="10" height="10" rx="2"/><path d="M5 8V5a2 2 0 012-2h7"/></svg>
+              Copy
+            </button>
+            <button class="results-action-btn" onclick="window.print()">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top:24px">
+          <div class="ad-zone ad-zone--sidebar" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <div class="disclaimer">
+          <strong>Disclaimer:</strong> Results are based on FLSA and California Labor Code rules in effect for 2026. Overtime exemptions (executive, administrative, professional, highly compensated) are not automatically applied — consult your HR or legal advisor for exempt status determination.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Overtime pay questions answered</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          What is the current FLSA overtime salary threshold?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          The FLSA white-collar exemption salary threshold was raised to $684/week ($35,568/year) in 2020 and further proposed increases are subject to litigation. As of 2026, the threshold remains at $684/week for most exempt employees and $107,432/year for highly compensated employees (HCE). Employees earning below $684/week cannot be classified as exempt regardless of their job duties, and must receive overtime pay.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          Can my employer offer comp time instead of overtime pay?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Private sector employers cannot substitute compensatory (comp) time for overtime pay under FLSA. Only state and local government employers may offer comp time at 1.5 hours per overtime hour worked. If a private employer offers comp time instead of overtime pay, they are in violation of FLSA and may be subject to back pay liability and penalties.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          How are tips factored into overtime rate for tipped employees?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          For tipped employees, the regular rate for overtime purposes is calculated differently depending on whether the employer takes a tip credit. If a tip credit is taken, overtime is based on the full minimum wage ($7.25 federal), not the lower tipped wage. For example, overtime for a server earning a $2.13 tipped wage is calculated at 1.5 × $7.25 = $10.88/hr, minus the applicable tip credit.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="3">
+        <button class="faq-q" aria-expanded="false">
+          What happens if an employer doesn't pay overtime?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          FLSA violations for unpaid overtime can result in: back pay equal to unpaid overtime, an equal amount in liquidated damages (doubling the liability), attorney's fees, and civil monetary penalties of up to $2,014 per violation. Willful violations extend the statute of limitations from 2 to 3 years. Employees can file a complaint with the <a href="https://www.dol.gov/agencies/whd" rel="nofollow noopener" target="_blank">DOL Wage and Hour Division</a> or pursue a private lawsuit.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M7 8h10M7 12h6"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">See the full tax impact of overtime earnings — federal, state, FICA.</div></div>
+        </div>
+      </a>
+      <a href="/pto-accrual-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <div><div class="tool-card-title">PTO Accrual Calculator</div><div class="tool-card-desc" style="font-size:13px">Calculate paid time off balance, rollover, and cash value.</div></div>
+        </div>
+      </a>
+      <a href="/employer-tax-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+          <div><div class="tool-card-title">Employer Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Total employer cost including overtime, FICA match, FUTA, and SUTA.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.dol.gov/agencies/whd/overtime" rel="nofollow noopener" target="_blank">DOL Overtime Rules</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA Overview</a></li>
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not legal or tax advice.</span>
+      <div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+
+  var activeMode = 'hourly';
+
+  /* Mode toggle */
+  document.querySelectorAll('[data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('[data-mode]').forEach(function(b){
+        b.classList.remove('active'); b.setAttribute('aria-checked','false');
+      });
+      btn.classList.add('active'); btn.setAttribute('aria-checked','true');
+      activeMode = btn.dataset.mode;
+      document.getElementById('section-hourly').hidden = activeMode !== 'hourly';
+      document.getElementById('section-salaried').hidden = activeMode !== 'salaried';
+      document.getElementById('section-blended').hidden = activeMode !== 'blended';
+      document.getElementById('ca-section').hidden = activeMode === 'blended';
+    });
+  });
+
+  /* CA checkbox show daily hours */
+  document.getElementById('ca_rules').addEventListener('change', function(){
+    document.getElementById('ca-daily-section').hidden = !this.checked;
+  });
+
+  function fmt(n){
+    return '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+
+  function calcCaliforniaOT(dailyHoursArr, regularRate){
+    var totalReg = 0, totalOT = 0, totalDT = 0;
+    dailyHoursArr.forEach(function(h, i){
+      if(h <= 8){ totalReg += h; }
+      else if(h <= 12){ totalReg += 8; totalOT += (h - 8); }
+      else { totalReg += 8; totalOT += 4; totalDT += (h - 12); }
+    });
+    /* Apply 7th day rule if 7 days */
+    if(dailyHoursArr.length === 7){
+      var d7 = dailyHoursArr[6];
+      if(d7 > 8){
+        totalDT += (d7 - 8);
+        totalOT += 8;
+        totalReg -= d7; /* remove 7th day from regular we added above */
+      } else if(d7 > 0){
+        totalOT += d7;
+        totalReg -= d7;
+      }
+    }
+    var regPay = totalReg * regularRate;
+    var otPay = totalOT * (regularRate * 1.5);
+    var dtPay = totalDT * (regularRate * 2);
+    return {regHours: totalReg, otHours: totalOT, dtHours: totalDT, regPay: regPay, otPay: otPay, dtPay: dtPay};
+  }
+
+  document.getElementById('ot-calc-btn').addEventListener('click', calculate);
+
+  function calculate(){
+    var regRate = 0, regHours = 0, otHours = 0, otMultiplier = 1.5;
+    var regPay = 0, otPay = 0, dtPay = 0, dtHours = 0;
+
+    if(activeMode === 'hourly'){
+      regRate = parseFloat(document.getElementById('regular_rate').value) || 0;
+      regHours = parseFloat(document.getElementById('regular_hours').value) || 40;
+      otHours = parseFloat(document.getElementById('overtime_hours').value) || 0;
+      otMultiplier = parseFloat(document.getElementById('ot_multiplier').value) || 1.5;
+
+      var caChecked = document.getElementById('ca_rules').checked;
+      if(caChecked){
+        var dailyStr = document.getElementById('daily_hours').value;
+        var dailyArr = dailyStr.split(',').map(function(s){ return parseFloat(s.trim()) || 0; }).filter(function(h){ return h > 0; });
+        if(dailyArr.length > 0){
+          var caResult = calcCaliforniaOT(dailyArr, regRate);
+          regHours = caResult.regHours; regPay = caResult.regPay;
+          otHours = caResult.otHours; otPay = caResult.otPay;
+          dtHours = caResult.dtHours; dtPay = caResult.dtPay;
+        } else {
+          regPay = regHours * regRate;
+          otPay = otHours * (regRate * otMultiplier);
+        }
+      } else {
+        regPay = regHours * regRate;
+        otPay = otHours * (regRate * otMultiplier);
+      }
+    } else if(activeMode === 'salaried'){
+      var weeklySalary = parseFloat(document.getElementById('weekly_salary').value) || 0;
+      var totalHours = parseFloat(document.getElementById('total_hours_worked').value) || 40;
+      regRate = totalHours > 0 ? weeklySalary / totalHours : 0;
+      regHours = Math.min(totalHours, 40);
+      otHours = Math.max(0, totalHours - 40);
+      /* Salaried OT premium method: salary covers straight time, so premium = 0.5x */
+      regPay = weeklySalary;
+      otPay = otHours * (regRate * 0.5);
+    } else if(activeMode === 'blended'){
+      var rate1 = parseFloat(document.getElementById('rate1').value) || 0;
+      var hours1 = parseFloat(document.getElementById('hours1').value) || 0;
+      var rate2 = parseFloat(document.getElementById('rate2').value) || 0;
+      var hours2 = parseFloat(document.getElementById('hours2').value) || 0;
+      var rate3 = parseFloat(document.getElementById('rate3').value) || 0;
+      var hours3 = parseFloat(document.getElementById('hours3').value) || 0;
+      var totalEarnings = (rate1 * hours1) + (rate2 * hours2) + (rate3 * hours3);
+      var totalHoursAll = hours1 + hours2 + hours3;
+      if(totalHoursAll <= 0) return;
+      regRate = totalEarnings / totalHoursAll;
+      regHours = Math.min(totalHoursAll, 40);
+      otHours = Math.max(0, totalHoursAll - 40);
+      regPay = totalEarnings;
+      otPay = otHours * (regRate * 0.5); /* half-time premium method */
+    }
+
+    if(regRate <= 0) return;
+
+    var totalPay = regPay + otPay + dtPay;
+    var otRate = regRate * (activeMode === 'salaried' ? 1.5 : otMultiplier);
+    var premium = otPay + dtPay;
+    var effHourlyRate = (regHours + otHours + dtHours) > 0 ? totalPay / (regHours + otHours + dtHours) : 0;
+    var otPct = totalPay > 0 ? ((otPay + dtPay) / totalPay) * 100 : 0;
+
+    /* Render */
+    document.getElementById('ot-total').textContent = fmt(totalPay);
+    document.getElementById('ot-reg-label').textContent = regHours.toFixed(1) + ' reg hrs × ' + fmt(regRate).replace('.00','');
+    document.getElementById('ot-reg-pay').textContent = fmt(regPay);
+    document.getElementById('ot-hours-label').textContent = otHours.toFixed(1) + ' OT hrs × ' + fmt(otRate).replace('.00','') + '/hr';
+    document.getElementById('ot-ot-pay').textContent = fmt(otPay);
+    document.getElementById('ot-reg-rate').textContent = fmt(regRate) + '/hr';
+    document.getElementById('ot-ot-rate').textContent = fmt(otRate) + '/hr';
+    document.getElementById('ot-gross-total').textContent = fmt(totalPay);
+    document.getElementById('ot-premium').textContent = fmt(premium);
+    document.getElementById('ot-annual').textContent = fmt(totalPay * 52);
+    document.getElementById('ot-pct').textContent = otPct.toFixed(1) + '%';
+    document.getElementById('ot-eff-rate').textContent = fmt(effHourlyRate) + '/hr';
+
+    var showDT = dtHours > 0;
+    document.getElementById('ot-dt-row').hidden = !showDT;
+    document.getElementById('ot-dt-rate-row').hidden = !showDT;
+    if(showDT){
+      document.getElementById('ot-dt-label').textContent = dtHours.toFixed(1) + ' DT hrs × ' + fmt(regRate * 2) + '/hr';
+      document.getElementById('ot-dt-pay').textContent = fmt(dtPay);
+      document.getElementById('ot-dt-rate').textContent = fmt(regRate * 2) + '/hr';
+    }
+
+    document.getElementById('ot-empty').hidden = true;
+    document.getElementById('ot-body').hidden = false;
+    document.getElementById('ot-actions').hidden = false;
+
+    if(window.innerWidth < 900){
+      document.getElementById('ot-results').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+})();
+</script>
+</body>
+</html>

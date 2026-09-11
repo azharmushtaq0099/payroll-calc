@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workers Comp Calculator 2026 — Estimate Workers Compensation Premium | FreePayrollCalc</title>
+<meta name="description" content="Estimate your workers compensation insurance premium for 2026. Select state, job classification, and annual payroll to get an estimated annual and monthly premium. Based on NCCI rates.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/workers-comp-calculator">
+<meta property="og:title" content="Workers Comp Calculator 2026 — Estimate Workers Compensation Premium">
+<meta property="og:description" content="Calculate estimated workers comp premium by state and job class. Based on NCCI rates per $100 payroll. 8 common job classifications.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Workers Comp Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/workers-comp-calculator",
+  "description": "Estimate workers compensation insurance premium by state and job classification. Based on approximate NCCI rates per $100 payroll. For budgeting and estimation purposes.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["8 common job classifications","All 50 states","NCCI-based rate estimates","Annual and monthly premium output","Premium as % of payroll"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is workers compensation premium calculated?",
+      "acceptedAnswer": {"@type":"Answer","text":"Workers compensation premium is calculated as: (Annual payroll ÷ 100) × Rate per $100 payroll. The rate varies by job classification (also called class code) and state. Class codes are set by NCCI (National Council on Compensation Insurance) or state-specific rating bureaus. Lower-risk jobs like clerical workers have rates around $0.18–$0.35 per $100 payroll, while high-risk jobs like roofing or construction can be $8–$25+ per $100 payroll. Your actual premium also depends on your experience modification factor (E-Mod) based on your claims history."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is workers compensation insurance required for all employers?",
+      "acceptedAnswer": {"@type":"Answer","text":"Workers compensation insurance is required in 49 states — Texas is the only state where it is generally optional for private employers (though many industries still require it). Requirements vary by state, including minimum number of employees and exemptions for certain worker types. Sole proprietors, partners, and corporate officers may be exempt in some states. Penalties for operating without required workers comp coverage can include fines, lawsuits, and criminal charges."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is an NCCI class code and how does it affect my premium?",
+      "acceptedAnswer": {"@type":"Answer","text":"NCCI class codes are 4-digit codes that classify workers by job type and associated injury risk level. Each code has a base rate per $100 of payroll. For example, clerical office workers (code 8810) carry very low risk and rates around $0.18–$0.35, while construction workers (code 5645) carry high risk at $8–$12+ per $100 payroll. Employers must accurately classify all employees — misclassification is subject to audits and back premiums. Most states use NCCI codes; CA, NY, NJ, and a few others use independent rating bureaus."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is an experience modification factor (E-Mod)?",
+      "acceptedAnswer": {"@type":"Answer","text":"An experience modification factor (E-Mod or EMR) adjusts your workers comp premium based on your actual claims history versus industry average. A 1.0 E-Mod means average claims history; a 0.85 means 15% better than average (you pay less); a 1.25 means 25% worse (you pay more). New businesses start at 1.0. E-Mod is calculated by your state's rating bureau and applies once you have 3 years of loss history. This calculator uses an E-Mod of 1.0 — multiply the result by your E-Mod for an adjusted estimate."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator">PTO</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+    <a href="/workers-comp-calculator" class="active">Workers Comp Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Workers Comp Calculator</span>
+    </nav>
+
+    <div style="margin-bottom:28px">
+      <div class="ad-zone ad-zone--leaderboard" aria-label="Advertisement">ADVERTISEMENT</div>
+    </div>
+
+    <h1 class="calc-title" data-enter>Workers Comp Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Estimate your workers compensation insurance premium by state and job classification.<br>
+      Based on approximate NCCI rates per $100 payroll. All 50 states.
+    </p>
+
+    <div class="calc-layout">
+
+      <!-- INPUT FORM -->
+      <div class="calc-main">
+        <div class="calc-card" data-enter data-delay="2">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2V5a2 2 0 00-2-2zM9 13H5a2 2 0 00-2 2v2a2 2 0 002 2h4a2 2 0 002-2v-2a2 2 0 00-2-2zM19 3h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2V5a2 2 0 00-2-2z"/></svg>
+            <span class="calc-card-head-title">Workers Comp Details</span>
+            <span class="calc-card-head-badge">NCCI Rates</span>
+          </div>
+          <div class="calc-body">
+
+            <!-- State -->
+            <div class="field-group">
+              <label class="field-label" for="state">State</label>
+              <select id="state" class="field-select">
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY" selected>New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+                <option value="DC">D.C.</option>
+              </select>
+            </div>
+
+            <!-- Job Classification -->
+            <div class="field-group">
+              <label class="field-label" for="job_class">Job Classification</label>
+              <select id="job_class" class="field-select" aria-label="Job classification for workers comp rate">
+                <option value="clerical">Clerical / Office (8810) — $0.18 per $100</option>
+                <option value="retail">Retail Store (8017) — $0.90 per $100</option>
+                <option value="restaurant">Restaurant / Food Service (9082) — $1.40 per $100</option>
+                <option value="manufacturing">Manufacturing / Light Industrial (3632) — $2.10 per $100</option>
+                <option value="warehouse">Warehouse / Distribution (8232) — $1.90 per $100</option>
+                <option value="healthcare">Healthcare Support (8835) — $1.80 per $100</option>
+                <option value="landscaping">Landscaping / Grounds Maintenance (0042) — $6.80 per $100</option>
+                <option value="construction">Construction / Carpentry (5645) — $8.50 per $100</option>
+              </select>
+              <div class="field-hint">Based on approximate NCCI class codes and national base rates</div>
+            </div>
+
+            <!-- Annual Payroll -->
+            <div class="field-group">
+              <label class="field-label" for="annual_payroll">Annual Payroll for This Class</label>
+              <div class="input-wrap"><span class="input-prefix">$</span>
+                <input type="number" id="annual_payroll" class="field-input has-prefix" placeholder="250,000" min="0" step="1000" inputmode="decimal" aria-label="Annual payroll in dollars">
+              </div>
+              <div class="field-hint">Total wages paid to employees in this job class for the year</div>
+            </div>
+
+            <!-- E-Mod -->
+            <div class="field-group">
+              <label class="field-label" for="emod">Experience Modification Factor (E-Mod)</label>
+              <input type="number" id="emod" class="field-input" placeholder="1.00" min="0.5" max="3.0" step="0.01" value="1.00" inputmode="decimal">
+              <div class="field-hint">1.00 = average claims history. Under 1.0 = better than average (discount). Over 1.0 = worse (surcharge). New businesses use 1.00.</div>
+            </div>
+
+            <button class="btn-calc" id="calc-btn" type="button">Calculate Premium →</button>
+
+          </div>
+        </div>
+
+        <!-- Rate reference table -->
+        <div class="calc-card" style="margin-top:24px" data-enter>
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+            <span class="calc-card-head-title">NCCI Base Rates Reference</span>
+          </div>
+          <div class="calc-body" style="padding:0">
+            <table style="width:100%;border-collapse:collapse;font-size:13px">
+              <thead>
+                <tr style="background:var(--surface-2);border-bottom:1px solid var(--border)">
+                  <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--ink);font-size:12px">Job Classification</th>
+                  <th style="padding:10px 16px;text-align:right;font-weight:600;color:var(--ink);font-size:12px">Rate / $100</th>
+                  <th style="padding:10px 16px;text-align:right;font-weight:600;color:var(--ink);font-size:12px">Per $100k Payroll</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 16px;color:var(--ink-2)">Clerical / Office (8810)</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--green)">$0.18</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--ink-2)">$180</td></tr>
+                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 16px;color:var(--ink-2)">Retail Store (8017)</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono)">$0.90</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--ink-2)">$900</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 16px;color:var(--ink-2)">Restaurant / Food Service (9082)</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono)">$1.40</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--ink-2)">$1,400</td></tr>
+                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 16px;color:var(--ink-2)">Healthcare Support (8835)</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono)">$1.80</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--ink-2)">$1,800</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 16px;color:var(--ink-2)">Warehouse / Distribution (8232)</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono)">$1.90</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--ink-2)">$1,900</td></tr>
+                <tr style="border-bottom:1px solid var(--border);background:var(--surface-2)"><td style="padding:9px 16px;color:var(--ink-2)">Manufacturing / Light Industrial (3632)</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono)">$2.10</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--ink-2)">$2,100</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 16px;color:var(--ink-2)">Landscaping / Grounds (0042)</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--amber)">$6.80</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--ink-2)">$6,800</td></tr>
+                <tr><td style="padding:9px 16px;color:var(--ink-2)">Construction / Carpentry (5645)</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--red)">$8.50</td><td style="padding:9px 16px;text-align:right;font-family:var(--mono);color:var(--ink-2)">$8,500</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="margin-top:28px">
+          <div class="ad-zone ad-zone--in-content" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <article style="margin-top:40px" data-enter>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">How workers comp premiums are calculated in 2026</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Workers compensation insurance premiums are calculated per $100 of annual payroll, using class code rates set by NCCI (National Council on Compensation Insurance) or state-specific rating bureaus. The formula is: <strong>(Annual Payroll ÷ 100) × Rate × E-Mod = Premium</strong>.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Rates vary enormously by risk level. A $250,000 clerical payroll costs roughly $450/year in workers comp; a $250,000 construction payroll costs roughly $21,250/year at the same base rates. High-risk industries like roofing, logging, and demolition can exceed $20–$30 per $100 payroll.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">For total employer payroll costs including FICA match, FUTA, and SUTA, see the <a href="/employer-tax-calculator" style="color:var(--accent)">Employer Tax Calculator</a>. For employee take-home calculations, see the <a href="/payroll-tax-calculator" style="color:var(--accent)">Payroll Tax Calculator</a>.</p>
+        </article>
+
+      </div>
+
+      <!-- RESULTS SIDEBAR -->
+      <div>
+        <div class="results-panel" id="results-panel">
+          <div class="results-head">
+            <span class="results-head-label">Results</span>
+            <span class="results-head-period">Annual Estimate</span>
+          </div>
+          <div class="results-empty" id="results-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m2 6H5a2 2 0 00-2 2v2a2 2 0 002 2h4a2 2 0 002-2v-2a2 2 0 00-2-2z"/><path d="M19 3h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2V5a2 2 0 00-2-2z"/></svg>
+            <p>Select your state, job class, and annual payroll, then click <strong>Calculate</strong> to estimate your workers comp premium.</p>
+          </div>
+          <div class="results-body" id="results-body" hidden>
+
+            <div class="net-pay-display">
+              <div class="net-pay-label">Estimated Annual Premium</div>
+              <div class="net-pay-amount" id="result-premium">$0</div>
+              <div class="net-pay-sub" id="result-sub">per year</div>
+            </div>
+
+            <div class="breakdown-section-label">Rate Breakdown</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--ink-3)"></span>Job classification</div>
+              <div class="breakdown-row-amount" id="r-class-name" style="color:var(--ink-2);font-size:12px">—</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--accent)"></span>Base rate (per $100)</div>
+              <div class="breakdown-row-amount amount-green" id="r-base-rate">$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--accent)"></span>State adjustment factor</div>
+              <div class="breakdown-row-amount" id="r-state-factor" style="color:var(--ink-2)">1.00×</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--accent)"></span>Adjusted rate (per $100)</div>
+              <div class="breakdown-row-amount amount-green" id="r-adj-rate">$0.00</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--amber)"></span>E-Mod factor</div>
+              <div class="breakdown-row-amount" id="r-emod-display" style="color:var(--amber)">1.00×</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label"><span class="breakdown-row-dot" style="background:var(--ink-2)"></span>Annual payroll</div>
+              <div class="breakdown-row-amount" id="r-payroll" style="color:var(--ink-2)">$0</div>
+            </div>
+
+            <div class="breakdown-total">
+              <div style="display:flex;align-items:center;gap:8px"><span class="breakdown-row-dot" style="background:var(--red);width:10px;height:10px"></span>Estimated premium</div>
+              <div class="breakdown-row-amount amount-red" id="r-premium-total">$0</div>
+            </div>
+
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+              <div style="font-size:12px;color:var(--ink-3);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px">Premium Analysis</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Monthly</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-monthly">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">% of Payroll</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--red)" id="r-pct-payroll">0.0%</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Per Employee*</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-per-emp">$0</div>
+                </div>
+                <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                  <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Per $100 Payroll</div>
+                  <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-per-100">$0.00</div>
+                </div>
+              </div>
+              <div style="font-size:11px;color:var(--ink-3);margin-top:8px">* Assumes avg $50,000 annual salary per employee</div>
+            </div>
+
+          </div>
+
+          <div class="results-actions" id="results-actions" hidden>
+            <button class="results-action-btn" data-copy-results>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="8" width="10" height="10" rx="2"/><path d="M5 8V5a2 2 0 012-2h7"/></svg>Copy
+            </button>
+            <button class="results-action-btn" id="print-btn">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top:24px">
+          <div class="ad-zone ad-zone--sidebar" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <div class="disclaimer">
+          <strong>Disclaimer:</strong> Premium estimates are based on approximate NCCI national base rates and state adjustment factors. Actual premiums depend on your specific insurer, experience modification factor, payroll audit, and state rate filings. Not a substitute for an insurance quote.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Workers comp questions answered</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          How do I lower my workers comp premium?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Several strategies can reduce your workers comp premium: (1) <strong>Improve your E-Mod</strong> by implementing safety programs and reducing workplace injuries — a 0.85 E-Mod saves 15% on premium. (2) <strong>Accurate employee classification</strong> — ensure employees are in the correct, lowest applicable class code. (3) <strong>Return-to-work programs</strong> — modified duty work reduces claims costs and improves your experience rating. (4) <strong>Pay-as-you-go policies</strong> — match premium payments to actual payroll to avoid overpayment and large year-end audits.
+        </div>
+      </div>
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          What states do not use NCCI for workers comp?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Several states operate their own rating bureaus and do not use NCCI: California (WCIRB), New York (NYCIRB), New Jersey (NJCRIB), Pennsylvania (PCRB), Massachusetts (WCRIB), Minnesota (MWCIA), Michigan (CAWCB), Wisconsin (WCCA), and Texas (TDIWC). Washington, Wyoming, Ohio, and North Dakota are "monopolistic states" where workers comp is provided exclusively by a state-run fund — private insurance is not permitted. Rates in these states may differ significantly from NCCI estimates.
+        </div>
+      </div>
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          Do workers comp premiums cover independent contractors?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Generally no — workers comp coverage is for W-2 employees, not independent contractors. However, worker misclassification is a major audit risk. If a state determines that someone classified as a 1099 contractor should be classified as a W-2 employee, the employer can owe back premiums, fines, and penalties. Some states (like California under AB5) have strict tests for independent contractor status. When in doubt, consult a labor attorney before classifying workers as contractors to avoid workers comp liability exposure.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Employee take-home pay after all withholding and deductions.</div></div>
+        </div>
+      </a>
+      <a href="/pto-accrual-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <div><div class="tool-card-title">PTO Accrual Calculator</div><div class="tool-card-desc" style="font-size:13px">Calculate paid time off balances for your employees.</div></div>
+        </div>
+      </a>
+      <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><div class="tool-card-title">Overtime Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">FLSA overtime and regular rate of pay calculations.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.ncci.com" rel="nofollow noopener" target="_blank">NCCI</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not insurance advice.</span>
+      <div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+
+  /* NCCI base rates per $100 payroll */
+  var RATES = {
+    clerical: 0.18,
+    retail: 0.90,
+    restaurant: 1.40,
+    manufacturing: 2.10,
+    warehouse: 1.90,
+    healthcare: 1.80,
+    landscaping: 6.80,
+    construction: 8.50
+  };
+
+  var CLASS_NAMES = {
+    clerical: 'Clerical / Office (8810)',
+    retail: 'Retail Store (8017)',
+    restaurant: 'Restaurant / Food Service (9082)',
+    manufacturing: 'Manufacturing / Light Industrial (3632)',
+    warehouse: 'Warehouse / Distribution (8232)',
+    healthcare: 'Healthcare Support (8835)',
+    landscaping: 'Landscaping / Grounds (0042)',
+    construction: 'Construction / Carpentry (5645)'
+  };
+
+  /* State adjustment factors (approximate multipliers vs national average base rates) */
+  var STATE_FACTORS = {
+    AL:0.95,AK:1.15,AZ:0.90,AR:0.92,CA:1.35,CO:0.95,CT:1.10,DE:1.00,FL:0.85,GA:0.90,
+    HI:1.20,ID:0.88,IL:1.05,IN:0.92,IA:0.88,KS:0.90,KY:0.95,LA:1.10,ME:1.05,MD:1.00,
+    MA:1.15,MI:1.00,MN:1.05,MS:0.88,MO:0.90,MT:1.00,NE:0.88,NV:0.92,NH:1.00,NJ:1.20,
+    NM:0.95,NY:1.30,NC:0.90,ND:1.10,OH:1.00,OK:0.90,OR:1.10,PA:1.05,RI:1.10,SC:0.90,
+    SD:0.85,TN:0.88,TX:0.80,UT:0.85,VT:1.05,VA:0.90,WA:1.25,WV:1.05,WI:1.00,WY:1.10,DC:1.15
+  };
+
+  document.getElementById('print-btn').addEventListener('click',function(){window.print();});
+  document.getElementById('calc-btn').addEventListener('click',calculate);
+
+  function fmt(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function fmtInt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+
+  function calculate(){
+    var payroll = parseFloat(document.getElementById('annual_payroll').value)||0;
+    if(payroll<=0){document.getElementById('annual_payroll').focus();return;}
+    var classKey = document.getElementById('job_class').value;
+    var state = document.getElementById('state').value;
+    var emod = parseFloat(document.getElementById('emod').value)||1.00;
+
+    var baseRate = RATES[classKey]||1.00;
+    var stateFactor = STATE_FACTORS[state]||1.00;
+    var adjRate = baseRate * stateFactor;
+    var annualPremium = (payroll / 100) * adjRate * emod;
+    var monthlyPremium = annualPremium / 12;
+    var pctPayroll = (annualPremium / payroll) * 100;
+    var perEmpEstimate = (50000 / 100) * adjRate * emod; /* assume $50k avg salary */
+
+    /* Render */
+    document.getElementById('result-premium').textContent = fmtInt(annualPremium);
+    document.getElementById('r-class-name').textContent = CLASS_NAMES[classKey]||classKey;
+    document.getElementById('r-base-rate').textContent = '$'+baseRate.toFixed(2);
+    document.getElementById('r-state-factor').textContent = stateFactor.toFixed(2)+'×';
+    document.getElementById('r-adj-rate').textContent = '$'+adjRate.toFixed(2);
+    document.getElementById('r-emod-display').textContent = emod.toFixed(2)+'×';
+    document.getElementById('r-payroll').textContent = fmtInt(payroll);
+    document.getElementById('r-premium-total').textContent = fmtInt(annualPremium);
+    document.getElementById('r-monthly').textContent = fmtInt(monthlyPremium);
+    document.getElementById('r-pct-payroll').textContent = pctPayroll.toFixed(2)+'%';
+    document.getElementById('r-per-emp').textContent = fmtInt(perEmpEstimate)+'/yr';
+    document.getElementById('r-per-100').textContent = '$'+adjRate.toFixed(2);
+
+    document.getElementById('results-empty').hidden = true;
+    document.getElementById('results-body').hidden = false;
+    document.getElementById('results-actions').hidden = false;
+    if(window.innerWidth<900)document.getElementById('results-panel').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

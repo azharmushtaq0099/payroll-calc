@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Payroll Calculator — US Payroll, Tax & HR Tools 2026 | FreePayrollCalc</title>
+<meta name="description" content="Free payroll calculators for US small businesses. Payroll tax, PTO accrual, overtime pay, employer tax split, workers comp — built on 2026 IRS rates. Instant results, no signup.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/">
+<meta property="og:title" content="Free Payroll Calculator — US Payroll & HR Tools 2026">
+<meta property="og:description" content="Payroll tax calculator, PTO accrual, overtime pay, and more. Built on 2026 IRS rates. Free, instant, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.freepayrollcalc.com/">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FreePayrollCalc",
+  "url": "https://www.freepayrollcalc.com",
+  "description": "Free US payroll calculators — payroll tax, PTO accrual, overtime, employer tax split, workers comp. Updated for 2026 IRS rates.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.freepayrollcalc.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Free Payroll Calculators",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Payroll Tax Calculator","url":"https://www.freepayrollcalc.com/payroll-tax-calculator"},
+    {"@type":"ListItem","position":2,"name":"PTO Accrual Calculator","url":"https://www.freepayrollcalc.com/pto-accrual-calculator"},
+    {"@type":"ListItem","position":3,"name":"Overtime Pay Calculator","url":"https://www.freepayrollcalc.com/overtime-pay-calculator"},
+    {"@type":"ListItem","position":4,"name":"Free Payroll Calculator","url":"https://www.freepayrollcalc.com/free-payroll-calculator"},
+    {"@type":"ListItem","position":5,"name":"Employer Payroll Tax Calculator","url":"https://www.freepayrollcalc.com/employer-tax-calculator"},
+    {"@type":"ListItem","position":6,"name":"1099 vs W-2 Tax Calculator","url":"https://www.freepayrollcalc.com/1099-vs-w2-calculator"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="14" height="14" rx="2"/>
+            <path d="M7 7h6M7 10h4M7 13h2"/>
+          </svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links" role="list">
+        <a href="/payroll-tax-calculator" role="listitem">Payroll Tax</a>
+        <a href="/pto-accrual-calculator" role="listitem">PTO</a>
+        <a href="/overtime-pay-calculator" role="listitem">Overtime</a>
+        <a href="/1099-vs-w2-calculator" role="listitem">1099 vs W-2</a>
+        <a href="#all-tools" role="listitem">All Tools</a>
+      </div>
+      <a href="/payroll-tax-calculator" class="nav-cta">Calculate Now</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile" role="navigation">
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+    <a href="/workers-comp-calculator">Workers Comp Calculator</a>
+    <a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge" data-enter>
+        <span class="hero-badge-dot" aria-hidden="true"></span>
+        Updated for 2026 IRS Tax Rates
+      </div>
+      <h1 data-enter data-delay="1">
+        Payroll calculators<br><em>your accountant charges for.</em><br>We built them free.
+      </h1>
+      <p class="hero-sub" data-enter data-delay="2">
+        Eight precision tools for US small businesses — payroll tax, PTO accrual, overtime, employer cost, workers comp, and more. Built on live 2026 IRS and FLSA data.
+      </p>
+      <div class="hero-actions" data-enter data-delay="3">
+        <a href="/payroll-tax-calculator" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
+          Payroll Tax Calculator
+        </a>
+        <a href="#all-tools" class="btn-ghost">
+          View all tools
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+      <div class="hero-proof" data-enter data-delay="4">
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          No signup required
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Zero data stored
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Based on 2026 IRS & FLSA rates
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          All 50 states
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip" role="complementary" aria-label="Data sources">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        IRS Publication 15 (Circular E)
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        FLSA Overtime Rules
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        SSA Wage Base Limits
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        State Revenue Departments
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats-banner" aria-label="Key statistics">
+  <div class="container">
+    <div class="stats-grid">
+      <div data-enter>
+        <div class="stat-value">33<em>M+</em></div>
+        <div class="stat-label">US small businesses with employees</div>
+      </div>
+      <div data-enter data-delay="1">
+        <div class="stat-value">$<em>8.50</em></div>
+        <div class="stat-label">Average payroll processing cost per employee/mo (ADP)</div>
+      </div>
+      <div data-enter data-delay="2">
+        <div class="stat-value">8</div>
+        <div class="stat-label">Precision calculators, all free</div>
+      </div>
+      <div data-enter data-delay="3">
+        <div class="stat-value">50</div>
+        <div class="stat-label">US states with state tax rates</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL TOOLS -->
+<section class="tool-grid-section" id="all-tools">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">All Calculators</p>
+      <h2 class="section-title">Every payroll tool your business needs</h2>
+      <p class="section-body">Each calculator uses the latest IRS tables, FLSA rules, and state tax rates — not ballpark estimates.</p>
+    </div>
+    <div class="tool-grid">
+
+      <!-- Payroll Tax -->
+      <a href="/payroll-tax-calculator" class="tool-card tool-card--featured" data-enter>
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="18" rx="2"/>
+              <path d="M7 8h10M7 12h6M7 16h4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tool-card-title">Payroll Tax Calculator</div>
+            <div class="tool-card-desc">Federal income tax, Social Security, Medicare, and state tax withholding — calculated per paycheck for any pay frequency.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">Covers <strong>all 50 states</strong></span>
+          <div class="tool-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Free Payroll Calc -->
+      <a href="/free-payroll-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tool-card-title">Free Payroll Calculator</div>
+            <div class="tool-card-desc">Complete gross-to-net paycheck breakdown including all federal/state taxes, pre-tax deductions (401k, health insurance) and take-home pay.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">Includes <strong>pre-tax deductions</strong></span>
+          <div class="tool-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- PTO Accrual -->
+      <a href="/pto-accrual-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+              <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tool-card-title">PTO Accrual Calculator</div>
+            <div class="tool-card-desc">Calculate paid time off accrual per pay period, per hour worked, or lump sum. Shows current balance, projected year-end balance, and cash value.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">3 accrual <strong>methods</strong></span>
+          <div class="tool-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Overtime Pay -->
+      <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tool-card-title">Overtime Pay Calculator</div>
+            <div class="tool-card-desc">FLSA-compliant overtime calculation for hourly and salaried non-exempt employees. Handles blended rates, double time, and California overtime rules.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">FLSA <strong>compliant</strong></span>
+          <div class="tool-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Employer Tax -->
+      <a href="/employer-tax-calculator" class="tool-card" data-enter data-delay="4">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-amber">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tool-card-title">Employer Payroll Tax Calculator</div>
+            <div class="tool-card-desc">Total employer cost per employee: FICA match, FUTA, SUTA, workers comp — so you know the true cost of every hire, not just the salary.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">Includes <strong>FUTA + SUTA</strong></span>
+          <div class="tool-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 1099 vs W2 -->
+      <a href="/1099-vs-w2-calculator" class="tool-card" data-enter data-delay="5">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 3H3v7h7V3zM21 3h-7v7h7V3zM21 14h-7v7h7v-7zM10 14H3v7h7v-7z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tool-card-title">1099 vs W-2 Tax Calculator</div>
+            <div class="tool-card-desc">Side-by-side tax comparison for independent contractors vs employees. Includes self-employment tax, quarterly estimated taxes, and deduction impact.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">SE tax <strong>vs W-2</strong></span>
+          <div class="tool-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Workers Comp -->
+      <a href="/workers-comp-calculator" class="tool-card" data-enter data-delay="4">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-slate">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>
+              <rect x="8" y="2" width="8" height="4" rx="1"/>
+              <path d="M12 11v6M9 14h6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tool-card-title">Workers Comp Calculator</div>
+            <div class="tool-card-desc">Estimate workers compensation insurance premium by state and job classification code. Based on NCCI and state bureau rates.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">NCCI <strong>classification rates</strong></span>
+          <div class="tool-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Cost Per Hire -->
+      <a href="/cost-per-hire-calculator" class="tool-card" data-enter data-delay="5">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-slate">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tool-card-title">Cost Per Hire Calculator</div>
+            <div class="tool-card-desc">True cost of recruitment: job board fees, recruiter time, interview hours, onboarding, training — broken down per hire and annually.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">Internal + <strong>external costs</strong></span>
+          <div class="tool-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">How It Works</p>
+      <h2 class="section-title">Accurate results in under 2 minutes</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step" data-enter data-delay="1">
+        <div class="step-num">01</div>
+        <div class="step-title">Enter employee details</div>
+        <div class="step-body">Gross pay, pay frequency, filing status, state, and any pre-tax deductions. No account, no email, no tracking.</div>
+      </div>
+      <div class="step" data-enter data-delay="2">
+        <div class="step-num">02</div>
+        <div class="step-title">We apply current rates</div>
+        <div class="step-body">2026 federal tax tables, SSA wage base ($176,100), FUTA/SUTA thresholds, and your state's exact income tax rate.</div>
+      </div>
+      <div class="step" data-enter data-delay="3">
+        <div class="step-num">03</div>
+        <div class="step-title">Get a full breakdown</div>
+        <div class="step-body">Every deduction line-itemized — federal, state, Social Security, Medicare — plus annual projections and employer cost.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AD ZONE -->
+<div style="padding:40px 0;background:var(--bg)">
+  <div class="container">
+    <div class="ad-zone ad-zone--leaderboard" aria-label="Advertisement">ADVERTISEMENT</div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Common payroll questions</h2>
+    </div>
+    <div class="faq-list" role="list">
+
+      <div class="faq-item" data-enter role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
+          How accurate are these payroll calculators?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div id="faq1" class="faq-a" role="region">
+          Our calculators use the official <a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Publication 15 (Circular E)</a> withholding tables and 2025/2026 tax brackets. Federal estimates are within $0.01 of IRS-standard payroll software. State taxes use the most current rates from each state's Department of Revenue. Results are for estimation — always verify with your payroll provider for final deductions.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="1" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
+          What is the 2026 Social Security wage base?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div id="faq2" class="faq-a" role="region">
+          The Social Security Administration adjusts the taxable wage base annually. For 2025 it was $176,100. The 2026 figure will be announced by SSA in October 2025 — our calculator is updated immediately when the official rate is released. Social Security tax is 6.2% for employees (and 6.2% matched by employers) up to that wage limit. Medicare (1.45%) has no wage cap.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="2" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
+          Does overtime apply to salaried employees?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div id="faq3" class="faq-a" role="region">
+          Under the <a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">Fair Labor Standards Act (FLSA)</a>, salaried employees earning below the exempt salary threshold ($684/week as of the 2024 rule, currently under legal review) must receive overtime pay. Salaried employees above the threshold in exempt roles (executive, administrative, professional) are not owed FLSA overtime. See our <a href="/overtime-pay-calculator">Overtime Pay Calculator</a> for a detailed breakdown.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="3" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
+          What is the difference between FUTA and SUTA?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div id="faq4" class="faq-a" role="region">
+          FUTA (Federal Unemployment Tax Act) is a federal employer-only tax of 6% on the first $7,000 of each employee's wages — most employers pay a net 0.6% after the state credit. SUTA (State Unemployment Tax Act) varies by state, ranging from 0.1% to over 8% depending on your state and experience rating. See our <a href="/employer-tax-calculator">Employer Payroll Tax Calculator</a> for combined cost.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="4" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          How is PTO accrual calculated?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div id="faq5" class="faq-a" role="region">
+          PTO can accrue three ways: (1) <strong>per pay period</strong> — annual days ÷ number of pay periods (e.g., 10 days ÷ 26 biweekly periods = 0.385 days/period); (2) <strong>per hour worked</strong> — a rate like 0.04 hours of PTO per hour worked = 1 day per 25 hours; (3) <strong>lump sum</strong> — full balance granted at the start of the year. Use our <a href="/pto-accrual-calculator">PTO Accrual Calculator</a> to project balances under all three methods.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links" role="list">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links" role="list">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <ul class="footer-links" role="list">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA Overview (DOL)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="/about">About & Methodology</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation purposes only — not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/about">Methodology</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+</body>
+</html>

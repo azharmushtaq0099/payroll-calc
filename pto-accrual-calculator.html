@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PTO Accrual Calculator 2026 — Calculate Paid Time Off Balance | FreePayrollCalc</title>
+<meta name="description" content="Free PTO accrual calculator. Calculate paid time off balance per pay period, per hour worked, or lump sum. See year-end balance, rollover, and cash value. No signup.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/pto-accrual-calculator">
+<meta property="og:title" content="PTO Accrual Calculator 2026 — Calculate Paid Time Off Balance">
+<meta property="og:description" content="Free PTO accrual calculator. Calculate paid time off balance per pay period, per hour worked, or lump sum. See year-end balance, rollover, and cash value.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<style>
+/* ── Method tab segmented control ── */
+.method-tabs{
+  display:flex;gap:0;
+  background:var(--surface-2);
+  border:1.5px solid var(--border-dark);
+  border-radius:10px;
+  padding:3px;
+}
+.method-tab{
+  flex:1;padding:8px 10px;border-radius:7px;
+  font-size:13px;font-weight:600;color:var(--ink-2);
+  transition:all var(--transition);cursor:pointer;
+  text-align:center;border:none;background:none;
+  white-space:nowrap;
+}
+.method-tab.active{
+  background:var(--surface);color:var(--accent);
+  box-shadow:0 1px 4px rgba(12,15,26,.10);
+}
+.method-tab:hover:not(.active){color:var(--ink)}
+/* ── PTO-specific overrides ── */
+.pto-balance-display{
+  text-align:center;padding:22px 20px;
+  background:linear-gradient(135deg,var(--green-dim),rgba(27,79,216,.04));
+  border:1px solid var(--green-border);
+  border-radius:14px;margin-bottom:20px;
+}
+.pto-balance-label{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.pto-balance-amount{
+  font-family:var(--mono);font-size:clamp(26px,4vw,38px);font-weight:600;
+  color:var(--green);letter-spacing:-1px;line-height:1;
+}
+.pto-balance-hours{font-size:13px;color:var(--ink-3);margin-top:5px}
+/* ── Inline warning color ── */
+.amount-warn{color:var(--red)}
+/* ── Trust strip tweak for calc pages ── */
+.trust-strip .trust-item svg{color:var(--green)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PTO Accrual Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/pto-accrual-calculator",
+  "description": "Calculate paid time off accrual per pay period, per hour worked, or lump sum. See year-end balance, rollover cap, and cash value. Free, no signup.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "featureList": ["Per pay period PTO accrual","Per hour worked accrual","Lump sum PTO balance","PTO cash value calculator","Rollover and forfeiture calculation"],
+  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is PTO accrual calculated per pay period?",
+      "acceptedAnswer": {"@type":"Answer","text":"To calculate PTO accrual per pay period, divide total annual PTO days by the number of pay periods per year. For example, 15 days on a bi-weekly schedule (26 pay periods) equals 0.5769 days per period. After 14 pay periods the employee has accrued 8.08 days. Formula: Accrual per period = Annual PTO days ÷ Pay periods per year."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is accrued PTO taxable when paid out?",
+      "acceptedAnswer": {"@type":"Answer","text":"Yes. PTO payouts are treated as supplemental wages by the IRS. They are subject to federal income tax withholding (22% flat rate for amounts under $1 million), Social Security (6.2%), Medicare (1.45%), and applicable state income taxes. The same withholding rules apply whether PTO is paid at termination, cashed out mid-year, or rolled over."}
+    },
+    {
+      "@type": "Question",
+      "name": "What states require PTO payout at termination?",
+      "acceptedAnswer": {"@type":"Answer","text":"California treats accrued PTO as earned wages — it cannot be forfeited and must be paid at the final rate upon termination. Colorado, Nebraska, North Dakota, and Illinois have similar requirements. States like Florida, Texas, and Georgia generally allow 'use-it-or-lose-it' policies if clearly communicated in writing. Always verify with your state's labor department."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good PTO accrual rate for employees?",
+      "acceptedAnswer": {"@type":"Answer","text":"According to SHRM, the national average is 14–17 days of combined PTO per year for employees with 1–5 years of service. Expressed as an hourly rate this is approximately 0.054–0.065 hours of PTO per hour worked. Entry-level roles often start at 10 days; senior employees at 10+ years frequently earn 20–25 days. A common hourly accrual benchmark is 1 hour of PTO for every 30 hours worked (≈ 0.0333 hrs/hr)."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/pto-accrual-calculator" class="active">PTO</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="calc-page">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">PTO Accrual Calculator</span>
+    </nav>
+
+    <!-- Ad zone top -->
+    <div style="margin-bottom:28px">
+      <div class="ad-zone ad-zone--leaderboard" aria-label="Advertisement">ADVERTISEMENT</div>
+    </div>
+
+    <!-- Title -->
+    <h1 class="calc-title" data-enter>PTO Accrual Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">
+      Calculate paid time off accrual per pay period, per hour worked, or lump sum.<br>
+      See current balance, year-end projection, cash value, and rollover eligibility.
+    </p>
+
+    <!-- Calculator Layout -->
+    <div class="calc-layout">
+
+      <!-- INPUT FORM -->
+      <div class="calc-main">
+
+        <div class="calc-card" data-enter data-delay="2">
+          <div class="calc-card-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <span class="calc-card-head-title">PTO Accrual Details</span>
+            <span class="calc-card-head-badge">SHRM Guidelines</span>
+          </div>
+          <div class="calc-body">
+
+            <!-- Accrual method selector -->
+            <div class="field-group">
+              <label class="field-label">Accrual Method</label>
+              <div class="method-tabs" role="tablist" aria-label="PTO accrual method">
+                <button class="method-tab active" data-method="per-period" role="tab" aria-selected="true" aria-controls="panel-per-period">Per Pay Period</button>
+                <button class="method-tab" data-method="per-hour" role="tab" aria-selected="false" aria-controls="panel-per-hour">Per Hour Worked</button>
+                <button class="method-tab" data-method="lump-sum" role="tab" aria-selected="false" aria-controls="panel-lump-sum">Lump Sum</button>
+              </div>
+            </div>
+
+            <!-- ── Per Pay Period panel ── -->
+            <div id="panel-per-period" data-method-panel="per-period" role="tabpanel">
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="pp_annual_days">Annual PTO Days</label>
+                  <div class="input-wrap">
+                    <input type="number" id="pp_annual_days" class="field-input has-suffix" placeholder="15" min="0" step="0.5" inputmode="decimal" aria-label="Total PTO days awarded per year">
+                    <span class="input-suffix">days</span>
+                  </div>
+                  <div class="field-hint">Total PTO days granted per year</div>
+                </div>
+                <div>
+                  <label class="field-label" for="pp_current_period">Current Pay Period #</label>
+                  <input type="number" id="pp_current_period" class="field-input" placeholder="14" min="0" step="1" inputmode="numeric" aria-label="Current pay period number (e.g. 14 out of 26)">
+                  <div class="field-hint">Which period are you in now?</div>
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Pay Frequency</label>
+                <div class="pill-group" role="radiogroup" aria-label="Pay frequency">
+                  <button class="pill-btn" data-freq="weekly" role="radio" aria-checked="false">Weekly</button>
+                  <button class="pill-btn active" data-freq="biweekly" role="radio" aria-checked="true">Bi-Weekly</button>
+                  <button class="pill-btn" data-freq="semimonthly" role="radio" aria-checked="false">Semi-Monthly</button>
+                  <button class="pill-btn" data-freq="monthly" role="radio" aria-checked="false">Monthly</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Per Hour Worked panel ── -->
+            <div id="panel-per-hour" data-method-panel="per-hour" role="tabpanel" hidden>
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="ph_rate">Accrual Rate</label>
+                  <div class="input-wrap">
+                    <input type="number" id="ph_rate" class="field-input has-suffix" placeholder="0.0385" min="0" step="0.0001" inputmode="decimal" aria-label="Hours of PTO earned per hour worked">
+                    <span class="input-suffix">hrs/hr</span>
+                  </div>
+                  <div class="field-hint">PTO hrs earned per hr worked (e.g. 0.04)</div>
+                </div>
+                <div>
+                  <label class="field-label" for="ph_weekly_hours">Avg Hours / Week</label>
+                  <div class="input-wrap">
+                    <input type="number" id="ph_weekly_hours" class="field-input has-suffix" placeholder="40" min="1" step="0.5" value="40" inputmode="decimal" aria-label="Average hours worked per week">
+                    <span class="input-suffix">hrs</span>
+                  </div>
+                  <div class="field-hint">Average hours worked each week</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Lump Sum panel ── -->
+            <div id="panel-lump-sum" data-method-panel="lump-sum" role="tabpanel" hidden>
+              <div class="field-row">
+                <div>
+                  <label class="field-label" for="ls_annual_days">Annual Days Granted</label>
+                  <div class="input-wrap">
+                    <input type="number" id="ls_annual_days" class="field-input has-suffix" placeholder="15" min="0" step="0.5" inputmode="decimal" aria-label="PTO days granted at start of year">
+                    <span class="input-suffix">days</span>
+                  </div>
+                  <div class="field-hint">Days deposited at year start</div>
+                </div>
+                <div>
+                  <label class="field-label" for="ls_days_used">Days Already Used</label>
+                  <div class="input-wrap">
+                    <input type="number" id="ls_days_used" class="field-input has-suffix" placeholder="3" min="0" step="0.5" value="0" inputmode="decimal" aria-label="PTO days already taken this year">
+                    <span class="input-suffix">days</span>
+                  </div>
+                  <div class="field-hint">Days taken so far this year</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Common inputs — all methods -->
+            <div class="field-row" style="margin-top:4px">
+              <div>
+                <label class="field-label" for="hourly_rate">Hourly Rate <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" id="hourly_rate" class="field-input has-prefix has-suffix" placeholder="25.00" min="0" step="0.01" inputmode="decimal" aria-label="Hourly wage — used to calculate PTO cash value">
+                  <span class="input-suffix">/hr</span>
+                </div>
+                <div class="field-hint">Calculates cash value of PTO balance</div>
+              </div>
+              <div>
+                <label class="field-label" for="max_carryover">Max Carryover <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+                <div class="input-wrap">
+                  <input type="number" id="max_carryover" class="field-input has-suffix" placeholder="10" min="0" step="0.5" inputmode="decimal" aria-label="Maximum PTO days employer allows to carry over">
+                  <span class="input-suffix">days</span>
+                </div>
+                <div class="field-hint">Leave blank if no rollover cap</div>
+              </div>
+            </div>
+
+            <button class="btn-calc" id="calc-btn" type="button" aria-label="Calculate PTO accrual and balance">
+              Calculate PTO Balance →
+            </button>
+
+          </div>
+        </div>
+
+        <!-- In-content Ad -->
+        <div style="margin-top:28px">
+          <div class="ad-zone ad-zone--in-content" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <!-- SEO article -->
+        <article style="margin-top:40px" data-enter>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">How PTO accrual works — and how to calculate it</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Paid time off (PTO) accrual is the process by which employees earn vacation, sick, or personal days over time. Employers use three primary models — per pay period, per hour worked, and lump sum — each with different implications for payroll accounting, employee scheduling, and legal compliance under the <a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank" style="color:var(--accent)">FLSA</a> and state labor laws.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>Per pay period accrual</strong> is the most common method for salaried employees. An employee earning 15 days annually on a bi-weekly schedule (26 pay periods) accrues <strong>0.5769 days per period</strong>. After the 14th pay period they have accumulated 8.08 days. This method aligns PTO earning directly with payroll processing, making it easy to reflect in any <a href="/free-payroll-calculator" style="color:var(--accent)">payroll system</a>. For semi-monthly payroll (24 periods), the same 15 days becomes 0.625 days per period.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>Per hour worked accrual</strong> is standard for hourly and part-time employees. A common benchmark is <strong>0.04 hours of PTO per hour worked</strong>, which gives a full-time employee (2,080 hrs/year) about 83.2 hours (10.4 days) annually. Several states now mandate minimum sick leave via hourly accrual — Arizona requires 1 hour per 30 hours worked; Michigan 1 per 35; Illinois 1 per 40. See the <a href="/overtime-pay-calculator" style="color:var(--accent)">Overtime Pay Calculator</a> for additional FLSA hour tracking.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>Lump sum PTO</strong> deposits the full annual balance on January 1 or the employee's anniversary date. It simplifies recordkeeping but creates a larger liability at year-start. If your employer uses a "use-it-or-lose-it" policy, check your state's rules — <strong>California</strong> treats accrued PTO as earned wages and prohibits any forfeiture policy. Colorado, Nebraska, and North Dakota have similar wage-parity protections.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75"><strong>Cash value of PTO</strong> is calculated as: balance days × (hourly rate × 8 hours/day). For example, 10 days of unused PTO at $25/hr is worth $2,000. When paid out, this amount is treated as supplemental wages subject to 22% federal withholding plus FICA. See our <a href="/payroll-tax-calculator" style="color:var(--accent)">Payroll Tax Calculator</a> or <a href="/employer-tax-calculator" style="color:var(--accent)">Employer Tax Calculator</a> for exact withholding on payout amounts.</p>
+        </article>
+
+      </div><!-- /calc-main -->
+
+      <!-- RESULTS SIDEBAR -->
+      <div>
+        <div class="results-panel" id="results-panel">
+          <div class="results-head">
+            <span class="results-head-label">Results</span>
+            <span class="results-head-period" id="results-head-period">PTO Balance</span>
+          </div>
+
+          <!-- Empty state -->
+          <div class="results-empty" id="results-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+            </svg>
+            <p>Enter your PTO details and click <strong>Calculate</strong> to see balance, cash value, and rollover eligibility.</p>
+          </div>
+
+          <!-- Results body -->
+          <div class="results-body" id="results-body" hidden>
+
+            <!-- Primary balance display -->
+            <div class="pto-balance-display">
+              <div class="pto-balance-label" id="r-balance-label">Current PTO Balance</div>
+              <div class="pto-balance-amount" id="r-balance-days">0.00 days</div>
+              <div class="pto-balance-hours" id="r-balance-hours">(0.0 hours)</div>
+            </div>
+
+            <!-- Accrual breakdown (method-specific rows) -->
+            <div class="breakdown-section-label">Accrual Breakdown</div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--accent)"></span>
+                <span id="r-label-accrual">Accrual rate</span>
+              </div>
+              <div class="breakdown-row-amount amount-neutral" id="r-accrual-rate">—</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--green)"></span>
+                <span id="r-label-row2">YTD accrued</span>
+              </div>
+              <div class="breakdown-row-amount amount-green" id="r-row2-val">—</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-row-label">
+                <span class="breakdown-row-dot" style="background:var(--ink-3)"></span>
+                <span id="r-label-row3">Remaining periods</span>
+              </div>
+              <div class="breakdown-row-amount amount-neutral" id="r-row3-val">—</div>
+            </div>
+
+            <!-- Annual summary -->
+            <div class="breakdown-section-label" style="margin-top:16px">Annual Summary</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px">
+              <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Annual Accrual</div>
+                <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink)" id="r-annual-accrual">—</div>
+              </div>
+              <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;text-align:center">
+                <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Year-End Balance</div>
+                <div style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--green)" id="r-year-end">—</div>
+              </div>
+            </div>
+
+            <!-- Cash value (conditional on hourly rate) -->
+            <div id="r-cash-section" hidden>
+              <div class="breakdown-section-label" style="margin-top:16px">Cash Value</div>
+              <div class="breakdown-row">
+                <div class="breakdown-row-label">
+                  <span class="breakdown-row-dot" style="background:var(--green)"></span>
+                  PTO cash value
+                </div>
+                <div class="breakdown-row-amount amount-green" id="r-cash-value">$0.00</div>
+              </div>
+              <div style="font-size:11px;color:var(--ink-3);padding-bottom:2px;padding-left:16px" id="r-cash-sub"></div>
+            </div>
+
+            <!-- Rollover / forfeiture (conditional on max carryover) -->
+            <div id="r-carryover-section" hidden>
+              <div class="breakdown-section-label" style="margin-top:16px">Carryover</div>
+              <div class="breakdown-row">
+                <div class="breakdown-row-label">
+                  <span class="breakdown-row-dot" style="background:var(--accent)"></span>
+                  Rollover eligible
+                </div>
+                <div class="breakdown-row-amount amount-neutral" id="r-rollover">—</div>
+              </div>
+              <div class="breakdown-row">
+                <div class="breakdown-row-label">
+                  <span class="breakdown-row-dot" style="background:var(--red)"></span>
+                  Days forfeited
+                </div>
+                <div class="breakdown-row-amount" id="r-forfeited" style="color:var(--red)">—</div>
+              </div>
+            </div>
+
+          </div><!-- /results-body -->
+
+          <div class="results-actions" id="results-actions" hidden>
+            <button class="results-action-btn" data-copy-results aria-label="Copy results to clipboard">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="8" width="10" height="10" rx="2"/><path d="M5 8V5a2 2 0 012-2h7"/></svg>
+              Copy
+            </button>
+            <button class="results-action-btn" id="print-btn" aria-label="Print results">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print
+            </button>
+          </div>
+
+        </div><!-- /results-panel -->
+
+        <!-- Sidebar ad -->
+        <div style="margin-top:24px">
+          <div class="ad-zone ad-zone--sidebar" aria-label="Advertisement">ADVERTISEMENT</div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <strong>State Law Notice:</strong> California treats accrued PTO as earned wages — it cannot be forfeited, and employers must pay it out at termination at the final rate of pay. Colorado, Nebraska, North Dakota, and Illinois have similar protections. "Use-it-or-lose-it" policies may be unenforceable in your state. This calculator is for estimation only — not legal or HR advice. Verify rules with your state's labor department.
+        </div>
+
+      </div><!-- /sidebar -->
+    </div><!-- /calc-layout -->
+
+  </div>
+</main>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        SHRM guidelines
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        FLSA tracking compliance
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        IRS PTO taxation rules
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Updated for 2026
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        No signup required
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container--narrow">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">PTO accrual questions answered</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item" data-enter>
+        <button class="faq-q" aria-expanded="false">
+          How is PTO accrual calculated per pay period?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Divide your total annual PTO days by the number of pay periods per year. For a <strong>bi-weekly schedule (26 periods)</strong>, an employee with 15 days of PTO accrues <strong>0.5769 days per period</strong>. After 14 periods they have 8.08 days. For semi-monthly payroll (24 periods) the rate is 0.625 days/period; weekly (52 periods) is 0.2885 days/period. The full formula: <em>Accrual rate = Annual PTO days ÷ Pay periods per year.</em> YTD balance = Accrual rate × Current period number.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="1">
+        <button class="faq-q" aria-expanded="false">
+          Is accrued PTO taxable when paid out?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          Yes — PTO payouts are classified as <strong>supplemental wages</strong> by the IRS. They are subject to federal income tax withholding at a flat 22% (for amounts under $1 million), plus Social Security (6.2%), Medicare (1.45%), and applicable state income taxes. The withholding applies whether the payout occurs at termination, via an employer cash-out program, or at year-end rollover. Use our <a href="/payroll-tax-calculator">Payroll Tax Calculator</a> to estimate the exact net amount after withholding.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="2">
+        <button class="faq-q" aria-expanded="false">
+          What states require PTO payout at termination?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          <strong>California</strong> has the strongest protections: accrued PTO is legally equivalent to earned wages, cannot be forfeited under any company policy, and must be paid at the employee's final rate of pay upon termination. <strong>Colorado, Nebraska, North Dakota, and Illinois</strong> have similar mandatory payout requirements. By contrast, states like Florida, Texas, Georgia, and New York generally allow "use-it-or-lose-it" policies if clearly written in the employee handbook. Always verify the current rules with your state's department of labor — local city ordinances sometimes impose additional obligations.
+        </div>
+      </div>
+
+      <div class="faq-item" data-enter data-delay="3">
+        <button class="faq-q" aria-expanded="false">
+          What is a good PTO accrual rate for employees?
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-a">
+          According to SHRM's annual benefits survey, the national average for combined PTO (vacation + sick) is <strong>14–17 days per year</strong> for employees with 1–5 years of service, rising to 18–22 days for those with 6–10 years. As an hourly accrual rate, this equates to roughly <strong>0.054–0.065 hours of PTO per hour worked</strong> for a standard 40-hour week. A common statutory benchmark for paid sick leave is 1 hour per 30 hours worked (≈ 0.0333 hrs/hr). Many technology companies and large employers have adopted unlimited PTO policies — though research consistently shows these often result in employees taking fewer days off than traditional accrual plans.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div class="container">
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">Related Tools</p>
+      <h2 class="section-title">More payroll calculators</h2>
+    </div>
+    <div class="related-grid">
+      <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Federal income tax + FICA + all 50 state withholding per paycheck. Updated for 2026 IRS rates.</div></div>
+        </div>
+      </a>
+      <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><div class="tool-card-title">Overtime Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">Calculate FLSA overtime at 1.5× and 2× rates for any pay frequency or shift schedule.</div></div>
+        </div>
+      </a>
+      <a href="/free-payroll-calculator" class="tool-card" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <div><div class="tool-card-title">Free Payroll Calculator</div><div class="tool-card-desc" style="font-size:13px">Full gross-to-net payroll with 401(k), health insurance, and all pre-tax deductions.</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.shrm.org/topics-tools/research-insights" rel="nofollow noopener" target="_blank">SHRM Research</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax or legal advice.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+/* ── PTO Accrual Calculator ── */
+(function(){
+  'use strict';
+
+  var activeMethod = 'per-period';
+  var activeFreq   = 'biweekly';
+  var PERIODS      = {weekly:52, biweekly:26, semimonthly:24, monthly:12};
+
+  /* ── Method tab switching ── */
+  document.querySelectorAll('[data-method]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('[data-method]').forEach(function(b){
+        b.classList.remove('active');
+        b.setAttribute('aria-selected','false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      activeMethod = btn.dataset.method;
+      /* Show the correct method panel, hide others */
+      document.querySelectorAll('[data-method-panel]').forEach(function(p){
+        p.hidden = (p.dataset.methodPanel !== activeMethod);
+      });
+      /* Reset to empty state when method changes */
+      document.getElementById('results-empty').hidden   = false;
+      document.getElementById('results-body').hidden    = true;
+      document.getElementById('results-actions').hidden = true;
+    });
+  });
+
+  /* ── Pay frequency pills (per-period method) ── */
+  document.querySelectorAll('[data-freq]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('[data-freq]').forEach(function(b){
+        b.classList.remove('active');
+        b.setAttribute('aria-checked','false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-checked','true');
+      activeFreq = btn.dataset.freq;
+    });
+  });
+
+  /* ── Print ── */
+  document.getElementById('print-btn').addEventListener('click', function(){
+    window.print();
+  });
+
+  /* ── Enter key triggers calculate ── */
+  ['pp_annual_days','pp_current_period','ph_rate','ph_weekly_hours',
+   'ls_annual_days','ls_days_used','hourly_rate','max_carryover'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('keydown', function(e){ if(e.key === 'Enter') calculate(); });
+  });
+
+  /* ── Calculate button ── */
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+
+  /* ── Helpers ── */
+  function fmt(n){
+    return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function fmtDays(n){
+    return n.toFixed(2) + ' days';
+  }
+  function fmtHrs(n){
+    return n.toFixed(2) + ' hrs';
+  }
+  function setEl(id, val){
+    var el = document.getElementById(id);
+    if(el) el.textContent = val;
+  }
+
+  /* ── Main calculation ── */
+  function calculate(){
+    /* Common inputs */
+    var hourlyRate      = parseFloat(document.getElementById('hourly_rate').value)   || 0;
+    var carryoverRaw    = document.getElementById('max_carryover').value.trim();
+    var hasCarryover    = carryoverRaw !== '';
+    var maxCarryover    = hasCarryover ? (parseFloat(carryoverRaw) || 0) : Infinity;
+
+    var balance          = 0;   /* current accrued PTO in days */
+    var annualAccrual    = 0;   /* full-year accrual in days */
+    var yearEndProjected = 0;   /* projected year-end balance in days */
+    var balanceLabel     = 'Current PTO Balance';
+
+    /* ────────────────────────────────────
+       Method 1: Per Pay Period
+    ──────────────────────────────────── */
+    if(activeMethod === 'per-period'){
+      var annualDays    = parseFloat(document.getElementById('pp_annual_days').value)     || 0;
+      var currentPeriod = parseInt(document.getElementById('pp_current_period').value, 10) || 0;
+
+      if(annualDays <= 0){
+        document.getElementById('pp_annual_days').focus();
+        return;
+      }
+
+      var totalPeriods     = PERIODS[activeFreq];
+      var accrualPerPeriod = annualDays / totalPeriods;
+      var safePeriod       = Math.min(Math.max(0, currentPeriod), totalPeriods);
+      var ytdAccrued       = accrualPerPeriod * safePeriod;
+      var remainingPeriods = totalPeriods - safePeriod;
+      var remainingDays    = accrualPerPeriod * remainingPeriods;
+
+      balance          = ytdAccrued;
+      annualAccrual    = annualDays;
+      yearEndProjected = ytdAccrued + remainingDays;
+      balanceLabel     = 'Current PTO Balance';
+
+      setEl('r-label-accrual', 'Accrual rate');
+      setEl('r-label-row2',    'YTD accrued');
+      setEl('r-label-row3',    'Remaining (' + remainingPeriods + ' periods)');
+      setEl('r-accrual-rate',  accrualPerPeriod.toFixed(4) + ' days / period');
+      setEl('r-row2-val',      fmtDays(ytdAccrued));
+      setEl('r-row3-val',      fmtDays(remainingDays));
+      setEl('results-head-period', 'Per Pay Period');
+
+    /* ────────────────────────────────────
+       Method 2: Per Hour Worked
+    ──────────────────────────────────── */
+    } else if(activeMethod === 'per-hour'){
+      var accrualRate   = parseFloat(document.getElementById('ph_rate').value)          || 0;
+      var avgHrsPerWeek = parseFloat(document.getElementById('ph_weekly_hours').value)  || 40;
+
+      if(accrualRate <= 0){
+        document.getElementById('ph_rate').focus();
+        return;
+      }
+
+      var hrsPerWeek  = accrualRate * avgHrsPerWeek;
+      var hrsPerMonth = hrsPerWeek * 52 / 12;
+      var hrsPerYear  = hrsPerWeek * 52;
+      var daysPerYear = hrsPerYear / 8;
+
+      balance          = daysPerYear;
+      annualAccrual    = daysPerYear;
+      yearEndProjected = daysPerYear;
+      balanceLabel     = 'Annual PTO (Full Year)';
+
+      setEl('r-label-accrual', 'Accrual rate');
+      setEl('r-label-row2',    'Per week');
+      setEl('r-label-row3',    'Per month');
+      setEl('r-accrual-rate',  accrualRate + ' hrs PTO / hr worked');
+      setEl('r-row2-val',      fmtHrs(hrsPerWeek) + ' (' + (hrsPerWeek / 8).toFixed(2) + ' days)');
+      setEl('r-row3-val',      fmtHrs(hrsPerMonth) + ' (' + (hrsPerMonth / 8).toFixed(2) + ' days)');
+      setEl('results-head-period', 'Per Hour Worked');
+
+    /* ────────────────────────────────────
+       Method 3: Lump Sum
+    ──────────────────────────────────── */
+    } else {
+      var annualGranted = parseFloat(document.getElementById('ls_annual_days').value)  || 0;
+      var daysUsed      = parseFloat(document.getElementById('ls_days_used').value)    || 0;
+
+      if(annualGranted <= 0){
+        document.getElementById('ls_annual_days').focus();
+        return;
+      }
+
+      balance          = Math.max(0, annualGranted - daysUsed);
+      annualAccrual    = annualGranted;
+      yearEndProjected = balance;   /* lump sum doesn't grow mid-year */
+      balanceLabel     = 'Current PTO Balance';
+
+      setEl('r-label-accrual', 'Annual grant');
+      setEl('r-label-row2',    'Days used');
+      setEl('r-label-row3',    'Remaining balance');
+      setEl('r-accrual-rate',  fmtDays(annualGranted) + ' / year');
+      setEl('r-row2-val',      fmtDays(daysUsed));
+      setEl('r-row3-val',      fmtDays(balance));
+      setEl('results-head-period', 'Lump Sum');
+    }
+
+    /* ── Common outputs ── */
+    var balanceHours = balance * 8;
+    var dailyRate    = hourlyRate * 8;
+    var cashValue    = balance * dailyRate;
+    var rollover     = hasCarryover ? Math.min(balance, maxCarryover) : balance;
+    var forfeited    = hasCarryover ? Math.max(0, balance - maxCarryover) : 0;
+
+    /* Primary display */
+    setEl('r-balance-label',  balanceLabel);
+    setEl('r-balance-days',   balance.toFixed(2) + ' days');
+    setEl('r-balance-hours',  '(' + balanceHours.toFixed(1) + ' hours)');
+
+    /* Annual summary grid */
+    setEl('r-annual-accrual', annualAccrual.toFixed(2) + ' days / yr');
+    setEl('r-year-end',       yearEndProjected.toFixed(2) + ' days');
+
+    /* Cash value section */
+    var cashSection = document.getElementById('r-cash-section');
+    cashSection.hidden = (hourlyRate <= 0);
+    if(hourlyRate > 0){
+      setEl('r-cash-value', fmt(cashValue));
+      setEl('r-cash-sub',   '@ $' + hourlyRate.toFixed(2) + '/hr × 8 hrs/day');
+    }
+
+    /* Carryover section */
+    var carrySection = document.getElementById('r-carryover-section');
+    carrySection.hidden = !hasCarryover;
+    if(hasCarryover){
+      setEl('r-rollover',  fmtDays(rollover));
+      var forfeitEl = document.getElementById('r-forfeited');
+      if(forfeited > 0){
+        forfeitEl.textContent = fmtDays(forfeited) + ' ⚠';
+        forfeitEl.style.color = 'var(--red)';
+      } else {
+        forfeitEl.textContent = '0 days (within cap)';
+        forfeitEl.style.color = 'var(--green)';
+      }
+    }
+
+    /* Show results panel */
+    document.getElementById('results-empty').hidden   = true;
+    document.getElementById('results-body').hidden    = false;
+    document.getElementById('results-actions').hidden = false;
+
+    /* Scroll to results on mobile */
+    if(window.innerWidth < 900){
+      document.getElementById('results-panel').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+})();
+</script>
+</body>
+</html>
