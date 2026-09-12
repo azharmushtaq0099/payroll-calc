@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hours Worked Calculator — Calculate Time Between Hours | FreePayrollCalc</title>
+<meta name="description" content="Free hours worked calculator. Calculate total hours between a start and end time, add multiple shifts, subtract breaks, and convert to decimal hours. Calculate gross pay at any hourly rate. Handles overnight shifts.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/hours-worked-calculator">
+<meta property="og:title" content="Hours Worked Calculator — Calculate Time Between Hours">
+<meta property="og:description" content="Calculate hours worked between any two times. Single shift, multi-shift, and weekly modes. Decimal conversion, OT detection, and gross pay calculation.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Hours Worked Calculator","url":"https://www.freepayrollcalc.com/hours-worked-calculator","description":"Calculate total hours worked between any start and end time. Supports single shifts, multiple shifts, and weekly totals. Handles overnight shifts, break deductions, decimal hours conversion, and optional gross pay calculation.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate hours worked between two times?","acceptedAnswer":{"@type":"Answer","text":"Subtract the start time from the end time, then subtract any break time. For example: start 8:00 AM, end 5:00 PM, 30-minute break = 9 hours − 0.5 hours = 8.5 hours worked. For digital payroll, convert to decimal: 8 hours 30 minutes = 8 + 30/60 = 8.5 decimal hours."}},{"@type":"Question","name":"How do I convert hours and minutes to decimal for payroll?","acceptedAnswer":{"@type":"Answer","text":"Divide the minutes by 60 and add to whole hours. Examples: 8:15 = 8.25, 8:30 = 8.50, 8:45 = 8.75, 9:20 = 9.333. Payroll software uses decimal hours for multiplying by an hourly rate. For 8h 30min at $18/hr: 8.5 × $18 = $153."}},{"@type":"Question","name":"How do I calculate hours worked overnight?","acceptedAnswer":{"@type":"Answer","text":"When the end time is earlier than the start time, the shift crosses midnight. Add 24 hours to the end time before subtracting. Example: start 10:00 PM (22:00), end 6:00 AM (06:00) = 06:00 + 24:00 − 22:00 = 8 hours. This calculator handles overnight shifts automatically."}},{"@type":"Question","name":"What is the overtime threshold for hours worked per week?","acceptedAnswer":{"@type":"Answer","text":"Under federal FLSA, overtime applies to hours worked over 40 in a single workweek. Some states have daily overtime rules: California, Alaska, and Nevada require overtime after 8 hours in a single workday regardless of weekly total. Double time may apply after 12 hours/day (California) or 8 hours on a 7th consecutive day."}},{"@type":"Question","name":"How do I calculate pay from hours worked?","acceptedAnswer":{"@type":"Answer","text":"Multiply decimal hours by your hourly rate. For overtime, apply 1.5× rate to hours over 40/week (or 8/day in daily-OT states). Example: 45 hours at $20/hr = 40 regular hours × $20 + 5 OT hours × $30 = $800 + $150 = $950 gross pay before taxes."}}]}
+</script>
+<style>
+.mode-pills{display:flex;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:24px;width:fit-content}
+.mode-pill{padding:8px 20px;font-size:13px;font-weight:600;background:var(--surface);border:none;cursor:pointer;transition:all .15s;border-right:1px solid var(--border)}
+.mode-pill:last-child{border-right:none}
+.mode-pill.active{background:var(--accent);color:#fff}
+.time-inputs{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+@media(max-width:500px){.time-inputs{grid-template-columns:1fr 1fr;}.time-inputs .break-col{grid-column:1/-1}}
+.multi-row{display:grid;grid-template-columns:80px 1fr 1fr auto auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.multi-row:last-child{border-bottom:none}
+.weekly-row{display:grid;grid-template-columns:100px 1fr 1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.weekly-row:last-child{border-bottom:none}
+.day-label{font-size:13px;font-weight:600;color:var(--ink-2)}
+.day-label.weekend{color:var(--amber)}
+.hours-badge{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--bg);min-width:60px;text-align:center}
+.hours-badge.ot{background:rgba(217,119,6,.12);color:var(--amber)}
+.hours-badge.normal{background:rgba(5,150,105,.1);color:var(--green)}
+.hours-badge.high{background:rgba(220,38,38,.1);color:var(--red)}
+.big-result{text-align:center;padding:32px 24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-top:24px}
+.big-hours{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:800;color:var(--accent);line-height:1}
+.big-decimal{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--ink-3);margin-top:4px}
+.big-detail{font-size:13px;color:var(--ink-3);margin-top:12px}
+.pay-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:600px){.pay-card{grid-template-columns:1fr}}
+.pay-col-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink-3);margin-bottom:4px}
+.pay-col-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--ink-1)}
+.pay-col-val.green{color:var(--green)}
+.decimal-ref{margin-top:32px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.decimal-ref-title{padding:14px 20px;font-weight:700;font-size:14px;background:var(--bg);border-bottom:1px solid var(--border)}
+.decimal-ref table{width:100%;border-collapse:collapse;font-size:13px}
+.decimal-ref table th{padding:8px 16px;background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);font-weight:700;border-bottom:2px solid var(--border)}
+.decimal-ref table td{padding:7px 16px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace}
+.decimal-ref table tr:last-child td{border-bottom:none}
+.decimal-ref table td:first-child{color:var(--ink-3)}
+.decimal-ref table td:last-child{color:var(--accent);font-weight:700}
+#hw-results{display:none}
+.tf-wrap{display:flex;gap:0;border:1px solid var(--border);border-radius:7px;overflow:hidden;width:fit-content;margin-bottom:16px}
+.tf-btn{padding:5px 14px;font-size:12px;font-weight:600;background:var(--surface);border:none;cursor:pointer}
+.tf-btn.active{background:var(--ink-1);color:#fff}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/hours-worked-calculator" class="active">Hours Worked</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a><a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/time-card-calculator">Time Card Calculator</a>
+    <a href="/hours-worked-calculator" class="active">Hours Worked Calculator</a>
+    <a href="/shift-differential-calculator">Shift Differential Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">›</span>
+      <span aria-current="page">Hours Worked Calculator</span>
+    </nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Hours Worked Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate time between any start and end time. Single shift, multiple shifts, or full weekly timesheet.<br>Convert to decimal hours, detect overtime, and calculate gross pay.</p>
+    <div class="calc-updated">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Handles overnight shifts, break deductions, and decimal conversion
+    </div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Hours Worked Calculator
+      </div>
+
+      <!-- Mode selector -->
+      <div class="mode-pills">
+        <button class="mode-pill active" id="mode-single">Single Shift</button>
+        <button class="mode-pill" id="mode-multi">Multiple Shifts</button>
+        <button class="mode-pill" id="mode-weekly">Weekly Total</button>
+      </div>
+
+      <!-- Time format toggle -->
+      <div class="tf-wrap">
+        <button class="tf-btn active" id="fmt-12">12-Hour</button>
+        <button class="tf-btn" id="fmt-24">24-Hour</button>
+      </div>
+
+      <!-- Single Shift -->
+      <div id="panel-single">
+        <div class="form-grid" style="grid-template-columns:1fr 1fr auto;align-items:end;gap:16px">
+          <div class="form-group" style="margin:0">
+            <label class="form-label">Start Time</label>
+            <div style="display:flex;gap:6px">
+              <input type="time" id="s-start" class="form-input" style="flex:1">
+              <select id="s-start-ampm" class="form-select" style="width:75px"><option>AM</option><option>PM</option></select>
+            </div>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label class="form-label">End Time</label>
+            <div style="display:flex;gap:6px">
+              <input type="time" id="s-end" class="form-input" style="flex:1">
+              <select id="s-end-ampm" class="form-select" style="width:75px"><option>AM</option><option value="PM">PM</option></select>
+            </div>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label class="form-label">Break (min)</label>
+            <input type="number" id="s-break" class="form-input" placeholder="0" min="0" step="5" style="width:80px">
+          </div>
+        </div>
+      </div>
+
+      <!-- Multiple Shifts -->
+      <div id="panel-multi" style="display:none">
+        <div id="multi-rows">
+          <div class="multi-row">
+            <div class="day-label">Shift 1</div>
+            <div><label class="form-label" style="font-size:11px">Start</label><div style="display:flex;gap:4px"><input type="time" class="form-input ms" style="flex:1"><select class="form-select mampm" style="width:70px"><option>AM</option><option>PM</option></select></div></div>
+            <div><label class="form-label" style="font-size:11px">End</label><div style="display:flex;gap:4px"><input type="time" class="form-input me" style="flex:1"><select class="form-select meampm" style="width:70px"><option>AM</option><option value="PM">PM</option></select></div></div>
+            <div><label class="form-label" style="font-size:11px">Break (min)</label><input type="number" class="form-input mb" placeholder="0" min="0" step="5" style="width:70px"></div>
+            <div class="hours-badge" id="mb-h0">—</div>
+          </div>
+        </div>
+        <button class="calc-btn calc-btn--secondary" id="add-shift-btn" style="margin-top:12px;width:auto;padding:8px 16px;font-size:13px">+ Add Shift</button>
+      </div>
+
+      <!-- Weekly -->
+      <div id="panel-weekly" style="display:none">
+        <div id="weekly-rows">
+          <!-- Mon–Sun generated by JS -->
+        </div>
+      </div>
+
+      <!-- Gross pay section -->
+      <div style="border-top:1px solid var(--border);margin-top:20px;padding-top:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--ink-2);margin-bottom:12px">Gross Pay (optional)</div>
+        <div class="form-grid" style="grid-template-columns:1fr 1fr auto;align-items:end;gap:12px">
+          <div class="form-group" style="margin:0">
+            <label class="form-label">Hourly Rate</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="hourly-rate" class="form-input form-input--prefixed" placeholder="18.00" min="0" step="0.01"></div>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label class="form-label">OT Rule</label>
+            <select id="ot-rule" class="form-select">
+              <option value="weekly">Weekly (40 hrs — federal)</option>
+              <option value="daily">Daily (8 hrs — CA/AK/NV)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label class="form-label">OT Rate</label>
+            <select id="ot-mult" class="form-select" style="width:90px">
+              <option value="1.5">1.5×</option>
+              <option value="2">2.0×</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-btn" style="margin-top:20px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Calculate Hours
+      </button>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="hw-results">
+      <div class="big-result" data-enter>
+        <div class="big-hours" id="r-hrmin">—</div>
+        <div class="big-decimal" id="r-decimal">— decimal hours</div>
+        <div class="big-detail" id="r-detail">—</div>
+      </div>
+
+      <div class="pay-card" id="pay-card-wrap" style="display:none" data-enter data-delay="1">
+        <div>
+          <div class="pay-col-label">Regular Pay</div>
+          <div class="pay-col-val" id="r-reg-pay">—</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-top:3px"><span id="r-reg-hrs">—</span> hrs × <span id="r-reg-rate">—</span></div>
+        </div>
+        <div>
+          <div class="pay-col-label">Overtime Pay</div>
+          <div class="pay-col-val" id="r-ot-pay">$0</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-top:3px"><span id="r-ot-hrs">0</span> OT hrs × <span id="r-ot-rate">—</span></div>
+        </div>
+        <div>
+          <div class="pay-col-label">Total Gross Pay</div>
+          <div class="pay-col-val green" id="r-gross">—</div>
+          <div style="font-size:12px;margin-top:3px"><a href="/payroll-tax-calculator" style="color:var(--accent);font-size:12px">Calculate take-home →</a></div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+        <a href="/time-card-calculator" class="calc-btn calc-btn--secondary" style="flex:1;min-width:200px;text-align:center;text-decoration:none">Full weekly timesheet →</a>
+        <button class="calc-btn calc-btn--secondary" id="reset-btn" style="flex:0">Reset</button>
+      </div>
+    </div>
+
+    <!-- DECIMAL REFERENCE TABLE -->
+    <div class="decimal-ref" style="margin-top:40px" data-enter>
+      <div class="decimal-ref-title">Decimal Hours Quick Reference</div>
+      <table>
+        <thead><tr><th>Hours : Minutes</th><th>Decimal Hours</th><th>Hours : Minutes</th><th>Decimal Hours</th></tr></thead>
+        <tbody>
+          <tr><td>8:00</td><td>8.00</td><td>8:30</td><td>8.50</td></tr>
+          <tr><td>8:05</td><td>8.08</td><td>8:35</td><td>8.58</td></tr>
+          <tr><td>8:10</td><td>8.17</td><td>8:40</td><td>8.67</td></tr>
+          <tr><td>8:15</td><td>8.25</td><td>8:45</td><td>8.75</td></tr>
+          <tr><td>8:20</td><td>8.33</td><td>8:50</td><td>8.83</td></tr>
+          <tr><td>8:25</td><td>8.42</td><td>8:55</td><td>8.92</td></tr>
+          <tr><td>9:00</td><td>9.00</td><td>9:30</td><td>9.50</td></tr>
+          <tr><td>10:00</td><td>10.00</td><td>10:30</td><td>10.50</td></tr>
+          <tr><td>12:00</td><td>12.00</td><td>7:30</td><td>7.50</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ARTICLE -->
+    <section class="calc-article" style="margin-top:56px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How to Calculate Hours Worked</h2>
+        <p>To calculate hours worked, subtract your start time from your end time, then subtract any unpaid break time. The result is typically expressed in decimal hours for payroll calculations — divide the minutes portion by 60 to convert.</p>
+        <p><strong>Example:</strong> Start 8:30 AM, End 5:15 PM, 30-minute lunch break.<br>
+        Total time: 8h 45min. Subtract 30min break = 8h 15min = <strong>8.25 decimal hours</strong>.</p>
+        <h3>Overnight Shifts</h3>
+        <p>When your shift ends on the next calendar day (e.g., 10:00 PM to 6:00 AM), the end time is earlier than the start time. Add 24 hours to the end time: 6:00 AM + 24 = 30:00, then 30:00 − 22:00 = 8 hours. This calculator handles overnight shifts automatically.</p>
+        <h3>Federal vs. Daily Overtime</h3>
+        <p>Federal law (FLSA) requires overtime pay for hours over 40 in a workweek — the daily total doesn't matter. However, California, Alaska, and Nevada require daily overtime after 8 hours in a single day. Choose the OT rule that matches your state when calculating gross pay.</p>
+        <h3>The 7-Minute Rounding Rule</h3>
+        <p>IRS allows employers to round time to the nearest quarter-hour for payroll. Under the 7-minute rule: 1–7 minutes after a quarter hour round down; 8–14 minutes round up. For example, 8:07 AM rounds to 8:00 AM; 8:08 AM rounds to 8:15 AM. Rounding must be applied consistently and cannot systematically favor the employer.</p>
+        <p><strong>Related:</strong> <a href="/time-card-calculator">Time Card Calculator</a> · <a href="/overtime-pay-calculator">Overtime Pay Calculator</a> · <a href="/payroll-tax-calculator">Payroll Tax Calculator</a> · <a href="/salary-to-hourly-calculator">Salary to Hourly Calculator</a></p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Hours worked questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How do I calculate hours worked between two times?</summary><div class="faq-a">Subtract start time from end time, then subtract break minutes. Convert remaining minutes to decimal by dividing by 60. Example: 8:00 AM to 5:00 PM = 9 hours − 0.5 hr break = 8.5 hours (8h 30min).</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">How do I convert hours and minutes to decimal?</summary><div class="faq-a">Divide the minutes by 60 and add to whole hours. 8h 15min = 8 + 15/60 = 8.25. 8h 30min = 8.50. 8h 45min = 8.75. Use the quick reference table above for common conversions.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How do I calculate hours worked on an overnight shift?</summary><div class="faq-a">When end time is before start time, the shift crossed midnight. Add 24 to the end time before subtracting. Example: start 10:00 PM (22:00), end 6:00 AM → 6:00 + 24 = 30:00 → 30:00 − 22:00 = 8 hours.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">When does overtime start?</summary><div class="faq-a">Federally (FLSA): after 40 hours in a workweek. In California, Alaska, and Nevada: after 8 hours in a single workday (daily overtime). California also mandates double time after 12 hours/day. Select your OT rule in the calculator above.</div></details>
+          <details class="faq-item" data-enter data-delay="5"><summary class="faq-q">How do I calculate gross pay from hours worked?</summary><div class="faq-a">Regular pay = regular hours × hourly rate. Overtime pay = OT hours × (hourly rate × 1.5). Add both together for gross pay. To see your take-home after taxes, use the Payroll Tax Calculator and enter your gross pay.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More payroll calculators</h2></div>
+        <div class="related-grid">
+          <a href="/time-card-calculator" class="tool-card" data-enter data-delay="1">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+              <div><div class="tool-card-title">Time Card Calculator</div><div class="tool-card-desc" style="font-size:13px">Full weekly timesheet with OT detection, gross pay, and print output.</div></div>
+            </div>
+          </a>
+          <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="2">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div><div class="tool-card-title">Overtime Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">FLSA overtime, double time, and blended rate calculations.</div></div>
+            </div>
+          </a>
+          <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="3">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div>
+              <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">See your net paycheck after federal, state, and FICA deductions.</div></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Calculators</div><ul class="footer-links"><li><a href="/time-card-calculator">Time Card Calculator</a></li><li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/salary-to-hourly-calculator">Salary to Hourly</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li><li><a href="/shift-differential-calculator">Shift Differential</a></li><li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Sources</div><ul class="footer-links"><li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li><li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var mode = 'single', fmt = '12';
+  var days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var multiCount = 1;
+
+  // Build weekly rows
+  var wr = document.getElementById('weekly-rows');
+  days.forEach(function(d,i){
+    var isWe = i>=5;
+    var row = document.createElement('div');
+    row.className = 'weekly-row';
+    row.innerHTML = '<div class="day-label'+(isWe?' weekend':'')+'">'+d+'</div>'
+      +'<div><div style="display:flex;gap:4px"><input type="time" class="form-input ws" style="flex:1"><select class="form-select wsampm" style="width:70px"><option>AM</option><option>PM</option></select></div></div>'
+      +'<div><div style="display:flex;gap:4px"><input type="time" class="form-input we" style="flex:1"><select class="form-select weampm" style="width:70px"><option>AM</option><option value="PM">PM</option></select></div></div>'
+      +'<div class="hours-badge" id="wh-'+i+'">—</div>';
+    wr.appendChild(row);
+  });
+
+  // Mode switching
+  document.getElementById('mode-single').addEventListener('click',function(){setMode('single');});
+  document.getElementById('mode-multi').addEventListener('click',function(){setMode('multi');});
+  document.getElementById('mode-weekly').addEventListener('click',function(){setMode('weekly');});
+  function setMode(m){
+    mode=m;
+    ['single','multi','weekly'].forEach(function(x){
+      document.getElementById('mode-'+x).classList.toggle('active',x===m);
+      document.getElementById('panel-'+x).style.display=x===m?'':'none';
+    });
+  }
+
+  // Time format
+  document.getElementById('fmt-12').addEventListener('click',function(){fmt='12';document.getElementById('fmt-12').classList.add('active');document.getElementById('fmt-24').classList.remove('active');toggleAMPM(true);});
+  document.getElementById('fmt-24').addEventListener('click',function(){fmt='24';document.getElementById('fmt-24').classList.add('active');document.getElementById('fmt-12').classList.remove('active');toggleAMPM(false);});
+  function toggleAMPM(show){
+    document.querySelectorAll('.mampm,.meampm,.wsampm,.weampm,[id="s-start-ampm"],[id="s-end-ampm"]').forEach(function(el){el.style.display=show?'':'none';});
+  }
+
+  // Add shift row
+  document.getElementById('add-shift-btn').addEventListener('click',function(){
+    if(multiCount>=6) return;
+    multiCount++;
+    var row = document.createElement('div');
+    row.className = 'multi-row';
+    row.innerHTML = '<div class="day-label">Shift '+multiCount+'</div>'
+      +'<div><label class="form-label" style="font-size:11px">Start</label><div style="display:flex;gap:4px"><input type="time" class="form-input ms" style="flex:1"><select class="form-select mampm" style="width:70px"><option>AM</option><option>PM</option></select></div></div>'
+      +'<div><label class="form-label" style="font-size:11px">End</label><div style="display:flex;gap:4px"><input type="time" class="form-input me" style="flex:1"><select class="form-select meampm" style="width:70px"><option>AM</option><option value="PM">PM</option></select></div></div>'
+      +'<div><label class="form-label" style="font-size:11px">Break (min)</label><input type="number" class="form-input mb" placeholder="0" min="0" step="5" style="width:70px"></div>'
+      +'<div class="hours-badge" id="mb-h'+(multiCount-1)+'">—</div>';
+    document.getElementById('multi-rows').appendChild(row);
+    if(multiCount>=6) document.getElementById('add-shift-btn').disabled=true;
+  });
+
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+  document.getElementById('reset-btn').addEventListener('click',function(){document.getElementById('hw-results').style.display='none';});
+
+  function parseTimeParts(timeVal, ampm){
+    if(!timeVal) return null;
+    var parts = timeVal.split(':');
+    var h = parseInt(parts[0]), m = parseInt(parts[1])||0;
+    if(fmt==='12'){
+      if(ampm==='PM' && h!==12) h+=12;
+      if(ampm==='AM' && h===12) h=0;
+    }
+    return h + m/60;
+  }
+  function calcShift(start, end, breakMin){
+    if(start===null || end===null) return null;
+    var diff = end - start;
+    if(diff < 0) diff += 24; // overnight
+    diff -= (breakMin||0)/60;
+    return Math.max(0, diff);
+  }
+  function toHrMin(dec){
+    var h=Math.floor(dec), m=Math.round((dec-h)*60);
+    if(m===60){h++;m=0;}
+    return h+'h '+(m<10?'0'+m:m)+'m';
+  }
+  function fmtD(n){return n.toFixed(2);}
+  function fmtMoney(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function badgeClass(h){if(h===null||h===0) return '';if(h>10) return 'high';if(h>8) return 'ot';return 'normal';}
+
+  function calculate(){
+    var totalHours = 0;
+    var dailyHours = [];
+
+    if(mode==='single'){
+      var st = parseTimeParts(document.getElementById('s-start').value, document.getElementById('s-start-ampm').value);
+      var et = parseTimeParts(document.getElementById('s-end').value, document.getElementById('s-end-ampm').value);
+      var brk = parseFloat(document.getElementById('s-break').value)||0;
+      var h = calcShift(st, et, brk);
+      if(h===null){alert('Please enter start and end times.');return;}
+      totalHours = h;
+      dailyHours = [h];
+      document.getElementById('r-detail').textContent = (st!==null?'Start '+fmtTime(st):'')+' · '+(et!==null?'End '+fmtTime(et):'')+' · Break '+brk+'min';
+    } else if(mode==='multi'){
+      var rows = document.querySelectorAll('#multi-rows .multi-row');
+      var idx = 0;
+      rows.forEach(function(row, ri){
+        var sEl=row.querySelector('.ms'), eEl=row.querySelector('.me'), bEl=row.querySelector('.mb');
+        var sAmp=row.querySelector('.mampm'), eAmp=row.querySelector('.meampm');
+        if(!sEl.value||!eEl.value){document.getElementById('mb-h'+ri).textContent='—';return;}
+        var h=calcShift(parseTimeParts(sEl.value,sAmp?sAmp.value:'AM'),parseTimeParts(eEl.value,eAmp?eAmp.value:'PM'),parseFloat(bEl.value)||0);
+        var badge=document.getElementById('mb-h'+ri);
+        if(badge){badge.textContent=toHrMin(h);badge.className='hours-badge '+(badgeClass(h)||'normal');}
+        totalHours+=h; dailyHours.push(h); idx++;
+      });
+      document.getElementById('r-detail').textContent = idx+' shifts · Total: '+toHrMin(totalHours);
+    } else {
+      var wRows = document.querySelectorAll('#weekly-rows .weekly-row');
+      wRows.forEach(function(row, i){
+        var sEl=row.querySelector('.ws'), eEl=row.querySelector('.we');
+        var sAmp=row.querySelector('.wsampm'), eAmp=row.querySelector('.weampm');
+        if(!sEl.value||!eEl.value){document.getElementById('wh-'+i).textContent='—';dailyHours.push(0);return;}
+        var h=calcShift(parseTimeParts(sEl.value,sAmp?sAmp.value:'AM'),parseTimeParts(eEl.value,eAmp?eAmp.value:'PM'),0);
+        var badge=document.getElementById('wh-'+i);
+        if(badge){badge.textContent=toHrMin(h);badge.className='hours-badge '+(badgeClass(h)||'normal');}
+        totalHours+=h; dailyHours.push(h);
+      });
+      document.getElementById('r-detail').textContent = 'Weekly total · '+dailyHours.filter(function(h){return h>0;}).length+' days worked';
+    }
+
+    if(totalHours===0) return;
+
+    document.getElementById('r-hrmin').textContent = toHrMin(totalHours);
+    document.getElementById('r-decimal').textContent = fmtD(totalHours)+' decimal hours';
+
+    // Gross pay
+    var rate = parseFloat(document.getElementById('hourly-rate').value)||0;
+    var otRule = document.getElementById('ot-rule').value;
+    var otMult = parseFloat(document.getElementById('ot-mult').value)||1.5;
+    if(rate>0){
+      var regHrs, otHrs;
+      if(otRule==='daily'){
+        var rArr = dailyHours.map(function(h){return Math.min(h,8);});
+        var oArr = dailyHours.map(function(h){return Math.max(0,h-8);});
+        regHrs = rArr.reduce(function(a,b){return a+b;},0);
+        otHrs = oArr.reduce(function(a,b){return a+b;},0);
+      } else {
+        otHrs = Math.max(0, totalHours-40);
+        regHrs = totalHours - otHrs;
+      }
+      var regPay = regHrs * rate;
+      var otPay = otHrs * (rate * otMult);
+      var gross = regPay + otPay;
+      document.getElementById('r-reg-pay').textContent = fmtMoney(regPay);
+      document.getElementById('r-reg-hrs').textContent = fmtD(regHrs);
+      document.getElementById('r-reg-rate').textContent = '$'+rate.toFixed(2)+'/hr';
+      document.getElementById('r-ot-pay').textContent = fmtMoney(otPay);
+      document.getElementById('r-ot-hrs').textContent = fmtD(otHrs);
+      document.getElementById('r-ot-rate').textContent = '$'+(rate*otMult).toFixed(2)+'/hr';
+      document.getElementById('r-gross').textContent = fmtMoney(gross);
+      document.getElementById('pay-card-wrap').style.display='grid';
+    } else {
+      document.getElementById('pay-card-wrap').style.display='none';
+    }
+
+    document.getElementById('hw-results').style.display='block';
+    document.getElementById('hw-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function fmtTime(dec){
+    var h=Math.floor(dec), m=Math.round((dec%1)*60);
+    if(fmt==='24') return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m);
+    var ampm=h<12?'AM':'PM'; var h12=h%12||12;
+    return h12+':'+(m<10?'0'+m:m)+' '+ampm;
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Time Card Calculator 2026 — Free Weekly Timesheet Calculator | FreePayrollCalc</title>
+<meta name="description" content="Free time card calculator. Enter your weekly work hours, auto-calculate regular and overtime pay, and print a clean timesheet. Supports daily OT (8 hrs) and weekly OT (40 hrs). All pay frequencies.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/time-card-calculator">
+<meta property="og:title" content="Time Card Calculator 2026 — Free Weekly Timesheet Calculator">
+<meta property="og:description" content="Free weekly time card calculator with overtime detection, gross pay calculation, and printable timesheet. Supports 12/24-hour format and daily or weekly OT rules.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Time Card Calculator 2026","url":"https://www.freepayrollcalc.com/time-card-calculator","description":"Free weekly time card and timesheet calculator. Enter daily start/end times and breaks, calculate regular and overtime hours, view gross pay, and print a professional timesheet. Supports FLSA weekly OT (40 hrs) and daily OT (8 hrs/day for CA/AK/NV).","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Weekly timesheet grid Monday–Sunday","12-hour and 24-hour time formats","Daily overtime (8 hrs) and weekly overtime (40 hrs) modes","Overtime auto-detection and calculation","Gross pay with regular and OT rates","Print-ready timesheet output"],"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate hours on a time card?","acceptedAnswer":{"@type":"Answer","text":"Subtract the start time from the end time for each day, then subtract any unpaid break time. Add up all daily totals to get your weekly hours. Convert time to decimals for payroll (divide minutes by 60). Example: 8:00 AM to 5:30 PM minus 30-minute break = 9 hours exactly (9.0 decimal hours)."}},{"@type":"Question","name":"When does overtime start — after 8 hours a day or 40 hours a week?","acceptedAnswer":{"@type":"Answer","text":"Under federal law (FLSA), overtime begins after 40 hours in a single workweek — daily hours don't matter. However, California, Alaska, and Nevada require overtime after 8 hours in a single workday regardless of the weekly total. California also mandates double time after 12 hours in a single day. This calculator supports both daily and weekly overtime rules."}},{"@type":"Question","name":"How do I calculate overtime pay on a time card?","acceptedAnswer":{"@type":"Answer","text":"For weekly OT: multiply hours over 40 by your overtime rate (typically 1.5× base rate). For daily OT: multiply hours over 8 per day by the OT rate. Example: 45 hours total at $20/hr with weekly OT = 40 hrs × $20 + 5 hrs × $30 = $800 + $150 = $950 gross."}},{"@type":"Question","name":"What is the 7-minute rounding rule for time cards?","acceptedAnswer":{"@type":"Answer","text":"IRS allows employers to round employee time to the nearest quarter-hour. Under the 7-minute rule: 1–7 minutes past a quarter-hour round down; 8–14 minutes round up. For example, 8:07 AM rounds to 8:00 AM while 8:08 AM rounds to 8:15 AM. Rounding must be applied consistently and cannot systematically favor the employer."}},{"@type":"Question","name":"How do I print a time card or timesheet?","acceptedAnswer":{"@type":"Answer","text":"After filling in your weekly hours, click the 'Print Timesheet' button to open a print-ready view. The printed timesheet shows employee name, the week date range, all daily entries, totals, and a signature line — formatted to fit a standard letter page. Your browser print dialog will appear automatically."}}]}
+</script>
+<style>
+/* ── Time Card Specific Styles ── */
+.tc-header-bar{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:16px 20px;background:var(--bg);border-bottom:1px solid var(--border);border-radius:12px 12px 0 0;margin:-24px -24px 20px}
+.tc-week-label{font-size:13px;font-weight:600;color:var(--ink-2)}
+.tc-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tc-toggle{display:flex;gap:0;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
+.tc-toggle-btn{padding:5px 12px;font-size:12px;font-weight:600;background:var(--surface);border:none;cursor:pointer;transition:all .15s}
+.tc-toggle-btn.active{background:var(--accent);color:#fff}
+.tc-btn-sm{padding:5px 12px;font-size:12px;font-weight:600;background:var(--surface);border:1.5px solid var(--border);border-radius:7px;cursor:pointer;color:var(--ink-2)}
+.tc-btn-sm:hover{background:var(--bg)}
+
+/* Timesheet table */
+.ts-wrap{overflow-x:auto;margin:0 -4px}
+.ts-table{width:100%;border-collapse:collapse;min-width:600px}
+.ts-table th{padding:8px 12px;background:var(--bg);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);text-align:left;border-bottom:2px solid var(--border);white-space:nowrap}
+.ts-table th:last-child{text-align:right}
+.ts-row{border-bottom:1px solid var(--border)}
+.ts-row:last-child{border-bottom:none}
+.ts-row.weekend td{background:rgba(0,0,0,.015)}
+.ts-row.weekend .day-col{color:var(--amber)}
+.ts-row td{padding:10px 12px;vertical-align:middle}
+.day-col{font-size:13px;font-weight:700;color:var(--ink-2);width:90px;white-space:nowrap}
+.time-col{min-width:130px}
+.time-input-wrap{display:flex;gap:5px;align-items:center}
+.time-input-wrap input[type=time]{flex:1;min-width:80px;padding:6px 8px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;background:var(--surface);color:var(--ink-1);font-family:inherit}
+.time-input-wrap input[type=time]:focus{outline:none;border-color:var(--accent)}
+.ampm-sel{padding:5px 6px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-weight:600;background:var(--surface);cursor:pointer;color:var(--ink-2)}
+.break-input{width:60px;padding:6px 8px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;background:var(--surface);text-align:center;font-family:inherit}
+.break-input:focus{outline:none;border-color:var(--accent)}
+.hours-cell{text-align:right;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;white-space:nowrap}
+.hours-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:700}
+.ht-normal{background:rgba(5,150,105,.1);color:var(--green)}
+.ht-ot{background:rgba(217,119,6,.12);color:var(--amber)}
+.ht-high{background:rgba(220,38,38,.1);color:var(--red)}
+.ht-empty{background:var(--bg);color:var(--ink-3)}
+
+/* Totals row */
+.ts-totals{background:var(--bg);border-top:2px solid var(--border)}
+.ts-totals td{padding:12px 12px;font-weight:700;font-size:14px}
+
+/* Results summary */
+.tc-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+@media(max-width:700px){.tc-summary{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.tc-summary{grid-template-columns:1fr}}
+.tc-stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.tc-stat-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:6px}
+.tc-stat-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--ink-1)}
+.tc-stat-val.green{color:var(--green)}
+.tc-stat-val.amber{color:var(--amber)}
+
+/* Print styles */
+@media print {
+  .site-nav,.site-footer,.calc-btn,.calc-breadcrumb,.calc-article,
+  .faq-section,.related-section,.ad-zone,.tc-controls,.calc-updated,
+  .calc-subtitle,.print-hide{display:none!important}
+  .print-only{display:block!important}
+  body{background:#fff!important}
+  .calc-card{border:none!important;box-shadow:none!important;padding:0!important}
+  .ts-table th{background:#f0f0f0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ts-row.weekend td{background:#fafafa!important}
+  .ts-totals{background:#f0f0f0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.print-only{display:none}
+.print-header{margin-bottom:24px}
+.print-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.print-sig-row{display:flex;gap:40px;margin-top:32px;padding-top:16px;border-top:1px solid #ccc}
+.print-sig-field{flex:1;border-bottom:1px solid #000;padding-bottom:4px;font-size:12px}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/time-card-calculator" class="active">Time Card</a>
+        <a href="/hours-worked-calculator">Hours Worked</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/time-card-calculator" class="active">Time Card Calculator</a>
+    <a href="/hours-worked-calculator">Hours Worked Calculator</a>
+    <a href="/shift-differential-calculator">Shift Differential Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+
+    <nav class="calc-breadcrumb print-hide" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">›</span>
+      <span aria-current="page">Time Card Calculator</span>
+    </nav>
+
+    <div class="ad-zone ad-zone--leaderboard print-hide"></div>
+
+    <h1 class="calc-title print-hide" data-enter>Time Card Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle print-hide" data-enter data-delay="1">
+      Enter your weekly start and end times — regular and overtime hours calculate automatically.<br>
+      Supports daily OT (CA/AK/NV) and federal weekly OT. Print a clean timesheet in one click.
+    </p>
+    <div class="calc-updated print-hide">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      FLSA-compliant overtime rules · Printable timesheet output · All pay frequencies
+    </div>
+
+    <!-- PRINT HEADER (hidden on screen) -->
+    <div class="print-only print-header">
+      <div class="print-header-row">
+        <div style="font-size:20px;font-weight:800">Weekly Timesheet</div>
+        <div style="font-size:13px;color:#666">FreePayrollCalc.com</div>
+      </div>
+      <div style="display:flex;gap:40px;font-size:13px;margin-top:8px">
+        <div>Employee Name: <strong id="print-name-show">___________________</strong></div>
+        <div>Week of: <strong id="print-week-show">___________________</strong></div>
+      </div>
+    </div>
+
+    <div class="calc-card" data-enter data-delay="2">
+
+      <!-- Header bar -->
+      <div class="tc-header-bar">
+        <div class="tc-week-label">
+          Week of:
+          <input type="date" id="week-start" style="margin-left:8px;padding:4px 8px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;background:var(--surface);font-family:inherit">
+        </div>
+        <div class="tc-controls print-hide">
+          <!-- Time format -->
+          <div class="tc-toggle">
+            <button class="tc-toggle-btn active" id="fmt-12">12-hr</button>
+            <button class="tc-toggle-btn" id="fmt-24">24-hr</button>
+          </div>
+          <!-- OT rule -->
+          <div class="tc-toggle">
+            <button class="tc-toggle-btn active" id="ot-weekly" title="Federal FLSA: OT after 40 hrs/week">Weekly OT</button>
+            <button class="tc-toggle-btn" id="ot-daily" title="CA/AK/NV: OT after 8 hrs/day">Daily OT</button>
+          </div>
+          <button class="tc-btn-sm" id="clear-btn">Clear All</button>
+        </div>
+      </div>
+
+      <!-- Timesheet table -->
+      <div class="ts-wrap">
+        <table class="ts-table" id="ts-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Time In</th>
+              <th>Time Out</th>
+              <th style="width:80px">Break (min)</th>
+              <th style="text-align:right">Hours Worked</th>
+            </tr>
+          </thead>
+          <tbody id="ts-body">
+            <!-- rows injected by JS -->
+          </tbody>
+          <tfoot>
+            <tr class="ts-totals">
+              <td colspan="3" style="font-size:13px;color:var(--ink-3)">Weekly Totals</td>
+              <td style="font-family:'JetBrains Mono',monospace;text-align:center" id="tot-break">—</td>
+              <td class="hours-cell" id="tot-hours" style="font-size:16px">—</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Pay rate section -->
+      <div style="border-top:1px solid var(--border);margin-top:20px;padding-top:20px" class="print-hide">
+        <div style="font-size:13px;font-weight:700;color:var(--ink-2);margin-bottom:12px">Gross Pay Calculation (optional)</div>
+        <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div class="form-group" style="margin:0">
+            <label class="form-label" for="pay-rate">Hourly Rate</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="pay-rate" class="form-input form-input--prefixed" placeholder="20.00" min="0" step="0.01"></div>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label class="form-label" for="ot-mult">OT Multiplier</label>
+            <select id="ot-mult" class="form-select">
+              <option value="1.5">1.5× (time and a half)</option>
+              <option value="2.0">2.0× (double time)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label class="form-label" for="emp-name">Employee Name</label>
+            <input type="text" id="emp-name" class="form-input" placeholder="Optional — for timesheet">
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap" class="print-hide">
+        <button class="calc-btn" id="calc-btn" style="flex:2;min-width:180px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          Calculate Time Card
+        </button>
+        <button class="calc-btn calc-btn--secondary" id="print-btn" style="flex:1;min-width:130px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Timesheet
+        </button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="tc-results" style="display:none">
+      <div class="tc-summary" data-enter>
+        <div class="tc-stat">
+          <div class="tc-stat-label">Total Hours</div>
+          <div class="tc-stat-val" id="r-total-hrs">—</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-top:4px" id="r-days-worked">—</div>
+        </div>
+        <div class="tc-stat">
+          <div class="tc-stat-label">Regular Hours</div>
+          <div class="tc-stat-val green" id="r-reg-hrs">—</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-top:4px">at base rate</div>
+        </div>
+        <div class="tc-stat">
+          <div class="tc-stat-label">Overtime Hours</div>
+          <div class="tc-stat-val amber" id="r-ot-hrs">—</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-top:4px" id="r-ot-label">at 1.5× rate</div>
+        </div>
+        <div class="tc-stat">
+          <div class="tc-stat-label">Gross Pay</div>
+          <div class="tc-stat-val green" id="r-gross">—</div>
+          <div style="font-size:12px;margin-top:4px"><a href="/payroll-tax-calculator" style="color:var(--accent)">After taxes →</a></div>
+        </div>
+      </div>
+
+      <!-- Pay breakdown -->
+      <div id="pay-breakdown" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:16px" data-enter data-delay="1">
+        <div style="padding:12px 20px;background:var(--bg);border-bottom:1px solid var(--border);font-weight:700;font-size:13px">Pay Breakdown</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0">
+          <div style="padding:16px 20px;border-right:1px solid var(--border)">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink-3);margin-bottom:6px">Regular Pay</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700" id="r-reg-pay">—</div>
+            <div style="font-size:12px;color:var(--ink-3);margin-top:3px"><span id="r-rp-hrs">—</span> hrs × <span id="r-rp-rate">—</span></div>
+          </div>
+          <div style="padding:16px 20px;border-right:1px solid var(--border)">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink-3);margin-bottom:6px">Overtime Pay</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--amber)" id="r-ot-pay">$0</div>
+            <div style="font-size:12px;color:var(--ink-3);margin-top:3px"><span id="r-op-hrs">0</span> hrs × <span id="r-op-rate">—</span></div>
+          </div>
+          <div style="padding:16px 20px">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink-3);margin-bottom:6px">Total Gross</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--green)" id="r-gross2">—</div>
+            <div style="font-size:12px;color:var(--ink-3);margin-top:3px" id="r-period-label">this week</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Print sig area -->
+      <div class="print-only print-sig-row">
+        <div class="print-sig-field">Employee Signature</div>
+        <div class="print-sig-field">Supervisor Signature</div>
+        <div class="print-sig-field">Date Approved</div>
+      </div>
+    </div>
+
+    <!-- ARTICLE -->
+    <section class="calc-article print-hide" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How to Use a Time Card Calculator</h2>
+        <p>A time card (or timesheet) records employee work hours by day so payroll can be calculated accurately. Enter your start time, end time, and any unpaid break time for each day. The calculator automatically totals your hours and flags overtime.</p>
+
+        <h3>Federal vs. Daily Overtime Rules</h3>
+        <p>Under the federal Fair Labor Standards Act (FLSA), overtime is required for hours over 40 in a single workweek at 1.5× the regular rate. California, Alaska, and Nevada go further — they also require overtime after 8 hours in a single day. California mandates double time (2×) after 12 hours in one day. Use the "Daily OT" toggle if you work in one of these states.</p>
+
+        <h3>The 7-Minute Rounding Rule</h3>
+        <p>IRS regulations allow employers to round employee time to the nearest quarter-hour. Under the 7-minute rule: if you clock in 1–7 minutes after a quarter-hour mark, your time rounds down. If you clock in 8–14 minutes after, it rounds up. Rounding must be applied consistently in both directions and cannot systematically benefit the employer.</p>
+
+        <h3>Overtime and Shift Differentials</h3>
+        <p>If you receive a shift differential premium, your overtime rate must be calculated on your effective hourly rate (base + differential), not just the base rate. This is an FLSA requirement that many employers overlook — see the <a href="/shift-differential-calculator">shift differential calculator</a> for exact figures.</p>
+
+        <p><strong>Related:</strong> <a href="/hours-worked-calculator">Hours Worked Calculator</a> · <a href="/overtime-pay-calculator">Overtime Pay Calculator</a> · <a href="/payroll-tax-calculator">Payroll Tax Calculator</a> · <a href="/shift-differential-calculator">Shift Differential Calculator</a></p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section print-hide">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Time card questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How do I calculate hours on a time card?</summary><div class="faq-a">Subtract the start time from the end time for each day, subtract any unpaid break, and add up the daily totals. Convert minutes to decimals (divide by 60) for payroll. Example: 8:00 AM – 5:30 PM − 30 min break = 9.0 hours.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">When does overtime start?</summary><div class="faq-a">Under federal FLSA: after 40 hours in a workweek. In California, Alaska, and Nevada: also after 8 hours in a single workday. California additionally requires double time after 12 hours/day or on the 7th consecutive workday. Toggle the OT rule above to match your state.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How do I calculate overtime pay on a time card?</summary><div class="faq-a">Regular pay = regular hours × hourly rate. Overtime pay = OT hours × (hourly rate × OT multiplier). Standard OT multiplier is 1.5× (time-and-a-half). Double time is 2×. Total gross = regular pay + overtime pay.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What is the 7-minute rounding rule?</summary><div class="faq-a">Employers may round to the nearest quarter-hour. 1–7 minutes past a quarter-hour rounds down; 8–14 minutes rounds up. So 8:07 AM → 8:00 AM, but 8:08 AM → 8:15 AM. Rounding must be consistent and cannot systematically favor the employer.</div></details>
+          <details class="faq-item" data-enter data-delay="5"><summary class="faq-q">How do I print a time card or timesheet?</summary><div class="faq-a">Fill in your hours above, then click "Print Timesheet." A print-ready view appears with your weekly entries, totals, employee name, and signature lines. Your browser print dialog opens automatically — print to paper or save as PDF.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section class="related-section print-hide">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More payroll calculators</h2></div>
+        <div class="related-grid">
+          <a href="/hours-worked-calculator" class="tool-card" data-enter data-delay="1">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div><div class="tool-card-title">Hours Worked Calculator</div><div class="tool-card-desc" style="font-size:13px">Single shift, multi-shift, decimal conversion, and gross pay.</div></div>
+            </div>
+          </a>
+          <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="2">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div><div class="tool-card-title">Overtime Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">FLSA overtime, daily OT, double time, blended rates.</div></div>
+            </div>
+          </a>
+          <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="3">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div>
+              <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">See your net paycheck after all federal, state, and FICA deductions.</div></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer print-hide">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Built on IRS Pub 15, FLSA, and SSA data. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Time Tools</div><ul class="footer-links"><li><a href="/time-card-calculator">Time Card Calculator</a></li><li><a href="/hours-worked-calculator">Hours Worked Calculator</a></li><li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li><li><a href="/shift-differential-calculator">Shift Differential</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/salary-to-hourly-calculator">Salary to Hourly</a></li><li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Sources</div><ul class="footer-links"><li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li><li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not legal advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var fmtMode = '12', otRule = 'weekly';
+
+  // Set default week start to this Monday
+  (function(){
+    var d = new Date(), day = d.getDay(), diff = d.getDate() - day + (day===0?-6:1);
+    d.setDate(diff);
+    document.getElementById('week-start').value = d.toISOString().slice(0,10);
+  })();
+
+  // Build table rows
+  var tbody = document.getElementById('ts-body');
+  DAYS.forEach(function(dayName, i){
+    var isWe = i >= 5;
+    var tr = document.createElement('tr');
+    tr.className = 'ts-row' + (isWe ? ' weekend' : '');
+    tr.dataset.day = i;
+    tr.innerHTML =
+      '<td class="day-col">'+dayName+'</td>'+
+      '<td class="time-col"><div class="time-input-wrap">'+
+        '<input type="time" class="tc-in" id="in-'+i+'" autocomplete="off">'+
+        '<select class="ampm-sel in-ampm" id="inampm-'+i+'"><option>AM</option><option>PM</option></select>'+
+      '</div></td>'+
+      '<td class="time-col"><div class="time-input-wrap">'+
+        '<input type="time" class="tc-out" id="out-'+i+'" autocomplete="off">'+
+        '<select class="ampm-sel out-ampm" id="outampm-'+i+'"><option>AM</option><option value="PM" selected>PM</option></select>'+
+      '</div></td>'+
+      '<td style="text-align:center"><input type="number" class="break-input tc-brk" id="brk-'+i+'" value="0" min="0" step="5"></td>'+
+      '<td class="hours-cell"><span class="hours-tag ht-empty" id="hrs-'+i+'">—</span></td>';
+    tbody.appendChild(tr);
+  });
+
+  // Attach live update listeners
+  document.querySelectorAll('.tc-in,.tc-out,.in-ampm,.out-ampm,.tc-brk').forEach(function(el){
+    el.addEventListener('change', updateRow);
+    el.addEventListener('input', updateRow);
+  });
+
+  function updateRow(){ recalcAll(); }
+
+  function parseT(timeVal, ampm){
+    if(!timeVal) return null;
+    var p = timeVal.split(':'), h = parseInt(p[0]), m = parseInt(p[1])||0;
+    if(fmtMode==='12'){
+      if(ampm==='PM' && h!==12) h+=12;
+      if(ampm==='AM' && h===12) h=0;
+    }
+    return h + m/60;
+  }
+
+  function toHM(dec){
+    var h=Math.floor(dec), m=Math.round((dec-h)*60);
+    if(m===60){h++;m=0;}
+    return h+'h '+(m<10?'0':'')+m+'m';
+  }
+  function fmtM(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function fmtD2(n){return (Math.round(n*100)/100).toFixed(2);}
+
+  var dailyHrs = [0,0,0,0,0,0,0];
+
+  function recalcAll(){
+    var totalBreak = 0;
+    dailyHrs = DAYS.map(function(_, i){
+      var inV = document.getElementById('in-'+i).value;
+      var outV = document.getElementById('out-'+i).value;
+      var brkV = parseFloat(document.getElementById('brk-'+i).value)||0;
+      var st = parseT(inV, document.getElementById('inampm-'+i).value);
+      var et = parseT(outV, document.getElementById('outampm-'+i).value);
+      if(st===null || et===null || !inV || !outV){ updateHrsBadge(i, null); return 0; }
+      var diff = et - st;
+      if(diff < 0) diff += 24;
+      diff -= brkV/60;
+      diff = Math.max(0, diff);
+      totalBreak += brkV;
+      updateHrsBadge(i, diff);
+      return diff;
+    });
+    var total = dailyHrs.reduce(function(a,b){return a+b;},0);
+    document.getElementById('tot-hours').innerHTML = total>0
+      ? '<span class="hours-tag ht-normal">'+toHM(total)+'</span>'
+      : '—';
+    document.getElementById('tot-break').textContent = totalBreak > 0 ? totalBreak+'m' : '—';
+  }
+
+  function updateHrsBadge(i, h){
+    var el = document.getElementById('hrs-'+i);
+    if(h===null||h===0){ el.className='hours-tag ht-empty'; el.textContent='—'; return; }
+    var cls = h>10?'ht-high':h>8?'ht-ot':'ht-normal';
+    el.className='hours-tag '+cls;
+    el.textContent = toHM(h);
+  }
+
+  // Time format toggle
+  document.getElementById('fmt-12').addEventListener('click',function(){
+    fmtMode='12';
+    document.getElementById('fmt-12').classList.add('active');
+    document.getElementById('fmt-24').classList.remove('active');
+    document.querySelectorAll('.in-ampm,.out-ampm').forEach(function(s){s.style.display='';});
+    recalcAll();
+  });
+  document.getElementById('fmt-24').addEventListener('click',function(){
+    fmtMode='24';
+    document.getElementById('fmt-24').classList.add('active');
+    document.getElementById('fmt-12').classList.remove('active');
+    document.querySelectorAll('.in-ampm,.out-ampm').forEach(function(s){s.style.display='none';});
+    recalcAll();
+  });
+
+  // OT rule toggle
+  document.getElementById('ot-weekly').addEventListener('click',function(){
+    otRule='weekly';
+    document.getElementById('ot-weekly').classList.add('active');
+    document.getElementById('ot-daily').classList.remove('active');
+  });
+  document.getElementById('ot-daily').addEventListener('click',function(){
+    otRule='daily';
+    document.getElementById('ot-daily').classList.add('active');
+    document.getElementById('ot-weekly').classList.remove('active');
+  });
+
+  // Clear all
+  document.getElementById('clear-btn').addEventListener('click',function(){
+    DAYS.forEach(function(_,i){
+      document.getElementById('in-'+i).value='';
+      document.getElementById('out-'+i).value='';
+      document.getElementById('brk-'+i).value='0';
+      updateHrsBadge(i,null);
+    });
+    document.getElementById('tot-hours').textContent='—';
+    document.getElementById('tot-break').textContent='—';
+    document.getElementById('tc-results').style.display='none';
+  });
+
+  // Calculate
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+
+  function calculate(){
+    recalcAll();
+    var total = dailyHrs.reduce(function(a,b){return a+b;},0);
+    if(total===0) return;
+
+    var regHrs, otHrs;
+    if(otRule==='daily'){
+      regHrs = dailyHrs.reduce(function(a,h){return a+Math.min(h,8);},0);
+      otHrs  = dailyHrs.reduce(function(a,h){return a+Math.max(0,h-8);},0);
+    } else {
+      otHrs  = Math.max(0, total-40);
+      regHrs = total - otHrs;
+    }
+
+    var daysWorked = dailyHrs.filter(function(h){return h>0;}).length;
+    document.getElementById('r-total-hrs').textContent = toHM(total);
+    document.getElementById('r-days-worked').textContent = daysWorked+' day'+(daysWorked!==1?'s':'')+' worked';
+    document.getElementById('r-reg-hrs').textContent = toHM(regHrs);
+    document.getElementById('r-ot-hrs').textContent = otHrs>0 ? toHM(otHrs) : '0h 00m';
+
+    var rate = parseFloat(document.getElementById('pay-rate').value)||0;
+    var mult = parseFloat(document.getElementById('ot-mult').value)||1.5;
+    document.getElementById('r-ot-label').textContent = 'at '+mult+'× rate';
+
+    if(rate>0){
+      var regPay = regHrs*rate, otPay = otHrs*(rate*mult), gross=regPay+otPay;
+      document.getElementById('r-gross').textContent = fmtM(gross);
+      document.getElementById('r-reg-pay').textContent = fmtM(regPay);
+      document.getElementById('r-rp-hrs').textContent = fmtD2(regHrs);
+      document.getElementById('r-rp-rate').textContent = '$'+rate.toFixed(2)+'/hr';
+      document.getElementById('r-ot-pay').textContent = fmtM(otPay);
+      document.getElementById('r-op-hrs').textContent = fmtD2(otHrs);
+      document.getElementById('r-op-rate').textContent = '$'+(rate*mult).toFixed(2)+'/hr';
+      document.getElementById('r-gross2').textContent = fmtM(gross);
+      document.getElementById('pay-breakdown').style.display='block';
+    } else {
+      document.getElementById('r-gross').textContent = '—';
+      document.getElementById('pay-breakdown').style.display='none';
+    }
+
+    document.getElementById('tc-results').style.display='block';
+    document.getElementById('tc-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  // Print
+  document.getElementById('print-btn').addEventListener('click',function(){
+    recalcAll();
+    var empName = document.getElementById('emp-name').value||'___________________';
+    var weekVal = document.getElementById('week-start').value;
+    var weekLabel = '—';
+    if(weekVal){
+      var d = new Date(weekVal+'T00:00:00');
+      var end = new Date(d); end.setDate(d.getDate()+6);
+      var opts={month:'short',day:'numeric'};
+      weekLabel = d.toLocaleDateString('en-US',opts)+' – '+end.toLocaleDateString('en-US',opts)+', '+end.getFullYear();
+    }
+    document.getElementById('print-name-show').textContent = empName;
+    document.getElementById('print-week-show').textContent = weekLabel;
+    window.print();
+  });
+
+})();
+</script>
+</body>
+</html>

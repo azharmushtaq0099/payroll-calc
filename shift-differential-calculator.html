@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shift Differential Calculator 2026 — Evening, Night &amp; Weekend Pay | FreePayrollCalc</title>
+<meta name="description" content="Free shift differential calculator. Calculate your evening, night, or weekend shift premium pay. Enter your base rate and differential percentage or flat amount. See annual impact and compare total compensation to day shift.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/shift-differential-calculator">
+<meta property="og:title" content="Shift Differential Calculator 2026 — Evening, Night &amp; Weekend Pay">
+<meta property="og:description" content="Calculate your shift differential premium pay. See weekly and annual earnings impact vs day shift. Industry benchmark rates included.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Shift Differential Calculator 2026","url":"https://www.freepayrollcalc.com/shift-differential-calculator","description":"Calculate evening, night, weekend, and holiday shift differential pay. Shows per-shift premium, weekly total, and annual earnings impact versus day shift. Includes industry benchmark differential rates.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is shift differential pay?","acceptedAnswer":{"@type":"Answer","text":"Shift differential pay is additional compensation paid to employees who work less desirable shifts — typically evenings, nights, weekends, or holidays. It is expressed as either a percentage above the base hourly rate (e.g., 15% more per hour) or a flat dollar amount added per hour (e.g., $2.00 extra per hour). Shift differentials are most common in healthcare, manufacturing, transportation, and retail."}},{"@type":"Question","name":"How is shift differential calculated?","acceptedAnswer":{"@type":"Answer","text":"For percentage differentials: effective rate = base rate × (1 + differential%). For example, a $20/hr base rate with 15% evening differential = $20 × 1.15 = $23/hr. For flat-rate differentials: effective rate = base rate + flat amount. For example, $20/hr + $2.50 differential = $22.50/hr. The differential premium applies only to the hours actually worked at that shift type."}},{"@type":"Question","name":"Is shift differential pay taxed differently?","acceptedAnswer":{"@type":"Answer","text":"No. Shift differential pay is taxed exactly the same as regular wages — subject to federal income tax withholding, Social Security (6.2%), Medicare (1.45%), and applicable state income taxes. There is no special tax treatment for shift premiums. They are simply added to your gross wages and taxed at your regular withholding rate."}},{"@type":"Question","name":"How does shift differential affect overtime pay?","acceptedAnswer":{"@type":"Answer","text":"Under FLSA, shift differentials must be included in the 'regular rate of pay' used to calculate overtime. This means your overtime rate is 1.5× your blended effective rate (including the differential), not just 1.5× your base rate. For example, if your effective rate with differential is $23/hr, your overtime rate must be at least $34.50/hr — not 1.5× your $20 base rate ($30/hr)."}},{"@type":"Question","name":"What is a typical shift differential percentage?","acceptedAnswer":{"@type":"Answer","text":"Typical shift differential rates by shift type: Evening shift (3pm–11pm): 10–15% in most industries, up to 20% in healthcare. Night shift (11pm–7am): 15–25%, up to 30% in hospitals. Weekend differential: 5–15%. Holiday premium: 50–100% (or 1.5× to 2× base pay). Rates vary significantly by industry, employer, and union agreements. The Bureau of Labor Statistics reports that about 16% of full-time workers receive shift differentials."}}]}
+</script>
+<style>
+.shift-type-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.shift-pill{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.shift-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.diff-type-toggle{display:flex;gap:0;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;width:fit-content;margin-top:8px}
+.diff-type-btn{padding:7px 18px;font-size:13px;font-weight:600;background:var(--surface);border:none;cursor:pointer;transition:all .15s}
+.diff-type-btn.active{background:var(--accent);color:#fff}
+.result-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+@media(max-width:700px){.result-cards{grid-template-columns:1fr}}
+.res-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.res-card-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.res-card-main{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--ink-1)}
+.res-card-main.green{color:var(--green)}
+.res-card-sub{font-size:12px;color:var(--ink-3);margin-top:6px}
+.res-card-sub span{font-weight:700;color:var(--accent)}
+.cmp-table{width:100%;border-collapse:collapse;margin-top:24px;font-size:14px}
+.cmp-table th{text-align:left;padding:10px 14px;background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:700;border-bottom:2px solid var(--border)}
+.cmp-table td{padding:10px 14px;border-bottom:1px solid var(--border)}
+.cmp-table tr:last-child td{border-bottom:none;font-weight:700}
+.cmp-table td.you{color:var(--green);font-weight:700;font-family:'JetBrains Mono',monospace}
+.cmp-table td.day{font-family:'JetBrains Mono',monospace}
+.cmp-table td.diff{color:var(--accent);font-family:'JetBrains Mono',monospace}
+.industry-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}
+.industry-table th{background:var(--bg);padding:8px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);font-weight:700;text-align:left;border-bottom:2px solid var(--border)}
+.industry-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--ink-2)}
+.industry-table tr:last-child td{border-bottom:none}
+#sd-results{display:none}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/overtime-pay-calculator">Overtime</a>
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/shift-differential-calculator" class="active">Shift Diff</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/time-card-calculator">Time Card Calculator</a>
+    <a href="/hours-worked-calculator">Hours Worked Calculator</a>
+    <a href="/shift-differential-calculator" class="active">Shift Differential Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">›</span>
+      <span aria-current="page">Shift Differential Calculator</span>
+    </nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Shift Differential Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate your evening, night, weekend, or holiday shift premium pay.<br>See exactly how much more you earn vs day shift — per hour, weekly, and annually.</p>
+    <div class="calc-updated">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Last updated: September 2026 — includes FLSA overtime regular rate rules
+    </div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Shift Differential Calculator
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Shift Type</label>
+          <div class="shift-type-pills">
+            <button class="shift-pill active" data-shift="evening">Evening (3pm–11pm)</button>
+            <button class="shift-pill" data-shift="night">Night (11pm–7am)</button>
+            <button class="shift-pill" data-shift="weekend">Weekend</button>
+            <button class="shift-pill" data-shift="holiday">Holiday</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="base_rate">Base Hourly Rate</label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input type="number" id="base_rate" class="form-input form-input--prefixed" placeholder="20.00" min="0" step="0.01">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Differential Type</label>
+          <div class="diff-type-toggle">
+            <button class="diff-type-btn active" id="btn-pct">% Percentage</button>
+            <button class="diff-type-btn" id="btn-flat">$ Flat / hr</button>
+          </div>
+          <div style="margin-top:12px">
+            <div class="input-wrap" id="pct-wrap">
+              <input type="number" id="diff_pct" class="form-input" placeholder="15" min="0" step="0.5">
+              <span class="input-suffix">%</span>
+            </div>
+            <div class="input-wrap" id="flat-wrap" style="display:none">
+              <span class="input-prefix">$</span>
+              <input type="number" id="diff_flat" class="form-input form-input--prefixed" placeholder="2.50" min="0" step="0.25">
+              <span class="input-suffix">/ hr</span>
+            </div>
+            <p class="form-hint" id="diff-hint">Evening shift: typically 10–15%</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="shift_hours">Hours Worked This Shift</label>
+          <input type="number" id="shift_hours" class="form-input" placeholder="8" min="0" step="0.5" value="8">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="weekly_diff_hours">Hours per Week at This Differential</label>
+          <input type="number" id="weekly_diff_hours" class="form-input" placeholder="40" min="0" step="0.5" value="40">
+          <p class="form-hint">Used to calculate weekly and annual earnings impact</p>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Calculate Shift Differential
+      </button>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="sd-results">
+      <div class="result-cards" data-enter>
+        <div class="res-card">
+          <div class="res-card-label">This Shift — Total Pay</div>
+          <div class="res-card-main green" id="r-shift-total">—</div>
+          <div class="res-card-sub">Effective rate: <span id="r-eff-rate">—</span>/hr</div>
+          <div class="res-card-sub" style="margin-top:4px">Premium earned: <span id="r-shift-premium">—</span></div>
+        </div>
+        <div class="res-card">
+          <div class="res-card-label">Weekly Total Pay</div>
+          <div class="res-card-main" id="r-weekly-total">—</div>
+          <div class="res-card-sub">vs day shift: <span id="r-weekly-vs">—</span> more</div>
+        </div>
+        <div class="res-card">
+          <div class="res-card-label">Annual Earnings</div>
+          <div class="res-card-main green" id="r-annual-total">—</div>
+          <div class="res-card-sub">vs day shift: <span id="r-annual-vs">—</span> more/yr</div>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:24px" data-enter data-delay="1">
+        <div style="font-weight:700;font-size:15px;margin-bottom:4px">Day Shift vs Your Shift — Earnings Comparison</div>
+        <div style="font-size:13px;color:var(--ink-3);margin-bottom:16px">Based on <span id="r-cmp-hours">40</span> hrs/week at your differential</div>
+        <div style="overflow-x:auto">
+        <table class="cmp-table">
+          <thead><tr><th>Period</th><th>Day Shift (base rate)</th><th>Your Shift</th><th>Differential Premium</th></tr></thead>
+          <tbody>
+            <tr><td>Per Hour</td><td class="day" id="r-day-hr">—</td><td class="you" id="r-you-hr">—</td><td class="diff" id="r-diff-hr">—</td></tr>
+            <tr><td>Per Shift (this shift hrs)</td><td class="day" id="r-day-shift">—</td><td class="you" id="r-you-shift">—</td><td class="diff" id="r-diff-shift">—</td></tr>
+            <tr><td>Weekly (diff hrs)</td><td class="day" id="r-day-wk">—</td><td class="you" id="r-you-wk">—</td><td class="diff" id="r-diff-wk">—</td></tr>
+            <tr><td>Monthly (×4.33)</td><td class="day" id="r-day-mo">—</td><td class="you" id="r-you-mo">—</td><td class="diff" id="r-diff-mo">—</td></tr>
+            <tr><td>Annual (52 weeks)</td><td class="day" id="r-day-yr">—</td><td class="you" id="r-you-yr">—</td><td class="diff" id="r-diff-yr">—</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- OT note -->
+      <div style="background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.25);border-radius:10px;padding:14px 18px;margin-top:16px;font-size:13px;color:var(--ink-2)" data-enter data-delay="2">
+        <strong style="color:var(--amber)">FLSA Note:</strong> Your shift differential must be included in your regular rate for overtime calculations. Your OT rate = 1.5 × effective hourly rate (<span id="r-ot-rate">—</span>), not 1.5 × base rate.
+        <a href="/overtime-pay-calculator" style="color:var(--accent);margin-left:6px">Calculate overtime →</a>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/payroll-tax-calculator" class="calc-btn" style="flex:1;min-width:200px;text-align:center;text-decoration:none">
+          Calculate take-home pay after taxes →
+        </a>
+        <button class="calc-btn calc-btn--secondary" id="reset-btn" style="flex:0">Reset</button>
+      </div>
+    </div>
+
+    <!-- INDUSTRY BENCHMARKS -->
+    <section style="margin-top:56px">
+      <div class="section-header" data-enter>
+        <p class="section-eyebrow">Reference</p>
+        <h2 class="section-title">Typical Shift Differential Rates by Industry</h2>
+        <p class="section-sub">Bureau of Labor Statistics + industry surveys, 2025–2026</p>
+      </div>
+      <div style="overflow-x:auto;margin-top:16px" data-enter data-delay="1">
+      <table class="industry-table">
+        <thead><tr><th>Industry</th><th>Evening (3–11pm)</th><th>Night (11pm–7am)</th><th>Weekend</th><th>Holiday</th></tr></thead>
+        <tbody>
+          <tr><td>Healthcare / Nursing</td><td>10–20%</td><td>15–30%</td><td>10–20%</td><td>50–100%</td></tr>
+          <tr><td>Manufacturing</td><td>5–15%</td><td>10–20%</td><td>8–12%</td><td>50–75%</td></tr>
+          <tr><td>Transportation / Logistics</td><td>10–15%</td><td>15–25%</td><td>10–20%</td><td>50–100%</td></tr>
+          <tr><td>Retail / Warehouse</td><td>5–10%</td><td>10–15%</td><td>5–10%</td><td>50–75%</td></tr>
+          <tr><td>Security / Public Safety</td><td>10–15%</td><td>15–20%</td><td>10–15%</td><td>50–100%</td></tr>
+          <tr><td>Hospitality / Food Service</td><td>5–10%</td><td>10–15%</td><td>5–10%</td><td>50–100%</td></tr>
+          <tr><td>Call Centers / Customer Service</td><td>5–12%</td><td>10–18%</td><td>5–10%</td><td>25–50%</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- ARTICLE -->
+    <section class="calc-article" style="margin-top:56px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How Shift Differential Pay Works</h2>
+        <p>Shift differential pay is additional compensation employers offer to workers who take on evening, overnight, weekend, or holiday shifts. Because these hours are less desirable than standard day shifts, employers add a premium to attract and retain employees willing to work them.</p>
+        <h3>Two Types: Percentage vs. Flat Rate</h3>
+        <p><strong>Percentage differential:</strong> Your hourly rate increases by a set percentage during qualifying hours. A $20/hr base with a 15% evening differential becomes $23/hr. This approach scales with your base rate — senior workers with higher base pay earn more in absolute terms from the same percentage differential.</p>
+        <p><strong>Flat-rate differential:</strong> A fixed dollar amount is added per hour (e.g., $2.00/hr extra). This is simpler to calculate and apply consistently across different pay grades.</p>
+        <h3>FLSA Overtime and Shift Differentials</h3>
+        <p>Under the Fair Labor Standards Act, shift differential pay must be included in your "regular rate of pay" when calculating overtime. This means your overtime rate is 1.5× your effective blended rate — not 1.5× your base rate. If your effective rate with differential is $23/hr, your overtime rate is $34.50/hr, not the lower $30/hr (1.5× $20 base).</p>
+        <h3>Tax Treatment</h3>
+        <p>Shift differentials are taxed exactly like regular wages: federal and state income tax withholding, Social Security (6.2%), and Medicare (1.45%) all apply. There is no special lower tax rate for shift premiums.</p>
+        <p><strong>Related:</strong> <a href="/overtime-pay-calculator">Overtime Pay Calculator</a> · <a href="/time-card-calculator">Time Card Calculator</a> · <a href="/payroll-tax-calculator">Payroll Tax Calculator</a> · <a href="/hours-worked-calculator">Hours Worked Calculator</a></p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Shift differential questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is shift differential pay?</summary><div class="faq-a">Shift differential pay is additional compensation for working evenings, nights, weekends, or holidays. It can be a percentage above your base rate (e.g., +15%) or a flat dollar amount per hour (e.g., +$2.00/hr). About 16% of full-time US workers receive some form of shift differential according to the Bureau of Labor Statistics.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">How is shift differential calculated?</summary><div class="faq-a">For percentage: effective rate = base rate × (1 + differential%). Example: $20/hr × 1.15 = $23/hr. For flat rate: effective rate = base rate + flat amount. Example: $20/hr + $2.50 = $22.50/hr. The premium only applies to hours actually worked at that shift type.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">Is shift differential taxed differently?</summary><div class="faq-a">No — shift differential pay is taxed exactly like regular wages. Federal income tax, Social Security (6.2%), Medicare (1.45%), and state income taxes all apply the same way. Your employer includes the differential in your gross pay and withholds taxes normally.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">How does shift differential affect overtime?</summary><div class="faq-a">Under FLSA, your overtime rate must be 1.5× your effective rate including the differential — not just 1.5× your base rate. So if your effective rate is $23/hr with differential, overtime must be at least $34.50/hr. Employers who pay overtime at 1.5× the base rate are underpaying and violating FLSA.</div></details>
+          <details class="faq-item" data-enter data-delay="5"><summary class="faq-q">What is a typical shift differential percentage?</summary><div class="faq-a">Evening shifts (3–11pm): 10–15% in most industries, up to 20% in healthcare. Night shifts (11pm–7am): 15–25%, up to 30% in hospitals. Weekend: 5–15%. Holiday: 50–100% (or time-and-a-half to double time). Rates vary by industry, employer, and collective bargaining agreements.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More payroll calculators</h2></div>
+        <div class="related-grid">
+          <a href="/overtime-pay-calculator" class="tool-card" data-enter data-delay="1">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div><div class="tool-card-title">Overtime Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">FLSA overtime at 1.5× your effective rate including differential.</div></div>
+            </div>
+          </a>
+          <a href="/time-card-calculator" class="tool-card" data-enter data-delay="2">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></div>
+              <div><div class="tool-card-title">Time Card Calculator</div><div class="tool-card-desc" style="font-size:13px">Weekly timesheet with OT auto-detection and print-ready output.</div></div>
+            </div>
+          </a>
+          <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="3">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div>
+              <div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Full paycheck breakdown after federal, state, and FICA taxes.</div></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Calculators</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li><li><a href="/time-card-calculator">Time Card Calculator</a></li><li><a href="/hours-worked-calculator">Hours Worked Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li><li><a href="/1099-vs-w2-calculator">1099 vs W-2</a></li><li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Sources</div><ul class="footer-links"><li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15</a></li><li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li><li><a href="https://www.bls.gov/ncs/" rel="nofollow noopener" target="_blank">BLS NCS Survey</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not legal or tax advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var shiftType = 'evening';
+  var diffMode = 'pct';
+  var HINTS = {evening:'Evening shift: typically 10–15%',night:'Night shift: typically 15–25%',weekend:'Weekend: typically 5–15%',holiday:'Holiday: typically 50–100%'};
+  var HINTS_FLAT = {evening:'Evening shift: typically $1.50–$3.00/hr',night:'Night shift: typically $2.50–$5.00/hr',weekend:'Weekend: typically $1.00–$2.50/hr',holiday:'Holiday: typically $5.00–$15.00/hr'};
+
+  document.querySelectorAll('.shift-pill').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.shift-pill').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      shiftType = btn.dataset.shift;
+      document.getElementById('diff-hint').textContent = diffMode==='pct' ? HINTS[shiftType] : HINTS_FLAT[shiftType];
+    });
+  });
+
+  document.getElementById('btn-pct').addEventListener('click',function(){
+    diffMode='pct';
+    document.getElementById('btn-pct').classList.add('active');
+    document.getElementById('btn-flat').classList.remove('active');
+    document.getElementById('pct-wrap').style.display='';
+    document.getElementById('flat-wrap').style.display='none';
+    document.getElementById('diff-hint').textContent = HINTS[shiftType];
+  });
+  document.getElementById('btn-flat').addEventListener('click',function(){
+    diffMode='flat';
+    document.getElementById('btn-flat').classList.add('active');
+    document.getElementById('btn-pct').classList.remove('active');
+    document.getElementById('pct-wrap').style.display='none';
+    document.getElementById('flat-wrap').style.display='';
+    document.getElementById('diff-hint').textContent = HINTS_FLAT[shiftType];
+  });
+
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+  document.getElementById('reset-btn').addEventListener('click',function(){document.getElementById('sd-results').style.display='none';});
+
+  function fmt(n){return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
+  function fmtD(n){return '$'+(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+  function calculate(){
+    var base = parseFloat(document.getElementById('base_rate').value)||0;
+    if(base<=0){document.getElementById('base_rate').focus();return;}
+    var shiftHrs = parseFloat(document.getElementById('shift_hours').value)||8;
+    var weeklyHrs = parseFloat(document.getElementById('weekly_diff_hours').value)||40;
+    var diffRate = 0;
+    if(diffMode==='pct'){
+      var pct = parseFloat(document.getElementById('diff_pct').value)||0;
+      diffRate = base * pct/100;
+    } else {
+      diffRate = parseFloat(document.getElementById('diff_flat').value)||0;
+    }
+    var effRate = base + diffRate;
+
+    var shiftBase = shiftHrs * base;
+    var shiftPremium = shiftHrs * diffRate;
+    var shiftTotal = shiftHrs * effRate;
+
+    var weeklyDay = weeklyHrs * base;
+    var weeklyYou = weeklyHrs * effRate;
+    var weeklyDiff = weeklyHrs * diffRate;
+
+    var monthlyDay = weeklyDay * 4.333;
+    var monthlyYou = weeklyYou * 4.333;
+    var monthlyDiff = weeklyDiff * 4.333;
+
+    var annualDay = weeklyDay * 52;
+    var annualYou = weeklyYou * 52;
+    var annualDiff = weeklyDiff * 52;
+
+    document.getElementById('r-shift-total').textContent = fmt(shiftTotal);
+    document.getElementById('r-eff-rate').textContent = fmtD(effRate);
+    document.getElementById('r-shift-premium').textContent = '+'+fmt(shiftPremium);
+    document.getElementById('r-weekly-total').textContent = fmt(weeklyYou);
+    document.getElementById('r-weekly-vs').textContent = '+'+fmt(weeklyDiff);
+    document.getElementById('r-annual-total').textContent = fmt(annualYou);
+    document.getElementById('r-annual-vs').textContent = '+'+fmt(annualDiff);
+    document.getElementById('r-cmp-hours').textContent = weeklyHrs;
+    document.getElementById('r-ot-rate').textContent = fmtD(effRate*1.5)+'/hr';
+
+    document.getElementById('r-day-hr').textContent = fmtD(base);
+    document.getElementById('r-you-hr').textContent = fmtD(effRate);
+    document.getElementById('r-diff-hr').textContent = '+'+fmtD(diffRate);
+    document.getElementById('r-day-shift').textContent = fmt(shiftBase);
+    document.getElementById('r-you-shift').textContent = fmt(shiftTotal);
+    document.getElementById('r-diff-shift').textContent = '+'+fmt(shiftPremium);
+    document.getElementById('r-day-wk').textContent = fmt(weeklyDay);
+    document.getElementById('r-you-wk').textContent = fmt(weeklyYou);
+    document.getElementById('r-diff-wk').textContent = '+'+fmt(weeklyDiff);
+    document.getElementById('r-day-mo').textContent = fmt(monthlyDay);
+    document.getElementById('r-you-mo').textContent = fmt(monthlyYou);
+    document.getElementById('r-diff-mo').textContent = '+'+fmt(monthlyDiff);
+    document.getElementById('r-day-yr').textContent = fmt(annualDay);
+    document.getElementById('r-you-yr').textContent = fmt(annualYou);
+    document.getElementById('r-diff-yr').textContent = '+'+fmt(annualDiff);
+
+    document.getElementById('sd-results').style.display='block';
+    document.getElementById('sd-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

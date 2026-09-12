@@ -86,6 +86,21 @@
     <priority>0.90</priority>
   </url>
   <url>
+    <loc>https://www.freepayrollcalc.com/time-card-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/hours-worked-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/shift-differential-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://www.freepayrollcalc.com/guides</loc>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
