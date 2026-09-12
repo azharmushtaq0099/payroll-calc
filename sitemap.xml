@@ -101,6 +101,21 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://www.freepayrollcalc.com/effective-tax-rate-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/employee-cost-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/payroll-cost-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://www.freepayrollcalc.com/time-card-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>

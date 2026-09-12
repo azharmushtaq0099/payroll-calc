@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payroll Cost Calculator 2026 — Total Payroll Cost for Your Team | FreePayrollCalc</title>
+<meta name="description" content="Calculate total payroll cost for your team — wages, employer FICA, FUTA, SUTA, benefits per employee. Monthly and annual total with cost-per-employee breakdown.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/payroll-cost-calculator">
+<meta property="og:title" content="Payroll Cost Calculator 2026 — Total Payroll Cost for Your Team">
+<meta property="og:description" content="Add your employees, set wages and pay periods. Get total monthly and annual payroll cost including all employer taxes — FICA, FUTA, SUTA. Plan your Q3 and Q4 payroll budget.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Payroll Cost Calculator 2026","url":"https://www.freepayrollcalc.com/payroll-cost-calculator","description":"Multi-employee payroll cost calculator. Add up to 20 employees with individual wages and pay frequencies. Calculates total wages, employer FICA, FUTA, SUTA, and all-in payroll cost monthly and annually. Updated for 2026 rates.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate total payroll cost?","acceptedAnswer":{"@type":"Answer","text":"Total payroll cost = gross wages + employer taxes + benefits. Employer taxes include Social Security (6.2% up to $176,100 per employee), Medicare (1.45%), FUTA (0.6% on first $7,000), and SUTA (varies by state). Add health insurance contributions, 401k match, and other benefits to get the full cost. This calculator handles all of it automatically."}},{"@type":"Question","name":"What percentage of revenue should payroll be?","acceptedAnswer":{"@type":"Answer","text":"Industry benchmarks vary widely. Service businesses (accounting, law, consulting) typically spend 30–35% of revenue on payroll. Retail and food service often run 25–35%. Manufacturing runs 15–30%. Technology companies vary from 20–50% depending on stage. The key metric isn't a fixed percentage but whether labor costs fit within your gross margin structure."}},{"@type":"Question","name":"When are FUTA taxes due?","acceptedAnswer":{"@type":"Answer","text":"FUTA tax is deposited quarterly if the cumulative FUTA liability exceeds $500. Deposits are due the last day of the month following the end of each quarter: April 30 (Q1), July 31 (Q2), October 31 (Q3), and January 31 (Q4). If your annual FUTA liability is $500 or less, you may pay it with your annual Form 940 by January 31."}},{"@type":"Question","name":"How often must I run payroll?","acceptedAnswer":{"@type":"Answer","text":"Federal law doesn't specify a payroll frequency, but all states have minimum requirements. Most states require at least semimonthly (twice a month). Weekly and biweekly are common for hourly workers. Semimonthly and monthly are more common for salaried employees. Check your state's Department of Labor for minimum frequency requirements."}},{"@type":"Question","name":"What is the payroll tax deposit schedule?","acceptedAnswer":{"@type":"Answer","text":"The IRS assigns a deposit schedule based on your lookback period (total taxes reported in the 4 quarters ending June 30). Monthly depositors pay by the 15th of the following month. Semiweekly depositors pay within 3 or 5 business days of payday. Next-day depositors (if any single payroll creates $100,000+ in taxes) must deposit the next business day."}}]}
+</script>
+<style>
+.emp-table{width:100%;border-collapse:collapse}
+.emp-table th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink-3);padding:7px 8px;text-align:left;border-bottom:2px solid var(--border)}
+.emp-table th.r{text-align:right}
+.emp-table td{padding:5px 4px;border-bottom:1px solid var(--border);vertical-align:middle}
+.emp-table td input,.emp-table td select{width:100%;border:1px solid transparent;background:transparent;border-radius:6px;padding:5px 6px;font-size:13px;color:var(--ink-1);font-family:'Inter',sans-serif;transition:border-color .15s}
+.emp-table td input:focus,.emp-table td select:focus{border-color:var(--accent);outline:none;background:#fff}
+.emp-table td .del-btn{background:none;border:none;cursor:pointer;color:var(--ink-3);padding:4px;border-radius:4px;transition:color .15s}
+.emp-table td .del-btn:hover{color:var(--red)}
+.emp-table td.annual-cell{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--ink-1);text-align:right;padding:5px 8px;white-space:nowrap}
+.add-emp-btn{display:flex;align-items:center;gap:6px;background:none;border:1px dashed var(--border);color:var(--accent);font-size:13px;font-weight:600;padding:8px 14px;border-radius:8px;cursor:pointer;width:100%;justify-content:center;margin-top:10px;transition:all .15s}
+.add-emp-btn:hover{background:rgba(27,79,216,.05);border-color:var(--accent)}
+.payroll-total-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:640px){.payroll-total-bar{grid-template-columns:1fr}}
+.ptb-cell{border-radius:12px;padding:20px;text-align:center}
+.ptb-cell.gross{background:rgba(27,79,216,.06);border:1.5px solid rgba(27,79,216,.18)}
+.ptb-cell.taxes{background:rgba(217,119,6,.05);border:1.5px solid rgba(217,119,6,.18)}
+.ptb-cell.total{background:rgba(5,150,105,.06);border:2px solid rgba(5,150,105,.25)}
+.ptb-val{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800;line-height:1.1}
+.ptb-val.gross{color:var(--accent)}
+.ptb-val.taxes{color:var(--amber)}
+.ptb-val.total{color:var(--green)}
+.ptb-label{font-size:12px;font-weight:700;color:var(--ink-3);margin-top:4px}
+.ptb-sub{font-size:11px;color:var(--ink-3);margin-top:2px}
+.results-emp-table{width:100%;border-collapse:collapse;font-size:13px}
+.results-emp-table th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--ink-3);padding:7px 10px;text-align:left;border-bottom:2px solid var(--border)}
+.results-emp-table th.r{text-align:right}
+.results-emp-table td{padding:9px 10px;border-bottom:1px solid var(--border)}
+.results-emp-table td.r{text-align:right;font-family:'JetBrains Mono',monospace}
+.results-emp-table tfoot td{font-weight:800;background:rgba(5,150,105,.05);padding:11px 10px}
+.quarter-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+@media(max-width:700px){.quarter-cards{grid-template-columns:1fr 1fr}}
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.qcard-q{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:4px}
+.qcard-val{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--ink-1)}
+.qcard-label{font-size:11px;color:var(--ink-3);margin-top:3px}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/employee-cost-calculator">Employee Cost</a>
+        <a href="/payroll-cost-calculator" class="active">Payroll Cost</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/employee-cost-calculator">Employee Cost Calculator</a>
+    <a href="/payroll-cost-calculator" class="active">Payroll Cost Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Payroll Cost Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Payroll Cost Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Add your employees, get total monthly &amp; annual payroll cost.<br>Wages + employer FICA + FUTA + SUTA — the full budget number.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Multi-employee · 2026 employer tax rates · Quarterly FUTA/SUTA tracker</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Team Settings</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">State (for SUTA rate)</label>
+          <select id="pc-state" class="form-select">
+            <option value="avg">Average (2.7%)</option>
+            <option value="CA">California (3.4%)</option>
+            <option value="FL">Florida (2.7%)</option>
+            <option value="TX">Texas (2.7%)</option>
+            <option value="NY">New York (4.1%)</option>
+            <option value="IL">Illinois (2.7%)</option>
+            <option value="PA">Pennsylvania (3.2%)</option>
+            <option value="OH">Ohio (2.7%)</option>
+            <option value="GA">Georgia (2.7%)</option>
+            <option value="NC">North Carolina (1.2%)</option>
+            <option value="WA">Washington (2.7%)</option>
+            <option value="NJ">New Jersey (2.7%)</option>
+            <option value="AZ">Arizona (2.0%)</option>
+            <option value="CO">Colorado (2.7%)</option>
+            <option value="MN">Minnesota (2.7%)</option>
+            <option value="other">Other state (use 2.7% avg)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Benefits Overhead (% of payroll)</label>
+          <div class="input-wrap"><input type="number" id="pc-benefits" class="form-input form-input--suffixed" placeholder="0" min="0" step=".5" value="0"><span class="input-suffix">%</span></div>
+          <p class="form-hint">Health insurance, 401k, etc. as % of total wages</p>
+        </div>
+      </div>
+
+      <div style="font-size:14px;font-weight:700;color:var(--ink-2);margin:20px 0 12px">Employee List</div>
+      <div style="overflow-x:auto">
+        <table class="emp-table">
+          <thead>
+            <tr>
+              <th style="width:30%">Name / Role</th>
+              <th style="width:20%">Pay Period</th>
+              <th style="width:20%">Wage</th>
+              <th class="r" style="width:22%">Annual Wages</th>
+              <th style="width:6%"></th>
+            </tr>
+          </thead>
+          <tbody id="emp-tbody"></tbody>
+        </table>
+      </div>
+      <button class="add-emp-btn" id="add-emp-btn" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Employee
+      </button>
+
+      <button class="calc-btn" id="calc-pc-btn" style="margin-top:20px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4M9 17h2"/></svg>
+        Calculate Total Payroll Cost
+      </button>
+    </div>
+
+    <!-- Results -->
+    <div id="pc-results" style="display:none">
+
+      <!-- Top totals -->
+      <div class="payroll-total-bar" data-enter>
+        <div class="ptb-cell gross">
+          <div class="ptb-val gross" id="r-total-wages">—</div>
+          <div class="ptb-label">Total Annual Wages</div>
+          <div class="ptb-sub" id="r-monthly-wages">—/month</div>
+        </div>
+        <div class="ptb-cell taxes">
+          <div class="ptb-val taxes" id="r-total-er-taxes">—</div>
+          <div class="ptb-label">Employer Taxes + Benefits</div>
+          <div class="ptb-sub" id="r-er-pct">—% of wages</div>
+        </div>
+        <div class="ptb-cell total">
+          <div class="ptb-val total" id="r-grand-total">—</div>
+          <div class="ptb-label">Total Payroll Cost</div>
+          <div class="ptb-sub" id="r-monthly-total">—/month</div>
+        </div>
+      </div>
+
+      <!-- Per-employee table -->
+      <div class="calc-card" style="margin-top:4px" data-enter data-delay="1">
+        <div class="calc-card-header">Per-Employee Breakdown</div>
+        <div style="overflow-x:auto">
+          <table class="results-emp-table">
+            <thead><tr><th>Employee</th><th>Pay Period</th><th class="r">Gross Wages</th><th class="r">SS (6.2%)</th><th class="r">Medicare</th><th class="r">FUTA/SUTA</th><th class="r">Benefits</th><th class="r">Total Cost</th></tr></thead>
+            <tbody id="results-emp-tbody"></tbody>
+            <tfoot id="results-tfoot"></tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Quarterly breakdown -->
+      <div class="calc-card" style="margin-top:16px" data-enter data-delay="2">
+        <div class="calc-card-header">Quarterly Payroll Forecast</div>
+        <div class="quarter-cards" id="quarter-cards"></div>
+        <div style="font-size:12px;color:var(--ink-3);margin-top:12px">Note: Q1 is typically highest due to FUTA/SUTA wage base caps resetting January 1. Costs drop in Q3–Q4 once employees exceed the $7,000 FUTA and state wage base thresholds.</div>
+      </div>
+
+      <!-- Deposit schedule reminder -->
+      <div style="background:rgba(27,79,216,.04);border:1px solid rgba(27,79,216,.15);border-radius:12px;padding:16px;margin-top:16px;font-size:13px;color:var(--ink-2);line-height:1.7" data-enter data-delay="3">
+        <strong>2026 Tax Deposit Reminders:</strong><br>
+        FUTA deposit due if cumulative liability exceeds $500: April 30 (Q1), July 31 (Q2), October 31 (Q3), January 31 2027 (Q4).<br>
+        Federal 941 (income + FICA) due: Monthly depositors by 15th of following month · Semiweekly depositors within 3–5 business days of payday.
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/employee-cost-calculator" class="calc-btn" style="flex:1;min-width:200px;text-align:center;text-decoration:none">Full cost for one employee →</a>
+        <a href="/employer-tax-calculator" class="calc-btn calc-btn--secondary" style="flex:1;min-width:180px;text-align:center;text-decoration:none">Employer tax detail</a>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>Payroll Budget Planning for Small Businesses</h2>
+        <p>When building your annual payroll budget, most business owners undercount by 15–25% because they only plan for gross wages. The real number is wages + employer taxes + benefits.</p>
+        <h3>Why Q1 Always Costs More</h3>
+        <p>FUTA and SUTA both have wage base limits that reset January 1. FUTA is 0.6% on the first $7,000 — that $42 per employee is entirely consumed by mid-February for anyone earning $50K+. But SUTA wage bases vary by state: California's is $7,000, New York's is $12,800, Washington's is $68,500. Higher wage base states see elevated SUTA costs through Q2 or even Q3 for higher earners.</p>
+        <p>The practical result: payroll costs in Q1 are noticeably higher than Q3/Q4 for the same headcount. Plan for it.</p>
+        <h3>The 2026 SS Wage Base</h3>
+        <p>The Social Security wage base for 2026 is $176,100 per employee. Once an employee's YTD wages exceed this threshold, the 6.2% SS tax stops for both employee and employer. For a $200,000 salary, you save $1,481 in employer SS after mid-October (approximately).</p>
+        <p><strong>Related:</strong> <a href="/employee-cost-calculator">Employee Cost Calculator</a> · <a href="/employer-tax-calculator">Employer Payroll Tax Calculator</a> · <a href="/quarterly-tax-calculator">Quarterly Tax Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Payroll cost questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How do I calculate total payroll cost?</summary><div class="faq-a">Total payroll cost = gross wages + employer FICA (7.65% up to SS wage base) + FUTA (0.6% on first $7,000/employee) + SUTA (varies by state) + benefits. Add all of it up — that's your true payroll budget number.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What percentage of revenue should payroll be?</summary><div class="faq-a">It varies by industry. Service businesses: 30–35%. Retail/food: 25–35%. Manufacturing: 15–30%. Tech startups: 20–50%. The key metric is whether labor costs fit within your gross margin structure, not a universal percentage.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">When are FUTA taxes due?</summary><div class="faq-a">FUTA deposits are due the last day of the month after each quarter end — April 30, July 31, October 31, and January 31 — if your cumulative FUTA liability exceeds $500. If the year-end total is $500 or less, pay it with Form 940 by January 31.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">How often must I run payroll?</summary><div class="faq-a">Federal law sets no frequency floor, but state laws do — most require at least semimonthly. Weekly or biweekly is most common for hourly workers; semimonthly or monthly for salaried employees. Check your state DOL for the minimum requirement.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More employer tools</h2></div>
+        <div class="related-grid">
+          <a href="/employee-cost-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="tool-card-title">Employee Cost Calculator</div><div class="tool-card-desc" style="font-size:13px">True total cost of one employee including benefits and overhead.</div></div></div></a>
+          <a href="/employer-tax-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="tool-card-title">Employer Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Detailed FICA, FUTA, SUTA breakdown per employee.</div></div></div></a>
+          <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M7 8h10M7 12h6"/></svg></div><div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Per-paycheck gross-to-net for employees.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Business Tools</div><ul class="footer-links"><li><a href="/payroll-cost-calculator">Payroll Cost Calculator</a></li><li><a href="/employee-cost-calculator">Employee Cost Calculator</a></li><li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li><li><a href="/workers-comp-calculator">Workers Comp</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/1099-vs-w2-calculator">1099 vs W-2</a></li><li><a href="/cost-per-hire-calculator">Cost Per Hire</a></li><li><a href="/invoice-generator-free">Invoice Generator</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not accounting or legal advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var SUTA={avg:.027,CA:.034,FL:.027,TX:.027,NY:.041,IL:.027,PA:.032,OH:.027,GA:.027,NC:.012,WA:.027,NJ:.027,AZ:.020,CO:.027,MN:.027,other:.027};
+  var SUTA_BASE={avg:7000,CA:7000,FL:7000,TX:9000,NY:12800,IL:13816,PA:10000,OH:9000,GA:9500,NC:28000,WA:68500,NJ:42300,AZ:8000,CO:20400,MN:42000,other:7000};
+  var PERIOD_MULT={weekly:52,biweekly:26,semimonthly:24,monthly:12,annual:1};
+  var PERIOD_LABELS={weekly:'Weekly',biweekly:'Biweekly',semimonthly:'Semimonthly',monthly:'Monthly',annual:'Annual/Salary'};
+
+  var employees = [];
+  var nextId = 1;
+  function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+
+  function annualWage(emp){
+    var mult = PERIOD_MULT[emp.freq]||26;
+    return (parseFloat(emp.wage)||0) * mult;
+  }
+
+  function addEmployee(name, freq, wage){
+    employees.push({id:nextId++, name:name||'', freq:freq||'biweekly', wage:wage||''});
+    renderTable();
+  }
+
+  function removeEmployee(id){
+    employees = employees.filter(function(e){return e.id!==id;});
+    renderTable();
+  }
+
+  function renderTable(){
+    var tbody = document.getElementById('emp-tbody');
+    if(employees.length===0){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--ink-3);padding:16px;font-size:13px">No employees yet — click Add Employee</td></tr>';return;}
+    tbody.innerHTML = employees.map(function(emp){
+      var annual = annualWage(emp);
+      var annualFmt = annual>0 ? fmt(annual) : '—';
+      var periodOpts = Object.keys(PERIOD_LABELS).map(function(k){
+        return '<option value="'+k+'"'+(emp.freq===k?' selected':'')+'>'+PERIOD_LABELS[k]+'</option>';
+      }).join('');
+      return '<tr data-eid="'+emp.id+'">'
+        +'<td><input class="emp-name" type="text" placeholder="Name or Role" value="'+emp.name.replace(/"/g,'&quot;')+'"></td>'
+        +'<td><select class="emp-freq">'+periodOpts+'</select></td>'
+        +'<td><input class="emp-wage" type="number" placeholder="0" min="0" step="100" value="'+emp.wage+'"></td>'
+        +'<td class="annual-cell">'+annualFmt+'</td>'
+        +'<td><button class="del-btn" type="button" title="Remove"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>'
+        +'</tr>';
+    }).join('');
+
+    tbody.querySelectorAll('.emp-name').forEach(function(el){el.addEventListener('input',function(){var id=parseInt(el.closest('tr').dataset.eid);var e=employees.find(function(x){return x.id===id;});if(e)e.name=el.value;});});
+    tbody.querySelectorAll('.emp-freq').forEach(function(el){el.addEventListener('change',function(){var id=parseInt(el.closest('tr').dataset.eid);var e=employees.find(function(x){return x.id===id;});if(e){e.freq=el.value;updateAnnual(el.closest('tr'),e);}});});
+    tbody.querySelectorAll('.emp-wage').forEach(function(el){el.addEventListener('input',function(){var id=parseInt(el.closest('tr').dataset.eid);var e=employees.find(function(x){return x.id===id;});if(e){e.wage=el.value;updateAnnual(el.closest('tr'),e);}});});
+    tbody.querySelectorAll('.del-btn').forEach(function(el){el.addEventListener('click',function(){removeEmployee(parseInt(el.closest('tr').dataset.eid));});});
+  }
+
+  function updateAnnual(row,emp){
+    var c=row.querySelector('.annual-cell');
+    var a=annualWage(emp);
+    if(c) c.textContent=a>0?fmt(a):'—';
+  }
+
+  document.getElementById('add-emp-btn').addEventListener('click',function(){addEmployee('','biweekly','');});
+  document.getElementById('calc-pc-btn').addEventListener('click', calcPC);
+
+  // Seed 3 employees
+  addEmployee('Employee 1','biweekly',2500);
+  addEmployee('Employee 2','biweekly',1800);
+  addEmployee('Employee 3','semimonthly',3000);
+
+  function calcPC(){
+    var state=document.getElementById('pc-state').value;
+    var benefitsPct=(parseFloat(document.getElementById('pc-benefits').value)||0)/100;
+    var sutaRate=SUTA[state]||.027;
+    var sutaBase=SUTA_BASE[state]||7000;
+
+    var totalWages=0, totalSS=0, totalMed=0, totalFUTA=0, totalSUTA=0, totalBen=0;
+    var rows=[];
+
+    employees.forEach(function(emp){
+      var wages=annualWage(emp);
+      if(wages<=0){rows.push({name:emp.name||'—',freq:emp.freq,wages:0,ss:0,med:0,futa:0,suta:0,ben:0,total:0});return;}
+      var ss=Math.min(wages,176100)*.062;
+      var med=wages*.0145;
+      var futa=Math.min(wages,7000)*.006;
+      var suta=Math.min(wages,sutaBase)*sutaRate;
+      var ben=wages*benefitsPct;
+      var total=wages+ss+med+futa+suta+ben;
+      totalWages+=wages;totalSS+=ss;totalMed+=med;totalFUTA+=futa;totalSUTA+=suta;totalBen+=ben;
+      rows.push({name:emp.name||'(unnamed)',freq:PERIOD_LABELS[emp.freq]||emp.freq,wages,ss,med,futa,suta,ben,total});
+    });
+
+    var totalErTax=totalSS+totalMed+totalFUTA+totalSUTA+totalBen;
+    var grandTotal=totalWages+totalErTax;
+
+    document.getElementById('r-total-wages').textContent=fmt(totalWages);
+    document.getElementById('r-monthly-wages').textContent=fmt(totalWages/12)+'/month';
+    document.getElementById('r-total-er-taxes').textContent=fmt(totalErTax);
+    document.getElementById('r-er-pct').textContent=totalWages>0?((totalErTax/totalWages)*100).toFixed(1)+'% of wages':'—';
+    document.getElementById('r-grand-total').textContent=fmt(grandTotal);
+    document.getElementById('r-monthly-total').textContent=fmt(grandTotal/12)+'/month';
+
+    // Per-employee results table
+    document.getElementById('results-emp-tbody').innerHTML=rows.map(function(r){
+      return '<tr>'
+        +'<td>'+r.name+'</td><td>'+r.freq+'</td>'
+        +'<td class="r">'+fmt(r.wages)+'</td>'
+        +'<td class="r">'+fmt(r.ss)+'</td>'
+        +'<td class="r">'+fmt(r.med)+'</td>'
+        +'<td class="r">'+fmt(r.futa+r.suta)+'</td>'
+        +'<td class="r">'+(r.ben>0?fmt(r.ben):'—')+'</td>'
+        +'<td class="r"><strong>'+fmt(r.total)+'</strong></td>'
+        +'</tr>';
+    }).join('');
+    document.getElementById('results-tfoot').innerHTML='<tr>'
+      +'<td colspan="2"><strong>TOTAL</strong></td>'
+      +'<td class="r">'+fmt(totalWages)+'</td>'
+      +'<td class="r">'+fmt(totalSS)+'</td>'
+      +'<td class="r">'+fmt(totalMed)+'</td>'
+      +'<td class="r">'+fmt(totalFUTA+totalSUTA)+'</td>'
+      +'<td class="r">'+(totalBen>0?fmt(totalBen):'—')+'</td>'
+      +'<td class="r"><strong>'+fmt(grandTotal)+'</strong></td>'
+      +'</tr>';
+
+    // Quarterly forecast — Q1 is higher because FUTA/SUTA accrue early
+    var q1=grandTotal*0.265,q2=grandTotal*0.252,q3=grandTotal*0.245,q4=grandTotal*0.238;
+    var qDates=['Q1 (Jan–Mar)','Q2 (Apr–Jun)','Q3 (Jul–Sep)','Q4 (Oct–Dec)'];
+    var qVals=[q1,q2,q3,q4];
+    document.getElementById('quarter-cards').innerHTML=qVals.map(function(v,i){
+      return '<div class="qcard"><div class="qcard-q">'+qDates[i]+'</div><div class="qcard-val">'+fmt(v)+'</div><div class="qcard-label">Total payroll cost</div></div>';
+    }).join('');
+
+    document.getElementById('pc-results').style.display='block';
+    document.getElementById('pc-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>
