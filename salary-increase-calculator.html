@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salary Increase Calculator 2026 — Raise &amp; Promotion Pay Calculator | FreePayrollCalc</title>
+<meta name="description" content="Free salary increase calculator. See your new salary after a raise in seconds — annual, monthly, biweekly, and hourly breakdown. Also calculate what raise percentage you need to reach a target salary or keep up with inflation.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/salary-increase-calculator">
+<meta property="og:title" content="Salary Increase Calculator 2026 — Raise &amp; Promotion Pay Calculator">
+<meta property="og:description" content="Calculate your new salary after a raise. See annual, monthly, biweekly, and hourly impact. Reverse-calculate the % raise needed to reach any target salary.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Salary Increase Calculator 2026","url":"https://www.freepayrollcalc.com/salary-increase-calculator","description":"Calculate your new salary after a raise or promotion. Shows new salary across all pay frequencies plus annual increase amount. Also reverse-calculates the percentage raise needed to reach a target salary. Updated for 2026.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate a salary increase?","acceptedAnswer":{"@type":"Answer","text":"To calculate a percentage salary increase: new salary = current salary × (1 + raise%). For example, $60,000 with a 5% raise = $60,000 × 1.05 = $63,000. The annual increase = $63,000 − $60,000 = $3,000. For a flat dollar raise: new salary = current salary + raise amount. Divide by 26 for biweekly pay, by 24 for semimonthly, by 12 for monthly."}},{"@type":"Question","name":"What is a good salary raise percentage in 2026?","acceptedAnswer":{"@type":"Answer","text":"According to the Bureau of Labor Statistics and major compensation surveys, the average salary increase in 2026 is projected at 3.5–4.5%. A raise at or below 3% in a year with higher inflation is effectively a pay cut in purchasing power. Merit-based raises for strong performers typically range from 5–8%, while promotions often carry 10–20% increases."}},{"@type":"Question","name":"How do I calculate the raise percentage I received?","acceptedAnswer":{"@type":"Answer","text":"Raise percentage = ((new salary − old salary) ÷ old salary) × 100. Example: old salary $55,000, new salary $58,000 → ($58,000 − $55,000) ÷ $55,000 × 100 = 5.45% raise."}},{"@type":"Question","name":"How much more will I take home after a raise?","acceptedAnswer":{"@type":"Answer","text":"Your actual take-home increase after a raise depends on your marginal tax rate. A $5,000 raise may result in roughly $3,000–$3,750 more in take-home pay after federal and state taxes and FICA. Use the Payroll Tax Calculator to see your exact new net paycheck after a raise."}},{"@type":"Question","name":"How do I negotiate a raise?","acceptedAnswer":{"@type":"Answer","text":"Research market rates for your role using Glassdoor, LinkedIn Salary, or the BLS Occupational Employment Statistics. Calculate the percentage you want to request. Prepare a case based on accomplishments, not tenure. Request 5–10% above your target to give room to negotiate. Timing matters — annual reviews, after a successful project, or when you receive outside offers are the strongest positions."}}]}
+</script>
+<style>
+.mode-bar{display:flex;gap:0;border:2px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.mode-btn{flex:1;padding:10px 16px;font-size:13px;font-weight:700;background:var(--surface);border:none;cursor:pointer;transition:all .15s;text-align:center}
+.mode-btn.active{background:var(--accent);color:#fff}
+.raise-type{display:flex;gap:0;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;width:fit-content;margin-top:8px}
+.rt-btn{padding:6px 16px;font-size:13px;font-weight:600;background:var(--surface);border:none;cursor:pointer}
+.rt-btn.active{background:var(--ink-1);color:#fff}
+.result-table{width:100%;border-collapse:collapse;margin-top:24px;font-size:14px}
+.result-table th{padding:10px 16px;background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:700;text-align:left;border-bottom:2px solid var(--border)}
+.result-table td{padding:11px 16px;border-bottom:1px solid var(--border)}
+.result-table tr:last-child td{border-bottom:none;font-weight:700;background:rgba(5,150,105,.04)}
+.result-table td.old{font-family:'JetBrains Mono',monospace;color:var(--ink-3)}
+.result-table td.new{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--green)}
+.result-table td.diff{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent)}
+.raise-hero{background:linear-gradient(135deg,rgba(27,79,216,.06),rgba(5,150,105,.06));border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;margin-top:24px}
+.raise-hero-pct{font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:800;color:var(--accent);line-height:1}
+.raise-hero-label{font-size:14px;color:var(--ink-3);margin-top:8px}
+.raise-hero-amount{font-size:20px;font-weight:700;color:var(--green);margin-top:6px}
+.inflation-box{background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.25);border-radius:10px;padding:14px 18px;margin-top:16px;font-size:13px}
+#si-results{display:none}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/take-home-pay-calculator">Take Home Pay</a>
+        <a href="/salary-increase-calculator" class="active">Raise Calc</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a><a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/salary-to-hourly-calculator">Salary to Hourly Calculator</a>
+    <a href="/take-home-pay-calculator">Take Home Pay Calculator</a>
+    <a href="/salary-increase-calculator" class="active">Salary Increase Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">›</span><span aria-current="page">Salary Increase Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Salary Increase Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate your new salary after a raise — or find out what raise % you need to hit a target.<br>See the impact across every pay frequency instantly.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Two modes: Calculate new salary after raise · Reverse-calculate raise % needed</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Salary Increase Calculator</div>
+
+      <div class="mode-bar">
+        <button class="mode-btn active" id="mode-got">I got a raise — calculate new salary</button>
+        <button class="mode-btn" id="mode-want">I want a raise — calculate % needed</button>
+      </div>
+
+      <!-- MODE A: Got a raise -->
+      <div id="panel-got">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Current Salary (Annual)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cur-sal" class="form-input form-input--prefixed" placeholder="60,000" min="0" step="500"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Raise Amount</label>
+            <div class="raise-type">
+              <button class="rt-btn active" id="rt-pct">% Percentage</button>
+              <button class="rt-btn" id="rt-flat">$ Dollar</button>
+            </div>
+            <div style="margin-top:10px">
+              <div class="input-wrap" id="pct-wrap"><input type="number" id="raise-pct" class="form-input" placeholder="5" min="0" step="0.1"><span class="input-suffix">%</span></div>
+              <div class="input-wrap" id="flat-wrap" style="display:none"><span class="input-prefix">$</span><input type="number" id="raise-flat" class="form-input form-input--prefixed" placeholder="3,000" min="0" step="100"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pay Frequency</label>
+            <select id="freq" class="form-select">
+              <option value="26">Biweekly (every 2 weeks)</option>
+              <option value="52">Weekly</option>
+              <option value="24">Semimonthly (twice a month)</option>
+              <option value="12">Monthly</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE B: Want a raise -->
+      <div id="panel-want" style="display:none">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Current Salary (Annual)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cur-sal2" class="form-input form-input--prefixed" placeholder="60,000" min="0" step="500"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Salary (Annual)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="target-sal" class="form-input form-input--prefixed" placeholder="65,000" min="0" step="500"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pay Frequency</label>
+            <select id="freq2" class="form-select">
+              <option value="26">Biweekly (every 2 weeks)</option>
+              <option value="52">Weekly</option>
+              <option value="24">Semimonthly (twice a month)</option>
+              <option value="12">Monthly</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-btn" style="margin-top:4px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        Calculate Raise
+      </button>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="si-results">
+      <!-- Mode A hero -->
+      <div id="got-results">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px" data-enter>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:8px">Annual Raise Amount</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:800;color:var(--green)" id="r-raise-amt">—</div>
+            <div style="font-size:13px;color:var(--ink-3);margin-top:4px" id="r-raise-pct-show">—</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:8px">New Annual Salary</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:800;color:var(--accent)" id="r-new-sal">—</div>
+            <div style="font-size:13px;color:var(--ink-3);margin-top:4px" id="r-new-period">—</div>
+          </div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:16px" data-enter data-delay="1">
+          <table class="result-table">
+            <thead><tr><th>Pay Period</th><th>Current Pay</th><th>New Pay</th><th>Increase</th></tr></thead>
+            <tbody>
+              <tr><td>Annual</td><td class="old" id="r-old-yr">—</td><td class="new" id="r-new-yr">—</td><td class="diff" id="r-diff-yr">—</td></tr>
+              <tr><td>Monthly</td><td class="old" id="r-old-mo">—</td><td class="new" id="r-new-mo">—</td><td class="diff" id="r-diff-mo">—</td></tr>
+              <tr><td id="r-period-label">Biweekly</td><td class="old" id="r-old-pp">—</td><td class="new" id="r-new-pp">—</td><td class="diff" id="r-diff-pp">—</td></tr>
+              <tr><td>Weekly</td><td class="old" id="r-old-wk">—</td><td class="new" id="r-new-wk">—</td><td class="diff" id="r-diff-wk">—</td></tr>
+              <tr><td>Hourly (2,080 hrs)</td><td class="old" id="r-old-hr">—</td><td class="new" id="r-new-hr">—</td><td class="diff" id="r-diff-hr">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="inflation-box" data-enter data-delay="2" id="r-inflation-box"></div>
+
+        <div style="margin-top:16px" data-enter data-delay="3">
+          <a href="/payroll-tax-calculator" class="calc-btn" style="display:inline-flex;text-decoration:none;width:auto;padding:12px 24px">
+            Calculate new take-home pay after taxes →
+          </a>
+        </div>
+      </div>
+
+      <!-- Mode B results -->
+      <div id="want-results" style="display:none">
+        <div class="raise-hero" data-enter>
+          <div style="font-size:13px;color:var(--ink-3);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">Raise Percentage Needed</div>
+          <div class="raise-hero-pct" id="r-need-pct">—</div>
+          <div class="raise-hero-label">to reach your target salary</div>
+          <div class="raise-hero-amount" id="r-need-amt">— annual increase</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:16px" data-enter data-delay="1">
+          <table class="result-table">
+            <thead><tr><th>Pay Period</th><th>Current Pay</th><th>Target Pay</th><th>Difference</th></tr></thead>
+            <tbody>
+              <tr><td>Annual</td><td class="old" id="r2-old-yr">—</td><td class="new" id="r2-new-yr">—</td><td class="diff" id="r2-diff-yr">—</td></tr>
+              <tr><td>Monthly</td><td class="old" id="r2-old-mo">—</td><td class="new" id="r2-new-mo">—</td><td class="diff" id="r2-diff-mo">—</td></tr>
+              <tr><td id="r2-period-label">Biweekly</td><td class="old" id="r2-old-pp">—</td><td class="new" id="r2-new-pp">—</td><td class="diff" id="r2-diff-pp">—</td></tr>
+              <tr><td>Weekly</td><td class="old" id="r2-old-wk">—</td><td class="new" id="r2-new-wk">—</td><td class="diff" id="r2-diff-wk">—</td></tr>
+              <tr><td>Hourly (2,080 hrs)</td><td class="old" id="r2-old-hr">—</td><td class="new" id="r2-new-hr">—</td><td class="diff" id="r2-diff-hr">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:16px"><a href="/payroll-tax-calculator" class="calc-btn" style="display:inline-flex;text-decoration:none;width:auto;padding:12px 24px">See new take-home pay after taxes →</a></div>
+      </div>
+    </div>
+
+    <!-- ARTICLE -->
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How to Calculate a Salary Increase</h2>
+        <p><strong>Percentage raise:</strong> New salary = current salary × (1 + raise% ÷ 100). A $60,000 salary with a 5% raise becomes $60,000 × 1.05 = $63,000. The annual dollar increase is $3,000.</p>
+        <p><strong>Flat dollar raise:</strong> New salary = current salary + raise amount. A $60,000 salary with a $3,500 raise becomes $63,500. The equivalent percentage is $3,500 ÷ $60,000 × 100 = 5.83%.</p>
+        <h3>What Is a Good Raise in 2026?</h3>
+        <p>Major compensation surveys project average salary increases of 3.5–4.5% for 2026. A raise below the current inflation rate is a real-terms pay cut — your purchasing power decreases even as your nominal salary goes up. Strong performers typically receive 5–8%, while promotions carry 10–20% increases.</p>
+        <h3>How Much More Will You Take Home?</h3>
+        <p>A $5,000 raise increases gross pay by $5,000 but your take-home increase will be less — typically 65–80% of the gross raise after federal taxes, FICA, and state taxes. The exact amount depends on your marginal tax bracket. Use the <a href="/payroll-tax-calculator">payroll tax calculator</a> to see your exact new net paycheck.</p>
+        <p><strong>Related:</strong> <a href="/salary-to-hourly-calculator">Salary to Hourly Calculator</a> · <a href="/payroll-tax-calculator">Payroll Tax Calculator</a> · <a href="/take-home-pay-calculator">Take Home Pay Calculator</a> · <a href="/net-to-gross-calculator">Net to Gross Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Salary raise questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How do I calculate a salary increase?</summary><div class="faq-a">New salary = current salary × (1 + raise%). Example: $60,000 × 1.05 = $63,000 for a 5% raise. For a flat dollar raise: new salary = current + raise amount. Divide by 26 for biweekly, 12 for monthly, 2,080 for hourly equivalent.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is a good salary raise percentage in 2026?</summary><div class="faq-a">Average salary increases in 2026 are projected at 3.5–4.5%. A raise below current inflation is a real-terms pay cut. Merit raises for strong performers: 5–8%. Promotions: 10–20%. Less than 3% in a high-inflation year is effectively losing purchasing power.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How do I calculate the raise percentage I received?</summary><div class="faq-a">Raise % = ((new salary − old salary) ÷ old salary) × 100. Example: went from $55,000 to $58,000 → ($3,000 ÷ $55,000) × 100 = 5.45% raise. Enter both salaries in "I want a raise" mode above for the full breakdown.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">How much more will I take home after a raise?</summary><div class="faq-a">Roughly 65–80% of your gross raise amount translates to extra take-home pay after taxes. A $5,000 raise yields approximately $3,250–$4,000 more per year in net pay depending on your bracket and state. Use the Payroll Tax Calculator for your exact figure.</div></details>
+          <details class="faq-item" data-enter data-delay="5"><summary class="faq-q">How do I negotiate a raise?</summary><div class="faq-a">Research market rates using Glassdoor, LinkedIn Salary, or BLS OES data. Request 5–10% above your actual target to allow for negotiation. Time it after a major win, during annual reviews, or when you have an outside offer. Salary data makes the strongest case.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More payroll calculators</h2></div>
+        <div class="related-grid">
+          <a href="/salary-to-hourly-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><div class="tool-card-title">Salary to Hourly Calculator</div><div class="tool-card-desc" style="font-size:13px">Convert annual salary to hourly, daily, weekly, and monthly rates.</div></div></div></a>
+          <a href="/payroll-tax-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div><div><div class="tool-card-title">Payroll Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">See your net paycheck after federal, state, and FICA taxes.</div></div></div></a>
+          <a href="/take-home-pay-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="tool-card-title">Take Home Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">Full paycheck with 401k, health insurance, and all deductions.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Calculators</div><ul class="footer-links"><li><a href="/salary-increase-calculator">Salary Increase Calculator</a></li><li><a href="/salary-to-hourly-calculator">Salary to Hourly</a></li><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/take-home-pay-calculator">Take Home Pay</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/net-to-gross-calculator">Net to Gross Calculator</a></li><li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li><li><a href="/1099-vs-w2-calculator">1099 vs W-2</a></li><li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Sources</div><ul class="footer-links"><li><a href="https://www.bls.gov/oes/" rel="nofollow noopener" target="_blank">BLS Occupational Wages</a></li><li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var mode = 'got', raiseType = 'pct';
+  var PERIOD_LABELS = {52:'Weekly',26:'Biweekly',24:'Semimonthly',12:'Monthly'};
+  var INFLATION_2026 = 3.1; // estimated CPI
+
+  document.getElementById('mode-got').addEventListener('click',function(){mode='got';document.getElementById('mode-got').classList.add('active');document.getElementById('mode-want').classList.remove('active');document.getElementById('panel-got').style.display='';document.getElementById('panel-want').style.display='none';});
+  document.getElementById('mode-want').addEventListener('click',function(){mode='want';document.getElementById('mode-want').classList.add('active');document.getElementById('mode-got').classList.remove('active');document.getElementById('panel-want').style.display='';document.getElementById('panel-got').style.display='none';});
+  document.getElementById('rt-pct').addEventListener('click',function(){raiseType='pct';document.getElementById('rt-pct').classList.add('active');document.getElementById('rt-flat').classList.remove('active');document.getElementById('pct-wrap').style.display='';document.getElementById('flat-wrap').style.display='none';});
+  document.getElementById('rt-flat').addEventListener('click',function(){raiseType='flat';document.getElementById('rt-flat').classList.add('active');document.getElementById('rt-pct').classList.remove('active');document.getElementById('flat-wrap').style.display='';document.getElementById('pct-wrap').style.display='none';});
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+
+  function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function fmtD(n){return '$'+(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function fmtPct(n){return (Math.round(n*100)/100).toFixed(2)+'%';}
+
+  function calculate(){
+    if(mode==='got'){
+      var cur = parseFloat(document.getElementById('cur-sal').value)||0;
+      if(cur<=0){document.getElementById('cur-sal').focus();return;}
+      var raise, raisePct;
+      if(raiseType==='pct'){
+        raisePct = parseFloat(document.getElementById('raise-pct').value)||0;
+        raise = cur * raisePct/100;
+      } else {
+        raise = parseFloat(document.getElementById('raise-flat').value)||0;
+        raisePct = cur>0 ? raise/cur*100 : 0;
+      }
+      var newSal = cur + raise;
+      var freq = parseInt(document.getElementById('freq').value)||26;
+
+      document.getElementById('r-raise-amt').textContent = fmt(raise);
+      document.getElementById('r-raise-pct-show').textContent = fmtPct(raisePct)+' raise';
+      document.getElementById('r-new-sal').textContent = fmt(newSal);
+      document.getElementById('r-new-period').textContent = fmt(newSal/freq)+' per '+(PERIOD_LABELS[freq]||'pay period').toLowerCase()+' paycheck';
+
+      var rows = [{id:'yr',div:1},{id:'mo',div:12},{id:'pp',div:freq},{id:'wk',div:52},{id:'hr',div:2080}];
+      rows.forEach(function(r){
+        document.getElementById('r-old-'+r.id).textContent = r.div===2080?fmtD(cur/r.div):fmt(cur/r.div);
+        document.getElementById('r-new-'+r.id).textContent = r.div===2080?fmtD(newSal/r.div):fmt(newSal/r.div);
+        document.getElementById('r-diff-'+r.id).textContent = '+'+( r.div===2080?fmtD(raise/r.div):fmt(raise/r.div));
+      });
+      document.getElementById('r-period-label').textContent = PERIOD_LABELS[freq]||'Per Period';
+
+      // Inflation context
+      var realRaise = raisePct - INFLATION_2026;
+      var iBox = document.getElementById('r-inflation-box');
+      if(raisePct > 0){
+        if(realRaise > 0){
+          iBox.innerHTML = '<strong style="color:var(--green)">Real raise: +'+realRaise.toFixed(1)+'%</strong> — Your '+fmtPct(raisePct)+' raise outpaces 2026 inflation (~'+INFLATION_2026+'%). Your purchasing power is actually growing.';
+        } else if(realRaise < 0){
+          iBox.innerHTML = '<strong style="color:var(--amber)">Real raise: '+realRaise.toFixed(1)+'%</strong> — Your '+fmtPct(raisePct)+' raise is below 2026 inflation (~'+INFLATION_2026+'%). In purchasing power terms, this is effectively a pay cut of '+Math.abs(realRaise).toFixed(1)+'%.';
+        } else {
+          iBox.innerHTML = '<strong>Inflation-neutral:</strong> Your raise matches 2026 estimated inflation (~'+INFLATION_2026+'%). Purchasing power holds steady.';
+        }
+        iBox.style.display='block';
+      } else {
+        iBox.style.display='none';
+      }
+
+      document.getElementById('got-results').style.display='block';
+      document.getElementById('want-results').style.display='none';
+    } else {
+      var cur2 = parseFloat(document.getElementById('cur-sal2').value)||0;
+      var tgt = parseFloat(document.getElementById('target-sal').value)||0;
+      if(cur2<=0||tgt<=0){return;}
+      var diff = tgt - cur2;
+      var pctNeeded = cur2>0 ? diff/cur2*100 : 0;
+      var freq2 = parseInt(document.getElementById('freq2').value)||26;
+
+      document.getElementById('r-need-pct').textContent = fmtPct(pctNeeded);
+      document.getElementById('r-need-amt').textContent = (diff>=0?'+':'')+fmt(diff)+' annual increase';
+
+      var rows2 = [{id:'yr',div:1},{id:'mo',div:12},{id:'pp',div:freq2},{id:'wk',div:52},{id:'hr',div:2080}];
+      rows2.forEach(function(r){
+        document.getElementById('r2-old-'+r.id).textContent = r.div===2080?fmtD(cur2/r.div):fmt(cur2/r.div);
+        document.getElementById('r2-new-'+r.id).textContent = r.div===2080?fmtD(tgt/r.div):fmt(tgt/r.div);
+        var d = (tgt-cur2)/r.div;
+        document.getElementById('r2-diff-'+r.id).textContent = (d>=0?'+':'')+( r.div===2080?fmtD(d):fmt(d));
+      });
+      document.getElementById('r2-period-label').textContent = PERIOD_LABELS[freq2]||'Per Period';
+
+      document.getElementById('got-results').style.display='none';
+      document.getElementById('want-results').style.display='block';
+    }
+
+    document.getElementById('si-results').style.display='block';
+    document.getElementById('si-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

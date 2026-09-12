@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quarterly Tax Calculator 2026 — Estimated Tax Payments (Form 1040-ES) | FreePayrollCalc</title>
+<meta name="description" content="Free quarterly estimated tax calculator for 2026. Calculate your Q1–Q4 payment amounts, due dates, and safe harbor amounts for IRS Form 1040-ES. For freelancers, self-employed, and anyone with income not subject to withholding.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/quarterly-tax-calculator">
+<meta property="og:title" content="Quarterly Tax Calculator 2026 — Estimated Tax Payments (Form 1040-ES)">
+<meta property="og:description" content="Calculate your 2026 quarterly estimated tax payments. Shows Q1–Q4 amounts, due dates, and safe harbor rule. Built for US freelancers, contractors, and investors.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Quarterly Tax Calculator 2026","url":"https://www.freepayrollcalc.com/quarterly-tax-calculator","description":"Calculate quarterly estimated tax payments for IRS Form 1040-ES. Covers self-employment income, investment income, and any non-withholding income. Shows 2026 payment due dates, safe harbor calculations, and penalty avoidance rules.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When are quarterly estimated taxes due in 2026?","acceptedAnswer":{"@type":"Answer","text":"2026 quarterly estimated tax due dates: Q1 (January–March income) — April 15, 2026. Q2 (April–May income) — June 16, 2026. Q3 (June–August income) — September 15, 2026. Q4 (September–December income) — January 15, 2027. Missing a deadline triggers an underpayment penalty on the late amount."}},{"@type":"Question","name":"Who needs to pay quarterly estimated taxes?","acceptedAnswer":{"@type":"Answer","text":"You must pay quarterly estimated taxes if you expect to owe at least $1,000 in federal income tax for 2026 and your withholding will cover less than 90% of your current-year tax OR less than 100% of your prior-year tax (110% if prior AGI exceeded $150,000). This typically applies to freelancers, independent contractors, small business owners, investors with dividends/capital gains, and anyone with significant income not subject to withholding."}},{"@type":"Question","name":"How do I calculate quarterly estimated taxes?","acceptedAnswer":{"@type":"Answer","text":"Estimate your total annual tax liability (self-employment tax + federal income tax + state income tax). Divide by 4 for equal quarterly payments. The safe harbor method: pay at least 100% of your prior year's total tax liability (110% if prior AGI was over $150,000) divided into 4 equal payments. Either method avoids the underpayment penalty."}},{"@type":"Question","name":"What is the safe harbor rule for estimated taxes?","acceptedAnswer":{"@type":"Answer","text":"The safe harbor rule lets you avoid underpayment penalties by paying a minimum amount regardless of your actual current-year tax. Pay at least 100% of your prior year's total tax if your prior AGI was $150,000 or less, OR 110% of prior year tax if your prior AGI exceeded $150,000. You can also use 90% of your current year's estimated tax as the safe harbor threshold."}},{"@type":"Question","name":"What happens if I miss a quarterly tax payment?","acceptedAnswer":{"@type":"Answer","text":"Missing or underpaying a quarterly estimated tax payment triggers the IRS underpayment penalty (Form 2210). For 2026, the penalty rate is the federal short-term rate plus 3 percentage points, calculated on the underpaid amount from the due date to the payment date. The penalty is typically 4–6% annualized. Pay the missed amount plus any penalty as soon as possible to stop additional penalties from accruing."}}]}
+</script>
+<style>
+.qtr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
+@media(max-width:600px){.qtr-grid{grid-template-columns:1fr}}
+.qtr-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.qtr-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent)}
+.qtr-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);margin-bottom:4px}
+.qtr-period{font-size:12px;color:var(--ink-3);margin-bottom:12px}
+.qtr-amount{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800;color:var(--accent)}
+.qtr-due{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:3px 10px}
+.safe-harbor-box{background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.2);border-radius:12px;padding:20px;margin-top:24px}
+.safe-harbor-title{font-weight:700;font-size:14px;color:var(--green);margin-bottom:12px}
+.sh-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(5,150,105,.1);font-size:13px}
+.sh-row:last-child{border-bottom:none;font-weight:700}
+.sh-val{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--green)}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--border);font-size:14px}
+.summary-row:last-child{border-bottom:none;background:rgba(5,150,105,.04);font-weight:700}
+.summary-val{font-family:'JetBrains Mono',monospace;font-weight:600}
+.summary-val.neg{color:var(--red)}
+.summary-val.pos{color:var(--green)}
+.income-type-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.it-pill{padding:5px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-size:12px;font-weight:600;cursor:pointer}
+.it-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+#qt-results{display:none}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/self-employment-tax-calculator">SE Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/take-home-pay-calculator">Take Home</a>
+        <a href="/quarterly-tax-calculator" class="active">Quarterly Tax</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a><a href="/self-employment-tax-calculator">Self-Employment Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+    <a href="/quarterly-tax-calculator" class="active">Quarterly Tax Calculator</a>
+    <a href="/take-home-pay-calculator">Take Home Pay Calculator</a>
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Quarterly Tax Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Quarterly Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate your Q1–Q4 estimated tax payments for IRS Form 1040-ES.<br>For freelancers, contractors, investors — anyone without sufficient withholding.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>2026 due dates · Safe harbor calculation · Underpayment penalty avoidance</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Quarterly Estimated Tax Calculator — 2026</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Net Self-Employment Income (Annual)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="se-income" class="form-input form-input--prefixed" placeholder="80,000" min="0" step="500"></div>
+          <p class="form-hint">Gross SE revenue minus business expenses (Schedule C net profit)</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">W-2 / Other Taxable Income (Annual)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="other-income" class="form-input form-input--prefixed" placeholder="0" min="0" step="500"></div>
+          <p class="form-hint">W-2 wages, rental income, dividends, capital gains not subject to withholding</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">W-2 Withholding Already Paid (Annual)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="w2-withheld" class="form-input form-input--prefixed" placeholder="0" min="0" step="100"></div>
+          <p class="form-hint">Federal income tax already withheld from paychecks — reduces what you owe quarterly</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Filing Status</label>
+          <select id="filing-status" class="form-select">
+            <option value="single">Single</option>
+            <option value="mfj">Married Filing Jointly</option>
+            <option value="hoh">Head of Household</option>
+            <option value="mfs">Married Filing Separately</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">State</label>
+          <select id="state" class="form-select">
+            <option value="AL">Alabama</option><option value="AK">Alaska (no income tax)</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida (no income tax)</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada (no income tax)</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota (no income tax)</option><option value="TN">Tennessee (no income tax)</option><option value="TX">Texas (no income tax)</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington (no income tax)</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming (no income tax)</option><option value="DC">Washington D.C.</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Prior Year Total Tax (for Safe Harbor) <span style="font-weight:400;color:var(--ink-3)">optional</span></label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="prior-tax" class="form-input form-input--prefixed" placeholder="0" min="0" step="100"></div>
+          <p class="form-hint">From your 2025 Form 1040 line 24 — used to calculate your safe harbor minimum payment</p>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Calculate Quarterly Payments
+      </button>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="qt-results">
+      <!-- Tax summary -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:24px" data-enter>
+        <div style="padding:14px 20px;background:var(--bg);border-bottom:1px solid var(--border);font-weight:700;font-size:13px">2026 Estimated Tax Summary</div>
+        <div class="summary-row"><span>SE Tax (Schedule SE)</span><span class="summary-val neg" id="r-se-tax">—</span></div>
+        <div class="summary-row"><span>Federal Income Tax</span><span class="summary-val neg" id="r-fed-tax">—</span></div>
+        <div class="summary-row"><span>State Income Tax</span><span class="summary-val neg" id="r-state-tax">—</span></div>
+        <div class="summary-row"><span>W-2 Withholding (already paid)</span><span class="summary-val pos" id="r-w2-withheld">—</span></div>
+        <div class="summary-row"><span>Balance Owed via Estimated Payments</span><span class="summary-val neg" id="r-balance">—</span></div>
+        <div class="summary-row"><span style="font-size:15px">Per Quarterly Payment</span><span class="summary-val" style="font-size:18px;color:var(--accent)" id="r-quarterly">—</span></div>
+      </div>
+
+      <!-- Quarter payment cards -->
+      <div class="qtr-grid" data-enter data-delay="1">
+        <div class="qtr-card">
+          <div class="qtr-label">Q1 Payment</div>
+          <div class="qtr-period">January – March 2026 income</div>
+          <div class="qtr-amount" id="r-q1">—</div>
+          <div class="qtr-due"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Due April 15, 2026</div>
+        </div>
+        <div class="qtr-card">
+          <div class="qtr-label">Q2 Payment</div>
+          <div class="qtr-period">April – May 2026 income</div>
+          <div class="qtr-amount" id="r-q2">—</div>
+          <div class="qtr-due"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Due June 16, 2026</div>
+        </div>
+        <div class="qtr-card">
+          <div class="qtr-label">Q3 Payment</div>
+          <div class="qtr-period">June – August 2026 income</div>
+          <div class="qtr-amount" id="r-q3">—</div>
+          <div class="qtr-due"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Due September 15, 2026</div>
+        </div>
+        <div class="qtr-card">
+          <div class="qtr-label">Q4 Payment</div>
+          <div class="qtr-period">September – December 2026 income</div>
+          <div class="qtr-amount" id="r-q4">—</div>
+          <div class="qtr-due"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Due January 15, 2027</div>
+        </div>
+      </div>
+
+      <!-- Safe harbor -->
+      <div class="safe-harbor-box" id="safe-harbor-section" data-enter data-delay="2">
+        <div class="safe-harbor-title">Safe Harbor — Minimum to Avoid Underpayment Penalty</div>
+        <div class="sh-row"><span>Prior year total tax</span><span class="sh-val" id="r-prior-tax">—</span></div>
+        <div class="sh-row"><span>Safe harbor threshold</span><span class="sh-val" id="r-sh-pct">100% of prior year tax</span></div>
+        <div class="sh-row"><span>Safe harbor quarterly minimum</span><span class="sh-val" id="r-sh-quarterly">—</span></div>
+        <div class="sh-row"><span>Your payment vs. safe harbor</span><span class="sh-val" id="r-sh-compare">—</span></div>
+      </div>
+
+      <div style="margin-top:16px;font-size:13px;color:var(--ink-3);line-height:1.6">
+        <strong>How to pay:</strong> Pay online at <a href="https://www.irs.gov/payments/irs-direct-pay" rel="nofollow noopener" target="_blank" style="color:var(--accent)">IRS Direct Pay</a> (free) or via EFTPS. Reference "2026 Form 1040-ES" and the correct payment quarter. Most states have their own estimated tax payment systems.
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/self-employment-tax-calculator" class="calc-btn" style="flex:1;min-width:200px;text-align:center;text-decoration:none">Full SE tax breakdown →</a>
+        <button class="calc-btn calc-btn--secondary" id="reset-btn" style="flex:0">Reset</button>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How Quarterly Estimated Taxes Work in 2026</h2>
+        <p>If you earn income that isn't subject to automatic withholding — freelance income, self-employment, rental income, investment gains, or alimony — you must pay the IRS quarterly to avoid a penalty. W-2 employees have taxes withheld automatically; everyone else must estimate and pay proactively.</p>
+        <h3>The $1,000 Rule</h3>
+        <p>You're required to make quarterly estimated tax payments if both of these are true: (1) you expect to owe at least $1,000 in federal tax after subtracting any withholding and credits, AND (2) your withholding will cover less than 90% of your current-year tax or less than 100% of your prior-year tax.</p>
+        <h3>Safe Harbor Rule</h3>
+        <p>The easiest way to avoid underpayment penalties: pay 100% of your prior year's total tax (or 110% if your prior AGI exceeded $150,000) divided into 4 equal payments. This "safe harbor" protects you regardless of how high your actual current-year income turns out to be.</p>
+        <h3>Self-Employment Tax Is Included</h3>
+        <p>Quarterly payments must cover both your federal income tax AND your self-employment tax (Schedule SE). Many new freelancers forget SE tax — the 15.3% on 92.35% of net earnings — and are caught off guard at filing time. This calculator includes SE tax in the quarterly payment calculation.</p>
+        <p><strong>Related:</strong> <a href="/self-employment-tax-calculator">Self-Employment Tax Calculator</a> · <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a> · <a href="/take-home-pay-calculator">Take Home Pay Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Quarterly estimated tax questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">When are quarterly estimated taxes due in 2026?</summary><div class="faq-a">Q1 (Jan–Mar): April 15, 2026. Q2 (Apr–May): June 16, 2026. Q3 (Jun–Aug): September 15, 2026. Q4 (Sep–Dec): January 15, 2027. Missing a deadline triggers an underpayment penalty on the late amount.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">Who needs to pay quarterly estimated taxes?</summary><div class="faq-a">Anyone who expects to owe at least $1,000 in federal tax and whose withholding covers less than 90% of current-year tax or 100% of prior-year tax. Primarily: freelancers, independent contractors, small business owners, investors with capital gains or dividends, and landlords with rental income.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How do I calculate quarterly estimated taxes?</summary><div class="faq-a">Estimate total annual tax (SE tax + federal income tax + state income tax), subtract any withholding, and divide the remainder by 4. The safe harbor alternative: divide your prior year total tax by 4 (multiply by 110% if prior AGI exceeded $150,000). Either method avoids the underpayment penalty.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What is the safe harbor rule for estimated taxes?</summary><div class="faq-a">Pay at least 100% of your prior year's total federal tax (or 110% if prior AGI exceeded $150,000) in equal quarterly installments. This guarantees penalty avoidance even if your income turns out to be much higher than expected.</div></details>
+          <details class="faq-item" data-enter data-delay="5"><summary class="faq-q">What happens if I miss a quarterly tax payment?</summary><div class="faq-a">The IRS charges an underpayment penalty (Form 2210) calculated at the federal short-term rate plus 3%, accruing from the due date until payment. For 2026 this is approximately 5–7% annualized on the underpaid amount. Pay the missed amount as soon as possible to stop the penalty from growing.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More tax calculators</h2></div>
+        <div class="related-grid">
+          <a href="/self-employment-tax-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div><div class="tool-card-title">Self-Employment Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Full Schedule SE calculation with deductible half and quarterly estimates.</div></div></div></a>
+          <a href="/1099-vs-w2-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="tool-card-title">1099 vs W-2 Calculator</div><div class="tool-card-desc" style="font-size:13px">Full side-by-side tax comparison for contractors vs employees.</div></div></div></a>
+          <a href="/take-home-pay-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="tool-card-title">Take Home Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">W-2 net paycheck after federal, state, FICA, and pre-tax deductions.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Tax Calculators</div><ul class="footer-links"><li><a href="/quarterly-tax-calculator">Quarterly Tax Calculator</a></li><li><a href="/self-employment-tax-calculator">SE Tax Calculator</a></li><li><a href="/1099-vs-w2-calculator">1099 vs W-2</a></li><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li><li><a href="/net-to-gross-calculator">Net to Gross</a></li><li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Sources</div><ul class="footer-links"><li><a href="https://www.irs.gov/forms-pubs/about-form-1040-es" rel="nofollow noopener" target="_blank">IRS Form 1040-ES</a></li><li><a href="https://www.irs.gov/publications/p505" rel="nofollow noopener" target="_blank">IRS Pub 505</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var FED={single:[[11925,.10,0],[48475,.12,11925],[103350,.22,48475],[197300,.24,103350],[250525,.32,197300],[626350,.35,250525],[Infinity,.37,626350]],mfj:[[23850,.10,0],[96950,.12,23850],[206700,.22,96950],[394600,.24,206700],[501050,.32,394600],[751600,.35,501050],[Infinity,.37,751600]],hoh:[[17000,.10,0],[64850,.12,17000],[103350,.22,64850],[197300,.24,103350],[250500,.32,197300],[626350,.35,250500],[Infinity,.37,626350]],mfs:[[11925,.10,0],[48475,.12,11925],[103350,.22,48475],[197300,.24,103350],[250525,.32,197300],[313175,.35,250525],[Infinity,.37,313175]]};
+  var STD_DED={single:15000,mfj:30000,hoh:22500,mfs:15000};
+  var SS_BASE=176100;
+  var STATE_TAX={AL:.050,AK:0,AZ:.025,AR:.039,CA:0,CO:.044,CT:0,DE:0,FL:0,GA:.0549,HI:0,ID:.058,IL:.0495,IN:.0305,IA:0,KS:0,KY:.040,LA:0,ME:0,MD:0,MA:.050,MI:.0405,MN:0,MS:.047,MO:0,MT:0,NE:0,NV:0,NH:0,NJ:0,NM:0,NY:.0685,NC:.045,ND:.0150,OH:0,OK:0,OR:0,PA:.0307,RI:0,SC:0,SD:0,TN:0,TX:0,UT:.0455,VT:0,VA:.0575,WA:0,WV:0,WI:0,WY:0,DC:0};
+
+  function stateRate(s,i){
+    if(s==='CA'){if(i<=10099)return.01;if(i<=23942)return.02;if(i<=37788)return.04;if(i<=52455)return.06;if(i<=66295)return.08;if(i<=338639)return.093;if(i<=406364)return.103;if(i<=677275)return.113;return.133;}
+    if(s==='NY'){if(i<=17150)return.04;if(i<=23600)return.045;if(i<=27900)return.0525;if(i<=161550)return.055;if(i<=323200)return.06;if(i<=2155350)return.0685;return.109;}
+    if(s==='NJ'){if(i<=20000)return.014;if(i<=35000)return.0175;if(i<=40000)return.035;if(i<=75000)return.05525;if(i<=500000)return.0637;return.1075;}
+    if(s==='OR'){if(i<=18400)return.0475;if(i<=250000)return.0675;return.099;}
+    return STATE_TAX[s]||0;
+  }
+  function fedTax(w,status){var b=FED[status]||FED.single,t=0,p=0;for(var i=0;i<b.length;i++){if(w<=p)break;var tx=Math.min(w,b[i][0])-b[i][2];if(tx>0)t+=tx*b[i][1];p=b[i][0];}return Math.max(0,t);}
+  function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+
+  document.getElementById('calc-btn').addEventListener('click', calculate);
+  document.getElementById('reset-btn').addEventListener('click',function(){document.getElementById('qt-results').style.display='none';});
+
+  function calculate(){
+    var seInc = parseFloat(document.getElementById('se-income').value)||0;
+    var otherInc = parseFloat(document.getElementById('other-income').value)||0;
+    var w2Withheld = parseFloat(document.getElementById('w2-withheld').value)||0;
+    var status = document.getElementById('filing-status').value;
+    var state = document.getElementById('state').value;
+    var priorTax = parseFloat(document.getElementById('prior-tax').value)||0;
+
+    if(seInc<=0 && otherInc<=0){document.getElementById('se-income').focus();return;}
+
+    // SE Tax
+    var netEarnings = seInc * 0.9235;
+    var ssTax = Math.min(netEarnings, SS_BASE) * 0.124;
+    var medTax = netEarnings * 0.029;
+    var seTax = ssTax + medTax;
+    var seDed = seTax * 0.5;
+
+    // Federal income tax
+    var totalIncome = seInc + otherInc;
+    var agi = Math.max(0, totalIncome - seDed);
+    var fedTaxable = Math.max(0, agi - STD_DED[status]);
+    var fed = fedTax(fedTaxable, status);
+
+    // State tax
+    var stRate = stateRate(state, agi);
+    var stateTaxAmt = agi * stRate;
+
+    var totalTax = seTax + fed + stateTaxAmt;
+    var balance = Math.max(0, totalTax - w2Withheld);
+    var qtrPayment = balance / 4;
+
+    document.getElementById('r-se-tax').textContent = seTax>0 ? '−'+fmt(seTax) : '$0';
+    document.getElementById('r-fed-tax').textContent = '−'+fmt(fed);
+    document.getElementById('r-state-tax').textContent = stateTaxAmt>0 ? '−'+fmt(stateTaxAmt) : '$0';
+    document.getElementById('r-w2-withheld').textContent = w2Withheld>0 ? '+'+fmt(w2Withheld) : '$0';
+    document.getElementById('r-balance').textContent = '−'+fmt(balance);
+    document.getElementById('r-quarterly').textContent = fmt(qtrPayment);
+    ['r-q1','r-q2','r-q3','r-q4'].forEach(function(id){document.getElementById(id).textContent=fmt(qtrPayment);});
+
+    // Safe harbor
+    if(priorTax>0){
+      var shPct = priorTax/4;
+      var shMult = 1.0; // assume prior AGI <= $150k; user can adjust
+      document.getElementById('r-prior-tax').textContent = fmt(priorTax);
+      document.getElementById('r-sh-pct').textContent = '100% of prior year tax';
+      document.getElementById('r-sh-quarterly').textContent = fmt(shPct);
+      var compare = qtrPayment >= shPct ? 'Covered ✓ (your payment > safe harbor)' : 'Below safe harbor — consider paying '+fmt(shPct)+' minimum';
+      document.getElementById('r-sh-compare').textContent = compare;
+      document.getElementById('r-sh-compare').style.color = qtrPayment>=shPct ? 'var(--green)' : 'var(--amber)';
+      document.getElementById('safe-harbor-section').style.display='block';
+    } else {
+      document.getElementById('safe-harbor-section').style.display='none';
+    }
+
+    document.getElementById('qt-results').style.display='block';
+    document.getElementById('qt-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

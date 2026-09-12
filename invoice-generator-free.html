@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Invoice Generator — Create &amp; Print Invoices Instantly (No Sign Up) | FreePayrollCalc</title>
+<meta name="description" content="Free invoice generator with no sign up. Add line items, set tax rate, apply discounts — then print to PDF or download. Professional invoices in 30 seconds.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/invoice-generator-free">
+<meta property="og:title" content="Free Invoice Generator — Create & Print Invoices Instantly">
+<meta property="og:description" content="Build professional invoices in 30 seconds. Add line items, tax, discounts, logo, payment terms — then print to PDF or download. No account needed.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free Invoice Generator","url":"https://www.freepayrollcalc.com/invoice-generator-free","description":"Browser-based free invoice generator. Create professional invoices with line items, tax, discounts, and notes. Print to PDF or download. No sign up required.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Add unlimited line items","Custom tax rate","Discount support","Logo upload","Custom payment terms","Print to PDF","No account required"],"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a free invoice online?","acceptedAnswer":{"@type":"Answer","text":"Use this free invoice generator. Fill in your business name and address, enter your client's details, add line items with descriptions, quantities, and rates, set a tax rate, and click Print/Download PDF. No sign up required. You can save the PDF by choosing 'Save as PDF' from the print dialog."}},{"@type":"Question","name":"Can I add a tax rate to my invoice?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter your tax rate percentage in the Tax field — the invoice automatically calculates the tax amount and adds it to the subtotal. You can also enter a discount percentage or fixed dollar amount before the tax is calculated."}},{"@type":"Question","name":"How do I download my invoice as a PDF?","acceptedAnswer":{"@type":"Answer","text":"Click the 'Print / Save PDF' button. In the print dialog, change the destination to 'Save as PDF' and click Save. The invoice is formatted specifically for A4/Letter printing — it will look clean with no stray UI elements."}},{"@type":"Question","name":"Is there a limit to how many invoices I can create?","acceptedAnswer":{"@type":"Answer","text":"No limit. This is a completely free, browser-based tool. You can create and print as many invoices as you need. Your data stays in your browser and is never sent to a server."}},{"@type":"Question","name":"What should a professional invoice include?","acceptedAnswer":{"@type":"Answer","text":"A professional invoice should include: your business name and contact info, client name and address, unique invoice number, invoice date and due date, itemized list of goods/services with quantities and rates, subtotal, tax amount, total amount due, and payment terms/instructions."}}]}
+</script>
+<style>
+/* Invoice builder layout */
+.inv-layout{display:grid;grid-template-columns:1fr 400px;gap:28px;align-items:start}
+@media(max-width:900px){.inv-layout{grid-template-columns:1fr}}
+.inv-form-col{}
+.inv-preview-col{position:sticky;top:80px}
+.inv-preview-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.inv-preview-header{background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.inv-preview-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3)}
+.inv-action-btns{display:flex;gap:10px}
+.inv-preview-scroll{padding:20px;max-height:80vh;overflow-y:auto}
+
+/* The actual invoice output */
+.invoice-doc{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:40px;font-family:'Inter',sans-serif;color:#1e293b;font-size:14px;min-height:400px}
+.invoice-doc .inv-header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:36px}
+.invoice-doc .inv-from{flex:1}
+.invoice-doc .inv-meta{text-align:right}
+.invoice-doc .inv-biz-name{font-size:22px;font-weight:800;color:#1e293b;margin-bottom:2px;line-height:1.2}
+.invoice-doc .inv-biz-sub{font-size:12px;color:#64748b;line-height:1.7;white-space:pre-line}
+.invoice-doc .inv-badge{display:inline-block;background:#1B4FD8;color:#fff;font-size:22px;font-weight:800;padding:4px 14px;border-radius:6px;letter-spacing:.04em;margin-bottom:8px}
+.invoice-doc .inv-meta-row{font-size:12px;color:#64748b;line-height:1.8}
+.invoice-doc .inv-meta-row strong{color:#1e293b}
+.invoice-doc .inv-parties{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
+.invoice-doc .inv-party-label{font-size:10px;text-transform:uppercase;font-weight:700;letter-spacing:.1em;color:#94a3b8;margin-bottom:6px}
+.invoice-doc .inv-party-name{font-size:15px;font-weight:700;color:#1e293b;margin-bottom:2px}
+.invoice-doc .inv-party-addr{font-size:12px;color:#64748b;line-height:1.7;white-space:pre-line}
+.invoice-doc .inv-items{width:100%;border-collapse:collapse;margin-bottom:0}
+.invoice-doc .inv-items th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#64748b;padding:8px 10px;text-align:left;border-bottom:2px solid #e2e8f0}
+.invoice-doc .inv-items th.num{text-align:right}
+.invoice-doc .inv-items td{padding:10px 10px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+.invoice-doc .inv-items td.num{text-align:right;font-family:'JetBrains Mono','Courier New',monospace;font-size:13px}
+.invoice-doc .inv-items td.desc-col{max-width:220px}
+.invoice-doc .inv-items td.desc-note{font-size:11px;color:#94a3b8;margin-top:2px}
+.invoice-doc .inv-totals{display:flex;justify-content:flex-end;margin-top:0}
+.invoice-doc .inv-totals-table{width:260px}
+.invoice-doc .inv-totals-row{display:flex;justify-content:space-between;padding:6px 10px;font-size:13px;color:#475569;border-bottom:1px solid #f1f5f9}
+.invoice-doc .inv-totals-row.total{font-size:16px;font-weight:800;color:#1e293b;background:#f8fafc;border-radius:6px;padding:10px;border:none;margin-top:4px}
+.invoice-doc .inv-totals-row .num{font-family:'JetBrains Mono','Courier New',monospace}
+.invoice-doc .inv-notes{margin-top:32px;padding-top:20px;border-top:1px solid #e2e8f0}
+.invoice-doc .inv-notes-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:#94a3b8;margin-bottom:8px}
+.invoice-doc .inv-notes-text{font-size:12px;color:#475569;line-height:1.7;white-space:pre-line}
+.invoice-doc .inv-footer{margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#94a3b8}
+
+/* Form sections */
+.inv-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.inv-section-head{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;background:var(--bg)}
+.inv-section-body{padding:16px}
+.inv-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.inv-2col{grid-template-columns:1fr}}
+.inv-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:600px){.inv-3col{grid-template-columns:1fr 1fr}}
+
+/* Line items table */
+.items-table{width:100%;border-collapse:collapse}
+.items-table th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink-3);padding:6px 8px;text-align:left;border-bottom:1px solid var(--border)}
+.items-table th.r{text-align:right}
+.items-table td{padding:5px 4px;border-bottom:1px solid var(--border);vertical-align:top}
+.items-table td input,.items-table td textarea{width:100%;border:1px solid transparent;background:transparent;border-radius:6px;padding:5px 6px;font-size:13px;color:var(--ink-1);font-family:'Inter',sans-serif;transition:border-color .15s}
+.items-table td input:focus,.items-table td textarea:focus{border-color:var(--accent);outline:none;background:#fff}
+.items-table td textarea{resize:vertical;min-height:34px;height:34px}
+.items-table td.total-cell{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--ink-1);text-align:right;padding:5px 8px;white-space:nowrap}
+.items-table td .del-btn{background:none;border:none;cursor:pointer;color:var(--ink-3);padding:4px;border-radius:4px;transition:color .15s;display:flex;align-items:center;justify-content:center}
+.items-table td .del-btn:hover{color:var(--red)}
+.add-line-btn{display:flex;align-items:center;gap:6px;background:none;border:1px dashed var(--border);color:var(--accent);font-size:13px;font-weight:600;padding:8px 14px;border-radius:8px;cursor:pointer;width:100%;justify-content:center;margin-top:10px;transition:all .15s}
+.add-line-btn:hover{background:rgba(27,79,216,.05);border-color:var(--accent)}
+.inv-logo-preview{width:100px;height:60px;object-fit:contain;margin-top:8px;display:none;border:1px solid var(--border);border-radius:6px}
+
+/* Print styles */
+@media print {
+  body * { visibility: hidden; }
+  #invoice-print-area, #invoice-print-area * { visibility: visible; }
+  #invoice-print-area {
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background:#fff; padding:0; margin:0;
+  }
+  .invoice-doc {
+    border:none; border-radius:0; padding:40px 50px;
+    box-shadow:none; min-height:auto;
+    font-size:13px;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/salary-increase-calculator">Salary Raise</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+        <a href="/invoice-generator-free" class="active">Invoice</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Full Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a><a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/quarterly-tax-calculator">Quarterly Tax Calculator</a>
+    <a href="/invoice-generator-free" class="active">Free Invoice Generator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Free Invoice Generator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Free Invoice Generator <span style="color:var(--green);font-size:.55em;font-weight:600;vertical-align:middle;background:rgba(5,150,105,.1);border-radius:6px;padding:3px 10px">No Sign Up</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Build a professional invoice in 30 seconds.<br>Add line items, tax, discounts — then print to PDF or save. Your data never leaves your browser.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free forever · No account · Print-to-PDF · Works offline</div>
+
+    <div class="inv-layout" style="margin-top:24px">
+      <!-- LEFT: Form -->
+      <div class="inv-form-col">
+
+        <!-- Business Info -->
+        <div class="inv-section" data-enter>
+          <div class="inv-section-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 9h8M8 13h6"/></svg>Your Business</div>
+          <div class="inv-section-body">
+            <div class="inv-2col">
+              <div class="form-group" style="grid-column:1/-1">
+                <label class="form-label">Business / Your Name <span style="color:var(--red)">*</span></label>
+                <input type="text" id="biz-name" class="form-input" placeholder="Acme Design Studio">
+              </div>
+              <div class="form-group" style="grid-column:1/-1">
+                <label class="form-label">Address / Contact Info</label>
+                <textarea id="biz-address" class="form-input" rows="2" placeholder="123 Main St, San Francisco CA 94102&#10;hello@acmedesign.com · (415) 555-0100" style="resize:vertical"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Website (optional)</label>
+                <input type="text" id="biz-website" class="form-input" placeholder="acmedesign.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Logo (optional)</label>
+                <input type="file" id="logo-upload" accept="image/*" class="form-input" style="padding:6px">
+                <img id="logo-preview" class="inv-logo-preview" alt="Logo preview">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Client Info -->
+        <div class="inv-section" data-enter data-delay="1">
+          <div class="inv-section-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Bill To (Client)</div>
+          <div class="inv-section-body">
+            <div class="inv-2col">
+              <div class="form-group">
+                <label class="form-label">Client Name <span style="color:var(--red)">*</span></label>
+                <input type="text" id="client-name" class="form-input" placeholder="Globex Corporation">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Client Email</label>
+                <input type="email" id="client-email" class="form-input" placeholder="billing@globex.com">
+              </div>
+              <div class="form-group" style="grid-column:1/-1">
+                <label class="form-label">Client Address</label>
+                <textarea id="client-address" class="form-input" rows="2" placeholder="742 Evergreen Terrace, Springfield IL 62701" style="resize:vertical"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoice Details -->
+        <div class="inv-section" data-enter data-delay="2">
+          <div class="inv-section-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Invoice Details</div>
+          <div class="inv-section-body">
+            <div class="inv-3col">
+              <div class="form-group">
+                <label class="form-label">Invoice #</label>
+                <input type="text" id="inv-number" class="form-input" placeholder="INV-0001">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Invoice Date</label>
+                <input type="date" id="inv-date" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Due Date</label>
+                <input type="date" id="inv-due" class="form-input">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Currency</label>
+              <select id="inv-currency" class="form-select">
+                <option value="USD" data-sym="$">USD — US Dollar ($)</option>
+                <option value="EUR" data-sym="€">EUR — Euro (€)</option>
+                <option value="GBP" data-sym="£">GBP — British Pound (£)</option>
+                <option value="CAD" data-sym="$">CAD — Canadian Dollar (CA$)</option>
+                <option value="AUD" data-sym="$">AUD — Australian Dollar (A$)</option>
+                <option value="AED" data-sym="AED">AED — UAE Dirham</option>
+                <option value="SAR" data-sym="SAR">SAR — Saudi Riyal</option>
+                <option value="PKR" data-sym="Rs">PKR — Pakistani Rupee</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line Items -->
+        <div class="inv-section" data-enter data-delay="3">
+          <div class="inv-section-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3" cy="6" r="1" fill="currentColor"/><circle cx="3" cy="12" r="1" fill="currentColor"/><circle cx="3" cy="18" r="1" fill="currentColor"/></svg>Line Items</div>
+          <div class="inv-section-body">
+            <table class="items-table">
+              <thead>
+                <tr>
+                  <th style="width:38%">Description</th>
+                  <th style="width:12%">Qty</th>
+                  <th class="r" style="width:18%">Rate</th>
+                  <th class="r" style="width:18%">Amount</th>
+                  <th style="width:6%"></th>
+                </tr>
+              </thead>
+              <tbody id="items-body"></tbody>
+            </table>
+            <button class="add-line-btn" id="add-item-btn" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Line Item
+            </button>
+          </div>
+        </div>
+
+        <!-- Totals Settings -->
+        <div class="inv-section" data-enter data-delay="4">
+          <div class="inv-section-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Tax &amp; Discount</div>
+          <div class="inv-section-body">
+            <div class="inv-2col">
+              <div class="form-group">
+                <label class="form-label">Tax Rate (%)</label>
+                <div class="input-wrap"><input type="number" id="tax-rate" class="form-input form-input--suffixed" placeholder="0" min="0" max="100" step=".1"><span class="input-suffix">%</span></div>
+                <p class="form-hint">GST, VAT, sales tax, etc.</p>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Discount</label>
+                <div style="display:flex;gap:8px">
+                  <select id="disc-type" class="form-select" style="width:80px;flex-shrink:0">
+                    <option value="pct">%</option>
+                    <option value="fixed">$</option>
+                  </select>
+                  <input type="number" id="disc-value" class="form-input" placeholder="0" min="0" step=".01">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes & Terms -->
+        <div class="inv-section" data-enter data-delay="5">
+          <div class="inv-section-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Notes &amp; Payment Terms</div>
+          <div class="inv-section-body">
+            <div class="form-group">
+              <label class="form-label">Notes / Payment Instructions</label>
+              <textarea id="inv-notes" class="form-input" rows="3" placeholder="Payment due within 30 days. Bank transfer: Account 1234567890 · Routing 021000021&#10;Thank you for your business!" style="resize:vertical"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Invoice Preview -->
+      <div class="inv-preview-col" data-enter data-delay="2">
+        <div class="inv-preview-card">
+          <div class="inv-preview-header">
+            <div class="inv-preview-title">Invoice Preview</div>
+            <div class="inv-action-btns">
+              <button class="calc-btn" id="print-invoice-btn" type="button" style="padding:7px 14px;font-size:13px;gap:6px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Print / Save PDF
+              </button>
+            </div>
+          </div>
+          <div class="inv-preview-scroll">
+            <div id="invoice-print-area">
+              <div class="invoice-doc" id="invoice-doc">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--ink-3);margin-top:10px;text-align:center">
+          In print dialog, set Destination → "Save as PDF"
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA on mobile -->
+    <div style="display:none" id="mobile-print-bar" class="print-hide">
+      <button class="calc-btn" id="mobile-print-btn" style="width:100%;margin:12px 0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print Invoice / Save as PDF
+      </button>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>What Makes a Good Invoice?</h2>
+        <p>A professional invoice communicates clearly, looks credible, and reduces payment friction. These are the seven components every invoice should include:</p>
+        <ul>
+          <li><strong>Invoice number</strong> — sequential numbering (INV-001, INV-002…) makes it easy to track payments and reference specific invoices in correspondence.</li>
+          <li><strong>Invoice date and due date</strong> — sets clear payment expectations. Net 30 (due 30 days after invoice date) is standard. Net 15 speeds up cash flow for service businesses.</li>
+          <li><strong>Itemized line items</strong> — list each deliverable, product, or service separately with quantity, unit price, and line total. Clients are more likely to pay quickly when they can see exactly what they're paying for.</li>
+          <li><strong>Tax (if applicable)</strong> — depending on your jurisdiction and industry, you may need to charge sales tax, GST, or VAT. Include the rate and calculated amount as a separate line.</li>
+          <li><strong>Clear payment instructions</strong> — bank transfer details, PayPal address, or a payment link. Remove all friction between the client and the "pay" button.</li>
+          <li><strong>Your logo and branding</strong> — even a simple wordmark adds professionalism and reinforces that this is a legitimate business document.</li>
+          <li><strong>Late payment policy</strong> — optionally add your late fee policy in Notes (e.g., "1.5% per month after 30 days") to encourage on-time payment.</li>
+        </ul>
+        <p><strong>Related:</strong> <a href="/quarterly-tax-calculator">Quarterly Tax Calculator</a> · <a href="/self-employment-tax-calculator">Self-Employment Tax Calculator</a> · <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Invoice generator questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How do I create a free invoice online?</summary><div class="faq-a">Fill in your business name, client details, and line items on this page. Set your tax rate and any discount. Then click "Print / Save PDF" and choose "Save as PDF" in the print dialog. No account or email required.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">Can I add a tax rate to my invoice?</summary><div class="faq-a">Yes — enter your tax rate percentage in the Tax Rate field. The calculator automatically applies it after any discount. Works for US sales tax, Canadian GST, UK VAT, UAE VAT (5%), and any other percentage-based tax.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How do I download my invoice as a PDF?</summary><div class="faq-a">Click "Print / Save PDF," change the print Destination to "Save as PDF," and click Save. The invoice is print-optimized — clean layout, no browser UI elements, correct margins.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">Is there a limit to how many invoices I can create?</summary><div class="faq-a">No limit. This is completely free and browser-based. Your data never leaves your device.</div></details>
+          <details class="faq-item" data-enter data-delay="5"><summary class="faq-q">What should a professional invoice include?</summary><div class="faq-a">Invoice number, invoice date, due date, your business info, client info, itemized line items with quantities and rates, subtotal, tax, total due, and payment instructions. This generator includes all of them.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More freelancer tools</h2></div>
+        <div class="related-grid">
+          <a href="/quarterly-tax-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div><div class="tool-card-title">Quarterly Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Know exactly how much to pay each quarter as a freelancer or contractor.</div></div></div></a>
+          <a href="/self-employment-tax-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="5"/><path d="M17 13H7a4 4 0 00-4 4v3h18v-3a4 4 0 00-4-4z"/></svg></div><div><div class="tool-card-title">Self-Employment Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">SS + Medicare taxes for freelancers, with SE deduction and quarterly plan.</div></div></div></a>
+          <a href="/1099-vs-w2-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16h16V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="tool-card-title">1099 vs W-2 Calculator</div><div class="tool-card-desc" style="font-size:13px">Compare contractor vs employee compensation after all taxes.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Freelancer Tools</div><ul class="footer-links"><li><a href="/invoice-generator-free">Free Invoice Generator</a></li><li><a href="/quarterly-tax-calculator">Quarterly Tax Calculator</a></li><li><a href="/self-employment-tax-calculator">SE Tax Calculator</a></li><li><a href="/salary-increase-calculator">Salary Raise Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Tax Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/w4-withholding-calculator">W-4 Calculator</a></li><li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. Invoice template for estimation — not official tax advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+
+  // Defaults
+  var items = [];
+  var nextId = 1;
+  var logoDataURL = null;
+
+  // Set today and +30d due date
+  var today = new Date();
+  var due30 = new Date(today); due30.setDate(due30.getDate()+30);
+  function fmtDate(d){ var m=d.getMonth()+1,day=d.getDate(); return d.getFullYear()+'-'+(m<10?'0'+m:m)+'-'+(day<10?'0'+day:day); }
+  document.getElementById('inv-date').value = fmtDate(today);
+  document.getElementById('inv-due').value = fmtDate(due30);
+  document.getElementById('inv-number').value = 'INV-0001';
+
+  // Logo upload
+  document.getElementById('logo-upload').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      logoDataURL = ev.target.result;
+      var prev = document.getElementById('logo-preview');
+      prev.src = logoDataURL;
+      prev.style.display = 'block';
+      renderPreview();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function getCurrencySym(){
+    var sel = document.getElementById('inv-currency');
+    var opt = sel.options[sel.selectedIndex];
+    return opt.getAttribute('data-sym')||'$';
+  }
+
+  function getCurrencyCode(){
+    return document.getElementById('inv-currency').value;
+  }
+
+  function fmtMoney(n){
+    var sym = getCurrencySym();
+    var code = getCurrencyCode();
+    if(code === 'AED'||code==='SAR') return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+' '+code;
+    if(code === 'PKR') return sym+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    if(code === 'EUR') return sym+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    return sym+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+
+  function addItem(){
+    var id = nextId++;
+    items.push({id:id, desc:'', qty:'1', rate:'', note:''});
+    renderItemsTable();
+    renderPreview();
+    // focus the new description
+    var el = document.querySelector('[data-item-id="'+id+'"] .item-desc');
+    if(el) setTimeout(function(){el.focus();},50);
+  }
+
+  function removeItem(id){
+    items = items.filter(function(i){return i.id!==id;});
+    renderItemsTable();
+    renderPreview();
+  }
+
+  function renderItemsTable(){
+    var body = document.getElementById('items-body');
+    if(items.length===0){body.innerHTML='';return;}
+    var sym = getCurrencySym();
+    body.innerHTML = items.map(function(item){
+      var qty = parseFloat(item.qty)||0;
+      var rate = parseFloat(item.rate)||0;
+      var total = qty * rate;
+      return '<tr data-item-id="'+item.id+'">'
+        +'<td><textarea class="item-desc" placeholder="Web design, consulting, etc." rows="1">'+escHtml(item.desc)+'</textarea></td>'
+        +'<td><input type="number" class="item-qty" value="'+escHtml(item.qty||'')+'" placeholder="1" min="0" step=".01"></td>'
+        +'<td><input type="number" class="item-rate" value="'+escHtml(item.rate||'')+'" placeholder="0.00" min="0" step=".01"></td>'
+        +'<td class="total-cell">'+fmtMoney(total)+'</td>'
+        +'<td><button type="button" class="del-btn" title="Remove"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>'
+        +'</tr>';
+    }).join('');
+
+    // Events
+    body.querySelectorAll('.item-desc').forEach(function(el){
+      el.addEventListener('input',function(){
+        var id=parseInt(el.closest('tr').dataset.itemId);
+        var it=items.find(function(i){return i.id===id;});
+        if(it){it.desc=el.value; renderPreview();}
+      });
+    });
+    body.querySelectorAll('.item-qty').forEach(function(el){
+      el.addEventListener('input',function(){
+        var id=parseInt(el.closest('tr').dataset.itemId);
+        var it=items.find(function(i){return i.id===id;});
+        if(it){it.qty=el.value; renderItemsTotals(); renderPreview();}
+      });
+    });
+    body.querySelectorAll('.item-rate').forEach(function(el){
+      el.addEventListener('input',function(){
+        var id=parseInt(el.closest('tr').dataset.itemId);
+        var it=items.find(function(i){return i.id===id;});
+        if(it){it.rate=el.value; renderItemsTotals(); renderPreview();}
+      });
+    });
+    body.querySelectorAll('.del-btn').forEach(function(el){
+      el.addEventListener('click',function(){
+        var id=parseInt(el.closest('tr').dataset.itemId);
+        removeItem(id);
+      });
+    });
+  }
+
+  function renderItemsTotals(){
+    var sym=getCurrencySym();
+    document.querySelectorAll('#items-body tr').forEach(function(row){
+      var id=parseInt(row.dataset.itemId);
+      var it=items.find(function(i){return i.id===id;});
+      if(!it) return;
+      var qty=parseFloat(it.qty)||0;
+      var rate=parseFloat(it.rate)||0;
+      var cell=row.querySelector('.total-cell');
+      if(cell) cell.textContent=fmtMoney(qty*rate);
+    });
+    renderPreview();
+  }
+
+  function calcTotals(){
+    var subtotal = items.reduce(function(acc,it){
+      return acc + (parseFloat(it.qty)||0)*(parseFloat(it.rate)||0);
+    },0);
+    var discType = document.getElementById('disc-type').value;
+    var discVal = parseFloat(document.getElementById('disc-value').value)||0;
+    var discAmt = discType==='pct' ? subtotal*discVal/100 : discVal;
+    discAmt = Math.min(discAmt, subtotal);
+    var afterDisc = subtotal - discAmt;
+    var taxRate = parseFloat(document.getElementById('tax-rate').value)||0;
+    var taxAmt = afterDisc * taxRate / 100;
+    var total = afterDisc + taxAmt;
+    return {subtotal,discAmt,discType,discVal,afterDisc,taxRate,taxAmt,total};
+  }
+
+  function escHtml(s){
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function fmtDisplayDate(val){
+    if(!val) return '';
+    var parts = val.split('-');
+    if(parts.length!==3) return val;
+    var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[parseInt(parts[1])-1]+' '+parseInt(parts[2])+', '+parts[0];
+  }
+
+  function renderPreview(){
+    var bizName = document.getElementById('biz-name').value||'Your Business';
+    var bizAddr = document.getElementById('biz-address').value||'';
+    var bizWeb  = document.getElementById('biz-website').value||'';
+    var clientName = document.getElementById('client-name').value||'Client Name';
+    var clientEmail = document.getElementById('client-email').value||'';
+    var clientAddr = document.getElementById('client-address').value||'';
+    var invNum  = document.getElementById('inv-number').value||'INV-0001';
+    var invDate = document.getElementById('inv-date').value;
+    var invDue  = document.getElementById('inv-due').value;
+    var notes   = document.getElementById('inv-notes').value||'';
+    var t = calcTotals();
+
+    var logoHtml = logoDataURL ? '<img src="'+logoDataURL+'" style="height:50px;width:auto;object-fit:contain;display:block;margin-bottom:8px" alt="logo">' : '';
+
+    var itemRows = items.length ? items.map(function(it){
+      var qty=parseFloat(it.qty)||0;
+      var rate=parseFloat(it.rate)||0;
+      return '<tr><td class="desc-col">'+escHtml(it.desc||'Item')+'</td><td class="num">'+qty+'</td><td class="num">'+fmtMoney(rate)+'</td><td class="num">'+fmtMoney(qty*rate)+'</td></tr>';
+    }).join('') : '<tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:20px;font-size:13px">Add line items above</td></tr>';
+
+    var discRow = t.discAmt>0 ? '<div class="inv-totals-row"><span>Discount'+(t.discType==='pct'?' ('+t.discVal+'%)':'')+'</span><span class="num">−'+fmtMoney(t.discAmt)+'</span></div>' : '';
+    var taxRow = t.taxRate>0 ? '<div class="inv-totals-row"><span>Tax ('+t.taxRate+'%)</span><span class="num">'+fmtMoney(t.taxAmt)+'</span></div>' : '';
+    var notesHtml = notes ? '<div class="inv-notes"><div class="inv-notes-label">Notes &amp; Payment</div><div class="inv-notes-text">'+escHtml(notes)+'</div></div>' : '';
+    var footerHtml = bizWeb ? '<div class="inv-footer"><span>'+escHtml(bizName)+'</span><span>'+escHtml(bizWeb)+'</span></div>' : '';
+
+    document.getElementById('invoice-doc').innerHTML =
+      '<div class="inv-header">'
+        +'<div class="inv-from">'+logoHtml+'<div class="inv-biz-name">'+escHtml(bizName)+'</div><div class="inv-biz-sub">'+escHtml(bizAddr)+'</div></div>'
+        +'<div class="inv-meta"><div class="inv-badge">INVOICE</div><div class="inv-meta-row"><strong>#'+escHtml(invNum)+'</strong></div>'
+        +(invDate?'<div class="inv-meta-row">Date: <strong>'+fmtDisplayDate(invDate)+'</strong></div>':'')
+        +(invDue?'<div class="inv-meta-row">Due: <strong>'+fmtDisplayDate(invDue)+'</strong></div>':'')
+        +'</div></div>'
+      +'<div class="inv-parties">'
+        +'<div><div class="inv-party-label">Bill To</div><div class="inv-party-name">'+escHtml(clientName)+'</div>'
+        +(clientEmail?'<div class="inv-party-addr">'+escHtml(clientEmail)+'</div>':'')
+        +(clientAddr?'<div class="inv-party-addr">'+escHtml(clientAddr)+'</div>':'')
+        +'</div></div>'
+      +'<table class="inv-items"><thead><tr><th>Description</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead><tbody>'+itemRows+'</tbody></table>'
+      +'<div class="inv-totals"><div class="inv-totals-table">'
+        +'<div class="inv-totals-row"><span>Subtotal</span><span class="num">'+fmtMoney(t.subtotal)+'</span></div>'
+        +discRow+taxRow
+        +'<div class="inv-totals-row total"><span>Total Due</span><span class="num">'+fmtMoney(t.total)+'</span></div>'
+      +'</div></div>'
+      +notesHtml+footerHtml;
+  }
+
+  // Bind all form inputs to re-render preview
+  var allInputs = document.querySelectorAll('#biz-name,#biz-address,#biz-website,#client-name,#client-email,#client-address,#inv-number,#inv-date,#inv-due,#inv-currency,#tax-rate,#disc-type,#disc-value,#inv-notes');
+  allInputs.forEach(function(el){
+    el.addEventListener('input',function(){renderPreview();});
+    el.addEventListener('change',function(){renderPreview(); if(el.id==='inv-currency'){renderItemsTable();renderPreview();}});
+  });
+
+  document.getElementById('add-item-btn').addEventListener('click', addItem);
+
+  function doPrint(){window.print();}
+  document.getElementById('print-invoice-btn').addEventListener('click', doPrint);
+  document.getElementById('mobile-print-btn').addEventListener('click', doPrint);
+
+  // Show mobile print bar on small screens
+  if(window.innerWidth < 900){
+    document.getElementById('mobile-print-bar').style.display='block';
+  }
+
+  // Bootstrap with 3 default items
+  addItem();
+  addItem();
+  addItem();
+
+  // Initial render
+  renderPreview();
+})();
+</script>
+</body>
+</html>
