@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Loan Calculator — Monthly Payment, Total Interest &amp; Amortization | FreePayrollCalc</title>
+<meta name="description" content="Free business loan calculator. Calculate monthly payment, total interest, and total cost of any business loan. Includes full amortization schedule, rate comparison table, and SBA loan guidance.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/business-loan-calculator">
+<meta property="og:title" content="Business Loan Calculator — Monthly Payment & Amortization Schedule">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Business Loan Calculator","url":"https://www.freepayrollcalc.com/business-loan-calculator","description":"Calculate business loan monthly payment, total interest, total cost, and full amortization schedule. Compare multiple loan scenarios side-by-side.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is a business loan monthly payment calculated?","acceptedAnswer":{"@type":"Answer","text":"Monthly Payment = P × [r(1+r)^n] ÷ [(1+r)^n − 1], where P = loan principal, r = monthly interest rate (annual rate ÷ 12), n = total number of monthly payments. This is standard amortized loan math — each payment covers accrued interest with the remainder reducing principal."}},{"@type":"Question","name":"What is a good interest rate for a business loan?","acceptedAnswer":{"@type":"Answer","text":"As of 2025–2026, SBA 7(a) loans: 10.5–14.5% APR. SBA 504 loans: 6–8% (fixed). Conventional bank loans: 7–13%. Online lenders: 8–30%+. Credit lines: Prime + 1–5%. Your rate depends on credit score, time in business, revenue, and collateral. Strong businesses with 700+ credit score and 2+ years history qualify for the best rates."}},{"@type":"Question","name":"What is the difference between APR and interest rate on a business loan?","acceptedAnswer":{"@type":"Answer","text":"Interest rate is the cost of borrowing expressed as a percentage. APR (Annual Percentage Rate) includes the interest rate plus fees (origination fee, guarantee fee, closing costs) spread over the loan term. APR is a more complete picture of total loan cost. Always compare APR when shopping loans."}},{"@type":"Question","name":"How much can I borrow for a business loan?","acceptedAnswer":{"@type":"Answer","text":"SBA 7(a): up to $5 million. SBA 504: up to $5.5 million. SBA Microloan: up to $50,000. Conventional bank: $50K–$5M+. Online lenders: $5K–$500K. Lenders typically want DSCR (Debt Service Coverage Ratio) of 1.25+, meaning business income covers loan payments by 1.25×."}},{"@type":"Question","name":"What is DSCR and why does it matter for business loans?","acceptedAnswer":{"@type":"Answer","text":"DSCR = Net Operating Income ÷ Total Annual Debt Service. A DSCR of 1.25 means the business earns $1.25 for every $1 of loan payment due. Most lenders require 1.20–1.25 minimum. Below 1.0 means the business can't cover its debt — loan denied. Strong businesses target DSCR of 1.5+."}}]}
+</script>
+<style>
+.loan-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.loan-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center}
+.loan-card.accent{border-color:rgba(27,79,216,.25);background:rgba(27,79,216,.03)}
+.loan-big{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--accent);line-height:1}
+.loan-big.green{color:var(--green)}
+.loan-big.red{color:var(--red)}
+.loan-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-top:6px}
+.loan-sub{font-size:12px;color:var(--ink-2);margin-top:3px}
+.paydown-bar{background:var(--bg);border-radius:8px;height:24px;overflow:hidden;border:1px solid var(--border);margin:16px 0 4px;position:relative}
+.paydown-principal{background:var(--accent);height:100%;border-radius:8px;transition:width .5s ease;position:absolute;left:0;top:0}
+.paydown-interest{background:var(--red);height:100%;position:absolute;top:0;transition:left .5s ease,width .5s ease}
+.paydown-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3)}
+.amort-table{width:100%;border-collapse:collapse;font-size:12px}
+.amort-table th{background:var(--bg);font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--ink-3);padding:7px 10px;text-align:right;border-bottom:2px solid var(--border)}
+.amort-table th:first-child{text-align:left}
+.amort-table td{padding:7px 10px;border-bottom:1px solid var(--bg);text-align:right;font-family:'JetBrains Mono',monospace}
+.amort-table td:first-child{text-align:left;font-family:inherit;color:var(--ink-2);font-size:11px}
+.amort-table tr:hover td{background:rgba(27,79,216,.03)}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+.cmp-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.cmp-rate{font-size:18px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.cmp-row{display:flex;justify-content:space-between;font-size:12px;margin-top:6px;padding-top:4px;border-top:1px solid var(--border)}
+.cmp-row span:last-child{font-family:'JetBrains Mono',monospace;font-weight:600}
+.dscr-bar{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-top:12px}
+.dscr-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700}
+.dscr-num.good{color:var(--green)}
+.dscr-num.warn{color:var(--amber)}
+.dscr-num.bad{color:var(--red)}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/break-even-calculator">Break-Even</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/business-loan-calculator" class="active">Business Loan</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/business-loan-calculator" class="active">Business Loan Calculator</a>
+    <a href="/profit-margin-calculator">Profit Margin Calculator</a>
+    <a href="/break-even-calculator">Break-Even Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Business Loan Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Business Loan Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate monthly payment, total interest, and amortization schedule for any business loan.<br>Includes DSCR check, rate comparison, and SBA loan guidance.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly payment · Total interest · Amortization schedule · DSCR check</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Business Loan Calculator</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Loan Amount</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="bl-amount" class="form-input form-input--prefixed" placeholder="250000" min="1000" step="1000"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Annual Interest Rate (APR)</label>
+          <div class="input-wrap"><input type="number" id="bl-rate" class="form-input form-input--suffixed" placeholder="9.5" min="0.1" max="50" step="0.1"><span class="input-suffix">%</span></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Loan Term</label>
+          <div style="display:flex;gap:8px">
+            <input type="number" id="bl-term" class="form-input" placeholder="5" min="1" max="30" step="1" style="flex:1">
+            <select id="bl-term-unit" class="form-input" style="width:auto;min-width:100px">
+              <option value="years" selected>Years</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Annual Net Operating Income <span style="font-weight:400;color:var(--ink-3)">(optional — for DSCR)</span></label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="bl-noi" class="form-input form-input--prefixed" placeholder="125000" min="0" step="1000"></div>
+          <span class="form-hint">Enter business NOI to check if you qualify (lenders want DSCR ≥ 1.25)</span>
+        </div>
+      </div>
+      <button class="calc-btn" id="calc-bl-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        Calculate Loan
+      </button>
+
+      <div id="bl-results" style="display:none;margin-top:24px">
+        <!-- Summary cards -->
+        <div class="loan-summary" id="bl-summary"></div>
+
+        <!-- Principal vs Interest bar -->
+        <div class="form-label" style="margin-bottom:4px">Principal vs Total Interest</div>
+        <div class="paydown-bar">
+          <div class="paydown-principal" id="bl-principal-bar"></div>
+          <div class="paydown-interest" id="bl-interest-bar"></div>
+        </div>
+        <div class="paydown-labels" id="bl-bar-labels"></div>
+
+        <!-- DSCR -->
+        <div id="bl-dscr-section" style="display:none"></div>
+
+        <!-- Rate comparison -->
+        <div style="margin-top:20px">
+          <div class="form-label" style="margin-bottom:8px">Rate Comparison — Same Amount &amp; Term</div>
+          <div class="compare-grid" id="bl-compare"></div>
+        </div>
+
+        <!-- Amortization schedule -->
+        <div style="margin-top:20px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div class="form-label">Amortization Schedule</div>
+            <div style="display:flex;gap:8px">
+              <button id="show-all-btn" class="calc-btn" style="padding:6px 14px;font-size:12px;background:var(--surface);color:var(--accent);border:1px solid var(--accent)">Show All</button>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="amort-table">
+              <thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+              <tbody id="amort-tbody"></tbody>
+            </table>
+          </div>
+          <p id="amort-note" style="font-size:12px;color:var(--ink-3);margin-top:6px"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SBA loan guidance -->
+    <div class="calc-card" data-enter data-delay="3" style="margin-top:16px">
+      <div class="calc-card-header">SBA Loan Types &amp; Typical Rates (2025–2026)</div>
+      <div style="overflow-x:auto">
+        <table class="amort-table">
+          <thead><tr><th style="text-align:left">Loan Type</th><th>Max Amount</th><th>Term</th><th>Rate Range</th><th style="text-align:left">Best For</th></tr></thead>
+          <tbody>
+            <tr><td>SBA 7(a) Standard</td><td>$5M</td><td>10–25 yr</td><td>10.5–14.5%</td><td style="text-align:left;font-family:inherit">Working capital, equipment, real estate</td></tr>
+            <tr><td>SBA 7(a) Small</td><td>$500K</td><td>Up to 10 yr</td><td>11–15%</td><td style="text-align:left;font-family:inherit">Smaller businesses, faster approval</td></tr>
+            <tr><td>SBA 504</td><td>$5.5M</td><td>10–25 yr</td><td>6–8% (fixed)</td><td style="text-align:left;font-family:inherit">Commercial real estate, heavy equipment</td></tr>
+            <tr><td>SBA Microloan</td><td>$50K</td><td>Up to 6 yr</td><td>8–13%</td><td style="text-align:left;font-family:inherit">Startups, very small businesses</td></tr>
+            <tr><td>Conventional Bank Loan</td><td>$5M+</td><td>1–20 yr</td><td>7–13%</td><td style="text-align:left;font-family:inherit">Established businesses, strong credit</td></tr>
+            <tr><td>Online Business Loan</td><td>$500K</td><td>3 mo–5 yr</td><td>8–30%+</td><td style="text-align:left;font-family:inherit">Fast funding, lower credit threshold</td></tr>
+            <tr><td>Business Line of Credit</td><td>$250K</td><td>Revolving</td><td>Prime+1–5%</td><td style="text-align:left;font-family:inherit">Working capital, cash flow management</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:var(--ink-3);margin-top:8px">Rates as of 2025. SBA 7(a) rates = Prime + spread; Prime Rate was 7.5% in 2025. Actual rates depend on creditworthiness, collateral, and lender.</p>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>Business Loan Basics: What Every Borrower Should Know</h2>
+        <p>A business loan is an amortized installment loan in most cases. Each monthly payment covers accrued interest first, then principal. Early payments are mostly interest; later payments are mostly principal.</p>
+        <h3>The PMT formula</h3>
+        <p>Monthly Payment = P × r(1+r)ⁿ ÷ [(1+r)ⁿ − 1]<br>where P = principal, r = monthly rate (APR ÷ 12), n = total months.</p>
+        <h3>DSCR — the most important qualifier</h3>
+        <p>Debt Service Coverage Ratio = Annual NOI ÷ Annual Debt Service. Most lenders require DSCR ≥ 1.25. If your business earns $100,000 NOI and the loan costs $75,000/year in payments, your DSCR is 1.33 — you qualify. Below 1.0 means the business can't cover its loan payments.</p>
+        <h3>APR vs interest rate</h3>
+        <p>The stated rate is just the interest cost. APR adds origination fees, guarantee fees, and other costs amortized over the loan term. Always compare APR between lenders — a lower rate with a 3% origination fee can be more expensive than a slightly higher rate with no fees.</p>
+        <p><strong>Related:</strong> <a href="/break-even-calculator">Break-Even Calculator</a> · <a href="/profit-margin-calculator">Profit Margin Calculator</a> · <a href="/employee-cost-calculator">Employee Cost Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Business loan questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How is my monthly payment calculated?</summary><div class="faq-a">Monthly Payment = P × r(1+r)ⁿ ÷ [(1+r)ⁿ − 1]. P = principal, r = monthly interest rate (APR÷12), n = number of monthly payments. Early payments are mostly interest; as you pay down principal, the interest portion shrinks each month.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is DSCR and why does it matter?</summary><div class="faq-a">DSCR = Net Operating Income ÷ Annual Debt Service. Most lenders require 1.25+. It means for every $1 in loan payments, the business earns $1.25 — a 25% safety buffer. Below 1.0 means you can't cover the loan from operations.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What is a good interest rate for a business loan?</summary><div class="faq-a">SBA 504 loans currently run 6–8% (fixed) — the best available rates. SBA 7(a): 10.5–14.5%. Strong businesses with 700+ credit score and 2+ years history typically qualify for bank rates of 7–11%. Online lenders charge more: 8–30%+.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">Is business loan interest tax deductible?</summary><div class="faq-a">Yes — for a loan used for legitimate business purposes, the interest expense is generally tax deductible as a business expense. This reduces your effective borrowing cost. A 10% loan with a 25% tax rate has an effective after-tax cost of 7.5%.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free business and payroll calculators. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Business Finance</div><ul class="footer-links"><li><a href="/business-loan-calculator">Business Loan</a></li><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/break-even-calculator">Break-Even</a></li><li><a href="/cap-rate-calculator">Cap Rate</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/debt-payoff-calculator">Debt Payoff</a></li><li><a href="/invoice-generator-free">Invoice Generator</a></li><li><a href="/employee-cost-calculator">Employee Cost</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not financial advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var fullSchedule=[], showingAll=false;
+  function fmt(n){return '$'+(Math.round(n)).toLocaleString('en-US',{minimumFractionDigits:0});}
+  function fmtP(n){return (Math.round(n*100)/100).toFixed(2)+'%';}
+  function pmt(P,r,n){if(r===0)return P/n;return P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);}
+
+  document.getElementById('show-all-btn').addEventListener('click',function(){
+    showingAll=!showingAll;
+    renderAmort(showingAll?fullSchedule:fullSchedule.slice(0,24));
+    this.textContent=showingAll?'Show Less':'Show All';
+    document.getElementById('amort-note').textContent=showingAll?'':'Showing first 24 payments. Click "Show All" for full schedule.';
+  });
+
+  document.getElementById('calc-bl-btn').addEventListener('click',function(){
+    var amount=parseFloat(document.getElementById('bl-amount').value)||0;
+    var annualRate=parseFloat(document.getElementById('bl-rate').value)||0;
+    var termVal=parseFloat(document.getElementById('bl-term').value)||0;
+    var termUnit=document.getElementById('bl-term-unit').value;
+    var noi=parseFloat(document.getElementById('bl-noi').value)||0;
+    if(amount<=0||annualRate<=0||termVal<=0){alert('Enter loan amount, rate, and term.');return;}
+    var n=termUnit==='years'?termVal*12:termVal;
+    var r=annualRate/100/12;
+    var monthly=pmt(amount,r,n);
+    var totalPaid=monthly*n;
+    var totalInterest=totalPaid-amount;
+
+    document.getElementById('bl-summary').innerHTML=[
+      {label:'Monthly Payment',val:fmt(monthly),sub:'per month',cls:'accent'},
+      {label:'Total Interest',val:fmt(totalInterest),sub:fmtP(totalInterest/amount*100)+' of principal',cls:'red'},
+      {label:'Total Cost',val:fmt(totalPaid),sub:'principal + interest',cls:''},
+    ].map(function(c){
+      return '<div class="loan-card'+(c.cls==='accent'?' accent':'')+'"><div class="loan-big'+(c.cls?' '+c.cls:'')+'">'+c.val+'</div><div class="loan-label">'+c.label+'</div><div class="loan-sub">'+c.sub+'</div></div>';
+    }).join('');
+
+    var pctPrincipal=amount/totalPaid*100;
+    document.getElementById('bl-principal-bar').style.width=pctPrincipal+'%';
+    document.getElementById('bl-interest-bar').style.left=pctPrincipal+'%';
+    document.getElementById('bl-interest-bar').style.width=(100-pctPrincipal)+'%';
+    document.getElementById('bl-interest-bar').style.background='var(--red)';
+    document.getElementById('bl-bar-labels').innerHTML='<span style="color:var(--accent)">Principal: '+fmt(amount)+'</span><span style="color:var(--red)">Interest: '+fmt(totalInterest)+'</span>';
+
+    // DSCR
+    if(noi>0){
+      var annualDS=monthly*12;
+      var dscr=noi/annualDS;
+      var dscrEl=document.getElementById('bl-dscr-section');
+      dscrEl.style.display='block';
+      var cls=dscr>=1.25?'good':dscr>=1.0?'warn':'bad';
+      var msg=dscr>=1.25?'Likely qualifies — DSCR above 1.25 lender minimum.':dscr>=1.0?'Marginal — DSCR between 1.0 and 1.25. Some lenders may decline.':'Below break-even — income doesn\'t cover loan payments.';
+      dscrEl.innerHTML='<div class="dscr-bar"><div class="dscr-num '+cls+'">'+dscr.toFixed(2)+'×</div><div><strong>DSCR (Debt Service Coverage Ratio)</strong><br><span style="font-size:13px;color:var(--ink-2)">'+msg+'</span></div></div>';
+    } else {
+      document.getElementById('bl-dscr-section').style.display='none';
+    }
+
+    // Rate comparison
+    var rates=[6,8,10,12,15,20];
+    document.getElementById('bl-compare').innerHTML=rates.map(function(rate){
+      var rm=rate/100/12;
+      var m=pmt(amount,rm,n);
+      var ti=(m*n)-amount;
+      var isActive=Math.abs(rate-annualRate)<0.5;
+      return '<div class="cmp-card"'+(isActive?' style="border-color:var(--accent);background:rgba(27,79,216,.04)"':'')+'>'
+        +'<div class="cmp-rate">'+rate+'%'+(isActive?' <span style="font-size:11px;color:var(--accent)">←your rate</span>':'')+'</div>'
+        +'<div class="cmp-row"><span>Monthly</span><span>'+fmt(m)+'</span></div>'
+        +'<div class="cmp-row"><span>Total Interest</span><span>'+fmt(ti)+'</span></div>'
+        +'</div>';
+    }).join('');
+
+    // Amortization
+    fullSchedule=[];
+    var balance=amount;
+    for(var i=1;i<=n;i++){
+      var intPmt=balance*r;
+      var prinPmt=monthly-intPmt;
+      balance=Math.max(balance-prinPmt,0);
+      fullSchedule.push({month:i,payment:monthly,principal:prinPmt,interest:intPmt,balance:balance});
+    }
+    showingAll=false;
+    document.getElementById('show-all-btn').textContent='Show All';
+    renderAmort(fullSchedule.slice(0,24));
+    if(n>24) document.getElementById('amort-note').textContent='Showing first 24 of '+n+' payments. Click "Show All" for full schedule.';
+    else document.getElementById('amort-note').textContent='';
+
+    document.getElementById('bl-results').style.display='block';
+    document.getElementById('bl-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  function renderAmort(rows){
+    document.getElementById('amort-tbody').innerHTML=rows.map(function(r){
+      return '<tr><td>Mo. '+r.month+'</td><td>'+fmt(r.payment)+'</td><td>'+fmt(r.principal)+'</td><td>'+fmt(r.interest)+'</td><td>'+fmt(r.balance)+'</td></tr>';
+    }).join('');
+  }
+})();
+</script>
+</body>
+</html>

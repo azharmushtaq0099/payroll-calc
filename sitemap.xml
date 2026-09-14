@@ -198,6 +198,21 @@
   </url>
 
   <url>
+    <loc>https://www.freepayrollcalc.com/profit-margin-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/business-loan-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/debt-payoff-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://www.freepayrollcalc.com/markup-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>

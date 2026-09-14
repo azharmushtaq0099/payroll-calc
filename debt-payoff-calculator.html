@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Debt Payoff Calculator — Snowball vs Avalanche Method | FreePayrollCalc</title>
+<meta name="description" content="Free debt payoff calculator. Compare Snowball (lowest balance first) vs Avalanche (highest rate first) methods. See payoff date, total interest, and month-by-month progress for all your debts.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/debt-payoff-calculator">
+<meta property="og:title" content="Debt Payoff Calculator — Snowball vs Avalanche Comparison">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Debt Payoff Calculator","url":"https://www.freepayrollcalc.com/debt-payoff-calculator","description":"Calculate debt payoff timeline and total interest using Snowball (lowest balance first) or Avalanche (highest rate first) methods. Compare both strategies side-by-side.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the debt snowball method?","acceptedAnswer":{"@type":"Answer","text":"The debt snowball method pays minimum payments on all debts, then directs extra payments to the lowest balance first. Once the smallest debt is paid off, you roll that payment into the next smallest, creating a 'snowball' effect. It provides psychological wins that build momentum."}},{"@type":"Question","name":"What is the debt avalanche method?","acceptedAnswer":{"@type":"Answer","text":"The debt avalanche method directs extra payments to the highest interest rate debt first while paying minimums on all others. Mathematically it saves the most money in total interest paid. However, high-rate debts often have large balances, so early wins take longer."}},{"@type":"Question","name":"Which is better: snowball or avalanche?","acceptedAnswer":{"@type":"Answer","text":"Avalanche saves more money in total interest paid — often significantly. Snowball provides faster psychological wins that help people stay motivated. Research by Harvard Business School found that debt payoff is 14% more likely to succeed when focusing on one debt at a time (snowball behavior). The best method is the one you'll stick with."}},{"@type":"Question","name":"How much extra should I pay on debt?","acceptedAnswer":{"@type":"Answer","text":"Even small extra payments make a large difference due to compound interest. An extra $100/month on a $10,000 credit card at 20% APR cuts payoff from 5.5 years to 2.5 years and saves over $4,000 in interest. The key is consistency. Start with whatever extra you can maintain."}},{"@type":"Question","name":"What is a debt payoff order?","acceptedAnswer":{"@type":"Answer","text":"Debt payoff order means which debt to target first. Snowball: lowest balance → next lowest → ... Avalanche: highest rate → next highest → ... In both methods, you always pay minimums on all debts. The extra payment is what changes direction."}}]}
+</script>
+<style>
+.debt-table-wrap{overflow-x:auto;margin-bottom:16px}
+.debt-table{width:100%;border-collapse:collapse;font-size:13px}
+.debt-table th{background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--ink-3);padding:9px 10px;text-align:left;border-bottom:2px solid var(--border);white-space:nowrap}
+.debt-table td{padding:8px 6px;border-bottom:1px solid var(--border);vertical-align:middle}
+.debt-table td input{width:100%;min-width:80px}
+.del-btn{background:none;border:none;cursor:pointer;color:var(--red);padding:4px;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.del-btn:hover{background:rgba(220,38,38,.08)}
+.add-debt-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface);border:1px dashed var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;transition:all .18s;width:100%;justify-content:center;margin-bottom:16px}
+.add-debt-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(27,79,216,.03)}
+.method-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.method-card{border:2px solid var(--border);border-radius:14px;padding:20px;transition:border-color .2s}
+.method-card.snowball{border-color:rgba(5,150,105,.3)}
+.method-card.avalanche{border-color:rgba(27,79,216,.3)}
+.method-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.method-title svg{flex-shrink:0}
+.method-stat{margin-bottom:8px}
+.method-stat-label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--ink-3)}
+.method-stat-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;margin-top:2px}
+.savings-banner{background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.2);border-radius:10px;padding:14px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.savings-amt{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--green);flex-shrink:0}
+.debt-progress{margin-top:16px}
+.dp-row{margin-bottom:10px}
+.dp-header{display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px}
+.dp-name{font-weight:700;color:var(--ink-1)}
+.dp-months{color:var(--ink-3)}
+.dp-bar-track{background:var(--bg);border-radius:4px;height:14px;overflow:hidden;border:1px solid var(--border)}
+.dp-bar-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.dp-footer{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin-top:2px}
+.method-toggle{display:flex;gap:0;background:var(--bg);border-radius:10px;padding:4px;border:1px solid var(--border);margin-bottom:20px}
+.method-btn{flex:1;padding:9px;text-align:center;font-size:13px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .18s;color:var(--ink-3)}
+.method-btn.snow.active{background:#fff;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.method-btn.aval.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.order-list{font-size:13px}
+.order-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid var(--border)}
+.order-num{width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.order-num.snow{background:rgba(5,150,105,.12);color:var(--green)}
+.order-num.aval{background:rgba(27,79,216,.1);color:var(--accent)}
+.order-payoff{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-3);margin-left:auto}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/business-loan-calculator">Business Loan</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/debt-payoff-calculator" class="active">Debt Payoff</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/debt-payoff-calculator" class="active">Debt Payoff Calculator</a>
+    <a href="/business-loan-calculator">Business Loan Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Debt Payoff Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Debt Payoff Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Compare Snowball vs Avalanche — see which method pays off your debts faster and saves more interest.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Snowball vs Avalanche · Payoff timeline · Total interest savings · Payoff order</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>Your Debts</div>
+      <div class="debt-table-wrap">
+        <table class="debt-table">
+          <thead><tr><th>Name / Label</th><th>Balance ($)</th><th>APR (%)</th><th>Min. Payment ($)</th><th></th></tr></thead>
+          <tbody id="debt-tbody"></tbody>
+        </table>
+      </div>
+      <button class="add-debt-btn" id="add-debt-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Another Debt
+      </button>
+
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Extra Monthly Payment (applied to target debt)</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="dp-extra" class="form-input form-input--prefixed" placeholder="200" min="0" step="10"></div>
+        <span class="form-hint">Extra amount beyond all minimums — put towards your target debt</span>
+      </div>
+
+      <button class="calc-btn" id="calc-dp-btn" style="margin-top:16px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+        Calculate Payoff Plan
+      </button>
+    </div>
+
+    <div id="dp-results" style="display:none">
+      <!-- Savings banner -->
+      <div class="savings-banner" id="dp-savings-banner" style="margin-top:16px">
+        <div class="savings-amt" id="dp-savings-amt">$0</div>
+        <div><strong id="dp-savings-label">Avalanche saves over Snowball</strong><br><span id="dp-savings-sub" style="font-size:13px;color:var(--ink-2)"></span></div>
+      </div>
+
+      <!-- Side-by-side comparison -->
+      <div class="method-compare">
+        <div class="method-card snowball">
+          <div class="method-title" style="color:var(--green)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            Snowball Method
+          </div>
+          <p style="font-size:12px;color:var(--ink-3);margin-bottom:12px">Lowest balance → next → ... Fastest early wins.</p>
+          <div class="method-stat"><div class="method-stat-label">Payoff Date</div><div class="method-stat-val" id="snow-date" style="color:var(--green)">—</div></div>
+          <div class="method-stat"><div class="method-stat-label">Total Interest</div><div class="method-stat-val" id="snow-interest">—</div></div>
+          <div class="method-stat"><div class="method-stat-label">Total Paid</div><div class="method-stat-val" id="snow-total">—</div></div>
+        </div>
+        <div class="method-card avalanche">
+          <div class="method-title" style="color:var(--accent)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+            Avalanche Method
+          </div>
+          <p style="font-size:12px;color:var(--ink-3);margin-bottom:12px">Highest rate → next → ... Lowest total interest.</p>
+          <div class="method-stat"><div class="method-stat-label">Payoff Date</div><div class="method-stat-val" id="aval-date" style="color:var(--accent)">—</div></div>
+          <div class="method-stat"><div class="method-stat-label">Total Interest</div><div class="method-stat-val" id="aval-interest">—</div></div>
+          <div class="method-stat"><div class="method-stat-label">Total Paid</div><div class="method-stat-val" id="aval-total">—</div></div>
+        </div>
+      </div>
+
+      <!-- Payoff order per method -->
+      <div class="calc-card" style="margin-top:0">
+        <div class="calc-card-header">Payoff Order &amp; Individual Debt Timeline</div>
+        <div class="method-toggle">
+          <div class="method-btn snow active" data-view="snow">Snowball Order</div>
+          <div class="method-btn aval" data-view="aval">Avalanche Order</div>
+        </div>
+        <div id="order-list-snow" class="order-list"></div>
+        <div id="order-list-aval" class="order-list" style="display:none"></div>
+      </div>
+
+      <!-- Progress bars -->
+      <div class="calc-card" style="margin-top:16px">
+        <div class="calc-card-header">Debt Payoff Progress (Avalanche)</div>
+        <div class="debt-progress" id="dp-progress"></div>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>Snowball vs Avalanche: Which Debt Payoff Strategy is Right for You?</h2>
+        <p>Both methods pay off all your debt — the difference is only in which debt gets your extra payment first. In both cases, you pay minimums on all debts and direct any extra monthly amount to one target debt.</p>
+        <h3>Snowball Method</h3>
+        <p>Target the debt with the lowest balance first. When it's paid off, add that freed-up payment to the next smallest balance. The psychological effect is real — crossing debts off the list builds confidence and momentum. Research shows people are more likely to stick with debt payoff when they see early wins.</p>
+        <h3>Avalanche Method</h3>
+        <p>Target the debt with the highest interest rate first. This is mathematically optimal — you minimize total interest paid. The downside: high-rate debts often have large balances too, so it can take a long time before you pay off your first debt.</p>
+        <h3>Which should you choose?</h3>
+        <p>If the interest savings from avalanche are meaningful and you're disciplined, go avalanche. If you've tried paying off debt before and struggled to stay motivated, snowball's early wins may keep you on track. A slightly suboptimal strategy you stick to beats a mathematically perfect one you abandon.</p>
+        <p><strong>Related:</strong> <a href="/business-loan-calculator">Business Loan Calculator</a> · <a href="/profit-margin-calculator">Profit Margin Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Debt payoff strategy questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is the debt snowball method?</summary><div class="faq-a">Pay minimums on all debts, then direct extra money to the lowest balance first. Once paid off, roll that payment into the next lowest balance. Gives fast psychological wins that build momentum.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is the debt avalanche method?</summary><div class="faq-a">Pay minimums on all debts, then direct extra money to the highest interest rate first. Saves the most in total interest paid. Best for people who are motivated by math rather than by checking boxes.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">Which method is better — snowball or avalanche?</summary><div class="faq-a">Avalanche saves more money. Snowball keeps more people on track. A Harvard Business School study found debt payoff is more successful when people see progress (snowball behavior). The best method is the one you'll actually stick to.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">How much does the extra payment matter?</summary><div class="faq-a">Enormously. On a $10,000 credit card at 20% APR with $250 minimum payment, it takes 5+ years to pay off. Add $100 extra/month and it drops to under 3 years with thousands less in interest. Even $50/month extra makes a dramatic difference.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free calculators for business, payroll, and personal finance.</div></div>
+      <div><div class="footer-col-title">Finance Tools</div><ul class="footer-links"><li><a href="/debt-payoff-calculator">Debt Payoff</a></li><li><a href="/business-loan-calculator">Business Loan</a></li><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/break-even-calculator">Break-Even</a></li></ul></div>
+      <div><div class="footer-col-title">Payroll Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax</a></li><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/invoice-generator-free">Invoice Generator</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not financial advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var debts=[], nextId=1;
+  var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var NOW=new Date(); var nowMonth=NOW.getMonth(); var nowYear=NOW.getFullYear();
+
+  function fmt(n){return '$'+(Math.round(n)).toLocaleString('en-US');}
+  function fmtMo(totalMonths){
+    var d=new Date(nowYear,nowMonth+totalMonths,1);
+    return MONTHS[d.getMonth()]+' '+d.getFullYear();
+  }
+
+  function addDebt(name,balance,apr,min){
+    var id=nextId++;
+    debts.push({id:id,name:name||'',balance:balance||0,apr:apr||0,min:min||0});
+    renderDebtTable();
+  }
+  function removeDebt(id){
+    debts=debts.filter(function(d){return d.id!==id;});
+    renderDebtTable();
+  }
+  function renderDebtTable(){
+    document.getElementById('debt-tbody').innerHTML=debts.map(function(d){
+      return '<tr data-id="'+d.id+'">'
+        +'<td><input type="text" class="form-input" style="min-width:100px" value="'+escHtml(d.name)+'" data-field="name" placeholder="Credit Card A"></td>'
+        +'<td><input type="number" class="form-input" style="min-width:90px" value="'+(d.balance||'')+'" data-field="balance" placeholder="5000" min="0" step="100"></td>'
+        +'<td><input type="number" class="form-input" style="min-width:70px" value="'+(d.apr||'')+'" data-field="apr" placeholder="19.99" min="0" max="100" step="0.1"></td>'
+        +'<td><input type="number" class="form-input" style="min-width:80px" value="'+(d.min||'')+'" data-field="min" placeholder="150" min="0" step="10"></td>'
+        +'<td><button class="del-btn" data-id="'+d.id+'" aria-label="Remove"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>'
+        +'</tr>';
+    }).join('');
+    document.querySelectorAll('#debt-tbody input').forEach(function(inp){
+      inp.addEventListener('input',function(){
+        var row=inp.closest('tr');
+        var id=parseInt(row.dataset.id);
+        var d=debts.find(function(x){return x.id===id;});
+        if(!d) return;
+        var field=inp.dataset.field;
+        d[field]=field==='name'?inp.value:parseFloat(inp.value)||0;
+      });
+    });
+    document.querySelectorAll('.del-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){removeDebt(parseInt(btn.dataset.id));});
+    });
+  }
+  function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  document.getElementById('add-debt-btn').addEventListener('click',function(){addDebt('','','','');});
+
+  // Pre-seed 3 sample debts
+  addDebt('Credit Card A',5000,19.99,150);
+  addDebt('Credit Card B',12000,24.99,250);
+  addDebt('Car Loan',8500,7.5,200);
+
+  // Method view toggle
+  document.querySelectorAll('.method-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.method-btn').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var view=btn.dataset.view;
+      document.getElementById('order-list-snow').style.display=view==='snow'?'block':'none';
+      document.getElementById('order-list-aval').style.display=view==='aval'?'block':'none';
+    });
+  });
+
+  function simulatePayoff(debtsCopy, extra){
+    var state=debtsCopy.map(function(d){return {id:d.id,name:d.name,balance:d.balance,apr:d.apr,min:d.min,paidOff:false,payoffMonth:null};});
+    var totalInterest=0, month=0, maxMonths=600;
+    var individualInterest={}; state.forEach(function(d){individualInterest[d.id]=0;});
+    var individualPayoffMonth={}; state.forEach(function(d){individualPayoffMonth[d.id]=null;});
+
+    while(state.some(function(d){return !d.paidOff;}) && month<maxMonths){
+      month++;
+      // Accrue interest
+      state.forEach(function(d){
+        if(d.paidOff) return;
+        var intCharge=d.balance*(d.apr/100/12);
+        d.balance+=intCharge;
+        totalInterest+=intCharge;
+        individualInterest[d.id]=(individualInterest[d.id]||0)+intCharge;
+      });
+      // Pay minimums
+      state.forEach(function(d){
+        if(d.paidOff) return;
+        var pay=Math.min(d.min,d.balance);
+        d.balance-=pay;
+        if(d.balance<=0.01){d.balance=0;d.paidOff=true;individualPayoffMonth[d.id]=month;}
+      });
+      // Apply extra to first unpaid
+      var target=state.find(function(d){return !d.paidOff;});
+      if(target&&extra>0){
+        var pay=Math.min(extra,target.balance);
+        target.balance-=pay;
+        if(target.balance<=0.01){target.balance=0;target.paidOff=true;individualPayoffMonth[target.id]=month;}
+      }
+    }
+    return {months:month,totalInterest:totalInterest,individualInterest:individualInterest,individualPayoffMonth:individualPayoffMonth};
+  }
+
+  document.getElementById('calc-dp-btn').addEventListener('click',function(){
+    // Sync from inputs
+    document.querySelectorAll('#debt-tbody tr').forEach(function(row){
+      var id=parseInt(row.dataset.id);
+      var d=debts.find(function(x){return x.id===id;});
+      if(!d) return;
+      row.querySelectorAll('input').forEach(function(inp){
+        var field=inp.dataset.field;
+        d[field]=field==='name'?inp.value:(parseFloat(inp.value)||0);
+      });
+    });
+    var activeDebts=debts.filter(function(d){return d.balance>0&&d.apr>0&&d.min>0;});
+    if(activeDebts.length===0){alert('Add at least one debt with balance, APR, and minimum payment.');return;}
+    var extra=parseFloat(document.getElementById('dp-extra').value)||0;
+    var totalBalance=activeDebts.reduce(function(s,d){return s+d.balance;},0);
+
+    // Snowball: sort by balance asc
+    var snowOrder=activeDebts.slice().sort(function(a,b){return a.balance-b.balance;});
+    var snowResult=simulatePayoff(snowOrder.map(function(d){return Object.assign({},d);}),extra);
+
+    // Avalanche: sort by APR desc
+    var avalOrder=activeDebts.slice().sort(function(a,b){return b.apr-a.apr;});
+    var avalResult=simulatePayoff(avalOrder.map(function(d){return Object.assign({},d);}),extra);
+
+    document.getElementById('snow-date').textContent=fmtMo(snowResult.months);
+    document.getElementById('snow-interest').textContent=fmt(snowResult.totalInterest);
+    document.getElementById('snow-total').textContent=fmt(totalBalance+snowResult.totalInterest);
+    document.getElementById('aval-date').textContent=fmtMo(avalResult.months);
+    document.getElementById('aval-interest').textContent=fmt(avalResult.totalInterest);
+    document.getElementById('aval-total').textContent=fmt(totalBalance+avalResult.totalInterest);
+
+    // Savings banner
+    var diff=snowResult.totalInterest-avalResult.totalInterest;
+    var monthDiff=snowResult.months-avalResult.months;
+    document.getElementById('dp-savings-amt').textContent=fmt(Math.abs(diff));
+    if(diff>0){
+      document.getElementById('dp-savings-label').textContent='Avalanche saves over Snowball';
+      document.getElementById('dp-savings-sub').textContent='You pay '+fmt(diff)+' less interest with Avalanche'+(monthDiff>0?' and finish '+monthDiff+' month'+(monthDiff!==1?'s':'')+' sooner':'')+ '.';
+      document.getElementById('dp-savings-banner').style.borderColor='rgba(5,150,105,.2)';
+      document.getElementById('dp-savings-amt').style.color='var(--green)';
+    } else if(diff<0){
+      document.getElementById('dp-savings-label').textContent='Snowball saves over Avalanche';
+      document.getElementById('dp-savings-sub').textContent='In this case the Snowball method saves '+fmt(Math.abs(diff))+'.';
+      document.getElementById('dp-savings-banner').style.borderColor='rgba(27,79,216,.2)';
+      document.getElementById('dp-savings-amt').style.color='var(--accent)';
+    } else {
+      document.getElementById('dp-savings-label').textContent='Both methods cost the same';
+      document.getElementById('dp-savings-sub').textContent='Your debts happen to produce equal total interest under both strategies.';
+    }
+
+    // Order lists
+    function renderOrder(order,result,type){
+      return order.map(function(d,i){
+        var pm=result.individualPayoffMonth[d.id];
+        var intAmt=result.individualInterest[d.id]||0;
+        return '<div class="order-item">'
+          +'<div class="order-num '+type+'">'+(i+1)+'</div>'
+          +'<div><strong>'+escHtml(d.name||'Debt '+(i+1))+'</strong><br><span style="font-size:11px;color:var(--ink-3)">'+fmt(d.balance)+' @ '+d.apr+'% — min $'+d.min+'</span></div>'
+          +'<div class="order-payoff">'+(pm?fmtMo(pm):'not paid')+'<br><span style="color:var(--red)">'+fmt(intAmt)+' int.</span></div>'
+          +'</div>';
+      }).join('');
+    }
+    document.getElementById('order-list-snow').innerHTML=renderOrder(snowOrder,snowResult,'snow');
+    document.getElementById('order-list-aval').innerHTML=renderOrder(avalOrder,avalResult,'aval');
+
+    // Progress bars (avalanche)
+    var maxPayoffMonth=avalResult.months;
+    document.getElementById('dp-progress').innerHTML=avalOrder.map(function(d){
+      var pm=avalResult.individualPayoffMonth[d.id]||maxPayoffMonth;
+      var pct=maxPayoffMonth>0?(pm/maxPayoffMonth*100):100;
+      var colors=['#1B4FD8','#059669','#D97706','#7c3aed','#DC2626','#0891b2','#db2777'];
+      var color=colors[avalOrder.indexOf(d)%colors.length];
+      return '<div class="dp-row">'
+        +'<div class="dp-header"><span class="dp-name">'+escHtml(d.name||'Debt')+'</span><span class="dp-months">'+fmtMo(pm)+'</span></div>'
+        +'<div class="dp-bar-track"><div class="dp-bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div>'
+        +'<div class="dp-footer"><span>'+fmt(d.balance)+' @ '+d.apr+'%</span><span>'+pm+' months</span></div>'
+        +'</div>';
+    }).join('');
+
+    document.getElementById('dp-results').style.display='block';
+    document.getElementById('dp-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>

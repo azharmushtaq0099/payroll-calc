@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profit Margin Calculator — Gross, Operating &amp; Net Margin | FreePayrollCalc</title>
+<meta name="description" content="Free profit margin calculator. Calculate gross profit margin, operating margin, and net profit margin. Find selling price from cost and target margin. Includes industry benchmarks.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/profit-margin-calculator">
+<meta property="og:title" content="Profit Margin Calculator — Gross, Operating & Net Margin">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Profit Margin Calculator","url":"https://www.freepayrollcalc.com/profit-margin-calculator","description":"Calculate gross profit margin, operating margin, and net profit margin. Find revenue or selling price from target margin. Includes industry benchmark margins.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is profit margin?","acceptedAnswer":{"@type":"Answer","text":"Profit margin = Profit ÷ Revenue × 100. Gross margin = (Revenue − COGS) ÷ Revenue × 100. Net profit margin = Net Income ÷ Revenue × 100. It measures what percentage of revenue is kept as profit after costs."}},{"@type":"Question","name":"What is a good profit margin?","acceptedAnswer":{"@type":"Answer","text":"It varies by industry. Software/SaaS: 70–90% gross margin. Retail: 25–50% gross, 2–5% net. Restaurants: 3–9% net. Manufacturing: 20–40% gross. A 10% net margin is generally considered good across most industries. 20%+ is considered high."}},{"@type":"Question","name":"What is the difference between gross and net profit margin?","acceptedAnswer":{"@type":"Answer","text":"Gross profit margin = (Revenue − COGS) ÷ Revenue. It only subtracts the direct costs of goods sold. Net profit margin = Net Income ÷ Revenue. It subtracts all costs: COGS, operating expenses, interest, and taxes. Net margin is always lower than gross margin."}},{"@type":"Question","name":"How do I calculate selling price from target margin?","acceptedAnswer":{"@type":"Answer","text":"Selling Price = Cost ÷ (1 − Target Margin%). Example: if cost is $70 and target margin is 30%: $70 ÷ (1 − 0.30) = $70 ÷ 0.70 = $100. Note: this is different from markup — margin is calculated on selling price, markup is calculated on cost."}},{"@type":"Question","name":"What is the difference between profit margin and markup?","acceptedAnswer":{"@type":"Answer","text":"Margin = Profit ÷ Selling Price. Markup = Profit ÷ Cost. A 50% markup produces a 33.3% margin. A 30% margin requires a 42.9% markup. Margin is used in financial reporting; markup is used in pricing decisions. Always specify which you mean."}}]}
+</script>
+<style>
+.mode-tabs{display:flex;gap:0;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
+.mode-tab{flex:1;padding:8px 6px;text-align:center;font-size:12px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .18s;color:var(--ink-3)}
+.mode-tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.margin-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.margin-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center}
+.margin-card.primary{border-color:rgba(27,79,216,.25);background:rgba(27,79,216,.03)}
+.margin-pct{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;line-height:1}
+.margin-pct.gross{color:var(--green)}
+.margin-pct.operating{color:var(--accent)}
+.margin-pct.net{color:#7c3aed}
+.margin-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-top:6px}
+.margin-dollar{font-size:13px;color:var(--ink-2);margin-top:4px;font-family:'JetBrains Mono',monospace}
+.waterfall{margin-top:20px}
+.wf-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.wf-label{font-size:12px;color:var(--ink-2);width:140px;flex-shrink:0}
+.wf-bar-wrap{flex:1;background:var(--bg);border-radius:4px;height:20px;overflow:hidden;border:1px solid var(--border)}
+.wf-bar{height:100%;border-radius:4px;transition:width .5s ease}
+.wf-val{font-family:'JetBrains Mono',monospace;font-size:12px;width:70px;flex-shrink:0;text-align:right;font-weight:600}
+.bm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:12px}
+.bm-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.bm-industry{font-size:12px;font-weight:700;color:var(--ink-2)}
+.bm-row{display:flex;justify-content:space-between;margin-top:4px;font-size:12px}
+.bm-row span:first-child{color:var(--ink-3)}
+.bm-row span:last-child{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink-1)}
+.conv-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.conv-table th{background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink-3);padding:8px 12px;text-align:left;border-bottom:2px solid var(--border)}
+.conv-table td{padding:9px 12px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:13px}
+.conv-table td:first-child{font-family:inherit;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/markup-calculator">Markup</a>
+        <a href="/break-even-calculator">Break-Even</a>
+        <a href="/profit-margin-calculator" class="active">Profit Margin</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/profit-margin-calculator" class="active">Profit Margin Calculator</a>
+    <a href="/markup-calculator">Markup Calculator</a>
+    <a href="/break-even-calculator">Break-Even Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Profit Margin Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Profit Margin Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate gross, operating, and net profit margin.<br>Find selling price from target margin. Includes industry benchmarks.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Gross · Operating · Net margin · Markup converter · Benchmarks</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Profit Margin Calculator</div>
+
+      <div class="mode-tabs">
+        <div class="mode-tab active" data-mode="full-margin">Full P&amp;L Margin</div>
+        <div class="mode-tab" data-mode="find-price">Find Selling Price</div>
+        <div class="mode-tab" data-mode="find-margin">Find Margin %</div>
+      </div>
+
+      <!-- Full P&L Mode -->
+      <div id="panel-full-margin">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Revenue / Net Sales</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="pm-revenue" class="form-input form-input--prefixed" placeholder="500000" min="0" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cost of Goods Sold (COGS)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="pm-cogs" class="form-input form-input--prefixed" placeholder="200000" min="0" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Operating Expenses <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="pm-opex" class="form-input form-input--prefixed" placeholder="150000" min="0" step="100"></div>
+            <span class="form-hint">Rent, salaries, marketing, admin — not in COGS</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Interest &amp; Taxes <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="pm-itax" class="form-input form-input--prefixed" placeholder="50000" min="0" step="100"></div>
+            <span class="form-hint">Interest expense + income tax provision</span>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-pm-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+          Calculate Margins
+        </button>
+        <div id="pm-results" style="display:none;margin-top:24px">
+          <div class="margin-hero" id="margin-hero"></div>
+          <div class="waterfall" id="pm-waterfall"></div>
+        </div>
+      </div>
+
+      <!-- Find Selling Price -->
+      <div id="panel-find-price" style="display:none">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Cost</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="fp-cost" class="form-input form-input--prefixed" placeholder="70" min="0" step="0.01"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Profit Margin</label>
+            <div class="input-wrap"><input type="number" id="fp-margin" class="form-input form-input--suffixed" placeholder="30" min="0.1" max="99.9" step="0.1"><span class="input-suffix">%</span></div>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-fp-btn">Find Selling Price</button>
+        <div id="fp-results" style="display:none;margin-top:20px">
+          <div class="margin-hero">
+            <div class="margin-card primary"><div class="margin-pct gross" id="fp-price">—</div><div class="margin-label">Selling Price</div></div>
+            <div class="margin-card"><div class="margin-pct operating" id="fp-profit">—</div><div class="margin-label">Profit</div></div>
+            <div class="margin-card"><div class="margin-pct net" id="fp-equiv-markup">—</div><div class="margin-label">Equiv. Markup %</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Find Margin % -->
+      <div id="panel-find-margin" style="display:none">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Cost / Expenses</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="fm2-cost" class="form-input form-input--prefixed" placeholder="70" min="0" step="0.01"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Selling Price / Revenue</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="fm2-price" class="form-input form-input--prefixed" placeholder="100" min="0" step="0.01"></div>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-fm2-btn">Find Margin %</button>
+        <div id="fm2-results" style="display:none;margin-top:20px">
+          <div class="margin-hero">
+            <div class="margin-card primary"><div class="margin-pct gross" id="fm2-margin">—</div><div class="margin-label">Profit Margin</div></div>
+            <div class="margin-card"><div class="margin-pct operating" id="fm2-profit">—</div><div class="margin-label">Profit</div></div>
+            <div class="margin-card"><div class="margin-pct net" id="fm2-markup">—</div><div class="margin-label">Markup %</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Markup ↔ Margin converter -->
+    <div class="calc-card" data-enter data-delay="3" style="margin-top:16px">
+      <div class="calc-card-header">Markup ↔ Margin Conversion Table</div>
+      <p style="font-size:13px;color:var(--ink-3);margin-bottom:4px">Markup is calculated on cost; margin is calculated on selling price. Use this table to convert between the two.</p>
+      <table class="conv-table">
+        <thead><tr><th>Markup %</th><th>→ Margin %</th><th>Margin %</th><th>→ Markup %</th></tr></thead>
+        <tbody>
+          <tr><td>10%</td><td>9.09%</td><td>10%</td><td>11.11%</td></tr>
+          <tr><td>20%</td><td>16.67%</td><td>20%</td><td>25.00%</td></tr>
+          <tr><td>25%</td><td>20.00%</td><td>25%</td><td>33.33%</td></tr>
+          <tr><td>33%</td><td>24.81%</td><td>30%</td><td>42.86%</td></tr>
+          <tr><td>50%</td><td>33.33%</td><td>33%</td><td>49.25%</td></tr>
+          <tr><td>75%</td><td>42.86%</td><td>40%</td><td>66.67%</td></tr>
+          <tr><td>100%</td><td>50.00%</td><td>50%</td><td>100.00%</td></tr>
+          <tr><td>200%</td><td>66.67%</td><td>60%</td><td>150.00%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Industry benchmarks -->
+    <div class="calc-card" data-enter data-delay="4" style="margin-top:16px">
+      <div class="calc-card-header">Industry Profit Margin Benchmarks</div>
+      <p style="font-size:13px;color:var(--ink-3);margin-bottom:12px">Gross and net margin ranges by industry. Net margins vary widely based on leverage, taxes, and business model.</p>
+      <div class="bm-grid">
+        <div class="bm-card"><div class="bm-industry">Software / SaaS</div><div class="bm-row"><span>Gross Margin</span><span>70–90%</span></div><div class="bm-row"><span>Net Margin</span><span>15–30%</span></div></div>
+        <div class="bm-card"><div class="bm-industry">E-Commerce / Retail</div><div class="bm-row"><span>Gross Margin</span><span>25–45%</span></div><div class="bm-row"><span>Net Margin</span><span>2–6%</span></div></div>
+        <div class="bm-card"><div class="bm-industry">Restaurants</div><div class="bm-row"><span>Gross Margin</span><span>60–70%</span></div><div class="bm-row"><span>Net Margin</span><span>3–9%</span></div></div>
+        <div class="bm-card"><div class="bm-industry">Manufacturing</div><div class="bm-row"><span>Gross Margin</span><span>20–40%</span></div><div class="bm-row"><span>Net Margin</span><span>5–15%</span></div></div>
+        <div class="bm-card"><div class="bm-industry">Professional Services</div><div class="bm-row"><span>Gross Margin</span><span>50–75%</span></div><div class="bm-row"><span>Net Margin</span><span>10–25%</span></div></div>
+        <div class="bm-card"><div class="bm-industry">Construction</div><div class="bm-row"><span>Gross Margin</span><span>15–25%</span></div><div class="bm-row"><span>Net Margin</span><span>2–8%</span></div></div>
+        <div class="bm-card"><div class="bm-industry">Healthcare / Medical</div><div class="bm-row"><span>Gross Margin</span><span>40–60%</span></div><div class="bm-row"><span>Net Margin</span><span>5–20%</span></div></div>
+        <div class="bm-card"><div class="bm-industry">Wholesale / Distribution</div><div class="bm-row"><span>Gross Margin</span><span>15–30%</span></div><div class="bm-row"><span>Net Margin</span><span>1–5%</span></div></div>
+        <div class="bm-card"><div class="bm-industry">Real Estate / Brokerage</div><div class="bm-row"><span>Gross Margin</span><span>50–80%</span></div><div class="bm-row"><span>Net Margin</span><span>15–30%</span></div></div>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>The Three Profit Margins Every Business Needs to Track</h2>
+        <p>Gross margin, operating margin, and net margin each tell a different part of your business story. A company can have a high gross margin but terrible net margin if operating costs are out of control.</p>
+        <h3>Gross Profit Margin</h3>
+        <p><strong>Gross Margin = (Revenue − COGS) ÷ Revenue</strong>. This shows how efficiently you produce or source your product. A falling gross margin means your direct costs are rising faster than your prices.</p>
+        <h3>Operating Profit Margin</h3>
+        <p><strong>Operating Margin = (Revenue − COGS − OpEx) ÷ Revenue</strong>. Also called EBIT margin. This measures operational efficiency — how well you run the business before financing costs and taxes.</p>
+        <h3>Net Profit Margin</h3>
+        <p><strong>Net Margin = Net Income ÷ Revenue</strong>. The bottom line. A 10% net margin means for every $100 in revenue, you keep $10 as profit after all costs, interest, and taxes.</p>
+        <p><strong>Related:</strong> <a href="/markup-calculator">Markup Calculator</a> · <a href="/break-even-calculator">Break-Even Calculator</a> · <a href="/cogs-calculator">COGS Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Profit margin questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is profit margin?</summary><div class="faq-a">Profit margin = Profit ÷ Revenue × 100. It tells you what percentage of revenue you keep after costs. Gross margin only subtracts COGS. Net margin subtracts all costs including operating expenses, interest, and taxes.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is a good profit margin?</summary><div class="faq-a">Depends on industry. Software typically achieves 70–90% gross and 15–30% net. Retail: 25–45% gross, 2–6% net. Restaurants: 3–9% net. A 10%+ net margin is generally considered good. Compare against your industry benchmark, not an absolute number.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How do I calculate selling price from target margin?</summary><div class="faq-a">Selling Price = Cost ÷ (1 − Margin%). If cost is $70 and you want 30% margin: $70 ÷ 0.70 = $100. This is different from markup: a 30% margin requires a 42.86% markup (cost × 1.4286 = selling price).</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What is the difference between margin and markup?</summary><div class="faq-a">Margin is calculated on selling price (profit ÷ price). Markup is calculated on cost (profit ÷ cost). A 50% markup = 33.3% margin. A 50% margin = 100% markup. They measure the same profit in different ways — always specify which you mean to avoid costly pricing errors.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free business and payroll calculators. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Business Tools</div><ul class="footer-links"><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/markup-calculator">Markup Calculator</a></li><li><a href="/break-even-calculator">Break-Even</a></li><li><a href="/cogs-calculator">COGS Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/business-loan-calculator">Business Loan</a></li><li><a href="/invoice-generator-free">Invoice Generator</a></li><li><a href="/employee-cost-calculator">Employee Cost</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var activeMode='full-margin';
+  document.querySelectorAll('.mode-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      activeMode=tab.dataset.mode;
+      document.querySelectorAll('.mode-tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active');
+      document.getElementById('panel-full-margin').style.display=activeMode==='full-margin'?'block':'none';
+      document.getElementById('panel-find-price').style.display=activeMode==='find-price'?'block':'none';
+      document.getElementById('panel-find-margin').style.display=activeMode==='find-margin'?'block':'none';
+    });
+  });
+
+  function fmt(n){return '$'+(Math.abs(Math.round(n))).toLocaleString('en-US',{minimumFractionDigits:0});}
+  function fmtP(n){return (Math.round(n*100)/100).toFixed(1)+'%';}
+
+  // Full P&L margin
+  document.getElementById('calc-pm-btn').addEventListener('click',function(){
+    var rev=parseFloat(document.getElementById('pm-revenue').value)||0;
+    var cogs=parseFloat(document.getElementById('pm-cogs').value)||0;
+    var opex=parseFloat(document.getElementById('pm-opex').value)||0;
+    var itax=parseFloat(document.getElementById('pm-itax').value)||0;
+    if(rev<=0){alert('Enter revenue.');return;}
+    var grossProfit=rev-cogs;
+    var grossMargin=rev>0?(grossProfit/rev*100):0;
+    var opIncome=grossProfit-opex;
+    var opMargin=rev>0?(opIncome/rev*100):0;
+    var netIncome=opIncome-itax;
+    var netMargin=rev>0?(netIncome/rev*100):0;
+
+    document.getElementById('margin-hero').innerHTML=
+      '<div class="margin-card"><div class="margin-pct gross">'+fmtP(grossMargin)+'</div><div class="margin-label">Gross Margin</div><div class="margin-dollar">'+fmt(grossProfit)+'</div></div>'
+      +(opex>0?'<div class="margin-card"><div class="margin-pct operating">'+fmtP(opMargin)+'</div><div class="margin-label">Operating Margin</div><div class="margin-dollar">'+fmt(opIncome)+'</div></div>':'')
+      +(itax>0||opex>0?'<div class="margin-card"><div class="margin-pct net">'+fmtP(netMargin)+'</div><div class="margin-label">Net Margin</div><div class="margin-dollar">'+fmt(netIncome)+'</div></div>':'');
+
+    var wfData=[
+      {label:'Revenue',val:rev,cls:'#1B4FD8',pct:100},
+      {label:'− COGS',val:cogs,cls:'#DC2626',pct:cogs/rev*100},
+      {label:'= Gross Profit',val:grossProfit,cls:'#059669',pct:grossProfit/rev*100},
+    ];
+    if(opex>0){
+      wfData.push({label:'− Operating Expenses',val:opex,cls:'#D97706',pct:opex/rev*100});
+      wfData.push({label:'= Operating Income',val:opIncome,cls:'#0891b2',pct:Math.max(opIncome/rev*100,0)});
+    }
+    if(itax>0){
+      wfData.push({label:'− Interest & Taxes',val:itax,cls:'#7c3aed',pct:itax/rev*100});
+      wfData.push({label:'= Net Income',val:netIncome,cls:'#059669',pct:Math.max(netIncome/rev*100,0)});
+    }
+    document.getElementById('pm-waterfall').innerHTML='<div class="form-label" style="margin-bottom:8px">P&L Waterfall</div>'
+      +wfData.map(function(d){
+        return '<div class="wf-row"><div class="wf-label">'+d.label+'</div>'
+          +'<div class="wf-bar-wrap"><div class="wf-bar" style="width:'+Math.min(Math.abs(d.pct),100)+'%;background:'+d.cls+'"></div></div>'
+          +'<div class="wf-val">'+fmt(d.val)+'</div></div>';
+      }).join('');
+
+    document.getElementById('pm-results').style.display='block';
+    document.getElementById('pm-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Find selling price
+  document.getElementById('calc-fp-btn').addEventListener('click',function(){
+    var cost=parseFloat(document.getElementById('fp-cost').value)||0;
+    var margin=parseFloat(document.getElementById('fp-margin').value)||0;
+    if(cost<=0||margin<=0||margin>=100){alert('Enter valid cost and margin (0–99.9%).');return;}
+    var price=cost/(1-margin/100);
+    var profit=price-cost;
+    var markup=(profit/cost*100);
+    document.getElementById('fp-price').textContent=fmt(price);
+    document.getElementById('fp-profit').textContent=fmt(profit);
+    document.getElementById('fp-equiv-markup').textContent=fmtP(markup);
+    document.getElementById('fp-results').style.display='block';
+  });
+
+  // Find margin %
+  document.getElementById('calc-fm2-btn').addEventListener('click',function(){
+    var cost=parseFloat(document.getElementById('fm2-cost').value)||0;
+    var price=parseFloat(document.getElementById('fm2-price').value)||0;
+    if(cost<=0||price<=0){alert('Enter cost and price.');return;}
+    var profit=price-cost;
+    var margin=profit/price*100;
+    var markup=profit/cost*100;
+    document.getElementById('fm2-margin').textContent=fmtP(margin);
+    document.getElementById('fm2-profit').textContent=fmt(profit);
+    document.getElementById('fm2-markup').textContent=fmtP(markup);
+    document.getElementById('fm2-results').style.display='block';
+  });
+})();
+</script>
+</body>
+</html>
