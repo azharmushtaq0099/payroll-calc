@@ -257,27 +257,22 @@
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://www.freepayrollcalc.com/gpa-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.freepayrollcalc.com/body-fat-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.freepayrollcalc.com/tdee-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.freepayrollcalc.com/minimum-wage-by-state</loc>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://www.freepayrollcalc.com/pay-stub-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/cost-of-living-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/direct-deposit-form</loc>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>

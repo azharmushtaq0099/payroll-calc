@@ -93,7 +93,9 @@
     {"@type":"ListItem","position":36,"name":"COGS Calculator","url":"https://www.freepayrollcalc.com/cogs-calculator"},
     {"@type":"ListItem","position":37,"name":"Percentage Calculator","url":"https://www.freepayrollcalc.com/percentage-calculator"},
     {"@type":"ListItem","position":38,"name":"Pay Stub Generator","url":"https://www.freepayrollcalc.com/pay-stub-generator"},
-    {"@type":"ListItem","position":39,"name":"Minimum Wage by State","url":"https://www.freepayrollcalc.com/minimum-wage-by-state"}
+    {"@type":"ListItem","position":39,"name":"Minimum Wage by State","url":"https://www.freepayrollcalc.com/minimum-wage-by-state"},
+    {"@type":"ListItem","position":40,"name":"Cost of Living Calculator","url":"https://www.freepayrollcalc.com/cost-of-living-calculator"},
+    {"@type":"ListItem","position":41,"name":"Direct Deposit Form","url":"https://www.freepayrollcalc.com/direct-deposit-form"}
   ]
 }
 </script>
@@ -933,36 +935,40 @@
         </div>
       </a>
 
-      <!-- GPA Calculator -->
-      <a href="/gpa-calculator" class="tool-card tool-card--new" data-enter data-delay="1">
+      <!-- Cost of Living Calculator -->
+      <a href="/cost-of-living-calculator" class="tool-card tool-card--new" data-enter data-delay="2">
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <div class="tc-icon-wrap tc-blue">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
           </div>
           <div>
-            <div class="tool-card-title">GPA Calculator</div>
-            <div class="tool-card-desc">Calculate semester and cumulative GPA by entering course names, credits, and letter grades. Includes a What-If calculator — find what grades you need to reach a target GPA. 4.0 and 5.0 weighted scale.</div>
+            <div class="tool-card-title">Cost of Living Calculator</div>
+            <div class="tool-card-desc">Compare living costs between 75+ US cities. Enter your salary and city, pick a destination, and instantly see what you need to earn to maintain your current lifestyle.</div>
           </div>
         </div>
         <div class="tool-card-meta">
-          <span class="tool-card-stat">Semester + <strong>cumulative + what-if</strong></span>
+          <span class="tool-card-stat">75+ cities · <strong>salary equivalency</strong></span>
           <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
         </div>
       </a>
 
-      <!-- TDEE Calculator -->
-      <a href="/tdee-calculator" class="tool-card tool-card--new" data-enter data-delay="2">
+      <!-- Direct Deposit Form -->
+      <a href="/direct-deposit-form" class="tool-card tool-card--new" data-enter data-delay="3">
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <div class="tc-icon-wrap tc-green">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
           </div>
           <div>
-            <div class="tool-card-title">TDEE Calculator</div>
-            <div class="tool-card-desc">Calculate Total Daily Energy Expenditure using the Mifflin-St Jeor BMR formula. Get calorie targets for fat loss, maintenance, and muscle gain. Includes macro breakdown and 5 activity levels.</div>
+            <div class="tool-card-title">Direct Deposit Form Generator</div>
+            <div class="tool-card-desc">Fill in your bank details and generate a professional, printable direct deposit authorization form. Validates routing numbers, masks account numbers — no signup, no watermark.</div>
           </div>
         </div>
         <div class="tool-card-meta">
-          <span class="tool-card-stat">BMR + TDEE + <strong>calorie goals</strong></span>
+          <span class="tool-card-stat">Routing validation · <strong>print to PDF</strong></span>
           <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
         </div>
       </a>
@@ -1099,23 +1105,6 @@
         </div>
         <div class="tool-card-meta">
           <span class="tool-card-stat">NOI builder + <strong>market benchmarks</strong></span>
-          <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </a>
-
-      <!-- Body Fat Calculator -->
-      <a href="/body-fat-calculator" class="tool-card tool-card--new" data-enter data-delay="4">
-        <div style="display:flex;align-items:flex-start;gap:14px;">
-          <div class="tc-icon-wrap tc-slate">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <div>
-            <div class="tool-card-title">Body Fat Calculator</div>
-            <div class="tool-card-desc">Calculate body fat percentage using the U.S. Navy circumference method (±3–4% accuracy). Shows fat mass, lean mass, health category, and visual range indicator.</div>
-          </div>
-        </div>
-        <div class="tool-card-meta">
-          <span class="tool-card-stat">Navy method — <strong>±3–4% accurate</strong></span>
           <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
         </div>
       </a>

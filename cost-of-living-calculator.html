@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cost of Living Calculator 2026 — Compare Cities & Salaries | FreePayrollCalc</title>
+  <meta name="description" content="Free cost of living calculator 2026. Compare living costs between any two US cities. See how much salary you need in a new city to match your current standard of living.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.freepayrollcalc.com/cost-of-living-calculator">
+  <meta property="og:title" content="Cost of Living Calculator 2026 — Compare US Cities">
+  <meta property="og:description" content="Compare cost of living between US cities. Calculate the salary you need to maintain your current lifestyle when relocating.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.freepayrollcalc.com/cost-of-living-calculator">
+  <link rel="stylesheet" href="/shared/styles.css">
+  <style>
+    :root {
+      --accent: #1B4FD8;
+      --accent-light: #EEF2FF;
+      --green: #059669;
+      --green-light: #ECFDF5;
+      --red: #DC2626;
+      --red-light: #FEF2F2;
+      --yellow: #D97706;
+      --yellow-light: #FFFBEB;
+      --text: #111827;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --surface: #F9FAFB;
+      --white: #ffffff;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: #F3F4F6; line-height: 1.6; }
+
+    /* NAV */
+    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 60px; gap: 32px; }
+    .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--accent); text-decoration: none; white-space: nowrap; }
+    .nav-links { display: flex; gap: 24px; flex: 1; flex-wrap: wrap; }
+    .nav-links a { font-size: 0.875rem; color: var(--muted); text-decoration: none; white-space: nowrap; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero { background: var(--white); border-bottom: 1px solid var(--border); padding: 40px 24px 32px; text-align: center; }
+    .hero-inner { max-width: 800px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 16px; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    h1 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .hero-sub { font-size: 1rem; color: var(--muted); max-width: 600px; margin: 0 auto 16px; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-light); color: var(--accent); font-size: 0.75rem; font-weight: 600; padding: 6px 12px; border-radius: 20px; }
+
+    /* MAIN LAYOUT */
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
+
+    /* CALCULATOR CARD */
+    .calc-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; }
+    .calc-header { background: var(--accent); color: white; padding: 20px 28px; }
+    .calc-header h2 { font-size: 1.1rem; font-weight: 700; }
+    .calc-header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+    .calc-body { padding: 28px; }
+
+    /* GRID */
+    .city-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+    @media (max-width: 600px) { .city-grid { grid-template-columns: 1fr; } }
+
+    .city-panel { border: 2px solid var(--border); border-radius: 10px; padding: 20px; }
+    .city-panel.from-panel { border-color: var(--accent); }
+    .city-panel.to-panel { border-color: var(--green); }
+    .panel-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 14px; }
+    .from-panel .panel-title { color: var(--accent); }
+    .to-panel .panel-title { color: var(--green); }
+
+    label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    select, input[type="number"] {
+      width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.9rem; font-family: inherit;
+      background: var(--white); color: var(--text); transition: border-color 0.15s;
+    }
+    select:focus, input[type="number"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(27,79,216,0.08); }
+    .field-group { margin-bottom: 14px; }
+    .field-hint { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+
+    .btn-calc { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+    .btn-calc:hover { background: #1644C0; }
+
+    /* RESULTS */
+    .results { display: none; margin-top: 32px; }
+    .results.visible { display: block; }
+
+    .result-headline { text-align: center; margin-bottom: 28px; }
+    .result-headline .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .result-headline .amount { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; }
+    .result-headline .amount.cheaper { color: var(--green); }
+    .result-headline .amount.pricier { color: var(--red); }
+    .result-headline .sublabel { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
+
+    .verdict-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
+    .verdict-bar .verdict-icon { font-size: 1.4rem; }
+    .verdict-bar strong { display: block; font-size: 0.95rem; }
+
+    .breakdown-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 14px; }
+
+    .breakdown-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .breakdown-card { border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .breakdown-card .bc-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+    .breakdown-card .bc-diff { font-size: 1.2rem; font-weight: 800; }
+    .breakdown-card .bc-diff.up { color: var(--red); }
+    .breakdown-card .bc-diff.down { color: var(--green); }
+    .breakdown-card .bc-diff.same { color: var(--muted); }
+    .breakdown-card .bc-from { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .breakdown-card .bc-to { font-size: 0.8rem; font-weight: 600; }
+
+    .salary-equiv { background: var(--accent-light); border: 1.5px solid var(--accent); border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+    .salary-equiv h3 { font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+    .salary-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(27,79,216,0.12); font-size: 0.9rem; }
+    .salary-row:last-child { border-bottom: none; }
+    .salary-row .sr-label { color: var(--muted); }
+    .salary-row .sr-value { font-weight: 700; }
+    .salary-row .sr-value.highlight { color: var(--accent); font-size: 1.05rem; }
+
+    .col-comparison { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+    .col-comparison table { width: 100%; border-collapse: collapse; }
+    .col-comparison th { background: var(--surface); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .col-comparison td { padding: 12px 16px; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+    .col-comparison tr:last-child td { border-bottom: none; }
+    .pct-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    .pct-badge.up { background: var(--red-light); color: var(--red); }
+    .pct-badge.down { background: var(--green-light); color: var(--green); }
+    .pct-badge.same { background: var(--surface); color: var(--muted); }
+
+    /* INFO SECTION */
+    .info-section { margin-top: 48px; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px; }
+    .info-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .info-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .info-card p, .info-card ul { font-size: 0.875rem; color: var(--muted); }
+    .info-card ul { padding-left: 20px; }
+    .info-card li { margin-bottom: 4px; }
+
+    /* FAQ */
+    .faq-section { margin-top: 48px; }
+    .faq-section h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; }
+    .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+    .faq-q { width: 100%; text-align: left; padding: 18px 24px; font-size: 0.95rem; font-weight: 600; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--muted); flex-shrink: 0; }
+    .faq-q.open::after { content: '−'; }
+    .faq-a { display: none; padding: 0 24px 18px; font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+    .faq-a.open { display: block; }
+
+    /* FOOTER */
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-size: 0.8rem; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
+
+    @media (max-width: 480px) {
+      .calc-body { padding: 20px; }
+      .city-panel { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">FreePayrollCalc</a>
+    <div class="nav-links">
+      <a href="/free-payroll-calculator">Payroll Calculator</a>
+      <a href="/pay-stub-generator">Pay Stub</a>
+      <a href="/minimum-wage-by-state">Minimum Wage</a>
+      <a href="/payroll-tax-calculator">State Taxes</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="breadcrumb"><a href="/">Home</a> › Cost of Living Calculator</p>
+    <h1>Cost of Living Calculator 2026</h1>
+    <p class="hero-sub">Compare living costs between any two US cities. Find out how much salary you need to maintain your current lifestyle when you relocate.</p>
+    <span class="badge">100+ US cities · Housing, food, transport & more · Salary equivalency</span>
+  </div>
+</div>
+
+<main>
+  <div class="calc-card">
+    <div class="calc-header">
+      <h2>Compare Cost of Living</h2>
+      <p>Enter your current city and salary, then select your destination city</p>
+    </div>
+    <div class="calc-body">
+      <div class="city-grid">
+        <div class="city-panel from-panel">
+          <div class="panel-title">Current City (From)</div>
+          <div class="field-group">
+            <label for="from-city">City</label>
+            <select id="from-city"></select>
+          </div>
+          <div class="field-group">
+            <label for="from-salary">Your Current Salary</label>
+            <input type="number" id="from-salary" placeholder="75000" min="0" value="75000">
+            <div class="field-hint">Annual gross salary</div>
+          </div>
+        </div>
+        <div class="city-panel to-panel">
+          <div class="panel-title">Destination City (To)</div>
+          <div class="field-group">
+            <label for="to-city">City</label>
+            <select id="to-city"></select>
+          </div>
+          <div class="field-group">
+            <label for="to-lifestyle">Lifestyle Match</label>
+            <select id="to-lifestyle">
+              <option value="1.0">Same standard of living</option>
+              <option value="1.1">10% upgrade</option>
+              <option value="1.2">20% upgrade</option>
+              <option value="0.9">10% downgrade (save more)</option>
+              <option value="0.8">20% downgrade (save more)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn-calc" onclick="calculate()">Compare Cities →</button>
+
+      <div class="results" id="results">
+        <div class="result-headline">
+          <div class="label">Equivalent salary in <span id="res-to-name"></span></div>
+          <div class="amount" id="res-equiv"></div>
+          <div class="sublabel" id="res-sublabel"></div>
+        </div>
+
+        <div class="verdict-bar" id="verdict-bar">
+          <span class="verdict-icon" id="verdict-icon"></span>
+          <div id="verdict-text"></div>
+        </div>
+
+        <div class="salary-equiv">
+          <h3>Salary Equivalency Breakdown</h3>
+          <div class="salary-row">
+            <span class="sr-label">Your salary in <span class="from-city-name"></span></span>
+            <span class="sr-value" id="sr-current"></span>
+          </div>
+          <div class="salary-row">
+            <span class="sr-label">COL adjustment factor</span>
+            <span class="sr-value" id="sr-factor"></span>
+          </div>
+          <div class="salary-row">
+            <span class="sr-label">Lifestyle modifier</span>
+            <span class="sr-value" id="sr-lifestyle"></span>
+          </div>
+          <div class="salary-row">
+            <span class="sr-label">Equivalent salary in <span class="to-city-name"></span></span>
+            <span class="sr-value highlight" id="sr-equiv"></span>
+          </div>
+        </div>
+
+        <p class="breakdown-title">Cost Category Comparison</p>
+        <div class="col-comparison">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th id="th-from"></th>
+                <th id="th-to"></th>
+                <th>Difference</th>
+              </tr>
+            </thead>
+            <tbody id="breakdown-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="breakdown-grid" id="breakdown-cards"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:4px;">How This Calculator Works</h2>
+    <p style="color:var(--muted);font-size:0.875rem;margin-bottom:24px;">Based on C2ER Cost of Living Index, ERI Geographic Differential data, and Bureau of Labor Statistics Consumer Expenditure Survey 2025.</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>What the Index Means</h3>
+        <p>Each city has a composite cost of living index relative to the US national average (100). New York City at 187 means living there costs 87% more than the national average. Omaha at 89 means 11% below average.</p>
+      </div>
+      <div class="info-card">
+        <h3>Categories Included</h3>
+        <ul>
+          <li>Housing (rent/mortgage) — 33% weight</li>
+          <li>Groceries & food — 13% weight</li>
+          <li>Transportation — 11% weight</li>
+          <li>Healthcare — 10% weight</li>
+          <li>Utilities — 8% weight</li>
+          <li>Miscellaneous — 25% weight</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Limitations to Know</h3>
+        <p>This calculator uses city-level averages. Actual costs vary by neighborhood, housing type, and lifestyle. Tax differences between states are not included — use our <a href="/payroll-tax-calculator" style="color:var(--accent)">payroll tax calculator</a> for take-home pay.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is a cost of living calculator?</button>
+      <div class="faq-a">A cost of living calculator compares the relative expense of living in different cities. It accounts for housing, food, transportation, healthcare, and other everyday expenses. The result tells you how much salary you need in a new city to maintain the same standard of living you have today.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How accurate is the cost of living index?</button>
+      <div class="faq-a">The data is based on the C2ER (Council for Community and Economic Research) Cost of Living Index, which surveys prices quarterly in over 300 US cities. It's the most widely used benchmark in the US. Individual experiences can vary — someone with a long commute or unusual housing situation may see different results — but the index is accurate for typical households.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Does this include state income tax differences?</button>
+      <div class="faq-a">No — this calculator compares gross costs of goods and services only. Moving from California to Texas means no state income tax in Texas, which significantly increases your take-home pay on top of the COL difference. Use our <a href="/payroll-tax-calculator" style="color:var(--accent)">state payroll tax calculator</a> to compare net pay by state.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What's the most expensive city to live in the US?</button>
+      <div class="faq-a">Manhattan (New York City) consistently ranks as the most expensive US city with a COL index around 230–250 (130–150% above the national average). Other high-cost cities include San Francisco, Honolulu, Boston, and Washington DC. The least expensive areas are generally mid-sized cities in the Midwest and South like Memphis, Wichita, and Tulsa.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How much salary do I need to move to New York City from a mid-size city?</button>
+      <div class="faq-a">If you earn $70,000 in a mid-cost city like Indianapolis (COL index ~88), you'd need roughly $173,000 in Manhattan (COL ~216) to maintain the same standard of living — a 147% increase. Housing is the dominant driver: the typical one-bedroom apartment in Manhattan runs $3,500–4,500/month vs $900–1,200 in Indianapolis.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 FreePayrollCalc.com · All calculations use C2ER Cost of Living Index data</p>
+  <p style="margin-top:8px;"><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></p>
+</footer>
+
+<script src="/shared/scripts.js"></script>
+<script>
+// ─── CITY DATA ─────────────────────────────────────────────────────────────
+// COL index relative to US national average (100)
+// Category indices: [housing, groceries, transport, healthcare, utilities, misc]
+// Sources: C2ER COLI 2025, ERI Geographic Differential data
+const CITIES = [
+  { name: "New York, NY (Manhattan)",        state: "NY", col: 216, h:340, g:114, t:118, hc:115, u:139, m:118 },
+  { name: "New York, NY (Brooklyn/Queens)",   state: "NY", col: 178, h:265, g:113, t:117, hc:115, u:135, m:115 },
+  { name: "San Francisco, CA",               state: "CA", col: 194, h:309, g:118, t:122, hc:112, u:136, m:116 },
+  { name: "San Jose, CA",                    state: "CA", col: 181, h:291, g:116, t:118, hc:111, u:130, m:113 },
+  { name: "Los Angeles, CA",                 state: "CA", col: 163, h:249, g:112, t:116, hc:108, u:118, m:112 },
+  { name: "San Diego, CA",                   state: "CA", col: 157, h:236, g:111, t:114, hc:109, u:115, m:111 },
+  { name: "Seattle, WA",                     state: "WA", col: 152, h:233, g:109, t:113, hc:110, u:113, m:110 },
+  { name: "Boston, MA",                      state: "MA", col: 162, h:247, g:113, t:115, hc:116, u:130, m:113 },
+  { name: "Washington, DC",                  state: "DC", col: 158, h:241, g:112, t:116, hc:112, u:125, m:114 },
+  { name: "Honolulu, HI",                    state: "HI", col: 196, h:316, g:129, t:124, hc:119, u:187, m:121 },
+  { name: "Denver, CO",                      state: "CO", col: 128, h:172, g:105, t:108, hc:103, u:97,  m:107 },
+  { name: "Portland, OR",                    state: "OR", col: 131, h:181, g:107, t:111, hc:106, u:101, m:109 },
+  { name: "Chicago, IL",                     state: "IL", col: 110, h:125, g:107, t:112, hc:108, u:114, m:107 },
+  { name: "Miami, FL",                       state: "FL", col: 123, h:159, g:106, t:107, hc:107, u:108, m:107 },
+  { name: "Austin, TX",                      state: "TX", col: 118, h:150, g:100, t:100, hc:95,  u:87,  m:104 },
+  { name: "Dallas, TX",                      state: "TX", col: 103, h:112, g:97,  t:98,  hc:92,  u:90,  m:101 },
+  { name: "Houston, TX",                     state: "TX", col: 96,  h:97,  g:95,  t:98,  hc:90,  u:92,  m:99  },
+  { name: "Atlanta, GA",                     state: "GA", col: 107, h:120, g:99,  t:103, hc:98,  u:92,  m:103 },
+  { name: "Phoenix, AZ",                     state: "AZ", col: 105, h:115, g:98,  t:101, hc:95,  u:99,  m:102 },
+  { name: "Las Vegas, NV",                   state: "NV", col: 104, h:113, g:99,  t:104, hc:92,  u:89,  m:103 },
+  { name: "Minneapolis, MN",                 state: "MN", col: 107, h:117, g:104, t:106, hc:112, u:100, m:104 },
+  { name: "Philadelphia, PA",                state: "PA", col: 114, h:130, g:108, t:113, hc:112, u:120, m:108 },
+  { name: "Nashville, TN",                   state: "TN", col: 108, h:121, g:98,  t:101, hc:94,  u:87,  m:105 },
+  { name: "Charlotte, NC",                   state: "NC", col: 100, h:107, g:98,  t:100, hc:97,  u:91,  m:99  },
+  { name: "Raleigh, NC",                     state: "NC", col: 104, h:115, g:98,  t:101, hc:96,  u:89,  m:101 },
+  { name: "Baltimore, MD",                   state: "MD", col: 120, h:150, g:109, t:110, hc:110, u:115, m:108 },
+  { name: "Richmond, VA",                    state: "VA", col: 100, h:106, g:99,  t:101, hc:99,  u:98,  m:99  },
+  { name: "Columbus, OH",                    state: "OH", col: 88,  h:82,  g:97,  t:95,  hc:98,  u:91,  m:95  },
+  { name: "Cincinnati, OH",                  state: "OH", col: 87,  h:80,  g:97,  t:95,  hc:97,  u:89,  m:93  },
+  { name: "Cleveland, OH",                   state: "OH", col: 86,  h:78,  g:97,  t:93,  hc:97,  u:89,  m:93  },
+  { name: "Indianapolis, IN",                state: "IN", col: 88,  h:81,  g:96,  t:96,  hc:93,  u:90,  m:94  },
+  { name: "Louisville, KY",                  state: "KY", col: 87,  h:80,  g:95,  t:95,  hc:91,  u:88,  m:93  },
+  { name: "St. Louis, MO",                   state: "MO", col: 88,  h:80,  g:97,  t:95,  hc:99,  u:90,  m:94  },
+  { name: "Kansas City, MO",                 state: "MO", col: 88,  h:82,  g:97,  t:95,  hc:96,  u:87,  m:94  },
+  { name: "Memphis, TN",                     state: "TN", col: 81,  h:70,  g:95,  t:92,  hc:91,  u:85,  m:90  },
+  { name: "Detroit, MI",                     state: "MI", col: 88,  h:80,  g:97,  t:96,  hc:100, u:89,  m:93  },
+  { name: "Milwaukee, WI",                   state: "WI", col: 91,  h:84,  g:99,  t:97,  hc:101, u:92,  m:96  },
+  { name: "Pittsburgh, PA",                  state: "PA", col: 95,  h:95,  g:100, t:98,  hc:107, u:98,  m:97  },
+  { name: "Buffalo, NY",                     state: "NY", col: 88,  h:79,  g:99,  t:95,  hc:104, u:98,  m:94  },
+  { name: "Rochester, NY",                   state: "NY", col: 88,  h:79,  g:100, t:95,  hc:103, u:95,  m:94  },
+  { name: "Tucson, AZ",                      state: "AZ", col: 91,  h:85,  g:96,  t:99,  hc:93,  u:97,  m:95  },
+  { name: "Albuquerque, NM",                 state: "NM", col: 90,  h:84,  g:96,  t:97,  hc:90,  u:88,  m:94  },
+  { name: "Oklahoma City, OK",               state: "OK", col: 82,  h:72,  g:94,  t:93,  hc:89,  u:84,  m:89  },
+  { name: "Tulsa, OK",                       state: "OK", col: 80,  h:68,  g:93,  t:92,  hc:88,  u:82,  m:88  },
+  { name: "Wichita, KS",                     state: "KS", col: 79,  h:66,  g:94,  t:92,  hc:88,  u:83,  m:87  },
+  { name: "Omaha, NE",                       state: "NE", col: 89,  h:83,  g:97,  t:94,  hc:96,  u:88,  m:94  },
+  { name: "Salt Lake City, UT",              state: "UT", col: 106, h:119, g:99,  t:100, hc:98,  u:84,  m:103 },
+  { name: "Boise, ID",                       state: "ID", col: 105, h:117, g:98,  t:100, hc:94,  u:88,  m:102 },
+  { name: "Spokane, WA",                     state: "WA", col: 99,  h:106, g:101, t:106, hc:106, u:97,  m:99  },
+  { name: "Sacramento, CA",                  state: "CA", col: 131, h:180, g:106, t:110, hc:105, u:112, m:108 },
+  { name: "Fresno, CA",                      state: "CA", col: 109, h:121, g:104, t:109, hc:103, u:109, m:105 },
+  { name: "Jacksonville, FL",                state: "FL", col: 97,  h:99,  g:98,  t:100, hc:98,  u:97,  m:97  },
+  { name: "Tampa, FL",                       state: "FL", col: 103, h:110, g:99,  t:103, hc:100, u:98,  m:101 },
+  { name: "Orlando, FL",                     state: "FL", col: 102, h:109, g:98,  t:104, hc:97,  u:94,  m:100 },
+  { name: "New Orleans, LA",                 state: "LA", col: 97,  h:97,  g:100, t:100, hc:97,  u:88,  m:99  },
+  { name: "Baton Rouge, LA",                 state: "LA", col: 89,  h:82,  g:96,  t:94,  hc:92,  u:81,  m:93  },
+  { name: "Birmingham, AL",                  state: "AL", col: 83,  h:72,  g:95,  t:93,  hc:90,  u:87,  m:89  },
+  { name: "Little Rock, AR",                 state: "AR", col: 82,  h:71,  g:94,  t:92,  hc:89,  u:82,  m:88  },
+  { name: "Jackson, MS",                     state: "MS", col: 80,  h:68,  g:93,  t:91,  hc:88,  u:82,  m:87  },
+  { name: "Columbia, SC",                    state: "SC", col: 88,  h:80,  g:95,  t:95,  hc:93,  u:87,  m:93  },
+  { name: "Greenville, SC",                  state: "SC", col: 87,  h:79,  g:95,  t:95,  hc:93,  u:85,  m:92  },
+  { name: "Knoxville, TN",                   state: "TN", col: 85,  h:75,  g:95,  t:93,  hc:91,  u:85,  m:91  },
+  { name: "Chattanooga, TN",                 state: "TN", col: 85,  h:75,  g:95,  t:93,  hc:90,  u:85,  m:91  },
+  { name: "Anchorage, AK",                   state: "AK", col: 131, h:155, g:130, t:116, hc:130, u:125, m:117 },
+  { name: "Burlington, VT",                  state: "VT", col: 118, h:145, g:111, t:107, hc:114, u:112, m:109 },
+  { name: "Hartford, CT",                    state: "CT", col: 125, h:154, g:113, t:112, hc:117, u:130, m:111 },
+  { name: "Providence, RI",                  state: "RI", col: 117, h:141, g:109, t:109, hc:113, u:126, m:108 },
+  { name: "Manchester, NH",                  state: "NH", col: 113, h:132, g:107, t:107, hc:111, u:118, m:107 },
+  { name: "Portland, ME",                    state: "ME", col: 116, h:140, g:108, t:105, hc:110, u:115, m:108 },
+  { name: "Fargo, ND",                       state: "ND", col: 88,  h:83,  g:98,  t:93,  hc:101, u:91,  m:93  },
+  { name: "Sioux Falls, SD",                 state: "SD", col: 87,  h:82,  g:97,  t:93,  hc:99,  u:89,  m:92  },
+  { name: "Billings, MT",                    state: "MT", col: 96,  h:97,  g:100, t:99,  hc:99,  u:92,  m:98  },
+  { name: "Cheyenne, WY",                    state: "WY", col: 91,  h:86,  g:97,  t:95,  hc:95,  u:87,  m:95  },
+  { name: "Des Moines, IA",                  state: "IA", col: 87,  h:80,  g:96,  t:94,  hc:96,  u:88,  m:92  },
+  { name: "Dayton, OH",                      state: "OH", col: 83,  h:72,  g:95,  t:92,  hc:94,  u:87,  m:90  },
+  { name: "Lansing, MI",                     state: "MI", col: 84,  h:73,  g:96,  t:93,  hc:97,  u:87,  m:90  },
+  { name: "Madison, WI",                     state: "WI", col: 99,  h:103, g:100, t:100, hc:104, u:96,  m:99  },
+  { name: "Lincoln, NE",                     state: "NE", col: 87,  h:80,  g:96,  t:93,  hc:94,  u:85,  m:92  },
+  { name: "Topeka, KS",                      state: "KS", col: 78,  h:65,  g:93,  t:91,  hc:87,  u:82,  m:87  },
+  { name: "Springfield, MO",                 state: "MO", col: 82,  h:71,  g:94,  t:92,  hc:90,  u:83,  m:89  },
+];
+
+// Category weights (must sum to 1.0)
+const WEIGHTS = { h: 0.33, g: 0.13, t: 0.11, hc: 0.10, u: 0.08, m: 0.25 };
+const CAT_LABELS = {
+  h: "Housing", g: "Groceries & Food", t: "Transportation",
+  hc: "Healthcare", u: "Utilities", m: "Miscellaneous"
+};
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+function init() {
+  const sorted = [...CITIES].sort((a, b) => a.name.localeCompare(b.name));
+  const fromSel = document.getElementById('from-city');
+  const toSel   = document.getElementById('to-city');
+  sorted.forEach(c => {
+    fromSel.add(new Option(c.name, c.name));
+    toSel.add(new Option(c.name, c.name));
+  });
+  // Default: New York → Dallas
+  fromSel.value = "New York, NY (Manhattan)";
+  toSel.value   = "Dallas, TX";
+}
+
+// ─── CALCULATE ────────────────────────────────────────────────────────────
+function calculate() {
+  const fromName   = document.getElementById('from-city').value;
+  const toName     = document.getElementById('to-city').value;
+  const salary     = parseFloat(document.getElementById('from-salary').value) || 0;
+  const lifestyle  = parseFloat(document.getElementById('to-lifestyle').value);
+
+  const from = CITIES.find(c => c.name === fromName);
+  const to   = CITIES.find(c => c.name === toName);
+  if (!from || !to || salary <= 0) return;
+
+  const factor = (to.col / from.col) * lifestyle;
+  const equiv  = salary * factor;
+  const diff   = equiv - salary;
+  const diffPct = ((factor - 1) * 100);
+
+  // Update city name spans
+  document.querySelectorAll('.from-city-name').forEach(el => el.textContent = from.name.split(',')[0]);
+  document.querySelectorAll('.to-city-name').forEach(el => el.textContent = to.name.split(',')[0]);
+
+  // Result headline
+  document.getElementById('res-to-name').textContent = to.name.split(',')[0];
+  const equivEl = document.getElementById('res-equiv');
+  equivEl.textContent = '$' + Math.round(equiv).toLocaleString();
+  equivEl.className = 'amount ' + (diffPct > 3 ? 'pricier' : diffPct < -3 ? 'cheaper' : '');
+
+  const subPct = Math.abs(diffPct).toFixed(1);
+  document.getElementById('res-sublabel').textContent =
+    diffPct > 3   ? `${subPct}% more expensive — you need a $${Math.round(diff).toLocaleString()} raise` :
+    diffPct < -3  ? `${subPct}% cheaper — your $${salary.toLocaleString()} buys more` :
+    `Similar cost of living`;
+
+  // Verdict bar
+  const icon = diffPct > 10 ? '⚠️' : diffPct > 3 ? '📈' : diffPct < -3 ? '✅' : '⚖️';
+  document.getElementById('verdict-icon').textContent = icon;
+  const verdictColor = diffPct > 3 ? 'var(--red-light)' : diffPct < -3 ? 'var(--green-light)' : 'var(--surface)';
+  document.getElementById('verdict-bar').style.background = verdictColor;
+  document.getElementById('verdict-text').innerHTML =
+    diffPct > 10  ? `<strong>${to.name} is significantly more expensive.</strong> Your $${salary.toLocaleString()} salary in ${from.name.split(',')[0]} is equivalent to $${Math.round(equiv).toLocaleString()} in ${to.name.split(',')[0]}. Negotiate a raise before accepting any offer.` :
+    diffPct > 3   ? `<strong>${to.name} is more expensive.</strong> You'll need $${Math.round(equiv).toLocaleString()} in ${to.name.split(',')[0]} to match your current $${salary.toLocaleString()} lifestyle.` :
+    diffPct < -10 ? `<strong>${to.name} is much cheaper.</strong> Your $${salary.toLocaleString()} goes significantly further — equivalent to $${Math.round(equiv).toLocaleString()} in ${to.name.split(',')[0]}.` :
+    diffPct < -3  ? `<strong>${to.name} is more affordable.</strong> Your $${salary.toLocaleString()} in ${from.name.split(',')[0]} is equivalent to $${Math.round(equiv).toLocaleString()} in ${to.name.split(',')[0]}.` :
+    `<strong>Similar cost of living.</strong> ${from.name.split(',')[0]} and ${to.name.split(',')[0]} have nearly identical costs. Your lifestyle will remain about the same.`;
+
+  // Salary rows
+  document.getElementById('sr-current').textContent = '$' + salary.toLocaleString();
+  document.getElementById('sr-factor').textContent = factor.toFixed(4) + 'x  (' + (from.col) + ' → ' + (to.col) + ')';
+  document.getElementById('sr-lifestyle').textContent = lifestyle === 1 ? 'Same lifestyle (1.0×)' :
+    lifestyle > 1 ? `Upgraded lifestyle (${lifestyle}×)` : `Reduced lifestyle (${lifestyle}×)`;
+  document.getElementById('sr-equiv').textContent = '$' + Math.round(equiv).toLocaleString() + '/yr';
+
+  // Table headers
+  document.getElementById('th-from').textContent = from.name.split(',')[0];
+  document.getElementById('th-to').textContent   = to.name.split(',')[0];
+
+  // Category breakdown
+  const tbody = document.getElementById('breakdown-tbody');
+  tbody.innerHTML = '';
+  Object.keys(WEIGHTS).forEach(k => {
+    const fromIdx = from[k];
+    const toIdx   = to[k];
+    const catDiff = ((toIdx - fromIdx) / fromIdx * 100);
+    const badge   = catDiff > 2 ? `<span class="pct-badge up">+${catDiff.toFixed(0)}%</span>` :
+                    catDiff < -2 ? `<span class="pct-badge down">${catDiff.toFixed(0)}%</span>` :
+                    `<span class="pct-badge same">≈ same</span>`;
+    tbody.innerHTML += `
+      <tr>
+        <td><strong>${CAT_LABELS[k]}</strong></td>
+        <td>${fromIdx}</td>
+        <td>${toIdx}</td>
+        <td>${badge}</td>
+      </tr>`;
+  });
+
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ─── FAQ ──────────────────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+  if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+}
+
+init();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Cost of Living Calculator 2026",
+  "url": "https://www.freepayrollcalc.com/cost-of-living-calculator",
+  "description": "Free cost of living calculator. Compare living costs between 75+ US cities and calculate salary equivalency for relocation.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["City-to-city cost comparison", "Salary equivalency calculation", "6 expense categories", "75+ US cities"],
+  "provider": { "@type": "Organization", "name": "FreePayrollCalc", "url": "https://www.freepayrollcalc.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a cost of living calculator?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A cost of living calculator compares the relative expense of living in different cities, accounting for housing, food, transportation, healthcare, and other expenses. It tells you how much salary you need in a new city to maintain the same standard of living." }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate is the cost of living index?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The data is based on the C2ER Cost of Living Index, which surveys prices quarterly in over 300 US cities. It's the most widely used benchmark in the US, accurate for typical households." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this include state income tax differences?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No — this calculator compares gross costs of goods and services only. Use a state payroll tax calculator to compare net take-home pay by state." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the most expensive city to live in the US?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Manhattan (New York City) consistently ranks as the most expensive US city with a COL index around 216–240. Other high-cost cities include San Francisco, Honolulu, Boston, and Washington DC." }
+    }
+  ]
+}
+</script>
+
+</body>
+</html>
