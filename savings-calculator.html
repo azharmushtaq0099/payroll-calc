@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Savings Calculator — Compound Interest | FreePayrollCalc</title>
+<meta name="description" content="Free savings calculator. Find how savings grow with compound interest, set monthly savings to reach a goal, and size your emergency fund.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/savings-calculator">
+<meta property="og:title" content="Savings Calculator — Compound Interest, Goal & Emergency Fund">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Savings Calculator","url":"https://www.freepayrollcalc.com/savings-calculator","description":"Calculate compound savings growth, find monthly savings needed to reach a goal, and size your emergency fund.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does compound interest work on savings?","acceptedAnswer":{"@type":"Answer","text":"Compound interest means you earn interest on your interest. $10,000 at 5% compounded annually becomes $10,500 after year 1, then $11,025 after year 2 (5% on $10,500). Compounded monthly is slightly better than annually. The formula is A = P(1 + r/n)^(nt) where P is principal, r is annual rate, n is compounds per year, t is years."}},{"@type":"Question","name":"How much should I have in an emergency fund?","acceptedAnswer":{"@type":"Answer","text":"Most financial advisors recommend 3–6 months of essential expenses. Freelancers, single-income households, or anyone in a volatile industry should target 6–12 months. Essential expenses include rent/mortgage, utilities, groceries, insurance, transportation, and minimum debt payments — not discretionary spending."}},{"@type":"Question","name":"How much do I need to save per month to reach a goal?","acceptedAnswer":{"@type":"Answer","text":"Monthly Savings = Goal Amount × r / [(1+r)^n − 1], where r is monthly interest rate and n is total months. Without interest, simply divide the goal by the number of months. Use the Goal Calculator tab above for your specific numbers."}},{"@type":"Question","name":"What is the rule of 72?","acceptedAnswer":{"@type":"Answer","text":"The Rule of 72 estimates how long it takes to double your money: Years to Double = 72 ÷ Annual Interest Rate. At 6%, money doubles in 12 years. At 9%, in 8 years. At 3% (HYSA), in 24 years. It's a quick mental math shortcut for compound growth estimates."}}]}
+</script>
+<style>
+.mode-tabs{display:flex;gap:0;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
+.mode-tab{flex:1;padding:8px 6px;text-align:center;font-size:12px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .18s;color:var(--ink-3)}
+.mode-tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.savings-hero{text-align:center;background:linear-gradient(135deg,rgba(5,150,105,.06),rgba(5,150,105,.02));border:1px solid rgba(5,150,105,.2);border-radius:14px;padding:28px 20px;margin-bottom:16px}
+.savings-big{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;color:var(--green);line-height:1}
+.savings-label{font-size:13px;font-weight:600;color:var(--ink-2);margin-top:6px}
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--ink-1)}
+.growth-chart{margin:12px 0}
+.gc-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.gc-label{font-size:11px;color:var(--ink-3);width:55px;flex-shrink:0;text-align:right}
+.gc-track{flex:1;background:var(--bg);border-radius:4px;height:16px;overflow:hidden;border:1px solid var(--border);position:relative}
+.gc-total{height:100%;background:var(--green);border-radius:4px;position:relative}
+.gc-principal{height:100%;background:rgba(27,79,216,.3);border-radius:4px;position:absolute;left:0;top:0}
+.gc-val{font-family:'JetBrains Mono',monospace;font-size:11px;width:70px;flex-shrink:0;font-weight:600;color:var(--green)}
+.rule72{background:rgba(27,79,216,.04);border:1px solid rgba(27,79,216,.12);border-radius:10px;padding:14px;margin-top:12px}
+.compound-select{width:100%}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/budget-calculator">Budget</a>
+        <a href="/retirement-calculator">Retirement</a>
+        <a href="/savings-calculator" class="active">Savings</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/savings-calculator" class="active">Savings Calculator</a>
+    <a href="/retirement-calculator">Retirement Calculator</a>
+    <a href="/budget-calculator">Budget Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Savings Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Savings Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate compound savings growth, find your monthly savings target, or size your emergency fund.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Compound interest · Goal planner · Emergency fund · Rule of 72</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Savings Calculator</div>
+      <div class="mode-tabs">
+        <div class="mode-tab active" data-mode="compound">Compound Growth</div>
+        <div class="mode-tab" data-mode="goal">Goal Calculator</div>
+        <div class="mode-tab" data-mode="emergency">Emergency Fund</div>
+      </div>
+
+      <!-- Compound Growth -->
+      <div id="panel-compound">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Initial Deposit</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cg-initial" class="form-input form-input--prefixed" placeholder="5000" min="0" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Monthly Contribution</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cg-monthly" class="form-input form-input--prefixed" placeholder="200" min="0" step="50"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Annual Interest Rate</label>
+            <div class="input-wrap"><input type="number" id="cg-rate" class="form-input form-input--suffixed" placeholder="4.5" min="0.01" max="30" step="0.1"><span class="input-suffix">%</span></div>
+            <span class="form-hint">HYSA: ~4–5%. CD: 4–5.5%. S&amp;P 500 avg: ~10%</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Time Period</label>
+            <div style="display:flex;gap:8px">
+              <input type="number" id="cg-years" class="form-input" placeholder="10" min="1" max="50" step="1" style="flex:1">
+              <select id="cg-compound" class="form-input compound-select" style="width:auto;min-width:130px">
+                <option value="12" selected>Compound Monthly</option>
+                <option value="4">Compound Quarterly</option>
+                <option value="1">Compound Annually</option>
+                <option value="365">Compound Daily</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-cg-btn">Calculate Growth</button>
+        <div id="cg-results" style="display:none;margin-top:24px">
+          <div class="savings-hero"><div class="savings-big" id="cg-total">—</div><div class="savings-label">Total Savings</div></div>
+          <div class="metrics-row" id="cg-metrics"></div>
+          <div class="form-label" style="margin-bottom:6px">Growth Over Time</div>
+          <div style="display:flex;gap:12px;font-size:11px;margin-bottom:4px"><span><span style="display:inline-block;width:10px;height:10px;background:var(--green);border-radius:2px;margin-right:3px"></span>Total</span><span><span style="display:inline-block;width:10px;height:10px;background:rgba(27,79,216,.3);border-radius:2px;margin-right:3px"></span>Principal</span></div>
+          <div class="growth-chart" id="cg-chart"></div>
+          <div class="rule72" id="cg-rule72"></div>
+        </div>
+      </div>
+
+      <!-- Goal Calculator -->
+      <div id="panel-goal" style="display:none">
+        <p style="font-size:13px;color:var(--ink-2);margin-bottom:16px">Find out how much you need to save each month to reach a savings goal.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Savings Goal</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="gl-goal" class="form-input form-input--prefixed" placeholder="20000" min="0" step="500"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Time to Reach Goal</label>
+            <div style="display:flex;gap:8px">
+              <input type="number" id="gl-years" class="form-input" placeholder="3" min="0" max="50" step="1" style="flex:1">
+              <select id="gl-unit" class="form-input" style="width:auto;min-width:90px">
+                <option value="years" selected>Years</option>
+                <option value="months">Months</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Current Savings Toward Goal</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="gl-current" class="form-input form-input--prefixed" placeholder="0" min="0" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Annual Interest Rate</label>
+            <div class="input-wrap"><input type="number" id="gl-rate" class="form-input form-input--suffixed" placeholder="4.5" min="0" max="20" step="0.1"><span class="input-suffix">%</span></div>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-gl-btn">Find Monthly Savings</button>
+        <div id="gl-results" style="display:none;margin-top:20px">
+          <div class="savings-hero"><div class="savings-big" id="gl-monthly">—</div><div class="savings-label">per month to reach your goal</div></div>
+          <div class="metrics-row" id="gl-metrics"></div>
+        </div>
+      </div>
+
+      <!-- Emergency Fund -->
+      <div id="panel-emergency" style="display:none">
+        <p style="font-size:13px;color:var(--ink-2);margin-bottom:16px">Calculate your target emergency fund based on your essential monthly expenses.</p>
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Rent / Mortgage</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-ef class="form-input form-input--prefixed" placeholder="1400" min="0" step="50"></div></div>
+          <div class="form-group"><label class="form-label">Utilities</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-ef class="form-input form-input--prefixed" placeholder="150" min="0" step="10"></div></div>
+          <div class="form-group"><label class="form-label">Groceries</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-ef class="form-input form-input--prefixed" placeholder="400" min="0" step="10"></div></div>
+          <div class="form-group"><label class="form-label">Transportation</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-ef class="form-input form-input--prefixed" placeholder="300" min="0" step="10"></div></div>
+          <div class="form-group"><label class="form-label">Insurance</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-ef class="form-input form-input--prefixed" placeholder="200" min="0" step="10"></div></div>
+          <div class="form-group"><label class="form-label">Minimum Debt Payments</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-ef class="form-input form-input--prefixed" placeholder="200" min="0" step="10"></div></div>
+          <div class="form-group"><label class="form-label">Other Essentials</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-ef class="form-input form-input--prefixed" placeholder="0" min="0" step="10"></div></div>
+          <div class="form-group">
+            <label class="form-label">Job Stability</label>
+            <select id="ef-months" class="form-input">
+              <option value="3">Stable job, dual income — 3 months</option>
+              <option value="6" selected>Average — 6 months (recommended)</option>
+              <option value="9">Freelance / contract — 9 months</option>
+              <option value="12">Self-employed / single income — 12 months</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Emergency Fund Balance</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="ef-current" class="form-input form-input--prefixed" placeholder="0" min="0" step="100"></div>
+        </div>
+        <button class="calc-btn" id="calc-ef-btn">Calculate Emergency Fund</button>
+        <div id="ef-results" style="display:none;margin-top:20px">
+          <div class="savings-hero" id="ef-hero"><div class="savings-big" id="ef-target">—</div><div class="savings-label" id="ef-status">Target Emergency Fund</div></div>
+          <div class="metrics-row" id="ef-metrics"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Savings calculator questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How does compound interest grow savings?</summary><div class="faq-a">You earn interest on your interest. $10,000 at 5% compounded monthly grows to $16,470 in 10 years — the extra $470 vs annual compounding is from monthly compounding. After 30 years it reaches $44,677. Starting early and compounding frequently maximizes growth.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is the Rule of 72?</summary><div class="faq-a">72 ÷ Annual Rate = Years to Double. At 4%: 18 years. At 7%: 10.3 years. At 10%: 7.2 years. Quick mental math shortcut for estimating compound growth.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How much should I have in an emergency fund?</summary><div class="faq-a">3–6 months of essential monthly expenses is the standard. Freelancers and self-employed people should target 9–12 months. Only count true necessities: housing, utilities, groceries, insurance, minimum debt payments — not discretionary spending.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">Where should I keep my emergency fund?</summary><div class="faq-a">High-yield savings account (HYSA) — currently 4–5% APY — is the best option. It's FDIC-insured, liquid, and earns meaningful interest. Money market accounts are similar. Avoid: investing in stocks (too volatile for emergency funds), regular savings (too low rate), or CDs (early withdrawal penalties).</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free calculators for savings, finance, and payroll.</div></div>
+      <div><div class="footer-col-title">Finance Tools</div><ul class="footer-links"><li><a href="/savings-calculator">Savings Calculator</a></li><li><a href="/retirement-calculator">Retirement Calculator</a></li><li><a href="/budget-calculator">Budget Calculator</a></li><li><a href="/debt-payoff-calculator">Debt Payoff</a></li></ul></div>
+      <div><div class="footer-col-title">Business Tools</div><ul class="footer-links"><li><a href="/roi-calculator">ROI Calculator</a></li><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/break-even-calculator">Break-Even</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not financial advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var activeMode='compound';
+  document.querySelectorAll('.mode-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      activeMode=tab.dataset.mode;
+      document.querySelectorAll('.mode-tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active');
+      document.getElementById('panel-compound').style.display=activeMode==='compound'?'block':'none';
+      document.getElementById('panel-goal').style.display=activeMode==='goal'?'block':'none';
+      document.getElementById('panel-emergency').style.display=activeMode==='emergency'?'block':'none';
+    });
+  });
+  function fmt(n){return '$'+(Math.round(n)).toLocaleString('en-US');}
+  function fmtK(n){if(n>=1e6)return '$'+(n/1e6).toFixed(2)+'M';return '$'+(Math.round(n/1000))+'K';}
+
+  // Compound growth
+  document.getElementById('calc-cg-btn').addEventListener('click',function(){
+    var P=parseFloat(document.getElementById('cg-initial').value)||0;
+    var m=parseFloat(document.getElementById('cg-monthly').value)||0;
+    var r=parseFloat(document.getElementById('cg-rate').value)||0;
+    var t=parseFloat(document.getElementById('cg-years').value)||0;
+    var n=parseInt(document.getElementById('cg-compound').value)||12;
+    if(!r||!t){alert('Enter interest rate and time period.');return;}
+    var rn=r/100/n; var periods=n*t;
+    var fvInitial=P*Math.pow(1+rn,periods);
+    var fvContrib=m>0?m*(Math.pow(1+rn,periods)-1)/rn:0;
+    var total=fvInitial+fvContrib;
+    var principal=P+m*12*t;
+    var interest=total-principal;
+    document.getElementById('cg-total').textContent=fmtK(total);
+    document.getElementById('cg-metrics').innerHTML=[
+      {label:'Total Principal',val:fmt(principal)},
+      {label:'Interest Earned',val:fmt(interest)},
+      {label:'Growth Multiple',val:(total/Math.max(principal,1)).toFixed(2)+'×'},
+      {label:'Annual Gain (avg)',val:fmt(total/t/12)+'/mo'},
+    ].map(function(x){return '<div class="metric-cell"><div class="metric-label">'+x.label+'</div><div class="metric-value">'+x.val+'</div></div>';}).join('');
+    // Chart
+    var steps=Math.min(t,10); var chartHtml='';
+    for(var y=Math.ceil(t/steps);y<=t;y+=Math.ceil(t/steps)){
+      var p2=n*y; var fvI2=P*Math.pow(1+rn,p2); var fvC2=m>0?m*(Math.pow(1+rn,p2)-1)/rn:0;
+      var tot2=fvI2+fvC2; var prin2=P+m*12*y;
+      var pctTot=tot2/total*100; var pctPrin=Math.min(prin2/total*100,pctTot);
+      chartHtml+='<div class="gc-row"><div class="gc-label">Yr '+y+'</div><div class="gc-track"><div class="gc-total" style="width:'+pctTot+'%"><div class="gc-principal" style="width:'+Math.min(pctPrin/pctTot*100,100)+'%"></div></div></div><div class="gc-val">'+fmtK(tot2)+'</div></div>';
+    }
+    document.getElementById('cg-chart').innerHTML=chartHtml;
+    var doubYrs=(72/r).toFixed(1);
+    document.getElementById('cg-rule72').innerHTML='<strong>Rule of 72:</strong> At '+r+'% your money doubles every <strong>'+doubYrs+' years</strong>.';
+    document.getElementById('cg-results').style.display='block';
+    document.getElementById('cg-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Goal calculator
+  document.getElementById('calc-gl-btn').addEventListener('click',function(){
+    var goal=parseFloat(document.getElementById('gl-goal').value)||0;
+    var timeVal=parseFloat(document.getElementById('gl-years').value)||0;
+    var unit=document.getElementById('gl-unit').value;
+    var current=parseFloat(document.getElementById('gl-current').value)||0;
+    var r=parseFloat(document.getElementById('gl-rate').value)||0;
+    if(!goal||!timeVal){alert('Enter goal and time period.');return;}
+    var months=unit==='years'?timeVal*12:timeVal;
+    var needed=goal-current*(r>0?Math.pow(1+r/100/12,months):1);
+    var rn=r/100/12; var monthly;
+    if(rn>0) monthly=needed*rn/(Math.pow(1+rn,months)-1);
+    else monthly=needed/months;
+    monthly=Math.max(0,monthly);
+    document.getElementById('gl-monthly').textContent=fmt(monthly);
+    document.getElementById('gl-metrics').innerHTML=[
+      {label:'Savings Goal',val:fmt(goal)},
+      {label:'Time',val:months+' months'},
+      {label:'Total You Save',val:fmt(monthly*months)},
+      {label:'Interest Earned',val:fmt(Math.max(0,goal-current-monthly*months))},
+    ].map(function(x){return '<div class="metric-cell"><div class="metric-label">'+x.label+'</div><div class="metric-value">'+x.val+'</div></div>';}).join('');
+    document.getElementById('gl-results').style.display='block';
+    document.getElementById('gl-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Emergency fund
+  document.getElementById('calc-ef-btn').addEventListener('click',function(){
+    var total=0;
+    document.querySelectorAll('input[data-ef]').forEach(function(inp){total+=(parseFloat(inp.value)||0);});
+    var months=parseInt(document.getElementById('ef-months').value)||6;
+    var current=parseFloat(document.getElementById('ef-current').value)||0;
+    var target=total*months;
+    var remaining=Math.max(0,target-current);
+    var pct=target>0?Math.min(current/target*100,100):0;
+    document.getElementById('ef-target').textContent=fmt(target);
+    document.getElementById('ef-status').textContent=months+'-month emergency fund target · '+Math.round(pct)+'% funded';
+    document.getElementById('ef-hero').className='savings-hero'+(pct>=100?' surplus':'');
+    document.getElementById('ef-metrics').innerHTML=[
+      {label:'Monthly Essentials',val:fmt(total)},
+      {label:'Months Coverage',val:months+' mo'},
+      {label:'Currently Funded',val:fmt(current)+' ('+Math.round(pct)+'%)'},
+      {label:'Still Needed',val:fmt(remaining)},
+    ].map(function(x){return '<div class="metric-cell"><div class="metric-label">'+x.label+'</div><div class="metric-value">'+x.val+'</div></div>';}).join('');
+    document.getElementById('ef-results').style.display='block';
+    document.getElementById('ef-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>

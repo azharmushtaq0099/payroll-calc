@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Percentage Calculator — 6 Modes Free | FreePayrollCalc</title>
+<meta name="description" content="Free percentage calculator — 6 modes: find X% of Y, what % is X of Y, percent change, add/subtract %, and percent difference. Formulas included.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/percentage-calculator">
+<meta property="og:title" content="Percentage Calculator — 6 Ways to Calculate Percentages">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","url":"https://www.freepayrollcalc.com/percentage-calculator","description":"Calculate percentages 6 ways: find X% of Y, find what percent X is of Y, percent change, percent increase/decrease, add or subtract a percent, and percent difference between two values.","applicationCategory":"CalculatorApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate a percentage of a number?","acceptedAnswer":{"@type":"Answer","text":"To find X% of Y: multiply Y by (X÷100). Example: 15% of 200 = 200 × 0.15 = 30. In other words, divide by 100 first, then multiply. Or multiply Y by X then divide by 100."}},{"@type":"Question","name":"How do I calculate percent change?","acceptedAnswer":{"@type":"Answer","text":"Percent Change = ((New Value − Old Value) ÷ Old Value) × 100. If a price goes from $80 to $100: ((100 − 80) ÷ 80) × 100 = 25% increase. If it goes from $100 to $80: ((80 − 100) ÷ 100) × 100 = −20% decrease."}},{"@type":"Question","name":"What is the difference between percent change and percent difference?","acceptedAnswer":{"@type":"Answer","text":"Percent change compares a new value to an old value and has direction (increase or decrease). Percent difference compares two values without implied direction: |V1 − V2| ÷ ((V1 + V2) ÷ 2) × 100. Use percent change when one value is a reference baseline. Use percent difference when comparing two independent values."}},{"@type":"Question","name":"How do I add or subtract a percentage from a number?","acceptedAnswer":{"@type":"Answer","text":"To add P% to a number N: N × (1 + P/100). To subtract P% from N: N × (1 − P/100). Example: Add 20% to $150 = 150 × 1.20 = $180. Subtract 15% from $200 = 200 × 0.85 = $170. This is used for discounts, markups, tax additions, and tip calculations."}},{"@type":"Question","name":"What percent is X of Y?","acceptedAnswer":{"@type":"Answer","text":"Percent = (X ÷ Y) × 100. Example: what percent is 35 of 140? (35 ÷ 140) × 100 = 25%. What percent is 6 of 24? (6 ÷ 24) × 100 = 25%. Divide the part by the whole, then multiply by 100."}}]}
+</script>
+<style>
+.pct-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:20px}
+.pct-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;transition:box-shadow .2s}
+.pct-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.pct-card-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:4px}
+.pct-card-desc{font-size:12px;color:var(--ink-3);margin-bottom:14px}
+.pct-input-row{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.pct-label-static{font-size:13px;color:var(--ink-2);white-space:nowrap;font-weight:600}
+.pct-input{padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:'JetBrains Mono',monospace;font-weight:700;width:90px;text-align:center;background:#fff;color:var(--ink-1);outline:none;transition:border-color .15s}
+.pct-input:focus{border-color:var(--accent)}
+.pct-btn{padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;margin-top:4px}
+.pct-result{margin-top:10px;padding:12px;background:rgba(27,79,216,.04);border:1px solid rgba(27,79,216,.15);border-radius:9px;display:none}
+.pct-answer{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--accent);line-height:1;margin-bottom:4px}
+.pct-formula{font-size:11px;color:var(--ink-3);font-family:'JetBrains Mono',monospace;margin-top:4px;word-break:break-all}
+.pct-answer.neg{color:var(--red)}
+.pct-answer.pos{color:var(--green)}
+/* quick tip bar */
+.tip-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tip-chip{padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;transition:all .15s;color:var(--ink-2);font-weight:600}
+.tip-chip:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/markup-calculator">Markup</a>
+        <a href="/profit-margin-calculator">Margin</a>
+        <a href="/roi-calculator">ROI</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/percentage-calculator" class="active">Percentage Calculator</a>
+    <a href="/markup-calculator">Markup Calculator</a>
+    <a href="/roi-calculator">ROI Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Percentage Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Percentage Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate percentages 6 different ways — each calculator shows the formula so you understand how it works.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>X% of Y · What % is X of Y · % Change · % Increase/Decrease · Add/Subtract % · % Difference</div>
+
+    <!-- Quick examples -->
+    <div class="calc-card" data-enter data-delay="1" style="margin-bottom:16px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:10px">Quick Examples — click to fill</div>
+      <div class="tip-bar">
+        <div class="tip-chip" data-fill="m1:15,m1:200">15% of 200</div>
+        <div class="tip-chip" data-fill="m1:7.5,m1:85">7.5% of 85</div>
+        <div class="tip-chip" data-fill="m2:45,m2:180">45 is what % of 180</div>
+        <div class="tip-chip" data-fill="m3:80,m3:100">% change 80→100</div>
+        <div class="tip-chip" data-fill="m4:250,m4:20">250 + 20%</div>
+        <div class="tip-chip" data-fill="m5:199,m5:15">$199 minus 15%</div>
+        <div class="tip-chip" data-fill="m6:85,m6:110">% diff 85 vs 110</div>
+      </div>
+    </div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><text x="6.5" y="16.5" style="font-size:12px;font-weight:700;fill:currentColor">%</text></svg>Percentage Calculators</div>
+      <div class="pct-grid">
+
+        <!-- Mode 1: X% of Y -->
+        <div class="pct-card">
+          <div class="pct-card-title">1 — Find X% of a Number</div>
+          <div class="pct-card-desc">What is 15% of 200?</div>
+          <div class="pct-input-row">
+            <span class="pct-label-static">What is</span>
+            <input type="number" class="pct-input" id="m1-pct" placeholder="15" step="any">
+            <span class="pct-label-static">% of</span>
+            <input type="number" class="pct-input" id="m1-num" placeholder="200" step="any">
+            <span class="pct-label-static">?</span>
+          </div>
+          <button class="pct-btn" id="calc-m1">Calculate</button>
+          <div class="pct-result" id="m1-result">
+            <div class="pct-answer" id="m1-answer"></div>
+            <div style="font-size:12px;color:var(--ink-2);margin-top:2px" id="m1-context"></div>
+            <div class="pct-formula" id="m1-formula"></div>
+          </div>
+        </div>
+
+        <!-- Mode 2: X is what % of Y -->
+        <div class="pct-card">
+          <div class="pct-card-title">2 — X is What % of Y?</div>
+          <div class="pct-card-desc">45 is what % of 180?</div>
+          <div class="pct-input-row">
+            <input type="number" class="pct-input" id="m2-x" placeholder="45" step="any">
+            <span class="pct-label-static">is what % of</span>
+            <input type="number" class="pct-input" id="m2-y" placeholder="180" step="any">
+            <span class="pct-label-static">?</span>
+          </div>
+          <button class="pct-btn" id="calc-m2">Calculate</button>
+          <div class="pct-result" id="m2-result">
+            <div class="pct-answer" id="m2-answer"></div>
+            <div class="pct-formula" id="m2-formula"></div>
+          </div>
+        </div>
+
+        <!-- Mode 3: % Change -->
+        <div class="pct-card">
+          <div class="pct-card-title">3 — Percent Change</div>
+          <div class="pct-card-desc">From old value to new value</div>
+          <div class="pct-input-row">
+            <span class="pct-label-static">From</span>
+            <input type="number" class="pct-input" id="m3-old" placeholder="80" step="any">
+            <span class="pct-label-static">to</span>
+            <input type="number" class="pct-input" id="m3-new" placeholder="100" step="any">
+          </div>
+          <button class="pct-btn" id="calc-m3">Calculate</button>
+          <div class="pct-result" id="m3-result">
+            <div class="pct-answer" id="m3-answer"></div>
+            <div style="font-size:12px;color:var(--ink-2)" id="m3-context"></div>
+            <div class="pct-formula" id="m3-formula"></div>
+          </div>
+        </div>
+
+        <!-- Mode 4: Add % to a number -->
+        <div class="pct-card">
+          <div class="pct-card-title">4 — Add a Percentage</div>
+          <div class="pct-card-desc">Price + tax/tip/markup</div>
+          <div class="pct-input-row">
+            <input type="number" class="pct-input" id="m4-num" placeholder="250" step="any">
+            <span class="pct-label-static">+</span>
+            <input type="number" class="pct-input" id="m4-pct" placeholder="20" step="any">
+            <span class="pct-label-static">%</span>
+          </div>
+          <button class="pct-btn" id="calc-m4">Calculate</button>
+          <div class="pct-result" id="m4-result">
+            <div class="pct-answer" id="m4-answer"></div>
+            <div style="font-size:12px;color:var(--ink-2)" id="m4-context"></div>
+            <div class="pct-formula" id="m4-formula"></div>
+          </div>
+        </div>
+
+        <!-- Mode 5: Subtract % from a number -->
+        <div class="pct-card">
+          <div class="pct-card-title">5 — Subtract a Percentage</div>
+          <div class="pct-card-desc">Price after discount</div>
+          <div class="pct-input-row">
+            <input type="number" class="pct-input" id="m5-num" placeholder="199" step="any">
+            <span class="pct-label-static">−</span>
+            <input type="number" class="pct-input" id="m5-pct" placeholder="15" step="any">
+            <span class="pct-label-static">%</span>
+          </div>
+          <button class="pct-btn" id="calc-m5">Calculate</button>
+          <div class="pct-result" id="m5-result">
+            <div class="pct-answer" id="m5-answer"></div>
+            <div style="font-size:12px;color:var(--ink-2)" id="m5-context"></div>
+            <div class="pct-formula" id="m5-formula"></div>
+          </div>
+        </div>
+
+        <!-- Mode 6: % Difference -->
+        <div class="pct-card">
+          <div class="pct-card-title">6 — Percent Difference</div>
+          <div class="pct-card-desc">Difference between two values</div>
+          <div class="pct-input-row">
+            <span class="pct-label-static">Between</span>
+            <input type="number" class="pct-input" id="m6-v1" placeholder="85" step="any">
+            <span class="pct-label-static">and</span>
+            <input type="number" class="pct-input" id="m6-v2" placeholder="110" step="any">
+          </div>
+          <button class="pct-btn" id="calc-m6">Calculate</button>
+          <div class="pct-result" id="m6-result">
+            <div class="pct-answer" id="m6-answer"></div>
+            <div style="font-size:12px;color:var(--ink-2)" id="m6-context"></div>
+            <div class="pct-formula" id="m6-formula"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Percentage cheat sheet -->
+    <section style="margin:32px 0" data-enter>
+      <div class="section-header"><p class="section-eyebrow">Reference</p><h2 class="section-title">Percentage formulas quick reference</h2></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:8px">Find X% of Y</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--bg);padding:8px;border-radius:6px;margin-bottom:6px">Result = Y × (X ÷ 100)</div>
+          <div style="font-size:12px;color:var(--ink-2)">15% of 200 = 200 × 0.15 = <strong>30</strong></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:8px">What % is X of Y?</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--bg);padding:8px;border-radius:6px;margin-bottom:6px">% = (X ÷ Y) × 100</div>
+          <div style="font-size:12px;color:var(--ink-2)">45 ÷ 180 × 100 = <strong>25%</strong></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:8px">% Change</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--bg);padding:8px;border-radius:6px;margin-bottom:6px">((New − Old) ÷ Old) × 100</div>
+          <div style="font-size:12px;color:var(--ink-2)">(100 − 80) ÷ 80 × 100 = <strong>+25%</strong></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:8px">Add / Subtract %</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--bg);padding:8px;border-radius:6px;margin-bottom:6px">N × (1 + P/100) or N × (1 − P/100)</div>
+          <div style="font-size:12px;color:var(--ink-2)">200 + 15% = 200 × 1.15 = <strong>230</strong></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:8px">% Difference</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--bg);padding:8px;border-radius:6px;margin-bottom:6px">|V1 − V2| ÷ ((V1+V2)÷2) × 100</div>
+          <div style="font-size:12px;color:var(--ink-2)">|85 − 110| ÷ 97.5 × 100 = <strong>25.6%</strong></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:8px">Common Conversions</div>
+          <div style="font-size:12px;color:var(--ink-2);line-height:1.8">1% = ÷100<br>10% = ÷10<br>25% = ÷4<br>50% = ÷2<br>20% = ÷5<br>33.3% = ÷3</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Percentage questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How do I calculate a percentage of a number?</summary><div class="faq-a">Multiply the number by the percentage divided by 100. 15% of 200 = 200 × (15÷100) = 200 × 0.15 = 30. Mental math shortcut: 10% is just moving the decimal left one place. 10% of 250 = 25. Then 15% = 25 + 12.5 = 37.5.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is the percent change formula?</summary><div class="faq-a">Percent Change = ((New − Old) ÷ Old) × 100. If something goes from $80 to $100: ((100−80)÷80)×100 = +25%. From $100 to $80: ((80−100)÷100)×100 = −20%. The base is always the OLD value.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">Percent change vs percent difference — which do I use?</summary><div class="faq-a">Use percent change when one value is the baseline (before/after, old/new). Use percent difference when comparing two independent values with no clear baseline. Percent difference uses the average of both values as the denominator.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">How do I reverse a percentage (find the original price before a discount)?</summary><div class="faq-a">If $170 is the price after a 15% discount, the original price = $170 ÷ (1 − 0.15) = $170 ÷ 0.85 = $200. Don't subtract the percent from the discounted price — that gives the wrong answer. Always divide by (1 − discount rate).</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free percentage and business calculators.</div></div>
+      <div><div class="footer-col-title">Math Tools</div><ul class="footer-links"><li><a href="/percentage-calculator">Percentage Calculator</a></li><li><a href="/markup-calculator">Markup Calculator</a></li><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/roi-calculator">ROI Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Finance Tools</div><ul class="footer-links"><li><a href="/savings-calculator">Savings Calculator</a></li><li><a href="/budget-calculator">Budget Calculator</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. Free percentage calculator.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  function rd(n,d){return Math.round(n*Math.pow(10,d||4))/Math.pow(10,d||4);}
+  function fmt(n){var s=rd(n,4).toString();return s;}
+  function show(resultId,answer,formula,context,cls){
+    document.getElementById(resultId+'-answer').textContent=answer;
+    document.getElementById(resultId+'-answer').className='pct-answer'+(cls?' '+cls:'');
+    document.getElementById(resultId+'-formula').textContent=formula;
+    if(document.getElementById(resultId+'-context')) document.getElementById(resultId+'-context').textContent=context||'';
+    document.getElementById(resultId+'-result').style.display='block';
+  }
+
+  // Mode 1
+  document.getElementById('calc-m1').addEventListener('click',function(){
+    var p=parseFloat(document.getElementById('m1-pct').value); var n=parseFloat(document.getElementById('m1-num').value);
+    if(isNaN(p)||isNaN(n)){alert('Enter both values.');return;}
+    var r=n*(p/100);
+    show('m1',fmt(r),'Formula: '+n+' × ('+p+' ÷ 100) = '+fmt(r),p+'% of '+n+' = '+fmt(r));
+  });
+
+  // Mode 2
+  document.getElementById('calc-m2').addEventListener('click',function(){
+    var x=parseFloat(document.getElementById('m2-x').value); var y=parseFloat(document.getElementById('m2-y').value);
+    if(isNaN(x)||isNaN(y)||y===0){alert('Enter both values (Y cannot be 0).');return;}
+    var r=x/y*100;
+    show('m2',fmt(r)+'%','Formula: ('+x+' ÷ '+y+') × 100 = '+fmt(r)+'%');
+  });
+
+  // Mode 3
+  document.getElementById('calc-m3').addEventListener('click',function(){
+    var old=parseFloat(document.getElementById('m3-old').value); var nv=parseFloat(document.getElementById('m3-new').value);
+    if(isNaN(old)||isNaN(nv)||old===0){alert('Enter both values (old cannot be 0).');return;}
+    var r=(nv-old)/old*100;
+    var cls=r>0?'pos':r<0?'neg':'';
+    show('m3',(r>=0?'+':'')+fmt(r)+'%','Formula: (('+nv+' − '+old+') ÷ '+old+') × 100 = '+fmt(r)+'%',(r>0?'Increase of '+fmt(r)+'% from '+old+' to '+nv:'Decrease of '+Math.abs(fmt(r))+'% from '+old+' to '+nv),cls);
+  });
+
+  // Mode 4
+  document.getElementById('calc-m4').addEventListener('click',function(){
+    var n=parseFloat(document.getElementById('m4-num').value); var p=parseFloat(document.getElementById('m4-pct').value);
+    if(isNaN(n)||isNaN(p)){alert('Enter both values.');return;}
+    var r=n*(1+p/100); var added=n*p/100;
+    show('m4',fmt(r),'Formula: '+n+' × (1 + '+p+'/100) = '+fmt(r),'+'+fmt(added)+' added ('+p+'% of '+n+')','pos');
+  });
+
+  // Mode 5
+  document.getElementById('calc-m5').addEventListener('click',function(){
+    var n=parseFloat(document.getElementById('m5-num').value); var p=parseFloat(document.getElementById('m5-pct').value);
+    if(isNaN(n)||isNaN(p)){alert('Enter both values.');return;}
+    var r=n*(1-p/100); var removed=n*p/100;
+    show('m5',fmt(r),'Formula: '+n+' × (1 − '+p+'/100) = '+fmt(r),'−'+fmt(removed)+' removed ('+p+'% of '+n+')');
+  });
+
+  // Mode 6
+  document.getElementById('calc-m6').addEventListener('click',function(){
+    var v1=parseFloat(document.getElementById('m6-v1').value); var v2=parseFloat(document.getElementById('m6-v2').value);
+    if(isNaN(v1)||isNaN(v2)){alert('Enter both values.');return;}
+    var avg=(v1+v2)/2; var r=Math.abs(v1-v2)/avg*100;
+    show('m6',fmt(r)+'%','Formula: |'+v1+' − '+v2+'| ÷ (('+v1+'+'+v2+')÷2) × 100 = '+fmt(r)+'%','Note: % difference uses average as base, not old/new.');
+  });
+
+  // Quick fill chips
+  document.querySelectorAll('.tip-chip').forEach(function(chip){
+    chip.addEventListener('click',function(){
+      var fill=chip.dataset.fill.split(',');
+      fill.forEach(function(f){
+        var parts=f.split(':');
+        // m1:15 means find input starting with m1
+        var inputs=document.querySelectorAll('input[id^="'+parts[0]+'"]');
+        // parts[0] is e.g. "m1", parts[1] is value
+        // we fill sequentially
+        if(chip.dataset.fill.split(',').indexOf(f)===0){
+          // first value
+          if(inputs[0]) inputs[0].value=parts[1];
+        } else {
+          if(inputs[0]) inputs[1]?inputs[1].value=parts[1]:inputs[0].value=parts[1];
+        }
+      });
+      // Actually do fill properly
+      var pairs=chip.dataset.fill.split(',');
+      var grouped={};
+      pairs.forEach(function(p){var sp=p.split(':');var k=sp[0];var v=sp[1];if(!grouped[k])grouped[k]=[];grouped[k].push(v);});
+      Object.keys(grouped).forEach(function(k){
+        var vals=grouped[k];
+        var ins=document.querySelectorAll('input[id^="'+k+'-"]');
+        ins.forEach(function(inp,i){if(vals[i]) inp.value=vals[i];});
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

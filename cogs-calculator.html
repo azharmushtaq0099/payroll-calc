@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COGS Calculator — Cost of Goods Sold | FreePayrollCalc</title>
+<meta name="description" content="Free COGS calculator. Calculate cost of goods sold using the inventory method or build product cost from components. Includes gross profit margin. Instant.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/cogs-calculator">
+<meta property="og:title" content="COGS Calculator — Cost of Goods Sold Formula & Product Cost Builder">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"COGS Calculator","url":"https://www.freepayrollcalc.com/cogs-calculator","description":"Calculate cost of goods sold using the inventory method or per-product cost builder. Includes gross profit and gross margin analysis.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the COGS formula?","acceptedAnswer":{"@type":"Answer","text":"COGS = Beginning Inventory + Purchases (or Production Costs) − Ending Inventory. If you started with $10,000 in inventory, purchased $40,000 more, and ended with $8,000, your COGS = $10,000 + $40,000 − $8,000 = $42,000. This is the standard accounting formula used on income statements."}},{"@type":"Question","name":"What's included in COGS?","acceptedAnswer":{"@type":"Answer","text":"COGS includes direct costs to produce or purchase what you sell: raw materials, direct labor, manufacturing overhead, packaging, and inbound freight. It does NOT include: selling expenses, marketing, admin overhead, rent (unless a factory), or depreciation on office equipment. Service businesses often have no COGS or use 'cost of revenue' instead."}},{"@type":"Question","name":"What is gross profit margin and what's a good number?","acceptedAnswer":{"@type":"Answer","text":"Gross Profit Margin = (Revenue − COGS) ÷ Revenue × 100. Benchmarks: Software/SaaS 70–90%, Service businesses 40–70%, Retail 20–50%, Restaurants 60–70% (food cost target 28–35%), Manufacturing 20–40%, Grocery 1–3%. If your margin is below your industry benchmark, your COGS is too high relative to your pricing."}},{"@type":"Question","name":"What is the difference between COGS and operating expenses?","acceptedAnswer":{"@type":"Answer","text":"COGS is the direct cost of what you sell. Operating expenses (OpEx) are the costs of running your business regardless of sales volume: salaries for non-production staff, rent, marketing, utilities, SaaS subscriptions, legal fees. Gross Profit = Revenue − COGS. Operating Profit = Gross Profit − OpEx. Net Profit = Operating Profit − Taxes − Interest."}}]}
+</script>
+<style>
+.mode-tabs{display:flex;gap:0;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
+.mode-tab{flex:1;padding:8px 6px;text-align:center;font-size:13px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .18s;color:var(--ink-3)}
+.mode-tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.cogs-hero{background:linear-gradient(135deg,rgba(27,79,216,.06),rgba(27,79,216,.02));border:1px solid rgba(27,79,216,.2);border-radius:14px;padding:24px;margin-bottom:16px;text-align:center}
+.cogs-big{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;color:var(--accent);line-height:1}
+.cogs-label{font-size:13px;font-weight:600;color:var(--ink-2);margin-top:6px}
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--ink-1)}
+.pnl-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;font-size:14px;border-bottom:1px solid var(--border)}
+.pnl-row.total{border-top:2px solid var(--border);border-bottom:none;font-weight:700}
+.pnl-row.subtotal{font-weight:700;background:var(--surface)}
+.cost-item-row{display:flex;gap:8px;align-items:flex-end;margin-bottom:8px}
+.cost-item-row .form-group{flex:1;margin:0}
+.del-row-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:0 10px;height:38px;cursor:pointer;color:var(--red);flex-shrink:0}
+.margin-bar{height:12px;border-radius:6px;background:var(--bg);border:1px solid var(--border);overflow:hidden;margin-top:4px}
+.margin-fill{height:100%;border-radius:6px;transition:width .4s ease}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/break-even-calculator">Break-Even</a>
+        <a href="/markup-calculator">Markup</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/cogs-calculator" class="active">COGS Calculator</a>
+    <a href="/profit-margin-calculator">Profit Margin</a>
+    <a href="/break-even-calculator">Break-Even</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">COGS Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>COGS Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate cost of goods sold using the inventory method, or build up per-product cost from components.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>COGS formula · Product cost builder · Gross profit · Margin analysis</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>COGS Calculator</div>
+      <div class="mode-tabs">
+        <div class="mode-tab active" data-mode="inventory">Inventory Method</div>
+        <div class="mode-tab" data-mode="product">Product Cost Builder</div>
+      </div>
+
+      <!-- Inventory Method -->
+      <div id="panel-inventory">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Beginning Inventory</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="inv-begin" class="form-input form-input--prefixed" placeholder="15000" min="0" step="100"></div>
+            <span class="form-hint">Value of inventory at start of period</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Purchases / Production Costs</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="inv-purchase" class="form-input form-input--prefixed" placeholder="85000" min="0" step="100"></div>
+            <span class="form-hint">Inventory bought or manufactured during period</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ending Inventory</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="inv-end" class="form-input form-input--prefixed" placeholder="12000" min="0" step="100"></div>
+            <span class="form-hint">Value of inventory remaining at end of period</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Revenue (for margin analysis)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="inv-revenue" class="form-input form-input--prefixed" placeholder="150000" min="0" step="1000"></div>
+            <span class="form-hint">Optional — enables gross profit calculation</span>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-inv-btn">Calculate COGS</button>
+        <div id="inv-results" style="display:none;margin-top:24px">
+          <div class="cogs-hero"><div class="cogs-big" id="inv-cogs">—</div><div class="cogs-label">Cost of Goods Sold</div></div>
+          <div class="metrics-row" id="inv-metrics"></div>
+          <div id="inv-pnl"></div>
+          <div id="inv-margin-section" style="display:none;margin-top:12px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px"><span>Gross Margin</span><span id="inv-margin-pct"></span></div>
+            <div class="margin-bar"><div class="margin-fill" id="inv-margin-bar" style="background:var(--green)"></div></div>
+            <div id="inv-margin-verdict" style="font-size:12px;color:var(--ink-2);margin-top:6px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Cost Builder -->
+      <div id="panel-product" style="display:none">
+        <p style="font-size:13px;color:var(--ink-2);margin-bottom:16px">Build up cost per unit from individual components. Supports multiple cost types.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Product Name</label>
+            <input type="text" id="prod-name" class="form-input" placeholder="e.g. Widget Pro">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Units Sold</label>
+            <input type="number" id="prod-units" class="form-input" placeholder="500" min="1" step="10">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Selling Price per Unit</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="prod-price" class="form-input form-input--prefixed" placeholder="49.99" min="0.01" step="0.01"></div>
+          </div>
+        </div>
+        <div class="form-label" style="margin-bottom:8px">Cost Components</div>
+        <div id="cost-rows"></div>
+        <button class="calc-btn" id="add-cost-btn" style="background:var(--bg);color:var(--accent);border:1px solid var(--accent);margin-bottom:16px;font-size:12px;padding:8px 16px">+ Add Cost Component</button>
+        <button class="calc-btn" id="calc-prod-btn">Calculate Product COGS</button>
+        <div id="prod-results" style="display:none;margin-top:24px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+            <div class="cogs-hero"><div class="cogs-big" id="prod-unit-cost" style="font-size:36px">—</div><div class="cogs-label">Cost per Unit</div></div>
+            <div class="cogs-hero" style="background:linear-gradient(135deg,rgba(5,150,105,.06),rgba(5,150,105,.02));border-color:rgba(5,150,105,.2)"><div class="cogs-big" id="prod-total-cogs" style="font-size:36px;color:var(--green)">—</div><div class="cogs-label">Total COGS</div></div>
+          </div>
+          <div class="metrics-row" id="prod-metrics"></div>
+          <div id="prod-breakdown" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:0"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COGS benchmarks -->
+    <section style="margin:32px 0" data-enter>
+      <div class="section-header"><p class="section-eyebrow">Reference</p><h2 class="section-title">Gross margin benchmarks by industry</h2></div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr style="background:var(--bg)">
+            <th style="padding:10px;border:1px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Industry</th>
+            <th style="padding:10px;border:1px solid var(--border);text-align:center;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Gross Margin</th>
+            <th style="padding:10px;border:1px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Key Cost Drivers</th>
+          </tr></thead>
+          <tbody id="benchmark-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">COGS questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is the COGS formula?</summary><div class="faq-a">COGS = Beginning Inventory + Purchases − Ending Inventory. If you started with $10K inventory, bought $40K more, and ended with $8K, your COGS is $42K. This represents the direct cost of what was actually sold during the period — not what was purchased.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is included in COGS?</summary><div class="faq-a">Direct costs only: raw materials, purchased goods for resale, direct labor (production workers), manufacturing overhead (factory rent, equipment depreciation), and inbound freight. Not included: marketing, sales salaries, admin overhead, office rent, or R&amp;D.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What is a good gross margin?</summary><div class="faq-a">It varies by industry: Software/SaaS 70–90%, Service businesses 40–70%, Retail 20–50%, Restaurants 60–70% (food cost 28–35% is the target), Manufacturing 20–40%. If your margin is below your industry benchmark, either raise prices or reduce COGS.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">COGS vs operating expenses — what's the difference?</summary><div class="faq-a">COGS = direct cost to produce/purchase what you sell. Operating expenses (OpEx) = everything else to run the business. Gross Profit = Revenue − COGS. Operating Profit = Gross Profit − OpEx. Keep them separate on your income statement — mixing them makes it impossible to analyze product profitability.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free COGS and business calculators.</div></div>
+      <div><div class="footer-col-title">Business Tools</div><ul class="footer-links"><li><a href="/cogs-calculator">COGS Calculator</a></li><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/markup-calculator">Markup Calculator</a></li><li><a href="/break-even-calculator">Break-Even</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/roi-calculator">ROI Calculator</a></li><li><a href="/business-loan-calculator">Business Loan</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not financial advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var activeMode='inventory';
+  document.querySelectorAll('.mode-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      activeMode=tab.dataset.mode;
+      document.querySelectorAll('.mode-tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active');
+      document.getElementById('panel-inventory').style.display=activeMode==='inventory'?'block':'none';
+      document.getElementById('panel-product').style.display=activeMode==='product'?'block':'none';
+    });
+  });
+  function fmt(n){return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function fmtPct(n){return n.toFixed(1)+'%';}
+
+  // Inventory
+  document.getElementById('calc-inv-btn').addEventListener('click',function(){
+    var begin=parseFloat(document.getElementById('inv-begin').value)||0;
+    var purchase=parseFloat(document.getElementById('inv-purchase').value)||0;
+    var end=parseFloat(document.getElementById('inv-end').value)||0;
+    var revenue=parseFloat(document.getElementById('inv-revenue').value)||0;
+    var cogs=begin+purchase-end;
+    if(cogs<0){alert('COGS cannot be negative. Check your ending inventory value.');return;}
+    document.getElementById('inv-cogs').textContent=fmt(cogs);
+    document.getElementById('inv-metrics').innerHTML=[
+      {l:'Beginning Inventory',v:fmt(begin)},{l:'Purchases',v:fmt(purchase)},{l:'Ending Inventory',v:fmt(end)},{l:'Goods Available',v:fmt(begin+purchase)}
+    ].map(function(x){return '<div class="metric-cell"><div class="metric-label">'+x.l+'</div><div class="metric-value">'+x.v+'</div></div>';}).join('');
+    // P&L
+    document.getElementById('inv-pnl').innerHTML='<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:13px">'
+      +'<div class="pnl-row"><span>Beginning Inventory</span><span>'+fmt(begin)+'</span></div>'
+      +'<div class="pnl-row"><span>+ Purchases / Production</span><span>'+fmt(purchase)+'</span></div>'
+      +'<div class="pnl-row subtotal"><span>= Goods Available for Sale</span><span>'+fmt(begin+purchase)+'</span></div>'
+      +'<div class="pnl-row"><span>− Ending Inventory</span><span>'+fmt(end)+'</span></div>'
+      +'<div class="pnl-row total"><span>= COGS</span><span>'+fmt(cogs)+'</span></div>'
+      +(revenue>0?'<div class="pnl-row"><span>Revenue</span><span>'+fmt(revenue)+'</span></div><div class="pnl-row total" style="color:var(--green)"><span>= Gross Profit</span><span>'+fmt(revenue-cogs)+'</span></div>':'')
+      +'</div>';
+    if(revenue>0){
+      var gm=(revenue-cogs)/revenue*100;
+      document.getElementById('inv-margin-pct').textContent=fmtPct(gm);
+      document.getElementById('inv-margin-bar').style.width=Math.min(gm,100)+'%';
+      document.getElementById('inv-margin-bar').style.background=gm>=50?'var(--green)':gm>=25?'var(--amber)':'var(--red)';
+      document.getElementById('inv-margin-verdict').textContent=gm>=50?'Strong gross margin — well above average for most industries.':gm>=25?'Moderate margin — acceptable for retail/distribution, tight for software.':'Low margin — review pricing or look for ways to reduce COGS.';
+      document.getElementById('inv-margin-section').style.display='block';
+    }
+    document.getElementById('inv-results').style.display='block';
+    document.getElementById('inv-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Product builder
+  var costCount=0;
+  function addCostRow(pre){
+    costCount++;
+    var id=costCount;
+    var p=pre||{name:'',cost:'',type:'materials'};
+    var div=document.createElement('div'); div.className='cost-item-row'; div.id='cost-row-'+id;
+    div.innerHTML='<div class="form-group"><label class="form-label">Component</label><input class="form-input" id="comp-name-'+id+'" placeholder="e.g. Raw materials" value="'+p.name+'"></div><div class="form-group"><label class="form-label">Cost / Unit ($)</label><input type="number" class="form-input" id="comp-cost-'+id+'" placeholder="0.00" min="0" step="0.01" value="'+p.cost+'"></div><div class="form-group"><label class="form-label">Type</label><select class="form-input" id="comp-type-'+id+'"><option value="materials"'+(p.type==='materials'?' selected':'')+'>Materials</option><option value="labor"'+(p.type==='labor'?' selected':'')+'>Direct Labor</option><option value="packaging"'+(p.type==='packaging'?' selected':'')+'>Packaging</option><option value="freight"'+(p.type==='freight'?' selected':'')+'>Freight</option><option value="overhead"'+(p.type==='overhead'?' selected':'')+'>Overhead</option></select></div><button class="del-row-btn" onclick="document.getElementById(\'cost-row-'+id+'\').remove()"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h14M8 6V4h4v2M19 6l-1 13H2L1 6"/></svg></button>';
+    document.getElementById('cost-rows').appendChild(div);
+  }
+  addCostRow({name:'Raw Materials',cost:'8.50',type:'materials'});
+  addCostRow({name:'Direct Labor',cost:'4.00',type:'labor'});
+  addCostRow({name:'Packaging',cost:'1.25',type:'packaging'});
+  addCostRow({name:'Inbound Freight',cost:'0.75',type:'freight'});
+  document.getElementById('add-cost-btn').addEventListener('click',function(){addCostRow({name:'',cost:'',type:'materials'});});
+  document.getElementById('calc-prod-btn').addEventListener('click',function(){
+    var units=parseFloat(document.getElementById('prod-units').value)||0;
+    var price=parseFloat(document.getElementById('prod-price').value)||0;
+    var rows=document.querySelectorAll('.cost-item-row');
+    if(!rows.length){alert('Add at least one cost component.');return;}
+    var totalUnitCost=0; var components=[];
+    rows.forEach(function(row){
+      var id=row.id.replace('cost-row-','');
+      var name=document.getElementById('comp-name-'+id).value||'Component';
+      var cost=parseFloat(document.getElementById('comp-cost-'+id).value)||0;
+      var type=document.getElementById('comp-type-'+id).value;
+      totalUnitCost+=cost;
+      components.push({name:name,cost:cost,type:type});
+    });
+    var totalCogs=totalUnitCost*(units||1);
+    var totalRevenue=price*units;
+    var grossProfit=totalRevenue-totalCogs;
+    var grossMargin=price>0&&units>0?(grossProfit/totalRevenue*100):((price-totalUnitCost)/price*100);
+    document.getElementById('prod-unit-cost').textContent=fmt(totalUnitCost);
+    document.getElementById('prod-total-cogs').textContent=units>0?fmt(totalCogs):'—';
+    document.getElementById('prod-metrics').innerHTML=[
+      {l:'Selling Price',v:fmt(price)},{l:'Markup',v:fmtPct(price>0?(price-totalUnitCost)/totalUnitCost*100:0)},{l:'Gross Margin',v:fmtPct(grossMargin)},{l:'Gross Profit/Unit',v:fmt(price-totalUnitCost)}
+    ].map(function(x){return '<div class="metric-cell"><div class="metric-label">'+x.l+'</div><div class="metric-value">'+x.v+'</div></div>';}).join('');
+    var bHtml='<div style="font-weight:700;font-size:12px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em">Cost Breakdown</div>';
+    components.forEach(function(c){
+      var pct=totalUnitCost>0?c.cost/totalUnitCost*100:0;
+      bHtml+='<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>'+c.name+' <span style="font-size:11px;color:var(--ink-3)">'+c.type+'</span></span><span style="font-family:\'JetBrains Mono\',monospace;font-weight:700">'+fmt(c.cost)+' <span style="color:var(--ink-3);font-size:11px">('+pct.toFixed(1)+'%)</span></span></div><div style="height:8px;background:var(--bg);border-radius:4px;overflow:hidden;border:1px solid var(--border)"><div style="height:100%;width:'+pct+'%;background:var(--accent);border-radius:4px"></div></div></div>';
+    });
+    document.getElementById('prod-breakdown').innerHTML=bHtml;
+    document.getElementById('prod-results').style.display='block';
+    document.getElementById('prod-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Benchmarks
+  var benchmarks=[
+    ['Software / SaaS','70–90%','Hosting, support, engineering'],
+    ['Professional Services','40–70%','Direct staff time, subcontractors'],
+    ['E-commerce / Retail','20–50%','Product cost, inbound freight, packaging'],
+    ['Restaurants','60–70%','Food & beverage cost (28–35% target)'],
+    ['Manufacturing','20–40%','Materials, direct labor, factory overhead'],
+    ['Grocery','1–3%','Perishables, volume-driven, tight margins'],
+    ['Apparel','40–60%','Production cost, import duties'],
+    ['Construction','20–30%','Materials, subcontractors, equipment'],
+  ];
+  document.getElementById('benchmark-body').innerHTML=benchmarks.map(function(b,i){
+    return '<tr style="'+(i%2===0?'background:var(--surface)':'')+'">'
+      +'<td style="padding:10px;border:1px solid var(--border);font-weight:600">'+b[0]+'</td>'
+      +'<td style="padding:10px;border:1px solid var(--border);font-family:\'JetBrains Mono\',monospace;font-weight:700;text-align:center">'+b[1]+'</td>'
+      +'<td style="padding:10px;border:1px solid var(--border);font-size:12px;color:var(--ink-2)">'+b[2]+'</td></tr>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

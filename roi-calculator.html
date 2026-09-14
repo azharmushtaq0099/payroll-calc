@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROI Calculator — Return on Investment | FreePayrollCalc</title>
+<meta name="description" content="Free ROI calculator. Calculate basic ROI, annualized ROI, and marketing ROI (ROAS). Compare multiple investments side by side. Instant results, no signup.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/roi-calculator">
+<meta property="og:title" content="ROI Calculator — Return on Investment, Annualized & Marketing ROI">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"ROI Calculator","url":"https://www.freepayrollcalc.com/roi-calculator","description":"Calculate basic ROI, annualized ROI, marketing ROI (ROAS), real estate ROI, and compare multiple investments side by side.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the ROI formula?","acceptedAnswer":{"@type":"Answer","text":"ROI = (Net Profit ÷ Cost of Investment) × 100. Or equivalently: ROI = ((Final Value − Initial Value) ÷ Initial Value) × 100. A $1,000 investment that returns $1,300 has an ROI of 30%. ROI doesn't factor in time — use annualized ROI to compare investments of different durations."}},{"@type":"Question","name":"What is annualized ROI?","acceptedAnswer":{"@type":"Answer","text":"Annualized ROI = [(1 + ROI/100)^(1/years) − 1] × 100. It converts a total return over any period into an equivalent yearly rate. A 30% return over 2 years = 14.0% annualized. A 30% return over 3 years = 9.1% annualized. Use this to compare investments held for different periods."}},{"@type":"Question","name":"What is a good ROI?","acceptedAnswer":{"@type":"Answer","text":"It depends on the investment type and risk. S&P 500 historical average: ~10% annualized (7% inflation-adjusted). Real estate: 8–12% total. Small business: 15–30%+. Marketing campaigns: 400–700% ROAS is considered strong. A basic rule: your ROI should exceed the risk-free rate (currently ~5% for T-bills) for the investment to be worth taking."}},{"@type":"Question","name":"What is ROAS and how does it differ from ROI?","acceptedAnswer":{"@type":"Answer","text":"ROAS (Return on Ad Spend) = Revenue Generated ÷ Ad Spend. It's revenue per dollar spent, not profit. A 5× ROAS means $5 revenue per $1 spent. ROI accounts for profit margin: if you spent $1,000 on ads and generated $5,000 revenue but the products cost $3,500, your ROI is 150% not 500%. Marketing ROI = (Revenue − Ad Spend − COGS) ÷ Ad Spend."}}]}
+</script>
+<style>
+.mode-tabs{display:flex;gap:0;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
+.mode-tab{flex:1;padding:8px 4px;text-align:center;font-size:11px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .18s;color:var(--ink-3)}
+.mode-tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.roi-hero{text-align:center;padding:24px;background:linear-gradient(135deg,rgba(27,79,216,.06),rgba(27,79,216,.02));border:1px solid rgba(27,79,216,.2);border-radius:14px;margin-bottom:16px}
+.roi-big{font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;color:var(--accent);line-height:1}
+.roi-label{font-size:13px;font-weight:600;color:var(--ink-2);margin-top:6px}
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--ink-1)}
+.roi-verdict{border-radius:10px;padding:12px 16px;font-size:13px;font-weight:600;margin-bottom:16px}
+.roi-verdict.good{background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.25);color:var(--green)}
+.roi-verdict.ok{background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.25);color:var(--amber)}
+.roi-verdict.bad{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);color:var(--red)}
+.compare-row{display:flex;gap:8px;align-items:flex-end;margin-bottom:8px}
+.compare-row .form-group{flex:1;margin:0}
+.compare-btn-del{background:none;border:1px solid var(--border);border-radius:6px;padding:0 10px;height:38px;cursor:pointer;color:var(--red)}
+.compare-results{margin-top:16px}
+.compare-table{width:100%;border-collapse:collapse;font-size:13px}
+.compare-table th{background:var(--bg);padding:8px 10px;text-align:left;border:1px solid var(--border);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.compare-table td{padding:8px 10px;border:1px solid var(--border)}
+.compare-table tr:nth-child(even) td{background:var(--surface)}
+.best-row td{background:rgba(5,150,105,.06)!important;font-weight:700}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/break-even-calculator">Break-Even</a>
+        <a href="/roi-calculator" class="active">ROI</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/roi-calculator" class="active">ROI Calculator</a>
+    <a href="/profit-margin-calculator">Profit Margin</a>
+    <a href="/break-even-calculator">Break-Even</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">ROI Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>ROI Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate return on investment, annualized ROI, marketing ROI, and compare multiple investments side by side.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Basic ROI · Annualized ROI · Marketing/ROAS · Real Estate ROI · Investment Comparison</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>ROI Calculator</div>
+      <div class="mode-tabs">
+        <div class="mode-tab active" data-mode="basic">Basic ROI</div>
+        <div class="mode-tab" data-mode="annualized">Annualized</div>
+        <div class="mode-tab" data-mode="marketing">Marketing</div>
+        <div class="mode-tab" data-mode="compare">Compare</div>
+      </div>
+
+      <!-- Basic ROI -->
+      <div id="panel-basic">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Initial Investment (Cost)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="b-cost" class="form-input form-input--prefixed" placeholder="10000" min="0.01" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Final Value (or Return Amount)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="b-return" class="form-input form-input--prefixed" placeholder="13500" min="0" step="100"></div>
+            <span class="form-hint">Enter the total value received back (not just profit)</span>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-basic-btn">Calculate ROI</button>
+        <div id="basic-results" style="display:none;margin-top:20px">
+          <div class="roi-verdict" id="b-verdict"></div>
+          <div class="roi-hero"><div class="roi-big" id="b-roi">—</div><div class="roi-label">Return on Investment</div></div>
+          <div class="metrics-row" id="b-metrics"></div>
+        </div>
+      </div>
+
+      <!-- Annualized ROI -->
+      <div id="panel-annualized" style="display:none">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Initial Investment</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="a-cost" class="form-input form-input--prefixed" placeholder="10000" min="0.01" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Final Value</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="a-return" class="form-input form-input--prefixed" placeholder="15000" min="0" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Holding Period</label>
+            <div style="display:flex;gap:8px">
+              <input type="number" id="a-years" class="form-input" placeholder="3" min="0.1" step="0.5" style="flex:1">
+              <select id="a-unit" class="form-input" style="width:auto;min-width:90px">
+                <option value="years" selected>Years</option>
+                <option value="months">Months</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-ann-btn">Calculate Annualized ROI</button>
+        <div id="ann-results" style="display:none;margin-top:20px">
+          <div class="roi-hero" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;text-align:center">
+            <div><div class="roi-big" id="a-total" style="font-size:36px">—</div><div class="roi-label">Total ROI</div></div>
+            <div><div class="roi-big" id="a-ann" style="font-size:36px;color:var(--green)">—</div><div class="roi-label">Annualized ROI</div></div>
+          </div>
+          <div class="metrics-row" id="a-metrics"></div>
+        </div>
+      </div>
+
+      <!-- Marketing ROI -->
+      <div id="panel-marketing" style="display:none">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Ad Spend</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="m-spend" class="form-input form-input--prefixed" placeholder="5000" min="0" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Revenue Generated</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="m-revenue" class="form-input form-input--prefixed" placeholder="25000" min="0" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cost of Goods Sold (COGS)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="m-cogs" class="form-input form-input--prefixed" placeholder="12000" min="0" step="100"></div>
+            <span class="form-hint">Leave 0 for ROAS only — include for true marketing ROI</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Other Campaign Costs</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="m-other" class="form-input form-input--prefixed" placeholder="1000" min="0" step="100"></div>
+            <span class="form-hint">Creative, agency fees, software, etc.</span>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-mkt-btn">Calculate Marketing ROI</button>
+        <div id="mkt-results" style="display:none;margin-top:20px">
+          <div class="roi-verdict" id="m-verdict"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+            <div class="roi-hero" style="padding:16px"><div class="roi-big" id="m-roas" style="font-size:36px">—</div><div class="roi-label">ROAS (Revenue/Spend)</div></div>
+            <div class="roi-hero" style="padding:16px;background:linear-gradient(135deg,rgba(5,150,105,.06),rgba(5,150,105,.02));border-color:rgba(5,150,105,.2)"><div class="roi-big" id="m-roi" style="font-size:36px;color:var(--green)">—</div><div class="roi-label">Marketing ROI</div></div>
+          </div>
+          <div class="metrics-row" id="m-metrics"></div>
+        </div>
+      </div>
+
+      <!-- Compare -->
+      <div id="panel-compare" style="display:none">
+        <p style="font-size:13px;color:var(--ink-2);margin-bottom:16px">Compare multiple investments side by side. Add up to 6.</p>
+        <div id="compare-rows"></div>
+        <button class="calc-btn" id="add-compare-btn" style="background:var(--bg);color:var(--accent);border:1px solid var(--accent);margin-bottom:12px">+ Add Investment</button>
+        <button class="calc-btn" id="calc-compare-btn">Compare All</button>
+        <div id="compare-results" style="display:none;margin-top:20px">
+          <div style="overflow-x:auto"><table class="compare-table" id="compare-table"></table></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROI benchmarks article -->
+    <section style="margin:32px 0" data-enter>
+      <div class="section-header"><p class="section-eyebrow">Reference</p><h2 class="section-title">ROI benchmarks by investment type</h2></div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr style="background:var(--bg)">
+            <th style="padding:10px;border:1px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Investment Type</th>
+            <th style="padding:10px;border:1px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Typical Annual ROI</th>
+            <th style="padding:10px;border:1px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Risk Level</th>
+            <th style="padding:10px;border:1px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Notes</th>
+          </tr></thead>
+          <tbody id="benchmark-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">ROI calculator questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is the ROI formula?</summary><div class="faq-a">ROI = (Net Profit ÷ Cost of Investment) × 100, or (Final Value − Initial Value) ÷ Initial Value × 100. A $10,000 investment that becomes $13,000 has a 30% ROI. This doesn't account for time — a 30% ROI over 10 years is much worse than 30% over 1 year.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">How is annualized ROI calculated?</summary><div class="faq-a">Annualized ROI = [(1 + Total ROI)^(1/Years) − 1] × 100. Example: a $10K investment returning $15K over 3 years has 50% total ROI and 14.47% annualized ROI. This lets you compare investments of different durations on equal footing.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What is ROAS and how is it different from marketing ROI?</summary><div class="faq-a">ROAS = Revenue ÷ Ad Spend. If you spent $1,000 on ads and made $5,000 in sales, ROAS = 5× or 500%. Marketing ROI also subtracts COGS and other costs: if those products cost $3,500 to make, your actual profit is $5,000 − $3,500 − $1,000 = $500, so marketing ROI = 50%. ROAS overstates results if margins are tight.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What ROI should I expect from marketing?</summary><div class="faq-a">Industry average is 4–7× ROAS for e-commerce (after COGS and ad spend). A ROAS below 2× often means you're losing money after COGS. Google Ads average is 200% marketing ROI; email marketing averages 3600%. Benchmarks vary widely by industry, margin, and funnel stage.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free ROI and business calculators.</div></div>
+      <div><div class="footer-col-title">Business Tools</div><ul class="footer-links"><li><a href="/roi-calculator">ROI Calculator</a></li><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/break-even-calculator">Break-Even</a></li><li><a href="/markup-calculator">Markup Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Finance Tools</div><ul class="footer-links"><li><a href="/savings-calculator">Savings Calculator</a></li><li><a href="/budget-calculator">Budget Calculator</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not financial advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var activeMode='basic';
+  document.querySelectorAll('.mode-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      activeMode=tab.dataset.mode;
+      document.querySelectorAll('.mode-tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active');
+      ['basic','annualized','marketing','compare'].forEach(function(m){
+        document.getElementById('panel-'+m).style.display=m===activeMode?'block':'none';
+      });
+    });
+  });
+  function fmt(n){return '$'+(Math.round(n)).toLocaleString('en-US');}
+  function fmtPct(n){return n.toFixed(1)+'%';}
+  function verdict(roi){
+    if(roi>=20) return {cls:'good',txt:'Strong ROI: '+fmtPct(roi)+' exceeds most market benchmarks.'};
+    if(roi>=0) return {cls:'ok',txt:'Moderate ROI: '+fmtPct(roi)+'. Below the S&P 500 historical average (~10%/yr annualized).'};
+    return {cls:'bad',txt:'Negative ROI: '+fmtPct(roi)+'. You lost money on this investment.'};
+  }
+
+  // Basic
+  document.getElementById('calc-basic-btn').addEventListener('click',function(){
+    var cost=parseFloat(document.getElementById('b-cost').value)||0;
+    var ret=parseFloat(document.getElementById('b-return').value)||0;
+    if(!cost){alert('Enter initial investment amount.');return;}
+    var profit=ret-cost; var roi=profit/cost*100;
+    var v=verdict(roi);
+    document.getElementById('b-verdict').className='roi-verdict '+v.cls;
+    document.getElementById('b-verdict').textContent=v.txt;
+    document.getElementById('b-roi').textContent=fmtPct(roi);
+    document.getElementById('b-roi').style.color=roi>=0?'var(--accent)':'var(--red)';
+    document.getElementById('b-metrics').innerHTML=[
+      {l:'Cost',v:fmt(cost)},{l:'Return',v:fmt(ret)},{l:'Net Profit',v:fmt(profit)},{l:'Multiple',v:(ret/cost).toFixed(2)+'×'}
+    ].map(function(x){return '<div class="metric-cell"><div class="metric-label">'+x.l+'</div><div class="metric-value">'+x.v+'</div></div>';}).join('');
+    document.getElementById('basic-results').style.display='block';
+  });
+
+  // Annualized
+  document.getElementById('calc-ann-btn').addEventListener('click',function(){
+    var cost=parseFloat(document.getElementById('a-cost').value)||0;
+    var ret=parseFloat(document.getElementById('a-return').value)||0;
+    var t=parseFloat(document.getElementById('a-years').value)||0;
+    var unit=document.getElementById('a-unit').value;
+    if(!cost||!t){alert('Enter cost and time period.');return;}
+    var years=unit==='months'?t/12:t;
+    var totalRoi=(ret-cost)/cost*100;
+    var annRoi=(Math.pow(1+totalRoi/100,1/years)-1)*100;
+    document.getElementById('a-total').textContent=fmtPct(totalRoi);
+    document.getElementById('a-total').style.color=totalRoi>=0?'var(--accent)':'var(--red)';
+    document.getElementById('a-ann').textContent=fmtPct(annRoi);
+    document.getElementById('a-ann').style.color=annRoi>=0?'var(--green)':'var(--red)';
+    document.getElementById('a-metrics').innerHTML=[
+      {l:'Initial',v:fmt(cost)},{l:'Final Value',v:fmt(ret)},{l:'Net Profit',v:fmt(ret-cost)},{l:'Holding Period',v:years.toFixed(1)+' yrs'}
+    ].map(function(x){return '<div class="metric-cell"><div class="metric-label">'+x.l+'</div><div class="metric-value">'+x.v+'</div></div>';}).join('');
+    document.getElementById('ann-results').style.display='block';
+  });
+
+  // Marketing
+  document.getElementById('calc-mkt-btn').addEventListener('click',function(){
+    var spend=parseFloat(document.getElementById('m-spend').value)||0;
+    var revenue=parseFloat(document.getElementById('m-revenue').value)||0;
+    var cogs=parseFloat(document.getElementById('m-cogs').value)||0;
+    var other=parseFloat(document.getElementById('m-other').value)||0;
+    if(!spend){alert('Enter ad spend.');return;}
+    var roas=revenue/spend;
+    var totalCost=spend+cogs+other;
+    var profit=revenue-totalCost;
+    var mroi=profit/totalCost*100;
+    document.getElementById('m-roas').textContent=roas.toFixed(2)+'×';
+    document.getElementById('m-roi').textContent=fmtPct(mroi);
+    document.getElementById('m-roi').style.color=mroi>=0?'var(--green)':'var(--red)';
+    var v=mroi>=100?{cls:'good',txt:'Excellent: $'+mroi.toFixed(0)+' profit per $100 invested. Well above typical benchmarks.'}:
+           mroi>=0?{cls:'ok',txt:'Breaking even or slight profit. Optimize targeting or reduce COGS for better return.'}:
+           {cls:'bad',txt:'Negative marketing ROI. Revenue doesn\'t cover total costs. Review ad targeting or margin.'};
+    document.getElementById('m-verdict').className='roi-verdict '+v.cls;
+    document.getElementById('m-verdict').textContent=v.txt;
+    document.getElementById('m-metrics').innerHTML=[
+      {l:'Ad Spend',v:fmt(spend)},{l:'Revenue',v:fmt(revenue)},{l:'Gross Profit',v:fmt(revenue-cogs)},{l:'Net Profit',v:fmt(profit)}
+    ].map(function(x){return '<div class="metric-cell"><div class="metric-label">'+x.l+'</div><div class="metric-value">'+x.v+'</div></div>';}).join('');
+    document.getElementById('mkt-results').style.display='block';
+  });
+
+  // Compare
+  var compareCount=0;
+  function addCompareRow(pre){
+    if(compareCount>=6){alert('Maximum 6 investments.');return;}
+    compareCount++;
+    var id=compareCount;
+    var p=pre||{name:'Investment '+id,cost:'',ret:'',yrs:''};
+    var div=document.createElement('div');
+    div.className='compare-row'; div.id='cmp-row-'+id;
+    div.innerHTML='<div class="form-group"><label class="form-label">Name</label><input class="form-input" data-cmp-name id="cn-'+id+'" placeholder="Investment '+id+'" value="'+p.name+'"></div><div class="form-group"><label class="form-label">Cost ($)</label><input type="number" class="form-input" data-cmp-cost id="cc-'+id+'" placeholder="10000" min="0" value="'+p.cost+'"></div><div class="form-group"><label class="form-label">Final Value ($)</label><input type="number" class="form-input" data-cmp-ret id="cr-'+id+'" placeholder="13000" min="0" value="'+p.ret+'"></div><div class="form-group"><label class="form-label">Years</label><input type="number" class="form-input" data-cmp-yrs id="cy-'+id+'" placeholder="1" min="0.1" step="0.5" value="'+p.yrs+'"></div><button class="compare-btn-del" onclick="document.getElementById(\'cmp-row-'+id+'\').remove();compareCount--;"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h14M8 6V4h4v2M19 6l-1 13H2L1 6"/></svg></button>';
+    document.getElementById('compare-rows').appendChild(div);
+  }
+  addCompareRow({name:'Stock Portfolio',cost:'10000',ret:'15500',yrs:'3'});
+  addCompareRow({name:'Rental Property',cost:'50000',ret:'72000',yrs:'4'});
+  addCompareRow({name:'Business',cost:'25000',ret:'45000',yrs:'2'});
+  document.getElementById('add-compare-btn').addEventListener('click',function(){addCompareRow({name:'',cost:'',ret:'',yrs:''});});
+  document.getElementById('calc-compare-btn').addEventListener('click',function(){
+    var rows=document.querySelectorAll('.compare-row');
+    if(!rows.length){alert('Add at least one investment.');return;}
+    var investments=[]; var maxAnn=-Infinity;
+    rows.forEach(function(row){
+      var id=row.id.replace('cmp-row-','');
+      var name=document.getElementById('cn-'+id).value||('Investment '+id);
+      var cost=parseFloat(document.getElementById('cc-'+id).value)||0;
+      var ret=parseFloat(document.getElementById('cr-'+id).value)||0;
+      var yrs=parseFloat(document.getElementById('cy-'+id).value)||1;
+      var totalRoi=(ret-cost)/cost*100;
+      var annRoi=(Math.pow(1+totalRoi/100,1/yrs)-1)*100;
+      if(annRoi>maxAnn) maxAnn=annRoi;
+      investments.push({name:name,cost:fmt(cost),ret:fmt(ret),years:yrs.toFixed(1),totalRoi:fmtPct(totalRoi),annRoi:annRoi});
+    });
+    var thead='<thead><tr><th>Investment</th><th>Cost</th><th>Final Value</th><th>Years</th><th>Total ROI</th><th>Annualized ROI</th></tr></thead>';
+    var tbody='<tbody>'+investments.map(function(inv){
+      var best=inv.annRoi===maxAnn?' class="best-row"':'';
+      return '<tr'+best+'><td>'+inv.name+(inv.annRoi===maxAnn?' ★':'')+'</td><td>'+inv.cost+'</td><td>'+inv.ret+'</td><td>'+inv.years+'</td><td>'+inv.totalRoi+'</td><td>'+fmtPct(inv.annRoi)+'</td></tr>';
+    }).join('')+'</tbody>';
+    document.getElementById('compare-table').innerHTML=thead+tbody;
+    document.getElementById('compare-results').style.display='block';
+    document.getElementById('compare-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Benchmarks
+  var benchmarks=[
+    ['HYSA / Money Market','4–5%','Very Low','FDIC insured, highly liquid, no risk of principal loss'],
+    ['U.S. Treasury Bonds','4–5%','Very Low','Government-backed, varies by duration'],
+    ['S&P 500 Index Fund','~10% (7% real)','Medium','Historical average; past performance not guaranteed'],
+    ['Rental Real Estate','6–12%','Medium','Cap rate 5–8% + appreciation; illiquid'],
+    ['Small Business','15–30%+','High','Highly variable; survivor bias in averages'],
+    ['Angel Investing','~20–25% (portfolio avg)','Very High','Most investments fail; returns are power-law'],
+    ['Google/Facebook Ads','100–500% ROAS','High','Depends on niche, margin, and execution'],
+    ['Email Marketing','~3,600% ROI','Low','$36 return per $1 spent; industry average'],
+  ];
+  document.getElementById('benchmark-body').innerHTML=benchmarks.map(function(b,i){
+    return '<tr style="'+(i%2===0?'background:var(--surface)':'')+'">'+'<td style="padding:10px;border:1px solid var(--border);font-weight:600">'+b[0]+'</td><td style="padding:10px;border:1px solid var(--border);font-family:\'JetBrains Mono\',monospace;font-weight:700">'+b[1]+'</td><td style="padding:10px;border:1px solid var(--border)">'+b[2]+'</td><td style="padding:10px;border:1px solid var(--border);font-size:12px;color:var(--ink-2)">'+b[3]+'</td></tr>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

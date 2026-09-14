@@ -17,6 +17,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
 <meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/shared/styles.css">
 <script type="application/ld+json">
 {
@@ -38,7 +41,7 @@
   "@type": "Organization",
   "name": "FreePayrollCalc",
   "url": "https://www.freepayrollcalc.com",
-  "logo": "https://www.freepayrollcalc.com/shared/logo.png",
+  "logo": "https://www.freepayrollcalc.com/shared/favicon.svg",
   "description": "Free US payroll calculators built on IRS, SSA, DOL, and state revenue department data. Updated annually for the latest tax rates.",
   "email": "hello@freepayrollcalc.com",
   "foundingDate": "2025",
@@ -87,7 +90,11 @@
     {"@type":"ListItem","position":33,"name":"GPA Calculator","url":"https://www.freepayrollcalc.com/gpa-calculator"},
     {"@type":"ListItem","position":34,"name":"TDEE Calculator","url":"https://www.freepayrollcalc.com/tdee-calculator"},
     {"@type":"ListItem","position":35,"name":"Retirement Calculator","url":"https://www.freepayrollcalc.com/retirement-calculator"},
-    {"@type":"ListItem","position":36,"name":"Budget Calculator","url":"https://www.freepayrollcalc.com/budget-calculator"}
+    {"@type":"ListItem","position":36,"name":"Budget Calculator","url":"https://www.freepayrollcalc.com/budget-calculator"},
+    {"@type":"ListItem","position":37,"name":"Savings Calculator","url":"https://www.freepayrollcalc.com/savings-calculator"},
+    {"@type":"ListItem","position":38,"name":"ROI Calculator","url":"https://www.freepayrollcalc.com/roi-calculator"},
+    {"@type":"ListItem","position":39,"name":"COGS Calculator","url":"https://www.freepayrollcalc.com/cogs-calculator"},
+    {"@type":"ListItem","position":40,"name":"Percentage Calculator","url":"https://www.freepayrollcalc.com/percentage-calculator"}
   ]
 }
 </script>
@@ -340,7 +347,7 @@
   <div class="container">
     <div class="section-header" data-enter>
       <p class="section-eyebrow">All Calculators</p>
-      <h2 class="section-title">36 free calculators — built to beat the paid ones</h2>
+      <h2 class="section-title">40 free calculators — built to beat the paid ones</h2>
       <p class="section-body">Every calculator uses 2026 IRS tables, FLSA rules, and state tax rates — not ballpark estimates. No software subscription required.</p>
     </div>
     <div class="tool-grid">
@@ -1088,6 +1095,74 @@
         </div>
         <div class="tool-card-meta">
           <span class="tool-card-stat">Navy method — <strong>±3–4% accurate</strong></span>
+          <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Savings Calculator -->
+      <a href="/savings-calculator" class="tool-card tool-card--new" data-enter data-delay="1">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div>
+            <div class="tool-card-title">Savings Calculator</div>
+            <div class="tool-card-desc">Calculate compound savings growth with monthly contributions, find how much to save per month to reach a goal, and size your emergency fund. Rule of 72 included.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">Compound growth + <strong>goal planner</strong></span>
+          <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ROI Calculator -->
+      <a href="/roi-calculator" class="tool-card tool-card--new" data-enter data-delay="2">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div>
+            <div class="tool-card-title">ROI Calculator</div>
+            <div class="tool-card-desc">Calculate basic ROI, annualized ROI, marketing ROI with ROAS, and compare multiple investments side by side. Shows verdict against market benchmarks.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">Basic · Annualized · <strong>Marketing ROI</strong></span>
+          <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+
+      <!-- COGS Calculator -->
+      <a href="/cogs-calculator" class="tool-card tool-card--new" data-enter data-delay="3">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-amber">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <div>
+            <div class="tool-card-title">COGS Calculator</div>
+            <div class="tool-card-desc">Calculate cost of goods sold using Beginning + Purchases − Ending Inventory, or build up per-unit cost from materials, labor, packaging, and freight components.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">Inventory method + <strong>product cost builder</strong></span>
+          <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Percentage Calculator -->
+      <a href="/percentage-calculator" class="tool-card tool-card--new" data-enter data-delay="4">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div class="tc-icon-wrap tc-slate">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+          </div>
+          <div>
+            <div class="tool-card-title">Percentage Calculator</div>
+            <div class="tool-card-desc">Calculate percentages 6 ways: find X% of Y, find what % X is of Y, percent change, percent increase/decrease, add/subtract a %, and percent difference. Formulas shown.</div>
+          </div>
+        </div>
+        <div class="tool-card-meta">
+          <span class="tool-card-stat">6 calculation modes + <strong>formulas shown</strong></span>
           <div class="tool-card-arrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
         </div>
       </a>

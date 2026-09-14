@@ -253,6 +253,26 @@
     <priority>0.90</priority>
   </url>
   <url>
+    <loc>https://www.freepayrollcalc.com/savings-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/roi-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/cogs-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/percentage-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://www.freepayrollcalc.com/about</loc>
     <changefreq>yearly</changefreq>
     <priority>0.60</priority>
