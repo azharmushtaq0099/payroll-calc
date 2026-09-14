@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All Free Payroll &amp; HR Calculators | FreePayrollCalc</title>
+<meta name="description" content="Browse all 41+ free payroll calculators and HR tools. Organized by category — payroll tax, income &amp; tax, time &amp; hours, HR documents, and business.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/tools">
+<meta property="og:title" content="All Free Payroll &amp; HR Calculators — FreePayrollCalc">
+<meta property="og:description" content="41+ free calculators organized by category. Payroll tax, income, time, HR and business tools built on 2026 IRS rates.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.freepayrollcalc.xyz/tools">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "All Free Payroll &amp; HR Calculators",
+  "url": "https://www.freepayrollcalc.xyz/tools",
+  "description": "Browse all 41+ free payroll calculators and HR tools by category."
+}
+</script>
+</head>
+<body>
+
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">↑↓</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">↵</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="8" fill="#2563EB"/>
+            <path d="M8 10h10a4 4 0 010 8H8V10zM8 18h12a4 4 0 010 8H8V18z" fill="white"/>
+          </svg>
+        </div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links" role="list">
+        <a href="/payroll-tax-calculator" role="listitem">Payroll Tax</a>
+        <a href="/pto-accrual-calculator" role="listitem">PTO</a>
+        <a href="/overtime-pay-calculator" role="listitem">Overtime</a>
+        <a href="/1099-vs-w2-calculator" role="listitem">1099 vs W-2</a>
+        <a href="/tools" role="listitem" aria-current="page">All Tools</a>
+      </div>
+      <a href="/payroll-tax-calculator" class="nav-cta">Calculate Now</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile" role="navigation">
+    <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+    <a href="/pto-accrual-calculator">PTO Accrual Calculator</a>
+    <a href="/overtime-pay-calculator">Overtime Pay Calculator</a>
+    <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+    <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+    <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+    <a href="/workers-comp-calculator">Workers Comp Calculator</a>
+    <a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="tools-page-header">
+  <div class="container">
+    <div data-enter>
+      <h1>Calculator Library</h1>
+      <p>41+ free tools — built on 2026 IRS, FLSA, and state rate data. No signup, no paywalls.</p>
+    </div>
+    <button class="tools-search-btn" onclick="openCmd()" data-enter data-delay="1">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      Search tools
+      <kbd>Ctrl K</kbd>
+    </button>
+  </div>
+</div>
+
+<!-- TOOLS LAYOUT -->
+<div class="tools-page-wrap">
+  <div class="container tools-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="tools-sidebar" id="tools-sidebar" aria-label="Filter by category">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Browse by category</div>
+        <nav role="list">
+          <a href="#cat-all" class="sidebar-item active" data-filter="all" role="listitem">
+            All tools
+            <span class="sidebar-item-count">41</span>
+          </a>
+          <a href="#cat-payroll" class="sidebar-item" data-filter="payroll" role="listitem">
+            Payroll
+            <span class="sidebar-item-count">9</span>
+          </a>
+          <a href="#cat-income" class="sidebar-item" data-filter="income" role="listitem">
+            Income &amp; Tax
+            <span class="sidebar-item-count">11</span>
+          </a>
+          <a href="#cat-time" class="sidebar-item" data-filter="time" role="listitem">
+            Time &amp; Hours
+            <span class="sidebar-item-count">5</span>
+          </a>
+          <a href="#cat-hr" class="sidebar-item" data-filter="hr" role="listitem">
+            HR &amp; Documents
+            <span class="sidebar-item-count">4</span>
+          </a>
+          <a href="#cat-business" class="sidebar-item" data-filter="business" role="listitem">
+            Business
+            <span class="sidebar-item-count">12</span>
+          </a>
+        </nav>
+      </div>
+      <div class="sidebar-section sidebar-cta">
+        <div class="sidebar-label">Quick tip</div>
+        <p>Press <kbd style="font-family:var(--mono);font-size:11px;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:1px 5px">Ctrl K</kbd> anywhere to search all tools instantly.</p>
+      </div>
+    </aside>
+
+    <!-- MAIN TOOL LIST -->
+    <main class="tools-main" id="tools-main">
+
+      <!-- PAYROLL -->
+      <div class="tool-list-section" id="cat-payroll" data-cat="payroll">
+        <div class="tool-list-header">
+          <span class="tool-list-cat-label">Payroll</span>
+          <span class="tool-list-count">9 tools</span>
+        </div>
+        <div class="tool-list">
+
+          <a href="/payroll-tax-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h4"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Payroll Tax Calculator</div>
+              <div class="tool-row-desc">Federal income tax, Social Security, Medicare, and state withholding per paycheck. All 50 states.</div>
+            </div>
+            <span class="tool-row-badge">Popular</span>
+          </a>
+
+          <a href="/free-payroll-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="6" x2="12" y2="18"/><path d="M15.5 9H10a2 2 0 000 4h4a2 2 0 010 4H8.5"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Free Payroll Calculator</div>
+              <div class="tool-row-desc">Gross-to-net with 401k, health insurance, and other pre-tax deductions factored in.</div>
+            </div>
+          </a>
+
+          <a href="/employer-tax-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Employer Payroll Tax Calculator</div>
+              <div class="tool-row-desc">FICA match, FUTA, SUTA, and workers comp — the true cost per employee, not just the salary.</div>
+            </div>
+          </a>
+
+          <a href="/1099-vs-w2-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="8" height="16" rx="1"/><path d="M2 9h8M2 13h6"/><rect x="14" y="4" width="8" height="16" rx="1"/><path d="M14 9h8M14 13h6"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">1099 vs W-2 Tax Calculator</div>
+              <div class="tool-row-desc">Side-by-side tax comparison for contractors vs employees including quarterly estimated payments.</div>
+            </div>
+          </a>
+
+          <a href="/workers-comp-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-slate">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Workers Comp Calculator</div>
+              <div class="tool-row-desc">Estimate workers compensation insurance premium by state and NCCI job classification code.</div>
+            </div>
+          </a>
+
+          <a href="/cost-per-hire-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-slate">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Cost Per Hire Calculator</div>
+              <div class="tool-row-desc">Job board fees, recruiter time, interview hours, onboarding — broken down per hire and annually.</div>
+            </div>
+          </a>
+
+          <a href="/net-to-gross-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Net to Gross Calculator</div>
+              <div class="tool-row-desc">Gross-up a desired net pay — find the gross salary that yields a specific take-home amount.</div>
+            </div>
+          </a>
+
+          <a href="/gross-pay-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Gross Pay Calculator</div>
+              <div class="tool-row-desc">Calculate gross pay from hourly rate, salary, or tipped employee earnings.</div>
+            </div>
+          </a>
+
+          <a href="/pay-stub-generator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Free Pay Stub Generator</div>
+              <div class="tool-row-desc">Professional pay stub PDF with all deductions listed. No watermark, no login.</div>
+            </div>
+            <span class="tool-row-badge">Free</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- INCOME & TAX -->
+      <div class="tool-list-section" id="cat-income" data-cat="income">
+        <div class="tool-list-header">
+          <span class="tool-list-cat-label">Income &amp; Tax</span>
+          <span class="tool-list-count">11 tools</span>
+        </div>
+        <div class="tool-list">
+
+          <a href="/take-home-pay-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Take-Home Pay Calculator</div>
+              <div class="tool-row-desc">Net pay after all taxes and deductions with annual projection.</div>
+            </div>
+            <span class="tool-row-badge">Popular</span>
+          </a>
+
+          <a href="/bonus-tax-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M16 8V6a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Bonus Tax Calculator</div>
+              <div class="tool-row-desc">Flat 22% supplemental method or aggregate method — see which costs less.</div>
+            </div>
+          </a>
+
+          <a href="/salary-to-hourly-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Salary to Hourly Calculator</div>
+              <div class="tool-row-desc">Annual salary converted to hourly, weekly, biweekly, semi-monthly and monthly rates.</div>
+            </div>
+          </a>
+
+          <a href="/w4-withholding-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">W-4 Withholding Calculator</div>
+              <div class="tool-row-desc">2026 W-4 form line-by-line guide — how to fill it out for any life situation.</div>
+            </div>
+          </a>
+
+          <a href="/commission-pay-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Commission Pay Calculator</div>
+              <div class="tool-row-desc">Straight, tiered, or residual commission structures with tax withholding.</div>
+            </div>
+          </a>
+
+          <a href="/final-paycheck-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-slate">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Final Paycheck Calculator</div>
+              <div class="tool-row-desc">Last paycheck calculation including accrued unused PTO payout by state law.</div>
+            </div>
+          </a>
+
+          <a href="/self-employment-tax-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Self-Employment Tax Calculator</div>
+              <div class="tool-row-desc">Schedule SE calculation plus the deductible half — for freelancers and sole proprietors.</div>
+            </div>
+          </a>
+
+          <a href="/quarterly-tax-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Quarterly Tax Calculator</div>
+              <div class="tool-row-desc">Estimated quarterly payment amounts for self-employed individuals and freelancers.</div>
+            </div>
+          </a>
+
+          <a href="/effective-tax-rate-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Effective Tax Rate Calculator</div>
+              <div class="tool-row-desc">Your blended effective rate vs marginal tax bracket — see the real percentage you pay.</div>
+            </div>
+          </a>
+
+          <a href="/salary-increase-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Salary Increase Calculator</div>
+              <div class="tool-row-desc">New salary after raise, the dollar and percentage increase, and after-tax impact on each paycheck.</div>
+            </div>
+          </a>
+
+          <a href="/futa-tax-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-slate">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">FUTA Tax Calculator</div>
+              <div class="tool-row-desc">Federal unemployment tax per employee — FUTA rate, wage base, and annual liability.</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- TIME & HOURS -->
+      <div class="tool-list-section" id="cat-time" data-cat="time">
+        <div class="tool-list-header">
+          <span class="tool-list-cat-label">Time &amp; Hours</span>
+          <span class="tool-list-count">5 tools</span>
+        </div>
+        <div class="tool-list">
+
+          <a href="/pto-accrual-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">PTO Accrual Calculator</div>
+              <div class="tool-row-desc">PTO balance, accrual rate per period, and year-end balance projection. Three accrual methods.</div>
+            </div>
+          </a>
+
+          <a href="/overtime-pay-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Overtime Pay Calculator</div>
+              <div class="tool-row-desc">FLSA 1.5x, double time, blended rates, and California daily overtime rules.</div>
+            </div>
+          </a>
+
+          <a href="/time-card-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Time Card Calculator</div>
+              <div class="tool-row-desc">Weekly timesheet with automatic overtime calculation from clock-in/out pairs.</div>
+            </div>
+            <span class="tool-row-badge">Popular</span>
+          </a>
+
+          <a href="/hours-worked-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Hours Worked Calculator</div>
+              <div class="tool-row-desc">Total hours from multiple clock-in/clock-out pairs including lunch break deduction.</div>
+            </div>
+          </a>
+
+          <a href="/shift-differential-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Shift Differential Calculator</div>
+              <div class="tool-row-desc">Night shift, weekend, and holiday premium pay amounts with regular pay comparison.</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- HR & DOCUMENTS -->
+      <div class="tool-list-section" id="cat-hr" data-cat="hr">
+        <div class="tool-list-header">
+          <span class="tool-list-cat-label">HR &amp; Documents</span>
+          <span class="tool-list-count">4 tools</span>
+        </div>
+        <div class="tool-list">
+
+          <a href="/direct-deposit-form" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Direct Deposit Form</div>
+              <div class="tool-row-desc">Printable direct deposit authorization form for any bank. Complete and print in 60 seconds.</div>
+            </div>
+            <span class="tool-row-badge">Free</span>
+          </a>
+
+          <a href="/invoice-generator-free" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Free Invoice Generator</div>
+              <div class="tool-row-desc">Professional invoice PDF for freelancers and contractors — no watermark, no login.</div>
+            </div>
+            <span class="tool-row-badge">Free</span>
+          </a>
+
+          <a href="/pay-stub-generator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Free Pay Stub Generator</div>
+              <div class="tool-row-desc">Complete pay stub with withholding breakdown. Print to PDF, no account required.</div>
+            </div>
+          </a>
+
+          <a href="/minimum-wage-by-state" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-slate">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Minimum Wage by State 2026</div>
+              <div class="tool-row-desc">Current minimum wages for all 50 states including tipped employee rates and scheduled 2026 increases.</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- BUSINESS -->
+      <div class="tool-list-section" id="cat-business" data-cat="business">
+        <div class="tool-list-header">
+          <span class="tool-list-cat-label">Business</span>
+          <span class="tool-list-count">12 tools</span>
+        </div>
+        <div class="tool-list">
+
+          <a href="/profit-margin-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Profit Margin Calculator</div>
+              <div class="tool-row-desc">Gross, operating, and net margin percentages from revenue and cost inputs.</div>
+            </div>
+          </a>
+
+          <a href="/roi-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">ROI Calculator</div>
+              <div class="tool-row-desc">Return on investment percentage, annualized ROI, and payback period.</div>
+            </div>
+          </a>
+
+          <a href="/break-even-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Break-Even Calculator</div>
+              <div class="tool-row-desc">Units and revenue needed to cover fixed costs at your price and variable cost.</div>
+            </div>
+          </a>
+
+          <a href="/business-loan-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Business Loan Calculator</div>
+              <div class="tool-row-desc">Monthly payments, total interest cost, and amortization schedule for business loans.</div>
+            </div>
+          </a>
+
+          <a href="/cogs-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">COGS Calculator</div>
+              <div class="tool-row-desc">Cost of goods sold using FIFO, LIFO, or weighted average — with gross profit output.</div>
+            </div>
+          </a>
+
+          <a href="/debt-payoff-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-slate">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Debt Payoff Calculator</div>
+              <div class="tool-row-desc">Payoff timeline and total interest saved with extra monthly payments applied.</div>
+            </div>
+          </a>
+
+          <a href="/cost-of-living-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Cost of Living Calculator</div>
+              <div class="tool-row-desc">Compare cost of living between 75+ US cities — and the equivalent salary you'd need.</div>
+            </div>
+            <span class="tool-row-badge">Popular</span>
+          </a>
+
+          <a href="/markup-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Markup Calculator</div>
+              <div class="tool-row-desc">Set your sale price from cost plus desired markup percentage or profit margin.</div>
+            </div>
+          </a>
+
+          <a href="/cap-rate-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Cap Rate Calculator</div>
+              <div class="tool-row-desc">Capitalization rate for investment property — NOI divided by property value.</div>
+            </div>
+          </a>
+
+          <a href="/cash-flow-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Cash Flow Calculator</div>
+              <div class="tool-row-desc">Operating cash flow from net income with depreciation and working capital changes.</div>
+            </div>
+          </a>
+
+          <a href="/burn-rate-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-slate">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.56 2.9A7 7 0 0119 9v4l2 2v1H3v-1l2-2V9a7 7 0 012.56-6.1"/><path d="M9 17v1a3 3 0 006 0v-1"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">Burn Rate Calculator</div>
+              <div class="tool-row-desc">Monthly gross and net burn rate plus runway in months from current cash balance.</div>
+            </div>
+          </a>
+
+          <a href="/saas-revenue-calculator" class="tool-row" data-enter>
+            <div class="tool-row-icon tc-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="tool-row-body">
+              <div class="tool-row-name">SaaS Revenue Calculator</div>
+              <div class="tool-row-desc">MRR, ARR, churn-adjusted projections and LTV from subscription plan data.</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">FreePayrollCalc</div>
+        <p class="footer-tagline">Free US payroll calculators built on IRS, SSA, DOL, and state revenue data. Updated for 2026 rates.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Payroll</div>
+        <ul>
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/net-to-gross-calculator">Net to Gross Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Income &amp; Tax</div>
+        <ul>
+          <li><a href="/take-home-pay-calculator">Take-Home Pay Calculator</a></li>
+          <li><a href="/bonus-tax-calculator">Bonus Tax Calculator</a></li>
+          <li><a href="/salary-to-hourly-calculator">Salary to Hourly Calculator</a></li>
+          <li><a href="/w4-withholding-calculator">W-4 Withholding Calculator</a></li>
+          <li><a href="/self-employment-tax-calculator">Self-Employment Tax</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Time, HR &amp; Business</div>
+        <ul>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+          <li><a href="/time-card-calculator">Time Card Calculator</a></li>
+          <li><a href="/pay-stub-generator">Pay Stub Generator</a></li>
+          <li><a href="/cost-of-living-calculator">Cost of Living Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Data Sources</div>
+        <ul>
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA Overview (DOL)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="/about">About &amp; Methodology</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation purposes only — not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/about">Methodology</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+/* Sidebar filter for tools page */
+(function(){
+  var items = document.querySelectorAll('.sidebar-item[data-filter]');
+  var sections = document.querySelectorAll('.tool-list-section[data-cat]');
+  if(!items.length) return;
+
+  /* Handle ?cat= URL param on load */
+  var urlCat = new URLSearchParams(window.location.search).get('cat') || 'all';
+  applyFilter(urlCat);
+  items.forEach(function(item){
+    if(item.getAttribute('data-filter') === urlCat) item.classList.add('active');
+    else item.classList.remove('active');
+  });
+
+  items.forEach(function(item){
+    item.addEventListener('click', function(e){
+      e.preventDefault();
+      var filter = item.getAttribute('data-filter');
+      items.forEach(function(i){ i.classList.remove('active'); });
+      item.classList.add('active');
+      applyFilter(filter);
+      history.replaceState(null,'', filter === 'all' ? '/tools' : '/tools?cat=' + filter);
+    });
+  });
+
+  function applyFilter(filter){
+    sections.forEach(function(s){
+      s.style.display = (filter === 'all' || s.getAttribute('data-cat') === filter) ? '' : 'none';
+    });
+  }
+})();
+</script>
+</body>
+</html>

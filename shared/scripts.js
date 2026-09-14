@@ -112,6 +112,115 @@ document.querySelectorAll('[data-copy-results]').forEach(function(btn){
   io.observe(counter);
 })();
 
+/* ── Command palette ── */
+var TOOLS_DATA = [
+  {name:'Payroll Tax Calculator',url:'/payroll-tax-calculator',cat:'Payroll',desc:'Federal, state, FICA withholding per paycheck'},
+  {name:'Free Payroll Calculator',url:'/free-payroll-calculator',cat:'Payroll',desc:'Gross-to-net with pre-tax deductions'},
+  {name:'Employer Payroll Tax Calculator',url:'/employer-tax-calculator',cat:'Payroll',desc:'FICA match, FUTA, SUTA, workers comp'},
+  {name:'1099 vs W-2 Tax Calculator',url:'/1099-vs-w2-calculator',cat:'Payroll',desc:'Side-by-side contractor vs employee tax'},
+  {name:'Workers Comp Calculator',url:'/workers-comp-calculator',cat:'Payroll',desc:'Insurance premium by state & job code'},
+  {name:'Cost Per Hire Calculator',url:'/cost-per-hire-calculator',cat:'Payroll',desc:'True total cost of each new hire'},
+  {name:'Net to Gross Calculator',url:'/net-to-gross-calculator',cat:'Payroll',desc:'Gross-up a desired net pay amount'},
+  {name:'Pay Stub Generator',url:'/pay-stub-generator',cat:'HR & Documents',desc:'Print-to-PDF pay stub, no watermark'},
+  {name:'Gross Pay Calculator',url:'/gross-pay-calculator',cat:'Payroll',desc:'Gross pay from hourly, salary, or tips'},
+  {name:'Bonus Tax Calculator',url:'/bonus-tax-calculator',cat:'Income & Tax',desc:'Flat 22% or aggregate withholding method'},
+  {name:'Take-Home Pay Calculator',url:'/take-home-pay-calculator',cat:'Income & Tax',desc:'Net pay after all taxes and deductions'},
+  {name:'Salary to Hourly Calculator',url:'/salary-to-hourly-calculator',cat:'Income & Tax',desc:'Annual salary to hourly / weekly / monthly'},
+  {name:'Commission Pay Calculator',url:'/commission-pay-calculator',cat:'Income & Tax',desc:'Straight, tiered, or residual commission'},
+  {name:'Final Paycheck Calculator',url:'/final-paycheck-calculator',cat:'Income & Tax',desc:'Last paycheck including accrued PTO'},
+  {name:'Self-Employment Tax Calculator',url:'/self-employment-tax-calculator',cat:'Income & Tax',desc:'Schedule SE plus deductible half'},
+  {name:'W-4 Withholding Calculator',url:'/w4-withholding-calculator',cat:'Income & Tax',desc:'2026 W-4 line-by-line guide'},
+  {name:'Quarterly Tax Calculator',url:'/quarterly-tax-calculator',cat:'Income & Tax',desc:'Estimated quarterly payments for freelancers'},
+  {name:'Effective Tax Rate Calculator',url:'/effective-tax-rate-calculator',cat:'Income & Tax',desc:'Blended vs marginal federal tax rate'},
+  {name:'Salary Increase Calculator',url:'/salary-increase-calculator',cat:'Income & Tax',desc:'Raise amount and after-tax impact'},
+  {name:'Taxable Income Calculator',url:'/taxable-income-calculator',cat:'Income & Tax',desc:'AGI minus standard deduction'},
+  {name:'FUTA Tax Calculator',url:'/futa-tax-calculator',cat:'Income & Tax',desc:'Federal unemployment tax per employee'},
+  {name:'PTO Accrual Calculator',url:'/pto-accrual-calculator',cat:'Time & Hours',desc:'PTO balance, accrual rate, year-end projection'},
+  {name:'Overtime Pay Calculator',url:'/overtime-pay-calculator',cat:'Time & Hours',desc:'FLSA 1.5x, double time, California rules'},
+  {name:'Time Card Calculator',url:'/time-card-calculator',cat:'Time & Hours',desc:'Weekly timesheet with OT auto-calculation'},
+  {name:'Hours Worked Calculator',url:'/hours-worked-calculator',cat:'Time & Hours',desc:'Total hours from clock-in/clock-out pairs'},
+  {name:'Shift Differential Calculator',url:'/shift-differential-calculator',cat:'Time & Hours',desc:'Night/weekend premium pay amounts'},
+  {name:'Direct Deposit Form',url:'/direct-deposit-form',cat:'HR & Documents',desc:'Printable bank direct deposit authorization'},
+  {name:'Free Invoice Generator',url:'/invoice-generator-free',cat:'HR & Documents',desc:'Professional invoice PDF, no login'},
+  {name:'Minimum Wage by State',url:'/minimum-wage-by-state',cat:'HR & Documents',desc:'2026 rates for all 50 states'},
+  {name:'Profit Margin Calculator',url:'/profit-margin-calculator',cat:'Business',desc:'Gross, operating, and net margin'},
+  {name:'ROI Calculator',url:'/roi-calculator',cat:'Business',desc:'Return on investment percentage'},
+  {name:'Break-Even Calculator',url:'/break-even-calculator',cat:'Business',desc:'Units and revenue to cover fixed costs'},
+  {name:'Business Loan Calculator',url:'/business-loan-calculator',cat:'Business',desc:'Monthly payments and total interest'},
+  {name:'COGS Calculator',url:'/cogs-calculator',cat:'Business',desc:'Cost of goods sold for product businesses'},
+  {name:'Debt Payoff Calculator',url:'/debt-payoff-calculator',cat:'Business',desc:'Payoff timeline with extra payments'},
+  {name:'Cost of Living Calculator',url:'/cost-of-living-calculator',cat:'Business',desc:'75+ US cities salary equivalency'},
+  {name:'Markup Calculator',url:'/markup-calculator',cat:'Business',desc:'Price from cost plus desired margin'},
+  {name:'Cap Rate Calculator',url:'/cap-rate-calculator',cat:'Business',desc:'Property capitalization rate for investors'},
+  {name:'Cash Flow Calculator',url:'/cash-flow-calculator',cat:'Business',desc:'Operating cash flow from income statement'},
+  {name:'Burn Rate Calculator',url:'/burn-rate-calculator',cat:'Business',desc:'Monthly spend and runway for startups'},
+  {name:'SaaS Revenue Calculator',url:'/saas-revenue-calculator',cat:'Business',desc:'MRR, ARR, churn impact projections'}
+];
+
+function openCmd(){
+  var overlay = document.getElementById('cmd-overlay');
+  var input = document.getElementById('cmd-input');
+  if(!overlay) return;
+  overlay.classList.add('open');
+  if(input){ input.value = ''; renderCmd(''); setTimeout(function(){ input.focus(); }, 50); }
+  document.body.style.overflow = 'hidden';
+}
+function closeCmd(){
+  var overlay = document.getElementById('cmd-overlay');
+  if(overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+(function(){
+  var overlay = document.getElementById('cmd-overlay');
+  var input   = document.getElementById('cmd-input');
+  if(!overlay || !input) return;
+
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeCmd(); });
+
+  document.addEventListener('keydown', function(e){
+    if((e.ctrlKey || e.metaKey) && e.key === 'k'){ e.preventDefault(); openCmd(); return; }
+    if(e.key === 'Escape'){ closeCmd(); return; }
+    if(!overlay.classList.contains('open')) return;
+    var items = overlay.querySelectorAll('.cmd-item');
+    var active = overlay.querySelector('.cmd-item.cmd-active');
+    var idx = active ? Array.from(items).indexOf(active) : -1;
+    if(e.key === 'ArrowDown'){
+      e.preventDefault();
+      var next = items[Math.min(idx + 1, items.length - 1)];
+      if(next){ if(active) active.classList.remove('cmd-active'); next.classList.add('cmd-active'); next.scrollIntoView({block:'nearest'}); }
+    } else if(e.key === 'ArrowUp'){
+      e.preventDefault();
+      var prev = items[Math.max(idx - 1, 0)];
+      if(prev){ if(active) active.classList.remove('cmd-active'); prev.classList.add('cmd-active'); prev.scrollIntoView({block:'nearest'}); }
+    } else if(e.key === 'Enter'){
+      var cur = overlay.querySelector('.cmd-item.cmd-active');
+      if(cur){ window.location.href = cur.getAttribute('data-url'); closeCmd(); }
+    }
+  });
+
+  input.addEventListener('input', function(){ renderCmd(input.value); });
+})();
+
+function renderCmd(q){
+  var body = document.getElementById('cmd-body');
+  if(!body) return;
+  var query = q.trim().toLowerCase();
+  var matches = query
+    ? TOOLS_DATA.filter(function(t){ return t.name.toLowerCase().indexOf(query) > -1 || t.cat.toLowerCase().indexOf(query) > -1 || t.desc.toLowerCase().indexOf(query) > -1; })
+    : TOOLS_DATA.slice(0, 8);
+  if(!matches.length){
+    body.innerHTML = '<div class="cmd-empty">No tools match "' + q + '"</div>';
+    return;
+  }
+  body.innerHTML = matches.map(function(t, i){
+    return '<a class="cmd-item' + (i === 0 ? ' cmd-active' : '') + '" data-url="' + t.url + '" href="' + t.url + '">' +
+      '<span class="cmd-item-name">' + t.name + '</span>' +
+      '<span class="cmd-item-cat">' + t.cat + '</span>' +
+      '</a>';
+  }).join('');
+}
+
 /* ── Category filter tabs ── */
 (function(){
   var tabs  = document.querySelectorAll('.filter-tab');
