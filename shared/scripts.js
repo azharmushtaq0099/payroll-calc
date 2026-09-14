@@ -96,3 +96,71 @@ document.querySelectorAll('[data-copy-results]').forEach(function(btn){
     });
   });
 });
+
+/* ── Stats counter (fires once when element enters viewport) ── */
+(function(){
+  var counter = document.getElementById('fpc-counter');
+  if(!counter) return;
+  var triggered = false;
+  var io = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting && !triggered){
+      triggered = true;
+      animateCount(counter, 0, 2400000, 1800, '', '+');
+      io.disconnect();
+    }
+  }, {threshold: 0.5});
+  io.observe(counter);
+})();
+
+/* ── Category filter tabs ── */
+(function(){
+  var tabs  = document.querySelectorAll('.filter-tab');
+  var cards = document.querySelectorAll('.tool-card[data-category]');
+  if(!tabs.length || !cards.length) return;
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var filter = tab.getAttribute('data-filter');
+
+      /* update active tab */
+      tabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+
+      /* show/hide cards */
+      cards.forEach(function(card){
+        var cat = card.getAttribute('data-category');
+        if(filter === 'all' || cat === filter){
+          card.removeAttribute('data-hidden');
+        } else {
+          card.setAttribute('data-hidden', '');
+        }
+      });
+
+      /* handle featured card (no data-category) */
+      var featured = document.querySelector('.tool-card--featured');
+      if(featured){
+        if(filter === 'all' || filter === 'payroll'){
+          featured.removeAttribute('data-hidden');
+        } else {
+          featured.setAttribute('data-hidden', '');
+        }
+      }
+
+      /* remove empty state if present */
+      var empty = document.querySelector('.tool-grid-empty');
+      if(empty) empty.remove();
+
+      /* check if grid is empty after filter */
+      var grid = document.querySelector('.tool-grid');
+      if(grid){
+        var visible = grid.querySelectorAll('.tool-card:not([data-hidden])');
+        if(!visible.length){
+          var msg = document.createElement('p');
+          msg.className = 'tool-grid-empty';
+          msg.textContent = 'No tools in this category yet.';
+          grid.appendChild(msg);
+        }
+      }
+    });
+  });
+})();

@@ -557,6 +557,36 @@ label.field-label{
 }
 .calc-updated svg{color:var(--green);flex-shrink:0}
 
+/* ── Category Filter Tabs ── */
+.filter-bar{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  margin-bottom:36px;padding-bottom:24px;
+  border-bottom:1px solid var(--border);
+}
+.filter-tab{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:7px 16px;border-radius:100px;
+  font-size:13.5px;font-weight:600;
+  border:1.5px solid var(--border-dark);
+  background:var(--surface);color:var(--ink-2);
+  cursor:pointer;transition:all var(--transition);white-space:nowrap;
+}
+.filter-tab:hover{border-color:var(--accent-border);color:var(--accent);background:var(--accent-dim)}
+.filter-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 2px 8px rgba(27,79,216,.25)}
+.filter-tab-count{
+  font-size:11px;font-weight:700;font-family:var(--mono);
+  background:rgba(255,255,255,.25);
+  padding:1px 6px;border-radius:100px;
+}
+.filter-tab:not(.active) .filter-tab-count{background:var(--surface-2);color:var(--ink-3)}
+.tool-card[data-hidden]{display:none!important}
+
+/* ── Tool grid empty state ── */
+.tool-grid-empty{
+  grid-column:1/-1;text-align:center;
+  padding:48px 24px;color:var(--ink-3);font-size:15px;
+}
+
 /* ── Utilities ── */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
 .text-mono{font-family:var(--mono)}
