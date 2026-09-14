@@ -196,17 +196,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
-
-  <url>
-    <loc>https://www.freepayrollcalc.com/gpa-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.freepayrollcalc.com/tdee-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
   <url>
     <loc>https://www.freepayrollcalc.com/retirement-calculator</loc>
     <changefreq>monthly</changefreq>
@@ -244,11 +233,6 @@
   </url>
   <url>
     <loc>https://www.freepayrollcalc.com/cap-rate-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.freepayrollcalc.com/body-fat-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
