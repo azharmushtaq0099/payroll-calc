@@ -1,0 +1,13 @@
+{
+  "name": "freepayrollcalc-indexing",
+  "version": "1.0.0",
+  "description": "Google Indexing API submitter for FreePayrollCalc",
+  "main": "submit-index.js",
+  "scripts": {
+    "submit": "node submit-index.js",
+    "submit-new": "node submit-index.js --new-only"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}

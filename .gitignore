@@ -1,1 +1,4 @@
 .vercel
+indexing-api/credentials.json
+indexing-api/submission-log.json
+node_modules/

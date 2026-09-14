@@ -1,0 +1,37 @@
+name: Google Indexing API — Auto-submit on deploy
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - '**.html'
+
+jobs:
+  submit-to-google:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # need previous commit to detect what changed
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: indexing-api/package.json
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: indexing-api
+
+      - name: Write Google credentials
+        run: echo '${{ secrets.GOOGLE_INDEXING_CREDENTIALS }}' > indexing-api/credentials.json
+
+      - name: Submit changed URLs to Google Indexing API
+        run: node indexing-api/submit-index.js --new-only
+
+      - name: Clean up credentials
+        if: always()
+        run: rm -f indexing-api/credentials.json
