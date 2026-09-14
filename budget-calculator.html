@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Budget Calculator — Monthly Budget &amp; 50/30/20 Rule | FreePayrollCalc</title>
+<meta name="description" content="Free budget calculator. Enter your income and expenses to see your monthly budget balance, whether you follow the 50/30/20 rule, and where to cut spending. Instant surplus or deficit analysis.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/budget-calculator">
+<meta property="og:title" content="Budget Calculator — Monthly Budget, 50/30/20 Rule & Surplus">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Budget Calculator","url":"https://www.freepayrollcalc.com/budget-calculator","description":"Calculate your monthly budget surplus or deficit. See how your spending compares to the 50/30/20 rule. Categorize needs, wants, and savings.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the 50/30/20 budget rule?","acceptedAnswer":{"@type":"Answer","text":"The 50/30/20 rule allocates after-tax income as: 50% to needs (rent, utilities, groceries, minimum debt payments), 30% to wants (dining out, entertainment, subscriptions, vacations), 20% to savings and debt payoff (emergency fund, retirement, extra debt payments). It was popularized by Senator Elizabeth Warren in her book 'All Your Worth.'"}},{"@type":"Question","name":"How do I make a monthly budget?","acceptedAnswer":{"@type":"Answer","text":"1. Calculate after-tax monthly income. 2. List all fixed expenses (rent, insurance, subscriptions). 3. Estimate variable expenses (food, gas, entertainment). 4. Calculate total expenses. 5. Subtract from income — positive is surplus, negative is deficit. 6. Adjust until you have a positive surplus directed toward savings or debt payoff."}},{"@type":"Question","name":"What is a good monthly savings rate?","acceptedAnswer":{"@type":"Answer","text":"Financial planners generally recommend saving at least 20% of net income. 15% is the minimum for retirement savings alone. Emergency fund goal: 3–6 months of expenses in a savings account. FIRE (Financial Independence) seekers often save 40–70%+ of income."}},{"@type":"Question","name":"What counts as a 'need' vs 'want' in a budget?","acceptedAnswer":{"@type":"Answer","text":"Needs: housing (rent/mortgage), utilities, groceries, transportation to work, minimum debt payments, basic healthcare and insurance. Wants: restaurants, entertainment, streaming subscriptions, gym memberships, vacations, clothing beyond basics, phone upgrades. Some items are mixed — internet may be a need for remote work but a want for entertainment."}}]}
+</script>
+<style>
+.cat-section{margin-bottom:20px}
+.cat-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:8px 12px;border-radius:8px}
+.cat-header.needs{background:rgba(27,79,216,.06)}
+.cat-header.wants{background:rgba(217,119,6,.06)}
+.cat-header.savings{background:rgba(5,150,105,.06)}
+.cat-title{font-size:14px;font-weight:700}
+.cat-header.needs .cat-title{color:var(--accent)}
+.cat-header.wants .cat-title{color:var(--amber)}
+.cat-header.savings .cat-title{color:var(--green)}
+.cat-total{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;margin-left:auto}
+.expense-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.expense-label{flex:1;font-size:13px;color:var(--ink-2)}
+.expense-input-wrap{width:120px}
+.budget-hero{border-radius:14px;padding:24px 20px;margin-bottom:16px;text-align:center;transition:all .3s}
+.budget-hero.surplus{background:rgba(5,150,105,.06);border:2px solid rgba(5,150,105,.2)}
+.budget-hero.deficit{background:rgba(220,38,38,.06);border:2px solid rgba(220,38,38,.2)}
+.budget-hero.balanced{background:rgba(27,79,216,.05);border:2px solid rgba(27,79,216,.15)}
+.budget-amount{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;line-height:1}
+.budget-amount.surplus{color:var(--green)}
+.budget-amount.deficit{color:var(--red)}
+.budget-amount.balanced{color:var(--accent)}
+.budget-status{font-size:14px;font-weight:700;margin-top:6px}
+.allocation-bars{margin:16px 0}
+.alloc-row{margin-bottom:10px}
+.alloc-header{display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px}
+.alloc-name{font-weight:700}
+.alloc-pcts{color:var(--ink-3)}
+.alloc-track{background:var(--bg);border-radius:4px;height:18px;overflow:hidden;border:1px solid var(--border);position:relative}
+.alloc-actual{height:100%;border-radius:4px;transition:width .5s ease;position:relative}
+.alloc-target-line{position:absolute;top:0;height:100%;width:2px;background:rgba(0,0,0,.2)}
+.rule-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.rule-card{border-radius:10px;padding:14px;text-align:center}
+.rule-card.needs-card{background:rgba(27,79,216,.06);border:1px solid rgba(27,79,216,.15)}
+.rule-card.wants-card{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.15)}
+.rule-card.savings-card{background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.15)}
+.rule-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700}
+.rule-card.needs-card .rule-num{color:var(--accent)}
+.rule-card.wants-card .rule-num{color:var(--amber)}
+.rule-card.savings-card .rule-num{color:var(--green)}
+.rule-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+.rule-card.needs-card .rule-label{color:var(--accent)}
+.rule-card.wants-card .rule-label{color:var(--amber)}
+.rule-card.savings-card .rule-label{color:var(--green)}
+.rule-sub{font-size:11px;color:var(--ink-3);margin-top:2px}
+.status-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;margin-top:4px}
+.sb-ok{background:rgba(5,150,105,.1);color:var(--green)}
+.sb-over{background:rgba(220,38,38,.1);color:var(--red)}
+.sb-under{background:rgba(27,79,216,.1);color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/budget-calculator" class="active">Budget</a>
+        <a href="/retirement-calculator">Retirement</a>
+        <a href="/debt-payoff-calculator">Debt Payoff</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/budget-calculator" class="active">Budget Calculator</a>
+    <a href="/retirement-calculator">Retirement Calculator</a>
+    <a href="/debt-payoff-calculator">Debt Payoff Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Budget Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Budget Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Enter your monthly income and expenses to see your surplus, savings rate,<br>and how you compare to the 50/30/20 rule.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Surplus / deficit · 50/30/20 rule · Savings rate · Category breakdown</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Monthly Budget Calculator</div>
+
+      <!-- Income -->
+      <div style="background:rgba(5,150,105,.03);border:1px solid rgba(5,150,105,.15);border-radius:10px;padding:16px;margin-bottom:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px">Monthly Income (after tax)</div>
+        <div class="form-grid" style="margin-bottom:0">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Take-Home Pay (primary job)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="inc-primary" class="form-input form-input--prefixed" placeholder="4500" min="0" step="100"></div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Other Income (side income, spouse, etc.)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="inc-other" class="form-input form-input--prefixed" placeholder="0" min="0" step="100"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEEDS -->
+      <div class="cat-section">
+        <div class="cat-header needs">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          <span class="cat-title">Needs</span>
+          <span style="font-size:11px;color:var(--ink-3)">— essential expenses (target: 50%)</span>
+          <span class="cat-total" id="total-needs">$0</span>
+        </div>
+        <div id="needs-expenses">
+          <div class="expense-row"><div class="expense-label">Rent / Mortgage</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="1400" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Utilities (electric, gas, water)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="150" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Groceries</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="400" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Transportation (car payment, gas, transit)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="350" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Health Insurance &amp; Medical</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="200" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Phone</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="80" min="0" step="5"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Minimum Debt Payments</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="200" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Other Necessities</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="0" min="0" step="10"></div></div></div>
+        </div>
+      </div>
+
+      <!-- WANTS -->
+      <div class="cat-section">
+        <div class="cat-header wants">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span class="cat-title">Wants</span>
+          <span style="font-size:11px;color:var(--ink-3)">— discretionary (target: 30%)</span>
+          <span class="cat-total" id="total-wants">$0</span>
+        </div>
+        <div id="wants-expenses">
+          <div class="expense-row"><div class="expense-label">Dining Out &amp; Takeout</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="200" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Entertainment &amp; Hobbies</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Streaming &amp; Subscriptions</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="50" min="0" step="5"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Gym &amp; Fitness</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="50" min="0" step="5"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Shopping &amp; Clothing</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Travel &amp; Vacations</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Other Wants</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="0" min="0" step="10"></div></div></div>
+        </div>
+      </div>
+
+      <!-- SAVINGS -->
+      <div class="cat-section">
+        <div class="cat-header savings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+          <span class="cat-title">Savings &amp; Debt Payoff</span>
+          <span style="font-size:11px;color:var(--ink-3)">— future (target: 20%)</span>
+          <span class="cat-total" id="total-savings">$0</span>
+        </div>
+        <div>
+          <div class="expense-row"><div class="expense-label">Emergency Fund Savings</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="200" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Retirement (401k / IRA)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="300" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Extra Debt Payments</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="100" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Investments / Brokerage</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="0" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Other Savings Goals</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="0" min="0" step="50"></div></div></div>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-budget-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+        Calculate Budget
+      </button>
+
+      <div id="budget-results" style="display:none;margin-top:24px">
+        <!-- Hero -->
+        <div class="budget-hero" id="budget-hero">
+          <div class="budget-amount" id="budget-amount">$0</div>
+          <div class="budget-status" id="budget-status">—</div>
+        </div>
+
+        <!-- 50/30/20 rule cards -->
+        <div class="form-label" style="margin-bottom:8px">Your Allocation vs 50/30/20 Rule</div>
+        <div class="rule-cards" id="rule-cards"></div>
+
+        <!-- Visual bars -->
+        <div class="allocation-bars" style="margin-top:20px" id="alloc-bars"></div>
+
+        <!-- Summary metrics -->
+        <div id="budget-summary" style="margin-top:8px"></div>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>The 50/30/20 Rule Explained</h2>
+        <p>Popularized by Senator Elizabeth Warren, the 50/30/20 rule is a simple budgeting framework. Split your after-tax income into three buckets:</p>
+        <ul>
+          <li><strong>50% Needs:</strong> Housing, utilities, groceries, transportation, insurance, minimum debt payments</li>
+          <li><strong>30% Wants:</strong> Dining out, entertainment, subscriptions, shopping, hobbies, vacations</li>
+          <li><strong>20% Savings/Debt:</strong> Emergency fund, retirement contributions, extra debt payments, investments</li>
+        </ul>
+        <p>It's a guide, not a law. High cost-of-living areas may require 60–65% on needs. Early debt payoff phases may push savings above 30%. The framework helps identify which category is out of balance.</p>
+        <p><strong>Related:</strong> <a href="/retirement-calculator">Retirement Calculator</a> · <a href="/debt-payoff-calculator">Debt Payoff Calculator</a> · <a href="/take-home-pay-calculator">Take-Home Pay Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Budget calculator questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is the 50/30/20 budget rule?</summary><div class="faq-a">Allocate after-tax income: 50% to needs (rent, utilities, groceries, minimum debt payments), 30% to wants (dining, entertainment, subscriptions), 20% to savings and extra debt payoff. It's a starting point — adjust based on your situation.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is a good savings rate?</summary><div class="faq-a">20% of take-home pay is the standard target. 15% is the minimum for retirement savings alone. High earners and early-retirement chasers often save 40–70%+. The best savings rate is the highest one you can sustain without feeling deprived.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What counts as a need vs a want?</summary><div class="faq-a">Needs: housing, utilities, groceries, minimum debt payments, health insurance, basic transportation. Wants: restaurants, streaming, gym, shopping, entertainment, vacations. Gray areas: internet (need for remote work, want for gaming), clothing (need for basics, want for fashion). When in doubt, ask: "Would my life suffer significantly without this for 3 months?"</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What should I do if I have a budget deficit?</summary><div class="faq-a">Priority order: (1) Cut wants first — subscriptions and dining are most flexible. (2) Reduce wants further before touching savings rate. (3) Only reduce savings as a last resort. (4) Look for ways to increase income. A persistent deficit requires either cutting expenses or earning more — there's no third option.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free calculators for personal finance, payroll, and business.</div></div>
+      <div><div class="footer-col-title">Personal Finance</div><ul class="footer-links"><li><a href="/budget-calculator">Budget Calculator</a></li><li><a href="/retirement-calculator">Retirement Calculator</a></li><li><a href="/debt-payoff-calculator">Debt Payoff</a></li><li><a href="/savings-calculator">Savings Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Payroll Tools</div><ul class="footer-links"><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/payroll-tax-calculator">Payroll Tax</a></li><li><a href="/salary-to-hourly-calculator">Salary to Hourly</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  function fmt(n){return '$'+(Math.abs(Math.round(n))).toLocaleString('en-US');}
+  function fmtP(n){return Math.round(n)+'%';}
+
+  // Live running totals
+  function sumCat(cat){
+    var total=0;
+    document.querySelectorAll('input[data-cat="'+cat+'"]').forEach(function(inp){total+=(parseFloat(inp.value)||0);});
+    return total;
+  }
+  function updateTotals(){
+    document.getElementById('total-needs').textContent=fmt(sumCat('needs'));
+    document.getElementById('total-wants').textContent=fmt(sumCat('wants'));
+    document.getElementById('total-savings').textContent=fmt(sumCat('savings'));
+  }
+  document.querySelectorAll('.budget-input').forEach(function(inp){inp.addEventListener('input',updateTotals);});
+  document.getElementById('inc-primary').addEventListener('input',updateTotals);
+  document.getElementById('inc-other').addEventListener('input',updateTotals);
+
+  document.getElementById('calc-budget-btn').addEventListener('click',function(){
+    var income=(parseFloat(document.getElementById('inc-primary').value)||0)+(parseFloat(document.getElementById('inc-other').value)||0);
+    if(income<=0){alert('Enter your monthly income.');return;}
+    var needs=sumCat('needs');
+    var wants=sumCat('wants');
+    var savings=sumCat('savings');
+    var totalExpenses=needs+wants+savings;
+    var surplus=income-totalExpenses;
+    var savingsRate=income>0?(savings/income*100):0;
+
+    // Hero
+    var heroEl=document.getElementById('budget-hero');
+    var cls=surplus>0?'surplus':surplus<0?'deficit':'balanced';
+    heroEl.className='budget-hero '+cls;
+    document.getElementById('budget-amount').className='budget-amount '+cls;
+    document.getElementById('budget-amount').textContent=(surplus>=0?'':'-')+fmt(Math.abs(surplus));
+    document.getElementById('budget-status').textContent=surplus>0?'Monthly Surplus — great job!':surplus<0?'Monthly Deficit — spending exceeds income':'Balanced Budget — at break-even';
+
+    // 50/30/20 rule cards
+    var targets={needs:50,wants:30,savings:20};
+    var actuals={needs:income>0?(needs/income*100):0,wants:income>0?(wants/income*100):0,savings:income>0?(savings/income*100):0};
+    var targetAmts={needs:income*0.5,wants:income*0.3,savings:income*0.2};
+    document.getElementById('rule-cards').innerHTML=[
+      {cat:'needs',label:'Needs',cls:'needs-card'},
+      {cat:'wants',label:'Wants',cls:'wants-card'},
+      {cat:'savings',label:'Savings',cls:'savings-card'},
+    ].map(function(c){
+      var act=actuals[c.cat];
+      var tgt=targets[c.cat];
+      var diff=act-tgt;
+      var badgeClass=Math.abs(diff)<2?'sb-ok':diff>0?'sb-over':'sb-under';
+      var badgeText=Math.abs(diff)<2?'On target':diff>0?'+'+Math.round(diff)+'% over':Math.round(-diff)+'% under target';
+      return '<div class="rule-card '+c.cls+'">'
+        +'<div class="rule-num">'+fmtP(act)+'</div>'
+        +'<div class="rule-label">'+c.label+'</div>'
+        +'<div class="rule-sub">target: '+tgt+'% · '+fmt(targetAmts[c.cat])+'</div>'
+        +'<div class="status-badge '+badgeClass+'">'+badgeText+'</div>'
+        +'</div>';
+    }).join('');
+
+    // Allocation bars
+    var categories=[
+      {name:'Needs (50% target)',actual:actuals.needs,target:50,color:'var(--accent)',amount:needs},
+      {name:'Wants (30% target)',actual:actuals.wants,target:30,color:'var(--amber)',amount:wants},
+      {name:'Savings (20% target)',actual:actuals.savings,target:20,color:'var(--green)',amount:savings},
+    ];
+    var barsHtml='';
+    categories.forEach(function(c){
+      var pct=Math.min(c.actual,100);
+      barsHtml+='<div class="alloc-row">'
+        +'<div class="alloc-header"><span class="alloc-name">'+c.name+'</span><span class="alloc-pcts">'+fmtP(c.actual)+' ('+fmt(c.amount)+')</span></div>'
+        +'<div class="alloc-track">'
+        +'<div class="alloc-actual" style="width:'+pct+'%;background:'+c.color+'">'
+        +'<div class="alloc-target-line" style="left:'+Math.min(c.target/Math.max(pct,1)*100,100)+'%"></div>'
+        +'</div></div></div>';
+    });
+    document.getElementById('alloc-bars').innerHTML=barsHtml;
+
+    // Summary
+    document.getElementById('budget-summary').innerHTML=[
+      {label:'Total Income',val:fmt(income)},
+      {label:'Total Expenses',val:fmt(totalExpenses)},
+      {label:'Savings Rate',val:fmtP(savingsRate)},
+      {label:'Monthly Surplus',val:(surplus>=0?'':'-')+fmt(Math.abs(surplus))},
+    ].map(function(m){
+      return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--ink-2)">'+m.label+'</span><strong style="font-family:var(--font-mono,monospace)">'+m.val+'</strong></div>';
+    }).join('');
+
+    document.getElementById('budget-results').style.display='block';
+    document.getElementById('budget-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>

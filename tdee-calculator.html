@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TDEE Calculator — Total Daily Energy Expenditure &amp; Calorie Goals | FreePayrollCalc</title>
+<meta name="description" content="Free TDEE calculator. Calculate your Total Daily Energy Expenditure using the Mifflin-St Jeor BMR formula. Get calorie targets for weight loss, maintenance, and muscle gain. Includes macro breakdown.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/tdee-calculator">
+<meta property="og:title" content="TDEE Calculator — Calorie Needs for Weight Loss, Maintenance & Gain">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"TDEE Calculator","url":"https://www.freepayrollcalc.com/tdee-calculator","description":"Calculate Total Daily Energy Expenditure (TDEE) and BMR using the Mifflin-St Jeor formula. Get personalized calorie goals for weight loss, maintenance, and muscle gain.","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is TDEE?","acceptedAnswer":{"@type":"Answer","text":"TDEE (Total Daily Energy Expenditure) is the total number of calories your body burns in a day including your base metabolic rate (BMR) plus all physical activity. To lose weight, eat below your TDEE. To gain weight, eat above it. To maintain weight, eat at TDEE."}},{"@type":"Question","name":"What is the Mifflin-St Jeor formula?","acceptedAnswer":{"@type":"Answer","text":"Men: BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5. Women: BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age − 161. This is the most accurate BMR formula for general use. TDEE = BMR × activity multiplier (1.2 to 1.9 depending on exercise level)."}},{"@type":"Question","name":"How many calories should I eat to lose weight?","acceptedAnswer":{"@type":"Answer","text":"A 500 calorie/day deficit produces approximately 1 lb/week of fat loss. A 1,000 calorie deficit = ~2 lbs/week. Most experts recommend no more than a 1,000 calorie daily deficit. Eating below 1,200 calories (women) or 1,500 calories (men) is generally not recommended without medical supervision."}},{"@type":"Question","name":"What is the difference between BMR and TDEE?","acceptedAnswer":{"@type":"Answer","text":"BMR (Basal Metabolic Rate) is the calories you burn at complete rest — just to maintain basic biological functions (breathing, circulation, cell repair). TDEE includes BMR plus all energy used for daily activities, exercise, and the thermic effect of food. TDEE is always higher than BMR."}},{"@type":"Question","name":"How accurate is the TDEE calculator?","acceptedAnswer":{"@type":"Answer","text":"The Mifflin-St Jeor formula is accurate to within ±10% for most people. Major sources of error are: incorrect activity multiplier selection (the most common mistake), body composition differences (muscular people have higher BMR than predicted), and medical conditions. Track your actual weight for 2–4 weeks and adjust calorie targets based on real results."}}]}
+</script>
+<style>
+.sex-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px;width:fit-content}
+.sex-btn{padding:9px 24px;text-align:center;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s;color:var(--ink-3);background:transparent;border:none}
+.sex-btn.active{background:var(--accent);color:#fff}
+.unit-toggle{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--ink-3);margin-bottom:20px}
+.unit-btn{padding:5px 12px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;background:var(--surface);color:var(--ink-3);transition:all .18s}
+.unit-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.activity-cards{display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:16px}
+.activity-card{border:2px solid var(--border);border-radius:10px;padding:11px 14px;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:10px}
+.activity-card:hover{border-color:rgba(27,79,216,.3)}
+.activity-card.selected{border-color:var(--accent);background:rgba(27,79,216,.04)}
+.activity-card-label{font-size:13px;font-weight:700;color:var(--ink-1)}
+.activity-card-desc{font-size:12px;color:var(--ink-3)}
+.activity-mult{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--ink-3);margin-left:auto;flex-shrink:0}
+.tdee-hero{text-align:center;background:linear-gradient(135deg,rgba(27,79,216,.06),rgba(27,79,216,.02));border:1px solid rgba(27,79,216,.15);border-radius:14px;padding:28px 20px;margin-bottom:16px}
+.tdee-number{font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;color:var(--accent);line-height:1}
+.tdee-label{font-size:13px;font-weight:600;color:var(--ink-2);margin-top:6px}
+.calorie-goals{display:grid;grid-template-columns:1fr;gap:6px}
+.goal-row{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:8px;border:1px solid var(--border)}
+.goal-row.maintenance{border-color:rgba(27,79,216,.2);background:rgba(27,79,216,.03)}
+.goal-label{font-size:13px;font-weight:600}
+.goal-label-sub{font-size:11px;color:var(--ink-3)}
+.goal-cal{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700}
+.goal-cal.lose-fast{color:var(--red)}
+.goal-cal.lose-slow{color:var(--amber)}
+.goal-cal.maintain{color:var(--accent)}
+.goal-cal.gain-slow{color:var(--green)}
+.goal-cal.gain-fast{color:#059669}
+.macro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.macro-card{border-radius:10px;padding:14px;text-align:center}
+.macro-card.protein{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.15)}
+.macro-card.carbs{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.15)}
+.macro-card.fat{background:rgba(27,79,216,.06);border:1px solid rgba(27,79,216,.15)}
+.macro-g{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700}
+.macro-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+.macro-card.protein .macro-g,.macro-card.protein .macro-label{color:#dc2626}
+.macro-card.carbs .macro-g,.macro-card.carbs .macro-label{color:var(--amber)}
+.macro-card.fat .macro-g,.macro-card.fat .macro-label{color:var(--accent)}
+.macro-kcal{font-size:11px;color:var(--ink-3);margin-top:2px}
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:12px}
+.metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--ink-1)}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/tdee-calculator" class="active">TDEE</a>
+        <a href="/body-fat-calculator">Body Fat</a>
+        <a href="/gpa-calculator">GPA</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/tdee-calculator" class="active">TDEE Calculator</a>
+    <a href="/body-fat-calculator">Body Fat Calculator</a>
+    <a href="/gpa-calculator">GPA Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">TDEE Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>TDEE Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate your Total Daily Energy Expenditure — calories you burn each day.<br>Get personalized targets for weight loss, maintenance, and muscle gain.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Mifflin-St Jeor formula · BMR + TDEE · Calorie goals · Macro breakdown</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>TDEE Calculator</div>
+
+      <div class="sex-toggle">
+        <button class="sex-btn active" id="btn-male">Male</button>
+        <button class="sex-btn" id="btn-female">Female</button>
+      </div>
+      <div class="unit-toggle">
+        Units:
+        <button class="unit-btn active" id="btn-imperial">Imperial (lb / in)</button>
+        <button class="unit-btn" id="btn-metric">Metric (kg / cm)</button>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Age</label>
+          <div class="input-wrap"><input type="number" id="td-age" class="form-input form-input--suffixed" placeholder="30" min="15" max="100" step="1"><span class="input-suffix">yrs</span></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Height</label>
+          <div class="input-wrap"><input type="number" id="td-height" class="form-input form-input--suffixed" placeholder="70" min="48" max="96" step="0.5"><span class="input-suffix unit-h">in</span></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Weight</label>
+          <div class="input-wrap"><input type="number" id="td-weight" class="form-input form-input--suffixed" placeholder="170" min="50" max="600" step="0.5"><span class="input-suffix unit-w">lb</span></div>
+        </div>
+      </div>
+
+      <div class="form-label" style="margin-bottom:10px">Activity Level</div>
+      <div class="activity-cards" id="activity-cards">
+        <div class="activity-card" data-mult="1.2"><div><div class="activity-card-label">Sedentary</div><div class="activity-card-desc">Desk job, little or no exercise</div></div><div class="activity-mult">×1.2</div></div>
+        <div class="activity-card selected" data-mult="1.375"><div><div class="activity-card-label">Lightly Active</div><div class="activity-card-desc">Light exercise 1–3 days/week</div></div><div class="activity-mult">×1.375</div></div>
+        <div class="activity-card" data-mult="1.55"><div><div class="activity-card-label">Moderately Active</div><div class="activity-card-desc">Moderate exercise 3–5 days/week</div></div><div class="activity-mult">×1.55</div></div>
+        <div class="activity-card" data-mult="1.725"><div><div class="activity-card-label">Very Active</div><div class="activity-card-desc">Hard exercise 6–7 days/week</div></div><div class="activity-mult">×1.725</div></div>
+        <div class="activity-card" data-mult="1.9"><div><div class="activity-card-label">Extra Active</div><div class="activity-card-desc">Athlete / physical job / 2× daily training</div></div><div class="activity-mult">×1.9</div></div>
+      </div>
+
+      <button class="calc-btn" id="calc-tdee-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        Calculate TDEE
+      </button>
+
+      <div id="tdee-results" style="display:none;margin-top:24px">
+        <div class="tdee-hero">
+          <div class="tdee-number" id="tdee-num">—</div>
+          <div class="tdee-label">calories / day (TDEE)</div>
+        </div>
+        <div class="metrics-row" id="tdee-metrics"></div>
+
+        <div class="form-label" style="margin-bottom:8px">Calorie Goals</div>
+        <div class="calorie-goals" id="calorie-goals"></div>
+
+        <div style="margin-top:20px">
+          <div class="form-label" style="margin-bottom:4px">Macro Breakdown — Maintenance Calories</div>
+          <p style="font-size:12px;color:var(--ink-3);margin-bottom:8px">Based on standard 40% carbs / 30% protein / 30% fat split. Adjust for your specific goals.</p>
+          <div class="macro-grid" id="macro-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>What is TDEE and How to Use It</h2>
+        <p>TDEE is the total calories you burn in a day. Eat below it to lose weight; eat above it to gain weight. It's the most important number in nutrition — not any specific diet rule.</p>
+        <h3>Mifflin-St Jeor BMR Formula</h3>
+        <p><strong>Men:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5</p>
+        <p><strong>Women:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age − 161</p>
+        <p>BMR is what you'd burn doing nothing. Multiply by your activity factor (1.2–1.9) to get TDEE.</p>
+        <h3>The activity multiplier is the hardest part</h3>
+        <p>Most people overestimate their activity level. "Moderately active" means 3–5 hard workouts per week, not 3 light walks. When in doubt, choose a lower activity level and adjust based on real results after 2–4 weeks of tracking.</p>
+        <h3>How fast should you lose weight?</h3>
+        <p>1 lb of fat = ~3,500 calories. A 500 cal/day deficit = ~1 lb/week. A 1,000 cal/day deficit = ~2 lbs/week (the safe maximum for most people). Losing faster than 2 lbs/week typically means losing muscle along with fat.</p>
+        <p><strong>Related:</strong> <a href="/body-fat-calculator">Body Fat Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">TDEE calculator questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is TDEE?</summary><div class="faq-a">Total Daily Energy Expenditure — all the calories you burn in a day. It includes your BMR (base metabolism) plus energy from movement, exercise, and digesting food. To lose weight, eat below TDEE. To gain, eat above it.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is the most accurate BMR formula?</summary><div class="faq-a">The Mifflin-St Jeor equation (used here) is considered the most accurate for the general population, validated in multiple clinical studies. The Harris-Benedict formula (older, 1919) tends to overestimate by 5–15%. Neither accounts for body composition — very muscular people will have higher actual BMR than predicted.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How many calories to lose 1 lb per week?</summary><div class="faq-a">Eat TDEE minus 500 calories per day. 500 × 7 = 3,500 calories/week ≈ 1 lb of fat. For 2 lbs/week, eat TDEE minus 1,000. Going beyond that risks muscle loss, fatigue, and metabolic adaptation.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">Why is my TDEE not matching my actual weight change?</summary><div class="faq-a">Common reasons: (1) You selected too high an activity multiplier. (2) Your food tracking has errors — restaurant meals especially. (3) Metabolic adaptation — long-term calorie restriction lowers BMR. (4) Water weight masking fat changes short-term. Track for 4 weeks consistently before adjusting your targets.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free calculators for health, business, and finance. Updated 2026.</div></div>
+      <div><div class="footer-col-title">Health Tools</div><ul class="footer-links"><li><a href="/tdee-calculator">TDEE Calculator</a></li><li><a href="/body-fat-calculator">Body Fat Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Finance Tools</div><ul class="footer-links"><li><a href="/retirement-calculator">Retirement Calculator</a></li><li><a href="/budget-calculator">Budget Calculator</a></li><li><a href="/debt-payoff-calculator">Debt Payoff</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. Not medical advice — consult a healthcare provider.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var sex='male', unit='imperial', actMult=1.375;
+
+  document.getElementById('btn-male').addEventListener('click',function(){sex='male';this.classList.add('active');document.getElementById('btn-female').classList.remove('active');});
+  document.getElementById('btn-female').addEventListener('click',function(){sex='female';this.classList.add('active');document.getElementById('btn-male').classList.remove('active');});
+
+  document.getElementById('btn-imperial').addEventListener('click',function(){
+    unit='imperial';this.classList.add('active');document.getElementById('btn-metric').classList.remove('active');
+    document.querySelector('.unit-h').textContent='in';document.querySelector('.unit-w').textContent='lb';
+    document.getElementById('td-height').placeholder='70';document.getElementById('td-weight').placeholder='170';
+  });
+  document.getElementById('btn-metric').addEventListener('click',function(){
+    unit='metric';this.classList.add('active');document.getElementById('btn-imperial').classList.remove('active');
+    document.querySelector('.unit-h').textContent='cm';document.querySelector('.unit-w').textContent='kg';
+    document.getElementById('td-height').placeholder='178';document.getElementById('td-weight').placeholder='77';
+  });
+
+  document.querySelectorAll('.activity-card').forEach(function(card){
+    card.addEventListener('click',function(){
+      document.querySelectorAll('.activity-card').forEach(function(c){c.classList.remove('selected');});
+      card.classList.add('selected');
+      actMult=parseFloat(card.dataset.mult);
+    });
+  });
+
+  function fmt(n){return Math.round(n).toLocaleString('en-US');}
+
+  document.getElementById('calc-tdee-btn').addEventListener('click',function(){
+    var age=parseFloat(document.getElementById('td-age').value)||0;
+    var h=parseFloat(document.getElementById('td-height').value)||0;
+    var w=parseFloat(document.getElementById('td-weight').value)||0;
+    if(!age||!h||!w){alert('Enter age, height, and weight.');return;}
+    var wKg=unit==='metric'?w:w*0.453592;
+    var hCm=unit==='metric'?h:h*2.54;
+    var bmr;
+    if(sex==='male') bmr=10*wKg+6.25*hCm-5*age+5;
+    else bmr=10*wKg+6.25*hCm-5*age-161;
+    var tdee=bmr*actMult;
+
+    document.getElementById('tdee-num').textContent=fmt(tdee);
+    document.getElementById('tdee-metrics').innerHTML=[
+      {label:'BMR',val:fmt(bmr)+' cal'},
+      {label:'Activity Factor',val:'×'+actMult},
+      {label:'Weekly Burn',val:fmt(tdee*7)+' cal'},
+    ].map(function(m){return '<div class="metric-cell"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.val+'</div></div>';}).join('');
+
+    var goals=[
+      {label:'Aggressive Fat Loss',sub:'~2 lbs/week · extreme deficit',cal:tdee-1000,cls:'lose-fast'},
+      {label:'Moderate Fat Loss',sub:'~1 lb/week · recommended',cal:tdee-500,cls:'lose-slow'},
+      {label:'Maintenance',sub:'maintain current weight',cal:tdee,cls:'maintain',highlight:true},
+      {label:'Lean Bulk',sub:'~0.5 lb/week muscle gain',cal:tdee+250,cls:'gain-slow'},
+      {label:'Muscle Building',sub:'~1 lb/week gain',cal:tdee+500,cls:'gain-fast'},
+    ];
+    document.getElementById('calorie-goals').innerHTML=goals.map(function(g){
+      return '<div class="goal-row'+(g.highlight?' maintenance':'')+'"><div><div class="goal-label">'+g.label+'</div><div class="goal-label-sub">'+g.sub+'</div></div><div class="goal-cal '+g.cls+'">'+fmt(g.cal)+' cal/day</div></div>';
+    }).join('');
+
+    // Macros at maintenance
+    var proteinCal=tdee*0.30, carbsCal=tdee*0.40, fatCal=tdee*0.30;
+    document.getElementById('macro-grid').innerHTML=
+      '<div class="macro-card protein"><div class="macro-g">'+Math.round(proteinCal/4)+'g</div><div class="macro-label">Protein</div><div class="macro-kcal">'+fmt(proteinCal)+' kcal · 30%</div></div>'
+      +'<div class="macro-card carbs"><div class="macro-g">'+Math.round(carbsCal/4)+'g</div><div class="macro-label">Carbs</div><div class="macro-kcal">'+fmt(carbsCal)+' kcal · 40%</div></div>'
+      +'<div class="macro-card fat"><div class="macro-g">'+Math.round(fatCal/9)+'g</div><div class="macro-label">Fat</div><div class="macro-kcal">'+fmt(fatCal)+' kcal · 30%</div></div>';
+
+    document.getElementById('tdee-results').style.display='block';
+    document.getElementById('tdee-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>

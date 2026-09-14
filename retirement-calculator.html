@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Retirement Calculator — Savings, Monthly Income &amp; 4% Rule | FreePayrollCalc</title>
+<meta name="description" content="Free retirement calculator. Project your retirement savings, calculate monthly income using the 4% withdrawal rule, and see how contributions grow over time. Includes inflation-adjusted values.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/retirement-calculator">
+<meta property="og:title" content="Retirement Calculator — Savings Growth & Monthly Income Projection">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Retirement Calculator","url":"https://www.freepayrollcalc.com/retirement-calculator","description":"Project retirement savings growth, calculate monthly income using the 4% withdrawal rule, and see inflation-adjusted values. Compare scenarios with different contribution amounts.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much do I need to retire?","acceptedAnswer":{"@type":"Answer","text":"The most common rule is 25× your annual expenses (the '4% rule'). If you spend $60,000/year, you need $1.5M. This assumes a 4% annual withdrawal rate from a diversified portfolio, which historically has lasted 30+ years in most market scenarios. More conservative planners use 3–3.5% withdrawal (requires 28–33× expenses)."}},{"@type":"Question","name":"What is the 4% rule?","acceptedAnswer":{"@type":"Answer","text":"The 4% rule states you can withdraw 4% of your retirement portfolio in the first year, then adjust for inflation each year, and have a high probability of not running out of money over 30 years. It was derived from the 'Trinity Study' (1998) analyzing historical stock/bond portfolio returns. Critics note it may be less reliable in low-return environments."}},{"@type":"Question","name":"How much should I save for retirement?","acceptedAnswer":{"@type":"Answer","text":"Most financial planners recommend saving 15% of gross income (including employer match) for retirement, starting in your 20s. Common milestones: 1× salary by 30, 3× by 40, 6× by 50, 8× by 60, 10× by 67. The earlier you start, the more compound growth does the work."}},{"@type":"Question","name":"What is a realistic retirement investment return?","acceptedAnswer":{"@type":"Answer","text":"Historical S&P 500 average: ~10% nominal, ~7% real (inflation-adjusted). A diversified 80/20 stock/bond portfolio historically returns ~7–8% nominal. The calculator uses 7% as the default real return. Adjust based on your risk tolerance and asset allocation."}},{"@type":"Question","name":"How does compound interest affect retirement savings?","acceptedAnswer":{"@type":"Answer","text":"Compound interest means you earn returns on your returns. $10,000 at 7% per year doubles every ~10 years. After 30 years it grows to ~$76,000 — 7.6× the original. This is why starting early matters enormously: a 25-year-old saving $500/month will have far more at 65 than a 35-year-old saving $1,000/month."}}]}
+</script>
+<style>
+.ret-hero{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.ret-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
+.ret-card.primary{border-color:rgba(5,150,105,.3);background:rgba(5,150,105,.03)}
+.ret-big{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1;color:var(--accent)}
+.ret-big.green{color:var(--green)}
+.ret-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-top:6px}
+.ret-sub{font-size:12px;color:var(--ink-2);margin-top:3px}
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--ink-1)}
+.growth-chart{margin:16px 0}
+.gc-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.gc-age{font-size:11px;color:var(--ink-3);width:50px;flex-shrink:0;text-align:right}
+.gc-bar-wrap{flex:1;background:var(--bg);border-radius:4px;height:16px;overflow:hidden;border:1px solid var(--border)}
+.gc-bar-total{height:100%;background:var(--accent);border-radius:4px;transition:width .4s ease;position:relative}
+.gc-bar-contrib{height:100%;background:var(--green);border-radius:4px;position:absolute;left:0;top:0}
+.gc-val{font-family:'JetBrains Mono',monospace;font-size:11px;width:80px;flex-shrink:0;font-weight:600}
+.rule4-section{background:rgba(5,150,105,.04);border:1px solid rgba(5,150,105,.15);border-radius:12px;padding:18px;margin-top:16px}
+.rule4-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px}
+.rule4-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.rule4-cell{background:#fff;border:1px solid rgba(5,150,105,.15);border-radius:8px;padding:12px;text-align:center}
+.rule4-rate{font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:4px}
+.rule4-income{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--green)}
+.rule4-annual{font-size:11px;color:var(--ink-3)}
+.milestone-table{width:100%;border-collapse:collapse;font-size:13px}
+.milestone-table th{background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--ink-3);padding:8px 12px;text-align:left;border-bottom:2px solid var(--border)}
+.milestone-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.milestone-table td:not(:first-child){font-family:'JetBrains Mono',monospace;font-weight:600}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/budget-calculator">Budget</a>
+        <a href="/debt-payoff-calculator">Debt Payoff</a>
+        <a href="/retirement-calculator" class="active">Retirement</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/retirement-calculator" class="active">Retirement Calculator</a>
+    <a href="/budget-calculator">Budget Calculator</a>
+    <a href="/debt-payoff-calculator">Debt Payoff Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Retirement Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Retirement Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Project how much your retirement savings will grow and what monthly income you can expect.<br>Includes the 4% withdrawal rule, inflation adjustment, and milestone tracking.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Compound growth · Inflation-adjusted · 4% rule · Savings milestones</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Retirement Calculator</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Current Age</label>
+          <input type="number" id="ret-cur-age" class="form-input" placeholder="35" min="18" max="75" step="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Retirement Age</label>
+          <input type="number" id="ret-ret-age" class="form-input" placeholder="65" min="40" max="80" step="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Retirement Savings</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="ret-savings" class="form-input form-input--prefixed" placeholder="50000" min="0" step="1000"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Monthly Contribution</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="ret-contrib" class="form-input form-input--prefixed" placeholder="500" min="0" step="50"></div>
+          <span class="form-hint">Include employer 401k match</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Expected Annual Return</label>
+          <div class="input-wrap"><input type="number" id="ret-return" class="form-input form-input--suffixed" placeholder="7" min="1" max="15" step="0.5"><span class="input-suffix">%</span></div>
+          <span class="form-hint">7% = historical S&amp;P 500 real return. Use 5–6% for conservative.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Annual Inflation Rate</label>
+          <div class="input-wrap"><input type="number" id="ret-inflation" class="form-input form-input--suffixed" placeholder="3" min="0" max="10" step="0.5"><span class="input-suffix">%</span></div>
+        </div>
+      </div>
+      <button class="calc-btn" id="calc-ret-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+        Calculate Retirement
+      </button>
+
+      <div id="ret-results" style="display:none;margin-top:24px">
+        <div class="ret-hero" id="ret-hero"></div>
+        <div class="metrics-row" id="ret-metrics"></div>
+
+        <!-- Growth chart -->
+        <div class="form-label" style="margin-bottom:6px">Portfolio Growth Over Time</div>
+        <div style="display:flex;gap:12px;font-size:11px;margin-bottom:6px">
+          <span><span style="display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:2px;margin-right:3px"></span>Total Value</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:var(--green);border-radius:2px;margin-right:3px"></span>Contributions</span>
+        </div>
+        <div class="growth-chart" id="growth-chart"></div>
+
+        <!-- 4% rule withdrawals -->
+        <div class="rule4-section" id="rule4-section"></div>
+
+        <!-- Milestones -->
+        <div style="margin-top:16px">
+          <div class="form-label" style="margin-bottom:8px">Savings Milestones</div>
+          <table class="milestone-table">
+            <thead><tr><th>Age</th><th>Years to Retire</th><th>Portfolio Value</th><th>Total Contributed</th><th>Interest Earned</th></tr></thead>
+            <tbody id="milestone-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How Much Do You Need to Retire?</h2>
+        <p>The answer depends entirely on your expenses. The standard framework is the <strong>4% Rule</strong>: multiply your expected annual expenses by 25 to get your target nest egg. Spending $60,000/year in retirement requires $1.5M.</p>
+        <h3>The power of time</h3>
+        <p>At 7% annual return, money doubles every ~10 years. A 25-year-old with $0 who saves $500/month will have more at 65 than a 35-year-old saving $1,000/month. The math favors starting early over saving more.</p>
+        <h3>2026 contribution limits</h3>
+        <ul>
+          <li>401(k): $23,500/year ($31,000 if age 50+)</li>
+          <li>IRA / Roth IRA: $7,000/year ($8,000 if age 50+)</li>
+          <li>SEP-IRA (self-employed): $70,000 or 25% of compensation</li>
+        </ul>
+        <p>Max out tax-advantaged accounts before investing in taxable brokerage. The tax savings compound just as powerfully as investment returns.</p>
+        <p><strong>Related:</strong> <a href="/budget-calculator">Budget Calculator</a> · <a href="/debt-payoff-calculator">Debt Payoff Calculator</a> · <a href="/take-home-pay-calculator">Take Home Pay Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Retirement planning questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How much do I need to retire?</summary><div class="faq-a">The 4% Rule: multiply your annual expenses by 25. $50K/year in retirement = $1.25M needed. $80K/year = $2M. This gives you a ~96% historical success rate of not running out of money over 30 years.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is the 4% withdrawal rule?</summary><div class="faq-a">In retirement, withdraw 4% of your portfolio in year 1, then adjust for inflation each year. Based on the Trinity Study (1998), this strategy survives 30+ years in ~96% of historical 30-year periods using a 50/50 stock/bond portfolio.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What return rate should I use?</summary><div class="faq-a">7% is the approximate historical real return of the S&P 500 after inflation. For a diversified 80/20 stock/bond portfolio: ~6–7%. Conservative estimate: 5%. Never use nominal returns without subtracting inflation — real purchasing power is what matters.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">How does Social Security affect retirement planning?</summary><div class="faq-a">Social Security replaces roughly 40% of pre-retirement income for average earners — less for high earners. Full retirement age is 67 for those born after 1960. Claiming at 62 reduces benefits permanently by ~30%; waiting until 70 increases them by ~24%. Use SSA.gov's My Social Security for a personalized estimate.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free calculators for retirement, business, payroll, and health.</div></div>
+      <div><div class="footer-col-title">Personal Finance</div><ul class="footer-links"><li><a href="/retirement-calculator">Retirement Calculator</a></li><li><a href="/budget-calculator">Budget Calculator</a></li><li><a href="/debt-payoff-calculator">Debt Payoff</a></li><li><a href="/business-loan-calculator">Business Loan</a></li></ul></div>
+      <div><div class="footer-col-title">Payroll Tools</div><ul class="footer-links"><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/payroll-tax-calculator">Payroll Tax</a></li><li><a href="/self-employment-tax-calculator">Self-Employment Tax</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not financial advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  function fmt(n){return '$'+(Math.round(n)).toLocaleString('en-US');}
+  function fmtK(n){if(n>=1000000)return '$'+(n/1000000).toFixed(2)+'M';return '$'+(Math.round(n/1000))+'K';}
+
+  document.getElementById('calc-ret-btn').addEventListener('click',function(){
+    var curAge=parseInt(document.getElementById('ret-cur-age').value)||0;
+    var retAge=parseInt(document.getElementById('ret-ret-age').value)||0;
+    var savings=parseFloat(document.getElementById('ret-savings').value)||0;
+    var monthly=parseFloat(document.getElementById('ret-contrib').value)||0;
+    var annualRate=parseFloat(document.getElementById('ret-return').value)||7;
+    var inflation=parseFloat(document.getElementById('ret-inflation').value)||3;
+    if(!curAge||!retAge||retAge<=curAge){alert('Enter valid ages. Retirement age must be greater than current age.');return;}
+
+    var years=retAge-curAge;
+    var monthlyRate=annualRate/100/12;
+    var months=years*12;
+
+    // FV of existing savings + FV of monthly contributions
+    var fvSavings=savings*Math.pow(1+monthlyRate,months);
+    var fvContrib=monthly>0?monthly*(Math.pow(1+monthlyRate,months)-1)/monthlyRate:0;
+    var totalFV=fvSavings+fvContrib;
+    var totalContrib=savings+monthly*months;
+    var interestEarned=totalFV-totalContrib;
+
+    // Inflation-adjusted (today's dollars)
+    var realFV=totalFV/Math.pow(1+inflation/100,years);
+
+    document.getElementById('ret-hero').innerHTML=
+      '<div class="ret-card primary"><div class="ret-big green">'+fmtK(totalFV)+'</div><div class="ret-label">Projected at Retirement</div><div class="ret-sub">nominal value at age '+retAge+'</div></div>'
+      +'<div class="ret-card"><div class="ret-big">'+fmtK(realFV)+'</div><div class="ret-label">Inflation-Adjusted Value</div><div class="ret-sub">in today\'s dollars (at '+inflation+'% inflation)</div></div>';
+
+    document.getElementById('ret-metrics').innerHTML=[
+      {label:'Years to Retire',val:years+' years'},
+      {label:'Total Contributed',val:fmtK(totalContrib)},
+      {label:'Interest Earned',val:fmtK(interestEarned)},
+      {label:'Growth Multiple',val:(totalFV/Math.max(totalContrib,1)).toFixed(1)+'×'},
+    ].map(function(m){return '<div class="metric-cell"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.val+'</div></div>';}).join('');
+
+    // Growth chart — every 5 years
+    var chartHtml='';
+    var checkpoints=[];
+    for(var y=0;y<=years;y+=Math.max(1,Math.floor(years/8))){
+      checkpoints.push(y);
+    }
+    if(checkpoints[checkpoints.length-1]!==years) checkpoints.push(years);
+    var chartData=checkpoints.map(function(y){
+      var m=y*12;
+      var fvS=savings*Math.pow(1+monthlyRate,m);
+      var fvC=monthly>0?monthly*(Math.pow(1+monthlyRate,m)-1)/monthlyRate:0;
+      var total=fvS+fvC;
+      var contrib=savings+monthly*m;
+      return {age:curAge+y,total:total,contrib:contrib};
+    });
+    var maxVal=chartData[chartData.length-1].total;
+    chartData.forEach(function(d){
+      var pctTotal=d.total/maxVal*100;
+      var pctContrib=d.contrib/maxVal*100;
+      chartHtml+='<div class="gc-row"><div class="gc-age">Age '+d.age+'</div>'
+        +'<div class="gc-bar-wrap"><div class="gc-bar-total" style="width:'+pctTotal+'%"><div class="gc-bar-contrib" style="width:'+Math.min(pctContrib/pctTotal*100,100)+'%"></div></div></div>'
+        +'<div class="gc-val">'+fmtK(d.total)+'</div></div>';
+    });
+    document.getElementById('growth-chart').innerHTML=chartHtml;
+
+    // 4% rule
+    var rule4Html='<div class="rule4-title">4% Withdrawal Rule — Monthly Income Options</div>'
+      +'<div class="rule4-grid">';
+    [3,3.5,4,4.5,5].forEach(function(rate){
+      var annual=totalFV*(rate/100);
+      var monthly2=annual/12;
+      rule4Html+='<div class="rule4-cell"><div class="rule4-rate">'+rate+'% withdrawal</div><div class="rule4-income">'+fmt(monthly2)+'/mo</div><div class="rule4-annual">'+fmtK(annual)+'/yr</div></div>';
+    });
+    rule4Html+='</div><p style="font-size:12px;color:var(--ink-3);margin-top:10px">Nominal portfolio value. Real purchasing power will be lower by inflation factor.</p>';
+    document.getElementById('rule4-section').innerHTML=rule4Html;
+
+    // Milestones table
+    var milestones=[10,20,30,years].filter(function(y){return y<=years&&y>0;});
+    if(milestones[milestones.length-1]!==years) milestones.push(years);
+    var seen={}; milestones=milestones.filter(function(y){if(seen[y])return false;seen[y]=true;return true;});
+    document.getElementById('milestone-tbody').innerHTML=milestones.map(function(y){
+      var m=y*12;
+      var fvS=savings*Math.pow(1+monthlyRate,m);
+      var fvC=monthly>0?monthly*(Math.pow(1+monthlyRate,m)-1)/monthlyRate:0;
+      var tot=fvS+fvC;
+      var contrib=savings+monthly*m;
+      return '<tr><td><strong>Age '+(curAge+y)+'</strong></td><td>'+(years-y)+'</td><td>'+fmtK(tot)+'</td><td>'+fmtK(contrib)+'</td><td>'+fmtK(tot-contrib)+'</td></tr>';
+    }).join('');
+
+    document.getElementById('ret-results').style.display='block';
+    document.getElementById('ret-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPA Calculator — Semester, Cumulative &amp; What-If GPA | FreePayrollCalc</title>
+<meta name="description" content="Free GPA calculator. Calculate semester GPA and cumulative GPA, find what grades you need to reach a target GPA. Supports 4.0 and 5.0 weighted scales with +/- grades.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/gpa-calculator">
+<meta property="og:title" content="GPA Calculator — Semester, Cumulative & What-If GPA">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"GPA Calculator","url":"https://www.freepayrollcalc.com/gpa-calculator","description":"Calculate semester GPA and cumulative GPA. Find what grades you need to reach a target GPA. Supports 4.0 and 5.0 weighted scales.","applicationCategory":"EducationApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is GPA calculated?","acceptedAnswer":{"@type":"Answer","text":"GPA = Sum of (Grade Points × Credit Hours) ÷ Total Credit Hours. Each letter grade converts to grade points: A=4.0, A-=3.7, B+=3.3, B=3.0, B-=2.7, C+=2.3, C=2.0, C-=1.7, D+=1.3, D=1.0, F=0. Multiply grade points by credits, sum all, divide by total credits."}},{"@type":"Question","name":"What is a good GPA?","acceptedAnswer":{"@type":"Answer","text":"3.5–4.0: Excellent, honors/distinction. 3.0–3.5: Good, above average. 2.5–3.0: Satisfactory, average. 2.0–2.5: Below average. Below 2.0: Academic probation risk at most schools. 3.0+ is typically required for graduate school consideration; 3.5+ for competitive programs."}},{"@type":"Question","name":"What grades do I need to raise my GPA?","acceptedAnswer":{"@type":"Answer","text":"Use the What-If calculator above. Generally, raising a GPA significantly requires many credit hours of high grades. A GPA of 2.5 after 60 credits requires a 3.5 GPA over the next 60 credits just to reach 3.0. Start improving early — the impact of new grades diminishes as total credits increase."}},{"@type":"Question","name":"What is the difference between weighted and unweighted GPA?","acceptedAnswer":{"@type":"Answer","text":"Unweighted GPA uses a 4.0 scale regardless of course difficulty. Weighted GPA uses a 5.0 scale where AP/honors classes earn an extra point (A in AP = 5.0 instead of 4.0). Most colleges recalculate GPA on their own scale during admissions, so weighted GPA matters primarily for high school class rank."}},{"@type":"Question","name":"How many credits does it take to raise my GPA?","acceptedAnswer":{"@type":"Answer","text":"It depends on your current GPA and credits completed. The more credits you've already earned, the harder it is to move your GPA. For example: 2.5 GPA after 60 credits requires straight A's (4.0) for 30 more credits just to reach 2.83. Use the what-if calculator for your specific numbers."}}]}
+</script>
+<style>
+.scale-toggle{display:flex;gap:0;background:var(--bg);border-radius:10px;padding:4px;border:1px solid var(--border);margin-bottom:20px;width:fit-content}
+.scale-btn{padding:7px 18px;text-align:center;font-size:13px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .18s;color:var(--ink-3)}
+.scale-btn.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.course-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:8px}
+.course-table th{background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--ink-3);padding:8px 8px;text-align:left;border-bottom:2px solid var(--border)}
+.course-table td{padding:6px 4px;border-bottom:1px solid var(--border);vertical-align:middle}
+.course-table td input,.course-table td select{width:100%}
+.del-btn{background:none;border:none;cursor:pointer;color:var(--red);padding:4px;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.del-btn:hover{background:rgba(220,38,38,.08)}
+.add-course-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface);border:1px dashed var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;transition:all .18s;width:100%;justify-content:center;margin-bottom:16px}
+.add-course-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gpa-hero{text-align:center;background:linear-gradient(135deg,rgba(27,79,216,.06),rgba(27,79,216,.02));border:2px solid transparent;border-radius:14px;padding:28px 20px;margin-bottom:16px;transition:border-color .3s}
+.gpa-hero.honors{border-color:rgba(5,150,105,.3)}
+.gpa-hero.good{border-color:rgba(27,79,216,.3)}
+.gpa-hero.avg{border-color:rgba(217,119,6,.3)}
+.gpa-hero.low{border-color:rgba(220,38,38,.2)}
+.gpa-number{font-family:'JetBrains Mono',monospace;font-size:60px;font-weight:700;line-height:1}
+.gpa-number.honors{color:var(--green)}
+.gpa-number.good{color:var(--accent)}
+.gpa-number.avg{color:var(--amber)}
+.gpa-number.low{color:var(--red)}
+.gpa-label{font-size:13px;font-weight:600;margin-top:6px}
+.gpa-label.honors{color:var(--green)}
+.gpa-label.good{color:var(--accent)}
+.gpa-label.avg{color:var(--amber)}
+.gpa-label.low{color:var(--red)}
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--ink-1)}
+.grade-bar{width:100%;background:var(--bg);border-radius:8px;height:20px;border:1px solid var(--border);overflow:hidden;margin-top:4px;margin-bottom:10px}
+.grade-fill{height:100%;border-radius:8px;background:var(--accent);transition:width .5s ease}
+.whatif-section{background:rgba(27,79,216,.03);border:1px solid rgba(27,79,216,.12);border-radius:12px;padding:18px;margin-top:8px}
+.whatif-result{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent);margin-top:8px}
+.grade-ref-table{width:100%;border-collapse:collapse;font-size:13px}
+.grade-ref-table th{background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--ink-3);padding:8px 12px;text-align:left;border-bottom:2px solid var(--border)}
+.grade-ref-table td{padding:8px 12px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:13px}
+.grade-ref-table td:first-child{font-family:inherit;font-weight:700}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/gpa-calculator" class="active">GPA</a>
+        <a href="/tdee-calculator">TDEE</a>
+        <a href="/body-fat-calculator">Body Fat</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/gpa-calculator" class="active">GPA Calculator</a>
+    <a href="/tdee-calculator">TDEE Calculator</a>
+    <a href="/body-fat-calculator">Body Fat Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">GPA Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>GPA Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate semester GPA, cumulative GPA, and find out what grades you need to hit your target.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Semester &amp; cumulative GPA · What-if calculator · 4.0 &amp; 5.0 scale · +/- grades</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>GPA Calculator</div>
+
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+        <div>
+          <div class="form-label" style="margin-bottom:6px">Scale</div>
+          <div class="scale-toggle">
+            <div class="scale-btn active" data-scale="4">4.0 Scale</div>
+            <div class="scale-btn" data-scale="5">5.0 Weighted</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-label" style="margin-bottom:8px">This Semester's Courses</div>
+      <div style="overflow-x:auto">
+        <table class="course-table">
+          <thead><tr><th>Course Name</th><th style="width:70px">Credits</th><th style="width:90px">Grade</th><th style="width:30px"></th></tr></thead>
+          <tbody id="course-tbody"></tbody>
+        </table>
+      </div>
+      <button class="add-course-btn" id="add-course-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Course
+      </button>
+
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px">
+        <div class="form-label" style="margin-bottom:10px">Previous Cumulative GPA <span style="font-weight:400;color:var(--ink-3)">(optional — leave blank for semester GPA only)</span></div>
+        <div class="form-grid" style="margin-bottom:0">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Current Cumulative GPA</label>
+            <input type="number" id="prev-gpa" class="form-input" placeholder="3.20" min="0" max="5" step="0.01">
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Total Credits Completed</label>
+            <input type="number" id="prev-credits" class="form-input" placeholder="60" min="0" step="1">
+          </div>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-gpa-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
+        Calculate GPA
+      </button>
+
+      <div id="gpa-results" style="display:none;margin-top:24px">
+        <div class="gpa-hero" id="gpa-hero">
+          <div class="gpa-number" id="gpa-num">—</div>
+          <div class="gpa-label" id="gpa-cat">—</div>
+        </div>
+        <div class="metrics-row" id="gpa-metrics"></div>
+
+        <div class="form-label" style="margin-bottom:4px">GPA Scale</div>
+        <div class="grade-bar"><div class="grade-fill" id="gpa-bar"></div></div>
+
+        <div id="gpa-courses-breakdown" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+    <!-- What-If Calculator -->
+    <div class="calc-card" data-enter data-delay="3" style="margin-top:16px">
+      <div class="calc-card-header">What-If GPA Calculator — What Grades Do I Need?</div>
+      <p style="font-size:13px;color:var(--ink-2);margin-bottom:16px">Enter your current GPA info and a target GPA to see what semester GPA you need to reach it.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Current Cumulative GPA</label>
+          <input type="number" id="wi-cur-gpa" class="form-input" placeholder="2.80" min="0" max="5" step="0.01">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Credits Completed So Far</label>
+          <input type="number" id="wi-cur-credits" class="form-input" placeholder="60" min="1" step="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Credits You Will Take</label>
+          <input type="number" id="wi-future-credits" class="form-input" placeholder="15" min="1" step="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Cumulative GPA</label>
+          <input type="number" id="wi-target-gpa" class="form-input" placeholder="3.00" min="0" max="4" step="0.01">
+        </div>
+      </div>
+      <button class="calc-btn" id="calc-wi-btn">Calculate What I Need</button>
+      <div id="wi-result" style="display:none;margin-top:16px">
+        <div class="whatif-section">
+          <div class="form-label">Required Semester GPA</div>
+          <div class="whatif-result" id="wi-needed">—</div>
+          <p id="wi-message" style="font-size:13px;color:var(--ink-2);margin-top:8px"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade reference table -->
+    <div class="calc-card" data-enter data-delay="4" style="margin-top:16px">
+      <div class="calc-card-header">Letter Grade to GPA Points Reference</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div class="form-label" style="margin-bottom:8px">4.0 Scale (Standard)</div>
+          <table class="grade-ref-table">
+            <thead><tr><th>Letter</th><th>Points</th><th>Percent</th></tr></thead>
+            <tbody>
+              <tr><td>A+</td><td>4.0</td><td>97–100%</td></tr>
+              <tr><td>A</td><td>4.0</td><td>93–96%</td></tr>
+              <tr><td>A−</td><td>3.7</td><td>90–92%</td></tr>
+              <tr><td>B+</td><td>3.3</td><td>87–89%</td></tr>
+              <tr><td>B</td><td>3.0</td><td>83–86%</td></tr>
+              <tr><td>B−</td><td>2.7</td><td>80–82%</td></tr>
+              <tr><td>C+</td><td>2.3</td><td>77–79%</td></tr>
+              <tr><td>C</td><td>2.0</td><td>73–76%</td></tr>
+              <tr><td>C−</td><td>1.7</td><td>70–72%</td></tr>
+              <tr><td>D+</td><td>1.3</td><td>67–69%</td></tr>
+              <tr><td>D</td><td>1.0</td><td>60–66%</td></tr>
+              <tr><td>F</td><td>0.0</td><td>Below 60%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="form-label" style="margin-bottom:8px">5.0 Scale (Weighted AP/Honors)</div>
+          <table class="grade-ref-table">
+            <thead><tr><th>Letter</th><th>AP/Honors</th><th>Regular</th></tr></thead>
+            <tbody>
+              <tr><td>A+/A</td><td>5.0</td><td>4.0</td></tr>
+              <tr><td>A−</td><td>4.7</td><td>3.7</td></tr>
+              <tr><td>B+</td><td>4.3</td><td>3.3</td></tr>
+              <tr><td>B</td><td>4.0</td><td>3.0</td></tr>
+              <tr><td>B−</td><td>3.7</td><td>2.7</td></tr>
+              <tr><td>C+</td><td>3.3</td><td>2.3</td></tr>
+              <tr><td>C</td><td>3.0</td><td>2.0</td></tr>
+              <tr><td>C−</td><td>2.7</td><td>1.7</td></tr>
+              <tr><td>D</td><td>1.0</td><td>1.0</td></tr>
+              <tr><td>F</td><td>0.0</td><td>0.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">GPA calculator questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How is GPA calculated?</summary><div class="faq-a">GPA = Σ(Grade Points × Credits) ÷ Total Credits. A in a 3-credit class = 4.0 × 3 = 12 quality points. B in a 4-credit class = 3.0 × 4 = 12 quality points. Total quality points ÷ total credits = GPA.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is a good GPA?</summary><div class="faq-a">3.5–4.0: Excellent, typically earns honors. 3.0–3.5: Good, above average. 2.5–3.0: Satisfactory. Below 2.0: Academic probation risk. Graduate schools typically require 3.0 minimum; competitive programs want 3.5+.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How many credits does it take to raise my GPA?</summary><div class="faq-a">It gets harder the more credits you've completed. With 60 credits at 2.5 GPA, you need a 3.83 semester GPA over 30 more credits just to reach 2.83. Use the What-If calculator for your exact numbers — the answer is almost always "more than you think."</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What is the difference between weighted and unweighted GPA?</summary><div class="faq-a">Unweighted GPA caps at 4.0 regardless of course difficulty. Weighted GPA (5.0 scale) gives extra points for AP, IB, and honors classes — A in AP = 5.0. Most colleges recalculate GPA themselves, so weighted GPA mainly matters for high school class rank.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free calculators for school, health, business, and finance.</div></div>
+      <div><div class="footer-col-title">Health &amp; Education</div><ul class="footer-links"><li><a href="/gpa-calculator">GPA Calculator</a></li><li><a href="/tdee-calculator">TDEE Calculator</a></li><li><a href="/body-fat-calculator">Body Fat Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Finance Tools</div><ul class="footer-links"><li><a href="/retirement-calculator">Retirement Calculator</a></li><li><a href="/budget-calculator">Budget Calculator</a></li><li><a href="/debt-payoff-calculator">Debt Payoff</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var courses=[], nextId=1, scale=4;
+  var GRADES_4={
+    'A+':4.0,'A':4.0,'A-':3.7,'B+':3.3,'B':3.0,'B-':2.7,
+    'C+':2.3,'C':2.0,'C-':1.7,'D+':1.3,'D':1.0,'D-':0.7,'F':0.0
+  };
+  var GRADES_5={
+    'A+':5.0,'A':5.0,'A-':4.7,'B+':4.3,'B':4.0,'B-':3.7,
+    'C+':3.3,'C':3.0,'C-':2.7,'D+':1.3,'D':1.0,'D-':0.7,'F':0.0
+  };
+  var GRADE_OPTS=['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F'];
+
+  document.querySelectorAll('.scale-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      scale=parseInt(btn.dataset.scale);
+      document.querySelectorAll('.scale-btn').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+    });
+  });
+
+  function addCourse(name,credits,grade){
+    var id=nextId++;
+    courses.push({id:id,name:name||'',credits:credits||3,grade:grade||'B'});
+    renderCourses();
+  }
+  function removeCourse(id){
+    courses=courses.filter(function(c){return c.id!==id;});
+    renderCourses();
+  }
+  function renderCourses(){
+    var opts=GRADE_OPTS.map(function(g){return '<option value="'+g+'">'+g+'</option>';}).join('');
+    document.getElementById('course-tbody').innerHTML=courses.map(function(c){
+      return '<tr data-id="'+c.id+'">'
+        +'<td><input type="text" class="form-input" value="'+escHtml(c.name)+'" data-field="name" placeholder="Math 101" style="min-width:120px"></td>'
+        +'<td><input type="number" class="form-input" value="'+c.credits+'" data-field="credits" min="0.5" max="6" step="0.5" style="min-width:60px"></td>'
+        +'<td><select class="form-input" data-field="grade">'+GRADE_OPTS.map(function(g){return '<option value="'+g+'"'+(g===c.grade?' selected':'')+'>'+g+'</option>';}).join('')+'</select></td>'
+        +'<td><button class="del-btn" data-id="'+c.id+'" aria-label="Remove"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>'
+        +'</tr>';
+    }).join('');
+    document.querySelectorAll('#course-tbody input,#course-tbody select').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        var row=inp.closest('tr');
+        var id=parseInt(row.dataset.id);
+        var c=courses.find(function(x){return x.id===id;});
+        if(!c) return;
+        var field=inp.dataset.field;
+        c[field]=field==='name'?inp.value:(field==='grade'?inp.value:parseFloat(inp.value)||0);
+      });
+    });
+    document.querySelectorAll('.del-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){removeCourse(parseInt(btn.dataset.id));});
+    });
+  }
+  function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  document.getElementById('add-course-btn').addEventListener('click',function(){addCourse('',3,'B');});
+
+  // Pre-seed courses
+  addCourse('English 101',3,'A');
+  addCourse('Math 201',4,'B+');
+  addCourse('Biology 101',3,'B');
+  addCourse('History 102',3,'A-');
+  addCourse('CS 150',3,'B+');
+
+  function getPoints(grade){ return (scale===5?GRADES_5:GRADES_4)[grade]||0; }
+  function gpaCategory(g){
+    if(g>=3.5) return {cls:'honors',label:'Honors / Dean\'s List'};
+    if(g>=3.0) return {cls:'good',label:'Good Standing'};
+    if(g>=2.0) return {cls:'avg',label:'Satisfactory'};
+    return {cls:'low',label:'Below Average'};
+  }
+
+  document.getElementById('calc-gpa-btn').addEventListener('click',function(){
+    // Sync from inputs
+    document.querySelectorAll('#course-tbody tr').forEach(function(row){
+      var id=parseInt(row.dataset.id);
+      var c=courses.find(function(x){return x.id===id;});
+      if(!c) return;
+      row.querySelectorAll('input,select').forEach(function(inp){
+        var field=inp.dataset.field;
+        c[field]=field==='name'?inp.value:(field==='grade'?inp.value:parseFloat(inp.value)||0);
+      });
+    });
+    var activeCourses=courses.filter(function(c){return c.credits>0;});
+    if(!activeCourses.length){alert('Add at least one course.');return;}
+
+    var semPoints=0, semCredits=0;
+    activeCourses.forEach(function(c){
+      var pts=getPoints(c.grade);
+      semPoints+=pts*c.credits;
+      semCredits+=c.credits;
+    });
+    var semGpa=semCredits>0?(semPoints/semCredits):0;
+
+    var prevGpa=parseFloat(document.getElementById('prev-gpa').value)||0;
+    var prevCredits=parseFloat(document.getElementById('prev-credits').value)||0;
+    var cumGpa, cumCredits, showCum=prevGpa>0&&prevCredits>0;
+    if(showCum){
+      var prevPoints=prevGpa*prevCredits;
+      cumCredits=prevCredits+semCredits;
+      cumGpa=(prevPoints+semPoints)/cumCredits;
+    }
+
+    var displayGpa=showCum?cumGpa:semGpa;
+    var cat=gpaCategory(displayGpa);
+    var maxScale=scale===5?5:4;
+
+    document.getElementById('gpa-hero').className='gpa-hero '+cat.cls;
+    document.getElementById('gpa-num').className='gpa-number '+cat.cls;
+    document.getElementById('gpa-num').textContent=displayGpa.toFixed(2);
+    document.getElementById('gpa-label').className='gpa-label '+cat.cls;
+    document.getElementById('gpa-label').textContent=cat.label;
+    document.getElementById('gpa-cat').className='gpa-label '+cat.cls;
+    document.getElementById('gpa-cat').textContent=cat.label;
+
+    var metrics=[
+      {label:'Semester GPA',val:semGpa.toFixed(2)},
+      {label:'Semester Credits',val:semCredits},
+    ];
+    if(showCum){
+      metrics.push({label:'Cumulative GPA',val:cumGpa.toFixed(2)});
+      metrics.push({label:'Total Credits',val:cumCredits});
+    }
+    document.getElementById('gpa-metrics').innerHTML=metrics.map(function(m){
+      return '<div class="metric-cell"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.val+'</div></div>';
+    }).join('');
+
+    document.getElementById('gpa-bar').style.width=(displayGpa/maxScale*100)+'%';
+
+    // Course breakdown
+    document.getElementById('gpa-courses-breakdown').innerHTML='<div class="form-label" style="margin-bottom:6px">Course Breakdown</div>'
+      +activeCourses.map(function(c){
+        var pts=getPoints(c.grade);
+        var qp=(pts*c.credits).toFixed(1);
+        return '<div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)">'
+          +'<span>'+escHtml(c.name||'Course')+'</span>'
+          +'<span><strong>'+c.grade+'</strong> · '+c.credits+' cr · '+pts.toFixed(1)+' pts · <span style="color:var(--accent)">'+qp+' QP</span></span>'
+          +'</div>';
+      }).join('');
+
+    document.getElementById('gpa-results').style.display='block';
+    document.getElementById('gpa-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // What-If
+  document.getElementById('calc-wi-btn').addEventListener('click',function(){
+    var curGpa=parseFloat(document.getElementById('wi-cur-gpa').value)||0;
+    var curCredits=parseFloat(document.getElementById('wi-cur-credits').value)||0;
+    var futureCredits=parseFloat(document.getElementById('wi-future-credits').value)||0;
+    var targetGpa=parseFloat(document.getElementById('wi-target-gpa').value)||0;
+    if(!curCredits||!futureCredits||!targetGpa){alert('Fill in all four fields.');return;}
+    var neededPoints=targetGpa*(curCredits+futureCredits)-(curGpa*curCredits);
+    var neededGpa=neededPoints/futureCredits;
+    var maxGpa=scale===5?5.0:4.0;
+    document.getElementById('wi-needed').textContent=neededGpa.toFixed(2)+' / '+maxGpa.toFixed(1);
+    var msg='';
+    if(neededGpa>maxGpa){
+      msg='Not achievable in '+futureCredits+' credits — even straight A\'s won\'t reach '+targetGpa.toFixed(2)+' from '+curGpa.toFixed(2)+' over '+curCredits+' credits. You need more time.';
+      document.getElementById('wi-needed').style.color='var(--red)';
+    } else if(neededGpa>=3.5){
+      msg='Very challenging — you\'ll need mostly A\'s this semester. Achievable but requires consistent strong performance.';
+      document.getElementById('wi-needed').style.color='var(--amber)';
+    } else if(neededGpa>=2.5){
+      msg='Achievable with consistent B+ to A- performance. Focus on your most heavily-weighted courses.';
+      document.getElementById('wi-needed').style.color='var(--accent)';
+    } else {
+      msg='Very attainable. You only need moderate performance to reach your target GPA.';
+      document.getElementById('wi-needed').style.color='var(--green)';
+    }
+    document.getElementById('wi-message').textContent=msg;
+    document.getElementById('wi-result').style.display='block';
+  });
+})();
+</script>
+</body>
+</html>
