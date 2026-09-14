@@ -262,6 +262,11 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://www.freepayrollcalc.com/pay-stub-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://www.freepayrollcalc.com/about</loc>
     <changefreq>yearly</changefreq>
     <priority>0.60</priority>

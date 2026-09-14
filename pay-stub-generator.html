@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Pay Stub Generator 2026 — Printable, No Signup | FreePayrollCalc</title>
+<meta name="description" content="Free pay stub generator — create a professional, printable pay stub instantly. Auto-calculates federal tax, FICA, and state tax. No signup, no watermark.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/pay-stub-generator">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css">
+<style>
+/* ── Layout ─────────────────────────────────────────────────── */
+.psg-layout{display:grid;grid-template-columns:1fr 480px;gap:32px;align-items:start;margin-top:24px}
+@media(max-width:900px){.psg-layout{grid-template-columns:1fr}}
+.psg-form-wrap{display:flex;flex-direction:column;gap:16px}
+.psg-preview-wrap{position:sticky;top:80px}
+
+/* ── Form sections ──────────────────────────────────────────── */
+.psg-section{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.psg-section-head{padding:14px 18px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.psg-section-num{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.psg-section-title{font-weight:700;font-size:14px;flex:1}
+.psg-section-body{padding:18px;display:flex;flex-direction:column;gap:12px}
+.psg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.psg-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:500px){.psg-row,.psg-row-3{grid-template-columns:1fr}}
+.psg-field{display:flex;flex-direction:column;gap:4px}
+.psg-field label{font-size:12px;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+.psg-field input,.psg-field select{padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;outline:none;background:#fff;width:100%;box-sizing:border-box}
+.psg-field input:focus,.psg-field select:focus{border-color:var(--accent)}
+.psg-earnings-row{display:grid;grid-template-columns:1fr auto auto auto auto;gap:8px;align-items:center}
+.psg-earnings-row input{padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none}
+.psg-earnings-row input:focus{border-color:var(--accent)}
+.psg-add-btn{padding:8px 16px;background:var(--surface);border:1px dashed var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--accent);cursor:pointer;text-align:center;width:100%;margin-top:4px}
+.psg-add-btn:hover{background:#EFF6FF;border-color:var(--accent)}
+.psg-remove-btn{width:28px;height:28px;border:none;background:none;cursor:pointer;color:var(--ink-3);font-size:16px;line-height:1;flex-shrink:0}
+.psg-remove-btn:hover{color:var(--red)}
+.psg-toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);cursor:pointer}
+.psg-toggle input{width:16px;height:16px;cursor:pointer}
+.psg-net-display{background:var(--accent);color:#fff;border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center}
+.psg-net-display .label{font-size:13px;font-weight:600;opacity:.85}
+.psg-net-display .value{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700}
+.psg-generate-btn{width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.psg-generate-btn:hover{opacity:.92}
+
+/* ── Pay Stub Preview ────────────────────────────────────────── */
+.psg-preview-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:0;overflow:hidden}
+.psg-preview-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.psg-preview-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+.psg-print-btn{padding:7px 16px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.psg-print-btn:hover{opacity:.9}
+
+/* ── Pay Stub Document ───────────────────────────────────────── */
+.ps-doc{padding:20px;font-size:12px;font-family:inherit;color:#111}
+.ps-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;padding-bottom:14px;border-bottom:2px solid #111}
+.ps-co-name{font-size:15px;font-weight:700;margin-bottom:3px}
+.ps-co-detail{font-size:11px;color:#444;line-height:1.5}
+.ps-doc-title{font-size:18px;font-weight:700;text-align:right;letter-spacing:.05em;margin-bottom:4px}
+.ps-meta{font-size:11px;text-align:right;color:#444;line-height:1.7}
+.ps-meta span{font-weight:700;color:#111}
+.ps-emp-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#F7F8FA;border-radius:6px;padding:10px 12px;margin-bottom:12px;font-size:11px;line-height:1.7}
+.ps-emp-name{font-size:13px;font-weight:700;margin-bottom:2px}
+.ps-label{color:#666;font-weight:500}
+.ps-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:8px}
+.ps-table th{background:#1B4FD8;color:#fff;padding:6px 8px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.ps-table th:last-child,.ps-table th:nth-last-child(2){text-align:right}
+.ps-table td{padding:5px 8px;border-bottom:1px solid #E5E7EB;vertical-align:top}
+.ps-table td:last-child,.ps-table td:nth-last-child(2){text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px}
+.ps-total-row td{background:#F7F8FA;font-weight:700;border-top:2px solid #D1D5DB;border-bottom:none}
+.ps-subtotal-row td{border-top:1px solid #9CA3AF;font-weight:600;color:#374151}
+.ps-net-row{display:flex;justify-content:space-between;align-items:center;background:#111;color:#fff;border-radius:6px;padding:10px 12px;margin-top:10px}
+.ps-net-label{font-weight:700;font-size:12px;letter-spacing:.05em}
+.ps-net-value{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700}
+.ps-disclaimer{font-size:9px;color:#9CA3AF;margin-top:10px;line-height:1.4}
+
+/* ── Print ────────────────────────────────────────────────────── */
+@media print{
+  .site-nav,.site-footer,.psg-form-wrap,h1,.calc-subtitle,.calc-updated,.faq-section,
+  .calc-breadcrumb,.psg-preview-header,.psg-generate-btn,.psg-net-display,
+  .section-header + div,.section-header{display:none!important}
+  .psg-layout{display:block!important}
+  .psg-preview-wrap{position:static!important}
+  .psg-preview-card{border:none!important;border-radius:0!important}
+  .ps-doc{padding:0!important}
+  body{background:#fff!important}
+  main{padding:0!important}
+}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/minimum-wage-by-state">Min Wage</a>
+        <a href="/free-payroll-calculator">Full Payroll</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Free Calculator</a>
+    </div>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb">
+      <a href="/">Home</a><span>›</span>
+      <span aria-current="page">Pay Stub Generator</span>
+    </nav>
+    <h1 class="calc-title" data-enter>Free Pay Stub Generator 2026</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Create a professional, printable pay stub in seconds. Auto-calculates federal tax, FICA, and all 50 state taxes. No signup, no watermark, completely free.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>2026 IRS rates · All 50 states · Print or save as PDF · No signup required</div>
+
+    <div class="psg-layout">
+      <!-- ═══ FORM ═══ -->
+      <div class="psg-form-wrap" data-enter>
+
+        <!-- 1. Company -->
+        <div class="psg-section">
+          <div class="psg-section-head"><div class="psg-section-num">1</div><div class="psg-section-title">Company / Employer Information</div></div>
+          <div class="psg-section-body">
+            <div class="psg-field"><label>Company Name *</label><input type="text" id="coName" placeholder="Acme Corp" oninput="updatePreview()"></div>
+            <div class="psg-row">
+              <div class="psg-field"><label>Street Address</label><input type="text" id="coAddr" placeholder="123 Main Street" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>City, State ZIP</label><input type="text" id="coCityStateZip" placeholder="Austin, TX 78701" oninput="updatePreview()"></div>
+            </div>
+            <div class="psg-row">
+              <div class="psg-field"><label>EIN (optional)</label><input type="text" id="coEIN" placeholder="XX-XXXXXXX" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>Phone (optional)</label><input type="text" id="coPhone" placeholder="(512) 555-0100" oninput="updatePreview()"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Employee -->
+        <div class="psg-section">
+          <div class="psg-section-head"><div class="psg-section-num">2</div><div class="psg-section-title">Employee Information</div></div>
+          <div class="psg-section-body">
+            <div class="psg-row">
+              <div class="psg-field"><label>Employee Name *</label><input type="text" id="empName" placeholder="Jane Smith" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>Employee ID (optional)</label><input type="text" id="empID" placeholder="EMP-001" oninput="updatePreview()"></div>
+            </div>
+            <div class="psg-field"><label>Address</label><input type="text" id="empAddr" placeholder="456 Oak Avenue, Austin, TX 78702" oninput="updatePreview()"></div>
+            <div class="psg-row">
+              <div class="psg-field"><label>SSN (last 4 only)</label><input type="text" id="empSSN" placeholder="1234" maxlength="4" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>Filing Status</label>
+                <select id="filingStatus" onchange="updatePreview()">
+                  <option value="single">Single</option>
+                  <option value="married">Married Filing Jointly</option>
+                  <option value="hoh">Head of Household</option>
+                </select>
+              </div>
+            </div>
+            <div class="psg-row">
+              <div class="psg-field"><label>State (for state tax)</label>
+                <select id="empState" onchange="updatePreview()">
+                  <option value="AL">Alabama</option><option value="AK">Alaska (No Tax)</option>
+                  <option value="AZ">Arizona</option><option value="AR">Arkansas</option>
+                  <option value="CA">California</option><option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option><option value="DE">Delaware</option>
+                  <option value="FL">Florida (No Tax)</option><option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option><option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option><option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option><option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option><option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option><option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option><option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option><option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option><option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option><option value="NV">Nevada (No Tax)</option>
+                  <option value="NH">New Hampshire (No Tax)</option><option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option><option value="NY">New York</option>
+                  <option value="NC">North Carolina</option><option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option><option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option><option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota (No Tax)</option><option value="TN">Tennessee (No Tax)</option>
+                  <option value="TX" selected>Texas (No Tax)</option><option value="UT">Utah</option>
+                  <option value="VT">Vermont</option><option value="VA">Virginia</option>
+                  <option value="WA">Washington (No Tax)</option><option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option><option value="WY">Wyoming (No Tax)</option>
+                  <option value="DC">Washington D.C.</option>
+                </select>
+              </div>
+              <div class="psg-field"><label>Dept / Title (optional)</label><input type="text" id="empTitle" placeholder="Software Engineer" oninput="updatePreview()"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Pay Period -->
+        <div class="psg-section">
+          <div class="psg-section-head"><div class="psg-section-num">3</div><div class="psg-section-title">Pay Period</div></div>
+          <div class="psg-section-body">
+            <div class="psg-row">
+              <div class="psg-field"><label>Period Start *</label><input type="date" id="periodStart" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>Period End *</label><input type="date" id="periodEnd" oninput="updatePreview()"></div>
+            </div>
+            <div class="psg-row">
+              <div class="psg-field"><label>Pay Date *</label><input type="date" id="payDate" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>Pay Frequency</label>
+                <select id="payFreq" onchange="updatePreview()">
+                  <option value="52">Weekly (52×/year)</option>
+                  <option value="26" selected>Biweekly (26×/year)</option>
+                  <option value="24">Semimonthly (24×/year)</option>
+                  <option value="12">Monthly (12×/year)</option>
+                </select>
+              </div>
+            </div>
+            <div class="psg-row">
+              <div class="psg-field"><label>Check / Stub Number</label><input type="text" id="checkNum" placeholder="1001" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>YTD Gross Before This Period ($)</label><input type="number" id="ytdBefore" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Earnings -->
+        <div class="psg-section">
+          <div class="psg-section-head"><div class="psg-section-num">4</div><div class="psg-section-title">Earnings</div></div>
+          <div class="psg-section-body">
+            <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);padding:0 0 4px">
+              <span>Description</span><span>Rate / Salary</span><span>Hours</span><span>Amount</span>
+            </div>
+            <div id="earningsRows">
+              <div class="psg-earnings-row" data-earning>
+                <input type="text" placeholder="Regular" value="Regular" oninput="updatePreview()">
+                <input type="number" placeholder="Rate/hr" step="0.01" min="0" oninput="updatePreview()">
+                <input type="number" placeholder="Hours" step="0.25" min="0" oninput="updatePreview()">
+                <input type="number" placeholder="Amount" step="0.01" min="0" oninput="updatePreview()" readonly style="background:var(--surface);color:var(--ink-2)">
+                <button class="psg-remove-btn" onclick="removeRow(this)" title="Remove">×</button>
+              </div>
+            </div>
+            <button class="psg-add-btn" onclick="addEarningRow()">+ Add Earning (Overtime, Bonus, Commission…)</button>
+          </div>
+        </div>
+
+        <!-- 5. Pre-tax deductions -->
+        <div class="psg-section">
+          <div class="psg-section-head"><div class="psg-section-num">5</div><div class="psg-section-title">Pre-Tax Deductions (Optional)</div></div>
+          <div class="psg-section-body">
+            <p style="font-size:12px;color:var(--ink-3);margin:0 0 8px">Pre-tax deductions reduce taxable income before federal and state taxes are calculated.</p>
+            <div class="psg-row">
+              <div class="psg-field"><label>401(k) / 403(b)</label><input type="number" id="ded401k" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>Health Insurance</label><input type="number" id="dedHealth" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+            </div>
+            <div class="psg-row">
+              <div class="psg-field"><label>HSA / FSA</label><input type="number" id="dedHSA" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+              <div class="psg-field"><label>Other Pre-Tax</label><input type="number" id="dedOther" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Tax withholding -->
+        <div class="psg-section">
+          <div class="psg-section-head"><div class="psg-section-num">6</div><div class="psg-section-title">Tax Withholding</div></div>
+          <div class="psg-section-body">
+            <label class="psg-toggle"><input type="checkbox" id="autoTax" checked onchange="toggleManualTax()"> <span>Auto-calculate taxes (2026 IRS rates)</span></label>
+            <div id="autoTaxDisplay" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+                <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;margin-bottom:3px">Federal Income Tax</div>
+                <div id="calcFedDisplay" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px">$0.00</div>
+              </div>
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+                <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;margin-bottom:3px">Social Security (6.2%)</div>
+                <div id="calcSSDisplay" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px">$0.00</div>
+              </div>
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+                <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;margin-bottom:3px">Medicare (1.45%)</div>
+                <div id="calcMedDisplay" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px">$0.00</div>
+              </div>
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+                <div style="font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;margin-bottom:3px">State Income Tax</div>
+                <div id="calcStateDisplay" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px">$0.00</div>
+              </div>
+            </div>
+            <div id="manualTaxFields" style="display:none;margin-top:8px">
+              <div class="psg-row">
+                <div class="psg-field"><label>Federal Income Tax ($)</label><input type="number" id="manFed" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+                <div class="psg-field"><label>Social Security ($)</label><input type="number" id="manSS" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+              </div>
+              <div class="psg-row">
+                <div class="psg-field"><label>Medicare ($)</label><input type="number" id="manMed" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+                <div class="psg-field"><label>State Income Tax ($)</label><input type="number" id="manState" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+              </div>
+            </div>
+            <div class="psg-field" style="margin-top:4px"><label>Post-Tax Deductions (garnishments, etc.)</label><input type="number" id="postTaxDed" placeholder="0.00" min="0" step="0.01" oninput="updatePreview()"></div>
+          </div>
+        </div>
+
+        <!-- Net Pay Summary -->
+        <div class="psg-net-display">
+          <div class="label">Estimated Net Pay</div>
+          <div class="value" id="netDisplay">$0.00</div>
+        </div>
+
+      </div><!-- /form -->
+
+      <!-- ═══ PREVIEW ═══ -->
+      <div class="psg-preview-wrap" data-enter data-delay="2">
+        <div class="psg-preview-card">
+          <div class="psg-preview-header">
+            <span class="psg-preview-title">Live Preview</span>
+            <button class="psg-print-btn" onclick="window.print()">🖨 Print / Save PDF</button>
+          </div>
+          <div class="ps-doc" id="psDoc">
+            <!-- Pay stub document — generated by JS -->
+            <div class="ps-head">
+              <div>
+                <div class="ps-co-name" id="psCoName">Company Name</div>
+                <div class="ps-co-detail" id="psCoDetail">Address · EIN</div>
+              </div>
+              <div style="text-align:right">
+                <div class="ps-doc-title">PAY STUB</div>
+                <div class="ps-meta" id="psMeta"></div>
+              </div>
+            </div>
+            <div class="ps-emp-row">
+              <div>
+                <div class="ps-emp-name" id="psEmpName">Employee Name</div>
+                <div id="psEmpAddr" style="font-size:11px;color:#444"></div>
+                <div id="psEmpTitle" style="font-size:11px;color:#666;margin-top:2px"></div>
+              </div>
+              <div>
+                <div><span class="ps-label">SSN:</span> <span id="psSSN">XXX-XX-XXXX</span></div>
+                <div><span class="ps-label">Employee ID:</span> <span id="psEmpID">—</span></div>
+                <div><span class="ps-label">Filing Status:</span> <span id="psFilingStatus">Single</span></div>
+                <div><span class="ps-label">Check #:</span> <span id="psCheckNum">—</span></div>
+              </div>
+            </div>
+            <table class="ps-table">
+              <thead><tr><th>Earnings</th><th>Rate</th><th>Hours</th><th>Current</th><th>YTD</th></tr></thead>
+              <tbody id="psEarningsBody"></tbody>
+              <tr class="ps-total-row"><td colspan="3">Gross Pay</td><td id="psGross">$0.00</td><td id="psGrossYTD">$0.00</td></tr>
+            </table>
+            <table class="ps-table" style="margin-top:6px">
+              <thead><tr><th colspan="3">Deductions</th><th>Current</th><th>YTD</th></tr></thead>
+              <tbody id="psDedBody"></tbody>
+              <tr class="ps-total-row"><td colspan="3">Total Deductions</td><td id="psTotalDed">$0.00</td><td id="psTotalDedYTD">$0.00</td></tr>
+            </table>
+            <div class="ps-net-row">
+              <div class="ps-net-label">NET PAY</div>
+              <div class="ps-net-value" id="psNetPay">$0.00</div>
+            </div>
+            <div class="ps-disclaimer">This pay stub is an estimate generated by FreePayrollCalc.com. Withholding amounts are calculated using 2026 IRS Publication 15-T methods. Verify all figures with a licensed payroll professional. Not a substitute for official payroll records.</div>
+          </div>
+        </div>
+
+        <!-- Help text -->
+        <div style="margin-top:12px;font-size:12px;color:var(--ink-3);line-height:1.6;padding:12px 14px;background:var(--surface);border-radius:8px">
+          <strong>To save as PDF:</strong> Click Print → change "Destination" to "Save as PDF" in your browser's print dialog.
+        </div>
+      </div>
+    </div><!-- /layout -->
+
+    <!-- FAQ -->
+    <section class="faq-section" style="background:none;padding-top:40px">
+      <div class="container" style="padding:0">
+        <div class="section-header" data-enter>
+          <p class="section-eyebrow">FAQ</p>
+          <h2 class="section-title">Pay stub generator questions</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter><summary class="faq-q">Is this pay stub generator free and does it add a watermark?</summary><div class="faq-a">Completely free. No signup required, no watermark, no hidden fees. You can generate and print unlimited pay stubs at no cost. The only text on the generated stub is a small disclaimer that it was generated by FreePayrollCalc.com.</div></details>
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">Are the tax calculations accurate?</summary><div class="faq-a">Federal and state withholding is calculated using 2026 IRS rates and each state's current tax rates. The annualized withholding method is used (same as IRS Publication 15-T). Results are estimates — exact withholding depends on additional W-4 elections, local taxes, and other factors. For payroll you're legally filing, verify amounts with a payroll professional or CPA.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">Can I use this pay stub as proof of income?</summary><div class="faq-a">Many landlords and lenders accept computer-generated pay stubs as proof of income documentation. However, some may require official paystubs from your employer or payroll software. Self-generated pay stubs are not official payroll records. Check with the specific party requesting proof of income about what they will accept.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How do I save the pay stub as a PDF?</summary><div class="faq-a">Click "Print / Save PDF" → In your browser's print dialog, change the "Destination" or "Printer" to "Save as PDF" → Click Save. This works in Chrome, Firefox, Edge, and Safari and produces a clean, professional PDF with no browser chrome or ads.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free payroll calculators and HR tools for US employers.</div></div>
+      <div><div class="footer-col-title">Payroll Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/minimum-wage-by-state">Minimum Wage by State</a></li><li><a href="/free-payroll-calculator">Full Payroll Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">More</div><ul class="footer-links"><li><a href="/overtime-pay-calculator">Overtime Pay</a></li><li><a href="/1099-vs-w2-calculator">1099 vs W-2</a></li><li><a href="/w4-withholding-calculator">W-4 Calculator</a></li><li><a href="/">All Tools</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. Estimates only — not tax or legal advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+<script src="/shared/scripts.js" defer></script>
+<script>
+// ── STATE TAX DATA (2026) ─────────────────────────────────────────────────────
+const ST = {
+  AL:{t:'p',b:[[0,.02],[500,.04],[3000,.05]]},
+  AK:{t:'n'},AZ:{t:'f',r:.025},
+  AR:{t:'p',b:[[0,.02],[4000,.04],[8000,.049]]},
+  CA:{t:'p',b:[[0,.01],[10412,.02],[24684,.04],[38959,.06],[54081,.08],[68350,.093],[349137,.103],[418961,.113],[698274,.123],[1000000,.133]]},
+  CO:{t:'f',r:.044},
+  CT:{t:'p',b:[[0,.03],[10000,.05],[50000,.055],[100000,.06],[200000,.065],[250000,.069]]},
+  DE:{t:'p',b:[[0,0],[2000,.022],[5000,.039],[10000,.048],[20000,.052],[25000,.0555],[60000,.066]]},
+  FL:{t:'n'},GA:{t:'f',r:.0549},
+  HI:{t:'p',b:[[0,.014],[2400,.032],[4800,.055],[9600,.064],[14400,.068],[19200,.072],[24000,.076],[36000,.079],[48000,.083],[150000,.11]]},
+  ID:{t:'f',r:.058},IL:{t:'f',r:.0495},IN:{t:'f',r:.0305},IA:{t:'f',r:.039},
+  KS:{t:'p',b:[[0,.031],[15000,.0525],[30000,.057]]},KY:{t:'f',r:.04},LA:{t:'f',r:.03},
+  ME:{t:'p',b:[[0,.058],[24500,.0675],[58050,.0715]]},
+  MD:{t:'p',b:[[0,.02],[1000,.03],[2000,.04],[3000,.0475],[100000,.05],[125000,.0525],[150000,.055],[250000,.0575]]},
+  MA:{t:'f',r:.05},MI:{t:'f',r:.0425},
+  MN:{t:'p',b:[[0,.0535],[30070,.068],[98760,.0785],[183340,.0985]]},
+  MS:{t:'f',r:.047},MO:{t:'p',b:[[0,.015],[1000,.02],[2000,.025],[3000,.03],[4000,.035],[5000,.04],[6000,.045],[7000,.0495],[9000,.0495]]},
+  MT:{t:'p',b:[[0,.01],[3100,.02],[5500,.03],[8400,.04],[11300,.05],[14500,.06],[18900,.0675]]},
+  NE:{t:'p',b:[[0,.0246],[3700,.0351],[22170,.0501],[35730,.0455]]},
+  NV:{t:'n'},NH:{t:'n'},
+  NJ:{t:'p',b:[[0,.014],[20000,.0175],[35000,.035],[40000,.05525],[75000,.0637],[500000,.0897],[5000000,.1075]]},
+  NM:{t:'p',b:[[0,.017],[5500,.032],[11000,.047],[16000,.049],[210000,.059]]},
+  NY:{t:'p',b:[[0,.04],[8500,.045],[11700,.0525],[13900,.059],[21400,.0645],[80650,.0665],[215400,.0965],[1077550,.103],[5000000,.109]]},
+  NC:{t:'f',r:.0399},ND:{t:'p',b:[[0,.011],[46725,.0204],[107600,.0227]]},
+  OH:{t:'p',b:[[0,0],[26050,.02765],[100000,.0333],[115300,.038]]},
+  OK:{t:'p',b:[[0,.005],[2000,.01],[5000,.02],[7500,.03],[9800,.04],[12200,.0475]]},
+  OR:{t:'p',b:[[0,.0475],[18400,.0675],[250000,.099]]},
+  PA:{t:'f',r:.0307},RI:{t:'p',b:[[0,.0375],[77450,.0475],[176050,.0599]]},
+  SC:{t:'p',b:[[0,0],[3200,.03],[6410,.04],[9620,.05],[12820,.06],[16040,.062]]},
+  SD:{t:'n'},TN:{t:'n'},TX:{t:'n'},UT:{t:'f',r:.0465},
+  VT:{t:'p',b:[[0,.0335],[45400,.066],[110050,.076],[229550,.0875]]},
+  VA:{t:'p',b:[[0,.02],[3000,.03],[5000,.05],[17000,.0575]]},
+  WA:{t:'n'},WV:{t:'p',b:[[0,.03],[10000,.04],[25000,.045],[40000,.06],[60000,.065]]},
+  WI:{t:'p',b:[[0,.0354],[13810,.0465],[27630,.053],[304170,.0765]]},
+  WY:{t:'n'},DC:{t:'p',b:[[0,.04],[10000,.06],[40000,.065],[60000,.085],[250000,.0925],[500000,.0975],[1000000,.1075]]}
+};
+
+// 2026 Federal brackets [threshold, rate] — single, taxable income
+const FED_S=[[0,.10],[11925,.12],[48475,.22],[103350,.24],[197300,.32],[250525,.35],[626350,.37]];
+const FED_M=[[0,.10],[23850,.12],[96950,.22],[206700,.24],[394600,.32],[501050,.35],[751600,.37]];
+const FED_HOH=[[0,.10],[17000,.12],[64850,.22],[103350,.24],[197300,.32],[250500,.35],[626350,.37]];
+const STD_DED={single:15000,married:30000,hoh:22500};
+
+function calcBrackets(income, brackets) {
+  let tax = 0;
+  for (let i = 0; i < brackets.length; i++) {
+    const lower = brackets[i][0], rate = brackets[i][1];
+    const upper = i < brackets.length-1 ? brackets[i+1][0] : Infinity;
+    if (income > lower) tax += (Math.min(income, upper) - lower) * rate;
+  }
+  return tax;
+}
+
+function calcFedAnnual(annualGross, filing) {
+  const ded = STD_DED[filing] || 15000;
+  const taxable = Math.max(0, annualGross - ded);
+  const brackets = filing === 'married' ? FED_M : filing === 'hoh' ? FED_HOH : FED_S;
+  return calcBrackets(taxable, brackets);
+}
+
+function calcStateAnnual(annualGross, stateCode) {
+  const s = ST[stateCode];
+  if (!s || s.t === 'n') return 0;
+  if (s.t === 'f') return annualGross * s.r;
+  return calcBrackets(annualGross, s.b);
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const fmt = n => '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtDate = s => { if(!s) return '—'; const d=new Date(s+'T00:00:00'); return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+
+function getNum(id) { return parseFloat($(id)?.value)||0; }
+
+// ── DYNAMIC EARNINGS ROWS ─────────────────────────────────────────────────────
+function addEarningRow(desc='', rate='', hours='', amount='') {
+  const row = document.createElement('div');
+  row.className = 'psg-earnings-row';
+  row.setAttribute('data-earning','');
+  row.innerHTML = `
+    <input type="text" placeholder="Description" value="${desc}" oninput="calcRowAmt(this);updatePreview()">
+    <input type="number" placeholder="Rate/hr or leave blank" step="0.01" min="0" value="${rate}" oninput="calcRowAmt(this);updatePreview()">
+    <input type="number" placeholder="Hours" step="0.25" min="0" value="${hours}" oninput="calcRowAmt(this);updatePreview()">
+    <input type="number" placeholder="Amount ($)" step="0.01" min="0" value="${amount}" oninput="updatePreview()" style="background:var(--surface);color:var(--ink-2)" readonly>
+    <button class="psg-remove-btn" onclick="removeRow(this)" title="Remove">×</button>`;
+  $('earningsRows').appendChild(row);
+  updatePreview();
+}
+
+function calcRowAmt(inp) {
+  const row = inp.closest('[data-earning]');
+  const inputs = row.querySelectorAll('input[type=number]');
+  const rate = parseFloat(inputs[0].value)||0;
+  const hours = parseFloat(inputs[1].value)||0;
+  if (rate && hours) {
+    inputs[2].value = (rate * hours).toFixed(2);
+  }
+}
+
+function removeRow(btn) {
+  const rows = $('earningsRows').querySelectorAll('[data-earning]');
+  if (rows.length <= 1) return;
+  btn.closest('[data-earning]').remove();
+  updatePreview();
+}
+
+function toggleManualTax() {
+  const auto = $('autoTax').checked;
+  $('autoTaxDisplay').style.display = auto ? 'grid' : 'none';
+  $('manualTaxFields').style.display = auto ? 'none' : 'grid';
+  updatePreview();
+}
+
+// ── MAIN CALCULATE & UPDATE ───────────────────────────────────────────────────
+function updatePreview() {
+  // ── Earnings
+  let grossPay = 0;
+  const earningLines = [];
+  $('earningsRows').querySelectorAll('[data-earning]').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const desc = inputs[0].value || 'Earnings';
+    const rate = parseFloat(inputs[1].value)||0;
+    const hours = parseFloat(inputs[2].value)||0;
+    let amount = parseFloat(inputs[3].value)||0;
+    if (!amount && rate && hours) { amount = rate * hours; inputs[3].value = amount.toFixed(2); }
+    if (!amount && !rate && !hours) return;
+    grossPay += amount;
+    earningLines.push({desc, rate, hours, amount});
+  });
+
+  // ── Pre-tax deductions
+  const d401k = getNum('ded401k');
+  const dHealth = getNum('dedHealth');
+  const dHSA = getNum('dedHSA');
+  const dOther = getNum('dedOther');
+  const preTaxTotal = d401k + dHealth + dHSA + dOther;
+  const taxableGross = Math.max(0, grossPay - preTaxTotal);
+
+  // ── Taxes
+  const freq = parseInt($('payFreq').value)||26;
+  const filing = $('filingStatus').value;
+  const state = $('empState').value;
+  const annualizedGross = taxableGross * freq;
+
+  const annualFed = calcFedAnnual(annualizedGross, filing);
+  const periodFed = annualFed / freq;
+  const periodSS = Math.min(taxableGross * 0.062, 176100 / freq * 0.062);
+  const periodMed = taxableGross * 0.0145;
+  const annualState = calcStateAnnual(annualizedGross, state);
+  const periodState = annualState / freq;
+
+  // ── Use auto or manual
+  const auto = $('autoTax').checked;
+  const fedTax   = auto ? periodFed   : getNum('manFed');
+  const ssTax    = auto ? periodSS    : getNum('manSS');
+  const medTax   = auto ? periodMed   : getNum('manMed');
+  const stateTax = auto ? periodState : getNum('manState');
+
+  if (auto) {
+    $('calcFedDisplay').textContent  = fmt(fedTax);
+    $('calcSSDisplay').textContent   = fmt(ssTax);
+    $('calcMedDisplay').textContent  = fmt(medTax);
+    $('calcStateDisplay').textContent= fmt(stateTax);
+  }
+
+  const totalTax = fedTax + ssTax + medTax + stateTax;
+  const postTax = getNum('postTaxDed');
+  const totalDed = preTaxTotal + totalTax + postTax;
+  const netPay = grossPay - totalDed;
+
+  // ── YTD
+  const ytdBefore = getNum('ytdBefore');
+  const ytdGross = ytdBefore + grossPay;
+  const ytdMultiplier = ytdBefore > 0 ? (ytdBefore / grossPay) + 1 : 1;
+  const ytdDed = totalDed * ytdMultiplier;
+
+  // ── Net display
+  $('netDisplay').textContent = fmt(netPay);
+
+  // ── Build pay stub preview
+  // Company
+  const coName = $('coName').value || 'Company Name';
+  const coDetail = [$('coAddr').value, $('coCityStateZip').value, $('coPhone').value, $('coEIN').value ? 'EIN: '+$('coEIN').value : ''].filter(Boolean).join(' · ');
+  $('psCoName').textContent = coName;
+  $('psCoDetail').textContent = coDetail || 'Address · EIN';
+
+  // Meta
+  const pStart = fmtDate($('periodStart').value);
+  const pEnd   = fmtDate($('periodEnd').value);
+  const pDate  = fmtDate($('payDate').value);
+  const checkNum = $('checkNum').value;
+  $('psMeta').innerHTML = `<div>Pay Period: <span>${pStart !== '—' ? pStart + ' – ' + pEnd : '—'}</span></div><div>Pay Date: <span>${pDate}</span></div>${checkNum ? '<div>Check #: <span>'+checkNum+'</span></div>' : ''}`;
+
+  // Employee
+  const empSSN = $('empSSN').value ? 'XXX-XX-' + $('empSSN').value.padStart(4,'X') : 'XXX-XX-XXXX';
+  const filingLabel = {single:'Single',married:'Married Filing Jointly',hoh:'Head of Household'}[$('filingStatus').value];
+  $('psEmpName').textContent = $('empName').value || 'Employee Name';
+  $('psEmpAddr').textContent = $('empAddr').value || '';
+  $('psEmpTitle').textContent = $('empTitle').value || '';
+  $('psSSN').textContent = empSSN;
+  $('psEmpID').textContent = $('empID').value || '—';
+  $('psFilingStatus').textContent = filingLabel;
+  $('psCheckNum').textContent = checkNum || '—';
+
+  // Earnings table
+  $('psEarningsBody').innerHTML = earningLines.length
+    ? earningLines.map(e => `<tr>
+        <td>${e.desc}</td>
+        <td style="text-align:right;font-family:'JetBrains Mono',monospace">${e.rate ? fmt(e.rate) : ''}</td>
+        <td style="text-align:right;font-family:'JetBrains Mono',monospace">${e.hours || ''}</td>
+        <td>${fmt(e.amount)}</td>
+        <td>${fmt(e.amount * ytdMultiplier)}</td>
+      </tr>`).join('')
+    : '<tr><td colspan="5" style="color:#9CA3AF;font-style:italic">Enter earnings above</td></tr>';
+
+  $('psGross').textContent    = fmt(grossPay);
+  $('psGrossYTD').textContent = fmt(ytdGross);
+
+  // Deductions table
+  const dedLines = [];
+  if (d401k)    dedLines.push({desc:'401(k) Contribution',amt:d401k,ytd:d401k*ytdMultiplier});
+  if (dHealth)  dedLines.push({desc:'Health Insurance',amt:dHealth,ytd:dHealth*ytdMultiplier});
+  if (dHSA)     dedLines.push({desc:'HSA / FSA',amt:dHSA,ytd:dHSA*ytdMultiplier});
+  if (dOther)   dedLines.push({desc:'Other Pre-Tax',amt:dOther,ytd:dOther*ytdMultiplier});
+  if (fedTax)   dedLines.push({desc:'Federal Income Tax',amt:fedTax,ytd:fedTax*ytdMultiplier});
+  if (ssTax)    dedLines.push({desc:'Social Security Tax (6.2%)',amt:ssTax,ytd:ssTax*ytdMultiplier});
+  if (medTax)   dedLines.push({desc:'Medicare Tax (1.45%)',amt:medTax,ytd:medTax*ytdMultiplier});
+  if (stateTax) dedLines.push({desc:state+' State Income Tax',amt:stateTax,ytd:stateTax*ytdMultiplier});
+  if (postTax)  dedLines.push({desc:'Post-Tax Deductions',amt:postTax,ytd:postTax*ytdMultiplier});
+
+  $('psDedBody').innerHTML = dedLines.length
+    ? dedLines.map(d => `<tr><td colspan="3">${d.desc}</td><td>${fmt(d.amt)}</td><td>${fmt(d.ytd)}</td></tr>`).join('')
+    : '<tr><td colspan="5" style="color:#9CA3AF;font-style:italic">No deductions</td></tr>';
+
+  $('psTotalDed').textContent    = fmt(totalDed);
+  $('psTotalDedYTD').textContent = fmt(ytdDed);
+  $('psNetPay').textContent      = fmt(netPay);
+}
+
+// ── SET DEFAULTS ──────────────────────────────────────────────────────────────
+(function init() {
+  const today = new Date();
+  const fmt = d => d.toISOString().split('T')[0];
+  const firstOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const mid = new Date(today.getFullYear(), today.getMonth(), 15);
+  $('periodStart').value = fmt(firstOfMonth);
+  $('periodEnd').value   = fmt(mid);
+  $('payDate').value     = fmt(today);
+
+  // Default first earning row
+  const firstRow = $('earningsRows').querySelector('[data-earning]');
+  if (firstRow) {
+    const inputs = firstRow.querySelectorAll('input');
+    inputs[1].value = '25.00';
+    inputs[2].value = '80';
+    inputs[3].value = '2000.00';
+    inputs[3].removeAttribute('readonly');
+    inputs[3].style.background = '';
+    inputs[3].style.color = '';
+    inputs[3].setAttribute('readonly','');
+    inputs[3].style.background = 'var(--surface)';
+    inputs[3].style.color = 'var(--ink-2)';
+  }
+  updatePreview();
+})();
+</script>
+</body>
+</html>
