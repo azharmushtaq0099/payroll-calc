@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Direct Deposit Form 2026 — Printable Authorization | FreePayrollCalc</title>
+  <meta name="description" content="Free direct deposit authorization form generator 2026. Fill in your bank details and print a professional direct deposit form instantly. No signup required.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.freepayrollcalc.com/direct-deposit-form">
+  <meta property="og:title" content="Free Direct Deposit Form 2026 — Printable Authorization">
+  <meta property="og:description" content="Generate and print a professional direct deposit authorization form free. Validates routing numbers, masks account numbers for security.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.freepayrollcalc.com/direct-deposit-form">
+  <link rel="stylesheet" href="/shared/styles.css">
+  <style>
+    :root {
+      --accent: #1B4FD8;
+      --accent-light: #EEF2FF;
+      --green: #059669;
+      --green-light: #ECFDF5;
+      --red: #DC2626;
+      --red-light: #FEF2F2;
+      --text: #111827;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --surface: #F9FAFB;
+      --white: #ffffff;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: #F3F4F6; line-height: 1.6; }
+
+    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 60px; gap: 32px; }
+    .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--accent); text-decoration: none; white-space: nowrap; }
+    .nav-links { display: flex; gap: 24px; flex: 1; flex-wrap: wrap; }
+    .nav-links a { font-size: 0.875rem; color: var(--muted); text-decoration: none; white-space: nowrap; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero { background: var(--white); border-bottom: 1px solid var(--border); padding: 40px 24px 32px; text-align: center; }
+    .hero-inner { max-width: 800px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 16px; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    h1 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; margin-bottom: 12px; }
+    .hero-sub { font-size: 1rem; color: var(--muted); max-width: 600px; margin: 0 auto 16px; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-light); color: var(--accent); font-size: 0.75rem; font-weight: 600; padding: 6px 12px; border-radius: 20px; }
+
+    main { max-width: 1140px; margin: 0 auto; padding: 32px 16px 64px; }
+
+    .tool-layout { display: grid; grid-template-columns: 420px 1fr; gap: 28px; align-items: start; }
+    @media (max-width: 860px) { .tool-layout { grid-template-columns: 1fr; } }
+
+    /* FORM PANEL */
+    .form-panel { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; position: sticky; top: 76px; }
+    .panel-header { background: var(--accent); color: white; padding: 18px 24px; }
+    .panel-header h2 { font-size: 1rem; font-weight: 700; }
+    .panel-header p { font-size: 0.8rem; opacity: 0.85; margin-top: 3px; }
+    .panel-body { padding: 24px; }
+
+    .section-title { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .section-title:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+    label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    input[type="text"], input[type="number"], select {
+      width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 0.88rem; font-family: inherit; background: var(--white); color: var(--text);
+      transition: border-color 0.15s;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(27,79,216,0.08); }
+    input.invalid { border-color: var(--red); }
+    input.valid { border-color: var(--green); }
+    .field-group { margin-bottom: 12px; }
+    .field-hint { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+    .field-error { font-size: 0.72rem; color: var(--red); margin-top: 4px; display: none; }
+    .field-group.has-error .field-error { display: block; }
+
+    .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .radio-label { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 500; cursor: pointer; padding: 7px 14px; border: 1.5px solid var(--border); border-radius: 8px; transition: all 0.15s; }
+    .radio-label input[type="radio"] { accent-color: var(--accent); }
+    .radio-label:has(input:checked) { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+
+    .amount-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    #amount-field, #percent-field { display: none; }
+    #amount-field.shown, #percent-field.shown { display: block; }
+
+    .btn-print { width: 100%; padding: 13px; background: var(--green); color: white; border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: background 0.15s; margin-top: 4px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-print:hover { background: #047857; }
+    .btn-print svg { flex-shrink: 0; }
+
+    /* PREVIEW PANEL */
+    .preview-panel { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; }
+
+    /* ─── THE DOCUMENT ─── */
+    .doc-wrap { padding: 0; }
+    #dd-document {
+      font-family: 'Times New Roman', Times, serif;
+      color: #1a1a1a;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 48px;
+      background: white;
+      border-left: 6px solid #1B4FD8;
+    }
+
+    .doc-header { text-align: center; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid #1B4FD8; }
+    .doc-company-name { font-size: 1.05rem; font-weight: bold; font-family: 'Inter', sans-serif; color: #1B4FD8; letter-spacing: 0.02em; margin-bottom: 6px; }
+    .doc-form-title { font-size: 1.5rem; font-weight: bold; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .doc-form-sub { font-size: 0.78rem; color: #555; font-family: 'Inter', sans-serif; }
+
+    .doc-notice {
+      background: #F0F4FF;
+      border: 1px solid #C7D7F8;
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 0.8rem;
+      color: #374151;
+      margin-bottom: 24px;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+    }
+
+    .doc-section { margin-bottom: 22px; }
+    .doc-section-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #1B4FD8;
+      border-bottom: 1px solid #C7D7F8;
+      padding-bottom: 5px;
+      margin-bottom: 12px;
+    }
+
+    .doc-row { display: grid; gap: 16px; margin-bottom: 10px; }
+    .doc-row.cols-2 { grid-template-columns: 1fr 1fr; }
+    .doc-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .doc-field { }
+    .doc-field-label { font-family: 'Inter', sans-serif; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: #6B7280; margin-bottom: 3px; }
+    .doc-field-value { font-size: 0.95rem; font-weight: bold; border-bottom: 1px solid #333; min-height: 22px; padding-bottom: 2px; word-break: break-all; }
+    .doc-field-value.placeholder { color: #ccc; font-weight: normal; font-style: italic; font-size: 0.85rem; }
+
+    .doc-account-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+    .account-type-badge { display: inline-block; background: #1B4FD8; color: white; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 3px; margin-top: 4px; }
+
+    .doc-deposit-info { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 4px; padding: 12px 14px; margin-bottom: 14px; }
+    .doc-deposit-info .di-label { font-family: 'Inter', sans-serif; font-size: 0.68rem; text-transform: uppercase; color: #6B7280; margin-bottom: 4px; }
+    .doc-deposit-info .di-value { font-size: 1rem; font-weight: bold; }
+
+    .doc-auth-text { font-size: 0.82rem; line-height: 1.7; color: #374151; margin-bottom: 20px; border: 1px solid #E5E7EB; padding: 12px 14px; border-radius: 4px; background: #FAFAFA; font-family: 'Inter', sans-serif; }
+
+    .doc-sig-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 8px; }
+    .doc-sig-field { }
+    .doc-sig-line { border-bottom: 1px solid #333; height: 28px; margin-bottom: 4px; }
+    .doc-sig-label { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #6B7280; text-transform: uppercase; letter-spacing: 0.05em; }
+    .doc-emp-id-line { font-family: 'Inter', sans-serif; font-size: 0.8rem; border-bottom: 1px solid #333; padding-bottom: 2px; min-height: 22px; font-weight: bold; }
+
+    .doc-footer { text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #E5E7EB; font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #9CA3AF; }
+
+    .preview-toolbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .preview-toolbar span { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+    .btn-print-top { padding: 7px 16px; background: var(--accent); color: white; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+    .btn-print-top:hover { background: #1644C0; }
+
+    /* INFO */
+    .info-section { margin-top: 40px; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 20px; }
+    .info-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+    .info-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+    .info-card p, .info-card ul { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    .info-card ul { padding-left: 18px; }
+    .info-card li { margin-bottom: 4px; }
+
+    /* FAQ */
+    .faq-section { margin-top: 40px; }
+    .faq-section h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 18px; }
+    .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+    .faq-q { width: 100%; text-align: left; padding: 16px 22px; font-size: 0.9rem; font-weight: 600; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq-q::after { content: '+'; font-size: 1.1rem; color: var(--muted); flex-shrink: 0; }
+    .faq-q.open::after { content: '−'; }
+    .faq-a { display: none; padding: 0 22px 16px; font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+    .faq-a.open { display: block; }
+
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-size: 0.8rem; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
+
+    /* ─── PRINT ─── */
+    @media print {
+      nav, .hero, .form-panel, .preview-toolbar, .info-section, .faq-section, footer, .btn-print, .btn-print-top { display: none !important; }
+      body { background: white; }
+      main { padding: 0; max-width: none; }
+      .tool-layout { display: block; }
+      .preview-panel { border: none; box-shadow: none; border-radius: 0; }
+      .doc-wrap { padding: 0; }
+      #dd-document { padding: 20px 36px; border-left-width: 4px; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">FreePayrollCalc</a>
+    <div class="nav-links">
+      <a href="/free-payroll-calculator">Payroll Calculator</a>
+      <a href="/pay-stub-generator">Pay Stub</a>
+      <a href="/cost-of-living-calculator">Cost of Living</a>
+      <a href="/payroll-tax-calculator">State Taxes</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="breadcrumb"><a href="/">Home</a> › Direct Deposit Form</p>
+    <h1>Free Direct Deposit Authorization Form 2026</h1>
+    <p class="hero-sub">Fill in your details and generate a professional, printable direct deposit authorization form instantly. No signup, no watermark.</p>
+    <span class="badge">Routing number validation · Account masking · Print to PDF</span>
+  </div>
+</div>
+
+<main>
+  <div class="tool-layout">
+
+    <!-- ─── FORM ─── -->
+    <div class="form-panel">
+      <div class="panel-header">
+        <h2>Enter Your Information</h2>
+        <p>Form updates live as you type</p>
+      </div>
+      <div class="panel-body">
+
+        <div class="section-title">Employee Information</div>
+
+        <div class="field-group">
+          <label for="emp-name">Full Name *</label>
+          <input type="text" id="emp-name" placeholder="Jane Smith" oninput="update()">
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="field-group">
+            <label for="emp-id">Employee ID</label>
+            <input type="text" id="emp-id" placeholder="EMP-00123" oninput="update()">
+          </div>
+          <div class="field-group">
+            <label for="eff-date">Effective Date</label>
+            <input type="text" id="eff-date" placeholder="MM/DD/YYYY" oninput="update()">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="emp-addr">Street Address</label>
+          <input type="text" id="emp-addr" placeholder="123 Main St" oninput="update()">
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;">
+          <div class="field-group">
+            <label for="emp-city">City</label>
+            <input type="text" id="emp-city" placeholder="Chicago" oninput="update()">
+          </div>
+          <div class="field-group">
+            <label for="emp-state">State</label>
+            <select id="emp-state" onchange="update()">
+              <option value="">ST</option>
+              <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+              <option>CO</option><option>CT</option><option>DE</option><option>DC</option><option>FL</option>
+              <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
+              <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+              <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+              <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
+              <option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option>
+              <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+              <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+              <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option>
+              <option>WY</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="emp-zip">ZIP</label>
+            <input type="text" id="emp-zip" placeholder="60601" maxlength="5" oninput="update()">
+          </div>
+        </div>
+
+        <div class="section-title">Bank Account Details</div>
+
+        <div class="field-group">
+          <label for="bank-name">Bank / Financial Institution *</label>
+          <input type="text" id="bank-name" placeholder="Chase Bank" oninput="update()">
+        </div>
+
+        <div class="field-group" id="routing-group">
+          <label for="routing">ABA Routing Number *</label>
+          <input type="text" id="routing" placeholder="021000021" maxlength="9" oninput="validateRouting()">
+          <div class="field-hint">9-digit number — found on the bottom-left of a check</div>
+          <div class="field-error" id="routing-error">Routing number must be exactly 9 digits</div>
+        </div>
+
+        <div class="field-group">
+          <label for="account">Account Number *</label>
+          <input type="text" id="account" placeholder="●●●● ●●●● 1234" oninput="update()">
+          <div class="field-hint">Shown as last 4 digits only in the form (for security)</div>
+        </div>
+
+        <div class="field-group">
+          <label>Account Type *</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="acct-type" value="Checking" checked onchange="update()"> Checking</label>
+            <label class="radio-label"><input type="radio" name="acct-type" value="Savings" onchange="update()"> Savings</label>
+          </div>
+        </div>
+
+        <div class="section-title">Employer Information</div>
+
+        <div class="field-group">
+          <label for="company">Company / Employer Name</label>
+          <input type="text" id="company" placeholder="Acme Corp" oninput="update()">
+        </div>
+
+        <div class="section-title">Deposit Instructions</div>
+
+        <div class="field-group">
+          <label>Deposit Amount</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="dep-type" value="full" checked onchange="updateDepType()"> Full paycheck</label>
+            <label class="radio-label"><input type="radio" name="dep-type" value="amount" onchange="updateDepType()"> Fixed $</label>
+            <label class="radio-label"><input type="radio" name="dep-type" value="percent" onchange="updateDepType()"> %</label>
+          </div>
+        </div>
+        <div class="field-group" id="amount-field">
+          <label for="dep-amount">Deposit Amount ($)</label>
+          <input type="number" id="dep-amount" placeholder="500.00" min="0" step="0.01" oninput="update()">
+        </div>
+        <div class="field-group" id="percent-field">
+          <label for="dep-percent">Deposit Percentage (%)</label>
+          <input type="number" id="dep-percent" placeholder="50" min="1" max="100" oninput="update()">
+        </div>
+
+        <button class="btn-print" onclick="printDoc()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print / Save as PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── PREVIEW ─── -->
+    <div class="preview-panel">
+      <div class="preview-toolbar">
+        <span>Live Preview</span>
+        <button class="btn-print-top" onclick="printDoc()">Print / Save as PDF</button>
+      </div>
+      <div class="doc-wrap">
+        <div id="dd-document">
+
+          <div class="doc-header">
+            <div class="doc-company-name" id="doc-company-hdr">DIRECT DEPOSIT AUTHORIZATION</div>
+            <div class="doc-form-title">Direct Deposit Authorization Form</div>
+            <div class="doc-form-sub">Employee Payroll Direct Deposit Enrollment / Change Form · 2026</div>
+          </div>
+
+          <div class="doc-notice" id="doc-notice">
+            I hereby authorize my employer to initiate credit entries and, if necessary, debit entries to my account at the financial institution named below. This authority will remain in effect until I provide written cancellation with sufficient notice.
+          </div>
+
+          <div class="doc-section">
+            <div class="doc-section-title">Employee Information</div>
+            <div class="doc-row cols-2">
+              <div class="doc-field">
+                <div class="doc-field-label">Full Name</div>
+                <div class="doc-field-value" id="doc-emp-name"><span class="placeholder">Jane Smith</span></div>
+              </div>
+              <div class="doc-field">
+                <div class="doc-field-label">Employee ID</div>
+                <div class="doc-field-value" id="doc-emp-id"><span class="placeholder">Optional</span></div>
+              </div>
+            </div>
+            <div class="doc-row cols-1" id="doc-addr-row" style="display:none;">
+              <div class="doc-field">
+                <div class="doc-field-label">Address</div>
+                <div class="doc-field-value" id="doc-address"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-section">
+            <div class="doc-section-title">Financial Institution Information</div>
+            <div class="doc-row cols-2">
+              <div class="doc-field">
+                <div class="doc-field-label">Bank / Financial Institution</div>
+                <div class="doc-field-value" id="doc-bank"><span class="placeholder">Bank Name</span></div>
+              </div>
+              <div class="doc-field">
+                <div class="doc-field-label">Account Type</div>
+                <div id="doc-acct-type"><span class="account-type-badge">CHECKING</span></div>
+              </div>
+            </div>
+            <div class="doc-account-row">
+              <div class="doc-field">
+                <div class="doc-field-label">ABA Routing Number</div>
+                <div class="doc-field-value" id="doc-routing"><span class="placeholder">●●●●●●●●●</span></div>
+              </div>
+              <div class="doc-field">
+                <div class="doc-field-label">Account Number</div>
+                <div class="doc-field-value" id="doc-account"><span class="placeholder">●●●● ●●●● ●●●●</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-section">
+            <div class="doc-section-title">Deposit Instructions</div>
+            <div class="doc-deposit-info">
+              <div class="di-label">Deposit Amount</div>
+              <div class="di-value" id="doc-dep-amount">100% of net pay (full paycheck)</div>
+            </div>
+            <div class="doc-row cols-2">
+              <div class="doc-field">
+                <div class="doc-field-label">Effective Date</div>
+                <div class="doc-field-value" id="doc-eff-date"><span class="placeholder">MM/DD/YYYY</span></div>
+              </div>
+              <div class="doc-field">
+                <div class="doc-field-label">Employer / Company</div>
+                <div class="doc-field-value" id="doc-company-field"><span class="placeholder">Optional</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-section">
+            <div class="doc-section-title">Authorization</div>
+            <div class="doc-auth-text" id="doc-auth">
+              I authorize the above-named employer / company to deposit my net pay electronically into the bank account listed above, until I provide written notice of cancellation. I understand that it may take one to two pay cycles for this authorization to take effect. I certify that I am the authorized owner of the account listed above.
+            </div>
+            <div class="doc-sig-grid">
+              <div class="doc-sig-field">
+                <div class="doc-sig-line"></div>
+                <div class="doc-sig-label">Employee Signature</div>
+              </div>
+              <div class="doc-sig-field">
+                <div class="doc-sig-line"></div>
+                <div class="doc-sig-label">Date</div>
+              </div>
+            </div>
+            <div style="margin-top:14px;">
+              <div class="doc-field-label" style="margin-bottom:4px;">Employee ID (if required)</div>
+              <div class="doc-emp-id-line" id="doc-sig-emp-id"></div>
+            </div>
+          </div>
+
+          <div class="doc-footer">
+            Generated by FreePayrollCalc.com &middot; Free Direct Deposit Form Generator &middot; 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">About Direct Deposit Forms</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Where to Find Your Routing Number</h3>
+        <ul>
+          <li>Bottom-left corner of a personal check (first 9 digits)</li>
+          <li>Your bank's website or mobile app (Account Details section)</li>
+          <li>Call your bank directly — they can provide it instantly</li>
+          <li>Note: routing numbers on deposit slips may differ from checks</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Where to Find Your Account Number</h3>
+        <ul>
+          <li>Bottom of a personal check (middle number, after routing)</li>
+          <li>Bank statement — listed prominently near the top</li>
+          <li>Online banking / mobile app — Account Details or Settings</li>
+          <li>Account numbers vary in length: typically 8–17 digits</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>What Happens After You Submit</h3>
+        <p>Give the completed form to your HR or payroll department. Most employers process the change within 1–2 pay cycles. Some require a voided check to verify your banking information alongside the authorization form.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is a direct deposit authorization form?</button>
+      <div class="faq-a">A direct deposit authorization form is a document that authorizes your employer to electronically deposit your paycheck directly into your bank account. It includes your bank's routing number, your account number, the account type (checking or savings), and the amount or percentage of each paycheck to deposit. Once submitted to HR or payroll, your paychecks are deposited automatically on payday — no waiting for a paper check.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What information do I need to fill out a direct deposit form?</button>
+      <div class="faq-a">You need four key pieces of information: (1) your bank's 9-digit ABA routing number, (2) your account number, (3) the account type — checking or savings, and (4) whether to deposit your full paycheck or a specific dollar amount/percentage. Optionally, your employer may require your name, address, employee ID, and signature. A voided check is sometimes requested to verify the account information.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How long does it take for direct deposit to start?</button>
+      <div class="faq-a">After submitting your direct deposit form to your employer's HR or payroll team, it typically takes 1–2 pay cycles (1–4 weeks) to activate. Some payroll systems process changes faster. Ask your payroll team about the cutoff date for changes to take effect on the next pay cycle.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I split my paycheck between multiple accounts?</button>
+      <div class="faq-a">Yes — many employers allow split deposits. You would fill out a separate direct deposit form for each account, designating a specific dollar amount or percentage for each. For example: $500 per pay period to a savings account and the remainder to your checking account. Check with your HR department about whether your payroll system supports split deposits.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is it safe to put my banking information on this form?</button>
+      <div class="faq-a">Yes — direct deposit forms are standard HR documents used by virtually every US employer. This generator runs entirely in your browser; no data is sent to any server. For added security, this tool displays only the last 4 digits of your account number in the generated form. The full account number is never stored or transmitted.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 FreePayrollCalc.com · Free payroll tools for US workers and employers</p>
+  <p style="margin-top:8px;"><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></p>
+</footer>
+
+<script src="/shared/scripts.js"></script>
+<script>
+function val(id) { return (document.getElementById(id) || {}).value || ''; }
+
+function maskAccount(raw) {
+  const clean = raw.replace(/\s/g, '');
+  if (!clean) return '';
+  if (clean.length <= 4) return '●'.repeat(clean.length);
+  return '●●●● ' + '●'.repeat(Math.max(0, clean.length - 8)).replace(/(.{4})/g, '$1 ').trim() + ' ' + clean.slice(-4);
+}
+
+function set(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
+function ph(id, value, placeholder) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (value) {
+    el.innerHTML = '';
+    el.textContent = value;
+    el.classList.remove('placeholder');
+  } else {
+    el.innerHTML = `<span class="placeholder">${placeholder}</span>`;
+  }
+}
+
+function validateRouting() {
+  const raw = val('routing').replace(/\D/g, '');
+  const input = document.getElementById('routing');
+  const group = document.getElementById('routing-group');
+  if (raw.length === 0) {
+    input.classList.remove('valid', 'invalid');
+    group.classList.remove('has-error');
+  } else if (raw.length === 9) {
+    input.classList.add('valid');
+    input.classList.remove('invalid');
+    group.classList.remove('has-error');
+  } else {
+    input.classList.add('invalid');
+    input.classList.remove('valid');
+    group.classList.add('has-error');
+  }
+  update();
+}
+
+function updateDepType() {
+  const type = document.querySelector('input[name="dep-type"]:checked').value;
+  document.getElementById('amount-field').className = 'field-group' + (type === 'amount' ? ' shown' : '');
+  document.getElementById('percent-field').className = 'field-group' + (type === 'percent' ? ' shown' : '');
+  update();
+}
+
+function update() {
+  const empName  = val('emp-name');
+  const empId    = val('emp-id');
+  const bankName = val('bank-name');
+  const routing  = val('routing').replace(/\D/g, '');
+  const account  = val('account');
+  const acctType = document.querySelector('input[name="acct-type"]:checked').value;
+  const company  = val('company');
+  const effDate  = val('eff-date');
+  const depType  = document.querySelector('input[name="dep-type"]:checked').value;
+  const addr     = val('emp-addr');
+  const city     = val('emp-city');
+  const state    = val('emp-state');
+  const zip      = val('emp-zip');
+
+  // Header
+  const companyHdr = document.getElementById('doc-company-hdr');
+  if (company) {
+    companyHdr.textContent = company.toUpperCase();
+    companyHdr.style.visibility = 'visible';
+  } else {
+    companyHdr.textContent = 'DIRECT DEPOSIT AUTHORIZATION';
+  }
+
+  // Employee
+  ph('doc-emp-name', empName, 'Jane Smith');
+  ph('doc-emp-id',   empId,   'Optional');
+
+  // Address row
+  const addrRow = document.getElementById('doc-addr-row');
+  const addrParts = [addr, [city, state, zip].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  if (addrParts) {
+    addrRow.style.display = '';
+    document.getElementById('doc-address').textContent = addrParts;
+  } else {
+    addrRow.style.display = 'none';
+  }
+
+  // Bank
+  ph('doc-bank', bankName, 'Bank Name');
+  set('doc-acct-type', `<span class="account-type-badge">${acctType.toUpperCase()}</span>`);
+  ph('doc-routing', routing.length === 9 ? routing : '', '●●●●●●●●●');
+  ph('doc-account', account ? maskAccount(account) : '', '●●●● ●●●● ●●●●');
+
+  // Deposit
+  let depText = '';
+  if (depType === 'full')    depText = '100% of net pay (full paycheck)';
+  else if (depType === 'amount') { const a = val('dep-amount'); depText = a ? `$${parseFloat(a).toFixed(2)} per pay period` : 'Fixed dollar amount'; }
+  else if (depType === 'percent') { const p = val('dep-percent'); depText = p ? `${p}% of net pay per period` : 'Percentage of net pay'; }
+  set('doc-dep-amount', depText);
+
+  ph('doc-eff-date',       effDate, 'MM/DD/YYYY');
+  ph('doc-company-field',  company, 'Optional');
+
+  // Auth text — personalize if name exists
+  const nameClause = empName ? `I, ${empName}, authorize` : 'I authorize';
+  const companyClause = company ? ` ${company}` : ' my employer';
+  document.getElementById('doc-auth').textContent =
+    `${nameClause}${companyClause} to deposit my net pay electronically into the bank account listed above, until I provide written notice of cancellation. I understand that it may take one to two pay cycles for this authorization to take effect. I certify that I am the authorized owner of the account listed above.`;
+
+  // Sig emp ID
+  document.getElementById('doc-sig-emp-id').textContent = empId || '';
+}
+
+function printDoc() {
+  window.print();
+}
+
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+  if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+}
+
+// Init
+update();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free Direct Deposit Form Generator 2026",
+  "url": "https://www.freepayrollcalc.com/direct-deposit-form",
+  "description": "Free direct deposit authorization form generator. Fill in bank details and print a professional direct deposit form. Validates routing numbers, masks account numbers for security. No signup required.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["Routing number validation", "Account number masking", "Printable authorization form", "Live preview", "No signup required"],
+  "provider": { "@type": "Organization", "name": "FreePayrollCalc", "url": "https://www.freepayrollcalc.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a direct deposit authorization form?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A direct deposit authorization form authorizes your employer to electronically deposit your paycheck into your bank account. It includes your routing number, account number, account type, and deposit amount." }
+    },
+    {
+      "@type": "Question",
+      "name": "What information do I need for a direct deposit form?",
+      "acceptedAnswer": { "@type": "Answer", "text": "You need your bank's 9-digit ABA routing number, your account number, account type (checking or savings), and the amount or percentage to deposit. Your name, employee ID, and signature are also typically required." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do I find my routing and account numbers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The routing number is the first 9 digits at the bottom of a personal check. The account number follows the routing number on the check. Both are also available in your bank's online portal under Account Details." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does direct deposit setup take?",
+      "acceptedAnswer": { "@type": "Answer", "text": "After submitting the form to HR or payroll, direct deposit typically activates within 1–2 pay cycles (1–4 weeks). Ask your payroll team about the cutoff date for changes." }
+    }
+  ]
+}
+</script>
+
+</body>
+</html>
