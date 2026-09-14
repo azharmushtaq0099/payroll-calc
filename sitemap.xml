@@ -198,6 +198,26 @@
   </url>
 
   <url>
+    <loc>https://www.freepayrollcalc.com/markup-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/break-even-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/cap-rate-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.freepayrollcalc.com/body-fat-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://www.freepayrollcalc.com/about</loc>
     <changefreq>yearly</changefreq>
     <priority>0.60</priority>

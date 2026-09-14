@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Break-Even Calculator — Units, Revenue &amp; Margin Analysis | FreePayrollCalc</title>
+<meta name="description" content="Free break-even calculator. Find break-even units and revenue from fixed costs, variable costs, and price. Includes margin of safety, COGS calculator, and contribution margin analysis.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/break-even-calculator">
+<meta property="og:title" content="Break-Even Calculator — Units, Revenue & Margin Analysis">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Break-Even Calculator","url":"https://www.freepayrollcalc.com/break-even-calculator","description":"Calculate break-even point in units and revenue. Includes COGS calculator, contribution margin analysis, and margin of safety.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the break-even point formula?","acceptedAnswer":{"@type":"Answer","text":"Break-Even Units = Fixed Costs ÷ (Selling Price per Unit − Variable Cost per Unit). The denominator is the contribution margin per unit. Break-Even Revenue = Fixed Costs ÷ Contribution Margin Ratio, where CM Ratio = (Price − Variable Cost) ÷ Price."}},{"@type":"Question","name":"What is contribution margin?","acceptedAnswer":{"@type":"Answer","text":"Contribution margin is selling price minus variable cost per unit. It represents how much each unit sold contributes toward covering fixed costs. Once fixed costs are fully covered, each additional unit sold contributes directly to profit."}},{"@type":"Question","name":"What are fixed vs variable costs?","acceptedAnswer":{"@type":"Answer","text":"Fixed costs stay the same regardless of how many units you produce or sell — rent, salaries, insurance, equipment leases. Variable costs change with production volume — raw materials, direct labor per unit, packaging, shipping. Mixed costs have both fixed and variable components."}},{"@type":"Question","name":"What is margin of safety?","acceptedAnswer":{"@type":"Answer","text":"Margin of safety = (Actual Sales − Break-Even Sales) ÷ Actual Sales × 100. It tells you how far sales can drop before you hit a loss. A 30% margin of safety means sales can decline 30% before the business breaks even."}},{"@type":"Question","name":"What is COGS?","acceptedAnswer":{"@type":"Answer","text":"Cost of Goods Sold (COGS) = Beginning Inventory + Purchases (or Production Costs) − Ending Inventory. COGS is the direct cost of producing goods sold during a period. It appears on the income statement and is subtracted from revenue to calculate gross profit."}}]}
+</script>
+<style>
+.tool-tabs{display:flex;gap:0;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
+.tool-tab{flex:1;padding:9px;text-align:center;font-size:13px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .18s;color:var(--ink-3)}
+.tool-tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.be-result{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px}
+.be-result-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:6px}
+.be-result-val{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--accent)}
+.be-result-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:16px}
+.metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--ink-1)}
+.chart-bars{margin-top:20px}
+.chart-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.chart-label{font-size:12px;color:var(--ink-2);width:120px;flex-shrink:0;text-align:right}
+.chart-bar-track{flex:1;background:var(--bg);border-radius:4px;height:18px;overflow:hidden;border:1px solid var(--border)}
+.chart-bar-fill{height:100%;border-radius:4px;transition:width .4s ease}
+.chart-bar-fill.blue{background:var(--accent)}
+.chart-bar-fill.green{background:var(--green)}
+.chart-bar-fill.amber{background:var(--amber)}
+.chart-val{font-family:'JetBrains Mono',monospace;font-size:12px;width:80px;flex-shrink:0;font-weight:600}
+.mos-bar{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:12px;display:flex;align-items:center;gap:12px}
+.mos-pct{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700}
+.mos-pct.good{color:var(--green)}
+.mos-pct.warn{color:var(--amber)}
+.mos-pct.bad{color:var(--red)}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/markup-calculator">Markup</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/break-even-calculator" class="active">Break-Even</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/break-even-calculator" class="active">Break-Even Calculator</a>
+    <a href="/markup-calculator">Markup Calculator</a>
+    <a href="/profit-margin-calculator">Profit Margin Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Break-Even Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Break-Even Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Find your break-even point in units and revenue.<br>Includes COGS calculator, contribution margin, and margin of safety.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Break-even analysis · COGS calculator · Margin of safety · 2026</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Break-Even &amp; COGS Calculator</div>
+
+      <div class="tool-tabs" id="tool-tabs">
+        <div class="tool-tab active" data-tool="break-even">Break-Even Analysis</div>
+        <div class="tool-tab" data-tool="cogs">COGS Calculator</div>
+      </div>
+
+      <!-- Break-Even Panel -->
+      <div id="panel-break-even">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Total Fixed Costs (per month/year)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="be-fixed" class="form-input form-input--prefixed" placeholder="10000" min="0" step="1"></div>
+            <span class="form-hint">Rent, salaries, insurance, subscriptions</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Variable Cost per Unit</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="be-vc" class="form-input form-input--prefixed" placeholder="25" min="0" step="0.01"></div>
+            <span class="form-hint">Materials, direct labor, packaging per unit sold</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Selling Price per Unit</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="be-price" class="form-input form-input--prefixed" placeholder="50" min="0" step="0.01"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Expected / Actual Sales Units <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+            <input type="number" id="be-actual" class="form-input" placeholder="500" min="0" step="1">
+            <span class="form-hint">Enter your projected sales to calculate margin of safety</span>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-be-btn" style="margin-top:8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Calculate Break-Even
+        </button>
+
+        <div id="be-results" style="display:none;margin-top:24px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="be-result">
+              <div class="be-result-label">Break-Even Units</div>
+              <div class="be-result-val" id="be-units">—</div>
+              <div class="be-result-sub">units must be sold to break even</div>
+            </div>
+            <div class="be-result" style="border-color:rgba(27,79,216,.2)">
+              <div class="be-result-label">Break-Even Revenue</div>
+              <div class="be-result-val" id="be-revenue">—</div>
+              <div class="be-result-sub">in sales needed to cover all costs</div>
+            </div>
+          </div>
+
+          <div class="metrics-grid" id="be-metrics"></div>
+
+          <div id="be-chart" style="margin-top:20px"></div>
+
+          <div id="be-safety-section" style="display:none;margin-top:8px">
+            <div class="form-label" style="margin-bottom:8px">Margin of Safety</div>
+            <div class="mos-bar">
+              <div class="mos-pct" id="mos-pct">—</div>
+              <div id="mos-desc" style="font-size:13px;color:var(--ink-2)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COGS Panel -->
+      <div id="panel-cogs" style="display:none">
+        <p style="font-size:13px;color:var(--ink-2);margin-bottom:20px">Cost of Goods Sold = Beginning Inventory + Purchases/Production Costs − Ending Inventory</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Beginning Inventory Value</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cogs-begin" class="form-input form-input--prefixed" placeholder="0" min="0" step="0.01"></div>
+            <span class="form-hint">Inventory value at start of period</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Purchases / Production Costs</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cogs-purchases" class="form-input form-input--prefixed" placeholder="50000" min="0" step="0.01"></div>
+            <span class="form-hint">All costs added to inventory this period</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ending Inventory Value</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cogs-end" class="form-input form-input--prefixed" placeholder="0" min="0" step="0.01"></div>
+            <span class="form-hint">Remaining inventory at end of period</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Revenue (for this period)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cogs-revenue" class="form-input form-input--prefixed" placeholder="100000" min="0" step="0.01"></div>
+            <span class="form-hint">Optional — to calculate gross profit &amp; margin</span>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-cogs-btn" style="margin-top:8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Calculate COGS
+        </button>
+
+        <div id="cogs-results" style="display:none;margin-top:24px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="be-result">
+              <div class="be-result-label">Cost of Goods Sold (COGS)</div>
+              <div class="be-result-val" id="cogs-val">—</div>
+              <div class="be-result-sub">direct cost of goods sold this period</div>
+            </div>
+            <div class="be-result" id="gp-card" style="display:none">
+              <div class="be-result-label">Gross Profit</div>
+              <div class="be-result-val green" id="gp-val" style="color:var(--green)">—</div>
+              <div class="be-result-sub" id="gp-margin">—</div>
+            </div>
+          </div>
+          <div class="metrics-grid" id="cogs-metrics" style="margin-top:12px"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>Break-Even Analysis: The Formula Every Business Owner Needs</h2>
+        <p>The break-even point is where total revenue equals total costs — no profit, no loss. Below it you're losing money; above it you're profitable. Every pricing decision, cost-cutting move, and sales target should be evaluated against your break-even point.</p>
+        <h3>The break-even formula</h3>
+        <p><strong>Break-Even Units = Fixed Costs ÷ Contribution Margin per Unit</strong></p>
+        <p>Contribution margin = Selling Price − Variable Cost. If your product sells for $50 and variable cost is $25, your CM is $25. If fixed costs are $10,000/month, you need 400 units/month to break even.</p>
+        <h3>What is COGS and why does it matter?</h3>
+        <p>COGS (Cost of Goods Sold) is a fundamental accounting figure: Beginning Inventory + Purchases − Ending Inventory. Gross Profit = Revenue − COGS. Your gross margin percentage determines how much you have left to cover operating expenses and generate net profit.</p>
+        <p><strong>Related tools:</strong> <a href="/markup-calculator">Markup Calculator</a> · <a href="/profit-margin-calculator">Profit Margin Calculator</a> · <a href="/employee-cost-calculator">Employee Cost Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Break-even & COGS questions</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is the break-even point formula?</summary><div class="faq-a">Break-Even Units = Fixed Costs ÷ (Price per Unit − Variable Cost per Unit). The denominator is called contribution margin. Break-Even Revenue = Fixed Costs ÷ CM Ratio, where CM Ratio = Contribution Margin ÷ Price.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is contribution margin?</summary><div class="faq-a">Contribution margin = Selling Price − Variable Cost. Each unit sold contributes this amount toward covering fixed costs. Once fixed costs are covered, each additional unit sold is pure profit (at the contribution margin level).</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What counts as a fixed vs variable cost?</summary><div class="faq-a">Fixed: rent, salaries, insurance, loan payments, software subscriptions — they don't change with production volume. Variable: raw materials, direct labor per unit, packaging, shipping per order. Some costs are "mixed" — like utilities with a fixed base charge plus usage component.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What is COGS?</summary><div class="faq-a">COGS = Beginning Inventory + Purchases (or manufacturing costs) − Ending Inventory. It represents the direct costs of goods sold during a period. Revenue − COGS = Gross Profit. COGS goes on the income statement and is an income tax deduction for businesses.</div></details>
+          <details class="faq-item" data-enter data-delay="5"><summary class="faq-q">What is a good margin of safety?</summary><div class="faq-a">Margin of safety = (Actual Sales − Break-Even Sales) ÷ Actual Sales. A margin above 25% is generally considered healthy. Below 10% means you're dangerously close to a loss if sales dip slightly. Most stable, profitable businesses target 20–40%.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free business and payroll calculators. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Business Tools</div><ul class="footer-links"><li><a href="/break-even-calculator">Break-Even Calculator</a></li><li><a href="/markup-calculator">Markup Calculator</a></li><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/cogs-calculator">COGS Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/employee-cost-calculator">Employee Cost</a></li><li><a href="/invoice-generator-free">Invoice Generator</a></li><li><a href="/payroll-tax-calculator">Payroll Tax</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var activeTool = 'break-even';
+  document.querySelectorAll('.tool-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      activeTool = tab.dataset.tool;
+      document.querySelectorAll('.tool-tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active');
+      document.getElementById('panel-break-even').style.display = activeTool==='break-even'?'block':'none';
+      document.getElementById('panel-cogs').style.display = activeTool==='cogs'?'block':'none';
+    });
+  });
+
+  function fmt(n){return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function fmtN(n){return Math.round(n).toLocaleString('en-US');}
+  function fmtP(n){return (Math.round(n*100)/100).toFixed(1)+'%';}
+
+  // Break-Even
+  document.getElementById('calc-be-btn').addEventListener('click',function(){
+    var fixed=parseFloat(document.getElementById('be-fixed').value)||0;
+    var vc=parseFloat(document.getElementById('be-vc').value)||0;
+    var price=parseFloat(document.getElementById('be-price').value)||0;
+    var actual=parseFloat(document.getElementById('be-actual').value)||0;
+    if(fixed<=0||price<=0){alert('Enter fixed costs and selling price.');return;}
+    var cm=price-vc;
+    if(cm<=0){alert('Selling price must be greater than variable cost.');return;}
+    var cmRatio=cm/price;
+    var beUnits=fixed/cm;
+    var beRevenue=fixed/cmRatio;
+
+    document.getElementById('be-units').textContent=fmtN(Math.ceil(beUnits))+' units';
+    document.getElementById('be-revenue').textContent=fmt(beRevenue);
+
+    var metrics=[
+      {label:'Contribution Margin / Unit',val:fmt(cm)},
+      {label:'CM Ratio',val:fmtP(cmRatio*100)},
+      {label:'Fixed Costs',val:fmt(fixed)},
+      {label:'Variable Cost / Unit',val:fmt(vc)},
+    ];
+    document.getElementById('be-metrics').innerHTML=metrics.map(function(m){
+      return '<div class="metric-cell"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.val+'</div></div>';
+    }).join('');
+
+    // Simple visual chart
+    var chartHtml='<div class="chart-bars">';
+    var chartData=[
+      {label:'Fixed Costs',val:fixed,max:beRevenue,cls:'amber'},
+      {label:'Break-Even Rev',val:beRevenue,max:beRevenue,cls:'blue'},
+    ];
+    if(actual>0){
+      var actualRev=actual*price;
+      var maxVal=Math.max(beRevenue,actualRev)*1.05;
+      chartData[0].max=maxVal; chartData[1].max=maxVal;
+      chartData.push({label:'Actual Revenue',val:actualRev,max:maxVal,cls:'green'});
+    }
+    chartData.forEach(function(d){
+      var pct=Math.min(d.val/d.max*100,100);
+      chartHtml+='<div class="chart-row"><div class="chart-label">'+d.label+'</div>'
+        +'<div class="chart-bar-track"><div class="chart-bar-fill '+d.cls+'" style="width:'+pct+'%"></div></div>'
+        +'<div class="chart-val">'+fmt(d.val)+'</div></div>';
+    });
+    chartHtml+='</div>';
+    document.getElementById('be-chart').innerHTML=chartHtml;
+
+    // Margin of safety
+    if(actual>0){
+      var mosUnits=actual-Math.ceil(beUnits);
+      var mosPct=mosUnits/actual*100;
+      var mosEl=document.getElementById('mos-pct');
+      mosEl.textContent=fmtP(Math.max(mosPct,0));
+      mosEl.className='mos-pct '+(mosPct>=25?'good':mosPct>=10?'warn':'bad');
+      var desc='';
+      if(mosPct>=25) desc='Strong safety buffer. Sales can drop '+fmtP(mosPct)+' before you break even.';
+      else if(mosPct>=10) desc='Moderate buffer. Consider ways to increase margin or reduce fixed costs.';
+      else if(mosPct>=0) desc='Thin margin — only '+fmtP(mosPct)+' buffer. Any sales dip means losses.';
+      else desc='Below break-even by '+(fmtN(Math.abs(mosUnits)))+' units. Operating at a loss.';
+      document.getElementById('mos-desc').textContent=desc;
+      document.getElementById('be-safety-section').style.display='block';
+    } else {
+      document.getElementById('be-safety-section').style.display='none';
+    }
+
+    document.getElementById('be-results').style.display='block';
+    document.getElementById('be-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // COGS
+  document.getElementById('calc-cogs-btn').addEventListener('click',function(){
+    var begin=parseFloat(document.getElementById('cogs-begin').value)||0;
+    var purchases=parseFloat(document.getElementById('cogs-purchases').value)||0;
+    var end=parseFloat(document.getElementById('cogs-end').value)||0;
+    var revenue=parseFloat(document.getElementById('cogs-revenue').value)||0;
+    var cogs=begin+purchases-end;
+    if(cogs<0) cogs=0;
+    document.getElementById('cogs-val').textContent=fmt(cogs);
+
+    if(revenue>0){
+      var gp=revenue-cogs;
+      var gpMargin=revenue>0?(gp/revenue*100):0;
+      document.getElementById('gp-val').textContent=fmt(gp);
+      document.getElementById('gp-margin').textContent='Gross Margin: '+fmtP(gpMargin);
+      document.getElementById('gp-card').style.display='block';
+    } else {
+      document.getElementById('gp-card').style.display='none';
+    }
+
+    var metrics=[
+      {label:'Beginning Inventory',val:fmt(begin)},
+      {label:'+ Purchases / Production',val:fmt(purchases)},
+      {label:'− Ending Inventory',val:fmt(end)},
+      {label:'= COGS',val:fmt(cogs)},
+    ];
+    document.getElementById('cogs-metrics').innerHTML=metrics.map(function(m){
+      return '<div class="metric-cell"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.val+'</div></div>';
+    }).join('');
+
+    document.getElementById('cogs-results').style.display='block';
+    document.getElementById('cogs-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cap Rate Calculator — Capitalization Rate &amp; Property Value | FreePayrollCalc</title>
+<meta name="description" content="Free cap rate calculator. Calculate capitalization rate from NOI and property value, estimate property value from NOI and target cap rate. Includes cap rate benchmarks by property type.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/cap-rate-calculator">
+<meta property="og:title" content="Cap Rate Calculator — Capitalization Rate & Property Value">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Cap Rate Calculator","url":"https://www.freepayrollcalc.com/cap-rate-calculator","description":"Calculate capitalization rate (cap rate) from net operating income and property value, or estimate property value from NOI and target cap rate.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is cap rate in real estate?","acceptedAnswer":{"@type":"Answer","text":"Cap rate (capitalization rate) = Net Operating Income ÷ Property Value × 100. It measures the rate of return on a real estate investment based on the income the property generates, independent of financing. A 6% cap rate means the property generates 6 cents for every $1 of value annually."}},{"@type":"Question","name":"What is a good cap rate for investment property?","acceptedAnswer":{"@type":"Answer","text":"It depends on property type and market. Multifamily in prime urban markets: 3–5%. Suburban multifamily: 5–7%. Retail: 5–8%. Industrial: 4–7%. Office: 5–8%. Higher cap rates mean higher risk or lower-demand markets. A 'good' cap rate meets your return requirements while matching the risk profile of the asset."}},{"@type":"Question","name":"How do you calculate net operating income (NOI)?","acceptedAnswer":{"@type":"Answer","text":"NOI = Gross Rental Income − Vacancy Losses − Operating Expenses. Operating expenses include property taxes, insurance, maintenance, property management fees, utilities (if paid by owner), and reserves for replacement. NOI does NOT include mortgage payments (debt service) or capital expenditures."}},{"@type":"Question","name":"What is the difference between cap rate and cash-on-cash return?","acceptedAnswer":{"@type":"Answer","text":"Cap rate is unlevered — it ignores financing. Cash-on-cash return accounts for your actual cash invested and mortgage payments: Annual Cash Flow (after debt service) ÷ Total Cash Invested × 100. Cap rate is used to value the property; cash-on-cash measures your actual return as an investor."}},{"@type":"Question","name":"How do cap rates relate to property values?","acceptedAnswer":{"@type":"Answer","text":"Cap Rate = NOI ÷ Value. So Property Value = NOI ÷ Cap Rate. If a property generates $60,000 NOI and the market cap rate is 6%, the implied value is $1,000,000. As cap rates compress (go down), property values rise. Rising interest rates typically push cap rates up and property values down."}},{"@type":"Question","name":"What does a higher cap rate mean?","acceptedAnswer":{"@type":"Answer","text":"A higher cap rate means higher yield but also higher risk. Distressed properties, secondary markets, and older buildings command higher cap rates. Lower cap rates indicate lower risk, higher quality assets, and stronger location. Cap rate compression over time signals appreciation potential."}}]}
+</script>
+<style>
+.mode-tabs{display:flex;gap:0;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
+.mode-tab{flex:1;padding:8px;text-align:center;font-size:13px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .18s;color:var(--ink-3)}
+.mode-tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.cap-result-big{text-align:center;background:linear-gradient(135deg,rgba(27,79,216,.06),rgba(27,79,216,.02));border:1px solid rgba(27,79,216,.15);border-radius:14px;padding:28px 20px;margin-bottom:16px}
+.cap-rate-number{font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;color:var(--accent);line-height:1}
+.cap-rate-label{font-size:13px;font-weight:600;color:var(--ink-2);margin-top:8px}
+.cap-rate-quality{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-top:10px}
+.cq-low{background:rgba(5,150,105,.12);color:var(--green)}
+.cq-mid{background:rgba(217,119,6,.12);color:var(--amber)}
+.cq-high{background:rgba(220,38,38,.1);color:var(--red)}
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:12px}
+.metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:4px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--ink-1)}
+.noi-builder{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px}
+.noi-builder-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:12px}
+.noi-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.noi-row label{flex:1;font-size:13px;color:var(--ink-2)}
+.noi-row .input-wrap{width:140px}
+.noi-total{display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid var(--border);font-weight:700;font-size:14px}
+.bm-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.bm-table th{background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink-3);padding:9px 12px;text-align:left;border-bottom:2px solid var(--border)}
+.bm-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.bm-table td.r{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.cap-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.cb-low{background:rgba(5,150,105,.1);color:var(--green)}
+.cb-mid{background:rgba(217,119,6,.1);color:var(--amber)}
+.cb-high{background:rgba(220,38,38,.08);color:var(--red)}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/break-even-calculator">Break-Even</a>
+        <a href="/roi-calculator">ROI</a>
+        <a href="/cap-rate-calculator" class="active">Cap Rate</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <a href="/">Home</a>
+    <a href="/cap-rate-calculator" class="active">Cap Rate Calculator</a>
+    <a href="/break-even-calculator">Break-Even Calculator</a>
+    <a href="/roi-calculator">ROI Calculator</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Cap Rate Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Cap Rate Calculator</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate capitalization rate from NOI and property value, or find implied property value from NOI and target cap rate.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cap rate · Property value · NOI builder · Market benchmarks</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Cap Rate Calculator</div>
+
+      <div class="mode-tabs">
+        <div class="mode-tab active" data-mode="find-cap-rate">Find Cap Rate</div>
+        <div class="mode-tab" data-mode="find-value">Find Property Value</div>
+        <div class="mode-tab" data-mode="find-noi">Find Required NOI</div>
+      </div>
+
+      <!-- NOI Builder (shared) -->
+      <div class="noi-builder">
+        <div class="noi-builder-title">NOI Builder (optional — or enter NOI directly below)</div>
+        <div class="noi-row"><label>Annual Gross Rent / Income</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="noi-gross" class="form-input form-input--prefixed" placeholder="120000" min="0" step="100"></div></div>
+        <div class="noi-row"><label>Vacancy &amp; Credit Losses</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="noi-vacancy" class="form-input form-input--prefixed" placeholder="6000" min="0" step="100"></div></div>
+        <div class="noi-row"><label>Property Taxes</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="noi-tax" class="form-input form-input--prefixed" placeholder="8000" min="0" step="100"></div></div>
+        <div class="noi-row"><label>Insurance</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="noi-insur" class="form-input form-input--prefixed" placeholder="3000" min="0" step="100"></div></div>
+        <div class="noi-row"><label>Maintenance &amp; Repairs</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="noi-maint" class="form-input form-input--prefixed" placeholder="4000" min="0" step="100"></div></div>
+        <div class="noi-row"><label>Property Management (8–12%)</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="noi-mgmt" class="form-input form-input--prefixed" placeholder="9600" min="0" step="100"></div></div>
+        <div class="noi-row"><label>Other Operating Expenses</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="noi-other" class="form-input form-input--prefixed" placeholder="0" min="0" step="100"></div></div>
+        <div class="noi-total"><span>Calculated NOI</span><span id="noi-calc" style="font-family:'JetBrains Mono',monospace;color:var(--accent)">$0</span></div>
+      </div>
+
+      <!-- Panel: Find Cap Rate -->
+      <div id="panel-find-cap-rate">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Annual NOI (Net Operating Income)</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cr-noi" class="form-input form-input--prefixed" placeholder="60000" min="0" step="100"></div>
+            <span class="form-hint">Use NOI Builder above or enter manually</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Property Value / Purchase Price</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cr-value" class="form-input form-input--prefixed" placeholder="1000000" min="0" step="1000"></div>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-cr-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          Calculate Cap Rate
+        </button>
+        <div id="cr-results" style="display:none;margin-top:24px">
+          <div class="cap-result-big">
+            <div class="cap-rate-number" id="cr-rate-num">—</div>
+            <div class="cap-rate-label">Capitalization Rate</div>
+            <div class="cap-rate-quality" id="cr-quality"></div>
+          </div>
+          <div class="metrics-row" id="cr-metrics"></div>
+        </div>
+      </div>
+
+      <!-- Panel: Find Property Value -->
+      <div id="panel-find-value" style="display:none">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Annual NOI</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="fv-noi" class="form-input form-input--prefixed" placeholder="60000" min="0" step="100"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target / Market Cap Rate</label>
+            <div class="input-wrap"><input type="number" id="fv-caprate" class="form-input form-input--suffixed" placeholder="6" min="0.1" max="30" step="0.1"><span class="input-suffix">%</span></div>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-fv-btn">Calculate Property Value</button>
+        <div id="fv-results" style="display:none;margin-top:24px">
+          <div class="cap-result-big">
+            <div class="cap-rate-number" id="fv-val-num" style="font-size:36px">—</div>
+            <div class="cap-rate-label">Implied Property Value</div>
+          </div>
+          <div class="metrics-row" id="fv-metrics"></div>
+        </div>
+      </div>
+
+      <!-- Panel: Find Required NOI -->
+      <div id="panel-find-noi" style="display:none">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Property Value / Purchase Price</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="fn-value" class="form-input form-input--prefixed" placeholder="1000000" min="0" step="1000"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Cap Rate</label>
+            <div class="input-wrap"><input type="number" id="fn-caprate" class="form-input form-input--suffixed" placeholder="6" min="0.1" max="30" step="0.1"><span class="input-suffix">%</span></div>
+          </div>
+        </div>
+        <button class="calc-btn" id="calc-fn-btn">Calculate Required NOI</button>
+        <div id="fn-results" style="display:none;margin-top:24px">
+          <div class="cap-result-big">
+            <div class="cap-rate-number" id="fn-noi-num" style="font-size:36px">—</div>
+            <div class="cap-rate-label">Required Annual NOI</div>
+          </div>
+          <div class="metrics-row" id="fn-metrics"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Benchmarks table -->
+    <div class="calc-card" data-enter data-delay="3" style="margin-top:16px">
+      <div class="calc-card-header">Cap Rate Benchmarks by Property Type (2025–2026)</div>
+      <p style="font-size:13px;color:var(--ink-3);margin-bottom:4px">Market cap rates vary by location, asset quality, and interest rate environment. These ranges reflect typical institutional market data.</p>
+      <table class="bm-table">
+        <thead><tr><th>Property Type</th><th>Typical Cap Rate Range</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Multifamily — Class A Urban</td><td class="r"><span class="cap-badge cb-low">3–5%</span></td><td>NYC, LA, SF; compressed due to demand</td></tr>
+          <tr><td>Multifamily — Suburban / Class B</td><td class="r"><span class="cap-badge cb-low">5–7%</span></td><td>Secondary markets, older builds</td></tr>
+          <tr><td>Single-Family Rental (SFR)</td><td class="r"><span class="cap-badge cb-low">4–7%</span></td><td>Varies heavily by market</td></tr>
+          <tr><td>Industrial / Warehouse</td><td class="r"><span class="cap-badge cb-low">4–6%</span></td><td>E-commerce demand has compressed rates</td></tr>
+          <tr><td>Retail — Anchored Strip Center</td><td class="r"><span class="cap-badge cb-mid">6–8%</span></td><td>Grocery-anchored at lower end</td></tr>
+          <tr><td>Retail — Single-Tenant NNN</td><td class="r"><span class="cap-badge cb-low">4–6%</span></td><td>Credit tenants (CVS, Dollar General)</td></tr>
+          <tr><td>Office — CBD Class A</td><td class="r"><span class="cap-badge cb-mid">6–9%</span></td><td>Risk premium for remote work uncertainty</td></tr>
+          <tr><td>Office — Suburban / Class B</td><td class="r"><span class="cap-badge cb-high">8–12%</span></td><td>Distress-level rates common</td></tr>
+          <tr><td>Self-Storage</td><td class="r"><span class="cap-badge cb-low">5–7%</span></td><td>Recession-resilient; demand stable</td></tr>
+          <tr><td>Hotel / Hospitality</td><td class="r"><span class="cap-badge cb-high">8–12%</span></td><td>Operational risk; market-dependent</td></tr>
+          <tr><td>Senior Housing / Medical Office</td><td class="r"><span class="cap-badge cb-mid">6–8%</span></td><td>Healthcare real estate premium</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>Cap Rate Formula and What It Tells You</h2>
+        <p><strong>Cap Rate = Net Operating Income ÷ Property Value</strong></p>
+        <p>The capitalization rate expresses a property's income relative to its value as a percentage. It's the most widely used metric for comparing investment properties because it strips out financing — two investors with different mortgage rates see the same cap rate on the same property.</p>
+        <h3>Cap rate vs. cash-on-cash return</h3>
+        <p>Cap rate is unlevered — it ignores how you financed the purchase. Cash-on-cash return divides annual cash flow after debt service by your actual cash invested. A property might have a 6% cap rate but a 10% cash-on-cash return if you used favorable leverage.</p>
+        <h3>NOI: what's included and excluded</h3>
+        <p>NOI includes: gross rents minus vacancy plus other income, minus property taxes, insurance, maintenance, management fees, and utilities you pay. NOI excludes: mortgage principal and interest, depreciation, capital expenditures, and income taxes. These are personal/financing items that vary by investor.</p>
+        <p><strong>Related:</strong> <a href="/roi-calculator">ROI Calculator</a> · <a href="/break-even-calculator">Break-Even Calculator</a> · <a href="/profit-margin-calculator">Profit Margin Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Cap rate questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">What is cap rate in real estate?</summary><div class="faq-a">Cap rate = Net Operating Income ÷ Property Value × 100. A 6% cap rate means the property earns 6% of its value per year in NOI. It's used to compare properties and estimate value without the noise of different financing structures.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What is a good cap rate?</summary><div class="faq-a">There's no universal answer. Lower cap rates (3–5%) indicate premium assets in high-demand markets with lower risk. Higher cap rates (8–12%) indicate higher risk, lower-demand areas, or distressed assets. A "good" cap rate meets your return requirements for the risk you're taking.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">How do I calculate NOI?</summary><div class="faq-a">NOI = Gross Rental Income − Vacancy Losses − Property Taxes − Insurance − Maintenance − Property Management − Other Operating Costs. Do NOT subtract mortgage payments or depreciation. NOI is purely an operating measure.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What is the difference between cap rate and ROI?</summary><div class="faq-a">Cap rate is unlevered — it doesn't account for financing. ROI accounts for all costs including down payment and financing. Cash-on-cash return is the most similar to ROI for rental properties: annual cash flow after mortgage payments ÷ total cash invested.</div></details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free business and payroll calculators. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">Business Tools</div><ul class="footer-links"><li><a href="/cap-rate-calculator">Cap Rate Calculator</a></li><li><a href="/roi-calculator">ROI Calculator</a></li><li><a href="/break-even-calculator">Break-Even Calculator</a></li><li><a href="/markup-calculator">Markup Calculator</a></li></ul></div>
+      <div><div class="footer-col-title">Payroll Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax</a></li><li><a href="/employee-cost-calculator">Employee Cost</a></li><li><a href="/invoice-generator-free">Invoice Generator</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var activeMode='find-cap-rate';
+  document.querySelectorAll('.mode-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      activeMode=tab.dataset.mode;
+      document.querySelectorAll('.mode-tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active');
+      document.getElementById('panel-find-cap-rate').style.display=activeMode==='find-cap-rate'?'block':'none';
+      document.getElementById('panel-find-value').style.display=activeMode==='find-value'?'block':'none';
+      document.getElementById('panel-find-noi').style.display=activeMode==='find-noi'?'block':'none';
+    });
+  });
+
+  function fmt(n){return '$'+(Math.round(n)).toLocaleString('en-US');}
+  function fmtP(n){return (Math.round(n*100)/100).toFixed(2)+'%';}
+  function fmtM(n){return '$'+(Math.round(n/1000)).toLocaleString('en-US')+'K';}
+
+  // Live NOI builder
+  function updateNOI(){
+    var gross=parseFloat(document.getElementById('noi-gross').value)||0;
+    var vac=parseFloat(document.getElementById('noi-vacancy').value)||0;
+    var tax=parseFloat(document.getElementById('noi-tax').value)||0;
+    var ins=parseFloat(document.getElementById('noi-insur').value)||0;
+    var maint=parseFloat(document.getElementById('noi-maint').value)||0;
+    var mgmt=parseFloat(document.getElementById('noi-mgmt').value)||0;
+    var other=parseFloat(document.getElementById('noi-other').value)||0;
+    var noi=gross-vac-tax-ins-maint-mgmt-other;
+    document.getElementById('noi-calc').textContent=fmt(noi);
+    return noi;
+  }
+  ['noi-gross','noi-vacancy','noi-tax','noi-insur','noi-maint','noi-mgmt','noi-other'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',function(){
+      var noi=updateNOI();
+      if(noi>0){
+        document.getElementById('cr-noi').value=Math.round(noi);
+        document.getElementById('fv-noi').value=Math.round(noi);
+      }
+    });
+  });
+
+  function qualityLabel(rate){
+    if(rate<5) return {cls:'cq-low',text:'Low Cap Rate — Premium / Low-Risk Asset'};
+    if(rate<8) return {cls:'cq-mid',text:'Mid Cap Rate — Moderate Risk / Return'};
+    return {cls:'cq-high',text:'High Cap Rate — Higher Risk / Value-Add'};
+  }
+
+  // Find Cap Rate
+  document.getElementById('calc-cr-btn').addEventListener('click',function(){
+    var noi=parseFloat(document.getElementById('cr-noi').value)||0;
+    var val=parseFloat(document.getElementById('cr-value').value)||0;
+    if(noi<=0||val<=0){alert('Enter NOI and property value.');return;}
+    var capRate=noi/val*100;
+    document.getElementById('cr-rate-num').textContent=fmtP(capRate);
+    var q=qualityLabel(capRate);
+    document.getElementById('cr-quality').className='cap-rate-quality '+q.cls;
+    document.getElementById('cr-quality').textContent=q.text;
+    document.getElementById('cr-metrics').innerHTML=[
+      {label:'Annual NOI',val:fmt(noi)},
+      {label:'Monthly NOI',val:fmt(noi/12)},
+      {label:'Property Value',val:fmt(val)},
+      {label:'Gross Rent Multiplier',val:noi>0?(val/noi).toFixed(1)+'×':'—'},
+    ].map(function(m){return '<div class="metric-cell"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.val+'</div></div>';}).join('');
+    document.getElementById('cr-results').style.display='block';
+    document.getElementById('cr-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Find Property Value
+  document.getElementById('calc-fv-btn').addEventListener('click',function(){
+    var noi=parseFloat(document.getElementById('fv-noi').value)||0;
+    var capRate=parseFloat(document.getElementById('fv-caprate').value)||0;
+    if(noi<=0||capRate<=0){alert('Enter NOI and cap rate.');return;}
+    var val=noi/(capRate/100);
+    document.getElementById('fv-val-num').textContent=fmt(val);
+    document.getElementById('fv-metrics').innerHTML=[
+      {label:'Annual NOI',val:fmt(noi)},
+      {label:'Monthly NOI',val:fmt(noi/12)},
+      {label:'Cap Rate',val:fmtP(capRate)},
+      {label:'GRM',val:(val/noi).toFixed(1)+'×'},
+    ].map(function(m){return '<div class="metric-cell"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.val+'</div></div>';}).join('');
+    document.getElementById('fv-results').style.display='block';
+    document.getElementById('fv-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Find Required NOI
+  document.getElementById('calc-fn-btn').addEventListener('click',function(){
+    var val=parseFloat(document.getElementById('fn-value').value)||0;
+    var capRate=parseFloat(document.getElementById('fn-caprate').value)||0;
+    if(val<=0||capRate<=0){alert('Enter property value and target cap rate.');return;}
+    var noi=val*(capRate/100);
+    document.getElementById('fn-noi-num').textContent=fmt(noi);
+    document.getElementById('fn-metrics').innerHTML=[
+      {label:'Required Annual NOI',val:fmt(noi)},
+      {label:'Required Monthly NOI',val:fmt(noi/12)},
+      {label:'Property Value',val:fmt(val)},
+      {label:'Target Cap Rate',val:fmtP(capRate)},
+    ].map(function(m){return '<div class="metric-cell"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.val+'</div></div>';}).join('');
+    document.getElementById('fn-results').style.display='block';
+    document.getElementById('fn-results').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>
