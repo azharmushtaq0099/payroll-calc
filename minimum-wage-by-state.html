@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minimum Wage by State 2026 — All 50 States + Major Cities | FreePayrollCalc</title>
+<meta name="description" content="2026 minimum wage rates for all 50 US states, DC, and 30+ major cities. Tipped worker rates, scheduled increases, and state comparison. Updated for 2026.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/minimum-wage-by-state">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the federal minimum wage in 2026?","acceptedAnswer":{"@type":"Answer","text":"The federal minimum wage is $7.25 per hour in 2026, unchanged since 2009. Employers must pay the higher of the federal minimum or any applicable state or local minimum wage."}},
+{"@type":"Question","name":"Which states have a $15 minimum wage in 2026?","acceptedAnswer":{"@type":"Answer","text":"States with a $15+ minimum wage in 2026 include California ($16.50), New York ($16.00 statewide, $16.50 NYC), Washington State ($16.66), Connecticut ($16.35), New Jersey ($15.49), Illinois ($15.00), Massachusetts ($15.00), Maryland ($15.00), Delaware ($15.00), Rhode Island ($15.00), Nebraska ($15.00 as of Jan 2026), and Florida ($15.00 as of Sep 2026). Washington DC is $17.50."}},
+{"@type":"Question","name":"What is the tipped minimum wage by state?","acceptedAnswer":{"@type":"Answer","text":"The federal tipped minimum wage is $2.13/hr (unchanged since 1991). However, many states do not allow a tip credit and require employers to pay tipped workers the full state minimum wage. States with no tip credit (full minimum wage for tipped workers) include California, Washington, Oregon, Montana, Nevada, Minnesota, and Alaska. Other states set their own tipped minimums above the federal $2.13."}},
+{"@type":"Question","name":"How often does the minimum wage change?","acceptedAnswer":{"@type":"Answer","text":"State minimum wages typically change on January 1st. Many states index their minimum wage to inflation (CPI) and increase automatically each year. Some states also have scheduled increases (like Florida's Amendment 2 schedule). The federal minimum wage has not changed since 2009 and requires an act of Congress to change."}},
+{"@type":"Question","name":"What cities have a minimum wage higher than their state?","acceptedAnswer":{"@type":"Answer","text":"Many major cities set minimum wages above their state's rate. Examples include Seattle (up to $19.97), San Francisco ($18.67), Denver ($18.81), Los Angeles ($17.28), Chicago ($16.20), and New York City ($16.50, matching the NYC-area rate). City minimum wages often apply only to businesses within city limits."}}
+]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"US Minimum Wage Rates 2026","description":"Minimum wage rates for all 50 US states, DC, and major cities for 2026","license":"https://creativecommons.org/licenses/by/4.0/","creator":{"@type":"Organization","name":"FreePayrollCalc"},"temporalCoverage":"2026","spatialCoverage":{"@type":"Country","name":"United States"}}
+</script>
+<style>
+.mw-search-wrap{position:relative;max-width:520px;margin:0 auto 32px}
+.mw-search{width:100%;padding:14px 48px 14px 18px;font-size:15px;border:2px solid var(--border);border-radius:12px;background:#fff;outline:none;font-family:inherit;box-sizing:border-box}
+.mw-search:focus{border-color:var(--accent)}
+.mw-search-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--ink-3)}
+.mw-result{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.1);z-index:100;max-height:320px;overflow-y:auto}
+.mw-result-item{padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.mw-result-item:last-child{border-bottom:none}
+.mw-result-item:hover{background:var(--surface)}
+.mw-result-rate{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent)}
+.mw-result-type{font-size:11px;color:var(--ink-3)}
+.mw-highlight-card{background:var(--accent);color:#fff;border-radius:16px;padding:28px 32px;margin-bottom:28px;display:none}
+.mw-highlight-rate{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;line-height:1}
+.mw-highlight-label{font-size:14px;opacity:.85;margin-top:4px}
+.mw-highlight-meta{display:flex;gap:20px;margin-top:16px;flex-wrap:wrap}
+.mw-highlight-meta-item{font-size:13px;opacity:.9}
+.mw-highlight-meta-item strong{display:block;font-size:16px;font-weight:700}
+.state-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.state-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:border-color .15s}
+.state-card:hover,.state-card.active{border-color:var(--accent)}
+.state-card-name{font-size:13px;font-weight:600;color:var(--ink-1)}
+.state-card-abbr{font-size:11px;color:var(--ink-3);margin-top:1px}
+.state-card-rate{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700}
+.rate-high{color:var(--green)}
+.rate-mid{color:var(--amber)}
+.rate-federal{color:var(--ink-3)}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-tab{padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;background:#fff;color:var(--ink-2)}
+.filter-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.city-table{width:100%;border-collapse:collapse;font-size:13px}
+.city-table th{text-align:left;padding:10px 12px;background:var(--surface);border-bottom:2px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:700}
+.city-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.city-table tr:hover td{background:var(--surface)}
+.change-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700}
+.change-up{background:#D1FAE5;color:#065F46}
+.change-none{background:var(--surface);color:var(--ink-3)}
+.upcoming-item{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.upcoming-date{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--accent);min-width:80px}
+.tipped-note{font-size:12px;color:var(--ink-3);margin-top:3px}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/take-home-pay-calculator">Take Home Pay</a>
+        <a href="/free-payroll-calculator">Full Payroll</a>
+        <a href="/#all-tools">All Tools</a>
+      </div>
+      <a href="/free-payroll-calculator" class="nav-cta">Free Calculator</a>
+    </div>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb">
+      <a href="/">Home</a><span>›</span>
+      <span aria-current="page">Minimum Wage by State 2026</span>
+    </nav>
+    <h1 class="calc-title" data-enter>Minimum Wage by State 2026</h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Current minimum wage rates for all 50 US states, Washington D.C., and 30+ major cities. Includes tipped worker rates and scheduled 2026 increases.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>2026 rates · Federal $7.25 · 15 states at $15+ · Updated Jan 2026</div>
+
+    <!-- Search -->
+    <div class="mw-search-wrap" data-enter data-delay="1">
+      <input type="text" id="mwSearch" class="mw-search" placeholder="Search any state or city — e.g. California, Seattle, Chicago..." autocomplete="off" spellcheck="false">
+      <svg class="mw-search-icon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
+      <div class="mw-result" id="mwResults"></div>
+    </div>
+
+    <!-- Highlight card (shown on search select) -->
+    <div class="mw-highlight-card" id="mwHighlight">
+      <div id="mwHighlightName" style="font-size:14px;font-weight:700;opacity:.85;margin-bottom:4px"></div>
+      <div id="mwHighlightRate" class="mw-highlight-rate"></div>
+      <div id="mwHighlightLabel" class="mw-highlight-label"></div>
+      <div class="mw-highlight-meta" id="mwHighlightMeta"></div>
+    </div>
+
+    <!-- Key stats -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:0 0 32px" data-enter data-delay="2">
+      <div class="metric-cell"><div class="metric-label">Federal Minimum</div><div class="metric-value" style="color:var(--ink-2)">$7.25/hr</div><div class="metric-sub">Since 2009</div></div>
+      <div class="metric-cell"><div class="metric-label">Highest (DC)</div><div class="metric-value">$17.50/hr</div><div class="metric-sub">Washington D.C.</div></div>
+      <div class="metric-cell"><div class="metric-label">States at $15+</div><div class="metric-value">15 states</div><div class="metric-sub">+ DC</div></div>
+      <div class="metric-cell"><div class="metric-label">Federal Tipped</div><div class="metric-value" style="color:var(--amber)">$2.13/hr</div><div class="metric-sub">Since 1991</div></div>
+    </div>
+
+    <!-- State grid -->
+    <div class="section-header" data-enter>
+      <p class="section-eyebrow">All States</p>
+      <h2 class="section-title">Minimum wage by state — 2026</h2>
+    </div>
+
+    <div class="filter-tabs" id="filterTabs" data-enter data-delay="1">
+      <button class="filter-tab active" data-filter="all">All States</button>
+      <button class="filter-tab" data-filter="high">$15+ States</button>
+      <button class="filter-tab" data-filter="mid">$10–$14.99</button>
+      <button class="filter-tab" data-filter="federal">Federal Rate ($7.25)</button>
+      <button class="filter-tab" data-filter="notip">No Tip Credit</button>
+    </div>
+
+    <div class="state-grid" id="stateGrid" data-enter data-delay="2"></div>
+
+    <!-- Cities section -->
+    <div class="section-header" style="margin-top:48px" data-enter>
+      <p class="section-eyebrow">Major Cities</p>
+      <h2 class="section-title">City minimum wages higher than state (2026)</h2>
+      <p style="color:var(--ink-2);font-size:14px;max-width:600px;margin:8px auto 0">Many cities set minimum wages above their state. The higher rate always applies within city limits.</p>
+    </div>
+    <div style="overflow-x:auto" data-enter data-delay="1">
+      <table class="city-table">
+        <thead><tr>
+          <th>City</th><th>State</th><th>City Rate</th><th>State Rate</th><th>Premium</th><th>Tipped</th><th>Notes</th>
+        </tr></thead>
+        <tbody id="cityTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Upcoming changes -->
+    <div class="section-header" style="margin-top:48px" data-enter>
+      <p class="section-eyebrow">Scheduled Changes</p>
+      <h2 class="section-title">Minimum wage increases scheduled for 2026</h2>
+    </div>
+    <div id="upcomingList" data-enter data-delay="1"></div>
+
+    <!-- Tipped wages section -->
+    <div class="section-header" style="margin-top:48px" data-enter>
+      <p class="section-eyebrow">Tipped Workers</p>
+      <h2 class="section-title">Tipped minimum wage by state 2026</h2>
+      <p style="color:var(--ink-2);font-size:14px;max-width:620px;margin:8px auto 0">The federal tipped minimum is $2.13/hr — unchanged since 1991. Many states require full minimum wage for tipped workers. States with "No tip credit" must pay tipped workers the full state minimum.</p>
+    </div>
+    <div style="overflow-x:auto" data-enter data-delay="1">
+      <table class="city-table">
+        <thead><tr><th>State</th><th>Regular Min Wage</th><th>Tipped Min Wage</th><th>Tip Credit Allowed</th><th>Notes</th></tr></thead>
+        <tbody id="tippedTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Calculator CTA -->
+    <div class="calc-card" style="text-align:center;padding:32px;margin:40px 0" data-enter>
+      <div style="font-size:20px;font-weight:700;margin-bottom:8px">Calculate exact take-home pay at any wage</div>
+      <p style="color:var(--ink-2);font-size:14px;margin-bottom:20px">Enter an hourly rate or annual salary. See federal + state taxes, FICA, and net take-home pay for any state.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/payroll-tax-calculator" class="calc-btn" style="display:inline-block;text-decoration:none;max-width:260px">Payroll Tax Calculator</a>
+        <a href="/take-home-pay-calculator" class="calc-btn" style="display:inline-block;text-decoration:none;max-width:260px;background:var(--surface);color:var(--accent);border:2px solid var(--accent)">Take-Home Pay Calculator</a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section" style="background:none;padding-top:0">
+      <div class="container" style="padding:0">
+        <div class="section-header" data-enter>
+          <p class="section-eyebrow">FAQ</p>
+          <h2 class="section-title">Minimum wage questions answered</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter><summary class="faq-q">What is the federal minimum wage in 2026?</summary><div class="faq-a">The federal minimum wage is <strong>$7.25 per hour</strong> in 2026, unchanged since July 24, 2009 — making it the longest period without a federal increase in US history. Employers must pay whichever is higher: the federal rate, state rate, or any applicable local (city/county) rate.</div></details>
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">Which states have a $15 minimum wage in 2026?</summary><div class="faq-a">As of 2026, states with minimum wages at or above $15/hr include: California ($16.50), Washington State ($16.66+), Connecticut ($16.35), New York ($16.00 state / $16.50 NYC), New Jersey ($15.49), Washington DC ($17.50), Illinois ($15.00), Massachusetts ($15.00), Maryland ($15.00), Delaware ($15.00), Rhode Island ($15.00), and Nebraska ($15.00 as of January 2026). Florida reaches $15.00 in September 2026.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">Can a city have a higher minimum wage than the state?</summary><div class="faq-a">Yes. Cities and counties can set minimum wages above the state rate. Examples: Seattle ($19.97 for large employers), San Francisco ($18.67), Denver ($18.81), Los Angeles ($17.28), Chicago ($16.20). The highest applicable rate — federal, state, or local — always governs. If a business operates in a city with a higher minimum wage than the state, it must pay the city rate to all employees working in that city.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What is the minimum wage for tipped workers?</summary><div class="faq-a">The federal tipped minimum wage is <strong>$2.13/hr</strong>, provided tips bring total pay to at least $7.25/hr. However, many states do not allow this "tip credit" and require tipped workers to receive the full state minimum wage. States with no tip credit include California, Washington, Oregon, Montana, Nevada (since July 2024), Minnesota, and Alaska. Always check your state's specific rule — it varies significantly.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">How often does the minimum wage increase?</summary><div class="faq-a">Many states now index their minimum wage to inflation (CPI) and adjust automatically every January 1st. Examples include Washington, Colorado, Arizona, Oregon, and others. Some states have legislated scheduled increases (like Florida's Amendment 2, which increases the rate by $1 each September). The federal minimum wage requires an act of Congress and has not changed since 2009. Employers should check their state's rate each January.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:12px;color:var(--ink-3);margin-top:32px;line-height:1.6">
+      <strong>Data sources &amp; accuracy:</strong> Rates compiled from US Department of Labor (dol.gov), state labor department websites, and enacted state legislation as of January 2026. Indexed rates (marked with †) adjust annually to CPI and may change. City rates are for businesses within city limits — check county/metro boundaries for your jurisdiction. This tool is for reference only; verify rates with your state labor department before processing payroll. <strong>Last updated: January 2026.</strong>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free 2026 payroll calculators and wage compliance tools for US employers.</div></div>
+      <div><div class="footer-col-title">Payroll Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/take-home-pay-calculator">Take Home Pay</a></li><li><a href="/free-payroll-calculator">Full Payroll</a></li><li><a href="/overtime-pay-calculator">Overtime Pay</a></li></ul></div>
+      <div><div class="footer-col-title">Resources</div><ul class="footer-links"><li><a href="/minimum-wage-by-state">Minimum Wage by State</a></li><li><a href="/w4-withholding-calculator">W-4 Calculator</a></li><li><a href="/employer-tax-calculator">Employer Tax</a></li><li><a href="/">All Tools</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For reference only — verify rates with official state sources.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+const STATES = [
+  // No state minimum (federal $7.25 applies)
+  {name:'Alabama',abbr:'AL',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'Federal rate applies'},
+  {name:'Georgia',abbr:'GA',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'State min is $5.15; federal $7.25 applies'},
+  {name:'Idaho',abbr:'ID',rate:7.25,src:'federal',tipped:3.35,tipCredit:true,tipNote:'Tipped min $3.35'},
+  {name:'Indiana',abbr:'IN',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'Federal rate applies'},
+  {name:'Iowa',abbr:'IA',rate:7.25,src:'federal',tipped:4.35,tipCredit:true,tipNote:'Tipped min $4.35'},
+  {name:'Kansas',abbr:'KS',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'Federal rate applies'},
+  {name:'Kentucky',abbr:'KY',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'Federal rate applies'},
+  {name:'Louisiana',abbr:'LA',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'No state law; federal applies'},
+  {name:'Mississippi',abbr:'MS',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'No state law; federal applies'},
+  {name:'New Hampshire',abbr:'NH',rate:7.25,src:'federal',tipped:3.26,tipCredit:true,tipNote:'Tipped min $3.26 (45% of min wage)'},
+  {name:'North Carolina',abbr:'NC',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'Federal rate applies'},
+  {name:'North Dakota',abbr:'ND',rate:7.25,src:'federal',tipped:4.86,tipCredit:true,tipNote:'Tipped min $4.86'},
+  {name:'Oklahoma',abbr:'OK',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'Federal rate applies'},
+  {name:'Pennsylvania',abbr:'PA',rate:7.25,src:'federal',tipped:2.83,tipCredit:true,tipNote:'Tipped min $2.83'},
+  {name:'South Carolina',abbr:'SC',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'No state law; federal applies'},
+  {name:'Tennessee',abbr:'TN',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'No state law; federal applies'},
+  {name:'Texas',abbr:'TX',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'Federal rate applies'},
+  {name:'Utah',abbr:'UT',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'Federal rate applies'},
+  {name:'Wisconsin',abbr:'WI',rate:7.25,src:'federal',tipped:2.33,tipCredit:true,tipNote:'Tipped min $2.33'},
+  {name:'Wyoming',abbr:'WY',rate:7.25,src:'federal',tipped:2.13,tipCredit:true,tipNote:'State min is $5.15; federal $7.25 applies'},
+
+  // States with own minimum above federal
+  {name:'Alaska',abbr:'AK',rate:11.91,src:'state',indexed:true,tipped:11.91,tipCredit:false,tipNote:'No tip credit — full minimum wage required'},
+  {name:'Arizona',abbr:'AZ',rate:14.35,src:'state',indexed:true,tipped:11.35,tipCredit:true,tipNote:'Tipped min $11.35 (up to $3.00 tip credit)'},
+  {name:'Arkansas',abbr:'AR',rate:11.00,src:'state',tipped:2.63,tipCredit:true,tipNote:'Tipped min $2.63'},
+  {name:'California',abbr:'CA',rate:16.50,src:'state',tipped:16.50,tipCredit:false,tipNote:'No tip credit — full $16.50 required',note:'Fast food workers: $20/hr under AB 1228'},
+  {name:'Colorado',abbr:'CO',rate:14.81,src:'state',indexed:true,tipped:11.79,tipCredit:true,tipNote:'Tipped min $11.79 (up to $3.02 tip credit)'},
+  {name:'Connecticut',abbr:'CT',rate:16.35,src:'state',indexed:true,tipped:8.23,tipCredit:true,tipNote:'Tipped min $8.23 for food/beverage service'},
+  {name:'Delaware',abbr:'DE',rate:15.00,src:'state',tipped:2.23,tipCredit:true,tipNote:'Tipped min $2.23'},
+  {name:'Florida',abbr:'FL',rate:14.00,src:'state',tipped:10.98,tipCredit:true,tipNote:'Tipped min $10.98 (Jan 2026). Rises to $11.98 when state hits $15 (Sep 2026)',upcoming:'$15.00 from Sep 30, 2026 (Amendment 2)'},
+  {name:'Hawaii',abbr:'HI',rate:14.00,src:'state',tipped:12.75,tipCredit:true,tipNote:'Tip credit max $1.25; tipped min $12.75'},
+  {name:'Illinois',abbr:'IL',rate:15.00,src:'state',tipped:9.00,tipCredit:true,tipNote:'Tipped min $9.00 (60% of min wage)'},
+  {name:'Maine',abbr:'ME',rate:14.65,src:'state',indexed:true,tipped:7.33,tipCredit:true,tipNote:'Tipped min $7.33 (50% of min wage)'},
+  {name:'Maryland',abbr:'MD',rate:15.00,src:'state',tipped:3.63,tipCredit:true,tipNote:'Tipped min $3.63'},
+  {name:'Massachusetts',abbr:'MA',rate:15.00,src:'state',tipped:6.75,tipCredit:true,tipNote:'Tipped min $6.75'},
+  {name:'Michigan',abbr:'MI',rate:10.56,src:'state',tipped:4.01,tipCredit:true,tipNote:'Tipped min $4.01 (Verify — complex court ruling)',note:'⚠ Rate subject to court rulings. Verify with Michigan LARA.'},
+  {name:'Minnesota',abbr:'MN',rate:10.85,src:'state',indexed:true,tipped:10.85,tipCredit:false,tipNote:'No tip credit — full min wage for all workers',note:'Large employers: $10.85; small employers: $8.85'},
+  {name:'Missouri',abbr:'MO',rate:13.75,src:'state',indexed:true,tipped:6.88,tipCredit:true,tipNote:'Tipped min $6.88 (50% of min wage)'},
+  {name:'Montana',abbr:'MT',rate:10.55,src:'state',indexed:true,tipped:10.55,tipCredit:false,tipNote:'No tip credit — full min wage required'},
+  {name:'Nebraska',abbr:'NE',rate:15.00,src:'state',tipped:2.13,tipCredit:true,tipNote:'Federal tipped rate applies',upcoming:'$15.00 confirmed Jan 1, 2026 per Initiative 436'},
+  {name:'Nevada',abbr:'NV',rate:12.00,src:'state',tipped:12.00,tipCredit:false,tipNote:'No tip credit since Jul 2024 — full $12.00 required'},
+  {name:'New Jersey',abbr:'NJ',rate:15.49,src:'state',indexed:true,tipped:5.26,tipCredit:true,tipNote:'Tipped min $5.26'},
+  {name:'New Mexico',abbr:'NM',rate:12.00,src:'state',tipped:3.00,tipCredit:true,tipNote:'Tipped min $3.00'},
+  {name:'New York',abbr:'NY',rate:16.00,src:'state',tipped:8.00,tipCredit:true,tipNote:'Tipped min $8.00 statewide; $10.65 NYC area',note:'NYC/Long Island/Westchester: $16.50'},
+  {name:'Ohio',abbr:'OH',rate:10.45,src:'state',indexed:true,tipped:5.25,tipCredit:true,tipNote:'Tipped min $5.25'},
+  {name:'Oregon',abbr:'OR',rate:14.70,src:'state',indexed:true,tipped:14.70,tipCredit:false,tipNote:'No tip credit — full min wage required',note:'Portland metro: $15.45; rural: $13.20'},
+  {name:'Rhode Island',abbr:'RI',rate:15.00,src:'state',tipped:3.89,tipCredit:true,tipNote:'Tipped min $3.89'},
+  {name:'South Dakota',abbr:'SD',rate:11.20,src:'state',indexed:true,tipped:5.60,tipCredit:true,tipNote:'Tipped min $5.60 (50% of min wage)'},
+  {name:'Vermont',abbr:'VT',rate:13.67,src:'state',indexed:true,tipped:6.84,tipCredit:true,tipNote:'Tipped min $6.84 (50% of min wage)'},
+  {name:'Virginia',abbr:'VA',rate:12.00,src:'state',indexed:true,tipped:2.13,tipCredit:true,tipNote:'Federal tipped rate applies'},
+  {name:'Washington',abbr:'WA',rate:16.66,src:'state',indexed:true,tipped:16.66,tipCredit:false,tipNote:'No tip credit — full $16.66 required'},
+  {name:'Washington D.C.',abbr:'DC',rate:17.50,src:'state',indexed:true,tipped:8.00,tipCredit:true,tipNote:'Tipped min $8.00'},
+  {name:'West Virginia',abbr:'WV',rate:8.75,src:'state',tipped:2.62,tipCredit:true,tipNote:'Tipped min $2.62'},
+];
+
+const CITIES = [
+  {city:'Seattle',state:'WA',rate:19.97,stateRate:16.66,tipped:19.97,tipCredit:false,note:'Large employers (500+). Under 500: $17.25'},
+  {city:'San Francisco',state:'CA',rate:18.67,stateRate:16.50,tipped:18.67,tipCredit:false,note:'Adjusted annually each July 1'},
+  {city:'Denver',state:'CO',rate:18.81,stateRate:14.81,tipped:15.79,tipCredit:true,note:'Adjusted annually each Jan 1'},
+  {city:'Emeryville',state:'CA',rate:19.36,stateRate:16.50,tipped:19.36,tipCredit:false,note:'One of highest city rates in US'},
+  {city:'Los Angeles',state:'CA',rate:17.28,stateRate:16.50,tipped:17.28,tipCredit:false,note:'City minimum; unincorporated LA County: $16.90'},
+  {city:'Berkeley',state:'CA',rate:18.67,stateRate:16.50,tipped:18.67,tipCredit:false,note:'Adjusts annually Oct 1'},
+  {city:'Chicago',state:'IL',rate:16.20,stateRate:15.00,tipped:9.72,tipCredit:true,note:'Reaches $17.00 Jul 2026; tipped: 60% of min wage'},
+  {city:'New York City',state:'NY',rate:16.50,stateRate:16.00,tipped:10.65,tipCredit:true,note:'Applies to NYC, Long Island, and Westchester'},
+  {city:'Portland (Metro)',state:'OR',rate:15.45,stateRate:14.70,tipped:15.45,tipCredit:false,note:'Metro area. Non-urban: $13.20'},
+  {city:'Flagstaff',state:'AZ',rate:17.85,stateRate:14.35,tipped:14.85,tipCredit:true,note:'Up to $3.00 tip credit'},
+  {city:'Santa Fe',state:'NM',rate:14.60,stateRate:12.00,tipped:14.60,tipCredit:false,note:'City ordinance; no tip credit'},
+  {city:'Bellevue/Renton/SeaTac',state:'WA',rate:19.97,stateRate:16.66,tipped:19.97,tipCredit:false,note:'SeaTac: $20.17 for hospitality/transportation'},
+  {city:'Minneapolis',state:'MN',rate:15.57,stateRate:10.85,tipped:15.57,tipCredit:false,note:'Large employer. Small employer: $15.57 (same in 2026)'},
+  {city:'St. Paul',state:'MN',rate:15.57,stateRate:10.85,tipped:15.57,tipCredit:false,note:'All employers same rate in 2026'},
+  {city:'Long Beach',state:'CA',rate:17.55,stateRate:16.50,tipped:17.55,tipCredit:false,note:'Hotel/hospitality workers rate'},
+];
+
+const UPCOMING = [
+  {date:'Jan 1, 2026',who:'Nebraska',change:'$13.50 → $15.00',detail:'Final step of Initiative 436 (2022 ballot measure). Nebraska reaches $15 minimum wage.'},
+  {date:'Jan 1, 2026',who:'Multiple indexed states',change:'Annual CPI adjustment',detail:'AK, AZ, CO, CT, ME, MN, MO, MT, NJ, OH, OR, SD, VT, WA and others adjust to inflation annually on Jan 1. Check your state\'s rate each January.'},
+  {date:'Jan 1, 2026',who:'Chicago, IL',change:'$15.80 → $16.20',detail:'Chicago minimum wage increases to $16.20 for employers with 21+ workers.'},
+  {date:'Jul 1, 2026',who:'Chicago, IL',change:'$16.20 → $17.00',detail:'Second Chicago increase in 2026 brings the rate to $17.00.'},
+  {date:'Sep 30, 2026',who:'Florida',change:'$14.00 → $15.00',detail:'Amendment 2 (2020 ballot) requires Florida minimum wage to reach $15 by Sep 30, 2026. After this date, Florida indexes to CPI.'},
+  {date:'Ongoing 2026',who:'Various cities',change:'Annual adjustments',detail:'Cities including Seattle, San Francisco, Denver, and others make CPI-indexed adjustments. Check city-specific ordinances each January and July.'},
+];
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function rateClass(rate) {
+  if (rate >= 15) return 'rate-high';
+  if (rate >= 10) return 'rate-mid';
+  return 'rate-federal';
+}
+function fmtRate(r) { return '$'+r.toFixed(2); }
+
+function renderStates(filter) {
+  const grid = document.getElementById('stateGrid');
+  let data = STATES;
+  if (filter === 'high')    data = STATES.filter(s => s.rate >= 15);
+  if (filter === 'mid')     data = STATES.filter(s => s.rate >= 10 && s.rate < 15);
+  if (filter === 'federal') data = STATES.filter(s => s.src === 'federal');
+  if (filter === 'notip')   data = STATES.filter(s => !s.tipCredit);
+  data = [...data].sort((a,b) => b.rate - a.rate);
+  grid.innerHTML = data.map(s => `
+    <div class="state-card" onclick="showHighlight('${s.abbr}')">
+      <div><div class="state-card-name">${s.name}</div><div class="state-card-abbr">${s.abbr}${s.indexed?' †':''}</div></div>
+      <div class="${rateClass(s.rate)}" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px">${fmtRate(s.rate)}</div>
+    </div>`).join('');
+}
+
+function renderCities() {
+  document.getElementById('cityTableBody').innerHTML = [...CITIES].sort((a,b)=>b.rate-a.rate).map(c=>`
+    <tr>
+      <td><strong>${c.city}</strong></td>
+      <td>${c.state}</td>
+      <td class="${rateClass(c.rate)}" style="font-family:'JetBrains Mono',monospace;font-weight:700">${fmtRate(c.rate)}</td>
+      <td style="font-family:'JetBrains Mono',monospace">${fmtRate(c.stateRate)}</td>
+      <td><span class="change-badge change-up">+${fmtRate(c.rate - c.stateRate)}</span></td>
+      <td style="font-size:12px">${c.tipCredit ? fmtRate(c.tipped) : '<span style="color:var(--green);font-weight:700">Full rate</span>'}</td>
+      <td style="font-size:12px;color:var(--ink-2)">${c.note}</td>
+    </tr>`).join('');
+}
+
+function renderUpcoming() {
+  document.getElementById('upcomingList').innerHTML = UPCOMING.map(u=>`
+    <div class="upcoming-item">
+      <div class="upcoming-date">${u.date}</div>
+      <div>
+        <div style="font-weight:700;font-size:14px">${u.who} — <span style="color:var(--green)">${u.change}</span></div>
+        <div style="font-size:13px;color:var(--ink-2);margin-top:3px">${u.detail}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderTipped() {
+  const sorted = [...STATES].sort((a,b) => b.rate - a.rate);
+  document.getElementById('tippedTableBody').innerHTML = sorted.map(s=>`
+    <tr>
+      <td><strong>${s.name}</strong> (${s.abbr})</td>
+      <td style="font-family:'JetBrains Mono',monospace">${fmtRate(s.rate)}</td>
+      <td style="font-family:'JetBrains Mono',monospace;${!s.tipCredit?'color:var(--green);font-weight:700':''}">${s.tipCredit ? fmtRate(s.tipped) : 'Full '+fmtRate(s.rate)}</td>
+      <td>${s.tipCredit ? '<span style="color:var(--amber)">Yes</span>' : '<span style="color:var(--green);font-weight:700">No — full wage</span>'}</td>
+      <td style="font-size:12px;color:var(--ink-2)">${s.tipNote}</td>
+    </tr>`).join('');
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────────────────
+const allSearchable = [
+  ...STATES.map(s => ({...s, type:'State', display:s.name+' ('+s.abbr+')'})),
+  ...CITIES.map(c => ({name:c.city, rate:c.rate, type:'City', display:c.city+', '+c.state, data:c}))
+];
+
+const input = document.getElementById('mwSearch');
+const results = document.getElementById('mwResults');
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+  if (!q) { results.style.display='none'; return; }
+  const hits = allSearchable.filter(x => x.name.toLowerCase().includes(q) || x.display.toLowerCase().includes(q)).slice(0,8);
+  if (!hits.length) { results.style.display='none'; return; }
+  results.innerHTML = hits.map(h=>`
+    <div class="mw-result-item" onclick="selectResult('${h.abbr||''}','${h.name}')">
+      <div><div>${h.display}</div><div class="mw-result-type">${h.type} minimum wage</div></div>
+      <div class="mw-result-rate">${fmtRate(h.rate)}/hr</div>
+    </div>`).join('');
+  results.style.display = 'block';
+});
+document.addEventListener('click', e => { if (!e.target.closest('.mw-search-wrap')) results.style.display='none'; });
+
+function showHighlight(abbr) {
+  const s = STATES.find(x => x.abbr === abbr);
+  if (!s) return;
+  const card = document.getElementById('mwHighlight');
+  document.getElementById('mwHighlightName').textContent = s.name + (s.src==='federal' ? ' — Using Federal Rate' : ' — State Minimum Wage 2026');
+  document.getElementById('mwHighlightRate').textContent = fmtRate(s.rate)+'/hr';
+  document.getElementById('mwHighlightLabel').textContent = s.src==='federal' ? 'Federal minimum wage applies (no higher state rate)' : 'State minimum wage' + (s.indexed ? ' — indexed to CPI, adjusts Jan 1' : '');
+  document.getElementById('mwHighlightMeta').innerHTML = `
+    <div class="mw-highlight-meta-item"><strong>${s.tipCredit ? fmtRate(s.tipped)+'/hr' : 'Full rate'}</strong>Tipped Min Wage</div>
+    <div class="mw-highlight-meta-item"><strong>${s.tipCredit ? 'Yes' : 'No'}</strong>Tip Credit Allowed</div>
+    <div class="mw-highlight-meta-item"><strong>${s.abbr}</strong>State Code</div>
+    ${s.upcoming ? '<div class="mw-highlight-meta-item" style="opacity:.9"><strong style="font-size:13px">'+s.upcoming+'</strong>Scheduled Change</div>' : ''}
+    ${s.note ? '<div style="font-size:12px;opacity:.8;margin-top:8px;width:100%">⚠ '+s.note+'</div>' : ''}
+  `;
+  card.style.display = 'block';
+  card.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.querySelectorAll('.state-card.active').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.state-card').forEach(el=>{ if(el.querySelector('.state-card-abbr')?.textContent.split(' ')[0]===abbr) el.classList.add('active'); });
+}
+
+function selectResult(abbr, name) {
+  results.style.display='none';
+  input.value = name;
+  if (abbr) showHighlight(abbr);
+  else {
+    const city = CITIES.find(c=>c.city===name);
+    if (city) {
+      const card = document.getElementById('mwHighlight');
+      document.getElementById('mwHighlightName').textContent = city.city+', '+city.state+' — City Minimum Wage 2026';
+      document.getElementById('mwHighlightRate').textContent = fmtRate(city.rate)+'/hr';
+      document.getElementById('mwHighlightLabel').textContent = 'City minimum wage (higher than state rate of '+fmtRate(city.stateRate)+'/hr)';
+      document.getElementById('mwHighlightMeta').innerHTML = `
+        <div class="mw-highlight-meta-item"><strong>${fmtRate(city.stateRate)}/hr</strong>State Rate</div>
+        <div class="mw-highlight-meta-item"><strong>+${fmtRate(city.rate-city.stateRate)}/hr</strong>City Premium</div>
+        <div class="mw-highlight-meta-item"><strong>${city.tipCredit ? fmtRate(city.tipped)+'/hr' : 'Full rate'}</strong>Tipped Min</div>
+        <div style="font-size:12px;opacity:.8;margin-top:8px;width:100%">${city.note}</div>`;
+      card.style.display='block';
+      card.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  }
+}
+
+// ── FILTER TABS ───────────────────────────────────────────────────────────────
+document.getElementById('filterTabs').addEventListener('click', e => {
+  const tab = e.target.closest('.filter-tab');
+  if (!tab) return;
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  renderStates(tab.dataset.filter);
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+renderStates('all');
+renderCities();
+renderUpcoming();
+renderTipped();
+</script>
+</body>
+</html>
