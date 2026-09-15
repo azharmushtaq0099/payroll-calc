@@ -1459,3 +1459,30 @@ label.field-label{
   .article-cta{flex-direction:column;align-items:flex-start}
   .blog-article-title{font-size:26px}
 }
+
+/* ── Blog Sidebar Layout ── */
+.blog-article-layout{display:grid;grid-template-columns:1fr 288px;gap:56px;align-items:start;padding-top:48px}
+.blog-article-main{min-width:0}
+.blog-article-layout .blog-article{max-width:100%;margin:0;padding:0}
+.blog-article-layout .blog-related{max-width:100%;margin-top:56px}
+.blog-sidebar{position:sticky;top:88px}
+.sidebar-widget{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px}
+.sidebar-widget-title{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.toc-list{list-style:none;padding:0;margin:0}
+.toc-list li{margin-bottom:2px}
+.toc-list a{display:block;font-size:13px;color:var(--ink-2);text-decoration:none;padding:5px 0 5px 12px;border-left:2px solid var(--border);line-height:1.4;transition:color .15s,border-color .15s}
+.toc-list a:hover,.toc-list a.toc-active{color:var(--accent);border-color:var(--accent)}
+.sidebar-links{list-style:none;padding:0;margin:0}
+.sidebar-links li{border-bottom:1px solid var(--border)}
+.sidebar-links li:last-child{border-bottom:none}
+.sidebar-links a{display:block;font-size:13px;color:var(--ink-2);text-decoration:none;padding:7px 0;line-height:1.35;transition:color .15s}
+.sidebar-links a:hover{color:var(--accent)}
+.sidebar-cta{background:var(--accent-dim);border:1.5px solid var(--accent-border);border-radius:14px;padding:20px 18px;text-align:center;margin-bottom:18px}
+.sidebar-cta-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.sidebar-cta-desc{font-size:12.5px;color:var(--ink-2);margin-bottom:14px;line-height:1.45}
+.sidebar-cta-btn{display:inline-block;padding:8px 18px;background:var(--accent);color:#fff;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity .15s}
+.sidebar-cta-btn:hover{opacity:.88}
+@media(max-width:960px){
+  .blog-article-layout{grid-template-columns:1fr;gap:0;padding-top:0}
+  .blog-sidebar{display:none}
+}
