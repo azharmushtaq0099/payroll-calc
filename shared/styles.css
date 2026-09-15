@@ -1300,3 +1300,52 @@ label.field-label{
   .blog-grid{grid-template-columns:1fr}
   .blog-header{padding:40px 0 28px}
 }
+
+/* ════════════════════════════════════════════════════
+   BLOG CARD IMAGE
+   ════════════════════════════════════════════════════ */
+.blog-card{overflow:hidden;padding:0}
+.blog-card-img{
+  width:100%;height:180px;object-fit:cover;display:block;
+  border-bottom:1px solid var(--border);
+}
+.blog-card-body{padding:20px 24px 20px}
+.blog-card .blog-card-cat{margin-bottom:10px}
+.blog-card .blog-card-title{margin:0 0 8px}
+.blog-card .blog-card-excerpt{margin:0 0 16px}
+
+/* ════════════════════════════════════════════════════
+   COOKIE CONSENT BANNER
+   ════════════════════════════════════════════════════ */
+.cookie-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:9999;
+  background:var(--ink);color:rgba(255,255,255,.85);
+  padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;
+  border-top:1px solid rgba(255,255,255,.1);
+  transform:translateY(0);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.cookie-bar.cookie-hide{transform:translateY(100%)}
+.cookie-bar-text{font-size:13.5px;line-height:1.5;max-width:680px}
+.cookie-bar-text a{color:rgba(255,255,255,.7);text-decoration:underline}
+.cookie-bar-text a:hover{color:#fff}
+.cookie-bar-btns{display:flex;gap:10px;flex-shrink:0}
+.cookie-accept{
+  padding:8px 20px;border-radius:8px;font-size:13.5px;font-weight:600;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  transition:background var(--transition);
+}
+.cookie-accept:hover{background:#1d4ed8}
+.cookie-decline{
+  padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:500;
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.15);cursor:pointer;
+  transition:all var(--transition);
+}
+.cookie-decline:hover{background:rgba(255,255,255,.12);color:#fff}
+@media(max-width:640px){
+  .cookie-bar{flex-direction:column;align-items:flex-start}
+  .blog-card-img{height:160px}
+}

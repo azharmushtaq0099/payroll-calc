@@ -280,3 +280,25 @@ function renderCmd(q){
     });
   });
 })();
+
+/* ── Cookie consent banner ── */
+(function(){
+  if(localStorage.getItem('fpc-cookie-ok')) return;
+  var bar = document.createElement('div');
+  bar.className = 'cookie-bar';
+  bar.innerHTML =
+    '<p class="cookie-bar-text">We use cookies to analyze traffic and improve your experience. By using this site you agree to our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Use</a>.</p>' +
+    '<div class="cookie-bar-btns">' +
+    '<button class="cookie-accept">Accept All</button>' +
+    '<button class="cookie-decline">Decline</button>' +
+    '</div>';
+  document.body.appendChild(bar);
+  function dismiss(accepted){
+    if(accepted) localStorage.setItem('fpc-cookie-ok','1');
+    else localStorage.setItem('fpc-cookie-ok','declined');
+    bar.classList.add('cookie-hide');
+    setTimeout(function(){ if(bar.parentNode) bar.parentNode.removeChild(bar); }, 400);
+  }
+  bar.querySelector('.cookie-accept').addEventListener('click', function(){ dismiss(true); });
+  bar.querySelector('.cookie-decline').addEventListener('click', function(){ dismiss(false); });
+})();
