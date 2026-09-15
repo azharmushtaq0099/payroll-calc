@@ -588,6 +588,18 @@ label.field-label{
    ════════════════════════════════════════════════════ */
 
 /* Hero — search-first */
+/* Hero CSS-only entrance — no JS dependency, no flash of invisible content */
+@keyframes hp-fade-up{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:none}
+}
+.hp-hero-animate{animation:hp-fade-up .55s ease both}
+.hp-fade-1{animation-delay:0s}
+.hp-fade-2{animation-delay:.06s}
+.hp-fade-3{animation-delay:.14s}
+.hp-fade-4{animation-delay:.22s}
+.hp-fade-5{animation-delay:.30s}
+
 .hp-hero{
   padding:100px 0 80px;
   background:var(--bg);
