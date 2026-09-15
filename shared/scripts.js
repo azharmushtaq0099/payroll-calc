@@ -24,6 +24,13 @@
   });
 })();
 
+/* ── Mobile nav accordion ── */
+function toggleMobSection(id){
+  var section = document.getElementById(id);
+  if(!section) return;
+  section.classList.toggle('open');
+}
+
 /* ── Entrance animations ── */
 (function(){
   var els = document.querySelectorAll('[data-enter]');
