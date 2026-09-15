@@ -42,27 +42,171 @@
 </style>
 </head>
 <body>
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
 <nav class="site-nav" aria-label="Main navigation">
   <div class="container">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4M7 13h2"/></svg></div>FreePayrollCalc</a>
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
       <div class="nav-links">
-        <a href="/profit-margin-calculator">Profit Margin</a>
-        <a href="/break-even-calculator">Break-Even</a>
-        <a href="/markup-calculator" class="active">Markup</a>
-        <a href="/#all-tools">All Tools</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
       </div>
-      <a href="/free-payroll-calculator" class="nav-cta">Payroll Calc</a>
-      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
     </div>
   </div>
-  <div id="nav-mobile" class="nav-mobile">
-    <a href="/">Home</a>
-    <a href="/markup-calculator" class="active">Markup Calculator</a>
-    <a href="/profit-margin-calculator">Profit Margin Calculator</a>
-    <a href="/break-even-calculator">Break-Even Calculator</a>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
   </div>
 </nav>
+
+
 
 <main class="calc-page">
   <div class="container">

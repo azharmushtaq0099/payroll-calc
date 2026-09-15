@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payroll &amp; Tax Blog | FreePayrollCalc</title>
+<meta name="description" content="Free guides, explainers, and tips on payroll taxes, withholding, overtime rules, 1099 vs W-2, FLSA compliance, and HR best practices — updated for 2026.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog">
+<meta property="og:title" content="Payroll &amp; Tax Blog — FreePayrollCalc">
+<meta property="og:description" content="Free guides on payroll taxes, withholding, overtime, and HR compliance updated for 2026.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=3">
+</head>
+<body>
+
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">↑↓</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">↵</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll →</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax →</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business →</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog" class="active">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators →</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="container">
+
+    <!-- Page header -->
+    <header class="blog-header" data-enter data-delay="0">
+      <div class="blog-header-eyebrow">Guides &amp; Resources</div>
+      <h1 class="blog-header-title">Payroll &amp; Tax Guides</h1>
+      <p class="blog-header-sub">Plain-English explanations of payroll taxes, withholding rules, overtime law, and HR compliance — with free calculator links throughout.</p>
+    </header>
+
+    <!-- Category filter -->
+    <div class="blog-cats" data-enter data-delay="1">
+      <button class="blog-cat-btn active" data-cat="all">All</button>
+      <button class="blog-cat-btn" data-cat="payroll">Payroll</button>
+      <button class="blog-cat-btn" data-cat="tax">Tax</button>
+      <button class="blog-cat-btn" data-cat="hr">HR &amp; Compliance</button>
+      <button class="blog-cat-btn" data-cat="business">Business</button>
+    </div>
+
+    <!-- Articles grid -->
+    <div class="blog-grid" id="blog-grid">
+
+      <article class="blog-card" data-cat="payroll" data-enter data-delay="2">
+        <div class="blog-card-cat">Payroll</div>
+        <h2 class="blog-card-title"><a href="/blog/how-to-calculate-payroll-taxes">How to Calculate Payroll Taxes in 2026</a></h2>
+        <p class="blog-card-excerpt">A step-by-step breakdown of federal income tax, FICA, and state withholding — with real examples for hourly and salaried employees.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Sep 1, 2026</span>
+          <span class="blog-card-read">8 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="tax" data-enter data-delay="3">
+        <div class="blog-card-cat">Tax</div>
+        <h2 class="blog-card-title"><a href="/blog/1099-vs-w2-tax-differences">1099 vs W-2: Tax Differences That Cost Contractors Thousands</a></h2>
+        <p class="blog-card-excerpt">Self-employment tax, quarterly estimates, deductions — here's what changes when you switch from employee to contractor status.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Aug 20, 2026</span>
+          <span class="blog-card-read">6 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="hr" data-enter data-delay="4">
+        <div class="blog-card-cat">HR &amp; Compliance</div>
+        <h2 class="blog-card-title"><a href="/blog/overtime-rules-flsa-2026">FLSA Overtime Rules in 2026: What Every Employer Needs to Know</a></h2>
+        <p class="blog-card-excerpt">The FLSA salary threshold, exemptions, and state-level overtime laws — including California double-time rules.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Aug 12, 2026</span>
+          <span class="blog-card-read">7 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="payroll" data-enter data-delay="2">
+        <div class="blog-card-cat">Payroll</div>
+        <h2 class="blog-card-title"><a href="/blog/gross-vs-net-pay-explained">Gross Pay vs Net Pay: What Gets Taken Out of Your Paycheck</a></h2>
+        <p class="blog-card-excerpt">FICA taxes, federal and state withholding, health insurance, 401(k) — a clear breakdown of every deduction line on a pay stub.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Aug 5, 2026</span>
+          <span class="blog-card-read">5 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="tax" data-enter data-delay="3">
+        <div class="blog-card-cat">Tax</div>
+        <h2 class="blog-card-title"><a href="/blog/quarterly-estimated-taxes-guide">Quarterly Estimated Taxes: A Freelancer's Complete Guide</a></h2>
+        <p class="blog-card-excerpt">When to pay, how to calculate the right amount, and how to avoid IRS underpayment penalties as a self-employed worker.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Jul 28, 2026</span>
+          <span class="blog-card-read">9 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="hr" data-enter data-delay="4">
+        <div class="blog-card-cat">HR &amp; Compliance</div>
+        <h2 class="blog-card-title"><a href="/blog/pto-accrual-methods">PTO Accrual Methods: Front-Load vs Earn-As-You-Go</a></h2>
+        <p class="blog-card-excerpt">The pros and cons of each method, state laws on unused PTO payout, and how to pick the right policy for your team size.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Jul 15, 2026</span>
+          <span class="blog-card-read">6 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="business" data-enter data-delay="2">
+        <div class="blog-card-cat">Business</div>
+        <h2 class="blog-card-title"><a href="/blog/true-cost-of-an-employee">The True Cost of an Employee (Beyond Their Salary)</a></h2>
+        <p class="blog-card-excerpt">FICA match, FUTA, state unemployment, workers comp, benefits, and overhead — the full picture of what each hire really costs.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Jul 8, 2026</span>
+          <span class="blog-card-read">7 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="payroll" data-enter data-delay="3">
+        <div class="blog-card-cat">Payroll</div>
+        <h2 class="blog-card-title"><a href="/blog/w4-withholding-guide-2026">W-4 Withholding Guide for 2026: How to Fill It Out Correctly</a></h2>
+        <p class="blog-card-excerpt">The new W-4 eliminated withholding allowances. Here's how to fill it out step-by-step so you don't over- or under-withhold.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Jun 30, 2026</span>
+          <span class="blog-card-read">5 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="tax" data-enter data-delay="4">
+        <div class="blog-card-cat">Tax</div>
+        <h2 class="blog-card-title"><a href="/blog/bonus-tax-withholding-methods">Bonus Tax Withholding: Flat 22% vs Aggregate Method</a></h2>
+        <p class="blog-card-excerpt">Two legal methods produce very different withholding amounts. Know which one your employer uses — and how to plan around it.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Jun 20, 2026</span>
+          <span class="blog-card-read">5 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="business" data-enter data-delay="2">
+        <div class="blog-card-cat">Business</div>
+        <h2 class="blog-card-title"><a href="/blog/minimum-wage-by-state-2026">2026 Minimum Wage by State: Every Rate, Effective Date &amp; Tip Credit</a></h2>
+        <p class="blog-card-excerpt">All 50 states plus D.C. — current minimum wages, scheduled increases, and tip credit rules for restaurant and hospitality employers.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Jun 10, 2026</span>
+          <span class="blog-card-read">4 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="hr" data-enter data-delay="3">
+        <div class="blog-card-cat">HR &amp; Compliance</div>
+        <h2 class="blog-card-title"><a href="/blog/workers-comp-insurance-basics">Workers Comp Insurance: What It Covers and How Premiums Are Calculated</a></h2>
+        <p class="blog-card-excerpt">NCCI job codes, experience modification factors, and state-by-state rules — everything small business owners need to know.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">Jun 1, 2026</span>
+          <span class="blog-card-read">8 min read</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-cat="payroll" data-enter data-delay="4">
+        <div class="blog-card-cat">Payroll</div>
+        <h2 class="blog-card-title"><a href="/blog/pay-frequency-comparison">Pay Frequency Comparison: Weekly vs Bi-Weekly vs Semi-Monthly</a></h2>
+        <p class="blog-card-excerpt">How pay period choice affects employee cash flow, payroll processing costs, and tax withholding — with a side-by-side comparison.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-date">May 22, 2026</span>
+          <span class="blog-card-read">5 min read</span>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">
+          <div class="nav-logo-mark" aria-hidden="true"></div>
+          FreePayrollCalc
+        </a>
+        <p>Free payroll and tax calculators for US employees, freelancers, and small businesses. Updated for 2026 IRS rates.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-label">Calculators</div>
+          <a href="/payroll-tax-calculator">Payroll Tax</a>
+          <a href="/take-home-pay-calculator">Take-Home Pay</a>
+          <a href="/overtime-pay-calculator">Overtime Pay</a>
+          <a href="/pto-accrual-calculator">PTO Accrual</a>
+          <a href="/tools">All 41+ Tools →</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Resources</div>
+          <a href="/blog">Blog</a>
+          <a href="/minimum-wage-by-state">Minimum Wage by State</a>
+          <a href="/guides">Guides</a>
+          <a href="/about">About</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Legal</div>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FreePayrollCalc. For informational purposes only — not tax or legal advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js" defer></script>
+<script>
+(function(){
+  var btns = document.querySelectorAll('.blog-cat-btn');
+  var cards = document.querySelectorAll('.blog-card');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var cat = btn.getAttribute('data-cat');
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      cards.forEach(function(card){
+        if(cat === 'all' || card.getAttribute('data-cat') === cat){
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
