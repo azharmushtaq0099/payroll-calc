@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PTO Accrual Methods: Front-Load vs Earn-As-You-Go | FreePayrollCalc</title>
+<meta name="description" content="Compare PTO accrual methods: front-loaded vs earn-as-you-go, accrual rate tables, unlimited PTO, state payout laws, and how to calculate remaining PTO liability.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog/pto-accrual-methods">
+<meta property="og:title" content="PTO Accrual Methods: Front-Load vs Earn-As-You-Go">
+<meta property="og:type" content="article">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=5">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"PTO Accrual Methods: Front-Load vs Earn-As-You-Go","datePublished":"2026-07-15","author":{"@type":"Organization","name":"FreePayrollCalc"},"publisher":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+</script>
+</head>
+<body>
+
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="blog-article-page">
+  <div class="container">
+    <article class="blog-article">
+      <div class="blog-article-eyebrow"><a href="/blog">Blog</a> / <span>HR &amp; Compliance</span></div>
+      <div class="blog-article-cat">HR &amp; Compliance</div>
+      <h1 class="blog-article-title">PTO Accrual Methods: Front-Load vs Earn-As-You-Go</h1>
+      <div class="blog-article-meta"><span>Jul 15, 2026</span><span>6 min read</span><span>Updated for 2026</span></div>
+      <img class="blog-article-hero" src="https://images.unsplash.com/photo-1506836467174-27f1042aa48c?w=1200&h=500&fit=crop&auto=format&q=80" alt="Calendar and planner on a desk representing time off planning">
+      <div class="blog-article-body">
+
+        <p class="lead">Paid time off is one of the most scrutinized line items in any employee benefits package — and one of the most consequential for HR compliance. The method you choose for awarding PTO affects your balance sheet (accrued PTO is a liability), your legal exposure in states that require payout at termination, and your ability to attract and retain employees who have seen enough "unlimited" PTO policies evaporate in practice. Here is a practical breakdown of every major PTO accrual structure, with real accrual rate calculations and state-by-state payout requirements.</p>
+
+        <h2>Front-Loaded PTO: All Days Granted on Day One</h2>
+        <p>Under a front-loaded (or "lump sum") model, the employer grants the full year's PTO allocation at the start of the benefit year — typically January 1 or the employee's hire date. An employee entitled to 15 days of PTO receives all 15 days on the first day of the period and can use them at any time throughout the year.</p>
+
+        <p><strong>Advantages of front-loading:</strong></p>
+        <ul>
+          <li>Simple to administer — no per-period accrual calculations needed</li>
+          <li>Highly attractive to employees, especially new hires who want flexibility without waiting months to earn time</li>
+          <li>Eliminates questions about how much time has been accrued mid-year</li>
+          <li>Works naturally with a "use it or lose it" policy in states that permit it, creating a clean annual reset</li>
+        </ul>
+
+        <p><strong>Disadvantages of front-loading:</strong></p>
+        <ul>
+          <li>If an employee uses all 15 days in January and resigns in February, the employer has paid out more PTO than the employee earned through service. Clawback provisions are legally limited in most states.</li>
+          <li>In California, Colorado, Illinois, Maine, and Massachusetts — states that treat accrued PTO as earned wages — a front-loaded grant may be treated as fully vested compensation on the day it is granted, making "use it or lose it" policies invalid even if your policy says otherwise.</li>
+          <li>Creates a significant balance sheet liability at the start of each year for all employees simultaneously</li>
+        </ul>
+
+        <p>A common workaround is to front-load only for tenured employees while new hires accrue on a per-period basis during their first year, converting to front-loading after their first anniversary.</p>
+
+        <h2>Earn-As-You-Go Accrual: The Most Common Model</h2>
+        <p>Under the accrual model, employees earn a fraction of their annual PTO allocation with each pay period worked. An employee entitled to 80 hours (10 days) of PTO per year on a weekly payroll accrues 80 ÷ 52 = 1.54 hours per week. They cannot use hours they have not yet earned, which protects the employer if the employee leaves partway through the year.</p>
+        <p>This model is widely considered the fairest for both parties. Employers carry a smaller average PTO liability at any given time compared to front-loading, and employees receive a continuous, transparent view of their available balance. Most payroll software platforms — ADP, Paychex, Gusto, Rippling — natively support per-period accrual at any rate you configure.</p>
+
+        <div class="article-cta"><div class="article-cta-text"><strong>Calculate exact PTO accrual balances</strong><span>Enter pay frequency, annual days, and hire date to see accrued hours for any employee at any point in the year.</span></div><a href="/pto-accrual-calculator" class="article-cta-btn">Calculate Now →</a></div>
+
+        <h2>PTO Accrual Rate Reference Table</h2>
+        <p>The table below shows how many hours accrue per pay period for the four most common annual PTO allocations across three pay frequencies. All calculations assume an 8-hour workday.</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>Annual PTO</th>
+              <th>Total Hours/Year</th>
+              <th>Weekly (hrs/period)</th>
+              <th>Bi-Weekly (hrs/period)</th>
+              <th>Semi-Monthly (hrs/period)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>10 days</td><td>80 hrs</td><td>1.54</td><td>3.08</td><td>3.33</td></tr>
+            <tr><td>15 days</td><td>120 hrs</td><td>2.31</td><td>4.62</td><td>5.00</td></tr>
+            <tr><td>20 days</td><td>160 hrs</td><td>3.08</td><td>6.15</td><td>6.67</td></tr>
+            <tr><td>25 days</td><td>200 hrs</td><td>3.85</td><td>7.69</td><td>8.33</td></tr>
+          </tbody>
+        </table>
+
+        <p>For monthly payroll (12 periods per year), divide annual hours by 12: 10 days = 6.67 hrs/month; 15 days = 10.00 hrs/month; 20 days = 13.33 hrs/month; 25 days = 16.67 hrs/month.</p>
+        <p>Tenure-based accrual schedules — where employees earn more PTO after two or five years of service — use the same per-period math, simply with a higher annual hours target once the employee crosses each tenure threshold. A common structure is 10 days/year in year 1, 15 days in years 2–4, and 20 days at year 5+.</p>
+
+        <div class="article-info"><strong>Key takeaway:</strong> Accrual-based PTO is the most widely used model and provides the best balance of employer protection and employee experience. The accrual rate is simply annual hours divided by the number of pay periods per year — a calculation your payroll system handles automatically once you configure the policy.</div>
+
+        <h2>PTO vs Separate Vacation and Sick Banks</h2>
+        <p>The traditional approach to time off used two separate balances: a vacation bank and a sick leave bank. An employee might receive 10 vacation days and 5 sick days per year, each accruing independently. This is the older model, still common in public sector employment and some large legacy organizations.</p>
+        <p>The modern trend — adopted by the majority of private employers — is the <strong>combined PTO bank</strong>: a single bucket of hours used for any absence, whether vacation, illness, personal business, or family care. From an administrative standpoint, combined PTO is far simpler. From the employee's perspective, it is more flexible: a healthy employee who takes no sick days has more vacation time available.</p>
+        <p>The tradeoff is that some states (California, New Jersey, Massachusetts, New York, Washington, and others) now mandate paid sick leave separately from PTO. Employers in these states must either ensure their combined PTO policy meets the state's minimum sick leave requirements or maintain a separate sick leave bank alongside PTO. Check your state's department of labor for the current minimum accrual rate — California requires at least 1 hour of paid sick leave per 30 hours worked, for example.</p>
+
+        <h2>Unlimited PTO: Growing Trend, Mixed Results</h2>
+        <p>An increasing number of employers — particularly in tech and professional services — have adopted unlimited PTO policies, where employees take time off as needed with manager approval, without a fixed annual allotment.</p>
+        <p><strong>Why employers adopt unlimited PTO:</strong></p>
+        <ul>
+          <li>Eliminates the accrued PTO liability on the balance sheet entirely — if there is no accrual, there is nothing to pay out at termination (in most states)</li>
+          <li>Reduces administrative overhead: no accrual tracking, no carryover calculations, no payout math</li>
+          <li>Attractive recruiting tool, particularly for roles that don't track hours precisely</li>
+        </ul>
+        <p><strong>Why unlimited PTO often underperforms:</strong></p>
+        <ul>
+          <li>Research consistently shows that employees under unlimited PTO take <em>fewer</em> days off on average than those with a defined accrual — removing the psychological signal of "days I've earned" eliminates a clear entitlement</li>
+          <li>Without a defined number, employees are uncertain what is acceptable and default to taking less</li>
+          <li>Manager approval creates implicit limits that make the policy not truly unlimited in practice</li>
+          <li>In California, a true unlimited PTO policy must be carefully designed or the state may treat it as an accrued benefit anyway</li>
+        </ul>
+        <p>A hybrid model — a generous defined accrual (say, 20–25 days) without carryover limits — often captures the best of both worlds: employees feel an entitlement worth using, and employers maintain flexibility without excessive liability.</p>
+
+        <h2>State Laws on PTO Payout at Termination</h2>
+        <p>This is the highest-stakes compliance question in PTO policy design. Some states treat accrued, unused PTO as earned wages — meaning it must be paid out at termination just like a final paycheck. Others allow employers to implement "use it or lose it" policies with no payout obligation. A handful fall in between.</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>State</th><th>PTO Payout Required at Termination?</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>California</strong></td><td>Yes — mandatory</td><td>Accrued PTO = earned wages. Use-it-or-lose-it policies are void. No cap on payout.</td></tr>
+            <tr><td><strong>Colorado</strong></td><td>Yes — mandatory</td><td>Accrued PTO must be paid out. COMPS Order applies to most employers.</td></tr>
+            <tr><td><strong>Illinois</strong></td><td>Yes — mandatory</td><td>Under the Wage Payment Act, accrued PTO is wages payable at termination.</td></tr>
+            <tr><td><strong>Maine</strong></td><td>Yes — mandatory</td><td>The Earned Paid Leave Law requires payout of accrued leave upon separation.</td></tr>
+            <tr><td><strong>Massachusetts</strong></td><td>Yes — mandatory</td><td>Accrued vacation is a wage; must be paid on last day of employment.</td></tr>
+            <tr><td>Most other states</td><td>Employer discretion</td><td>Payout required only if your written policy promises it. Use-it-or-lose-it is permitted with proper notice.</td></tr>
+            <tr><td>Texas, Florida, Georgia</td><td>Employer policy governs</td><td>No state mandate; if your policy says "forfeit on separation," it is generally enforceable.</td></tr>
+          </tbody>
+        </table>
+
+        <p>If you operate in a mandatory payout state, accrued PTO is a real financial liability. Every hour an employee banks is an obligation on your books. This makes accrual caps and carryover limits not just good HR practice but also sound accounting.</p>
+
+        <h2>Carryover Rules: Setting an Accrual Cap</h2>
+        <p>Even in states that do not require payout, most employers implement carryover caps to prevent employees from accumulating months of unused PTO that creates both a financial liability and a staffing challenge when taken all at once.</p>
+        <p>A common and sensible cap structure is <strong>1.5 times the annual accrual</strong>. For an employee who earns 15 days (120 hours) per year, the carryover cap would be 180 hours. Once the employee reaches 180 hours, accrual pauses until they use time — then resumes. This is legally safer in mandatory-payout states than a hard "use it or lose it" rule, while still limiting runaway liability.</p>
+        <p>In California, even a carryover cap must allow employees a reasonable opportunity to use their time before the cap kicks in. A cap that effectively prevents employees from ever reaching the maximum is enforceable; a cap that resets balances to zero without any reasonable use window is not.</p>
+
+        <h2>How to Calculate PTO Payout at Termination</h2>
+        <p>When an employee separates and your policy (or state law) requires a PTO payout, the calculation is straightforward:</p>
+        <p><strong>PTO payout = Accrued hours balance × Hourly rate</strong></p>
+        <p>For a salaried employee, convert their annual salary to an hourly rate by dividing by 2,080 (52 weeks × 40 hours). An employee earning $65,000 per year has an hourly rate of $65,000 ÷ 2,080 = <strong>$31.25 per hour</strong>. If they have 48 hours of accrued, unused PTO at termination, the payout is 48 × $31.25 = <strong>$1,500.00</strong>.</p>
+        <p>This amount is treated as regular wages, subject to federal and state income tax withholding, Social Security, and Medicare — exactly like a final paycheck. In most states that mandate payout, the PTO payout must be included on the employee's final paycheck delivered by the last day worked or the next regular payday.</p>
+
+        <div class="article-info"><strong>Key takeaway:</strong> If you operate in California, Colorado, Illinois, Maine, or Massachusetts, every hour of PTO an employee accrues is a wage liability. Build this into your compensation budgeting, set a reasonable accrual cap, and make sure your HRIS tracks balances accurately — the cost of a wage claim in these states is multiples of the original payout amount.</div>
+
+      </div>
+    </article>
+
+    <section class="blog-related">
+      <h2 class="blog-related-title">Related Articles</h2>
+      <div class="blog-related-grid">
+        <a href="/blog/gross-vs-net-pay-explained" class="blog-related-card">
+          <div class="blog-related-cat">Payroll</div>
+          <div class="blog-related-title-text">Gross Pay vs Net Pay: What Gets Taken Out of Your Paycheck</div>
+          <div class="blog-related-meta">5 min read</div>
+        </a>
+        <a href="/blog/overtime-pay-rules-explained" class="blog-related-card">
+          <div class="blog-related-cat">HR &amp; Compliance</div>
+          <div class="blog-related-title-text">FLSA Overtime Rules: Who Qualifies and How to Calculate It</div>
+          <div class="blog-related-meta">6 min read</div>
+        </a>
+        <a href="/blog/employee-benefits-cost-guide" class="blog-related-card">
+          <div class="blog-related-cat">HR &amp; Compliance</div>
+          <div class="blog-related-title-text">True Cost of an Employee: Benefits, Taxes, and Overhead</div>
+          <div class="blog-related-meta">8 min read</div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=3" defer></script>
+</body>
+</html>

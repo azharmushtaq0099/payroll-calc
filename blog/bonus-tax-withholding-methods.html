@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bonus Tax Withholding: Flat 22% vs. Aggregate Method Explained | FreePayrollCalc</title>
+<meta name="description" content="Two IRS-approved methods determine how much tax is withheld from your bonus. Learn why a $10,000 bonus nets ~$6,500 and whether you'll owe more come April.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog/bonus-tax-withholding-methods">
+<meta property="og:title" content="Bonus Tax Withholding: Flat 22% vs. Aggregate Method Explained"><meta property="og:type" content="article">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=5">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Bonus Tax Withholding: Flat 22% vs. Aggregate Method Explained","datePublished":"2026-06-20","author":{"@type":"Organization","name":"FreePayrollCalc"}}</script>
+</head>
+<body>
+
+<!-- NAV -->
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="blog-article-page"><div class="container">
+<article class="blog-article">
+  <div class="blog-article-eyebrow"><a href="/blog">Blog</a> / <span>Tax</span></div>
+  <div class="blog-article-cat">Tax</div>
+  <h1 class="blog-article-title">Bonus Tax Withholding: Flat 22% vs. Aggregate Method Explained</h1>
+  <div class="blog-article-meta"><span>Jun 20, 2026</span><span>5 min read</span><span>Updated for 2026</span></div>
+  <img class="blog-article-hero" src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=1200&h=500&fit=crop&auto=format&q=80" alt="Person reviewing a bonus check with tax documents spread on a desk">
+  <div class="blog-article-body">
+
+    <p class="lead">You've earned a $10,000 bonus. Your employer cuts the check — and you net about $6,500. Where did $3,500 go? The answer is a combination of federal withholding, FICA taxes, and state income tax, applied through one of two IRS-sanctioned methods. Understanding which method your employer uses — and whether it matches your actual tax bracket — determines whether you get a refund in April or write the IRS a check.</p>
+
+    <h2>The Two IRS-Approved Withholding Methods</h2>
+    <p>The IRS classifies bonuses, commissions, overtime pay, and similar payments as <strong>"supplemental wages"</strong> — compensation paid in addition to a worker's regular wages. For supplemental wages, employers may use one of two withholding methods described in <a href="https://www.irs.gov/publications/p15t" rel="nofollow noopener" target="_blank">IRS Publication 15-T</a>:</p>
+    <ul>
+      <li><strong>Method 1: The Percentage (Supplemental/Flat) Method</strong> — a fixed federal rate applied to the bonus amount only</li>
+      <li><strong>Method 2: The Aggregate Method</strong> — combine the bonus with regular wages and withhold at the resulting marginal rate from the tax tables</li>
+    </ul>
+    <p>Employers may choose either method. In practice, most payroll systems default to the flat percentage method for bonuses paid as separate checks, because it's simpler to calculate. The aggregate method is typically used when the bonus is combined with a regular paycheck rather than issued separately.</p>
+
+    <h2>Method 1 — The Flat Supplemental Rate</h2>
+    <p>Under the percentage method, federal income tax is withheld at a flat rate based on cumulative supplemental wages paid to the employee during the calendar year:</p>
+    <ul>
+      <li><strong>22%</strong> on supplemental wages up to <strong>$1,000,000</strong> in the calendar year</li>
+      <li><strong>37%</strong> on supplemental wages exceeding $1,000,000 — the top ordinary income rate, applied to every dollar over the threshold</li>
+    </ul>
+    <p>The 22% flat rate applies to the vast majority of employees and is the number most people refer to when they say "bonuses are taxed at 22%." That statement is accurate — but only for withholding purposes. It is not a special tax rate. Your actual federal income tax on bonus income is determined by your marginal bracket, just like regular wages.</p>
+    <p>The flat 22% method covers only federal income tax. Your employer must also withhold:</p>
+    <ul>
+      <li><strong>Social Security: 6.2%</strong> on wages up to the SSA wage base ($176,100 for 2025). If you've already hit the wage base through regular salary, no Social Security is withheld on the bonus.</li>
+      <li><strong>Medicare: 1.45%</strong> on all wages, no cap (plus an additional 0.9% if your year-to-date wages exceed $200,000 as a single filer)</li>
+      <li><strong>State income tax:</strong> varies from 0% (in Texas, Florida, and seven other states) to 13.3% in California at the highest bracket</li>
+    </ul>
+    <p><strong>Example — $10,000 bonus, single filer, state with no income tax, wage base not yet hit:</strong></p>
+    <table>
+      <thead><tr><th>Tax</th><th>Rate</th><th>Amount Withheld</th></tr></thead>
+      <tbody>
+        <tr><td>Federal income tax (flat)</td><td>22%</td><td>$2,200</td></tr>
+        <tr><td>Social Security</td><td>6.2%</td><td>$620</td></tr>
+        <tr><td>Medicare</td><td>1.45%</td><td>$145</td></tr>
+        <tr><td>State income tax</td><td>0%</td><td>$0</td></tr>
+        <tr><td><strong>Total withheld</strong></td><td><strong>29.65%</strong></td><td><strong>$2,965</strong></td></tr>
+        <tr><td><strong>Net bonus check</strong></td><td></td><td><strong>$7,035</strong></td></tr>
+      </tbody>
+    </table>
+    <p>Add a 5% state income tax and the net drops to $6,535. In a high-tax state like California or New York, total withholding on a $10,000 bonus can reach 35%–40%, netting $6,000–$6,500.</p>
+
+    <h2>Method 2 — The Aggregate Method</h2>
+    <p>Under the aggregate method, the employer adds the bonus to the employee's wages from the most recent regular paycheck, treats the combined total as a single payment, and looks up the withholding using the IRS Publication 15-T wage bracket tables for the pay period. The previously withheld amount from the regular paycheck is then subtracted, leaving only the withholding attributable to the bonus.</p>
+    <p>The aggregate method attempts to match the marginal tax rate the employee will actually face when the bonus is added to their annual income. For most employees, the result is:</p>
+    <ul>
+      <li><strong>Higher withholding</strong> for employees already in the 24%, 32%, or 35% federal bracket — because the bonus pushes their per-period income into a higher marginal rate calculation</li>
+      <li><strong>Lower withholding</strong> for employees in the 10% or 12% bracket — because their true marginal rate is below the 22% flat rate</li>
+    </ul>
+    <p>Example: An employee earns $120,000 per year ($4,615 bi-weekly). Their marginal federal rate is 24% on income above $103,350 (2026 single brackets). When a $20,000 bonus is added to one paycheck, the per-period income jumps to $24,615, which annualizes to $640,000 — placing much of the bonus in the 35% bracket for withholding calculation purposes. Under the aggregate method, the employer may withhold 28%–32% federal on the bonus, versus 22% under the flat method.</p>
+
+    <div class="article-info"><strong>Key takeaway:</strong> The flat 22% is withholding — an estimate of the federal tax owed. Your actual tax rate on the bonus is your marginal bracket. If you're above 22%, expect to owe the difference at filing.</div>
+
+    <h2>Why Your Bonus Check Seems Smaller Than Expected</h2>
+    <p>Many employees assume bonuses are "taxed at 50%" because their net check looks half the size of the gross. Let's break down a realistic example for an employee earning $70,000 in base salary, single filing status, resident of California:</p>
+    <table>
+      <thead><tr><th>Tax</th><th>Rate</th><th>Amount Withheld</th></tr></thead>
+      <tbody>
+        <tr><td>Federal income tax (flat 22%)</td><td>22%</td><td>$2,200</td></tr>
+        <tr><td>Social Security (6.2%)</td><td>6.2%</td><td>$620</td></tr>
+        <tr><td>Medicare (1.45%)</td><td>1.45%</td><td>$145</td></tr>
+        <tr><td>California state tax (~9.3%)</td><td>9.3%</td><td>$930</td></tr>
+        <tr><td><strong>Total withheld</strong></td><td><strong>~38.95%</strong></td><td><strong>$3,895</strong></td></tr>
+        <tr><td><strong>Net bonus check</strong></td><td></td><td><strong>$6,105</strong></td></tr>
+      </tbody>
+    </table>
+    <p>That's roughly 61 cents on the dollar — not 50. The perception of "half gone" often comes from high-tax states or from employees who haven't yet hit the Social Security wage base. If your base salary is $60,000 and your year-to-date wages are below $176,100, you're still paying 6.2% Social Security on the bonus — a meaningful additional bite on top of federal income tax.</p>
+    <p>Once you've hit the Social Security wage base ($176,100 for 2025), no further Social Security tax is withheld on the bonus — which is why high earners who receive large year-end bonuses sometimes see a higher net percentage than colleagues who receive bonuses mid-year before hitting the wage base.</p>
+
+    <h2>Will You Owe More Tax on Your Bonus at Filing?</h2>
+    <p>This depends entirely on your marginal tax bracket versus the withholding method used:</p>
+    <ul>
+      <li><strong>If your employer used the flat 22% method</strong> and you're in the <strong>24%, 32%, 35%, or 37% bracket</strong> based on total annual income, you will owe additional federal tax. The shortfall is the difference between 22% and your actual marginal rate on the bonus dollars.</li>
+      <li><strong>If you're in the 10% or 12% bracket</strong>, the flat 22% over-withholds. You'll receive a refund of the excess at filing.</li>
+      <li><strong>If your employer used the aggregate method</strong>, withholding is closer to your actual rate, so the year-end true-up is smaller in either direction.</li>
+    </ul>
+    <p>For a single filer with $85,000 in base salary plus a $15,000 bonus (total $100,000), the 2026 marginal rate on income from $48,475 to $103,350 is 22%. The flat method withholds exactly at that marginal rate — no surprise at filing. But if the same employee's base salary is $100,000 and the bonus pushes them to $115,000, the bonus income above $103,350 ($11,650) falls in the 24% bracket, and the flat 22% method underwithholds by $232 on that portion.</p>
+
+    <h2>RSUs and Stock Bonuses: Same Rules Apply</h2>
+    <p>Restricted Stock Units (RSUs) that vest are treated as ordinary wage income on the vesting date, valued at the fair market value of the shares at that moment. This amount appears in Box 1 of your W-2 alongside regular wages, and is subject to the same supplemental withholding rules as cash bonuses.</p>
+    <p>Most employers use the flat 22% method for RSU withholding. The shares withheld or sold to cover taxes ("sell-to-cover" or "withhold-to-cover") represent the same 22% + FICA calculation as a cash bonus. If your company's stock has risen significantly and you're in a high-income year, the 22% flat withholding on RSUs is almost certainly insufficient — plan to make an estimated tax payment or increase withholding in a subsequent paycheck using Form W-4 Step 4(c).</p>
+    <p>One important distinction from cash bonuses: RSU tax is based on market value at vesting. Any gain or loss on shares you continue to hold after vesting is separately reported as capital gains (short-term if held less than one year, long-term if held more than one year).</p>
+
+    <h2>How to Reduce the Tax Hit on Your Bonus</h2>
+    <p>While you cannot escape federal income tax on earned compensation, these strategies reduce the amount of your bonus that is taxable:</p>
+    <ul>
+      <li><strong>Maximize 401(k) contributions:</strong> Traditional 401(k) contributions reduce federal taxable wages dollar-for-dollar. The 2026 employee contribution limit is $23,500 ($31,000 if age 50 or older with catch-up). If you have contribution room remaining, ask your employer's payroll department to increase your 401(k) deferral for the pay period containing your bonus. A $5,000 additional 401(k) contribution on a $10,000 bonus cuts your taxable bonus in half.</li>
+      <li><strong>Request a January payment:</strong> If your employer permits it, deferring a year-end bonus to January shifts the income to the following tax year. This is valuable if you expect lower total income next year, or if you're near a bracket threshold in the current year.</li>
+      <li><strong>Contribute to an HSA:</strong> If you're enrolled in a qualifying High Deductible Health Plan, HSA contributions reduce your adjusted gross income (AGI). The 2026 contribution limits are $4,300 for self-only coverage and $8,550 for family coverage.</li>
+      <li><strong>Charitable contributions:</strong> If you itemize deductions, cash donations to 501(c)(3) organizations reduce your taxable income dollar-for-dollar, up to 60% of AGI for cash donations to public charities. A $2,000 charitable gift in the year of a large bonus saves approximately $440–$740 in federal tax depending on your bracket.</li>
+    </ul>
+
+    <div class="article-cta"><div class="article-cta-text"><strong>Bonus Tax Calculator</strong><span>Enter your bonus amount, base salary, and filing status to see exactly how much you'll net after federal, FICA, and state taxes.</span></div><a href="/bonus-tax-calculator" class="article-cta-btn">Calculate Now →</a></div>
+
+    <h2>Worked Example: $15,000 Bonus, Both Methods Compared</h2>
+    <p><strong>Employee profile:</strong> Single, $95,000 annual base salary, bi-weekly pay ($3,654/paycheck), Texas resident (no state income tax), year-to-date wages below Social Security wage base.</p>
+
+    <p><strong>Method 1 — Flat 22%:</strong></p>
+    <ul>
+      <li>Federal income tax: $15,000 × 22% = <strong>$3,300</strong></li>
+      <li>Social Security: $15,000 × 6.2% = <strong>$930</strong></li>
+      <li>Medicare: $15,000 × 1.45% = <strong>$217.50</strong></li>
+      <li>State income tax: <strong>$0</strong></li>
+      <li>Total withheld: $4,447.50 (29.65%)</li>
+      <li><strong>Net bonus: $10,552.50</strong></li>
+    </ul>
+
+    <p><strong>Method 2 — Aggregate:</strong></p>
+    <ul>
+      <li>Combined bi-weekly paycheck: $3,654 + $15,000 = $18,654</li>
+      <li>Annualized combined: $18,654 × 26 = $485,004 — but for a lump bonus, the IRS procedure adds the bonus to the most recent regular paycheck and annualizes from there</li>
+      <li>In practice for this employee: $95,000 base + $15,000 bonus = $110,000 total annual income</li>
+      <li>The 22% bracket applies from $48,475 to $103,350. From $95,000 base, only $8,350 of the bonus falls in the 22% bracket: $8,350 × 22% = $1,837</li>
+      <li>The remaining $6,650 of bonus falls in the 24% bracket: $6,650 × 24% = $1,596</li>
+      <li>Total federal on bonus: $1,837 + $1,596 = <strong>$3,433</strong></li>
+      <li>Social Security + Medicare: <strong>$1,147.50</strong></li>
+      <li>Total withheld: $4,580.50 (30.54%)</li>
+      <li><strong>Net bonus: $10,419.50</strong></li>
+    </ul>
+
+    <p>In this scenario, the aggregate method withholds about $133 more than the flat method. The flat 22% method leaves a small shortfall at filing for the 24% bracket portion — the employee would owe approximately $133 in additional federal tax on this bonus. For most people, that difference is a non-event. Where it matters is for employees earning $150,000+ who receive substantial bonuses and are firmly in the 32% or 35% bracket — those employees may face $2,000–$5,000 additional federal tax owed at filing if their employer uses the flat 22% method.</p>
+
+  </div>
+</article>
+<section class="blog-related"><h2 class="blog-related-title">Related Articles</h2>
+<div class="blog-related-grid">
+  <a href="/blog/how-to-calculate-payroll-taxes" class="blog-related-card">
+    <div class="blog-related-card-cat">Payroll</div>
+    <div class="blog-related-card-title">How to Calculate Payroll Taxes in 2026</div>
+  </a>
+  <a href="/blog/w4-withholding-guide-2026" class="blog-related-card">
+    <div class="blog-related-card-cat">Tax</div>
+    <div class="blog-related-card-title">W-4 Withholding Guide for 2026: How to Fill It Out Correctly</div>
+  </a>
+  <a href="/blog/gross-vs-net-pay-explained" class="blog-related-card">
+    <div class="blog-related-card-cat">Payroll</div>
+    <div class="blog-related-card-title">Gross Pay vs Net Pay: What Gets Taken Out of Your Paycheck</div>
+  </a>
+</div></section>
+</div></main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only &mdash; not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=3" defer></script>
+</body>
+</html>

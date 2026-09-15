@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workers Comp Insurance: What It Covers &amp; How Premiums Are Calculated | FreePayrollCalc</title>
+<meta name="description" content="Learn what workers compensation covers, how premiums are calculated using NCCI class codes and experience modification rates, and how to lower your costs.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog/workers-comp-insurance-basics">
+<meta property="og:title" content="Workers Comp Insurance: What It Covers and How Premiums Are Calculated"><meta property="og:type" content="article">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=5">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Workers Comp Insurance: What It Covers and How Premiums Are Calculated","datePublished":"2026-06-01","author":{"@type":"Organization","name":"FreePayrollCalc"}}</script>
+</head>
+<body>
+
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="blog-article-page"><div class="container">
+<article class="blog-article">
+  <div class="blog-article-eyebrow"><a href="/blog">Blog</a> / <span>HR &amp; Compliance</span></div>
+  <div class="blog-article-cat">HR &amp; Compliance</div>
+  <h1 class="blog-article-title">Workers Comp Insurance: What It Covers and How Premiums Are Calculated</h1>
+  <div class="blog-article-meta"><span>Jun 1, 2026</span><span>8 min read</span><span>Updated for 2026</span></div>
+  <img class="blog-article-hero" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=500&fit=crop&auto=format&q=80" alt="Business owner reviewing workers compensation insurance policy documents">
+  <div class="blog-article-body">
+    <p class="lead">Workers compensation insurance is one of the most misunderstood — and most frequently mispriced — employer costs in small business. Most employers know they need it, but few understand exactly how their premium is calculated or what levers they can pull to reduce it. This guide explains what coverage you are actually buying, how class codes and experience modification rates determine what you pay, and how to build a strategy for keeping your costs down.</p>
+
+    <h2>What Workers Compensation Insurance Covers</h2>
+    <p>Workers comp is a no-fault insurance system. An employee who is injured or becomes ill as a result of their job — regardless of who caused the incident — receives benefits without needing to prove negligence. In exchange, employees give up the right to sue their employer in most cases. Coverage typically includes four categories of benefits:</p>
+    <ul>
+      <li><strong>Medical benefits:</strong> All reasonable and necessary medical treatment related to the work injury, including emergency care, surgery, prescription drugs, physical therapy, and specialist visits. There is generally no cap on medical benefits.</li>
+      <li><strong>Lost wages (indemnity benefits):</strong> Most states pay approximately two-thirds (66.67%) of the employee's average weekly wage during recovery. These payments are capped at a state maximum weekly benefit — for example, California's 2026 maximum is $1,619.15/week, while New York's is $1,125.46/week. A waiting period of 3–7 days typically applies before wage replacement kicks in.</li>
+      <li><strong>Rehabilitation:</strong> Vocational rehabilitation and retraining benefits for employees who cannot return to their original role due to a permanent impairment.</li>
+      <li><strong>Death benefits:</strong> If a work-related injury or illness results in death, the policy pays funeral expenses (typically up to $10,000–$15,000 depending on state) and ongoing wage replacement benefits to surviving dependents, usually a percentage of the deceased worker's weekly wage for a set number of years.</li>
+    </ul>
+
+    <h2>Who Must Carry Workers Comp Coverage?</h2>
+    <p>Workers compensation is mandatory in <strong>49 states</strong>. The sole exception is Texas, where private employers can legally opt out of the state workers comp system — though opting out eliminates certain liability protections and exposes employers to negligence lawsuits. In every other state, coverage is required once you have a minimum number of employees (usually one, though some states set the threshold at three to five for certain industries or employer types).</p>
+
+    <p>Some states carve out specific categories from mandatory coverage requirements. Sole proprietors and partners are frequently exempt (but can elect coverage). Agricultural workers, domestic workers, and certain independent contractors may be excluded depending on state law. Corporate officers often can exempt themselves with a formal written election filed with the insurer and, in some states, the labor department.</p>
+
+    <div class="article-info"><strong>Key takeaway:</strong> If you have even one employee in any state except Texas, you almost certainly need workers comp coverage. Operating without it exposes you to fines, stop-work orders, and personal liability for the full cost of any injury claim.</div>
+
+    <h2>How Workers Comp Premiums Are Calculated</h2>
+    <p>The standard premium formula is:</p>
+    <p style="background:var(--surface-2);padding:14px 18px;border-radius:8px;font-family:var(--mono);font-size:14px;border-left:3px solid var(--accent)">
+      <strong>Premium = (Payroll &divide; $100) &times; Base Rate &times; Experience Modification Rate (EMR)</strong>
+    </p>
+    <p>Each variable requires explanation.</p>
+
+    <h2>NCCI Class Codes: The Base Rate Driver</h2>
+    <p>The National Council on Compensation Insurance (NCCI) assigns a four-digit class code to each job type. The class code reflects the statistical injury frequency and severity for that type of work, and insurers use it to set a base rate — expressed as a dollar amount per $100 of payroll. Every employee at your company must be assigned to the appropriate class code.</p>
+
+    <p>Class codes range dramatically in cost. Here are representative 2026 base rates (rates vary by state; these are illustrative national averages):</p>
+
+    <div style="overflow-x:auto;margin:24px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.5">
+      <thead>
+        <tr style="background:var(--surface-2);text-align:left">
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Class Code</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Job Type</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Typical Rate per $100 Payroll</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Risk Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;font-family:var(--mono)">8810</td><td style="padding:9px 14px">Clerical office employees</td><td style="padding:9px 14px;font-family:var(--mono)">$0.14 – $0.30</td><td style="padding:9px 14px;color:var(--ink-2)">Very low</td></tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface)"><td style="padding:9px 14px;font-family:var(--mono)">8742</td><td style="padding:9px 14px">Salespersons (outside)</td><td style="padding:9px 14px;font-family:var(--mono)">$0.45 – $0.80</td><td style="padding:9px 14px;color:var(--ink-2)">Low</td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;font-family:var(--mono)">8017</td><td style="padding:9px 14px">Retail store employees</td><td style="padding:9px 14px;font-family:var(--mono)">$1.50 – $2.50</td><td style="padding:9px 14px;color:var(--ink-2)">Moderate</td></tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface)"><td style="padding:9px 14px;font-family:var(--mono)">5183</td><td style="padding:9px 14px">Plumbing / pipe fitting</td><td style="padding:9px 14px;font-family:var(--mono)">$4.00 – $8.00</td><td style="padding:9px 14px;color:var(--ink-2)">High</td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;font-family:var(--mono)">5645</td><td style="padding:9px 14px">Carpentry — residential</td><td style="padding:9px 14px;font-family:var(--mono)">$8.00 – $14.00</td><td style="padding:9px 14px;color:var(--ink-2)">High</td></tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface)"><td style="padding:9px 14px;font-family:var(--mono)">0042</td><td style="padding:9px 14px">Landscaping / groundskeeping</td><td style="padding:9px 14px;font-family:var(--mono)">$8.00 – $15.00</td><td style="padding:9px 14px;color:var(--ink-2)">High</td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;font-family:var(--mono)">5403</td><td style="padding:9px 14px">Carpentry — commercial</td><td style="padding:9px 14px;font-family:var(--mono)">$10.00 – $18.00</td><td style="padding:9px 14px;color:var(--ink-2)">Very high</td></tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface)"><td style="padding:9px 14px;font-family:var(--mono)">5057</td><td style="padding:9px 14px">Iron / structural steel erection</td><td style="padding:9px 14px;font-family:var(--mono)">$18.00 – $35.00</td><td style="padding:9px 14px;color:var(--ink-2)">Extreme</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>Misclassifying employees — intentionally or accidentally — is one of the most common workers comp audit findings. An employer who codes field technicians as clerical workers is underreporting risk, and the insurer will collect the difference at audit time, plus potential penalties.</p>
+
+    <h2>Experience Modification Rate (EMR): Your Claim History Score</h2>
+    <p>The Experience Modification Rate, also called the X-Mod or EMR, is a multiplier that adjusts your premium based on your company's actual claims history relative to other businesses in your industry and state. It is calculated by NCCI (or the state rating bureau in a few states) using your three most recent policy years, excluding the most current year.</p>
+    <ul>
+      <li><strong>EMR = 1.0</strong> — You are exactly average for your industry. No credit or surcharge.</li>
+      <li><strong>EMR below 1.0</strong> (e.g., 0.82) — Your claims are better than average. You get a discount. An EMR of 0.85 means a 15% reduction in premium.</li>
+      <li><strong>EMR above 1.0</strong> (e.g., 1.35) — Your claims are worse than average. You pay a surcharge. An EMR of 1.35 means 35% more in premium.</li>
+    </ul>
+
+    <p>A single serious lost-time claim can drive your EMR above 1.0 for three years. Frequency of small claims hurts the EMR more than a single large claim of the same total cost, because the formula weighs primary losses (the first ~$17,500 of any claim) more heavily than excess losses.</p>
+
+    <div class="article-cta"><div class="article-cta-text"><strong>Estimate Your Workers Comp Premium</strong><span>Use our workers comp calculator to get an instant estimate based on your payroll, class codes, and state.</span></div><a href="/workers-comp-calculator" class="article-cta-btn">Calculate Now →</a></div>
+
+    <h2>Worked Example: $500,000 Mixed-Workforce Premium</h2>
+    <p>Imagine a residential contractor with a $500,000 annual payroll split across three employee types:</p>
+
+    <div style="overflow-x:auto;margin:24px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.5">
+      <thead>
+        <tr style="background:var(--surface-2);text-align:left">
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Employee Type</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Payroll</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Class Code</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Rate per $100</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Base Premium</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px">Office staff (4 employees)</td><td style="padding:9px 14px;font-family:var(--mono)">$200,000</td><td style="padding:9px 14px;font-family:var(--mono)">8810</td><td style="padding:9px 14px;font-family:var(--mono)">$0.18</td><td style="padding:9px 14px;font-family:var(--mono)">$360</td></tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface)"><td style="padding:9px 14px">Plumbers (5 employees)</td><td style="padding:9px 14px;font-family:var(--mono)">$175,000</td><td style="padding:9px 14px;font-family:var(--mono)">5183</td><td style="padding:9px 14px;font-family:var(--mono)">$6.50</td><td style="padding:9px 14px;font-family:var(--mono)">$11,375</td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px">Landscapers (3 employees)</td><td style="padding:9px 14px;font-family:var(--mono)">$125,000</td><td style="padding:9px 14px;font-family:var(--mono)">0042</td><td style="padding:9px 14px;font-family:var(--mono)">$11.00</td><td style="padding:9px 14px;font-family:var(--mono)">$13,750</td></tr>
+        <tr style="background:var(--surface-2)"><td style="padding:9px 14px;font-weight:700">Total</td><td style="padding:9px 14px;font-family:var(--mono);font-weight:700">$500,000</td><td style="padding:9px 14px"></td><td style="padding:9px 14px"></td><td style="padding:9px 14px;font-family:var(--mono);font-weight:700">$25,485</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>Now apply the EMR. This company has had a clean record: EMR = 0.85 (15% better than industry average).</p>
+    <p style="background:var(--surface-2);padding:14px 18px;border-radius:8px;font-size:14px">
+      Adjusted premium = $25,485 &times; 0.85 = <strong>$21,662</strong><br>
+      Add state assessment fees + insurer expense loading (~12%): <strong>&asymp; $24,261 estimated annual premium</strong>
+    </p>
+    <p>If that same company had an EMR of 1.30 due to a bad claims year, the premium would jump to $25,485 &times; 1.30 = $33,131 — nearly $9,000 more per year — before fees.</p>
+
+    <h2>Monopolistic States: No Private Market Allowed</h2>
+    <p>Four states do not permit private workers comp insurers at all. Employers in these states must purchase coverage exclusively from the state-run fund:</p>
+    <ul>
+      <li><strong>North Dakota</strong> — WSI (Workforce Safety &amp; Insurance)</li>
+      <li><strong>Ohio</strong> — BWC (Bureau of Workers' Compensation)</li>
+      <li><strong>Washington</strong> — L&amp;I (Department of Labor &amp; Industries)</li>
+      <li><strong>Wyoming</strong> — DWS (Department of Workforce Services)</li>
+    </ul>
+    <p>If you have employees in any of these states, you cannot use your private policy to cover them. You must register separately with that state's fund and pay their rate structure, which may differ significantly from private market pricing elsewhere.</p>
+
+    <h2>The Payroll Audit: How Policies Reconcile</h2>
+    <p>Most workers comp policies are issued on an estimated-premium basis at the start of the policy year, using projected payroll figures. At year-end, the insurer conducts a <strong>payroll audit</strong> — either in person, by mail, or via an online portal — to compare actual payroll against estimates. If you hired more staff or paid more overtime than projected, you owe additional premium. If payroll came in lower, you receive a credit or refund. Keeping accurate payroll records throughout the year prevents audit surprises.</p>
+
+    <h2>How to Lower Your Workers Comp Costs</h2>
+    <p>Since the EMR is the biggest single lever on premium, a claims-reduction strategy delivers compounding savings over multiple years:</p>
+    <ul>
+      <li><strong>Implement a formal safety program.</strong> OSHA-compliant training, documented safety meetings, PPE enforcement, and hazard assessments directly reduce claim frequency. Many insurers offer premium credits for certified safety programs.</li>
+      <li><strong>Create a return-to-work (RTW) program.</strong> Offering modified duty positions to injured workers who cannot perform their full job reduces the duration of lost-time claims — the primary driver of high claim costs. Shorter indemnity periods mean lower claim reserves, which improve your EMR calculation.</li>
+      <li><strong>Verify employee classification accuracy.</strong> Review every class code annually. If the nature of work has changed — for example, a previously field-based employee now works primarily at a desk — reclassification to a lower-rated code can reduce premium immediately.</li>
+      <li><strong>Report injuries immediately.</strong> Late-reported claims are statistically more expensive and more likely to involve legal representation. Prompt reporting gives the insurer the best chance to manage the claim efficiently and get the worker appropriate care fast.</li>
+      <li><strong>Consider a pay-as-you-go policy.</strong> Rather than estimating annual payroll, pay-as-you-go policies calculate premiums based on actual payroll each pay period. This eliminates large audit true-ups and improves cash flow.</li>
+    </ul>
+
+    <div class="article-info"><strong>Key takeaway:</strong> Your EMR is the single most controllable factor in your workers comp cost. A sustained safety culture and proactive claims management can reduce your EMR below 1.0 within two to three years, delivering a permanent premium discount that compounds annually.</div>
+
+    <h2>State Fund vs. Private Insurer vs. Self-Insurance</h2>
+    <p>Outside the four monopolistic states, employers have three coverage options:</p>
+    <ul>
+      <li><strong>Private insurers</strong> — The most common route. Rates are regulated by state but may vary by insurer. Private carriers often offer loss-control services, return-to-work support, and more flexible payment terms.</li>
+      <li><strong>State competitive funds</strong> — Many states operate state funds that compete alongside private insurers (e.g., State Compensation Insurance Fund in California, SAIF in Oregon). These are often the market of last resort for businesses that private carriers will not write, but they can be competitive for some employers.</li>
+      <li><strong>Self-insurance</strong> — Large employers (typically those with $500,000+ in annual premium) can apply to self-insure, posting a bond or letter of credit as security and paying claims directly. Properly managed, this can be the cheapest option long-term, but it requires significant administrative infrastructure and reserves.</li>
+    </ul>
+
+  </div>
+</article>
+
+<section class="blog-related"><h2 class="blog-related-title">Related Articles</h2>
+<div class="blog-related-grid">
+  <a href="/blog/minimum-wage-by-state-2026" class="blog-related-card">
+    <div class="blog-related-cat">Business</div>
+    <div class="blog-related-title">2026 Minimum Wage by State: Every Rate, Effective Date &amp; Tip Credit</div>
+    <div class="blog-related-meta">Jun 10, 2026 &middot; 4 min read</div>
+  </a>
+  <a href="/blog/pay-frequency-comparison" class="blog-related-card">
+    <div class="blog-related-cat">Payroll</div>
+    <div class="blog-related-title">Pay Frequency Comparison: Weekly vs Bi-Weekly vs Semi-Monthly vs Monthly</div>
+    <div class="blog-related-meta">May 22, 2026 &middot; 5 min read</div>
+  </a>
+  <a href="/blog/employer-payroll-taxes-guide" class="blog-related-card">
+    <div class="blog-related-cat">HR &amp; Compliance</div>
+    <div class="blog-related-title">Employer Payroll Taxes 2026: FICA Match, FUTA, SUTA and the True Cost Per Employee</div>
+    <div class="blog-related-meta">Apr 15, 2026 &middot; 7 min read</div>
+  </a>
+</div></section>
+</div></main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only &mdash; not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=3" defer></script>
+</body></html>

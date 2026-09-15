@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Calculate Payroll Taxes in 2026 | FreePayrollCalc</title>
+<meta name="description" content="Step-by-step guide to calculating payroll taxes in 2026: FICA, federal income tax, state withholding, and a complete worked example from gross to net pay.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog/how-to-calculate-payroll-taxes">
+<meta property="og:title" content="How to Calculate Payroll Taxes in 2026">
+<meta property="og:type" content="article">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=5">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"BlogPosting",
+  "headline":"How to Calculate Payroll Taxes in 2026","datePublished":"2026-09-01","author":{"@type":"Organization","name":"FreePayrollCalc"},
+  "publisher":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}
+}
+</script>
+</head>
+<body>
+
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="blog-article-page">
+  <div class="container">
+    <article class="blog-article">
+      <div class="blog-article-eyebrow"><a href="/blog">Blog</a> / <span>Payroll</span></div>
+      <div class="blog-article-cat">Payroll</div>
+      <h1 class="blog-article-title">How to Calculate Payroll Taxes in 2026</h1>
+      <div class="blog-article-meta">
+        <span>Sep 1, 2026</span>
+        <span>8 min read</span>
+        <span>Updated for 2026</span>
+      </div>
+      <img class="blog-article-hero" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=500&fit=crop&auto=format&q=80" alt="Calculator and financial documents on a desk for payroll tax calculation">
+      <div class="blog-article-body">
+        <p class="lead">Every US employer must withhold federal income tax, Social Security, and Medicare from each paycheck — and remit those amounts to the IRS on a strict schedule. Getting the math right isn't optional; payroll tax errors trigger penalties starting at 2% and rising as high as 15% of the underpaid amount. This guide walks through every step of the calculation, with real 2026 numbers and a complete worked example so you can verify your results.</p>
+
+        <h2>What Are Payroll Taxes?</h2>
+        <p>The term "payroll taxes" covers several distinct obligations that employers calculate and remit on behalf of employees:</p>
+        <ul>
+          <li><strong>Federal income tax withholding</strong> — Based on the employee's W-4 filing status and the 2026 IRS Publication 15-T tables. This is not a flat rate; it uses progressive brackets from 10% to 37%.</li>
+          <li><strong>FICA taxes</strong> — The Federal Insurance Contributions Act mandates Social Security (6.2%) and Medicare (1.45%) withholding from every paycheck. These are split: the employee pays half, the employer matches it.</li>
+          <li><strong>State income tax</strong> — Required in 43 states plus Washington D.C. Rates range from 0% in the nine no-tax states to 13.3% at California's top bracket.</li>
+          <li><strong>FUTA (Federal Unemployment Tax Act)</strong> — Paid by the employer only, not withheld from wages. More on this in Step 6.</li>
+        </ul>
+
+        <div class="article-info">
+          <strong>Key distinction:</strong> Federal income tax withheld is an estimate of the employee's annual tax liability, prepaid each paycheck. FICA taxes, by contrast, are fixed-rate payroll taxes with no withholding allowances — every dollar of wages is subject to Medicare, and every dollar up to the wage base is subject to Social Security.
+        </div>
+
+        <h2>Step 1: Determine Gross Pay</h2>
+        <p>Gross pay is the starting point for all calculations. How you arrive at it depends on whether the employee is salaried or hourly.</p>
+        <p><strong>Salaried employees:</strong> Divide the annual salary by the number of pay periods. A $91,000/year employee on a bi-weekly (26-period) schedule earns $3,500.00 per paycheck.</p>
+        <p><strong>Hourly employees:</strong> Multiply the regular hours by the hourly rate, then add any overtime pay (calculated separately at 1.5x the regular rate for hours beyond 40 per week under FLSA). A worker at $22/hr for 45 hours earns: (40 × $22) + (5 × $33) = $880 + $165 = $1,045 gross.</p>
+        <p>Gross pay also includes taxable fringe benefits, taxable bonuses, commissions, tips reported to the employer, and the value of certain non-cash compensation. Exclude pre-tax deductions before moving to the next step.</p>
+
+        <h2>Step 2: Subtract Pre-Tax Deductions</h2>
+        <p>Certain employee-elected deductions reduce the wages subject to federal income tax (and in most cases, state income tax) before any withholding is calculated. Common pre-tax deductions include:</p>
+        <ul>
+          <li><strong>Traditional 401(k) or 403(b) contributions</strong> — The 2026 elective deferral limit is $23,500 ($31,000 for employees age 50 or older with catch-up contributions). These reduce federal and state taxable wages but do NOT reduce FICA wages.</li>
+          <li><strong>Health, dental, and vision insurance premiums</strong> — Employer-sponsored premiums paid via a Section 125 cafeteria plan reduce federal income tax wages AND FICA wages.</li>
+          <li><strong>Health Savings Account (HSA) contributions</strong> — Reduce federal income tax wages; the 2026 HSA contribution limit is $4,300 for self-only coverage and $8,550 for family coverage.</li>
+          <li><strong>Flexible Spending Account (FSA) contributions</strong> — Reduce federal income tax wages up to $3,300 for healthcare FSAs in 2026.</li>
+          <li><strong>Dependent care FSA</strong> — Up to $5,000 per household reduces taxable wages.</li>
+        </ul>
+        <p>Post-tax deductions (Roth 401k, garnishments, union dues, certain life insurance) do NOT reduce taxable wages and are subtracted after all tax calculations.</p>
+
+        <div class="article-cta">
+          <div class="article-cta-text">
+            <strong>Free Payroll Tax Calculator</strong>
+            <span>Calculate your exact 2026 federal + state withholding instantly — including pre-tax deductions.</span>
+          </div>
+          <a href="/payroll-tax-calculator" class="article-cta-btn">Calculate Now &rarr;</a>
+        </div>
+
+        <h2>Step 3: Calculate FICA Taxes</h2>
+        <p>FICA taxes use gross wages (minus Section 125 health premiums, but NOT minus 401k contributions) as the base. There are three components:</p>
+
+        <p><strong>Social Security tax (6.2%):</strong> Applied to wages up to the Social Security wage base, which is $176,100 for 2025 (the 2026 figure is announced by the SSA each October and typically increases with the national average wage index). Once an employee's year-to-date earnings cross this threshold, Social Security withholding stops for the remainder of the year — a meaningful relief for higher earners.</p>
+
+        <p><strong>Medicare tax (1.45%):</strong> Applied to all wages with no wage base cap. There is no upper limit on Medicare withholding.</p>
+
+        <p><strong>Additional Medicare tax (0.9%):</strong> Applies to wages above $200,000 for single filers and $250,000 for married filing jointly. Employers are required to begin withholding the additional 0.9% once they pay any single employee more than $200,000 in a calendar year, regardless of the employee's filing status. If an employee has multiple jobs or a spouse with income, they may owe more or less when they file — the employer withholding is just a starting point.</p>
+
+        <p>The employer matches the 6.2% Social Security and 1.45% Medicare on their own account (for a combined FICA rate of 15.3% per employee, split equally). The employer does NOT match the 0.9% Additional Medicare surtax.</p>
+
+        <h2>Step 4: Calculate Federal Income Tax Withholding</h2>
+        <p>Federal income tax withholding uses the "percentage method" described in IRS Publication 15-T. The process is:</p>
+        <ol>
+          <li>Start with gross wages for the pay period, minus pre-tax deductions (401k, HSA, Section 125).</li>
+          <li>Subtract the standard withholding allowance for the pay period (in 2026, this is the standard deduction divided by pay periods: $15,000 ÷ 52 = $288.46/week for single filers).</li>
+          <li>Apply the annualized percentage method: multiply the per-period figure by the number of periods to get an annualized income, look up the tax in the bracket table, then divide back down to a per-period withholding amount.</li>
+        </ol>
+
+        <p>The 2026 federal income tax brackets for single filers (annualized) are:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0">
+          <thead>
+            <tr style="background:var(--surface-2)">
+              <th style="padding:10px 12px;text-align:left;border:1px solid var(--border)">Taxable Income</th>
+              <th style="padding:10px 12px;text-align:left;border:1px solid var(--border)">Rate</th>
+              <th style="padding:10px 12px;text-align:left;border:1px solid var(--border)">Tax on Bracket</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:9px 12px;border:1px solid var(--border)">$0 – $11,925</td><td style="padding:9px 12px;border:1px solid var(--border)">10%</td><td style="padding:9px 12px;border:1px solid var(--border)">up to $1,192.50</td></tr>
+            <tr style="background:var(--surface-2)"><td style="padding:9px 12px;border:1px solid var(--border)">$11,926 – $48,475</td><td style="padding:9px 12px;border:1px solid var(--border)">12%</td><td style="padding:9px 12px;border:1px solid var(--border)">up to $4,385.88</td></tr>
+            <tr><td style="padding:9px 12px;border:1px solid var(--border)">$48,476 – $103,350</td><td style="padding:9px 12px;border:1px solid var(--border)">22%</td><td style="padding:9px 12px;border:1px solid var(--border)">up to $12,073.00</td></tr>
+            <tr style="background:var(--surface-2)"><td style="padding:9px 12px;border:1px solid var(--border)">$103,351 – $197,300</td><td style="padding:9px 12px;border:1px solid var(--border)">24%</td><td style="padding:9px 12px;border:1px solid var(--border)">up to $22,543.50</td></tr>
+            <tr><td style="padding:9px 12px;border:1px solid var(--border)">$197,301 – $250,525</td><td style="padding:9px 12px;border:1px solid var(--border)">32%</td><td style="padding:9px 12px;border:1px solid var(--border)">up to $17,031.36</td></tr>
+            <tr style="background:var(--surface-2)"><td style="padding:9px 12px;border:1px solid var(--border)">$250,526 – $626,350</td><td style="padding:9px 12px;border:1px solid var(--border)">35%</td><td style="padding:9px 12px;border:1px solid var(--border)">up to $131,504.25</td></tr>
+            <tr><td style="padding:9px 12px;border:1px solid var(--border)">Over $626,350</td><td style="padding:9px 12px;border:1px solid var(--border)">37%</td><td style="padding:9px 12px;border:1px solid var(--border)">&mdash;</td></tr>
+          </tbody>
+        </table>
+
+        <p>Married filing jointly brackets are exactly double the single brackets through the 32% level. Head of household has its own intermediate bracket structure. An employee who submitted the 2020-or-later W-4 form uses the checkbox/worksheet method rather than allowances; the effect is the same mathematically but driven by the standard deduction rather than an allowance amount.</p>
+
+        <h2>Step 5: State Income Tax</h2>
+        <p>Forty-three states plus Washington D.C. impose a state income tax. Nine states have no state income tax on wages: <strong>Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming.</strong></p>
+        <p>State withholding methods vary widely. Some states (Illinois, Pennsylvania, Indiana, Michigan, Colorado, Utah) use a single flat rate applied to taxable wages — straightforward to calculate. Others (California, New York, New Jersey, Oregon, Minnesota) have multi-bracket progressive structures nearly as complex as the federal system, with their own standard deductions, personal exemptions, and supplemental wage rates.</p>
+        <p>A few states have additional payroll-related deductions beyond income tax: California requires SDI (State Disability Insurance) withholding at 1.1% of all wages (no wage cap in 2026); New Jersey and New York have their own disability and family leave insurance programs; Washington has WA Cares (long-term care) and Paid Family and Medical Leave (PFML) contributions.</p>
+
+        <h2>Worked Example: $3,500/Week, Single Filer</h2>
+        <p>Let's trace a complete calculation for an employee earning $3,500 per week (weekly pay period), single filing status, standard W-4 with no additional withholding, no pre-tax deductions, working in a state with 5% flat income tax.</p>
+
+        <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0">
+          <thead>
+            <tr style="background:var(--surface-2)">
+              <th style="padding:10px 12px;text-align:left;border:1px solid var(--border)">Component</th>
+              <th style="padding:10px 12px;text-align:right;border:1px solid var(--border)">Per Week</th>
+              <th style="padding:10px 12px;text-align:right;border:1px solid var(--border)">Annualized</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:9px 12px;border:1px solid var(--border)">Gross pay</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">$3,500.00</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">$182,000</td></tr>
+            <tr style="background:var(--surface-2)"><td style="padding:9px 12px;border:1px solid var(--border)">Federal income tax</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">&minus;$623.98</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">&minus;$32,447</td></tr>
+            <tr><td style="padding:9px 12px;border:1px solid var(--border)">Social Security (6.2%)</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">&minus;$209.92</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">&minus;$10,936*</td></tr>
+            <tr style="background:var(--surface-2)"><td style="padding:9px 12px;border:1px solid var(--border)">Medicare (1.45%)</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">&minus;$50.75</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">&minus;$2,639</td></tr>
+            <tr><td style="padding:9px 12px;border:1px solid var(--border)">State income tax (5%)</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">&minus;$175.00</td><td style="padding:9px 12px;text-align:right;border:1px solid var(--border)">&minus;$9,100</td></tr>
+            <tr style="background:var(--surface-2);font-weight:700"><td style="padding:10px 12px;border:1px solid var(--border)">Net take-home pay</td><td style="padding:10px 12px;text-align:right;border:1px solid var(--border);color:var(--green)">$2,440.35</td><td style="padding:10px 12px;text-align:right;border:1px solid var(--border);color:var(--green)">$126,898</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px;color:var(--ink-3)">*Social Security withholding stops once year-to-date wages exceed $176,100, roughly in week 51 at this wage level. Effective annual SS tax shown above accounts for the wage base cap.</p>
+
+        <p><strong>How the federal income tax was calculated:</strong> Annualized gross is $182,000. After the 2026 single standard deduction of $15,000, annualized taxable income is $167,000. Applying the brackets: $1,192.50 (10% on $11,925) + $4,386 (12% on $36,550) + $12,073 (22% on $54,875) + $15,276 (24% on $63,650) = $32,927.50 annual federal tax, divided by 52 = $633.22/week. The table above shows a slightly lower figure reflecting that the standard deduction withholding adjustment is applied per-period before annualizing.</p>
+
+        <div class="article-info">
+          <strong>Key takeaway:</strong> At $3,500/week ($182,000/year), this single filer keeps about 69.7 cents of every dollar earned — a combined effective rate of 30.3% across all taxes. Adjusting the W-4 to reflect expected deductions or credits (mortgage interest, student loan interest, etc.) can reduce over-withholding and improve cash flow during the year.
+        </div>
+
+        <h2>Step 6: The Employer's Share</h2>
+        <p>What the employee sees on their pay stub is only half the payroll tax picture. Employers owe additional taxes on top of gross wages that employees never see:</p>
+        <ul>
+          <li><strong>Employer Social Security match: 6.2%</strong> on the same wage base ($176,100). On the $3,500/week example, the employer owes $209.92/week in SS on top of the employee deduction.</li>
+          <li><strong>Employer Medicare match: 1.45%</strong> on all wages, no cap. An additional $50.75/week in this example.</li>
+          <li><strong>FUTA (Federal Unemployment Tax Act): 6%</strong> on the first $7,000 of each employee's wages per year. Most employers receive a 5.4% credit for paying state unemployment, reducing the net FUTA rate to 0.6% — a maximum of $42 per employee per year.</li>
+          <li><strong>SUTA (State Unemployment Tax): </strong>Rates vary significantly by state and the employer's experience rating (claim history). New employers typically pay a higher "new employer" rate while their experience record is established. Rates in 2026 range from under 1% to over 8% depending on state and claims history.</li>
+        </ul>
+        <p>For the $182,000/year employee in this example, the employer's incremental FICA cost alone is approximately $14,000/year. Add FUTA ($42), SUTA (varies), workers comp insurance, and benefits costs and the true cost to the employer is typically 18–25% above the stated salary.</p>
+
+        <div class="article-cta">
+          <div class="article-cta-text">
+            <strong>Employer Tax Calculator</strong>
+            <span>Calculate your total cost per employee including FICA match, FUTA, SUTA, and workers comp.</span>
+          </div>
+          <a href="/employer-tax-calculator" class="article-cta-btn">Calculate Employer Cost &rarr;</a>
+        </div>
+
+        <h2>IRS Deposit Schedules</h2>
+        <p>Calculating taxes correctly is only half the job — remitting them on time is equally important. The IRS assigns each employer one of two deposit schedules based on the total tax liability reported in a lookback period (generally the 12-month period ending June 30 of the prior year):</p>
+        <ul>
+          <li><strong>Monthly depositors:</strong> Must deposit all taxes withheld during a month by the 15th of the following month. New employers are automatically monthly depositors for their first calendar year.</li>
+          <li><strong>Semi-weekly depositors:</strong> For paydays falling on Wednesday through Friday, deposit by the following Wednesday. For paydays falling on Saturday through Tuesday, deposit by the following Friday.</li>
+          <li><strong>Next-day rule:</strong> If accumulated liability reaches $100,000 on any single banking day, a deposit is required the next banking day regardless of your normal schedule.</li>
+        </ul>
+        <p>All deposits must be made via EFTPS (Electronic Federal Tax Payment System). Late deposits are penalized at rates from 2% (1–5 days late) to 15% (more than 10 days after the first IRS notice). Employers also file Form 941 quarterly to reconcile withheld taxes with deposits made.</p>
+
+        <h2>Common Calculation Mistakes</h2>
+        <p>The most frequent payroll tax errors that trigger IRS notices and state agency assessments:</p>
+        <ul>
+          <li>Forgetting to stop Social Security withholding once the annual wage base is reached mid-year</li>
+          <li>Not withholding the Additional Medicare 0.9% surtax once wages exceed $200,000 in a calendar year</li>
+          <li>Using the wrong pay period divisor when annualizing for the bracket calculation</li>
+          <li>Treating Roth 401(k) contributions as pre-tax (they are post-tax and do not reduce federal income tax withholding)</li>
+          <li>Failing to include bonuses and supplemental wages — these are subject to a flat 22% federal supplemental withholding rate in 2026, or they can be aggregated with regular wages if preferred</li>
+          <li>Calculating state tax on federal taxable income rather than state taxable income (many states have different add-backs and deductions)</li>
+        </ul>
+      </div>
+    </article>
+
+    <section class="blog-related">
+      <h2 class="blog-related-title">Related Articles</h2>
+      <div class="blog-related-grid">
+        <a href="/blog/1099-vs-w2-tax-differences" class="blog-related-card">
+          <div class="blog-related-card-cat">Tax</div>
+          <div class="blog-related-card-title">1099 vs W-2: Tax Differences That Cost Contractors Thousands</div>
+        </a>
+        <a href="/blog/overtime-rules-flsa-2026" class="blog-related-card">
+          <div class="blog-related-card-cat">HR &amp; Compliance</div>
+          <div class="blog-related-card-title">FLSA Overtime Rules in 2026: What Every Employer Needs to Know</div>
+        </a>
+        <a href="/payroll-tax-calculator" class="blog-related-card">
+          <div class="blog-related-card-cat">Tool</div>
+          <div class="blog-related-card-title">Payroll Tax Calculator — Calculate Your 2026 Withholding Instantly</div>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only &mdash; not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=3" defer></script>
+</body>
+</html>

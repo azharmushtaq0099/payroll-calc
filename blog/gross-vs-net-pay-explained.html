@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gross Pay vs Net Pay: What Gets Taken Out of Your Paycheck | FreePayrollCalc</title>
+<meta name="description" content="Gross pay vs net pay explained: every deduction on your paycheck, from 401(k) and health insurance to federal taxes and FICA. Includes a real worked example.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog/gross-vs-net-pay-explained">
+<meta property="og:title" content="Gross Pay vs Net Pay: What Gets Taken Out of Your Paycheck">
+<meta property="og:type" content="article">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=5">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Gross Pay vs Net Pay: What Gets Taken Out of Your Paycheck","datePublished":"2026-08-05","author":{"@type":"Organization","name":"FreePayrollCalc"},"publisher":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+</script>
+</head>
+<body>
+
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="blog-article-page">
+  <div class="container">
+    <article class="blog-article">
+      <div class="blog-article-eyebrow"><a href="/blog">Blog</a> / <span>Payroll</span></div>
+      <div class="blog-article-cat">Payroll</div>
+      <h1 class="blog-article-title">Gross Pay vs Net Pay: What Gets Taken Out of Your Paycheck</h1>
+      <div class="blog-article-meta"><span>Aug 5, 2026</span><span>5 min read</span><span>Updated for 2026</span></div>
+      <img class="blog-article-hero" src="https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?w=1200&h=500&fit=crop&auto=format&q=80" alt="Person reviewing a paycheck and pay stub documents">
+      <div class="blog-article-body">
+
+        <p class="lead">Your employer agreed to pay you $75,000 a year, so why does your bi-weekly direct deposit show up as $1,680 instead of $2,885? The gap between what your employer promises and what you actually receive is filled with a stack of deductions — some mandatory, some optional, and some that can actually reduce the mandatory ones. Here is exactly what happens to every dollar between gross pay and net pay.</p>
+
+        <h2>What Is Gross Pay?</h2>
+        <p>Gross pay is the total compensation owed to you before any deductions are applied. For a salaried employee earning $75,000 per year on a bi-weekly schedule (26 pay periods), gross pay per check is <strong>$2,884.62</strong>. For an hourly employee, gross pay is hours worked multiplied by the hourly rate, plus any overtime, shift differentials, or bonuses earned in that period.</p>
+        <p>Gross pay is what your employment offer letter quotes. It is the number you negotiate. Every other number on your pay stub flows from it.</p>
+
+        <h2>Pre-Tax Deductions: Lowering Your Taxable Income First</h2>
+        <p>Before the IRS gets its cut, several deductions come out of gross pay on a pre-tax basis. These deductions reduce the wages on which federal and most state income taxes are calculated — which is why maximizing them is one of the most effective legal strategies for reducing your tax bill.</p>
+
+        <h3>Traditional 401(k) Contributions</h3>
+        <p>Contributions to a traditional 401(k) or 403(b) retirement plan reduce your federally taxable wages dollar-for-dollar. The 2026 employee contribution limit is <strong>$23,500</strong> (up from $23,000 in 2025), with a catch-up contribution of an additional $7,500 allowed for employees aged 50 and over — and under the SECURE 2.0 Act, employees aged 60 through 63 may contribute an even larger catch-up of $11,250. An employee contributing $400 per bi-weekly paycheck ($10,400/year) reduces their taxable wages by that full $10,400.</p>
+        <p>Note: 401(k) contributions reduce federal and state income tax wages, but they do <em>not</em> reduce FICA (Social Security and Medicare) wages. You still pay FICA on your full gross pay.</p>
+
+        <h3>Flexible Spending Accounts (FSA)</h3>
+        <p>Health FSA contributions are excluded from both federal income tax and FICA. The 2026 FSA contribution limit is <strong>$3,300</strong> per year ($126.92 per bi-weekly paycheck). Dependent Care FSA limits are $5,000 per household. FSA funds must be used within the plan year (with a grace period or up to $660 carryover, depending on your plan), so contribute only what you expect to spend.</p>
+
+        <h3>Health Savings Account (HSA)</h3>
+        <p>If you are enrolled in a High-Deductible Health Plan (HDHP), you can contribute to an HSA. The 2026 HSA contribution limits are <strong>$4,300 for individual coverage</strong> and <strong>$8,550 for family coverage</strong>. Unlike FSA funds, HSA balances roll over indefinitely and can be invested. Payroll-deducted HSA contributions are excluded from federal income tax, state income tax in most states, and FICA — making them the most tax-advantaged savings vehicle available to W-2 employees.</p>
+
+        <h3>Health, Dental, and Vision Insurance Premiums</h3>
+        <p>When your employer offers benefits through a Section 125 cafeteria plan (which virtually all employer-sponsored health plans qualify as), your share of health, dental, and vision premiums is deducted pre-tax. These premiums reduce federal taxable wages, but unlike 401(k) contributions, they also reduce FICA wages — meaning you save both income tax and FICA on every dollar of premium you pay.</p>
+
+        <div class="article-info"><strong>Key takeaway:</strong> Pre-tax deductions reduce the income on which federal and state tax is calculated. Maxing out your 401(k), HSA, and FSA in the same year can reduce your federal taxable income by more than $31,000 — saving thousands of dollars in taxes annually.</div>
+
+        <h2>Federal Income Tax Withholding</h2>
+        <p>Federal income tax is withheld from each paycheck using the IRS annualized wage method from <a href="https://www.irs.gov/publications/p15t" rel="nofollow noopener" target="_blank">Publication 15-T</a>. Your employer takes your gross pay per period, multiplies by the number of pay periods per year, subtracts pre-tax deductions and your standard deduction based on your filing status, then applies the 2026 federal tax brackets to that annualized figure — and divides the result back down to a per-paycheck amount.</p>
+        <p>The 2026 standard deduction is <strong>$15,000 for single filers</strong> and $30,000 for married filing jointly. Your W-4 filing status and any additional withholding or exemption claims you made on Form W-4 determine the exact withholding amount. If you claimed a filing status of "single" with no adjustments, your employer uses the single brackets. If your spouse also works, or you have significant non-wage income, you may be under-withheld unless you account for it on Step 4 of your W-4.</p>
+
+        <h2>FICA: Social Security and Medicare</h2>
+        <p>FICA taxes are calculated as flat percentages of your FICA wages (gross pay, minus employer-sponsored health premiums and FSA contributions under a Section 125 plan, but <em>not</em> minus 401(k) contributions for most plan designs).</p>
+        <ul>
+          <li><strong>Social Security tax: 6.2%</strong> on wages up to the SSA wage base ($176,100 for 2025; the 2026 base will be announced by the SSA in October 2025). Once you hit the wage base for the calendar year, Social Security withholding stops — a meaningful raise in your net pay each paycheck once you cross that threshold.</li>
+          <li><strong>Medicare tax: 1.45%</strong> on all wages with no cap.</li>
+          <li><strong>Additional Medicare surtax: 0.9%</strong> on wages above $200,000 for single filers ($250,000 for married filing jointly). Employers begin withholding this once your wages from that employer exceed $200,000 in a calendar year, regardless of filing status.</li>
+        </ul>
+        <p>Your employer pays a matching 6.2% Social Security and 1.45% Medicare on top of your wages — this never appears on your pay stub because it is an additional employer cost, not a deduction from your check.</p>
+
+        <h2>State and Local Income Taxes</h2>
+        <p>Forty-one states plus Washington D.C. levy a state income tax. Rates range from a flat 2.5% in Arizona to a top marginal rate of 13.3% in California. Nine states — Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming — have no state income tax on wages. Some localities (New York City, Philadelphia, Kansas City, and others) impose an additional local income tax on top of the state rate.</p>
+        <p>State income tax withholding typically mirrors the federal calculation: it is applied to wages after pre-tax deductions, using the state's own brackets or flat rate and filing status rules.</p>
+
+        <h2>Post-Tax Deductions</h2>
+        <p>After all taxes are calculated, some deductions are taken from what remains. These do not reduce your taxable income but still reduce your take-home pay:</p>
+        <ul>
+          <li><strong>Roth 401(k) contributions:</strong> Identical to traditional 401(k) contributions in terms of the annual limit ($23,500 in 2026), but contributions are made with after-tax dollars. No current-year tax benefit, but qualified withdrawals in retirement are tax-free.</li>
+          <li><strong>Life and disability insurance premiums:</strong> Employer-sponsored group life insurance coverage above $50,000 in face value is subject to imputed income (a taxable benefit), but disability and supplemental life premiums are typically post-tax deductions.</li>
+          <li><strong>Wage garnishments:</strong> Court-ordered deductions for child support, student loan defaults, or tax levies come out after taxes. Federal law (Title III of the Consumer Credit Protection Act) limits garnishments to 25% of disposable earnings for most debts.</li>
+          <li><strong>Charitable contributions and union dues</strong> when processed through payroll are also post-tax deductions.</li>
+        </ul>
+
+        <div class="article-cta"><div class="article-cta-text"><strong>See your exact take-home pay</strong><span>Enter your salary, deductions, and state to get a full paycheck breakdown — including every line from gross to net.</span></div><a href="/take-home-pay-calculator" class="article-cta-btn">Calculate Now →</a></div>
+
+        <h2>Worked Example: $75,000 Salary, Bi-Weekly Paycheck</h2>
+        <p>Here is a complete paycheck breakdown for a single employee earning $75,000 per year in Virginia, contributing $400 per paycheck to a traditional 401(k) and paying $225 per paycheck for employer-sponsored health insurance (the employee's share under a Section 125 plan).</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>Line Item</th><th>Per Paycheck</th><th>Annual</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Gross Pay</strong></td><td>$2,884.62</td><td>$75,000.00</td></tr>
+            <tr class="table-section-row"><td colspan="3">Pre-Tax Deductions</td></tr>
+            <tr><td>&nbsp;&nbsp;Traditional 401(k) contribution</td><td>− $400.00</td><td>− $10,400.00</td></tr>
+            <tr><td>&nbsp;&nbsp;Health/dental/vision premium</td><td>− $225.00</td><td>− $5,850.00</td></tr>
+            <tr><td><em>Federal &amp; state taxable wages</em></td><td>$2,259.62</td><td>$58,750.12</td></tr>
+            <tr class="table-section-row"><td colspan="3">Federal Taxes</td></tr>
+            <tr><td>&nbsp;&nbsp;Federal income tax (single, no adj.)</td><td>− $192.75</td><td>− $5,011.50</td></tr>
+            <tr><td>&nbsp;&nbsp;Social Security (6.2%)</td><td>− $163.08</td><td>− $4,240.00</td></tr>
+            <tr><td>&nbsp;&nbsp;Medicare (1.45%)</td><td>− $38.13</td><td>− $991.25</td></tr>
+            <tr class="table-section-row"><td colspan="3">State Tax</td></tr>
+            <tr><td>&nbsp;&nbsp;Virginia income tax (~5.75% effective)</td><td>− $165.87</td><td>− $4,312.50</td></tr>
+            <tr style="font-weight:700;background:var(--surface-2)"><td>Net Take-Home Pay</td><td>$1,699.79</td><td>$44,194.75</td></tr>
+          </tbody>
+        </table>
+
+        <p>The effective total tax rate on this employee's gross wages is approximately <strong>22.4%</strong>. Without the 401(k) and health premium deductions, federal taxable income would be higher and the total tax burden would increase by roughly $3,200 per year — demonstrating the real value of pre-tax benefit elections.</p>
+
+        <div class="article-info"><strong>Key takeaway:</strong> FICA (Social Security + Medicare) is calculated on gross wages minus Section 125 health premiums, not on federal taxable income. The 401(k) contribution does not reduce your FICA wages, only your income tax wages.</div>
+
+        <h2>How to Increase Your Take-Home Pay</h2>
+        <p>There are two legitimate levers for increasing net pay without getting a raise:</p>
+        <p><strong>1. Maximize pre-tax deductions.</strong> Every dollar contributed to a traditional 401(k), HSA, or FSA reduces your federal (and usually state) income tax. For an employee in the 22% federal bracket also paying 5.75% Virginia state tax, each dollar of pre-tax 401(k) contribution saves about $0.28 in current-year taxes. If you are not contributing enough to your 401(k) to capture the full employer match, you are leaving direct compensation on the table.</p>
+        <p><strong>2. Review your W-4.</strong> If you consistently receive a large tax refund each spring, you are over-withholding — essentially giving the IRS an interest-free loan. Updating your W-4 to claim the correct filing status, and using the IRS withholding estimator to calculate any adjustments in Step 4, can put more money in each paycheck without changing your annual tax liability. Conversely, if you owe taxes every April, increase the additional withholding amount in Step 4(c) to avoid underpayment penalties.</p>
+
+      </div>
+    </article>
+
+    <section class="blog-related">
+      <h2 class="blog-related-title">Related Articles</h2>
+      <div class="blog-related-grid">
+        <a href="/blog/how-to-read-your-pay-stub" class="blog-related-card">
+          <div class="blog-related-cat">Payroll</div>
+          <div class="blog-related-title-text">How to Read Your Pay Stub: Every Line Explained</div>
+          <div class="blog-related-meta">6 min read</div>
+        </a>
+        <a href="/blog/w4-withholding-guide" class="blog-related-card">
+          <div class="blog-related-cat">Tax</div>
+          <div class="blog-related-title-text">W-4 Withholding Guide: How to Fill It Out Correctly for 2026</div>
+          <div class="blog-related-meta">7 min read</div>
+        </a>
+        <a href="/blog/quarterly-estimated-taxes-guide" class="blog-related-card">
+          <div class="blog-related-cat">Tax</div>
+          <div class="blog-related-title-text">Quarterly Estimated Taxes: A Freelancer's Complete Guide</div>
+          <div class="blog-related-meta">9 min read</div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=3" defer></script>
+</body>
+</html>

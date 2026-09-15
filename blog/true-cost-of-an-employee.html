@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The True Cost of an Employee (Beyond Their Salary) | FreePayrollCalc</title>
+<meta name="description" content="Hiring a $75,000 employee costs closer to $100,000 all-in. Full breakdown: FICA match, FUTA, SUTA, workers comp, health insurance, 401(k), and PTO costs.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog/true-cost-of-an-employee">
+<meta property="og:title" content="The True Cost of an Employee (Beyond Their Salary)"><meta property="og:type" content="article">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=5">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The True Cost of an Employee (Beyond Their Salary)","datePublished":"2026-07-08","author":{"@type":"Organization","name":"FreePayrollCalc"}}</script>
+</head>
+<body>
+
+<!-- NAV -->
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="blog-article-page"><div class="container">
+<article class="blog-article">
+  <div class="blog-article-eyebrow"><a href="/blog">Blog</a> / <span>Business</span></div>
+  <div class="blog-article-cat">Business</div>
+  <h1 class="blog-article-title">The True Cost of an Employee (Beyond Their Salary)</h1>
+  <div class="blog-article-meta"><span>Jul 8, 2026</span><span>7 min read</span><span>Updated for 2026</span></div>
+  <img class="blog-article-hero" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=500&fit=crop&auto=format&q=80" alt="Business owner reviewing employee cost spreadsheet at desk">
+  <div class="blog-article-body">
+
+    <p class="lead">When a job posting says "$75,000 salary," that's not what the employee actually costs you. Once you add mandatory payroll taxes, insurance, and benefits, the real number typically lands 25% to 40% higher — often north of $100,000. Understanding the true cost of an employee is essential for accurate headcount budgeting, pricing your services, and evaluating contractor versus W-2 tradeoffs.</p>
+
+    <h2>The Salary Multiplier: Your Starting Point</h2>
+    <p>The most useful rule of thumb in workforce planning is the <strong>1.25x–1.40x multiplier</strong>. A $75,000 salaried employee typically costs between $93,750 and $105,000 per year in total employment cost. Where you land in that range depends primarily on your benefits package, your state's unemployment insurance rate, and the workers compensation classification for the role.</p>
+    <p>Gross salary represents only about <strong>60–70% of the true cost of employment</strong>. The remaining 30–40% breaks down into mandatory government taxes you owe regardless of business size, mandatory insurance, and the voluntary benefits you need to compete for talent.</p>
+
+    <h2>Mandatory Employer Payroll Taxes</h2>
+    <p>These costs are non-negotiable. Every US employer pays them, and they cannot be shifted to the employee.</p>
+
+    <h3>Employer FICA: 7.65% of Gross Wages</h3>
+    <p>The Federal Insurance Contributions Act requires employers to match the employee's Social Security and Medicare contributions dollar-for-dollar. The employer share is:</p>
+    <ul>
+      <li><strong>Social Security: 6.2%</strong> on wages up to the SSA wage base ($176,100 for 2025; 2026 figure announced in October)</li>
+      <li><strong>Medicare: 1.45%</strong> on all wages, with no cap</li>
+    </ul>
+    <p>Total employer FICA: <strong>7.65% of gross wages</strong>. On a $75,000 salary, that's $5,737.50 per year — every year, for every employee. Note that the employer does not pay the Additional Medicare Tax (0.9%) on high earners; that surtax applies only to the employee side.</p>
+
+    <h3>FUTA: Federal Unemployment Tax</h3>
+    <p>The Federal Unemployment Tax Act imposes a 6% tax on the <strong>first $7,000</strong> of each employee's wages — a maximum of $420 per employee per year at the gross rate. However, employers in states that are current on their federal unemployment loans receive a credit of up to 5.4%, reducing the effective FUTA rate to <strong>0.6%</strong> — just $42 per employee per year. In most states, FUTA costs under $50 annually per worker. (A handful of "credit reduction" states with outstanding federal loans lose part of this credit; check the IRS Form 940 Schedule A for the current list.)</p>
+
+    <h3>SUTA: State Unemployment Insurance</h3>
+    <p>State unemployment tax is where the range opens up significantly. New employer rates typically start around 2.0%–3.5% on a taxable wage base that varies by state — from $7,000 in Florida and Texas (same as the FUTA base) to $68,500 in Washington State. Over time, your rate is adjusted based on your "experience rating," which reflects how many former employees have filed unemployment claims against your account.</p>
+    <p>Rates range from <strong>0.5% to 8.5%</strong> depending on the state and your claims history. A new employer paying a 2.7% rate on a $14,000 wage base pays roughly $378 per employee per year. An employer in a high-rate state with significant turnover could pay several times that amount.</p>
+
+    <h2>Workers Compensation Insurance</h2>
+    <p>Workers comp is state-mandated insurance — not a payroll tax — but it's a direct, unavoidable cost of employment in 49 states (Texas is the sole exception where it's elective). Premiums are quoted per $100 of payroll and vary dramatically by industry and job classification:</p>
+    <ul>
+      <li><strong>Office / clerical workers:</strong> $0.25–$0.75 per $100 of payroll</li>
+      <li><strong>Retail, food service, light warehouse:</strong> $1.00–$2.50 per $100</li>
+      <li><strong>Construction trades:</strong> $5.00–$15.00+ per $100</li>
+      <li><strong>Roofing, logging, structural steel:</strong> can exceed $25.00 per $100</li>
+    </ul>
+    <p>The average across all industries is approximately <strong>$1.30 per $100 of payroll</strong>. For a $75,000 salary in a typical office environment, budget $750–$1,100 per year in workers comp premiums. Use the <a href="/workers-comp-calculator">Workers Comp Calculator</a> to estimate your rate by state and job class.</p>
+
+    <h2>Benefits — The Biggest Variable in Total Cost</h2>
+    <p>Mandatory taxes add roughly 10–12% to your labor cost. Benefits are where the true gap between salary and total cost emerges — and where small businesses most often underestimate their exposure.</p>
+
+    <h3>Health Insurance: The Dominant Benefits Cost</h3>
+    <p>According to the Kaiser Family Foundation 2024 Employer Health Benefits Survey, the average employer contribution toward employee-only (single) health coverage was approximately <strong>$8,435 per year</strong>. Family coverage averaged around $22,000, of which employers contributed roughly $16,000–$18,000.</p>
+    <p>Under the Affordable Care Act, employers with 50 or more full-time equivalent employees are required to offer minimum essential coverage or face penalties. Smaller businesses are not required to offer insurance, but doing so is often necessary to compete for workers. Small businesses may be eligible for the Small Business Health Care Tax Credit if they have fewer than 25 employees with average wages below $56,000.</p>
+
+    <h3>Retirement Plan Match</h3>
+    <p>A competitive 401(k) match runs between 3% and 6% of salary. The most common structure is a <strong>100% match on employee contributions up to 4% of salary</strong>, costing the employer $3,000 per year on a $75,000 salary. The SECURE 2.0 Act (effective 2025) requires new 401(k) plans to auto-enroll employees at 3%–10%, which can increase employer matching costs as more employees participate.</p>
+
+    <h3>Paid Time Off: The Hidden Salary Multiplier</h3>
+    <p>PTO has an overlooked dollar cost: you pay salary for days the employee doesn't work. With 10 paid vacation days, 10 federal holidays, and 5 sick days, that's 25 paid non-working days — roughly 10% of the 250 working days in a year. On a $75,000 salary, PTO costs approximately $7,500 in productive capacity foregone. A more conservative estimate of 10–15 PTO days (excluding holidays) represents <strong>4–6% of base salary</strong> — $3,000–$4,500 on a $75,000 salary.</p>
+
+    <h2>Full Cost Breakdown by Salary Level</h2>
+    <p>The table below assumes a typical office employee in a moderate-cost state, with single health coverage, a 3% 401(k) match, 12 days of PTO, and an average workers comp rate of $1.30/$100:</p>
+
+    <table>
+      <thead>
+        <tr><th>Cost Category</th><th>$50,000 Salary</th><th>$75,000 Salary</th><th>$100,000 Salary</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base Salary</td><td>$50,000</td><td>$75,000</td><td>$100,000</td></tr>
+        <tr><td>Employer FICA (7.65%)</td><td>$3,825</td><td>$5,738</td><td>$7,650</td></tr>
+        <tr><td>FUTA (net 0.6%, cap $7k)</td><td>$42</td><td>$42</td><td>$42</td></tr>
+        <tr><td>SUTA (2.5% on $14k wage base)</td><td>$350</td><td>$350</td><td>$350</td></tr>
+        <tr><td>Workers Comp ($1.30/$100)</td><td>$650</td><td>$975</td><td>$1,300</td></tr>
+        <tr><td>Health Insurance (single coverage)</td><td>$8,435</td><td>$8,435</td><td>$8,435</td></tr>
+        <tr><td>401(k) Match (3% of salary)</td><td>$1,500</td><td>$2,250</td><td>$3,000</td></tr>
+        <tr><td>PTO Cost (5% of salary)</td><td>$2,500</td><td>$3,750</td><td>$5,000</td></tr>
+        <tr><td><strong>Total Annual Cost</strong></td><td><strong>$67,302</strong></td><td><strong>$96,540</strong></td><td><strong>$125,777</strong></td></tr>
+        <tr><td><strong>Effective Multiplier</strong></td><td><strong>1.35x</strong></td><td><strong>1.29x</strong></td><td><strong>1.26x</strong></td></tr>
+      </tbody>
+    </table>
+
+    <p>Notice that the multiplier decreases at higher salaries. That's because benefits like health insurance are a fixed dollar amount — a $100,000 employee pays the same $8,435 health premium as a $50,000 employee. As base salary grows, those fixed costs represent a shrinking percentage of total cost.</p>
+
+    <div class="article-info"><strong>Key takeaway:</strong> Budget salary × 1.25 to 1.40 as your total employment cost. Add health insurance as a flat dollar figure on top for the most accurate number — it doesn't scale with pay.</div>
+
+    <h2>The One-Time Cost Per Hire</h2>
+    <p>Before any recurring costs begin, there's the cost of filling the role. The Society for Human Resource Management (SHRM) estimates the average cost per hire at approximately $4,700, but the total including lost productivity during vacancy and ramp-up time frequently reaches <strong>$7,000–$10,000</strong> for professional roles. Common line items include:</p>
+    <ul>
+      <li><strong>Job board postings:</strong> $250–$500 per posting (Indeed, LinkedIn Jobs)</li>
+      <li><strong>Applicant tracking software:</strong> often bundled, $5–$15/month per seat</li>
+      <li><strong>Background check and drug screening:</strong> $50–$200 per candidate</li>
+      <li><strong>Recruiter or staffing agency fee:</strong> 15–25% of first-year salary for professional hires — $11,250–$18,750 on a $75,000 role</li>
+      <li><strong>HR onboarding staff time:</strong> $500–$1,500 in labor cost</li>
+      <li><strong>Training and ramp-up period:</strong> $2,000–$5,000 in partially productive labor while the new hire reaches full output</li>
+    </ul>
+    <p>For a $75,000 role filled internally (without a recruiter), direct out-of-pocket recruiting costs run $1,000–$2,500. Engaging an external recruiter at the industry-standard 20% fee adds $15,000 to first-year cost — making the total year-one cost of that hire over $110,000 before benefits.</p>
+    <p>High turnover is therefore one of the most expensive operational problems a small business can have. Losing and replacing a $75,000 employee once every two years adds roughly $5,000–$7,500 per year in annualized recruiting cost on top of the recurring employment cost.</p>
+
+    <div class="article-cta"><div class="article-cta-text"><strong>Cost Per Hire Calculator</strong><span>Estimate the full first-year cost of a new hire, including recruiting expenses, employer taxes, and benefits — before you post the job.</span></div><a href="/cost-per-hire-calculator" class="article-cta-btn">Calculate Now →</a></div>
+
+    <h2>Putting It All Together: Build Your Headcount Budget</h2>
+    <p>When budgeting for a new hire, use this framework:</p>
+    <ul>
+      <li><strong>Step 1:</strong> Take the offered base salary</li>
+      <li><strong>Step 2:</strong> Add 7.65% for employer FICA</li>
+      <li><strong>Step 3:</strong> Add your state's SUTA rate on the applicable wage base</li>
+      <li><strong>Step 4:</strong> Add $42 for FUTA (almost negligible)</li>
+      <li><strong>Step 5:</strong> Add your workers comp premium (rate × salary / 100)</li>
+      <li><strong>Step 6:</strong> Add your actual health insurance employer contribution</li>
+      <li><strong>Step 7:</strong> Add your 401(k) match amount if applicable</li>
+      <li><strong>Step 8:</strong> Add one-time recruiting cost amortized over expected tenure</li>
+    </ul>
+    <p>The <a href="/employer-tax-calculator">Employer Tax Calculator</a> handles Steps 2 through 5 automatically for all 50 states. For the full picture — including the 1099 contractor alternative — the <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a> shows how the total cost compares when engaging independent contractors versus employees.</p>
+
+  </div>
+</article>
+<section class="blog-related"><h2 class="blog-related-title">Related Articles</h2>
+<div class="blog-related-grid">
+  <a href="/blog/pto-accrual-methods" class="blog-related-card">
+    <div class="blog-related-card-cat">HR &amp; Compliance</div>
+    <div class="blog-related-card-title">PTO Accrual Methods: Front-Load vs Earn-As-You-Go</div>
+  </a>
+  <a href="/blog/1099-vs-w2-tax-differences" class="blog-related-card">
+    <div class="blog-related-card-cat">Tax</div>
+    <div class="blog-related-card-title">1099 vs W-2: Tax Differences That Cost Contractors Thousands</div>
+  </a>
+  <a href="/blog/overtime-rules-flsa-2026" class="blog-related-card">
+    <div class="blog-related-card-cat">HR &amp; Compliance</div>
+    <div class="blog-related-card-title">FLSA Overtime Rules in 2026: What Every Employer Needs to Know</div>
+  </a>
+</div></section>
+</div></main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only &mdash; not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=3" defer></script>
+</body>
+</html>

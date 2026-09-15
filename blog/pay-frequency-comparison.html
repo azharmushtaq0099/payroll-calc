@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pay Frequency Comparison: Weekly vs Bi-Weekly vs Semi-Monthly vs Monthly | FreePayrollCalc</title>
+<meta name="description" content="Compare weekly, bi-weekly, semi-monthly, and monthly pay schedules. Cash flow impact, payroll cost, overtime interaction, state law requirements, and employer recommendations.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog/pay-frequency-comparison">
+<meta property="og:title" content="Pay Frequency Comparison: Weekly vs Bi-Weekly vs Semi-Monthly vs Monthly"><meta property="og:type" content="article">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=5">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Pay Frequency Comparison: Weekly vs Bi-Weekly vs Semi-Monthly vs Monthly","datePublished":"2026-05-22","author":{"@type":"Organization","name":"FreePayrollCalc"}}</script>
+</head>
+<body>
+
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 41+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">Documents</div>
+              <a href="/pay-stub-generator">Pay Stub Generator</a>
+              <a href="/direct-deposit-form">Direct Deposit Form</a>
+              <a href="/invoice-generator-free">Invoice Generator</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 41+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <a href="/tools" class="nav-cta">All 41+ Tools</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">
+        Payroll
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/net-to-gross-calculator">Net to Gross</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">
+        Income &amp; Tax
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/w4-withholding-calculator">W-4 Calculator</a>
+        <a href="/self-employment-tax-calculator">Self-Employment</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">
+        Time, HR &amp; Business
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/pay-stub-generator">Pay Stub</a>
+        <a href="/profit-margin-calculator">Profit Margin</a>
+        <a href="/cost-of-living-calculator">Cost of Living</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 41+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="blog-article-page"><div class="container">
+<article class="blog-article">
+  <div class="blog-article-eyebrow"><a href="/blog">Blog</a> / <span>Payroll</span></div>
+  <div class="blog-article-cat">Payroll</div>
+  <h1 class="blog-article-title">Pay Frequency Comparison: Weekly vs Bi-Weekly vs Semi-Monthly vs Monthly</h1>
+  <div class="blog-article-meta"><span>May 22, 2026</span><span>5 min read</span><span>Updated for 2026</span></div>
+  <img class="blog-article-hero" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&h=500&fit=crop&auto=format&q=80" alt="Calendar and paycheck representing different pay schedule frequencies">
+  <div class="blog-article-body">
+    <p class="lead">Choosing a pay schedule is one of the most consequential — and most underestimated — decisions a small business owner makes. The difference between bi-weekly and semi-monthly payroll is not just two pay periods a year. It affects overtime calculation, state compliance, employee financial wellness, payroll processing costs, and cash flow for both sides of the relationship. Here is a complete breakdown of all four common pay frequencies so you can choose the right one from the start.</p>
+
+    <h2>The Four Pay Schedules: Definitions</h2>
+    <p>Before comparing, it is worth being precise about what each schedule actually means — because semi-monthly and bi-weekly are frequently confused for one another:</p>
+    <ul>
+      <li><strong>Weekly</strong> — Employees are paid every 7 days, on the same day each week (typically Friday). This produces exactly 52 pay periods per year.</li>
+      <li><strong>Bi-weekly</strong> — Employees are paid every two weeks (every 14 days), on the same day of the week. This produces 26 pay periods per year. The paycheck amount is always the same regardless of which month it falls in.</li>
+      <li><strong>Semi-monthly</strong> — Employees are paid twice per calendar month, on fixed dates (most commonly the 1st and 15th, or the 15th and last day of the month). This produces exactly 24 pay periods per year. Because months vary in length, pay periods are not equal in days.</li>
+      <li><strong>Monthly</strong> — Employees are paid once per month, on a fixed date. This produces 12 pay periods per year. Most common for executives, senior salaried staff, and certain professional services roles.</li>
+    </ul>
+
+    <h2>At-a-Glance Comparison</h2>
+
+    <div style="overflow-x:auto;margin:24px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.5">
+      <thead>
+        <tr style="background:var(--surface-2);text-align:left">
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Frequency</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Pay Periods / Year</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Annual Salary &divide;</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Processing Days / Year</th>
+          <th style="padding:10px 14px;font-weight:600;border-bottom:2px solid var(--border)">Typical For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;font-weight:600">Weekly</td><td style="padding:9px 14px;font-family:var(--mono)">52</td><td style="padding:9px 14px;font-family:var(--mono)">52</td><td style="padding:9px 14px;font-family:var(--mono)">52</td><td style="padding:9px 14px;color:var(--ink-2)">Construction, hourly labor, retail</td></tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface)"><td style="padding:9px 14px;font-weight:600">Bi-weekly</td><td style="padding:9px 14px;font-family:var(--mono)">26</td><td style="padding:9px 14px;font-family:var(--mono)">26</td><td style="padding:9px 14px;font-family:var(--mono)">26</td><td style="padding:9px 14px;color:var(--ink-2)">Most US employers (~43% of workforce)</td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 14px;font-weight:600">Semi-monthly</td><td style="padding:9px 14px;font-family:var(--mono)">24</td><td style="padding:9px 14px;font-family:var(--mono)">24</td><td style="padding:9px 14px;font-family:var(--mono)">24</td><td style="padding:9px 14px;color:var(--ink-2)">Salaried office workers, professional services</td></tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface)"><td style="padding:9px 14px;font-weight:600">Monthly</td><td style="padding:9px 14px;font-family:var(--mono)">12</td><td style="padding:9px 14px;font-family:var(--mono)">12</td><td style="padding:9px 14px;font-family:var(--mono)">12</td><td style="padding:9px 14px;color:var(--ink-2)">Executives, independent contractors, some nonprofits</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>For a $60,000/year salaried employee, the gross paycheck size across each frequency would be: weekly $1,153.85, bi-weekly $2,307.69, semi-monthly $2,500.00, monthly $5,000.00. The annual cost to the employer is identical regardless of schedule.</p>
+
+    <h2>The "Three-Paycheck Month" Phenomenon</h2>
+    <p>Bi-weekly payroll creates a quirk that employees often celebrate — and employers should plan for. Because there are 26 pay periods in a year but only 12 months, two months per year will contain <strong>three paychecks</strong> instead of two. Which months depends on when your pay cycle begins: in 2026, for a Friday pay schedule starting January 2, the three-paycheck months are May and October.</p>
+
+    <p>For employees, these months feel like a windfall — an extra $2,000–$4,000 deposited in a month where their rent and bills do not change. Financial wellness advocates often suggest using these months to build emergency funds or pay down debt. For employers, the cash flow impact is modest but real: payroll costs are slightly higher in those two months, and any payroll processing fees that are per-run rather than flat-monthly also increase.</p>
+
+    <p>Semi-monthly payroll never has a "bonus month" because it always produces exactly two paydays per calendar month. Some employees prefer this predictability; others miss the occasional windfall.</p>
+
+    <div class="article-cta"><div class="article-cta-text"><strong>Calculate Your Exact Paycheck at Any Frequency</strong><span>Enter your salary or hourly rate to see the gross-to-net breakdown for weekly, bi-weekly, semi-monthly, or monthly pay periods — including all federal and state taxes.</span></div><a href="/payroll-tax-calculator" class="article-cta-btn">Calculate Now →</a></div>
+
+    <h2>Cash Flow Impact for Employees</h2>
+    <p>Pay frequency has a measurable impact on employee financial stress and satisfaction. According to the American Payroll Association, the most common pay frequency in the US is bi-weekly, used by approximately 43% of employers, followed by weekly (33%), semi-monthly (19%), and monthly (5%).</p>
+
+    <p>From an employee perspective, shorter pay cycles reduce the time money is "outstanding" — meaning fewer days between earning wages and receiving them:</p>
+    <ul>
+      <li><strong>Weekly:</strong> Maximum gap of 7 days. Ideal for hourly workers living paycheck to paycheck, seasonal workers, and anyone managing tight cash flow. Employees can use wages to pay bills before the next cycle creates pressure.</li>
+      <li><strong>Bi-weekly:</strong> Maximum gap of 14 days. A good balance for most workers. Paychecks are large enough to be meaningful but frequent enough to maintain consistent cash flow.</li>
+      <li><strong>Semi-monthly:</strong> Gap of roughly 15 days, but variable depending on month length and weekends. Aligns naturally with monthly rent and mortgage bills. For workers paid on the 1st and 15th, bills due on the 1st of the month are always covered by the prior 15th paycheck.</li>
+      <li><strong>Monthly:</strong> Gap of up to 31 days. Requires strong personal budgeting discipline. Workers must set aside funds for the full month's expenses from a single deposit. Generally unsuitable for hourly workers or anyone earning below $75,000–$80,000 annually.</li>
+    </ul>
+
+    <div class="article-info"><strong>Key takeaway:</strong> For most hourly and non-exempt workforces, bi-weekly is the sweet spot — it balances employee cash flow needs against the administrative burden of weekly processing. For all-salaried teams, semi-monthly is simpler and aligns better with monthly financial planning.</div>
+
+    <h2>Payroll Processing Costs: More Frequent = More Expensive</h2>
+    <p>Every payroll run has a cost — either the direct cost of a payroll service subscription, per-run fees from a provider like Gusto, ADP, or Paychex, or the internal labor cost of running payroll manually. Here is how frequency affects costs:</p>
+    <ul>
+      <li><strong>Payroll service per-run fees:</strong> Many providers charge a flat base fee per run plus a per-employee fee. If you pay $15 per run, switching from semi-monthly (24 runs) to weekly (52 runs) adds $420 per year in base fees alone — before per-employee charges.</li>
+      <li><strong>ACH processing fees:</strong> Direct deposit batches submitted to the ACH network carry transaction fees. More runs mean more ACH batches and higher transaction costs.</li>
+      <li><strong>Staff time:</strong> Manual review of time cards, overtime calculations, and exception processing takes time each payroll cycle. Weekly processing means 52 cycles of that work per year versus 26 for bi-weekly.</li>
+      <li><strong>Tax deposit scheduling:</strong> The IRS requires tax deposits on schedules that can align with pay cycles. More frequent payroll can mean more frequent deposit obligations under some thresholds.</li>
+    </ul>
+
+    <h2>State Laws on Minimum Pay Frequency</h2>
+    <p>Federal law (the FLSA) does not specify how often employees must be paid, only that they must be paid for all hours worked and that wages cannot be unreasonably delayed. However, most states have their own minimum pay frequency requirements — and some are quite strict:</p>
+    <ul>
+      <li><strong>California</strong> — Employees in most industries must be paid at least twice per month (semi-monthly). Manual laborers and workers in certain industries (e.g., farm labor, domestic service) must be paid weekly. Payday must be a fixed, predetermined day.</li>
+      <li><strong>New York</strong> — Manual workers must be paid weekly. Clerical and other workers must be paid at least semi-monthly. "Manual worker" is broadly defined and includes many non-office roles.</li>
+      <li><strong>Illinois</strong> — Every employee must be paid at least semi-monthly. No monthly payroll for most employees.</li>
+      <li><strong>Michigan</strong> — Employers must pay employees at least twice per month, with paychecks covering wages earned through the last day of the pay period.</li>
+      <li><strong>Texas</strong> — Exempt employees may be paid monthly; non-exempt employees must be paid at least twice monthly.</li>
+      <li><strong>Florida, Georgia, most Southern states</strong> — No state minimum frequency law beyond the FLSA. Monthly payroll is technically permissible.</li>
+    </ul>
+    <p>Violating state pay frequency rules can result in penalties, back-wage claims, and, in some states like New York, liquidated damages. Always verify the requirements for every state where you have employees.</p>
+
+    <h2>How Overtime Interacts With Pay Frequency</h2>
+    <p>This is where the semi-monthly vs. bi-weekly distinction matters most for non-exempt employees. Under the FLSA, overtime is calculated on a <strong>7-day workweek</strong> — not a pay period. Employers must designate a fixed, recurring 7-day workweek (e.g., Monday through Sunday) and pay 1.5x for all hours over 40 in that workweek.</p>
+
+    <p>For bi-weekly payroll, this is straightforward: each pay period contains exactly two full 7-day workweeks. Overtime in week 1 and overtime in week 2 can each be calculated cleanly and are not blended together.</p>
+
+    <p>For semi-monthly payroll, the math gets complicated. Because pay periods run from the 1st to the 15th and the 16th to the end of the month, they never align perfectly with 7-day workweeks. A workweek may straddle two pay periods — meaning you cannot calculate that week's overtime until the second pay period closes. Employers on semi-monthly schedules must either use split-pay period overtime allocation formulas, or accept that some overtime calculations will require retroactive adjustments in the following pay run.</p>
+
+    <p>For this reason, most employers with significant hourly workforces choose bi-weekly over semi-monthly, even if the paycheck-count math slightly favors semi-monthly for administrative simplicity.</p>
+
+    <h2>Semi-Monthly vs Bi-Weekly for Salaried Staff: The Real Tradeoff</h2>
+    <p>For all-salaried, fully exempt workforces, the overtime issue disappears — overtime does not apply to exempt employees. In this scenario, semi-monthly has real advantages:</p>
+    <ul>
+      <li>Exactly 24 paychecks per year, aligning monthly cost of living to two predictable paydays</li>
+      <li>No "extra paycheck months" to plan around in cash flow</li>
+      <li>2 fewer payroll processing runs per year than bi-weekly</li>
+      <li>Easier alignment with monthly benefit deductions (health insurance, FSA, etc.) — each deduction is taken from exactly 2 paychecks per month, every month</li>
+    </ul>
+
+    <p>For bi-weekly payroll with 26 runs per year, benefit deductions require special handling in the two "three-paycheck months." You either skip the deduction on the third paycheck (leaving employees with higher take-home that month) or pro-rate deductions differently. Most payroll systems handle this automatically, but it is worth understanding the mechanics.</p>
+
+    <div class="article-info"><strong>Key takeaway:</strong> For exempt salaried-only teams, semi-monthly is cleaner and cheaper. For any workforce with hourly non-exempt employees, bi-weekly is far simpler for overtime compliance under the FLSA's 7-day workweek rule.</div>
+
+    <h2>Recommendations by Employer Type</h2>
+    <p>There is no universally "correct" pay frequency, but there are strong defaults for different business types:</p>
+    <ul>
+      <li><strong>Small business with mixed hourly and salaried staff</strong> — Bi-weekly. It handles overtime cleanly, is the most widely understood schedule among employees, and payroll software handles the three-paycheck months automatically.</li>
+      <li><strong>All-salaried professional services firm (law, consulting, accounting)</strong> — Semi-monthly. Cleaner month-end accounting, predictable benefit deduction alignment, and two fewer payroll runs per year.</li>
+      <li><strong>Construction, hospitality, or retail with predominantly hourly workforce</strong> — Weekly or bi-weekly. Weekly improves worker cash flow (a meaningful recruiting and retention advantage for lower-wage roles) and some state laws require it for manual workers.</li>
+      <li><strong>Startup with only founders and senior executives</strong> — Monthly or semi-monthly. Low administrative burden, and senior staff can budget around a monthly paycheck.</li>
+    </ul>
+
+  </div>
+</article>
+
+<section class="blog-related"><h2 class="blog-related-title">Related Articles</h2>
+<div class="blog-related-grid">
+  <a href="/blog/minimum-wage-by-state-2026" class="blog-related-card">
+    <div class="blog-related-cat">Business</div>
+    <div class="blog-related-title">2026 Minimum Wage by State: Every Rate, Effective Date &amp; Tip Credit</div>
+    <div class="blog-related-meta">Jun 10, 2026 &middot; 4 min read</div>
+  </a>
+  <a href="/blog/workers-comp-insurance-basics" class="blog-related-card">
+    <div class="blog-related-cat">HR &amp; Compliance</div>
+    <div class="blog-related-title">Workers Comp Insurance: What It Covers and How Premiums Are Calculated</div>
+    <div class="blog-related-meta">Jun 1, 2026 &middot; 8 min read</div>
+  </a>
+  <a href="/blog/overtime-pay-rules-2026" class="blog-related-card">
+    <div class="blog-related-cat">Payroll</div>
+    <div class="blog-related-title">FLSA Overtime Rules 2026: Exempt Salary Thresholds and How to Calculate OT Pay</div>
+    <div class="blog-related-meta">May 10, 2026 &middot; 6 min read</div>
+  </a>
+</div></section>
+</div></main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">FreePayrollCalc</div>
+        <div class="footer-brand-desc">Free, accurate payroll calculators for US small businesses. Built on IRS Publication 15, FLSA, and SSA data. Updated for 2026.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Calculators</div>
+        <ul class="footer-links">
+          <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+          <li><a href="/free-payroll-calculator">Free Payroll Calculator</a></li>
+          <li><a href="/pto-accrual-calculator">PTO Accrual Calculator</a></li>
+          <li><a href="/overtime-pay-calculator">Overtime Pay Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">More Tools</div>
+        <ul class="footer-links">
+          <li><a href="/employer-tax-calculator">Employer Tax Calculator</a></li>
+          <li><a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a></li>
+          <li><a href="/workers-comp-calculator">Workers Comp Calculator</a></li>
+          <li><a href="/cost-per-hire-calculator">Cost Per Hire Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sources</div>
+        <ul class="footer-links">
+          <li><a href="https://www.irs.gov/publications/p15" rel="nofollow noopener" target="_blank">IRS Pub 15 (Circular E)</a></li>
+          <li><a href="https://www.ssa.gov/employers/" rel="nofollow noopener" target="_blank">SSA Employer Guide</a></li>
+          <li><a href="https://www.dol.gov/agencies/whd/flsa" rel="nofollow noopener" target="_blank">FLSA (DOL)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only &mdash; not tax advice.</span>
+      <div class="footer-legal">
+        <a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=3" defer></script>
+</body></html>
