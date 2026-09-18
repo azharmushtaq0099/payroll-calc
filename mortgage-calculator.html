@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Mortgage Calculator 2026 | Monthly Payment + Amortization</title>
+<meta name="description" content="Free mortgage calculator. Enter home price, down payment, interest rate, and loan term to get your monthly payment, total interest, and full amortization schedule. 2026.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/mortgage-calculator">
+<meta property="og:title" content="Free Mortgage Calculator 2026 — Monthly Payment + Total Interest">
+<meta property="og:description" content="Calculate your exact monthly mortgage payment with taxes and insurance. Includes full amortization table and total cost breakdown.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free Mortgage Calculator 2026","url":"https://www.freepayrollcalc.xyz/mortgage-calculator","description":"Calculate monthly mortgage payments including principal, interest, taxes, and insurance. Full amortization schedule included. Free, no sign-up.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is a monthly mortgage payment calculated?","acceptedAnswer":{"@type":"Answer","text":"The formula is M = P[r(1+r)^n]/[(1+r)^n-1], where P is the loan principal, r is the monthly interest rate (annual rate divided by 12), and n is the number of monthly payments. For a $300,000 loan at 7% for 30 years: monthly rate = 0.07/12 = 0.005833, n = 360, M = $1,996."}},{"@type":"Question","name":"What is included in a monthly mortgage payment?","acceptedAnswer":{"@type":"Answer","text":"A full mortgage payment (PITI) includes: Principal (reduces your loan balance), Interest (cost of borrowing), Taxes (property tax collected in escrow), and Insurance (homeowners insurance and PMI if down payment is under 20%)."}},{"@type":"Question","name":"How much house can I afford?","acceptedAnswer":{"@type":"Answer","text":"The 28/36 rule: your monthly housing costs should not exceed 28% of gross monthly income, and total debt payments should not exceed 36%. With $80,000 annual income, maximum monthly housing = $1,867."}},{"@type":"Question","name":"What is an amortization schedule?","acceptedAnswer":{"@type":"Answer","text":"An amortization schedule shows each monthly payment broken into principal and interest portions. Early payments are mostly interest; later payments shift toward principal. You can use it to see exactly how much of your loan you will have paid off at any point in time."}}]}
+</script>
+<style>
+.mc-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:720px){.mc-summary{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.mc-summary{grid-template-columns:1fr}}
+.mc-main-card{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2);border-radius:14px;padding:24px;text-align:center}
+.mc-big-num{font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.mc-big-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.mc-big-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.mc-stat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center}
+.mc-stat-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--ink-1);line-height:1;margin-bottom:4px}
+.mc-stat-label{font-size:12px;color:var(--ink-3)}
+.mc-bar-row{display:flex;gap:12px;align-items:center;margin:6px 0;font-size:13px}
+.mc-bar-fill{height:10px;border-radius:6px;flex-shrink:0}
+.mc-line{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.mc-line:last-child{border-bottom:none}
+.mc-sec{font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--ink-3);padding:10px 0 4px;margin-top:8px}
+.mc-total{background:rgba(27,79,216,.04);border-radius:8px;padding:12px 14px;margin-top:4px;font-size:15px;font-weight:800;color:var(--accent)}
+.mc-amort-wrap{max-height:320px;overflow-y:auto;margin-top:12px;border:1px solid var(--border);border-radius:10px}
+.mc-amort-table{width:100%;border-collapse:collapse;font-size:12px}
+.mc-amort-table th{background:var(--surface);padding:8px 12px;text-align:right;font-weight:700;color:var(--ink-3);font-size:11px;position:sticky;top:0;z-index:1}
+.mc-amort-table th:first-child{text-align:left}
+.mc-amort-table td{padding:7px 12px;text-align:right;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-2)}
+.mc-amort-table td:first-child{text-align:left;font-family:'Inter',sans-serif;font-weight:600;color:var(--ink-1)}
+.mc-amort-table tr:hover td{background:rgba(27,79,216,.03)}
+.dp-toggle{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;width:fit-content}
+.dp-toggle button{padding:6px 14px;font-size:13px;font-weight:600;background:none;border:none;cursor:pointer;color:var(--ink-3);transition:all .15s}
+.dp-toggle button.active{background:var(--accent);color:#fff}
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 45+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">FreePayrollCalc</a>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Payroll <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/payroll-tax-calculator" class="nav-item">Payroll Tax</a>
+          <a href="/take-home-pay-calculator" class="nav-item">Take-Home Pay</a>
+          <a href="/payroll-hours-calculator" class="nav-item">Payroll Hours</a>
+          <a href="/paycheck-calculator" class="nav-item">Paycheck Calculator</a>
+          <a href="/salary-to-hourly-calculator" class="nav-item">Salary to Hourly</a>
+          <a href="/net-to-gross-calculator" class="nav-item">Net to Gross</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Time &amp; HR <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/overtime-pay-calculator" class="nav-item">Overtime Pay</a>
+          <a href="/time-card-calculator" class="nav-item">Time Card</a>
+          <a href="/pto-accrual-calculator" class="nav-item">PTO Accrual</a>
+          <a href="/severance-pay-calculator" class="nav-item">Severance Pay</a>
+          <a href="/fmla-leave-calculator" class="nav-item">FMLA Leave</a>
+          <a href="/cobra-insurance-calculator" class="nav-item">COBRA Insurance</a>
+          <a href="/unemployment-benefits-calculator" class="nav-item">Unemployment Benefits</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Tax <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/self-employment-tax-calculator" class="nav-item">Self-Employment Tax</a>
+          <a href="/bonus-tax-calculator" class="nav-item">Bonus Tax</a>
+          <a href="/quarterly-tax-calculator" class="nav-item">Quarterly Tax</a>
+          <a href="/1099-vs-w2-calculator" class="nav-item">1099 vs W-2</a>
+          <a href="/income-tax-calculator" class="nav-item">Income Tax Estimator</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Finance <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/mortgage-calculator" class="nav-item nav-item--active">Mortgage Calculator</a>
+          <a href="/budget-calculator" class="nav-item">Budget Calculator</a>
+          <a href="/debt-payoff-calculator" class="nav-item">Debt Payoff</a>
+          <a href="/savings-calculator" class="nav-item">Savings Calculator</a>
+          <a href="/retirement-calculator" class="nav-item">Retirement Calculator</a>
+          <a href="/business-loan-calculator" class="nav-item">Business Loan</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="btn-search" aria-label="Search tools"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></button>
+      <a href="/tools" class="btn-all-tools">All Tools</a>
+    </div>
+  </div>
+</header>
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">Mortgage Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Free Mortgage Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Calculate your exact monthly payment, total interest, and full amortization schedule.<br>Includes taxes, insurance, PMI, and HOA fees.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Standard amortization formula (P+I) · PITI breakdown · Full amortization table</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Loan Details</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Home Price <span style="color:var(--red)">*</span></label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="mc-price" class="form-input form-input--prefixed" placeholder="400000" min="0" step="1000" value="400000"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Down Payment</label>
+          <div style="display:flex;gap:8px;align-items:flex-start">
+            <div class="input-wrap" style="flex:1"><span class="input-prefix" id="dp-prefix">$</span><input type="number" id="mc-dp" class="form-input form-input--prefixed" placeholder="80000" min="0" value="80000"></div>
+            <div class="dp-toggle"><button id="dp-dollar" class="active" onclick="toggleDP('dollar')">$</button><button id="dp-pct" onclick="toggleDP('pct')">%</button></div>
+          </div>
+          <p class="form-hint" id="dp-hint">20% down = $80,000 on a $400,000 home. Under 20% typically requires PMI.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Loan Term</label>
+          <select id="mc-term" class="form-select">
+            <option value="30" selected>30 years</option>
+            <option value="20">20 years</option>
+            <option value="15">15 years</option>
+            <option value="10">10 years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Annual Interest Rate</label>
+          <div class="input-wrap"><input type="number" id="mc-rate" class="form-input form-input--suffixed" placeholder="6.85" min="0" max="30" step="0.05" value="6.85"><span class="input-suffix">%</span></div>
+          <p class="form-hint">30-yr fixed national avg (Sep 2026): ~6.8%. 15-yr: ~6.1%.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Property Tax Rate (annual)</label>
+          <div class="input-wrap"><input type="number" id="mc-ptax" class="form-input form-input--suffixed" placeholder="1.1" min="0" max="5" step="0.05" value="1.1"><span class="input-suffix">%</span></div>
+          <p class="form-hint">US avg ~1.1%. TX ~1.8%, NJ ~2.2%, HI ~0.3%.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Homeowners Insurance (monthly)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="mc-ins" class="form-input form-input--prefixed" placeholder="150" min="0" step="10" value="150"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">PMI (monthly, if &lt;20% down)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="mc-pmi" class="form-input form-input--prefixed" placeholder="0" min="0" step="10" value="0"></div>
+          <p class="form-hint">Typically 0.5%&#x2013;1.5% of loan/yr. Auto-estimated if down payment is under 20%.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">HOA Fees (monthly)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="mc-hoa" class="form-input form-input--prefixed" placeholder="0" min="0" step="10" value="0"></div>
+        </div>
+      </div>
+      <button class="calc-btn" id="calc-mc-btn" style="margin-top:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Calculate Mortgage Payment
+      </button>
+    </div>
+
+    <div id="mc-results" style="display:none">
+      <div class="mc-summary" data-enter>
+        <div class="mc-main-card">
+          <div class="mc-big-num" id="r-monthly-total">&#x2014;</div>
+          <div class="mc-big-label">Total Monthly Payment</div>
+          <div class="mc-big-sub">Principal, interest, taxes, insurance</div>
+        </div>
+        <div class="mc-stat-card">
+          <div class="mc-stat-num" id="r-pi">&#x2014;</div>
+          <div class="mc-stat-label">Principal + Interest only</div>
+        </div>
+        <div class="mc-stat-card">
+          <div class="mc-stat-num" id="r-total-interest">&#x2014;</div>
+          <div class="mc-stat-label">Total interest paid</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px" data-enter data-delay="1">
+        <div class="mc-stat-card">
+          <div class="mc-stat-num" id="r-loan-amount">&#x2014;</div>
+          <div class="mc-stat-label">Loan amount (principal)</div>
+        </div>
+        <div class="mc-stat-card">
+          <div class="mc-stat-num" id="r-total-cost">&#x2014;</div>
+          <div class="mc-stat-label">Total cost of home</div>
+        </div>
+      </div>
+
+      <div class="calc-card" style="margin-top:20px" data-enter data-delay="2">
+        <div class="calc-card-header">Monthly Payment Breakdown</div>
+        <div id="mc-breakdown"></div>
+      </div>
+
+      <div class="calc-card" style="margin-top:20px" data-enter data-delay="3">
+        <div class="calc-card-header">Amortization Schedule (Yearly)</div>
+        <div class="mc-amort-wrap">
+          <table class="mc-amort-table">
+            <thead><tr><th>Year</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+            <tbody id="mc-amort-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/debt-payoff-calculator" class="calc-btn" style="flex:1;min-width:180px;text-align:center;text-decoration:none">Debt payoff calculator &#x2192;</a>
+        <a href="/budget-calculator" class="calc-btn calc-btn--secondary" style="flex:1;min-width:180px;text-align:center;text-decoration:none">Monthly budget planner</a>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How to Calculate a Mortgage Payment (2026)</h2>
+        <p>The standard formula for monthly principal and interest is: <strong>M = P[r(1+r)^n] / [(1+r)^n - 1]</strong></p>
+        <ul>
+          <li><strong>P</strong> = loan principal (home price minus down payment)</li>
+          <li><strong>r</strong> = monthly interest rate (annual rate / 12)</li>
+          <li><strong>n</strong> = total number of payments (term in years x 12)</li>
+        </ul>
+        <p>Example: $320,000 loan at 6.85% for 30 years. Monthly rate = 0.0685/12 = 0.005708. n = 360. M = $2,099/month (P+I only).</p>
+        <h3>What is PITI?</h3>
+        <p>PITI stands for Principal, Interest, Taxes, and Insurance. Lenders use this full monthly figure to calculate your debt-to-income ratio. Always budget for the PITI payment, not just P+I.</p>
+        <h3>The 28% Rule</h3>
+        <p>Lenders generally require your monthly PITI payment to be no more than 28% of gross monthly income. At $80,000/year ($6,667/month), that means a max payment of $1,867/month.</p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Mortgage payment questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How much does a $400,000 mortgage cost per month?</summary><div class="faq-a">At 6.85% for 30 years with 20% down ($320,000 loan), P+I = $2,099/month. Adding property tax (1.1% = $367/mo), insurance ($150/mo): total PITI = roughly $2,616/month.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">How much do I save with a 15-year vs 30-year mortgage?</summary><div class="faq-a">A 15-year mortgage has higher monthly payments but dramatically less total interest. On a $320,000 loan: 30-yr at 6.85% = $436,000 in total interest. 15-yr at 6.1% = $166,000. You save over $270,000 in interest.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What credit score do I need for a mortgage?</summary><div class="faq-a">Conventional loans typically require 620+. FHA loans allow 580+ (3.5% down) or 500-579 (10% down). VA and USDA loans have no set minimum. Higher scores get better rates: 760+ qualifies for the best available rates.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">Should I choose a 15 or 30-year mortgage?</summary><div class="faq-a">Choose 30-year if you need lower monthly payments or want flexibility to invest the difference. Choose 15-year if you can afford higher payments and want to build equity faster, pay dramatically less interest, and own your home sooner.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More finance calculators</h2></div>
+        <div class="related-grid">
+          <a href="/debt-payoff-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="tool-card-title">Debt Payoff Calculator</div><div class="tool-card-desc" style="font-size:13px">Avalanche vs. snowball payoff plans.</div></div></div></a>
+          <a href="/budget-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div><div class="tool-card-title">Budget Calculator</div><div class="tool-card-desc" style="font-size:13px">Monthly income vs. expenses breakdown.</div></div></div></a>
+          <a href="/income-tax-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="tool-card-title">Income Tax Estimator</div><div class="tool-card-desc" style="font-size:13px">Federal tax, effective rate, refund.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="/" class="footer-logo">FreePayrollCalc</a>
+        <p class="footer-tagline">Free payroll and finance calculators. No sign-up required.</p>
+      </div>
+      <div class="footer-col"><div class="footer-col-title">Payroll</div><nav class="footer-nav"><a href="/payroll-tax-calculator">Payroll Tax</a><a href="/take-home-pay-calculator">Take-Home Pay</a><a href="/payroll-hours-calculator">Payroll Hours</a><a href="/salary-to-hourly-calculator">Salary to Hourly</a></nav></div>
+      <div class="footer-col"><div class="footer-col-title">Finance</div><nav class="footer-nav"><a href="/mortgage-calculator">Mortgage Calculator</a><a href="/budget-calculator">Budget Calculator</a><a href="/debt-payoff-calculator">Debt Payoff</a><a href="/savings-calculator">Savings</a><a href="/retirement-calculator">Retirement</a></nav></div>
+      <div class="footer-col"><div class="footer-col-title">Tax</div><nav class="footer-nav"><a href="/income-tax-calculator">Income Tax Estimator</a><a href="/self-employment-tax-calculator">Self-Employment Tax</a><a href="/quarterly-tax-calculator">Quarterly Tax</a><a href="/bonus-tax-calculator">Bonus Tax</a></nav></div>
+    </div>
+    <div class="footer-bottom"><p>FreePayrollCalc is an informational tool. Mortgage calculations are estimates. Consult a lender for official rates and qualification details.</p><p class="footer-copyright">&copy; 2026 FreePayrollCalc.xyz</p></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var dpMode = 'dollar';
+
+  window.toggleDP = function(mode) {
+    dpMode = mode;
+    document.getElementById('dp-dollar').classList.toggle('active', mode === 'dollar');
+    document.getElementById('dp-pct').classList.toggle('active', mode === 'pct');
+    document.getElementById('dp-prefix').textContent = mode === 'dollar' ? '$' : '';
+    var price = parseFloat(document.getElementById('mc-price').value) || 400000;
+    var dpInput = document.getElementById('mc-dp');
+    if (mode === 'pct') {
+      var dollarVal = parseFloat(dpInput.value) || 0;
+      dpInput.value = price > 0 ? (dollarVal / price * 100).toFixed(1) : 20;
+      dpInput.placeholder = '20';
+      document.getElementById('dp-hint').textContent = 'Enter percentage of home price. 20% = no PMI.';
+    } else {
+      var pctVal = parseFloat(dpInput.value) || 20;
+      dpInput.value = Math.round(price * pctVal / 100);
+      dpInput.placeholder = '80000';
+      document.getElementById('dp-hint').textContent = '20% down on $400,000 = $80,000. Under 20% requires PMI.';
+    }
+  };
+
+  function fmt(n) { return '$' + Math.round(n).toString().replace(/B(?=(d{3})+(?!d))/g, ','); }
+  function fmtD(n) { return '$' + n.toFixed(2).replace(/B(?=(d{3})+(?!d))/g, ','); }
+
+  function line(label, val, cls) {
+    return '<div class="mc-line' + (cls ? ' ' + cls : '') + '"><span>' + label + '</span><span style="font-family:JetBrains Mono,monospace;font-weight:700">' + val + '</span></div>';
+  }
+
+  document.getElementById('calc-mc-btn').addEventListener('click', function() {
+    var price  = parseFloat(document.getElementById('mc-price').value) || 0;
+    var dpVal  = parseFloat(document.getElementById('mc-dp').value)    || 0;
+    var term   = parseInt(document.getElementById('mc-term').value, 10) || 30;
+    var rate   = parseFloat(document.getElementById('mc-rate').value)  || 0;
+    var ptax   = parseFloat(document.getElementById('mc-ptax').value)  || 0;
+    var ins    = parseFloat(document.getElementById('mc-ins').value)   || 0;
+    var pmi    = parseFloat(document.getElementById('mc-pmi').value)   || 0;
+    var hoa    = parseFloat(document.getElementById('mc-hoa').value)   || 0;
+
+    if (!price || !rate) { document.getElementById('mc-price').focus(); return; }
+
+    var dp = dpMode === 'pct' ? price * dpVal / 100 : dpVal;
+    var principal = price - dp;
+    if (principal <= 0) { alert('Down payment cannot exceed home price.'); return; }
+
+    // Auto-estimate PMI if < 20% down and PMI field is 0
+    var dpPct = dp / price;
+    if (dpPct < 0.20 && pmi === 0) {
+      pmi = Math.round(principal * 0.01 / 12); // ~1% of loan/yr
+    }
+
+    var r = rate / 100 / 12;
+    var n = term * 12;
+    var M = principal * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+
+    var monthlyPtax = price * ptax / 100 / 12;
+    var totalMonthly = M + monthlyPtax + ins + pmi + hoa;
+    var totalPaid = M * n;
+    var totalInterest = totalPaid - principal;
+    var totalCost = price + totalInterest + (monthlyPtax + ins + pmi + hoa) * n;
+
+    document.getElementById('r-monthly-total').textContent = fmtD(totalMonthly);
+    document.getElementById('r-pi').textContent = fmtD(M);
+    document.getElementById('r-total-interest').textContent = fmt(totalInterest);
+    document.getElementById('r-loan-amount').textContent = fmt(principal);
+    document.getElementById('r-total-cost').textContent = fmt(totalCost);
+
+    // Breakdown
+    var bd = '';
+    bd += '<div class="mc-sec">Monthly Payment</div>';
+    bd += line('Principal &amp; Interest', fmtD(M));
+    bd += line('Property tax (' + ptax + '%/yr)', fmtD(monthlyPtax));
+    bd += line('Homeowners insurance', fmtD(ins));
+    if (pmi > 0) bd += line('PMI (est.)', fmtD(pmi));
+    if (hoa > 0) bd += line('HOA fees', fmtD(hoa));
+    bd += line('<strong>Total Monthly Payment</strong>', '<strong>' + fmtD(totalMonthly) + '</strong>', 'mc-total');
+    bd += '<div class="mc-sec">Loan Summary</div>';
+    bd += line('Home price', fmt(price));
+    bd += line('Down payment (' + (dpPct * 100).toFixed(1) + '%)', fmt(dp));
+    bd += line('Loan amount', fmt(principal));
+    bd += line('Total P+I paid (' + term + ' yrs)', fmt(totalPaid));
+    bd += line('Total interest paid', fmt(totalInterest));
+    document.getElementById('mc-breakdown').innerHTML = bd;
+
+    // Amortization (yearly)
+    var balance = principal;
+    var tbody = '';
+    for (var yr = 1; yr <= term; yr++) {
+      var yrPrinc = 0, yrInt = 0;
+      for (var m = 0; m < 12; m++) {
+        var intPmt = balance * r;
+        var princPmt = M - intPmt;
+        yrInt += intPmt;
+        yrPrinc += princPmt;
+        balance -= princPmt;
+      }
+      if (balance < 0) balance = 0;
+      tbody += '<tr><td>' + yr + '</td><td>' + fmt(yrPrinc) + '</td><td>' + fmt(yrInt) + '</td><td>' + fmt(balance) + '</td></tr>';
+    }
+    document.getElementById('mc-amort-body').innerHTML = tbody;
+
+    var res = document.getElementById('mc-results');
+    res.style.display = '';
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // Price field updates dp hint when in pct mode
+  document.getElementById('mc-price').addEventListener('input', function() {
+    if (dpMode === 'dollar') {
+      var price = parseFloat(this.value) || 400000;
+      var dp = parseFloat(document.getElementById('mc-dp').value) || 0;
+      document.getElementById('dp-hint').textContent = (dp/price*100).toFixed(1) + '% of home price.';
+    }
+  });
+
+  // Enter key
+  document.querySelectorAll('#calc-mc-btn').forEach(function(b){
+    var card = b.closest('.calc-card');
+    if (card) card.querySelectorAll('input,select').forEach(function(el){
+      el.addEventListener('keydown', function(e){ if (e.key === 'Enter') b.click(); });
+    });
+  });
+})();
+</script>
+<script src="/shared/scripts.js?v=4" defer></script>
+</body>
+</html>

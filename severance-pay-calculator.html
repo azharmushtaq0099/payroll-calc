@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Severance Pay Calculator 2026 | FreePayrollCalc</title>
+<meta name="description" content="Free severance pay calculator. Estimate your severance package based on years of service and salary. See gross pay, taxes, and net severance amount.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/severance-pay-calculator">
+<meta property="og:title" content="Severance Pay Calculator 2026 — Estimate Your Package">
+<meta property="og:description" content="Calculate severance pay based on weeks per year of service. See gross amount, federal tax withholding at 22% supplemental rate, and net payout.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Severance Pay Calculator 2026","url":"https://www.freepayrollcalc.xyz/severance-pay-calculator","description":"Calculate severance pay based on years of service and salary. Shows weeks of severance, gross amount, federal tax withholding (22% supplemental rate), state tax estimate, and net payout.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is severance pay calculated?","acceptedAnswer":{"@type":"Answer","text":"Severance pay is typically calculated as a set number of weeks of pay per year of service. The most common formula is 1–2 weeks of pay per year worked. For example, if you earned $75,000/year and worked 5 years at 2 weeks per year, your severance would be (75,000÷52) × 10 weeks = $14,423 gross before taxes."}},{"@type":"Question","name":"Is severance pay taxed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Severance pay is fully taxable as ordinary income. If paid as a lump sum, employers typically withhold at the 22% federal supplemental rate (2026) plus state income tax and FICA taxes. Your actual tax rate depends on your total income for the year and your tax bracket."}},{"@type":"Question","name":"Is there a legal requirement to pay severance?","acceptedAnswer":{"@type":"Answer","text":"No federal law in the US requires employers to pay severance. However, severance may be required if: (1) your employment contract specifies it, (2) company policy or handbook promises it, or (3) a collective bargaining agreement mandates it. The WARN Act may require 60 days' notice or pay for mass layoffs."}},{"@type":"Question","name":"How long does severance pay last?","acceptedAnswer":{"@type":"Answer","text":"Severance pay duration depends on the employer's policy. Common packages are 1–4 weeks per year of service, with a minimum of 2 weeks and a maximum cap (often 26 weeks for executives). The duration is usually paid as either a lump sum or in regular installments."}},{"@type":"Question","name":"Does severance affect unemployment benefits?","acceptedAnswer":{"@type":"Answer","text":"It depends on your state. Some states count severance as wages and delay or reduce unemployment benefits. Others do not. If you receive severance as salary continuation (weekly payments), most states will delay unemployment eligibility until the severance period ends."}}]}
+</script>
+<style>
+.sev-summary{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+@media(max-width:640px){.sev-summary{grid-template-columns:1fr}}
+.sev-main-card{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2);border-radius:14px;padding:24px;text-align:center}
+.sev-big-num{font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.sev-big-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.sev-big-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.net-card{background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(16,185,129,.02));border:2px solid rgba(16,185,129,.2);border-radius:14px;padding:24px;text-align:center}
+.net-num{font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:800;color:#10b981;line-height:1;margin-bottom:4px}
+.sev-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:20px}
+.sev-metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.sev-metric-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--ink-1)}
+.sev-metric-label{font-size:11px;color:var(--ink-3);margin-top:3px}
+.sev-line{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.sev-line:last-child{border-bottom:none}
+.sev-line.total-line{background:rgba(27,79,216,.04);border-radius:8px;padding:12px 14px;margin-top:4px;font-size:15px;font-weight:800;color:var(--ink-1);border:none}
+.sev-line-val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink-1)}
+.sev-line-val.neg{color:#ef4444}
+.sev-section-head{font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--ink-3);padding:10px 0 4px;margin-top:8px}
+.notice-box{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--ink-2);line-height:1.65;margin-top:16px}
+</style>
+</head>
+<body>
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 45+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">HR &amp; Benefits</div>
+              <a href="/severance-pay-calculator">Severance Pay</a>
+              <a href="/fmla-leave-calculator">FMLA Leave</a>
+              <a href="/cobra-insurance-calculator">COBRA Insurance</a>
+              <a href="/unemployment-benefits-calculator">Unemployment Benefits</a>
+              <a href="/employee-cost-calculator">Employee Cost</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">
+                View all 45+ tools
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+      <a href="/tools" class="nav-cta">All 45+ Tools</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">Payroll<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="nav-mobile-links">
+        <a href="/payroll-tax-calculator">Payroll Tax</a>
+        <a href="/free-payroll-calculator">Free Payroll</a>
+        <a href="/employer-tax-calculator">Employer Tax</a>
+        <a href="/1099-vs-w2-calculator">1099 vs W-2</a>
+        <a href="/workers-comp-calculator">Workers Comp</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">Income &amp; Tax<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="nav-mobile-links">
+        <a href="/take-home-pay-calculator">Take-Home Pay</a>
+        <a href="/bonus-tax-calculator">Bonus Tax</a>
+        <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+        <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+      </div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">Time, HR &amp; Benefits<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="nav-mobile-links">
+        <a href="/time-card-calculator">Time Card</a>
+        <a href="/overtime-pay-calculator">Overtime Pay</a>
+        <a href="/pto-accrual-calculator">PTO Accrual</a>
+        <a href="/severance-pay-calculator">Severance Pay</a>
+        <a href="/fmla-leave-calculator">FMLA Leave</a>
+        <a href="/cobra-insurance-calculator">COBRA Insurance</a>
+        <a href="/unemployment-benefits-calculator">Unemployment</a>
+        <a href="/employee-cost-calculator">Employee Cost</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static">
+      <a href="/tools">All 45+ Tools</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Severance Pay Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Severance Pay Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Estimate your severance package based on years of service.<br>See gross pay, federal tax withholding, and net amount.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>22% federal supplemental rate · FICA on severance · 2026 tax tables</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
+        Your Severance Details
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Annual Salary <span style="color:var(--red)">*</span></label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="sv-salary" class="form-input form-input--prefixed" placeholder="75,000" min="0" step="1000"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Years of Service <span style="color:var(--red)">*</span></label>
+          <input type="number" id="sv-years" class="form-input" placeholder="5" min="0" step="0.5">
+          <p class="form-hint">Round to nearest half-year (e.g. 3.5)</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Severance Formula</label>
+          <select id="sv-formula" class="form-select">
+            <option value="1">1 week per year (minimum standard)</option>
+            <option value="2" selected>2 weeks per year (most common)</option>
+            <option value="3">3 weeks per year (generous)</option>
+            <option value="4">4 weeks per year (executive level)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Additional Lump Sum (optional)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="sv-lump" class="form-input form-input--prefixed" placeholder="0" min="0" step="500"></div>
+          <p class="form-hint">Bonus, signing bonus clawback, COBRA contribution, etc.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">State Income Tax Rate (estimated)</label>
+          <div class="input-wrap"><input type="number" id="sv-state-tax" class="form-input form-input--suffixed" placeholder="5.5" min="0" max="15" step="0.1"><span class="input-suffix">%</span></div>
+          <p class="form-hint">CA: 9.3%, NY: 6.85%, TX/FL: 0%, avg US: ~5.5%</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Payment Type</label>
+          <select id="sv-payment" class="form-select">
+            <option value="lump">Lump sum (22% federal supplemental rate)</option>
+            <option value="salary">Salary continuation (regular withholding)</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-sv-btn" style="margin-top:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
+        Calculate Severance
+      </button>
+    </div>
+
+    <!-- Results -->
+    <div id="sv-results" style="display:none">
+      <div class="sev-summary" data-enter>
+        <div class="sev-main-card">
+          <div class="sev-big-num" id="r-gross">—</div>
+          <div class="sev-big-label">Gross Severance</div>
+          <div class="sev-big-sub" id="r-weeks-label">— weeks of pay</div>
+        </div>
+        <div class="net-card">
+          <div class="net-num" id="r-net">—</div>
+          <div class="sev-big-label" style="color:#10b981">Estimated Net Pay</div>
+          <div class="sev-big-sub">After taxes &amp; FICA</div>
+        </div>
+      </div>
+
+      <div class="sev-metrics" data-enter data-delay="1">
+        <div class="sev-metric"><div class="sev-metric-val" id="r-weekly-rate">—</div><div class="sev-metric-label">Weekly Rate</div></div>
+        <div class="sev-metric"><div class="sev-metric-val" id="r-weeks-total">—</div><div class="sev-metric-label">Total Weeks</div></div>
+        <div class="sev-metric"><div class="sev-metric-val" id="r-fed-tax">—</div><div class="sev-metric-label">Fed Tax Est.</div></div>
+        <div class="sev-metric"><div class="sev-metric-val" id="r-monthly-equiv">—</div><div class="sev-metric-label">Monthly Equivalent</div></div>
+      </div>
+
+      <div class="calc-card" style="margin-top:20px" data-enter data-delay="2">
+        <div class="calc-card-header">Full Severance Breakdown</div>
+        <div id="sv-breakdown"></div>
+      </div>
+
+      <div class="notice-box" data-enter data-delay="3">
+        <strong>Note:</strong> These are estimates. Actual taxes depend on your total annual income. If severance pushes you into a higher bracket, you may owe more at tax time — or receive a refund if the 22% withholding rate exceeded your actual bracket. Consider adjusting your W-4 after receiving severance.
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/unemployment-benefits-calculator" class="calc-btn" style="flex:1;min-width:200px;text-align:center;text-decoration:none">Unemployment benefits →</a>
+        <a href="/take-home-pay-calculator" class="calc-btn calc-btn--secondary" style="flex:1;min-width:180px;text-align:center;text-decoration:none">Take-home pay calculator</a>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How Severance Pay Works in 2026</h2>
+        <p>Severance pay is compensation offered to employees when they are laid off or their position is eliminated. No federal law mandates it, but it is widely offered as part of separation agreements — especially in exchange for signing a release of legal claims.</p>
+        <h3>Standard Severance Formulas</h3>
+        <ul>
+          <li><strong>1 week per year:</strong> Entry-level or hourly employees. Minimum acceptable package.</li>
+          <li><strong>2 weeks per year:</strong> Most common for salaried employees. A 5-year employee gets 10 weeks.</li>
+          <li><strong>3–4 weeks per year:</strong> Management and executive roles. Often combined with COBRA continuation coverage.</li>
+        </ul>
+        <h3>Taxes on Severance (2026)</h3>
+        <p>Severance is taxed as ordinary income. Lump-sum payments use the <strong>22% federal supplemental withholding rate</strong> — regardless of your actual bracket. State income tax applies on top. FICA (Social Security 6.2% up to $176,100 + Medicare 1.45%) is also withheld unless you have already hit the Social Security wage base for the year.</p>
+        <h3>Negotiating Your Package</h3>
+        <p>The initial offer is rarely final. Consider negotiating for additional weeks, continued COBRA coverage, outplacement services, accelerated vesting of stock, or a neutral reference. Most employers expect some negotiation.</p>
+        <p><strong>Related:</strong> <a href="/unemployment-benefits-calculator">Unemployment Benefits Calculator</a> · <a href="/pto-payout-calculator">PTO Payout Calculator</a> · <a href="/cobra-insurance-calculator">COBRA Insurance Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Severance pay questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How is severance pay calculated?</summary><div class="faq-a">The most common formula is 1–2 weeks of pay per year worked. Divide your annual salary by 52 to get your weekly rate, then multiply by your total weeks of severance. Example: $75,000 ÷ 52 = $1,442/week × 10 weeks = $14,423 gross.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">Is severance pay taxed?</summary><div class="faq-a">Yes — severance is fully taxable as ordinary income. Lump sums are typically withheld at 22% federal + state income tax + FICA. You may owe more or receive a refund when you file depending on your full-year income.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">Is severance pay required by law?</summary><div class="faq-a">No federal law requires severance. It is required only if your employment contract, company policy, or a collective bargaining agreement promises it. The WARN Act may require 60 days' advance notice or pay for mass layoffs of 50+ employees.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">Does severance affect unemployment?</summary><div class="faq-a">It depends on your state. States like FL, TX, and CA generally don't offset unemployment with severance. Others delay benefits until the severance period ends. Check your state's unemployment rules before filing.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More HR &amp; benefits calculators</h2></div>
+        <div class="related-grid">
+          <a href="/unemployment-benefits-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="tool-card-title">Unemployment Benefits Calculator</div><div class="tool-card-desc" style="font-size:13px">Estimate weekly benefits by state.</div></div></div></a>
+          <a href="/cobra-insurance-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="tool-card-title">COBRA Insurance Calculator</div><div class="tool-card-desc" style="font-size:13px">Calculate COBRA premium vs marketplace.</div></div></div></a>
+          <a href="/pto-accrual-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="tool-card-title">PTO Accrual Calculator</div><div class="tool-card-desc" style="font-size:13px">Track your PTO balance and payout value.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">HR &amp; Benefits</div><ul class="footer-links"><li><a href="/severance-pay-calculator">Severance Pay Calculator</a></li><li><a href="/fmla-leave-calculator">FMLA Leave Calculator</a></li><li><a href="/cobra-insurance-calculator">COBRA Insurance Calculator</a></li><li><a href="/unemployment-benefits-calculator">Unemployment Benefits</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/employee-cost-calculator">Employee Cost</a></li><li><a href="/workers-comp-calculator">Workers Comp</a></li><li><a href="/pto-accrual-calculator">PTO Accrual</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not legal or accounting advice.</span><div class="footer-legal"><a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=4" defer></script>
+<script>
+(function(){
+  'use strict';
+  function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function fmtH(n){return '$'+(Math.round(n*100)/100).toFixed(2);}
+
+  document.getElementById('calc-sv-btn').addEventListener('click', calcSev);
+
+  function calcSev(){
+    var salary = parseFloat(document.getElementById('sv-salary').value)||0;
+    if(salary<=0){document.getElementById('sv-salary').focus();return;}
+    var years   = parseFloat(document.getElementById('sv-years').value)||0;
+    if(years<=0){document.getElementById('sv-years').focus();return;}
+    var formula     = parseFloat(document.getElementById('sv-formula').value)||2;
+    var lump        = parseFloat(document.getElementById('sv-lump').value)||0;
+    var stateTaxPct = parseFloat(document.getElementById('sv-state-tax').value)||5.5;
+    var payType     = document.getElementById('sv-payment').value;
+
+    var weeklyRate   = salary / 52;
+    var weeksTotal   = years * formula;
+    var sevBase      = weeklyRate * weeksTotal;
+    var gross        = sevBase + lump;
+
+    // Federal tax
+    var fedRate = payType === 'lump' ? 0.22 : 0.22; // supplemental rate for both; salary continuation can vary
+    var fedTax  = gross * fedRate;
+
+    // State tax
+    var stateTax = gross * (stateTaxPct / 100);
+
+    // FICA — employer still withholds employee FICA on severance
+    var ficaSS      = Math.min(gross, 176100) * 0.062;
+    var ficaMed     = gross * 0.0145;
+    var ficaTotal   = ficaSS + ficaMed;
+
+    var totalTax = fedTax + stateTax + ficaTotal;
+    var net      = gross - totalTax;
+
+    document.getElementById('r-gross').textContent = fmt(gross);
+    document.getElementById('r-net').textContent   = fmt(net);
+    document.getElementById('r-weeks-label').textContent = weeksTotal.toFixed(1)+' weeks of pay';
+    document.getElementById('r-weekly-rate').textContent = fmt(weeklyRate)+'/wk';
+    document.getElementById('r-weeks-total').textContent = weeksTotal.toFixed(1)+' wks';
+    document.getElementById('r-fed-tax').textContent     = fmt(fedTax);
+    document.getElementById('r-monthly-equiv').textContent = fmt(gross/((weeksTotal/4.33)||1))+'/mo';
+
+    var lines = [
+      {section:'Gross Severance'},
+      {label:'Base salary', val:salary, sub:true},
+      {label:'Weekly rate (salary ÷ 52)', val:weeklyRate},
+      {label:'Severance weeks ('+years+' yrs × '+formula+' wks)', val:weeksTotal, isWeeks:true},
+      {label:'Severance base ('+weeksTotal.toFixed(1)+' wks × '+fmtH(weeklyRate)+'/wk)', val:sevBase},
+      lump>0 && {label:'Additional lump sum', val:lump},
+      {label:'Gross severance', val:gross, bold:true},
+      {section:'Tax Withholding (Estimates)'},
+      {label:'Federal income tax ('+(fedRate*100).toFixed(0)+'% supplemental rate)', val:fedTax, neg:true},
+      {label:'State income tax ('+stateTaxPct.toFixed(1)+'%)', val:stateTax, neg:true},
+      {label:'Social Security (6.2%, up to $176,100)', val:ficaSS, neg:true},
+      {label:'Medicare (1.45%)', val:ficaMed, neg:true},
+      {label:'Total estimated taxes', val:totalTax, neg:true, bold:true},
+      {total:true, label:'ESTIMATED NET SEVERANCE', val:net},
+    ].filter(Boolean);
+
+    var html = '';
+    lines.forEach(function(l){
+      if(l.section){html+='<div class="sev-section-head">'+l.section+'</div>';return;}
+      if(l.total){html+='<div class="sev-line total-line"><span>'+l.label+'</span><span class="sev-line-val">'+fmt(l.val)+'</span></div>';return;}
+      if(l.isWeeks){html+='<div class="sev-line"><span style="color:var(--ink-2)">'+l.label+'</span><span class="sev-line-val">'+(l.val)+'</span></div>';return;}
+      var valClass = l.neg ? 'sev-line-val neg' : 'sev-line-val';
+      var prefix = l.neg ? '−' : '';
+      html+='<div class="sev-line"><span style="color:var(--ink-'+(l.sub?'3':'2')+');'+(l.bold?'font-weight:700':'')+'">'+l.label+'</span><span class="'+valClass+'">'+(l.neg?'−':'')+fmt(l.neg?l.val:l.val)+'</span></div>';
+    });
+    document.getElementById('sv-breakdown').innerHTML = html;
+
+    document.getElementById('sv-results').style.display='block';
+    document.getElementById('sv-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

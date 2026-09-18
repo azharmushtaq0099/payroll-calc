@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FMLA Leave Calculator 2026 | FreePayrollCalc</title>
+<meta name="description" content="Free FMLA leave calculator. Check eligibility, calculate your 12-week entitlement, income impact, and intermittent leave hours. Updated for 2026.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/fmla-leave-calculator">
+<meta property="og:title" content="FMLA Leave Calculator 2026 — Check Eligibility &amp; Leave Hours">
+<meta property="og:description" content="Check FMLA eligibility (12 months + 1,250 hours), calculate total leave hours, income impact, and return date. Covers regular leave and military caregiver leave.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"FMLA Leave Calculator 2026","url":"https://www.freepayrollcalc.xyz/fmla-leave-calculator","description":"Check FMLA eligibility (12 months employment + 1,250 hours worked), calculate your 12-week or 26-week leave entitlement, total leave hours, income impact, and return-to-work date. Covers regular FMLA and military caregiver leave.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Who qualifies for FMLA leave?","acceptedAnswer":{"@type":"Answer","text":"To qualify for FMLA, you must: (1) work for a covered employer (50+ employees within 75 miles), (2) have worked for that employer for at least 12 months, (3) have logged at least 1,250 hours in the 12 months before leave. The 12 months don't have to be consecutive."}},{"@type":"Question","name":"How many weeks of FMLA leave am I entitled to?","acceptedAnswer":{"@type":"Answer","text":"Most eligible employees are entitled to 12 workweeks of unpaid FMLA leave per 12-month period for qualifying reasons (birth, adoption, serious health condition of self or family member). Military caregiver leave can extend this to 26 workweeks."}},{"@type":"Question","name":"Is FMLA leave paid?","acceptedAnswer":{"@type":"Answer","text":"FMLA itself is unpaid. However, employers may require (and you may choose) to use accrued paid leave (PTO, vacation, sick days) concurrently with FMLA. Some states have paid family leave programs that run alongside FMLA."}},{"@type":"Question","name":"Can FMLA leave be taken intermittently?","acceptedAnswer":{"@type":"Answer","text":"Yes. FMLA leave can be taken continuously (full weeks at once), as reduced schedule (e.g., 4 hours per day instead of 8), or intermittently (separate blocks of time — e.g., 2 hours every Thursday for a chronic condition). All formats draw from the same 12-week bank."}},{"@type":"Question","name":"What counts as a qualifying FMLA reason?","acceptedAnswer":{"@type":"Answer","text":"Qualifying reasons include: birth, adoption, or foster placement of a child; serious health condition of the employee; serious health condition of a spouse, child, or parent; qualifying military exigency; or caring for a covered servicemember with a serious injury (up to 26 weeks)."}}]}
+</script>
+<style>
+.fmla-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:640px){.fmla-summary{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.fmla-summary{grid-template-columns:1fr}}
+.fmla-main-card{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2);border-radius:14px;padding:22px;text-align:center}
+.fmla-big-num{font-family:'JetBrains Mono',monospace;font-size:38px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.fmla-big-label{font-size:12px;font-weight:700;color:var(--ink-2)}
+.fmla-big-sub{font-size:11px;color:var(--ink-3);margin-top:3px}
+.elig-card{border-radius:14px;padding:22px;text-align:center}
+.elig-card.pass{background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(16,185,129,.02));border:2px solid rgba(16,185,129,.25)}
+.elig-card.fail{background:linear-gradient(135deg,rgba(239,68,68,.07),rgba(239,68,68,.02));border:2px solid rgba(239,68,68,.25)}
+.elig-icon{font-size:28px;margin-bottom:6px}
+.elig-status{font-size:18px;font-weight:800;margin-bottom:4px}
+.elig-status.pass{color:#10b981}
+.elig-status.fail{color:#ef4444}
+.fmla-metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.fmla-metric-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--ink-1)}
+.fmla-metric-label{font-size:11px;color:var(--ink-3);margin-top:3px}
+.fmla-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px}
+.check-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
+.check-row:last-child{border-bottom:none}
+.check-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-top:1px}
+.check-icon.ok{background:rgba(16,185,129,.15);color:#10b981}
+.check-icon.no{background:rgba(239,68,68,.15);color:#ef4444}
+.check-icon.warn{background:rgba(245,158,11,.15);color:#d97706}
+</style>
+</head>
+<body>
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+      </span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 45+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home">
+        <div class="nav-logo-mark" aria-hidden="true"></div>
+        FreePayrollCalc
+      </a>
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            Calculators
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/net-to-gross-calculator">Net to Gross</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+              <a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/self-employment-tax-calculator">Self-Employment Tax</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+              <a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <a href="/hours-worked-calculator">Hours Worked</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">HR &amp; Benefits</div>
+              <a href="/severance-pay-calculator">Severance Pay</a>
+              <a href="/fmla-leave-calculator">FMLA Leave</a>
+              <a href="/cobra-insurance-calculator">COBRA Insurance</a>
+              <a href="/unemployment-benefits-calculator">Unemployment Benefits</a>
+              <a href="/employee-cost-calculator">Employee Cost</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/roi-calculator">ROI Calculator</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/cost-of-living-calculator">Cost of Living</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+              <a href="/tools?cat=business" class="nav-mega-view-all">All Business &rarr;</a>
+            </div>
+            <div class="nav-mega-footer">
+              <div class="nav-mega-footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+              </div>
+              <a href="/tools" class="nav-mega-footer-cta">View all 45+ tools <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+        </div>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>
+          Search <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+      <a href="/tools" class="nav-cta">All 45+ Tools</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-section" id="mob-payroll">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-payroll')">Payroll<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="nav-mobile-links"><a href="/payroll-tax-calculator">Payroll Tax</a><a href="/free-payroll-calculator">Free Payroll</a><a href="/employer-tax-calculator">Employer Tax</a><a href="/1099-vs-w2-calculator">1099 vs W-2</a><a href="/workers-comp-calculator">Workers Comp</a></div>
+    </div>
+    <div class="nav-mobile-section" id="mob-income">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-income')">Income &amp; Tax<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="nav-mobile-links"><a href="/take-home-pay-calculator">Take-Home Pay</a><a href="/bonus-tax-calculator">Bonus Tax</a><a href="/quarterly-tax-calculator">Quarterly Tax</a></div>
+    </div>
+    <div class="nav-mobile-section" id="mob-time">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-time')">Time, HR &amp; Benefits<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="nav-mobile-links"><a href="/time-card-calculator">Time Card</a><a href="/overtime-pay-calculator">Overtime Pay</a><a href="/pto-accrual-calculator">PTO Accrual</a><a href="/severance-pay-calculator">Severance Pay</a><a href="/fmla-leave-calculator">FMLA Leave</a><a href="/cobra-insurance-calculator">COBRA Insurance</a><a href="/unemployment-benefits-calculator">Unemployment</a><a href="/employee-cost-calculator">Employee Cost</a></div>
+    </div>
+    <div class="nav-mobile-static"><a href="/tools">All 45+ Tools</a><a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">FMLA Leave Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>FMLA Leave Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Check your FMLA eligibility and calculate total leave entitlement.<br>See leave hours, income impact, and return date.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>12-month + 1,250-hour eligibility rules · 12-week &amp; 26-week entitlements · 2026</div>
+
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Employment &amp; Leave Details
+      </div>
+
+      <div style="font-size:14px;font-weight:700;color:var(--ink-2);margin-bottom:14px;margin-top:4px">Eligibility Check</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Months Worked for This Employer <span style="color:var(--red)">*</span></label>
+          <input type="number" id="fm-months" class="form-input" placeholder="24" min="0" step="1">
+          <p class="form-hint">Minimum required: 12 months (need not be consecutive)</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hours Worked in Past 12 Months <span style="color:var(--red)">*</span></label>
+          <input type="number" id="fm-hours" class="form-input" placeholder="1,900" min="0" step="10">
+          <p class="form-hint">Minimum required: 1,250 hours. Full-time ≈ 2,080 hrs/yr.</p>
+        </div>
+      </div>
+
+      <div style="font-size:14px;font-weight:700;color:var(--ink-2);margin:20px 0 14px">Leave Details</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Leave Reason</label>
+          <select id="fm-reason" class="form-select">
+            <option value="12">Birth, adoption, or foster placement</option>
+            <option value="12">Serious health condition (self)</option>
+            <option value="12">Serious health condition (spouse, child, parent)</option>
+            <option value="12">Qualifying military exigency</option>
+            <option value="26">Military caregiver (covered servicemember)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Leave Type</label>
+          <select id="fm-type" class="form-select">
+            <option value="continuous">Continuous (full weeks at once)</option>
+            <option value="reduced">Reduced schedule (part-time hours)</option>
+            <option value="intermittent">Intermittent (separate blocks)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Scheduled Hours Per Week</label>
+          <input type="number" id="fm-hrs-week" class="form-input" placeholder="40" min="1" max="60" step="0.5" value="40">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hourly Rate (for income impact)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="fm-rate" class="form-input form-input--prefixed" placeholder="25.00" min="0" step="0.25"></div>
+          <p class="form-hint">Or enter 0 to skip income impact</p>
+        </div>
+        <div class="form-group" id="fm-leave-hrs-wrap" style="display:none">
+          <label class="form-label">Hours of Leave Per Week (reduced/intermittent)</label>
+          <input type="number" id="fm-leave-hrs-week" class="form-input" placeholder="20" min="1" step="0.5">
+          <p class="form-hint">For reduced: hours taken off per week. For intermittent: avg hours used per week.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Accrued PTO Available</label>
+          <input type="number" id="fm-pto" class="form-input" placeholder="0" min="0" step="0.5" value="0">
+          <p class="form-hint">Hours of accrued paid leave employer may require you to use concurrently</p>
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calc-fm-btn" style="margin-top:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+        Calculate FMLA Leave
+      </button>
+    </div>
+
+    <!-- Results -->
+    <div id="fm-results" style="display:none">
+      <div class="fmla-summary" data-enter>
+        <div class="elig-card" id="r-elig-card">
+          <div class="elig-icon" id="r-elig-icon">✓</div>
+          <div class="elig-status" id="r-elig-status">Likely Eligible</div>
+          <div class="fmla-big-sub" id="r-elig-sub">Based on info entered</div>
+        </div>
+        <div class="fmla-main-card">
+          <div class="fmla-big-num" id="r-leave-weeks">—</div>
+          <div class="fmla-big-label">Leave Weeks</div>
+          <div class="fmla-big-sub" id="r-leave-hours-total">— hours protected</div>
+        </div>
+        <div class="fmla-main-card" style="background:linear-gradient(135deg,rgba(239,68,68,.07),rgba(239,68,68,.02));border-color:rgba(239,68,68,.2)">
+          <div class="fmla-big-num" id="r-income-lost" style="color:#ef4444">—</div>
+          <div class="fmla-big-label">Est. Unpaid Amount</div>
+          <div class="fmla-big-sub" id="r-income-sub">After PTO offset</div>
+        </div>
+      </div>
+
+      <div class="fmla-metrics" data-enter data-delay="1">
+        <div class="fmla-metric"><div class="fmla-metric-val" id="r-leave-hrs">—</div><div class="fmla-metric-label">Total Leave Hours</div></div>
+        <div class="fmla-metric"><div class="fmla-metric-val" id="r-return-date">—</div><div class="fmla-metric-label">Return Date (if starting today)</div></div>
+        <div class="fmla-metric"><div class="fmla-metric-val" id="r-pto-covers">—</div><div class="fmla-metric-label">PTO Paid Hours</div></div>
+        <div class="fmla-metric"><div class="fmla-metric-val" id="r-unpaid-hrs">—</div><div class="fmla-metric-label">Unpaid Hours</div></div>
+      </div>
+
+      <div class="calc-card" style="margin-top:20px" data-enter data-delay="2">
+        <div class="calc-card-header">Eligibility Checklist</div>
+        <div id="fm-checklist"></div>
+      </div>
+
+      <div style="background:rgba(27,79,216,.04);border:1px solid rgba(27,79,216,.15);border-radius:12px;padding:16px;margin-top:16px;font-size:13px;color:var(--ink-2);line-height:1.7" data-enter data-delay="3">
+        <strong>State leave:</strong> Many states have their own paid family and medical leave programs (CA, NY, WA, NJ, MA, CT, OR, CO, DC, and more) that provide partial wage replacement during FMLA-qualifying leave. Check your state's program — you may receive paid benefits even though FMLA itself is unpaid.
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/pto-accrual-calculator" class="calc-btn" style="flex:1;min-width:200px;text-align:center;text-decoration:none">PTO balance calculator →</a>
+        <a href="/cobra-insurance-calculator" class="calc-btn calc-btn--secondary" style="flex:1;min-width:180px;text-align:center;text-decoration:none">COBRA insurance cost</a>
+      </div>
+    </div>
+
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>FMLA Leave: What You Need to Know in 2026</h2>
+        <p>The Family and Medical Leave Act (FMLA) provides eligible employees up to 12 weeks of unpaid, job-protected leave per year. Understanding eligibility and planning the leave period reduces surprises on both sides.</p>
+        <h3>The Two Eligibility Tests</h3>
+        <ul>
+          <li><strong>12-month tenure:</strong> Must have worked for the employer at least 12 months total (not necessarily consecutive). Breaks in service under 7 years count.</li>
+          <li><strong>1,250 hours:</strong> Must have actually worked 1,250 hours in the 12 months immediately before leave begins. Paid leave (PTO, vacation) generally does not count toward this total.</li>
+        </ul>
+        <h3>How Leave Hours Are Calculated</h3>
+        <p>Leave entitlement is 12 workweeks — not 480 hours for everyone. If you work 30 hours per week, your 12 weeks = 360 hours. If you work 40 hours/week, 12 weeks = 480 hours. Hours scale to your actual scheduled work week.</p>
+        <h3>Using PTO Concurrently</h3>
+        <p>Employers may require (and employees may elect) to substitute accrued PTO, vacation, or sick leave for unpaid FMLA leave. This means you get paid during the PTO portion, but those days count against your 12-week FMLA bank — not in addition to it.</p>
+        <p><strong>Related:</strong> <a href="/severance-pay-calculator">Severance Pay Calculator</a> · <a href="/cobra-insurance-calculator">COBRA Insurance Calculator</a> · <a href="/pto-accrual-calculator">PTO Accrual Calculator</a></p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">FMLA leave questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">Who qualifies for FMLA?</summary><div class="faq-a">You must work for a covered employer (50+ employees within 75 miles), have 12 months of tenure, and have logged 1,250 hours in the past year. Public agencies and schools have different thresholds.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">Is FMLA leave paid?</summary><div class="faq-a">FMLA itself is unpaid. However, employers may require you to use accrued PTO concurrently. Many states (CA, NY, WA, NJ, MA, CT, OR, CO) have paid family leave programs that provide wage replacement.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">Can I take FMLA intermittently?</summary><div class="faq-a">Yes. FMLA can be taken in any combination of continuous, reduced schedule, or intermittent blocks. All formats draw from the same 12-week bank. Your employer may ask for a medical certification and a schedule estimate.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">Will my job be protected while on FMLA?</summary><div class="faq-a">Yes. FMLA guarantees return to the same or an equivalent position with the same pay, benefits, and terms. Employers cannot retaliate for taking FMLA leave — termination while on FMLA is a serious legal violation.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More HR calculators</h2></div>
+        <div class="related-grid">
+          <a href="/pto-accrual-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="tool-card-title">PTO Accrual Calculator</div><div class="tool-card-desc" style="font-size:13px">Track accrued PTO and payout value.</div></div></div></a>
+          <a href="/cobra-insurance-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="tool-card-title">COBRA Insurance Calculator</div><div class="tool-card-desc" style="font-size:13px">Cost of continuing employer coverage.</div></div></div></a>
+          <a href="/severance-pay-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg></div><div><div class="tool-card-title">Severance Pay Calculator</div><div class="tool-card-desc" style="font-size:13px">Estimate your severance package.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">HR &amp; Benefits</div><ul class="footer-links"><li><a href="/severance-pay-calculator">Severance Pay Calculator</a></li><li><a href="/fmla-leave-calculator">FMLA Leave Calculator</a></li><li><a href="/cobra-insurance-calculator">COBRA Insurance Calculator</a></li><li><a href="/unemployment-benefits-calculator">Unemployment Benefits</a></li></ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li><li><a href="/employee-cost-calculator">Employee Cost</a></li><li><a href="/pto-accrual-calculator">PTO Accrual</a></li><li><a href="/workers-comp-calculator">Workers Comp</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not legal or HR advice.</span><div class="footer-legal"><a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></div></div>
+  </div>
+</footer>
+
+<script src="/shared/scripts.js?v=4" defer></script>
+<script>
+(function(){
+  'use strict';
+  function fmt(n){return '$'+Math.round(Math.abs(n)).toLocaleString('en-US');}
+  function addDays(d,days){var r=new Date(d);r.setDate(r.getDate()+days);return r;}
+  function fmtDate(d){return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+
+  // Toggle reduced/intermittent hours field
+  document.getElementById('fm-type').addEventListener('change',function(){
+    var show = this.value !== 'continuous';
+    document.getElementById('fm-leave-hrs-wrap').style.display = show ? '' : 'none';
+  });
+
+  document.getElementById('calc-fm-btn').addEventListener('click', calcFMLA);
+
+  function calcFMLA(){
+    var months   = parseFloat(document.getElementById('fm-months').value)||0;
+    var hoursWkd = parseFloat(document.getElementById('fm-hours').value)||0;
+    var reasonEl = document.getElementById('fm-reason');
+    var maxWeeks = parseFloat(reasonEl.options[reasonEl.selectedIndex].value)||12;
+    var leaveType = document.getElementById('fm-type').value;
+    var hrsWeek  = parseFloat(document.getElementById('fm-hrs-week').value)||40;
+    var rate     = parseFloat(document.getElementById('fm-rate').value)||0;
+    var pto      = parseFloat(document.getElementById('fm-pto').value)||0;
+
+    // Eligibility
+    var eligMonths = months >= 12;
+    var eligHours  = hoursWkd >= 1250;
+    var eligible   = eligMonths && eligHours;
+
+    // Leave entitlement
+    var totalLeaveHrs = maxWeeks * hrsWeek;
+
+    // For reduced/intermittent: how long the leave spans calendar-wise
+    var leaveHrsPerWeek = hrsWeek; // continuous: full week
+    if(leaveType !== 'continuous'){
+      leaveHrsPerWeek = parseFloat(document.getElementById('fm-leave-hrs-week').value)||hrsWeek/2;
+    }
+    var calendarWeeks = leaveType === 'continuous' ? maxWeeks : totalLeaveHrs / leaveHrsPerWeek;
+    var calendarDays  = Math.ceil(calendarWeeks * 7);
+
+    // Return date
+    var today     = new Date();
+    var returnDate = addDays(today, calendarDays);
+
+    // Income impact
+    var ptoCoverHrs  = Math.min(pto, totalLeaveHrs);
+    var unpaidHrs    = totalLeaveHrs - ptoCoverHrs;
+    var incomeLost   = rate > 0 ? unpaidHrs * rate : null;
+
+    // Eligibility card
+    var eligCard = document.getElementById('r-elig-card');
+    eligCard.className = 'elig-card ' + (eligible ? 'pass' : 'fail');
+    document.getElementById('r-elig-icon').textContent = eligible ? '✓' : '✗';
+    document.getElementById('r-elig-status').textContent = eligible ? 'Likely Eligible' : 'May Not Qualify';
+    document.getElementById('r-elig-status').className = 'elig-status ' + (eligible ? 'pass' : 'fail');
+    document.getElementById('r-elig-sub').textContent = eligible
+      ? 'Both eligibility tests met'
+      : 'See checklist below for details';
+
+    document.getElementById('r-leave-weeks').textContent = maxWeeks;
+    document.getElementById('r-leave-hours-total').textContent = totalLeaveHrs+' hours protected';
+    document.getElementById('r-income-lost').textContent = incomeLost !== null ? fmt(incomeLost) : 'N/A';
+    document.getElementById('r-income-sub').textContent = rate > 0 ? 'Unpaid hours × $'+rate.toFixed(2)+'/hr' : 'Enter hourly rate to calculate';
+
+    document.getElementById('r-leave-hrs').textContent = totalLeaveHrs+' hrs';
+    document.getElementById('r-return-date').textContent = fmtDate(returnDate);
+    document.getElementById('r-pto-covers').textContent = ptoCoverHrs.toFixed(0)+' hrs';
+    document.getElementById('r-unpaid-hrs').textContent = unpaidHrs.toFixed(0)+' hrs';
+
+    // Checklist
+    var checks = [
+      {ok: eligMonths, label:'12 months of employment', detail: months >= 12 ? 'You have '+months+' months — requirement met.' : 'You have '+months+' months. Need 12 minimum.'},
+      {ok: eligHours,  label:'1,250 hours worked in past year', detail: hoursWkd >= 1250 ? hoursWkd+' hours logged — requirement met.' : hoursWkd+' hours. Need 1,250 minimum.'},
+      {ok: null,       label:'Covered employer (50+ employees within 75 miles)', detail:'Verify with your HR department. Public agencies and schools have different thresholds.'},
+      {ok: null,       label:'Qualifying reason', detail:'All reasons selected in this calculator qualify under federal FMLA.'},
+    ];
+    var html = '';
+    checks.forEach(function(c){
+      var cls = c.ok === true ? 'ok' : c.ok === false ? 'no' : 'warn';
+      var sym = c.ok === true ? '✓' : c.ok === false ? '✗' : '?';
+      html += '<div class="check-row"><span class="check-icon '+cls+'">'+sym+'</span><div><div style="font-weight:600;color:var(--ink-1)">'+c.label+'</div><div style="color:var(--ink-3);font-size:12px;margin-top:2px">'+c.detail+'</div></div></div>';
+    });
+    document.getElementById('fm-checklist').innerHTML = html;
+
+    document.getElementById('fm-results').style.display='block';
+    document.getElementById('fm-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unemployment Insurance Estimator 2026 | FreePayrollCalc</title>
+<meta name="description" content="Free UI payment estimator. Enter your prior wages and state to see estimated weekly rate and total duration. Reference tool only.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/unemployment-benefits-calculator">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<style>
+.ui-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:640px){.ui-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.ui-grid{grid-template-columns:1fr}}
+.ui-card{border-radius:14px;padding:22px;text-align:center}
+.ui-card.blue{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2)}
+.ui-card.amber{background:linear-gradient(135deg,rgba(217,119,6,.07),rgba(217,119,6,.02));border:2px solid rgba(217,119,6,.2)}
+.ui-card.green{background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(16,185,129,.02));border:2px solid rgba(16,185,129,.2)}
+.ui-num{font-family:'JetBrains Mono',monospace;font-size:38px;font-weight:800;line-height:1;margin-bottom:4px}
+.ui-num.blue{color:var(--accent)}.ui-num.amber{color:var(--amber)}.ui-num.green{color:#10b981}
+.ui-label{font-size:12px;font-weight:700;color:var(--ink-2)}
+.ui-sub{font-size:11px;color:var(--ink-3);margin-top:3px}
+.ui-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px}
+.ui-metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.ui-metric-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--ink-1)}
+.ui-metric-lbl{font-size:11px;color:var(--ink-3);margin-top:3px}
+.ui-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.ui-row:last-child{border-bottom:none}
+.ui-row-val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink-1)}
+.ui-sec{font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--ink-3);padding:10px 0 4px;margin-top:8px}
+.ui-total{background:rgba(27,79,216,.04);border-radius:8px;padding:12px 14px;margin-top:4px;font-size:15px;font-weight:800;color:var(--ink-1)}
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 45+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home"><div class="nav-logo-mark" aria-hidden="true"></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Calculators<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Payroll</div>
+              <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+              <a href="/free-payroll-calculator">Free Payroll Calculator</a>
+              <a href="/employer-tax-calculator">Employer Tax Calculator</a>
+              <a href="/1099-vs-w2-calculator">1099 vs W-2 Calculator</a>
+              <a href="/workers-comp-calculator">Workers Comp</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Income &amp; Tax</div>
+              <a href="/take-home-pay-calculator">Take-Home Pay</a>
+              <a href="/bonus-tax-calculator">Bonus Tax</a>
+              <a href="/salary-to-hourly-calculator">Salary to Hourly</a>
+              <a href="/w4-withholding-calculator">W-4 Withholding</a>
+              <a href="/quarterly-tax-calculator">Quarterly Tax</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Time &amp; HR</div>
+              <a href="/time-card-calculator">Time Card</a>
+              <a href="/overtime-pay-calculator">Overtime Pay</a>
+              <a href="/pto-accrual-calculator">PTO Accrual</a>
+              <div class="nav-mega-col-label" style="margin-top:14px">HR &amp; Benefits</div>
+              <a href="/severance-pay-calculator">Severance Pay</a>
+              <a href="/fmla-leave-calculator">FMLA Leave</a>
+              <a href="/cobra-insurance-calculator">COBRA Insurance</a>
+              <a href="/unemployment-benefits-calculator">Unemployment</a>
+              <a href="/employee-cost-calculator">Employee Cost</a>
+            </div>
+            <div class="nav-mega-col">
+              <div class="nav-mega-col-label">Business</div>
+              <a href="/profit-margin-calculator">Profit Margin</a>
+              <a href="/break-even-calculator">Break-Even</a>
+              <a href="/business-loan-calculator">Business Loan</a>
+              <a href="/burn-rate-calculator">Burn Rate</a>
+            </div>
+          </div>
+        </div>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>Search<kbd>Ctrl K</kbd></button>
+      </div>
+      <a href="/tools" class="nav-cta">All 45+ Tools</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile">
+    <div class="nav-mobile-section" id="mob-hr">
+      <div class="nav-mobile-section-hdr" onclick="toggleMobSection('mob-hr')">HR &amp; Benefits<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="nav-mobile-links">
+        <a href="/severance-pay-calculator">Severance Pay</a>
+        <a href="/fmla-leave-calculator">FMLA Leave</a>
+        <a href="/cobra-insurance-calculator">COBRA Insurance</a>
+        <a href="/unemployment-benefits-calculator">Unemployment</a>
+        <a href="/employee-cost-calculator">Employee Cost</a>
+      </div>
+    </div>
+    <div class="nav-mobile-static"><a href="/tools">All 45+ Tools</a><a href="/blog">Blog</a><a href="/about">About</a></div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav><main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Unemployment Insurance Estimator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Unemployment Benefits Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Estimate your weekly UI payment rate and total duration by state.<br>Based on your prior wages and 2026 state formulas.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>50% of avg weekly wage · 2026 state caps · Reference only</div>
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Prior Employment Details</div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">State <span style="color:var(--red)">*</span></label>
+          <select id="ui-state" class="form-select">
+            <option value="">Select your state</option>
+            <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option><option value="FL">Florida</option><option value="GA">Georgia</option>
+            <option value="IL">Illinois</option><option value="IN">Indiana</option><option value="MA">Massachusetts</option>
+            <option value="MD">Maryland</option><option value="MI">Michigan</option><option value="MN">Minnesota</option>
+            <option value="MO">Missouri</option><option value="NC">North Carolina</option><option value="NJ">New Jersey</option>
+            <option value="NY">New York</option><option value="OH">Ohio</option><option value="PA">Pennsylvania</option>
+            <option value="TN">Tennessee</option><option value="TX">Texas</option><option value="VA">Virginia</option>
+            <option value="WA">Washington</option><option value="WI">Wisconsin</option><option value="OTHER">Other state</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">Annual Salary (most recent job) <span style="color:var(--red)">*</span></label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="ui-salary" class="form-input form-input--prefixed" placeholder="55,000" min="0" step="1000"></div></div>
+        <div class="form-group"><label class="form-label">Separation Reason</label>
+          <select id="ui-reason" class="form-select">
+            <option value="layoff">Laid off / position eliminated</option>
+            <option value="reduction">Hours reduced significantly</option>
+            <option value="quit">Resigned (may affect eligibility)</option>
+            <option value="fired">Terminated for cause (may affect eligibility)</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">Weeks Worked in Past 12 Months</label>
+          <input type="number" id="ui-weeks-worked" class="form-input" placeholder="52" min="1" max="52" step="1" value="52">
+          <p class="form-hint">Most states require 15-20 weeks of work to qualify</p></div>
+      </div>
+      <button class="calc-btn" id="calc-ui-btn" style="margin-top:8px">Estimate Payment</button>
+    </div>
+    <div id="ui-results" style="display:none">
+      <div class="ui-grid" data-enter>
+        <div class="ui-card blue"><div class="ui-num blue" id="r-weekly">—</div><div class="ui-label">Est. Weekly Rate</div><div class="ui-sub">Before federal tax</div></div>
+        <div class="ui-card amber"><div class="ui-num amber" id="r-weeks">—</div><div class="ui-label">Max Duration</div><div class="ui-sub" id="r-weeks-sub">weeks</div></div>
+        <div class="ui-card green"><div class="ui-num green" id="r-total">—</div><div class="ui-label">Est. Total Payout</div><div class="ui-sub">If used fully</div></div>
+      </div>
+      <div class="ui-metrics" data-enter data-delay="1">
+        <div class="ui-metric"><div class="ui-metric-val" id="r-avg-wage">—</div><div class="ui-metric-lbl">Avg Weekly Wage</div></div>
+        <div class="ui-metric"><div class="ui-metric-val" id="r-state-cap">—</div><div class="ui-metric-lbl">State Weekly Cap</div></div>
+        <div class="ui-metric"><div class="ui-metric-val" id="r-net-weekly">—</div><div class="ui-metric-lbl">After 10% Fed Tax</div></div>
+        <div class="ui-metric"><div class="ui-metric-val" id="r-replace">—</div><div class="ui-metric-lbl">Wage Replacement</div></div>
+      </div>
+      <div class="calc-card" style="margin-top:20px" data-enter data-delay="2">
+        <div class="calc-card-header">Estimate Breakdown</div>
+        <div id="ui-breakdown"></div>
+      </div>
+      <div id="r-note" style="background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--ink-2);line-height:1.65;margin-top:16px"></div>
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/severance-pay-calculator" class="calc-btn" style="flex:1;min-width:200px;text-align:center;text-decoration:none">Severance pay calculator &rarr;</a>
+        <a href="/cobra-insurance-calculator" class="calc-btn calc-btn--secondary" style="flex:1;min-width:180px;text-align:center;text-decoration:none">COBRA insurance cost</a>
+      </div>
+    </div>
+  </div>
+</main><footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free, accurate payroll calculators for US businesses. Updated for 2026.</div></div>
+      <div><div class="footer-col-title">HR &amp; Benefits</div><ul class="footer-links">
+        <li><a href="/severance-pay-calculator">Severance Pay Calculator</a></li>
+        <li><a href="/fmla-leave-calculator">FMLA Leave Calculator</a></li>
+        <li><a href="/cobra-insurance-calculator">COBRA Insurance Calculator</a></li>
+        <li><a href="/unemployment-benefits-calculator">Unemployment Estimator</a></li>
+      </ul></div>
+      <div><div class="footer-col-title">More Tools</div><ul class="footer-links">
+        <li><a href="/payroll-tax-calculator">Payroll Tax Calculator</a></li>
+        <li><a href="/employee-cost-calculator">Employee Cost</a></li>
+        <li><a href="/workers-comp-calculator">Workers Comp</a></li>
+        <li><a href="/pto-accrual-calculator">PTO Accrual</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only — not legal or financial advice.</span>
+      <div class="footer-legal"><a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></div>
+    </div>
+  </div>
+</footer>
+<script src="/shared/scripts.js?v=4" defer></script><script>
+(function(){
+  "use strict";
+  var SD = {"AL":{"max":275,"wks":14,"rate":0.5},"AK":{"max":442,"wks":26,"rate":0.5},"AZ":{"max":320,"wks":26,"rate":0.5},"AR":{"max":451,"wks":16,"rate":0.5},"CA":{"max":450,"wks":26,"rate":0.5},"CO":{"max":781,"wks":26,"rate":0.55},"CT":{"max":741,"wks":26,"rate":0.5},"FL":{"max":275,"wks":12,"rate":0.5},"GA":{"max":365,"wks":14,"rate":0.5},"IL":{"max":793,"wks":26,"rate":0.47},"IN":{"max":390,"wks":26,"rate":0.47},"MA":{"max":1033,"wks":30,"rate":0.5},"MD":{"max":430,"wks":26,"rate":0.5},"MI":{"max":362,"wks":20,"rate":0.47},"MN":{"max":857,"wks":26,"rate":0.5},"MO":{"max":320,"wks":20,"rate":0.5},"NC":{"max":350,"wks":13,"rate":0.5},"NJ":{"max":854,"wks":26,"rate":0.5},"NY":{"max":504,"wks":26,"rate":0.5},"OH":{"max":647,"wks":26,"rate":0.5},"PA":{"max":572,"wks":26,"rate":0.5},"TN":{"max":275,"wks":26,"rate":0.5},"TX":{"max":563,"wks":26,"rate":0.5},"VA":{"max":378,"wks":26,"rate":0.5},"WA":{"max":1019,"wks":26,"rate":0.5},"WI":{"max":370,"wks":26,"rate":0.5},"OTHER":{"max":400,"wks":26,"rate":0.5}};
+  function fmt(n){return "$"+Math.round(Math.abs(n)).toLocaleString("en-US");}
+  function fmtPct(n){return (n*100).toFixed(0)+"%";}
+
+  document.getElementById("calc-ui-btn").addEventListener("click", calcUI);
+
+  function calcUI(){
+    var state  = document.getElementById("ui-state").value;
+    var salary = parseFloat(document.getElementById("ui-salary").value)||0;
+    var reason = document.getElementById("ui-reason").value;
+    var wksWkd = parseFloat(document.getElementById("ui-weeks-worked").value)||52;
+    if(!state){document.getElementById("ui-state").focus();return;}
+    if(salary<=0){document.getElementById("ui-salary").focus();return;}
+
+    var sd = SD[state] || SD.OTHER;
+    var avgWeeklyWage = salary / 52;
+    var rawWBA = avgWeeklyWage * sd.rate;
+    var wba = Math.min(rawWBA, sd.max);
+    var netWBA = wba * 0.9;
+    var totalMax = wba * sd.wks;
+    var replacement = avgWeeklyWage > 0 ? wba / avgWeeklyWage : 0;
+
+    document.getElementById("r-weekly").textContent = fmt(wba)+"/wk";
+    document.getElementById("r-weeks").textContent  = sd.wks;
+    document.getElementById("r-weeks-sub").textContent = "weeks max ("+state+")";
+    document.getElementById("r-total").textContent  = fmt(totalMax);
+    document.getElementById("r-avg-wage").textContent = fmt(avgWeeklyWage)+"/wk";
+    document.getElementById("r-state-cap").textContent = fmt(sd.max)+"/wk";
+    document.getElementById("r-net-weekly").textContent = fmt(netWBA)+"/wk";
+    document.getElementById("r-replace").textContent = fmtPct(replacement);
+
+    var capped = rawWBA > sd.max;
+    var lines = [
+      {sec:"Your Prior Wages"},
+      {lbl:"Annual salary",val:salary},
+      {lbl:"Average weekly wage (salary ÷ 52)",val:avgWeeklyWage},
+      {sec:"Weekly Rate Calculation"},
+      {lbl:"Formula rate ("+fmtPct(sd.rate)+" of avg weekly wage)",val:rawWBA},
+      capped && {lbl:"State cap applied ("+state+" max: "+fmt(sd.max)+"/wk)",val:sd.max,note:true},
+      {lbl:"Estimated weekly rate",val:wba,bold:true},
+      {lbl:"After optional 10% federal withholding",val:netWBA},
+      {sec:"Duration & Total"},
+      {lbl:"Maximum weeks ("+state+")",val:sd.wks,isWks:true},
+      {lbl:"Est. total if fully used",val:totalMax,bold:true},
+    ].filter(Boolean);
+
+    var html = "";
+    lines.forEach(function(l){
+      if(l.sec){html+='<div style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--ink-3);padding:10px 0 4px;margin-top:8px">'+l.sec+"</div>";return;}
+      if(l.isWks){html+='<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--ink-2)">'+l.lbl+'</span><span style="font-family:JetBrains Mono,monospace;font-weight:600">'+l.val+" wks</span></div>";return;}
+      html+='<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--ink-'+( l.note?"3":"2")+')">'+l.lbl+'</span><span style="font-family:JetBrains Mono,monospace;font-weight:'+( l.bold?"700":"600")+'">'+fmt(l.val)+"</span></div>";
+    });
+    document.getElementById("ui-breakdown").innerHTML = html;
+
+    var notes = [];
+    if(reason==="quit") notes.push("You resigned — eligibility varies by state. Quitting for good cause (unsafe conditions, significant pay cut) may still qualify.");
+    if(reason==="fired") notes.push("Termination for cause often disqualifies a claim. Termination without misconduct (performance, position elimination) usually qualifies.");
+    if(wksWkd < 20) notes.push("You worked "+wksWkd+" weeks. Most states require 15-20 weeks in the base period. Verify your state's specific requirement.");
+    if(capped) notes.push("Your calculated rate ("+fmt(rawWBA)+"/wk) exceeds the "+state+" cap of "+fmt(sd.max)+"/wk. The cap applies.");
+    notes.push("This is an estimate only. Actual amounts are set by your state agency based on your base period wages. File at your state's workforce agency website.");
+    document.getElementById("r-note").innerHTML = notes.map(function(n){return "<p style='margin:0 0 6px'>"+n+"</p>";}).join("");
+
+    document.getElementById("ui-results").style.display="block";
+    document.getElementById("ui-results").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+})();
+</script>
+</body>
+</html>
