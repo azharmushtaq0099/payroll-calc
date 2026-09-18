@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Mortgage Refinance Calculator 2026 | Should I Refinance?</title>
+<meta name="description" content="Free mortgage refinance calculator. Enter your current loan and new rate to see monthly savings, break-even point, and total interest saved. Find out if refinancing makes sense.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/refinance-calculator">
+<meta property="og:title" content="Free Mortgage Refinance Calculator 2026 — Should I Refinance?">
+<meta property="og:description" content="Calculate monthly savings, break-even months, and lifetime interest savings from refinancing your mortgage. Free, no sign-up.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free Mortgage Refinance Calculator 2026","url":"https://www.freepayrollcalc.xyz/refinance-calculator","description":"Calculate whether refinancing your mortgage makes financial sense. Shows monthly savings, break-even point, and total interest saved over the life of the loan.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When does refinancing make sense?","acceptedAnswer":{"@type":"Answer","text":"Refinancing makes sense when: (1) you can lower your rate by at least 0.5-1%, (2) you plan to stay in the home past the break-even point, and (3) closing costs are reasonable (typically 2-5% of loan amount). The break-even point is when cumulative monthly savings equal the closing costs paid upfront."}},{"@type":"Question","name":"How do I calculate my break-even point on a refinance?","acceptedAnswer":{"@type":"Answer","text":"Break-even months = total closing costs divided by monthly payment savings. Example: $5,000 closing costs and $200/month savings = 25-month break-even. If you plan to stay in the home more than 25 months, refinancing saves money overall."}},{"@type":"Question","name":"What are typical refinance closing costs?","acceptedAnswer":{"@type":"Answer","text":"Refinance closing costs typically run 2-5% of the loan amount, or roughly $3,000-$6,000 on a $200,000 loan. Common costs: origination fee (0.5-1%), appraisal ($300-600), title insurance ($500-1,500), recording fees ($25-250), and prepaid interest."}},{"@type":"Question","name":"Should I refinance to a 15-year or 30-year mortgage?","acceptedAnswer":{"@type":"Answer","text":"A 15-year refinance has higher monthly payments but dramatically less total interest. A 30-year refinance lowers your monthly payment most. Best approach: refinance to a 30-year but pay extra principal monthly — you get payment flexibility without being locked into high payments."}}]}
+</script>
+<style>
+.rf-verdict{border-radius:16px;padding:32px;text-align:center;margin-bottom:20px}
+.rf-verdict--good{background:linear-gradient(135deg,rgba(16,185,129,.10),rgba(16,185,129,.03));border:2px solid rgba(16,185,129,.3)}
+.rf-verdict--neutral{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.02));border:2px solid rgba(245,158,11,.25)}
+.rf-verdict--wait{background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(239,68,68,.02));border:2px solid rgba(239,68,68,.2)}
+.rf-verdict-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.rf-verdict-head{font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:900;line-height:1;margin-bottom:6px}
+.rf-verdict-sub{font-size:14px;color:var(--ink-3)}
+.rf-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.rf-metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.rf-metric-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--ink-1)}
+.rf-metric-label{font-size:11px;color:var(--ink-3);margin-top:3px}
+.rf-line{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.rf-line:last-child{border-bottom:none}
+.rf-sec{font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--ink-3);padding:10px 0 4px;margin-top:8px}
+.rf-total{background:rgba(16,185,129,.05);border-radius:8px;padding:12px 14px;margin-top:4px;font-size:14px;font-weight:800;color:#10b981}
+.rf-warn{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--ink-2);margin-top:16px}
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 50+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">FreePayrollCalc</a>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Payroll <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown"><a href="/payroll-tax-calculator" class="nav-item">Payroll Tax</a><a href="/take-home-pay-calculator" class="nav-item">Take-Home Pay</a><a href="/payroll-hours-calculator" class="nav-item">Payroll Hours</a><a href="/salary-to-hourly-calculator" class="nav-item">Salary to Hourly</a></div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Tax <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown"><a href="/tax-refund-estimator" class="nav-item">Tax Refund Estimator</a><a href="/income-tax-calculator" class="nav-item">Income Tax</a><a href="/1099-tax-calculator" class="nav-item">1099 Tax Calculator</a><a href="/self-employment-tax-calculator" class="nav-item">Self-Employment Tax</a><a href="/bonus-tax-calculator" class="nav-item">Bonus Tax</a></div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Finance <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown"><a href="/mortgage-calculator" class="nav-item">Mortgage Calculator</a><a href="/refinance-calculator" class="nav-item nav-item--active">Refinance Calculator</a><a href="/reverse-mortgage-calculator" class="nav-item">Reverse Mortgage</a><a href="/budget-calculator" class="nav-item">Budget Calculator</a><a href="/debt-payoff-calculator" class="nav-item">Debt Payoff</a></div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="btn-search" aria-label="Search tools"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></button>
+      <a href="/tools" class="btn-all-tools">All Tools</a>
+    </div>
+  </div>
+</header>
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">Refinance Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Free Mortgage Refinance Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Find out if refinancing your mortgage saves money.<br>See monthly savings, break-even point, and total interest saved over the loan life.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Break-even analysis &#xB7; Lifetime savings &#xB7; Rate comparison</div>
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> Current Loan</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Current Loan Balance <span style="color:var(--red)">*</span></label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="rf-balance" class="form-input form-input--prefixed" placeholder="280000" min="0" step="1000"></div>
+          <p class="form-hint">Remaining principal. Check your latest mortgage statement.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Interest Rate</label>
+          <div class="input-wrap"><input type="number" id="rf-cur-rate" class="form-input form-input--suffixed" placeholder="7.25" min="0" max="30" step="0.05"><span class="input-suffix">%</span></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Remaining Term</label>
+          <select id="rf-cur-term" class="form-select">
+            <option value="30">30 years remaining</option>
+            <option value="27">27 years remaining</option>
+            <option value="25">25 years remaining</option>
+            <option value="20">20 years remaining</option>
+            <option value="15">15 years remaining</option>
+            <option value="10">10 years remaining</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-card-header" style="margin-top:20px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> New Loan</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">New Interest Rate <span style="color:var(--red)">*</span></label>
+          <div class="input-wrap"><input type="number" id="rf-new-rate" class="form-input form-input--suffixed" placeholder="6.25" min="0" max="30" step="0.05"><span class="input-suffix">%</span></div>
+          <p class="form-hint">30-yr fixed avg (Sep 2026): ~6.8%. Shop at least 3 lenders.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Loan Term</label>
+          <select id="rf-new-term" class="form-select">
+            <option value="30" selected>30 years</option>
+            <option value="20">20 years</option>
+            <option value="15">15 years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Estimated Closing Costs</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="rf-costs" class="form-input form-input--prefixed" placeholder="4000" min="0" step="100" value="4000"></div>
+          <p class="form-hint">Typical range: $2,000&#x2013;$6,000. Includes origination, appraisal, and title fees.</p>
+        </div>
+      </div>
+      <button class="calc-btn" id="calc-rf-btn" style="margin-top:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Calculate Refinance Savings
+      </button>
+    </div>
+    <div id="rf-results" style="display:none">
+      <div id="rf-verdict-card" data-enter></div>
+      <div class="rf-metrics" data-enter data-delay="1">
+        <div class="rf-metric"><div class="rf-metric-val" id="r-rf-cur-pay">&#x2014;</div><div class="rf-metric-label">Current Payment</div></div>
+        <div class="rf-metric"><div class="rf-metric-val" id="r-rf-new-pay">&#x2014;</div><div class="rf-metric-label">New Payment</div></div>
+        <div class="rf-metric"><div class="rf-metric-val" id="r-rf-savings">&#x2014;</div><div class="rf-metric-label">Monthly Savings</div></div>
+        <div class="rf-metric"><div class="rf-metric-val" id="r-rf-breakeven">&#x2014;</div><div class="rf-metric-label">Break-Even</div></div>
+      </div>
+      <div class="calc-card" style="margin-top:8px" data-enter data-delay="2">
+        <div class="calc-card-header">Full Refinance Breakdown</div>
+        <div id="rf-breakdown"></div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/mortgage-calculator" class="calc-btn" style="flex:1;min-width:180px;text-align:center;text-decoration:none">Mortgage calculator &#x2192;</a>
+        <a href="/debt-payoff-calculator" class="calc-btn calc-btn--secondary" style="flex:1;min-width:180px;text-align:center;text-decoration:none">Debt payoff calculator</a>
+      </div>
+    </div>
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>Should You Refinance Your Mortgage? (2026 Guide)</h2>
+        <p>The refinance decision comes down to one question: will you stay in the home long enough to recoup the closing costs through monthly savings?</p>
+        <h3>The Break-Even Rule</h3>
+        <p>If closing costs = $5,000 and monthly savings = $200, your break-even is 25 months (about 2 years). If you plan to stay longer, refinancing saves money. If you might sell or move in 2 years, the math does not work.</p>
+        <h3>The 1% Rule of Thumb</h3>
+        <p>Refinancing is generally worth it if you can lower your rate by at least 1 percentage point. A 0.5% drop can still make sense if your loan balance is large enough that the monthly savings justify the closing costs quickly.</p>
+        <h3>Cash-Out vs. Rate-and-Term Refinance</h3>
+        <p>A rate-and-term refinance (what this calculator covers) just changes your rate and/or term. A cash-out refinance lets you borrow against your equity but increases your balance and usually your rate. Use cash-out carefully &#x2014; it resets your payoff timeline.</p>
+      </div>
+    </section>
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">Refinance questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">How much does it cost to refinance a mortgage?</summary><div class="faq-a">Refinance closing costs typically run 2&#x2013;5% of the loan amount. On a $280,000 loan that is $5,600&#x2013;$14,000. Some lenders offer "no-closing-cost" refinances where fees are rolled into the rate (slightly higher rate) or loan balance. Always compare total cost over your planned stay, not just the rate.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">How many times can I refinance my mortgage?</summary><div class="faq-a">There is no legal limit on refinancing frequency. However, each refinance resets your amortization (more of early payments go to interest again), incurs closing costs, and may require a new appraisal and credit check. Most lenders require 6&#x2013;12 months between refinances.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">What credit score do I need to refinance?</summary><div class="faq-a">Conventional refinance: 620+ minimum, 740+ for best rates. FHA streamline refinance: no minimum score. VA IRRRL: no minimum. The higher your score, the lower your rate. Even improving from 680 to 720 can save 0.25&#x2013;0.5% on the rate.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">Is a 15-year refinance worth it?</summary><div class="faq-a">A 15-year refinance saves massive interest over the loan life but has significantly higher monthly payments. On a $280,000 refinance: 30-yr at 6.5% = $1,770/mo. 15-yr at 6.0% = $2,364/mo (+$594/mo). Total interest: 30-yr = $357,000 vs 15-yr = $145,000. You save $212,000 in interest if you can afford the higher payment.</div></details>
+        </div>
+      </div>
+    </section>
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More mortgage calculators</h2></div>
+        <div class="related-grid">
+          <a href="/mortgage-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div><div class="tool-card-title">Mortgage Calculator</div><div class="tool-card-desc" style="font-size:13px">Monthly payment, PITI, amortization.</div></div></div></a>
+          <a href="/reverse-mortgage-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><div class="tool-card-title">Reverse Mortgage Calculator</div><div class="tool-card-desc" style="font-size:13px">HECM proceeds estimate for 62+.</div></div></div></a>
+          <a href="/debt-payoff-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="tool-card-title">Debt Payoff Calculator</div><div class="tool-card-desc" style="font-size:13px">Avalanche vs. snowball payoff plan.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand"><a href="/" class="footer-logo">FreePayrollCalc</a><p class="footer-tagline">Free finance and payroll calculators. No sign-up required.</p></div>
+      <div class="footer-col"><div class="footer-col-title">Mortgage</div><nav class="footer-nav"><a href="/mortgage-calculator">Mortgage Calculator</a><a href="/refinance-calculator">Refinance Calculator</a><a href="/reverse-mortgage-calculator">Reverse Mortgage</a></nav></div>
+      <div class="footer-col"><div class="footer-col-title">Tax</div><nav class="footer-nav"><a href="/tax-refund-estimator">Tax Refund Estimator</a><a href="/income-tax-calculator">Income Tax</a><a href="/1099-tax-calculator">1099 Tax Calculator</a></nav></div>
+      <div class="footer-col"><div class="footer-col-title">Payroll</div><nav class="footer-nav"><a href="/payroll-tax-calculator">Payroll Tax</a><a href="/take-home-pay-calculator">Take-Home Pay</a><a href="/payroll-hours-calculator">Payroll Hours</a></nav></div>
+    </div>
+    <div class="footer-bottom"><p>FreePayrollCalc is an informational tool. Refinance calculations are estimates. Consult a lender for official rate quotes.</p><p class="footer-copyright">&copy; 2026 FreePayrollCalc.xyz</p></div>
+  </div>
+</footer>
+<script>
+(function(){
+  function pmt(principal, annualRate, years) {
+    if (annualRate === 0) return principal / (years * 12);
+    var r = annualRate / 100 / 12, n = years * 12;
+    return principal * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+  }
+  function totalInterest(principal, annualRate, years) {
+    return pmt(principal, annualRate, years) * years * 12 - principal;
+  }
+  function fmt(n) { return '$' + Math.round(n).toString().replace(/B(?=(d{3})+(?!d))/g, ','); }
+  function fmtD(n) { return '$' + n.toFixed(2).replace(/B(?=(d{3})+(?!d))/g, ','); }
+  function line(lbl, val, cls) {
+    return '<div class="rf-line' + (cls?' '+cls:'') + '"><span>'+lbl+'</span><span style="font-family:JetBrains Mono,monospace;font-weight:700">'+val+'</span></div>';
+  }
+
+  document.getElementById('calc-rf-btn').addEventListener('click', function(){
+    var balance  = parseFloat(document.getElementById('rf-balance').value)   || 0;
+    var curRate  = parseFloat(document.getElementById('rf-cur-rate').value)  || 0;
+    var curTerm  = parseInt(document.getElementById('rf-cur-term').value,10) || 30;
+    var newRate  = parseFloat(document.getElementById('rf-new-rate').value)  || 0;
+    var newTerm  = parseInt(document.getElementById('rf-new-term').value,10) || 30;
+    var costs    = parseFloat(document.getElementById('rf-costs').value)     || 0;
+
+    if (!balance || !newRate) { document.getElementById('rf-balance').focus(); return; }
+
+    var curPay  = pmt(balance, curRate, curTerm);
+    var newPay  = pmt(balance, newRate, newTerm);
+    var savings = curPay - newPay;
+    var breakEven = savings > 0 ? Math.ceil(costs / savings) : Infinity;
+    var curTotalInt = totalInterest(balance, curRate, curTerm);
+    var newTotalInt = totalInterest(balance, newRate, newTerm);
+    var intSaved = curTotalInt - newTotalInt;
+    var netSaved = intSaved - costs;
+
+    document.getElementById('r-rf-cur-pay').textContent  = fmtD(curPay);
+    document.getElementById('r-rf-new-pay').textContent  = fmtD(newPay);
+    document.getElementById('r-rf-savings').textContent  = savings > 0 ? fmtD(savings) : '-'+fmtD(Math.abs(savings));
+    document.getElementById('r-rf-breakeven').textContent = isFinite(breakEven) ? breakEven + ' mo' : 'N/A';
+
+    var verdict, vClass;
+    if (savings <= 0) {
+      verdict = 'Not recommended'; vClass = 'rf-verdict--wait';
+      document.getElementById('rf-verdict-card').innerHTML = '<div class="rf-verdict '+vClass+'"><div class="rf-verdict-label" style="color:#ef4444">Verdict</div><div class="rf-verdict-head" style="color:#ef4444;font-size:32px">Do not refinance</div><div class="rf-verdict-sub">New rate is not low enough to reduce your payment.</div></div>';
+    } else if (breakEven <= 24) {
+      vClass = 'rf-verdict--good';
+      document.getElementById('rf-verdict-card').innerHTML = '<div class="rf-verdict '+vClass+'"><div class="rf-verdict-label" style="color:#10b981">Verdict: Refinance Makes Sense</div><div class="rf-verdict-head" style="color:#10b981">Break-even: '+breakEven+' months</div><div class="rf-verdict-sub">You recoup closing costs in under 2 years. Strong case to refinance.</div></div>';
+    } else {
+      vClass = 'rf-verdict--neutral';
+      document.getElementById('rf-verdict-card').innerHTML = '<div class="rf-verdict '+vClass+'"><div class="rf-verdict-label" style="color:#f59e0b">Verdict: Depends on Your Plans</div><div class="rf-verdict-head" style="color:#f59e0b;font-size:38px">Break-even: '+breakEven+' mo</div><div class="rf-verdict-sub">Only makes sense if you stay in the home past month '+breakEven+'.</div></div>';
+    }
+
+    var bd = '<div class="rf-sec">Payment Comparison</div>';
+    bd += line('Current monthly payment ('+curRate+'%, '+curTerm+' yr)', fmtD(curPay));
+    bd += line('New monthly payment ('+newRate+'%, '+newTerm+' yr)', fmtD(newPay));
+    bd += line(savings>0?'<strong>Monthly savings</strong>':'<strong>Monthly increase</strong>', '<strong>'+(savings>0?'+':'')+fmtD(savings)+'</strong>');
+    bd += '<div class="rf-sec">Break-Even Analysis</div>';
+    bd += line('Closing costs', fmt(costs));
+    bd += line('Monthly payment savings', fmtD(Math.max(0,savings)));
+    bd += line('Break-even point', isFinite(breakEven)?breakEven+' months':'N/A');
+    bd += '<div class="rf-sec">Lifetime Interest</div>';
+    bd += line('Interest remaining on current loan', fmt(curTotalInt));
+    bd += line('Interest on new loan', fmt(newTotalInt));
+    bd += line('Interest saved', fmt(Math.max(0,intSaved)));
+    bd += line('Minus closing costs', '-'+fmt(costs));
+    var netClass = netSaved >= 0 ? 'rf-total' : '';
+    bd += '<div class="'+netClass+'" style="display:flex;justify-content:space-between;padding:12px 14px;border-radius:8px;margin-top:4px;font-weight:800;font-size:14px;'+(netSaved<0?'color:#ef4444':'color:#10b981')+'"><span>Net lifetime '+(netSaved>=0?'savings':'cost')+'</span><span style="font-family:JetBrains Mono,monospace">'+fmt(Math.abs(netSaved))+'</span></div>';
+    document.getElementById('rf-breakdown').innerHTML = bd;
+
+    var res = document.getElementById('rf-results');
+    res.style.display = '';
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.querySelectorAll('#calc-rf-btn').forEach(function(b){
+    var card = b.closest('.calc-card');
+    if (card) card.querySelectorAll('input,select').forEach(function(el){
+      el.addEventListener('keydown', function(e){ if(e.key==='Enter') b.click(); });
+    });
+  });
+})();
+</script>
+<script src="/shared/scripts.js?v=4" defer></script>
+</body>
+</html>

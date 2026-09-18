@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free 1099 Tax Calculator 2026 | Self-Employment Tax Estimator</title>
+<meta name="description" content="Free 1099 tax calculator for 2026. Enter your freelance or contractor income and expenses to estimate self-employment tax, federal income tax, and quarterly payment amounts.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/1099-tax-calculator">
+<meta property="og:title" content="Free 1099 Tax Calculator 2026 — Freelancer &amp; Contractor Tax Estimator">
+<meta property="og:description" content="Calculate your 2026 taxes as a 1099 contractor: self-employment tax, federal income tax, effective rate, and quarterly estimated payments. Free, no sign-up.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free 1099 Tax Calculator 2026","url":"https://www.freepayrollcalc.xyz/1099-tax-calculator","description":"Calculate self-employment tax and federal income tax for 1099 contractors and freelancers. Shows SE tax, income tax, quarterly estimated payments, and effective rate. 2026 IRS rates.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much tax do I owe on 1099 income?","acceptedAnswer":{"@type":"Answer","text":"As a 1099 contractor you pay self-employment tax (15.3% on 92.35% of net profit) plus federal income tax on your taxable income. For someone earning $70,000 net: SE tax is about $9,890, then federal income tax on the remainder after deductions. Total effective tax rate is typically 25-35% including both taxes."}},{"@type":"Question","name":"What business expenses can I deduct on a 1099?","acceptedAnswer":{"@type":"Answer","text":"Common 1099 deductions include: home office (simplified: $5/sq ft up to 300 sq ft), internet and phone (business portion), software and subscriptions, equipment and supplies, professional development, health insurance premiums (self-employed), retirement contributions (SEP-IRA up to 25% of net, max $69,000), and mileage ($0.67/mile in 2026)."}},{"@type":"Question","name":"When are quarterly estimated taxes due in 2026?","acceptedAnswer":{"@type":"Answer","text":"2026 estimated tax due dates: Q1 — April 15, 2026 (for Jan 1 to Mar 31 income); Q2 — June 16, 2026; Q3 — September 15, 2026; Q4 — January 15, 2027. Pay at IRS.gov/payments. Underpaying can result in a penalty if you owe more than $1,000 at filing."}},{"@type":"Question","name":"What is the self-employment tax rate in 2026?","acceptedAnswer":{"@type":"Answer","text":"Self-employment tax is 15.3% (12.4% Social Security + 2.9% Medicare) on 92.35% of net self-employment income. The Social Security portion only applies to the first $176,100 of net SE income in 2026. You can deduct half of SE tax paid as an adjustment to income, reducing your federal income tax."}}]}
+</script>
+<style>
+.tt-summary{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+@media(max-width:600px){.tt-summary{grid-template-columns:1fr}}
+.tt-main-card{background:linear-gradient(135deg,rgba(239,68,68,.07),rgba(239,68,68,.02));border:2px solid rgba(239,68,68,.2);border-radius:14px;padding:24px;text-align:center}
+.tt-big-num{font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:900;color:#ef4444;line-height:1;margin-bottom:4px}
+.tt-keep-card{background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(16,185,129,.02));border:2px solid rgba(16,185,129,.2);border-radius:14px;padding:24px;text-align:center}
+.tt-keep-num{font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:900;color:#10b981;line-height:1;margin-bottom:4px}
+.tt-big-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.tt-big-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.tt-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:20px}
+.tt-metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.tt-metric-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--ink-1)}
+.tt-metric-label{font-size:11px;color:var(--ink-3);margin-top:3px}
+.tt-line{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.tt-line:last-child{border-bottom:none}
+.tt-sec{font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--ink-3);padding:10px 0 4px;margin-top:8px}
+.tt-total{background:rgba(239,68,68,.05);border-radius:8px;padding:12px 14px;margin-top:4px;font-size:14px;font-weight:800;color:#ef4444}
+.tt-qtrs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+@media(max-width:500px){.tt-qtrs{grid-template-columns:1fr}}
+.tt-qtr{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.tt-qtr-amount{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--accent)}
+.tt-qtr-label{font-size:12px;font-weight:700;color:var(--ink-2);margin-bottom:2px}
+.tt-qtr-date{font-size:11px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 50+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">FreePayrollCalc</a>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Tax <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown"><a href="/1099-tax-calculator" class="nav-item nav-item--active">1099 Tax Calculator</a><a href="/tax-refund-estimator" class="nav-item">Tax Refund Estimator</a><a href="/income-tax-calculator" class="nav-item">Income Tax</a><a href="/self-employment-tax-calculator" class="nav-item">Self-Employment Tax</a><a href="/quarterly-tax-calculator" class="nav-item">Quarterly Tax</a><a href="/1099-vs-w2-calculator" class="nav-item">1099 vs W-2</a></div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Payroll <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown"><a href="/payroll-tax-calculator" class="nav-item">Payroll Tax</a><a href="/take-home-pay-calculator" class="nav-item">Take-Home Pay</a><a href="/payroll-hours-calculator" class="nav-item">Payroll Hours</a></div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Finance <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown"><a href="/mortgage-calculator" class="nav-item">Mortgage Calculator</a><a href="/budget-calculator" class="nav-item">Budget Calculator</a></div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="btn-search" aria-label="Search tools"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></button>
+      <a href="/tools" class="btn-all-tools">All Tools</a>
+    </div>
+  </div>
+</header>
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">1099 Tax Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Free 1099 Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-subtitle" data-enter data-delay="1">Estimate your total tax bill as a freelancer or 1099 contractor.<br>Includes self-employment tax, federal income tax, and quarterly payment schedule.</p>
+    <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SE tax 15.3% on 92.35% of net &#xB7; 2026 IRS brackets &#xB7; Quarterly payment dates</div>
+    <div class="calc-card" data-enter data-delay="2">
+      <div class="calc-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> 1099 Income Details</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Gross 1099 Income <span style="color:var(--red)">*</span></label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="tt-income" class="form-input form-input--prefixed" placeholder="85000" min="0" step="1000"></div>
+          <p class="form-hint">Total amount from all 1099-NEC / 1099-MISC forms before any deductions.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Business Expenses</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="tt-expenses" class="form-input form-input--prefixed" placeholder="10000" min="0" step="500" value="0"></div>
+          <p class="form-hint">Home office, equipment, software, phone, mileage, professional development, etc.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Filing Status</label>
+          <select id="tt-filing" class="form-select">
+            <option value="single">Single</option>
+            <option value="mfj">Married Filing Jointly</option>
+            <option value="hoh">Head of Household</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Other W-2 Income (if any)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="tt-w2" class="form-input form-input--prefixed" placeholder="0" min="0" step="1000" value="0"></div>
+          <p class="form-hint">Salary or wages from a regular job (W-2) in addition to 1099 income.</p>
+        </div>
+      </div>
+      <button class="calc-btn" id="calc-tt-btn" style="margin-top:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Calculate My 1099 Taxes
+      </button>
+    </div>
+    <div id="tt-results" style="display:none">
+      <div class="tt-summary" data-enter>
+        <div class="tt-main-card">
+          <div class="tt-big-num" id="r-tt-total">&#x2014;</div>
+          <div class="tt-big-label">Total Tax Owed</div>
+          <div class="tt-big-sub">SE tax + federal income tax</div>
+        </div>
+        <div class="tt-keep-card">
+          <div class="tt-keep-num" id="r-tt-keep">&#x2014;</div>
+          <div class="tt-big-label" style="color:#10b981">You Keep</div>
+          <div class="tt-big-sub">After all taxes (from net profit)</div>
+        </div>
+      </div>
+      <div class="tt-metrics" data-enter data-delay="1">
+        <div class="tt-metric"><div class="tt-metric-val" id="r-tt-net">&#x2014;</div><div class="tt-metric-label">Net Profit</div></div>
+        <div class="tt-metric"><div class="tt-metric-val" id="r-tt-se">&#x2014;</div><div class="tt-metric-label">SE Tax</div></div>
+        <div class="tt-metric"><div class="tt-metric-val" id="r-tt-fed">&#x2014;</div><div class="tt-metric-label">Federal Income Tax</div></div>
+        <div class="tt-metric"><div class="tt-metric-val" id="r-tt-eff">&#x2014;</div><div class="tt-metric-label">Effective Rate</div></div>
+      </div>
+      <div class="calc-card" style="margin-top:20px" data-enter data-delay="2">
+        <div class="calc-card-header">Full Tax Breakdown</div>
+        <div id="tt-breakdown"></div>
+      </div>
+      <div class="calc-card" style="margin-top:20px" data-enter data-delay="3">
+        <div class="calc-card-header">2026 Quarterly Estimated Payments</div>
+        <p style="font-size:13px;color:var(--ink-3);margin-bottom:12px">Pay each quarter to avoid underpayment penalties. Due dates shown below.</p>
+        <div class="tt-qtrs" id="tt-quarters"></div>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:12px">Pay at IRS.gov/payments (Direct Pay &#x2014; free) or by check to the IRS with Form 1040-ES.</p>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="/quarterly-tax-calculator" class="calc-btn" style="flex:1;min-width:180px;text-align:center;text-decoration:none">Quarterly tax calculator &#x2192;</a>
+        <a href="/1099-vs-w2-calculator" class="calc-btn calc-btn--secondary" style="flex:1;min-width:180px;text-align:center;text-decoration:none">1099 vs W-2 comparison</a>
+      </div>
+    </div>
+    <section class="calc-article" style="margin-top:64px">
+      <div class="article-inner" style="max-width:720px">
+        <h2>How 1099 Taxes Work in 2026</h2>
+        <p>As a 1099 contractor you pay <strong>two</strong> separate taxes on your net profit: self-employment tax and income tax.</p>
+        <h3>Self-Employment Tax (15.3%)</h3>
+        <p>SE tax = net profit &#xD7; 92.35% &#xD7; 15.3%. The 92.35% factor exists because employees only pay 7.65% FICA (employer pays the other half). As self-employed, you pay both halves. <strong>Good news:</strong> you can deduct half of SE tax paid from your gross income, reducing your federal income tax.</p>
+        <h3>Federal Income Tax</h3>
+        <p>After subtracting half of SE tax and the standard deduction from your adjusted gross income, your taxable income is taxed at the 2026 bracket rates (10% / 12% / 22% / 24% / 32% / 35% / 37%).</p>
+        <h3>Top Deductions for 1099 Workers</h3>
+        <ul>
+          <li>Home office: $5/sq ft (simplified), up to $1,500/yr</li>
+          <li>Mileage: $0.67/mile (2026 IRS rate)</li>
+          <li>Health insurance premiums: 100% deductible if not eligible for employer plan</li>
+          <li>SEP-IRA: up to 25% of net SE income, max $69,000 &#x2014; biggest available deduction</li>
+          <li>Half of self-employment tax: automatic adjustment</li>
+        </ul>
+      </div>
+    </section>
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">FAQ</p><h2 class="section-title">1099 tax questions answered</h2></div>
+        <div class="faq-list">
+          <details class="faq-item" data-enter data-delay="1"><summary class="faq-q">Do I have to file taxes if I made less than $600 on a 1099?</summary><div class="faq-a">Yes. The $600 threshold only determines whether the payer must send you a 1099 form. You must report all self-employment income to the IRS regardless of amount. If your net SE income exceeds $400, you owe self-employment tax and must file Schedule SE.</div></details>
+          <details class="faq-item" data-enter data-delay="2"><summary class="faq-q">What percentage should I set aside for 1099 taxes?</summary><div class="faq-a">A safe rule of thumb: set aside 25&#x2013;30% of every payment you receive. This covers SE tax (~15%), federal income tax (~10&#x2013;15%), and leaves a small buffer. Open a separate savings account and transfer the percentage immediately when paid &#x2014; do not keep it in your operating account.</div></details>
+          <details class="faq-item" data-enter data-delay="3"><summary class="faq-q">Can I deduct my home office as a 1099 contractor?</summary><div class="faq-a">Yes, using the simplified method: $5 per square foot of your home office, up to 300 sq ft = max $1,500/yr deduction. The regular method (actual expenses proportional to office square footage) can yield more if your home costs are high. The office must be used regularly and exclusively for business.</div></details>
+          <details class="faq-item" data-enter data-delay="4"><summary class="faq-q">What is the penalty for not paying quarterly estimated taxes?</summary><div class="faq-a">The underpayment penalty is currently around 8% annualized (federal short-term rate + 3%). It applies if you owe more than $1,000 at filing and did not pay at least 90% of current year tax or 100% of prior year tax through withholding or estimated payments. The penalty is calculated on each quarter individually.</div></details>
+        </div>
+      </div>
+    </section>
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header" data-enter><p class="section-eyebrow">Related Tools</p><h2 class="section-title">More tax calculators</h2></div>
+        <div class="related-grid">
+          <a href="/quarterly-tax-calculator" class="tool-card" data-enter data-delay="1"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="tool-card-title">Quarterly Tax Calculator</div><div class="tool-card-desc" style="font-size:13px">Safe harbor amounts for each quarter.</div></div></div></a>
+          <a href="/self-employment-tax-calculator" class="tool-card" data-enter data-delay="2"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><div class="tool-card-title">Self-Employment Tax</div><div class="tool-card-desc" style="font-size:13px">SE tax + deductible half breakdown.</div></div></div></a>
+          <a href="/1099-vs-w2-calculator" class="tool-card" data-enter data-delay="3"><div style="display:flex;align-items:flex-start;gap:12px"><div class="tc-icon-wrap tc-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="tool-card-title">1099 vs W-2 Calculator</div><div class="tool-card-desc" style="font-size:13px">True cost comparison, contractor vs employee.</div></div></div></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand"><a href="/" class="footer-logo">FreePayrollCalc</a><p class="footer-tagline">Free payroll and tax calculators. No sign-up required.</p></div>
+      <div class="footer-col"><div class="footer-col-title">1099 / Freelance Tax</div><nav class="footer-nav"><a href="/1099-tax-calculator">1099 Tax Calculator</a><a href="/self-employment-tax-calculator">Self-Employment Tax</a><a href="/quarterly-tax-calculator">Quarterly Tax</a><a href="/1099-vs-w2-calculator">1099 vs W-2</a></nav></div>
+      <div class="footer-col"><div class="footer-col-title">Income Tax</div><nav class="footer-nav"><a href="/tax-refund-estimator">Tax Refund Estimator</a><a href="/income-tax-calculator">Income Tax Calculator</a><a href="/bonus-tax-calculator">Bonus Tax</a><a href="/w4-withholding-calculator">W-4 Withholding</a></nav></div>
+      <div class="footer-col"><div class="footer-col-title">Payroll</div><nav class="footer-nav"><a href="/payroll-tax-calculator">Payroll Tax</a><a href="/take-home-pay-calculator">Take-Home Pay</a><a href="/payroll-hours-calculator">Payroll Hours</a></nav></div>
+    </div>
+    <div class="footer-bottom"><p>FreePayrollCalc is an informational tool. Tax estimates use 2026 IRS published rates. Consult a tax professional for official guidance.</p><p class="footer-copyright">&copy; 2026 FreePayrollCalc.xyz</p></div>
+  </div>
+</footer>
+<script>
+(function(){
+  var BRACKETS = {
+    single: [[11925,0,0.10],[48475,1192.5,0.12],[103350,5578.5,0.22],[197300,26660.5,0.24],[243725,49335.5,0.32],[609350,64087.5,0.35],[Infinity,192189.75,0.37]],
+    mfj:    [[23850,0,0.10],[96950,2385,0.12],[206700,11157,0.22],[394600,53321,0.24],[487450,98671,0.32],[731200,128111,0.35],[Infinity,384380,0.37]],
+    hoh:    [[17000,0,0.10],[64850,1700,0.12],[103350,7442,0.22],[197300,16133.5,0.24],[243725,38646.5,0.32],[609350,53578.5,0.35],[Infinity,181954.25,0.37]]
+  };
+  var STD = { single:15000, mfj:30000, hoh:22500 };
+  var SS_CAP = 176100;
+
+  function calcIncomeTax(taxable, filing) {
+    var b = BRACKETS[filing], tax = 0, marginal = 0;
+    for (var i = 0; i < b.length; i++) {
+      var floor = i > 0 ? b[i-1][0] : 0;
+      if (taxable > floor) { var top = Math.min(taxable, b[i][0]); tax += (top-floor)*b[i][2]; marginal = b[i][2]; }
+    }
+    return { tax: tax, marginal: marginal };
+  }
+
+  function fmt(n) { return '$' + Math.round(Math.abs(n)).toString().replace(/B(?=(d{3})+(?!d))/g, ','); }
+  function pct(r) { return (r*100).toFixed(1)+'%'; }
+  function line(lbl, val, cls) {
+    return '<div class="tt-line'+(cls?' '+cls:'')+'"><span>'+lbl+'</span><span style="font-family:JetBrains Mono,monospace;font-weight:700">'+val+'</span></div>';
+  }
+
+  var QTRS = [
+    { label: 'Q1 2026', period: 'Jan 1 &#x2013; Mar 31', due: 'Due Apr 15, 2026' },
+    { label: 'Q2 2026', period: 'Apr 1 &#x2013; May 31', due: 'Due Jun 16, 2026' },
+    { label: 'Q3 2026', period: 'Jun 1 &#x2013; Aug 31', due: 'Due Sep 15, 2026' },
+    { label: 'Q4 2026', period: 'Sep 1 &#x2013; Dec 31', due: 'Due Jan 15, 2027' }
+  ];
+
+  document.getElementById('calc-tt-btn').addEventListener('click', function(){
+    var gross    = parseFloat(document.getElementById('tt-income').value)   || 0;
+    var expenses = parseFloat(document.getElementById('tt-expenses').value) || 0;
+    var filing   = document.getElementById('tt-filing').value;
+    var w2       = parseFloat(document.getElementById('tt-w2').value)       || 0;
+
+    if (!gross) { document.getElementById('tt-income').focus(); return; }
+
+    var netProfit = Math.max(0, gross - expenses);
+
+    // SE tax
+    var seBase = netProfit * 0.9235;
+    var seSS   = Math.min(seBase, SS_CAP) * 0.124;
+    var seMed  = seBase * 0.029;
+    var seTax  = seSS + seMed;
+    var seDeduct = seTax / 2;
+
+    // Federal income tax
+    var agi      = netProfit + w2 - seDeduct;
+    var stdDed   = STD[filing];
+    var taxable  = Math.max(0, agi - stdDed);
+    var fedResult = calcIncomeTax(taxable, filing);
+    var fedTax   = fedResult.tax;
+
+    var totalTax  = seTax + fedTax;
+    var keepAmt   = netProfit - totalTax;
+    var effRate   = gross > 0 ? totalTax / gross : 0;
+
+    document.getElementById('r-tt-total').textContent = fmt(totalTax);
+    document.getElementById('r-tt-keep').textContent  = fmt(keepAmt);
+    document.getElementById('r-tt-net').textContent   = fmt(netProfit);
+    document.getElementById('r-tt-se').textContent    = fmt(seTax);
+    document.getElementById('r-tt-fed').textContent   = fmt(fedTax);
+    document.getElementById('r-tt-eff').textContent   = pct(effRate);
+
+    // Breakdown
+    var bd = '<div class="tt-sec">Income</div>';
+    bd += line('Gross 1099 income', fmt(gross));
+    if (expenses > 0) bd += line('Business expenses', '-'+fmt(expenses));
+    bd += line('<strong>Net profit</strong>', '<strong>'+fmt(netProfit)+'</strong>');
+    if (w2 > 0) bd += line('W-2 income', '+'+fmt(w2));
+    bd += '<div class="tt-sec">Self-Employment Tax (15.3%)</div>';
+    bd += line('SE income base (92.35% of net profit)', fmt(seBase));
+    bd += line('Social Security (12.4%, capped at $'+SS_CAP.toLocaleString()+')', fmt(seSS));
+    bd += line('Medicare (2.9%)', fmt(seMed));
+    bd += line('<strong>Total SE tax</strong>', '<strong>'+fmt(seTax)+'</strong>');
+    bd += '<div class="tt-sec">Federal Income Tax</div>';
+    bd += line('Net profit + W-2', fmt(netProfit+w2));
+    bd += line('Half of SE tax (deduction)', '-'+fmt(seDeduct));
+    bd += line('Standard deduction ('+filing.toUpperCase().replace('MFJ','MFJ').replace('HOH','HOH')+')', '-'+fmt(stdDed));
+    bd += line('Taxable income', fmt(taxable));
+    bd += line('<strong>Federal income tax</strong>', '<strong>'+fmt(fedTax)+'</strong>');
+    bd += line('Marginal bracket', pct(fedResult.marginal));
+    bd += '<div class="tt-total" style="display:flex;justify-content:space-between"><span>Total tax liability</span><span style="font-family:JetBrains Mono,monospace">'+fmt(totalTax)+'</span></div>';
+    document.getElementById('tt-breakdown').innerHTML = bd;
+
+    // Quarterly payments
+    var qtrAmt = totalTax / 4;
+    var qHTML = '';
+    for (var i = 0; i < QTRS.length; i++) {
+      qHTML += '<div class="tt-qtr"><div class="tt-qtr-label">'+QTRS[i].label+'</div>'
+        + '<div class="tt-qtr-amount">'+fmt(qtrAmt)+'</div>'
+        + '<div class="tt-qtr-date">'+QTRS[i].period+'<br>'+QTRS[i].due+'</div></div>';
+    }
+    document.getElementById('tt-quarters').innerHTML = qHTML;
+
+    var res = document.getElementById('tt-results');
+    res.style.display = '';
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.querySelectorAll('#calc-tt-btn').forEach(function(b){
+    var card = b.closest('.calc-card');
+    if (card) card.querySelectorAll('input,select').forEach(function(el){
+      el.addEventListener('keydown', function(e){ if(e.key==='Enter') b.click(); });
+    });
+  });
+})();
+</script>
+<script src="/shared/scripts.js?v=4" defer></script>
+</body>
+</html>
