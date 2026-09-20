@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://www.freepayrollcalc.xyz/sitemap.xml
+Sitemap: https://www.freepayrollcalc.com/sitemap.xml
