@@ -84,6 +84,17 @@ const TITLES = {
   'fmla-leave-calculator': 'FMLA Leave Calculator',
   'unemployment-benefits-calculator': 'Unemployment Benefits',
   'state-payroll-tax-rates': 'State Payroll Tax Rates',
+  // Batch 4
+  'cd-calculator': 'CD Calculator',
+  'credit-card-payoff-calculator': 'Credit Card Payoff',
+  'extra-mortgage-payment-calculator': 'Extra Mortgage Payment',
+  '401k-loan-calculator': '401k Loan Calculator',
+  'balance-transfer-calculator': 'Balance Transfer Calculator',
+  'parent-plus-loan-calculator': 'Parent PLUS Loan Calculator',
+  'estate-tax-calculator': 'Estate Tax Calculator',
+  'dividend-yield-calculator': 'Dividend Yield Calculator',
+  'total-compensation-calculator': 'Total Compensation',
+  'fuel-savings-calculator': 'Fuel Savings Calculator',
 };
 
 const RELATED = {
@@ -171,6 +182,17 @@ const RELATED = {
   'salary-to-hourly-calculator': ['take-home-pay-calculator','payroll-tax-calculator','overtime-pay-calculator','net-to-gross-calculator'],
   'net-to-gross-calculator': ['payroll-tax-calculator','take-home-pay-calculator','income-tax-calculator','w4-withholding-calculator'],
   'percentage-calculator': ['markup-calculator','profit-margin-calculator','salary-increase-calculator','rate-of-return-calculator'],
+  // Batch 4
+  'cd-calculator': ['savings-goal-calculator','compound-interest-calculator','savings-calculator','rate-of-return-calculator'],
+  'credit-card-payoff-calculator': ['balance-transfer-calculator','debt-consolidation-calculator','debt-payoff-calculator','personal-loan-calculator'],
+  'extra-mortgage-payment-calculator': ['mortgage-calculator','refinance-calculator','mortgage-affordability-calculator','savings-goal-calculator'],
+  '401k-loan-calculator': ['retirement-calculator','roth-ira-calculator','compound-interest-calculator','personal-loan-calculator'],
+  'balance-transfer-calculator': ['credit-card-payoff-calculator','debt-consolidation-calculator','personal-loan-calculator','debt-payoff-calculator'],
+  'parent-plus-loan-calculator': ['student-loan-repayment-calculator','debt-consolidation-calculator','personal-loan-calculator','savings-goal-calculator'],
+  'estate-tax-calculator': ['income-tax-calculator','capital-gains-tax-calculator','roth-ira-calculator','retirement-calculator'],
+  'dividend-yield-calculator': ['rate-of-return-calculator','compound-interest-calculator','roth-ira-calculator','savings-goal-calculator'],
+  'total-compensation-calculator': ['take-home-pay-calculator','payroll-tax-calculator','salary-to-hourly-calculator','budget-calculator'],
+  'fuel-savings-calculator': ['budget-calculator','cost-of-living-calculator','savings-goal-calculator','total-compensation-calculator'],
 };
 
 // State pages all get the same 4 related tools
