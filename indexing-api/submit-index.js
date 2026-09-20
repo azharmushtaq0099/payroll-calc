@@ -23,7 +23,7 @@ const SITE_ROOT   = path.join(__dirname, '..');
 const CREDS_FILE  = path.join(__dirname, 'credentials.json');
 const SITEMAP     = path.join(SITE_ROOT, 'sitemap.xml');
 const LOG_FILE    = path.join(__dirname, 'submission-log.json');
-const DOMAIN      = 'https://www.freepayrollcalc.com';
+const DOMAIN      = 'https://www.freepayrollcalc.xyz';
 const DAILY_LIMIT = 200;
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
