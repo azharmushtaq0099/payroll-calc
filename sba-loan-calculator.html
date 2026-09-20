@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SBA Loan Calculator 2026 | Monthly Payment + Guarantee Fee Estimate</title>
+<meta name="description" content="Calculate SBA 7(a) and 504 loan payments. Enter loan amount, rate, and term to see monthly payment, total interest, guarantee fee, and total cost.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/sba-loan-calculator">
+<meta property="og:title" content="SBA Loan Calculator 2026 | Monthly Payment + Guarantee Fee Estimate">
+<meta property="og:description" content="Calculate SBA 7(a) and 504 loan payments. Enter loan amount, rate, and term to see monthly payment, total interest, guarantee fee, and total cost.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SBA Loan Calculator 2026","url":"https://www.freepayrollcalc.com/sba-loan-calculator","description":"Calculate monthly payments for SBA 7(a) and 504 loans. Enter loan amount, interest rate, and term to see your monthly payment, total interest, and guarantee fee.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are current SBA loan interest rates in 2026?","acceptedAnswer":{"@type":"Answer","text":"SBA 7(a) loan rates are typically prime rate + 2.25%–4.75% depending on loan size and term. SBA 504 loans have fixed rates set monthly by the SBA, typically ranging from 6%–8% for the CDC portion. Check SBA.gov for current rate tables."}},{"@type":"Question","name":"What is the SBA guarantee fee?","acceptedAnswer":{"@type":"Answer","text":"For SBA 7(a) loans, the guarantee fee is a percentage of the guaranteed portion: 0% for loans under $150K, 2% for $150K–$700K, 3% for $700K–$5M. The fee is typically financed into the loan. Small businesses in underserved communities may be exempt."}},{"@type":"Question","name":"How long can an SBA loan term be?","acceptedAnswer":{"@type":"Answer","text":"SBA 7(a) loans: up to 10 years for working capital and equipment, up to 25 years for real estate. SBA 504 loans: 10, 20, or 25 years. SBA Microloans: up to 6 years."}},{"@type":"Question","name":"What credit score do I need for an SBA loan?","acceptedAnswer":{"@type":"Answer","text":"Most SBA lenders require a minimum credit score of 650–680. The SBA itself doesn't set a minimum, but lenders do. Strong business financials, time in business (typically 2+ years), and collateral can compensate for a lower score."}},{"@type":"Question","name":"What is the maximum SBA 7(a) loan amount?","acceptedAnswer":{"@type":"Answer","text":"The maximum SBA 7(a) loan is $5 million. SBA 504 loans can go up to $5.5 million (or $5.5 million for eligible energy projects). SBA Microloans max out at $50,000."}}]}</script>
+<style>
+.result-card{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2);border-radius:14px;padding:24px;text-align:center;margin-bottom:16px}
+.result-big{font-family:'JetBrains Mono',monospace;font-size:40px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.result-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.result-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:640px){.stat-grid{grid-template-columns:1fr 1fr}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--ink-1);line-height:1;margin-bottom:3px}
+.stat-lbl{font-size:11px;color:var(--ink-3);font-weight:600}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.breakdown-row:last-child{border-bottom:none}
+.breakdown-row .val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink-1)}
+.highlight-row{background:rgba(27,79,216,.04);border-radius:8px;padding:10px 14px;margin-top:4px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:var(--accent)}
+.tag-chip{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:12px}
+.tag-green{background:#dcfce7;color:#15803d}
+.tag-yellow{background:#fef9c3;color:#854d0e}
+.tag-red{background:#fee2e2;color:#dc2626}
+.tag-blue{background:#dbeafe;color:#1d4ed8}
+
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 50+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">FreePayrollCalc</a>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Payroll <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/payroll-tax-calculator" class="nav-item">Payroll Tax</a>
+          <a href="/take-home-pay-calculator" class="nav-item">Take-Home Pay</a>
+          <a href="/payroll-hours-calculator" class="nav-item">Payroll Hours</a>
+          <a href="/salary-to-hourly-calculator" class="nav-item">Salary to Hourly</a>
+          <a href="/net-to-gross-calculator" class="nav-item">Net to Gross</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Tax <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/self-employment-tax-calculator" class="nav-item">Self-Employment Tax</a>
+          <a href="/bonus-tax-calculator" class="nav-item">Bonus Tax</a>
+          <a href="/quarterly-tax-calculator" class="nav-item">Quarterly Tax</a>
+          <a href="/capital-gains-tax-calculator" class="nav-item">Capital Gains Tax</a>
+          <a href="/income-tax-calculator" class="nav-item">Income Tax Estimator</a>
+          <a href="/mileage-reimbursement-calculator" class="nav-item">Mileage Reimbursement</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Home &amp; RE <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/mortgage-calculator" class="nav-item">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator" class="nav-item">Home Equity Loan</a>
+          <a href="/heloc-calculator" class="nav-item">HELOC Calculator</a>
+          <a href="/refinance-calculator" class="nav-item">Refinance Calculator</a>
+          <a href="/reverse-mortgage-calculator" class="nav-item">Reverse Mortgage</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Business <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/sba-loan-calculator" class="nav-item">SBA Loan Calculator</a>
+          <a href="/business-loan-calculator" class="nav-item">Business Loan</a>
+          <a href="/business-valuation-calculator" class="nav-item">Business Valuation</a>
+          <a href="/break-even-calculator" class="nav-item">Break-Even</a>
+          <a href="/profit-margin-calculator" class="nav-item">Profit Margin</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Retirement <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/retirement-calculator" class="nav-item">Retirement Calculator</a>
+          <a href="/required-minimum-distribution-calculator" class="nav-item">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator" class="nav-item">401k Withdrawal</a>
+          <a href="/savings-calculator" class="nav-item">Savings Calculator</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="btn-search" aria-label="Search tools"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></button>
+      <a href="/tools" class="btn-all-tools">All Tools</a>
+    </div>
+  </div>
+</header>
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">SBA Loan Calculator 2026</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>SBA Loan Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+<p class="calc-sub" data-enter data-delay="1">Estimate monthly payments for SBA 7(a) and 504 loans. See total interest, guarantee fee, and total cost of borrowing.</p>
+<div class="calc-layout">
+  <div class="calc-inputs">
+    <div class="input-group">
+      <label class="input-label" for="sba-type">Loan Type</label>
+      <select id="sba-type" class="calc-select" onchange="setSBADefaults()">
+        <option value="7a" selected>SBA 7(a) — Working Capital / General</option>
+        <option value="504">SBA 504 — Real Estate / Equipment</option>
+        <option value="micro">SBA Microloan (max $50,000)</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="sba-amount">Loan Amount</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="sba-amount" class="calc-input" value="250000" min="5000" max="5000000" step="5000"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="sba-rate">Interest Rate</label>
+      <div class="input-prefix-wrap"><input type="number" id="sba-rate" class="calc-input" value="11.0" min="4" max="20" step="0.25"><span class="input-suffix">%</span></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="sba-term">Loan Term</label>
+      <select id="sba-term" class="calc-select">
+        <option value="5">5 years</option>
+        <option value="7">7 years</option>
+        <option value="10" selected>10 years</option>
+        <option value="15">15 years</option>
+        <option value="20">20 years</option>
+        <option value="25">25 years</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="sba-down">Down Payment (if any)</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="sba-down" class="calc-input" value="0" min="0" step="5000"></div>
+    </div>
+    <button class="calc-btn" onclick="calcSBA()">Calculate</button>
+  </div>
+  <div class="calc-results">
+    <div class="result-card">
+      <div class="result-big" id="sba-payment">$2,763</div>
+      <div class="result-label">Monthly Payment</div>
+      <div class="result-sub" id="sba-rate-note">At 11.0% for 10 years</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="sba-total-int">$81,560</div><div class="stat-lbl">Total Interest</div></div>
+      <div class="stat-card"><div class="stat-num" id="sba-gfee">$5,625</div><div class="stat-lbl">Guarantee Fee</div></div>
+      <div class="stat-card"><div class="stat-num" id="sba-total-cost">$336,560</div><div class="stat-lbl">Total Cost</div></div>
+    </div>
+    <div class="calc-card">
+      <div class="breakdown-row"><span>Loan Amount</span><span class="val" id="sba-s-amount">$250,000</span></div>
+      <div class="breakdown-row"><span>Down Payment</span><span class="val" id="sba-s-down">$0</span></div>
+      <div class="breakdown-row"><span>Financed Amount</span><span class="val" id="sba-s-financed">$250,000</span></div>
+      <div class="breakdown-row"><span>Interest Rate</span><span class="val" id="sba-s-rate">11.0%</span></div>
+      <div class="breakdown-row"><span>Term</span><span class="val" id="sba-s-term">10 years (120 payments)</span></div>
+      <div class="breakdown-row"><span>SBA Guarantee Fee (est.)</span><span class="val" id="sba-s-gfee">$5,625</span></div>
+      <div class="breakdown-row"><span>Total Interest Paid</span><span class="val" id="sba-s-int">$81,560</span></div>
+      <div class="highlight-row"><span>Total Cost of Loan</span><span id="sba-s-total">$336,560</span></div>
+    </div>
+    <div class="calc-info-box" style="background:#dbeafe;border:1px solid #93c5fd;border-radius:10px;padding:14px;margin-top:12px;font-size:13px;color:#1e40af">
+      <strong>Note:</strong> SBA 7(a) rates are variable (prime + spread). This calculator uses a fixed rate for simplicity. Check SBA.gov for current prime rate and spreads.
+    </div>
+  </div>
+</div>
+<div class="calc-article">
+  <h2>SBA Loan Types Compared</h2>
+  <p><strong>SBA 7(a):</strong> The most common SBA loan. Used for working capital, equipment, inventory, or business acquisition. Max $5M, up to 10 years (25 years for real estate). Variable rate tied to prime rate.</p>
+  <p><strong>SBA 504:</strong> Used for major fixed assets — real estate and heavy equipment. Lower down payment (10%), fixed rate on the CDC portion, max $5.5M. Requires a conventional lender (50%) + CDC (40%) + borrower down payment (10%).</p>
+  <p><strong>SBA Microloan:</strong> Up to $50,000, up to 6-year term. Administered through nonprofit lenders. Rates typically 8%–13%.</p>
+  <h3>SBA Guarantee Fee (2026)</h3>
+  <p>The SBA charges lenders a guarantee fee based on the guaranteed portion of the loan (typically 75–85% of the loan amount):</p>
+  <ul>
+    <li>Loans ≤$150,000: <strong>0%</strong></li>
+    <li>$150,001–$700,000: <strong>2%</strong> of guaranteed portion</li>
+    <li>$700,001–$5,000,000: <strong>3%</strong> of guaranteed portion</li>
+  </ul>
+  <p>This fee is usually rolled into the loan. Lenders pass it to borrowers.</p>
+</div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="footer-logo">FreePayrollCalc</a>
+        <p class="footer-tagline">Free financial &amp; payroll calculators. No sign-up required.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Home &amp; Real Estate</div>
+        <nav class="footer-nav">
+          <a href="/mortgage-calculator">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator">Home Equity Loan</a>
+          <a href="/heloc-calculator">HELOC Calculator</a>
+          <a href="/refinance-calculator">Refinance Calculator</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Business &amp; Tax</div>
+        <nav class="footer-nav">
+          <a href="/sba-loan-calculator">SBA Loan Calculator</a>
+          <a href="/capital-gains-tax-calculator">Capital Gains Tax</a>
+          <a href="/business-valuation-calculator">Business Valuation</a>
+          <a href="/mileage-reimbursement-calculator">Mileage Reimbursement</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Retirement</div>
+        <nav class="footer-nav">
+          <a href="/required-minimum-distribution-calculator">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator">401k Withdrawal</a>
+          <a href="/retirement-calculator">Retirement Calculator</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FreePayrollCalc.com &mdash; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+      <p class="footer-disclaimer">For informational purposes only. Consult a financial professional for advice.</p>
+    </div>
+  </div>
+</footer>
+<script src="/shared/scripts.js?v=6" defer></script>
+<script>
+function fmt(n){return n<0?'-
+</html>+Math.abs(Math.round(n)).toLocaleString():'
+</html>+Math.round(n).toLocaleString();}
+function gFee(amount, type){
+  if(type==='micro') return 0;
+  var gPct=type==='7a'?0.75:0.4;
+  var gAmt=amount*gPct;
+  if(gAmt<=150000) return 0;
+  if(gAmt<=700000) return gAmt*0.02;
+  return gAmt*0.03;
+}
+function setSBADefaults(){
+  var t=document.getElementById('sba-type').value;
+  if(t==='7a'){document.getElementById('sba-rate').value='11.0';document.getElementById('sba-term').value='10';}
+  else if(t==='504'){document.getElementById('sba-rate').value='7.5';document.getElementById('sba-term').value='20';document.getElementById('sba-down').value='25000';}
+  else{document.getElementById('sba-rate').value='10.0';document.getElementById('sba-term').value='5';document.getElementById('sba-amount').value='40000';}
+  calcSBA();
+}
+function calcSBA(){
+  var type=document.getElementById('sba-type').value;
+  var amount=parseFloat(document.getElementById('sba-amount').value)||250000;
+  var down=parseFloat(document.getElementById('sba-down').value)||0;
+  var rate=parseFloat(document.getElementById('sba-rate').value)/100/12;
+  var n=parseInt(document.getElementById('sba-term').value)*12;
+  var financed=amount-down;
+  var pay=rate>0?financed*rate*Math.pow(1+rate,n)/(Math.pow(1+rate,n)-1):financed/n;
+  var totalPaid=pay*n;
+  var totalInt=totalPaid-financed;
+  var fee=gFee(amount, type);
+  var totalCost=totalPaid+fee+down;
+  document.getElementById('sba-payment').textContent=fmt(pay);
+  document.getElementById('sba-rate-note').textContent='At '+document.getElementById('sba-rate').value+'% for '+document.getElementById('sba-term').value+' years';
+  document.getElementById('sba-total-int').textContent=fmt(totalInt);
+  document.getElementById('sba-gfee').textContent=fmt(fee);
+  document.getElementById('sba-total-cost').textContent=fmt(totalCost);
+  document.getElementById('sba-s-amount').textContent=fmt(amount);
+  document.getElementById('sba-s-down').textContent=fmt(down);
+  document.getElementById('sba-s-financed').textContent=fmt(financed);
+  document.getElementById('sba-s-rate').textContent=document.getElementById('sba-rate').value+'%';
+  document.getElementById('sba-s-term').textContent=document.getElementById('sba-term').value+' years ('+n+' payments)';
+  document.getElementById('sba-s-gfee').textContent=fmt(fee);
+  document.getElementById('sba-s-int').textContent=fmt(totalInt);
+  document.getElementById('sba-s-total').textContent=fmt(totalCost);
+}
+document.addEventListener('DOMContentLoaded',calcSBA);
+document.querySelectorAll('#sba-amount,#sba-rate,#sba-down').forEach(function(el){el.addEventListener('input',calcSBA);});
+document.getElementById('sba-term').addEventListener('change',calcSBA);
+</script></body>
+</html>

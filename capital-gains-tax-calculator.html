@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capital Gains Tax Calculator 2026 | Short & Long-Term Rates</title>
+<meta name="description" content="Calculate capital gains tax on stocks, real estate, or crypto using 2026 IRS tax brackets. See your net proceeds after federal tax for short-term and long-term gains.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/capital-gains-tax-calculator">
+<meta property="og:title" content="Capital Gains Tax Calculator 2026 | Short & Long-Term Rates">
+<meta property="og:description" content="Calculate capital gains tax on stocks, real estate, or crypto using 2026 IRS tax brackets. See your net proceeds after federal tax for short-term and long-term gains.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Capital Gains Tax Calculator 2026","url":"https://www.freepayrollcalc.com/capital-gains-tax-calculator","description":"Calculate short-term and long-term capital gains tax on stocks, real estate, and other assets. Uses 2026 tax brackets. See net proceeds after tax.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the capital gains tax rate for 2026?","acceptedAnswer":{"@type":"Answer","text":"Long-term capital gains rates for 2026: 0% for taxable income up to $47,025 (single) / $94,050 (married); 15% for most taxpayers; 20% for income above $518,900 (single) / $583,750 (married). Short-term capital gains are taxed as ordinary income at your marginal rate (10%–37%)."}},{"@type":"Question","name":"How long do I need to hold an asset for long-term capital gains rates?","acceptedAnswer":{"@type":"Answer","text":"You must hold the asset for more than 12 months (at least one year and one day) to qualify for long-term capital gains tax rates. Assets held 12 months or less are subject to short-term rates, which are the same as ordinary income tax rates."}},{"@type":"Question","name":"Is the capital gains tax rate 0% for some taxpayers?","acceptedAnswer":{"@type":"Answer","text":"Yes. For 2026, if your taxable income is below $47,025 (single) or $94,050 (married filing jointly), your long-term capital gains rate is 0%. This means you could sell appreciated investments tax-free if your income is low enough."}},{"@type":"Question","name":"What is the Net Investment Income Tax (NIIT)?","acceptedAnswer":{"@type":"Answer","text":"High earners may owe an additional 3.8% NIIT on investment income (including capital gains). This applies to single filers with modified AGI above $200,000 and married filers above $250,000. This calculator shows you whether NIIT may apply."}}]}</script>
+<style>
+.result-card{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2);border-radius:14px;padding:24px;text-align:center;margin-bottom:16px}
+.result-big{font-family:'JetBrains Mono',monospace;font-size:40px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.result-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.result-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:640px){.stat-grid{grid-template-columns:1fr 1fr}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--ink-1);line-height:1;margin-bottom:3px}
+.stat-lbl{font-size:11px;color:var(--ink-3);font-weight:600}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.breakdown-row:last-child{border-bottom:none}
+.breakdown-row .val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink-1)}
+.highlight-row{background:rgba(27,79,216,.04);border-radius:8px;padding:10px 14px;margin-top:4px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:var(--accent)}
+.tag-chip{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:12px}
+.tag-green{background:#dcfce7;color:#15803d}
+.tag-yellow{background:#fef9c3;color:#854d0e}
+.tag-red{background:#fee2e2;color:#dc2626}
+.tag-blue{background:#dbeafe;color:#1d4ed8}
+
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 50+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">FreePayrollCalc</a>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Payroll <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/payroll-tax-calculator" class="nav-item">Payroll Tax</a>
+          <a href="/take-home-pay-calculator" class="nav-item">Take-Home Pay</a>
+          <a href="/payroll-hours-calculator" class="nav-item">Payroll Hours</a>
+          <a href="/salary-to-hourly-calculator" class="nav-item">Salary to Hourly</a>
+          <a href="/net-to-gross-calculator" class="nav-item">Net to Gross</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Tax <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/self-employment-tax-calculator" class="nav-item">Self-Employment Tax</a>
+          <a href="/bonus-tax-calculator" class="nav-item">Bonus Tax</a>
+          <a href="/quarterly-tax-calculator" class="nav-item">Quarterly Tax</a>
+          <a href="/capital-gains-tax-calculator" class="nav-item">Capital Gains Tax</a>
+          <a href="/income-tax-calculator" class="nav-item">Income Tax Estimator</a>
+          <a href="/mileage-reimbursement-calculator" class="nav-item">Mileage Reimbursement</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Home &amp; RE <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/mortgage-calculator" class="nav-item">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator" class="nav-item">Home Equity Loan</a>
+          <a href="/heloc-calculator" class="nav-item">HELOC Calculator</a>
+          <a href="/refinance-calculator" class="nav-item">Refinance Calculator</a>
+          <a href="/reverse-mortgage-calculator" class="nav-item">Reverse Mortgage</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Business <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/sba-loan-calculator" class="nav-item">SBA Loan Calculator</a>
+          <a href="/business-loan-calculator" class="nav-item">Business Loan</a>
+          <a href="/business-valuation-calculator" class="nav-item">Business Valuation</a>
+          <a href="/break-even-calculator" class="nav-item">Break-Even</a>
+          <a href="/profit-margin-calculator" class="nav-item">Profit Margin</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Retirement <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/retirement-calculator" class="nav-item">Retirement Calculator</a>
+          <a href="/required-minimum-distribution-calculator" class="nav-item">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator" class="nav-item">401k Withdrawal</a>
+          <a href="/savings-calculator" class="nav-item">Savings Calculator</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="btn-search" aria-label="Search tools"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></button>
+      <a href="/tools" class="btn-all-tools">All Tools</a>
+    </div>
+  </div>
+</header>
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">Capital Gains Tax Calculator 2026</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Capital Gains Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+<p class="calc-sub" data-enter data-delay="1">Calculate your capital gains tax on stocks, real estate, crypto, or any asset. Uses 2026 IRS tax brackets. See your net proceeds after federal tax.</p>
+<div class="calc-layout">
+  <div class="calc-inputs">
+    <div class="input-group">
+      <label class="input-label" for="cg-purchase">Purchase Price (cost basis)</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="cg-purchase" class="calc-input" value="50000" min="0" step="100"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="cg-sale">Sale Price</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="cg-sale" class="calc-input" value="120000" min="0" step="100"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="cg-holding">Holding Period</label>
+      <select id="cg-holding" class="calc-select">
+        <option value="short">Short-term (12 months or less)</option>
+        <option value="long" selected>Long-term (more than 12 months)</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="cg-income">Your Annual Taxable Income</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="cg-income" class="calc-input" value="80000" min="0" step="1000"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="cg-filing">Filing Status</label>
+      <select id="cg-filing" class="calc-select">
+        <option value="single" selected>Single</option>
+        <option value="mfj">Married Filing Jointly</option>
+        <option value="mfs">Married Filing Separately</option>
+        <option value="hoh">Head of Household</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="cg-expenses">Selling Expenses (commissions, fees)</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="cg-expenses" class="calc-input" value="0" min="0" step="100"></div>
+    </div>
+    <button class="calc-btn" onclick="calcCG()">Calculate</button>
+  </div>
+  <div class="calc-results">
+    <div class="result-card">
+      <div class="result-big" id="cg-tax-owed">$10,500</div>
+      <div class="result-label">Estimated Federal Tax Owed</div>
+      <div class="result-sub" id="cg-rate-note">Long-term 15% rate</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="cg-gain">$70,000</div><div class="stat-lbl">Capital Gain</div></div>
+      <div class="stat-card"><div class="stat-num" id="cg-rate">15%</div><div class="stat-lbl">Tax Rate</div></div>
+      <div class="stat-card"><div class="stat-num" id="cg-net">$109,500</div><div class="stat-lbl">Net Proceeds</div></div>
+    </div>
+    <div class="calc-card">
+      <div class="breakdown-row"><span>Sale Price</span><span class="val" id="cg-s-sale">$120,000</span></div>
+      <div class="breakdown-row"><span>Cost Basis</span><span class="val" id="cg-s-basis">$50,000</span></div>
+      <div class="breakdown-row"><span>Selling Expenses</span><span class="val" id="cg-s-exp">$0</span></div>
+      <div class="breakdown-row"><span>Net Capital Gain</span><span class="val" id="cg-s-gain">$70,000</span></div>
+      <div class="breakdown-row"><span>Holding Period</span><span class="val" id="cg-s-hold">Long-term</span></div>
+      <div class="breakdown-row"><span>Capital Gains Tax Rate</span><span class="val" id="cg-s-rate">15%</span></div>
+      <div class="breakdown-row" id="cg-niit-row" style="display:none"><span>Net Investment Income Tax (3.8%)</span><span class="val" id="cg-s-niit">$0</span></div>
+      <div class="breakdown-row"><span>Federal Tax Owed</span><span class="val" id="cg-s-tax">$10,500</span></div>
+      <div class="highlight-row"><span>Net Proceeds After Tax</span><span id="cg-s-net">$109,500</span></div>
+    </div>
+    <p style="font-size:11px;color:var(--ink-3);margin-top:8px">Federal tax only. State capital gains tax not included. Consult a tax professional for your situation.</p>
+  </div>
+</div>
+<div class="calc-article">
+  <h2>2026 Capital Gains Tax Rates</h2>
+  <h3>Long-Term Capital Gains (held &gt; 1 year)</h3>
+  <table class="data-table">
+    <thead><tr><th>Rate</th><th>Single Filers</th><th>Married Filing Jointly</th></tr></thead>
+    <tbody>
+      <tr><td>0%</td><td>Up to $47,025</td><td>Up to $94,050</td></tr>
+      <tr><td>15%</td><td>$47,026–$518,900</td><td>$94,051–$583,750</td></tr>
+      <tr><td>20%</td><td>Over $518,900</td><td>Over $583,750</td></tr>
+    </tbody>
+  </table>
+  <p><em>Note: High earners may also owe 3.8% Net Investment Income Tax (NIIT) on top of the capital gains rate.</em></p>
+  <h3>Short-Term Capital Gains</h3>
+  <p>Assets held 12 months or less are taxed as ordinary income at your marginal bracket (10%, 12%, 22%, 24%, 32%, 35%, or 37%). There is no preferential rate for short-term gains.</p>
+  <h3>Tax-Saving Strategies</h3>
+  <ul>
+    <li><strong>Hold longer than 1 year</strong> to qualify for long-term rates</li>
+    <li><strong>Harvest tax losses</strong> to offset gains with losses from other investments</li>
+    <li><strong>Timing the sale</strong> — selling in a low-income year can drop you into the 0% bracket</li>
+    <li><strong>1031 exchange</strong> for real estate — defer all taxes by reinvesting in like-kind property</li>
+  </ul>
+</div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="footer-logo">FreePayrollCalc</a>
+        <p class="footer-tagline">Free financial &amp; payroll calculators. No sign-up required.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Home &amp; Real Estate</div>
+        <nav class="footer-nav">
+          <a href="/mortgage-calculator">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator">Home Equity Loan</a>
+          <a href="/heloc-calculator">HELOC Calculator</a>
+          <a href="/refinance-calculator">Refinance Calculator</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Business &amp; Tax</div>
+        <nav class="footer-nav">
+          <a href="/sba-loan-calculator">SBA Loan Calculator</a>
+          <a href="/capital-gains-tax-calculator">Capital Gains Tax</a>
+          <a href="/business-valuation-calculator">Business Valuation</a>
+          <a href="/mileage-reimbursement-calculator">Mileage Reimbursement</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Retirement</div>
+        <nav class="footer-nav">
+          <a href="/required-minimum-distribution-calculator">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator">401k Withdrawal</a>
+          <a href="/retirement-calculator">Retirement Calculator</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FreePayrollCalc.com &mdash; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+      <p class="footer-disclaimer">For informational purposes only. Consult a financial professional for advice.</p>
+    </div>
+  </div>
+</footer>
+<script src="/shared/scripts.js?v=6" defer></script>
+<script>
+function fmt(n){return n<0?'-
+</html>+Math.abs(Math.round(n)).toLocaleString():'
+</html>+Math.round(n).toLocaleString();}
+var LT={single:[{max:47025,rate:0},{max:518900,rate:0.15},{max:Infinity,rate:0.20}],mfj:[{max:94050,rate:0},{max:583750,rate:0.15},{max:Infinity,rate:0.20}],mfs:[{max:47025,rate:0},{max:291850,rate:0.15},{max:Infinity,rate:0.20}],hoh:[{max:63000,rate:0},{max:551350,rate:0.15},{max:Infinity,rate:0.20}]};
+var ST={single:[{max:11600,rate:0.10},{max:47150,rate:0.12},{max:100525,rate:0.22},{max:191950,rate:0.24},{max:243725,rate:0.32},{max:609350,rate:0.35},{max:Infinity,rate:0.37}],mfj:[{max:23200,rate:0.10},{max:94300,rate:0.12},{max:201050,rate:0.22},{max:383900,rate:0.24},{max:487450,rate:0.32},{max:731200,rate:0.35},{max:Infinity,rate:0.37}],mfs:[{max:11600,rate:0.10},{max:47150,rate:0.12},{max:100525,rate:0.22},{max:191950,rate:0.24},{max:243725,rate:0.32},{max:365600,rate:0.35},{max:Infinity,rate:0.37}],hoh:[{max:16550,rate:0.10},{max:63100,rate:0.12},{max:100500,rate:0.22},{max:191950,rate:0.24},{max:243700,rate:0.32},{max:609350,rate:0.35},{max:Infinity,rate:0.37}]};
+function getRate(brackets,income){for(var i=0;i<brackets.length;i++){if(income<=brackets[i].max) return brackets[i].rate;}return 0.37;}
+function calcCG(){
+  var purchase=parseFloat(document.getElementById('cg-purchase').value)||0;
+  var sale=parseFloat(document.getElementById('cg-sale').value)||0;
+  var income=parseFloat(document.getElementById('cg-income').value)||0;
+  var expenses=parseFloat(document.getElementById('cg-expenses').value)||0;
+  var holding=document.getElementById('cg-holding').value;
+  var filing=document.getElementById('cg-filing').value;
+  var gain=Math.max(0,sale-purchase-expenses);
+  var taxRate,tax,niit=0;
+  if(holding==='short'){
+    taxRate=getRate(ST[filing]||ST.single, income+gain);
+    tax=gain*taxRate;
+  } else {
+    taxRate=getRate(LT[filing]||LT.single, income);
+    tax=gain*taxRate;
+  }
+  var niitThresh={single:200000,mfj:250000,mfs:125000,hoh:200000};
+  var thresh=niitThresh[filing]||200000;
+  if(income>thresh){niit=gain*0.038;document.getElementById('cg-niit-row').style.display='flex';}
+  else{niit=0;document.getElementById('cg-niit-row').style.display='none';}
+  var totalTax=tax+niit;
+  var netProceeds=sale-totalTax-expenses;
+  document.getElementById('cg-tax-owed').textContent=fmt(totalTax);
+  document.getElementById('cg-rate-note').textContent=(holding==='long'?'Long-term':'Short-term')+' '+Math.round(taxRate*100)+'% rate'+(niit>0?' + 3.8% NIIT':'');
+  document.getElementById('cg-gain').textContent=fmt(gain);
+  document.getElementById('cg-rate').textContent=Math.round(taxRate*100)+'%';
+  document.getElementById('cg-net').textContent=fmt(netProceeds);
+  document.getElementById('cg-s-sale').textContent=fmt(sale);
+  document.getElementById('cg-s-basis').textContent=fmt(purchase);
+  document.getElementById('cg-s-exp').textContent=fmt(expenses);
+  document.getElementById('cg-s-gain').textContent=fmt(gain);
+  document.getElementById('cg-s-hold').textContent=holding==='long'?'Long-term (>1 year)':'Short-term (≤1 year)';
+  document.getElementById('cg-s-rate').textContent=Math.round(taxRate*100)+'%';
+  document.getElementById('cg-s-niit').textContent=fmt(niit);
+  document.getElementById('cg-s-tax').textContent=fmt(totalTax);
+  document.getElementById('cg-s-net').textContent=fmt(netProceeds);
+  var rateEl=document.getElementById('cg-rate');
+  if(taxRate===0){rateEl.style.color='#15803d';}else if(taxRate>=0.35){rateEl.style.color='#dc2626';}else{rateEl.style.color='';}
+}
+document.addEventListener('DOMContentLoaded',calcCG);
+document.querySelectorAll('#cg-purchase,#cg-sale,#cg-income,#cg-expenses').forEach(function(el){el.addEventListener('input',calcCG);});
+document.getElementById('cg-holding').addEventListener('change',calcCG);
+document.getElementById('cg-filing').addEventListener('change',calcCG);
+</script></body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Valuation Calculator 2026 | EBITDA & Revenue Multiples</title>
+<meta name="description" content="Estimate your business value using EBITDA multiples, revenue multiples, and asset-based methods. See valuation range by industry.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/business-valuation-calculator">
+<meta property="og:title" content="Business Valuation Calculator 2026 | EBITDA & Revenue Multiples">
+<meta property="og:description" content="Estimate your business value using EBITDA multiples, revenue multiples, and asset-based methods. See valuation range by industry.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Business Valuation Calculator 2026","url":"https://www.freepayrollcalc.com/business-valuation-calculator","description":"Estimate your business value using revenue multiples, EBITDA multiples, and asset-based methods. See valuation range by industry.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is a small business valued?","acceptedAnswer":{"@type":"Answer","text":"Small businesses are typically valued using earnings multiples (1–4× SDE or EBITDA), revenue multiples (0.3–4× depending on industry), or asset-based methods. The most common method for main-street businesses is Seller's Discretionary Earnings (SDE) × a multiple between 1.5 and 3.5. SaaS and tech companies trade at much higher revenue multiples (3–10×)."}},{"@type":"Question","name":"What is Seller's Discretionary Earnings (SDE)?","acceptedAnswer":{"@type":"Answer","text":"SDE = Net profit + owner's salary + personal expenses run through the business + depreciation + amortization + interest. It represents the true economic benefit to a single owner-operator. Most main-street business buyers use SDE as the earnings base when negotiating price."}},{"@type":"Question","name":"What multiple should I use to value my business?","acceptedAnswer":{"@type":"Answer","text":"Typical SDE multiples by industry: Retail/restaurant 1.5–2.5×, Service businesses 2–3.5×, Professional services 1.5–3×, Technology/SaaS 3–8× (revenue), Manufacturing 2–4×, E-commerce 2–4×. Higher multiples go to businesses with recurring revenue, strong growth, documented processes, and no key-person dependency."}},{"@type":"Question","name":"What reduces a business valuation multiple?","acceptedAnswer":{"@type":"Answer","text":"Factors that reduce multiples: key-person dependency (the business relies entirely on the owner), undocumented processes, customer concentration (one customer = 30%+ of revenue), declining revenue, unclean financial records, poor online reviews, and industry-specific risks."}}]}</script>
+<style>
+.result-card{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2);border-radius:14px;padding:24px;text-align:center;margin-bottom:16px}
+.result-big{font-family:'JetBrains Mono',monospace;font-size:40px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.result-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.result-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:640px){.stat-grid{grid-template-columns:1fr 1fr}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--ink-1);line-height:1;margin-bottom:3px}
+.stat-lbl{font-size:11px;color:var(--ink-3);font-weight:600}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.breakdown-row:last-child{border-bottom:none}
+.breakdown-row .val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink-1)}
+.highlight-row{background:rgba(27,79,216,.04);border-radius:8px;padding:10px 14px;margin-top:4px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:var(--accent)}
+.tag-chip{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:12px}
+.tag-green{background:#dcfce7;color:#15803d}
+.tag-yellow{background:#fef9c3;color:#854d0e}
+.tag-red{background:#fee2e2;color:#dc2626}
+.tag-blue{background:#dbeafe;color:#1d4ed8}
+
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 50+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">FreePayrollCalc</a>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Payroll <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/payroll-tax-calculator" class="nav-item">Payroll Tax</a>
+          <a href="/take-home-pay-calculator" class="nav-item">Take-Home Pay</a>
+          <a href="/payroll-hours-calculator" class="nav-item">Payroll Hours</a>
+          <a href="/salary-to-hourly-calculator" class="nav-item">Salary to Hourly</a>
+          <a href="/net-to-gross-calculator" class="nav-item">Net to Gross</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Tax <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/self-employment-tax-calculator" class="nav-item">Self-Employment Tax</a>
+          <a href="/bonus-tax-calculator" class="nav-item">Bonus Tax</a>
+          <a href="/quarterly-tax-calculator" class="nav-item">Quarterly Tax</a>
+          <a href="/capital-gains-tax-calculator" class="nav-item">Capital Gains Tax</a>
+          <a href="/income-tax-calculator" class="nav-item">Income Tax Estimator</a>
+          <a href="/mileage-reimbursement-calculator" class="nav-item">Mileage Reimbursement</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Home &amp; RE <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/mortgage-calculator" class="nav-item">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator" class="nav-item">Home Equity Loan</a>
+          <a href="/heloc-calculator" class="nav-item">HELOC Calculator</a>
+          <a href="/refinance-calculator" class="nav-item">Refinance Calculator</a>
+          <a href="/reverse-mortgage-calculator" class="nav-item">Reverse Mortgage</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Business <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/sba-loan-calculator" class="nav-item">SBA Loan Calculator</a>
+          <a href="/business-loan-calculator" class="nav-item">Business Loan</a>
+          <a href="/business-valuation-calculator" class="nav-item">Business Valuation</a>
+          <a href="/break-even-calculator" class="nav-item">Break-Even</a>
+          <a href="/profit-margin-calculator" class="nav-item">Profit Margin</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Retirement <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/retirement-calculator" class="nav-item">Retirement Calculator</a>
+          <a href="/required-minimum-distribution-calculator" class="nav-item">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator" class="nav-item">401k Withdrawal</a>
+          <a href="/savings-calculator" class="nav-item">Savings Calculator</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="btn-search" aria-label="Search tools"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></button>
+      <a href="/tools" class="btn-all-tools">All Tools</a>
+    </div>
+  </div>
+</header>
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">Business Valuation Calculator 2026</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Business Valuation Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+<p class="calc-sub" data-enter data-delay="1">Estimate your business value using revenue multiples and EBITDA/SDE multiples. See valuation range across different methods used by buyers and brokers.</p>
+<div class="calc-layout">
+  <div class="calc-inputs">
+    <div class="input-group">
+      <label class="input-label" for="bv-industry">Industry</label>
+      <select id="bv-industry" class="calc-select" onchange="setIndustryDefaults()">
+        <option value="services">Professional / Business Services</option>
+        <option value="retail">Retail / Restaurant</option>
+        <option value="saas" selected>SaaS / Technology</option>
+        <option value="ecom">E-Commerce</option>
+        <option value="manufacturing">Manufacturing</option>
+        <option value="healthcare">Healthcare / Medical</option>
+        <option value="construction">Construction / Trades</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="bv-revenue">Annual Revenue</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="bv-revenue" class="calc-input" value="1000000" min="10000" step="10000"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="bv-ebitda">Annual EBITDA / SDE</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="bv-ebitda" class="calc-input" value="350000" min="0" step="5000"></div>
+      <div class="input-hint">Net profit + owner salary + add-backs (depreciation, interest, personal expenses)</div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="bv-assets">Business Assets (equipment, inventory)</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="bv-assets" class="calc-input" value="100000" min="0" step="10000"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="bv-growth">Annual Revenue Growth</label>
+      <select id="bv-growth" class="calc-select">
+        <option value="declining">Declining</option>
+        <option value="flat">Flat (0–5%)</option>
+        <option value="moderate" selected>Moderate (5–20%)</option>
+        <option value="high">High (20%+)</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcBV()">Estimate Value</button>
+  </div>
+  <div class="calc-results">
+    <div class="result-card">
+      <div class="result-big" id="bv-midpoint">$2,450,000</div>
+      <div class="result-label">Estimated Business Value</div>
+      <div class="result-sub" id="bv-range">Range: $1,750,000 – $3,150,000</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="bv-rev-val">$4,000,000</div><div class="stat-lbl">Revenue Multiple</div></div>
+      <div class="stat-card"><div class="stat-num" id="bv-ebitda-val">$2,450,000</div><div class="stat-lbl">EBITDA Multiple</div></div>
+      <div class="stat-card"><div class="stat-num" id="bv-asset-val">$450,000</div><div class="stat-lbl">Asset-Based Floor</div></div>
+    </div>
+    <div class="calc-card">
+      <div class="breakdown-row"><span>Revenue</span><span class="val" id="bv-s-rev">$1,000,000</span></div>
+      <div class="breakdown-row"><span>Revenue Multiple (range)</span><span class="val" id="bv-s-rev-mult">3–5×</span></div>
+      <div class="breakdown-row"><span>Revenue-based Valuation</span><span class="val" id="bv-s-rev-val">$3,000,000–$5,000,000</span></div>
+      <div class="breakdown-row"><span>EBITDA / SDE</span><span class="val" id="bv-s-ebitda">$350,000</span></div>
+      <div class="breakdown-row"><span>EBITDA Multiple (range)</span><span class="val" id="bv-s-ebitda-mult">5–9×</span></div>
+      <div class="breakdown-row"><span>EBITDA-based Valuation</span><span class="val" id="bv-s-ebitda-val">$1,750,000–$3,150,000</span></div>
+      <div class="breakdown-row"><span>Asset Floor (assets + EBITDA)</span><span class="val" id="bv-s-asset">$450,000</span></div>
+      <div class="highlight-row"><span>Estimated Midpoint Value</span><span id="bv-s-mid">$2,450,000</span></div>
+    </div>
+    <p style="font-size:11px;color:var(--ink-3);margin-top:8px">Estimates only. Final value depends on due diligence, deal structure, buyer profile, and market conditions. Use a business broker or M&amp;A advisor for a formal valuation.</p>
+  </div>
+</div>
+<div class="calc-article">
+  <h2>Business Valuation Methods Explained</h2>
+  <h3>1. Earnings Multiple (Most Common for SMBs)</h3>
+  <p>Value = EBITDA (or SDE) × industry multiple. This is the most commonly used method for businesses under $10M. The multiple is driven by industry, growth, recurring revenue, and risk.</p>
+  <h3>2. Revenue Multiple (Common for SaaS / Tech)</h3>
+  <p>Value = Annual Revenue × multiple. Used for fast-growing tech companies, especially those with negative profit but strong revenue growth. SaaS ARR multiples range from 3× to 10× depending on growth and churn.</p>
+  <h3>3. Asset-Based (Floor Value)</h3>
+  <p>Value = Fair market value of assets − liabilities. Used as a floor — no buyer pays less than the liquidation value of assets. Common for asset-heavy businesses (manufacturing, real estate).</p>
+</div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="footer-logo">FreePayrollCalc</a>
+        <p class="footer-tagline">Free financial &amp; payroll calculators. No sign-up required.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Home &amp; Real Estate</div>
+        <nav class="footer-nav">
+          <a href="/mortgage-calculator">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator">Home Equity Loan</a>
+          <a href="/heloc-calculator">HELOC Calculator</a>
+          <a href="/refinance-calculator">Refinance Calculator</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Business &amp; Tax</div>
+        <nav class="footer-nav">
+          <a href="/sba-loan-calculator">SBA Loan Calculator</a>
+          <a href="/capital-gains-tax-calculator">Capital Gains Tax</a>
+          <a href="/business-valuation-calculator">Business Valuation</a>
+          <a href="/mileage-reimbursement-calculator">Mileage Reimbursement</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Retirement</div>
+        <nav class="footer-nav">
+          <a href="/required-minimum-distribution-calculator">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator">401k Withdrawal</a>
+          <a href="/retirement-calculator">Retirement Calculator</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FreePayrollCalc.com &mdash; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+      <p class="footer-disclaimer">For informational purposes only. Consult a financial professional for advice.</p>
+    </div>
+  </div>
+</footer>
+<script src="/shared/scripts.js?v=6" defer></script>
+<script>
+var MULTS={services:{revLo:1.5,revHi:3,ebitdaLo:2.5,ebitdaHi:4},retail:{revLo:0.3,revHi:0.6,ebitdaLo:1.5,ebitdaHi:2.5},saas:{revLo:3,revHi:8,ebitdaLo:5,ebitdaHi:12},ecom:{revLo:1.5,revHi:4,ebitdaLo:2,ebitdaHi:5},manufacturing:{revLo:0.5,revHi:1.2,ebitdaLo:3,ebitdaHi:6},healthcare:{revLo:1,revHi:2.5,ebitdaLo:4,ebitdaHi:8},construction:{revLo:0.3,revHi:0.7,ebitdaLo:2,ebitdaHi:4}};
+function fmt(n){return '
+</html>+Math.round(n).toLocaleString();}
+function fmtM(n){return n>=1000000?(n/1000000).toFixed(2)+'M':n>=1000?(n/1000).toFixed(0)+'K':n.toFixed(0);}
+function setIndustryDefaults(){
+  var i=document.getElementById('bv-industry').value;
+  if(i==='saas'){document.getElementById('bv-revenue').value='1000000';document.getElementById('bv-ebitda').value='350000';}
+  else if(i==='retail'){document.getElementById('bv-revenue').value='800000';document.getElementById('bv-ebitda').value='120000';}
+  else if(i==='construction'){document.getElementById('bv-revenue').value='2000000';document.getElementById('bv-ebitda').value='200000';}
+  calcBV();
+}
+function growthAdj(g){return g==='declining'?-0.2:g==='flat'?0:g==='moderate'?0.1:0.25;}
+function calcBV(){
+  var ind=document.getElementById('bv-industry').value;
+  var rev=parseFloat(document.getElementById('bv-revenue').value)||1000000;
+  var ebitda=parseFloat(document.getElementById('bv-ebitda').value)||0;
+  var assets=parseFloat(document.getElementById('bv-assets').value)||0;
+  var growth=document.getElementById('bv-growth').value;
+  var m=MULTS[ind]||MULTS.services;
+  var adj=1+growthAdj(growth);
+  var revLo=rev*m.revLo*adj, revHi=rev*m.revHi*adj;
+  var ebitdaLo=ebitda*m.ebitdaLo*adj, ebitdaHi=ebitda*m.ebitdaHi*adj;
+  var assetFloor=assets+(ebitda>0?ebitda:0);
+  var midpoint=(ebitdaLo+ebitdaHi)/2;
+  document.getElementById('bv-midpoint').textContent='
+</html>+fmtM(midpoint);
+  document.getElementById('bv-range').textContent='Range: 
+</html>+fmtM(ebitdaLo)+' – 
+</html>+fmtM(ebitdaHi);
+  document.getElementById('bv-rev-val').textContent='
+</html>+fmtM((revLo+revHi)/2);
+  document.getElementById('bv-ebitda-val').textContent='
+</html>+fmtM(midpoint);
+  document.getElementById('bv-asset-val').textContent='
+</html>+fmtM(assetFloor);
+  document.getElementById('bv-s-rev').textContent=fmt(rev);
+  document.getElementById('bv-s-rev-mult').textContent=(m.revLo*adj).toFixed(1)+'–'+(m.revHi*adj).toFixed(1)+'×';
+  document.getElementById('bv-s-rev-val').textContent='
+</html>+fmtM(revLo)+' – 
+</html>+fmtM(revHi);
+  document.getElementById('bv-s-ebitda').textContent=fmt(ebitda);
+  document.getElementById('bv-s-ebitda-mult').textContent=(m.ebitdaLo*adj).toFixed(1)+'–'+(m.ebitdaHi*adj).toFixed(1)+'×';
+  document.getElementById('bv-s-ebitda-val').textContent='
+</html>+fmtM(ebitdaLo)+' – 
+</html>+fmtM(ebitdaHi);
+  document.getElementById('bv-s-asset').textContent='
+</html>+fmtM(assetFloor);
+  document.getElementById('bv-s-mid').textContent='
+</html>+fmtM(midpoint);
+}
+document.addEventListener('DOMContentLoaded',calcBV);
+document.querySelectorAll('#bv-revenue,#bv-ebitda,#bv-assets').forEach(function(el){el.addEventListener('input',calcBV);});
+document.getElementById('bv-growth').addEventListener('change',calcBV);
+</script></body>
+</html>

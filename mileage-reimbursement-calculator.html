@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mileage Reimbursement Calculator 2026 | IRS Standard Rate</title>
+<meta name="description" content="Calculate IRS mileage reimbursement using 2026 standard rates (70¢/mile business, 21¢ medical, 14¢ charity). See total reimbursement and tax deduction value.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/mileage-reimbursement-calculator">
+<meta property="og:title" content="Mileage Reimbursement Calculator 2026 | IRS Standard Rate">
+<meta property="og:description" content="Calculate IRS mileage reimbursement using 2026 standard rates (70¢/mile business, 21¢ medical, 14¢ charity). See total reimbursement and tax deduction value.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Mileage Reimbursement Calculator 2026","url":"https://www.freepayrollcalc.com/mileage-reimbursement-calculator","description":"Calculate IRS mileage reimbursement for business, medical, and charity driving using 2026 standard rates. See total reimbursement and tax deduction value.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the IRS mileage rate for 2026?","acceptedAnswer":{"@type":"Answer","text":"The IRS standard mileage rate for 2026 is 70 cents per mile for business use. Medical and military moving: 21 cents per mile. Charitable service: 14 cents per mile. These rates are set by the IRS and updated annually (sometimes mid-year). Check IRS.gov for the most current rates."}},{"@type":"Question","name":"Can employers reimburse at a rate higher than the IRS rate?","acceptedAnswer":{"@type":"Answer","text":"Yes. Employers can reimburse at any rate. Reimbursements at or below the IRS standard rate are not taxable income to the employee and are deductible for the employer. Reimbursements above the IRS rate are taxable wages to the employee for the excess amount."}},{"@type":"Question","name":"How do I track mileage for reimbursement?","acceptedAnswer":{"@type":"Answer","text":"The IRS requires a contemporaneous mileage log showing: date, destination, business purpose, and miles driven. Apps like MileIQ, Everlance, or Stride automatically track and log trips using GPS. Odometer readings at year-start and year-end are also required if using the standard mileage rate."}},{"@type":"Question","name":"Is mileage reimbursement taxable income?","acceptedAnswer":{"@type":"Answer","text":"No, employer mileage reimbursements under an accountable plan (at or below IRS standard rate, with documentation) are not taxable income. Self-employed individuals claim the mileage deduction on Schedule C (Form 1040) to reduce self-employment tax."}}]}</script>
+<style>
+.result-card{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2);border-radius:14px;padding:24px;text-align:center;margin-bottom:16px}
+.result-big{font-family:'JetBrains Mono',monospace;font-size:40px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.result-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.result-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:640px){.stat-grid{grid-template-columns:1fr 1fr}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--ink-1);line-height:1;margin-bottom:3px}
+.stat-lbl{font-size:11px;color:var(--ink-3);font-weight:600}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.breakdown-row:last-child{border-bottom:none}
+.breakdown-row .val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink-1)}
+.highlight-row{background:rgba(27,79,216,.04);border-radius:8px;padding:10px 14px;margin-top:4px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:var(--accent)}
+.tag-chip{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:12px}
+.tag-green{background:#dcfce7;color:#15803d}
+.tag-yellow{background:#fef9c3;color:#854d0e}
+.tag-red{background:#fee2e2;color:#dc2626}
+.tag-blue{background:#dbeafe;color:#1d4ed8}
+
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 50+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">FreePayrollCalc</a>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Payroll <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/payroll-tax-calculator" class="nav-item">Payroll Tax</a>
+          <a href="/take-home-pay-calculator" class="nav-item">Take-Home Pay</a>
+          <a href="/payroll-hours-calculator" class="nav-item">Payroll Hours</a>
+          <a href="/salary-to-hourly-calculator" class="nav-item">Salary to Hourly</a>
+          <a href="/net-to-gross-calculator" class="nav-item">Net to Gross</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Tax <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/self-employment-tax-calculator" class="nav-item">Self-Employment Tax</a>
+          <a href="/bonus-tax-calculator" class="nav-item">Bonus Tax</a>
+          <a href="/quarterly-tax-calculator" class="nav-item">Quarterly Tax</a>
+          <a href="/capital-gains-tax-calculator" class="nav-item">Capital Gains Tax</a>
+          <a href="/income-tax-calculator" class="nav-item">Income Tax Estimator</a>
+          <a href="/mileage-reimbursement-calculator" class="nav-item">Mileage Reimbursement</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Home &amp; RE <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/mortgage-calculator" class="nav-item">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator" class="nav-item">Home Equity Loan</a>
+          <a href="/heloc-calculator" class="nav-item">HELOC Calculator</a>
+          <a href="/refinance-calculator" class="nav-item">Refinance Calculator</a>
+          <a href="/reverse-mortgage-calculator" class="nav-item">Reverse Mortgage</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Business <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/sba-loan-calculator" class="nav-item">SBA Loan Calculator</a>
+          <a href="/business-loan-calculator" class="nav-item">Business Loan</a>
+          <a href="/business-valuation-calculator" class="nav-item">Business Valuation</a>
+          <a href="/break-even-calculator" class="nav-item">Break-Even</a>
+          <a href="/profit-margin-calculator" class="nav-item">Profit Margin</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Retirement <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/retirement-calculator" class="nav-item">Retirement Calculator</a>
+          <a href="/required-minimum-distribution-calculator" class="nav-item">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator" class="nav-item">401k Withdrawal</a>
+          <a href="/savings-calculator" class="nav-item">Savings Calculator</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="btn-search" aria-label="Search tools"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></button>
+      <a href="/tools" class="btn-all-tools">All Tools</a>
+    </div>
+  </div>
+</header>
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">Mileage Reimbursement Calculator 2026</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Mileage Reimbursement Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+<p class="calc-sub" data-enter data-delay="1">Calculate IRS standard mileage reimbursement for business, medical, or charity driving. Uses official 2026 rates.</p>
+<div class="calc-layout">
+  <div class="calc-inputs">
+    <div class="input-group">
+      <label class="input-label" for="mi-miles">Total Miles Driven</label>
+      <input type="number" id="mi-miles" class="calc-input" value="5000" min="1" step="1">
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="mi-purpose">Driving Purpose</label>
+      <select id="mi-purpose" class="calc-select" onchange="calcMileage()">
+        <option value="business" selected>Business (standard)</option>
+        <option value="medical">Medical / Military Moving</option>
+        <option value="charity">Charitable Service</option>
+        <option value="custom">Custom Rate</option>
+      </select>
+    </div>
+    <div class="input-group" id="mi-custom-wrap" style="display:none">
+      <label class="input-label" for="mi-custom-rate">Custom Rate (cents per mile)</label>
+      <div class="input-prefix-wrap"><input type="number" id="mi-custom-rate" class="calc-input" value="70" min="1" max="200" step="0.5"><span class="input-suffix">¢</span></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="mi-year">Tax Year</label>
+      <select id="mi-year" class="calc-select" onchange="calcMileage()">
+        <option value="2026" selected>2026 — 70¢/mile (business)</option>
+        <option value="2025">2025 — 70¢/mile (business)</option>
+        <option value="2024">2024 — 67¢/mile (business)</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="mi-tax-rate">Your Tax Rate (for deduction value)</label>
+      <div class="input-prefix-wrap"><input type="number" id="mi-tax-rate" class="calc-input" value="22" min="0" max="37" step="1"><span class="input-suffix">%</span></div>
+    </div>
+    <button class="calc-btn" onclick="calcMileage()">Calculate</button>
+  </div>
+  <div class="calc-results">
+    <div class="result-card">
+      <div class="result-big" id="mi-total">$3,500</div>
+      <div class="result-label">Total Reimbursement</div>
+      <div class="result-sub" id="mi-rate-used">At $0.70/mile (2026 IRS business rate)</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="mi-miles-out">5,000</div><div class="stat-lbl">Miles</div></div>
+      <div class="stat-card"><div class="stat-num" id="mi-rate-out">$0.70</div><div class="stat-lbl">Rate per Mile</div></div>
+      <div class="stat-card"><div class="stat-num" id="mi-tax-value">$770</div><div class="stat-lbl">Tax Deduction Value</div></div>
+    </div>
+    <div class="calc-card">
+      <div class="breakdown-row"><span>Miles Driven</span><span class="val" id="mi-s-miles">5,000</span></div>
+      <div class="breakdown-row"><span>IRS Rate (2026)</span><span class="val" id="mi-s-rate">$0.70/mile</span></div>
+      <div class="breakdown-row"><span>Total Reimbursement</span><span class="val" id="mi-s-total">$3,500</span></div>
+      <div class="breakdown-row"><span>Your Tax Rate</span><span class="val" id="mi-s-taxrate">22%</span></div>
+      <div class="highlight-row"><span>Tax Savings (deduction value)</span><span id="mi-s-taxval">$770</span></div>
+    </div>
+    <div class="calc-card" style="margin-top:12px">
+      <div style="font-size:12px;font-weight:700;color:var(--ink-3);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">All 2026 IRS Rates</div>
+      <div class="breakdown-row"><span>Business</span><span class="val">$0.70/mile</span></div>
+      <div class="breakdown-row"><span>Medical / Military Moving</span><span class="val">$0.21/mile</span></div>
+      <div class="breakdown-row"><span>Charitable Service</span><span class="val">$0.14/mile</span></div>
+    </div>
+  </div>
+</div>
+<div class="calc-article">
+  <h2>2026 IRS Mileage Rates</h2>
+  <p>The IRS standard mileage rate is the per-mile amount the IRS considers reasonable for auto expenses. For 2026, the business rate is <strong>70 cents per mile</strong>.</p>
+  <h3>Who Can Use the Standard Mileage Rate?</h3>
+  <ul>
+    <li><strong>Self-employed / freelancers:</strong> Deduct on Schedule C</li>
+    <li><strong>Employees:</strong> Reimbursed by employer — not taxable if at or below IRS rate</li>
+    <li><strong>Small business owners:</strong> Deduct on business return</li>
+  </ul>
+  <h3>Standard Mileage vs Actual Expense Method</h3>
+  <p>You can choose the <strong>standard mileage rate</strong> (simple — just track miles) or the <strong>actual expense method</strong> (track gas, insurance, depreciation, repairs). The standard rate is simpler; the actual method can be larger if you drive a high-cost vehicle with lots of business use. You must choose the standard rate in year 1; you can switch to actual later but can't switch back to standard for that vehicle.</p>
+  <h3>Mileage Log Requirements</h3>
+  <p>The IRS requires a written record (contemporaneous log) for each trip: date, destination, business purpose, and miles. A mileage tracking app (MileIQ, Everlance, TripLog) is the easiest way to stay compliant.</p>
+</div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="footer-logo">FreePayrollCalc</a>
+        <p class="footer-tagline">Free financial &amp; payroll calculators. No sign-up required.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Home &amp; Real Estate</div>
+        <nav class="footer-nav">
+          <a href="/mortgage-calculator">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator">Home Equity Loan</a>
+          <a href="/heloc-calculator">HELOC Calculator</a>
+          <a href="/refinance-calculator">Refinance Calculator</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Business &amp; Tax</div>
+        <nav class="footer-nav">
+          <a href="/sba-loan-calculator">SBA Loan Calculator</a>
+          <a href="/capital-gains-tax-calculator">Capital Gains Tax</a>
+          <a href="/business-valuation-calculator">Business Valuation</a>
+          <a href="/mileage-reimbursement-calculator">Mileage Reimbursement</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Retirement</div>
+        <nav class="footer-nav">
+          <a href="/required-minimum-distribution-calculator">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator">401k Withdrawal</a>
+          <a href="/retirement-calculator">Retirement Calculator</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FreePayrollCalc.com &mdash; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+      <p class="footer-disclaimer">For informational purposes only. Consult a financial professional for advice.</p>
+    </div>
+  </div>
+</footer>
+<script src="/shared/scripts.js?v=6" defer></script>
+<script>
+var RATES={2026:{business:0.70,medical:0.21,charity:0.14},2025:{business:0.70,medical:0.21,charity:0.14},2024:{business:0.67,medical:0.21,charity:0.14}};
+function fmt(n){return '
+</html>+n.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});}
+function calcMileage(){
+  var miles=parseFloat(document.getElementById('mi-miles').value)||0;
+  var purpose=document.getElementById('mi-purpose').value;
+  var year=parseInt(document.getElementById('mi-year').value);
+  var taxRate=parseFloat(document.getElementById('mi-tax-rate').value)/100;
+  var customWrap=document.getElementById('mi-custom-wrap');
+  var rate;
+  if(purpose==='custom'){customWrap.style.display='block';rate=(parseFloat(document.getElementById('mi-custom-rate').value)||70)/100;}
+  else{customWrap.style.display='none';rate=RATES[year][purpose]||RATES[year].business;}
+  var total=miles*rate;
+  var taxVal=total*taxRate;
+  document.getElementById('mi-total').textContent=fmt(total);
+  document.getElementById('mi-rate-used').textContent='At 
+</html>+rate.toFixed(2)+'/mile ('+year+' IRS '+purpose+' rate)';
+  document.getElementById('mi-miles-out').textContent=miles.toLocaleString();
+  document.getElementById('mi-rate-out').textContent='
+</html>+rate.toFixed(2);
+  document.getElementById('mi-tax-value').textContent=fmt(taxVal);
+  document.getElementById('mi-s-miles').textContent=miles.toLocaleString();
+  document.getElementById('mi-s-rate').textContent='
+</html>+rate.toFixed(2)+'/mile';
+  document.getElementById('mi-s-total').textContent=fmt(total);
+  document.getElementById('mi-s-taxrate').textContent=Math.round(taxRate*100)+'%';
+  document.getElementById('mi-s-taxval').textContent=fmt(taxVal);
+}
+document.addEventListener('DOMContentLoaded',calcMileage);
+document.getElementById('mi-miles').addEventListener('input',calcMileage);
+document.getElementById('mi-tax-rate').addEventListener('input',calcMileage);
+document.getElementById('mi-custom-rate').addEventListener('input',calcMileage);
+</script></body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RMD Calculator 2026 | Required Minimum Distribution from IRA & 401k</title>
+<meta name="description" content="Calculate your Required Minimum Distribution (RMD) from IRA or 401k using 2026 IRS Uniform Lifetime Table. Avoid the 25% penalty by knowing your exact amount.">
+<link rel="canonical" href="https://www.freepayrollcalc.com/required-minimum-distribution-calculator">
+<meta property="og:title" content="RMD Calculator 2026 | Required Minimum Distribution from IRA & 401k">
+<meta property="og:description" content="Calculate your Required Minimum Distribution (RMD) from IRA or 401k using 2026 IRS Uniform Lifetime Table. Avoid the 25% penalty by knowing your exact amount.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Required Minimum Distribution (RMD) Calculator 2026","url":"https://www.freepayrollcalc.com/required-minimum-distribution-calculator","description":"Calculate your Required Minimum Distribution (RMD) from IRA, 401k, or 403b using 2026 IRS Uniform Lifetime Table. See annual withdrawal amount and deadline.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"At what age do RMDs start in 2026?","acceptedAnswer":{"@type":"Answer","text":"Under the SECURE 2.0 Act (2022), Required Minimum Distributions begin at age 73 for anyone born between 1951 and 1959, and at age 75 for anyone born in 1960 or later. If you were born before 1951, your RMDs were already required starting at age 72 or 70.5."}},{"@type":"Question","name":"How is the RMD amount calculated?","acceptedAnswer":{"@type":"Answer","text":"RMD = Account balance (as of December 31 of prior year) ÷ IRS life expectancy factor from the Uniform Lifetime Table. Example: Age 73, balance $500,000, life expectancy factor 26.5 → RMD = $500,000 ÷ 26.5 = $18,868."}},{"@type":"Question","name":"What happens if I miss my RMD deadline?","acceptedAnswer":{"@type":"Answer","text":"The penalty for missing an RMD was reduced by SECURE 2.0 from 50% to 25% of the missed amount. If you correct the missed RMD within the correction window (2 years), the penalty drops to 10%. Always take your RMD by December 31 (or April 1 of the following year for your first RMD)."}},{"@type":"Question","name":"Do Roth IRAs require RMDs?","acceptedAnswer":{"@type":"Answer","text":"No. Roth IRAs have no RMDs during the owner's lifetime. Roth 401(k)s did have RMDs until SECURE 2.0 eliminated them starting in 2024. Inherited Roth IRAs have RMD rules that depend on when you inherited and your relationship to the original owner."}}]}</script>
+<style>
+.result-card{background:linear-gradient(135deg,rgba(27,79,216,.07),rgba(27,79,216,.02));border:2px solid rgba(27,79,216,.2);border-radius:14px;padding:24px;text-align:center;margin-bottom:16px}
+.result-big{font-family:'JetBrains Mono',monospace;font-size:40px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.result-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.result-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:640px){.stat-grid{grid-template-columns:1fr 1fr}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--ink-1);line-height:1;margin-bottom:3px}
+.stat-lbl{font-size:11px;color:var(--ink-3);font-weight:600}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.breakdown-row:last-child{border-bottom:none}
+.breakdown-row .val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink-1)}
+.highlight-row{background:rgba(27,79,216,.04);border-radius:8px;padding:10px 14px;margin-top:4px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:var(--accent)}
+.tag-chip{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:12px}
+.tag-green{background:#dcfce7;color:#15803d}
+.tag-yellow{background:#fef9c3;color:#854d0e}
+.tag-red{background:#fee2e2;color:#dc2626}
+.tag-blue{background:#dbeafe;color:#1d4ed8}
+
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search 50+ tools..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd>
+    </div>
+    <div class="cmd-body" id="cmd-body"></div>
+    <div class="cmd-footer">
+      <span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span>
+      <span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span>
+      <span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">FreePayrollCalc</a>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Payroll <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/payroll-tax-calculator" class="nav-item">Payroll Tax</a>
+          <a href="/take-home-pay-calculator" class="nav-item">Take-Home Pay</a>
+          <a href="/payroll-hours-calculator" class="nav-item">Payroll Hours</a>
+          <a href="/salary-to-hourly-calculator" class="nav-item">Salary to Hourly</a>
+          <a href="/net-to-gross-calculator" class="nav-item">Net to Gross</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Tax <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/self-employment-tax-calculator" class="nav-item">Self-Employment Tax</a>
+          <a href="/bonus-tax-calculator" class="nav-item">Bonus Tax</a>
+          <a href="/quarterly-tax-calculator" class="nav-item">Quarterly Tax</a>
+          <a href="/capital-gains-tax-calculator" class="nav-item">Capital Gains Tax</a>
+          <a href="/income-tax-calculator" class="nav-item">Income Tax Estimator</a>
+          <a href="/mileage-reimbursement-calculator" class="nav-item">Mileage Reimbursement</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Home &amp; RE <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/mortgage-calculator" class="nav-item">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator" class="nav-item">Home Equity Loan</a>
+          <a href="/heloc-calculator" class="nav-item">HELOC Calculator</a>
+          <a href="/refinance-calculator" class="nav-item">Refinance Calculator</a>
+          <a href="/reverse-mortgage-calculator" class="nav-item">Reverse Mortgage</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Business <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/sba-loan-calculator" class="nav-item">SBA Loan Calculator</a>
+          <a href="/business-loan-calculator" class="nav-item">Business Loan</a>
+          <a href="/business-valuation-calculator" class="nav-item">Business Valuation</a>
+          <a href="/break-even-calculator" class="nav-item">Break-Even</a>
+          <a href="/profit-margin-calculator" class="nav-item">Profit Margin</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">Retirement <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <a href="/retirement-calculator" class="nav-item">Retirement Calculator</a>
+          <a href="/required-minimum-distribution-calculator" class="nav-item">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator" class="nav-item">401k Withdrawal</a>
+          <a href="/savings-calculator" class="nav-item">Savings Calculator</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="btn-search" aria-label="Search tools"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></button>
+      <a href="/tools" class="btn-all-tools">All Tools</a>
+    </div>
+  </div>
+</header>
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">RMD Calculator 2026</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>RMD Calculator — Required Minimum Distribution <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+<p class="calc-sub" data-enter data-delay="1">Calculate your annual Required Minimum Distribution from IRA, 401(k), or 403(b) using the 2026 IRS Uniform Lifetime Table. Avoid the 25% penalty.</p>
+<div class="calc-layout">
+  <div class="calc-inputs">
+    <div class="input-group">
+      <label class="input-label" for="rmd-balance">Account Balance (Dec 31 prior year)</label>
+      <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="rmd-balance" class="calc-input" value="500000" min="1000" step="1000"></div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="rmd-age">Your Age (as of Dec 31 this year)</label>
+      <input type="number" id="rmd-age" class="calc-input" value="73" min="70" max="115" step="1">
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="rmd-type">Account Type</label>
+      <select id="rmd-type" class="calc-select">
+        <option value="ira" selected>Traditional IRA</option>
+        <option value="401k">401(k) / 403(b)</option>
+        <option value="roth401k">Roth 401(k)</option>
+        <option value="rothira">Roth IRA</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="rmd-tax-rate">Tax Rate on Withdrawals</label>
+      <div class="input-prefix-wrap"><input type="number" id="rmd-tax-rate" class="calc-input" value="22" min="0" max="37" step="1"><span class="input-suffix">%</span></div>
+    </div>
+    <button class="calc-btn" onclick="calcRMD()">Calculate RMD</button>
+  </div>
+  <div class="calc-results">
+    <div class="result-card" id="rmd-main-card">
+      <div class="result-big" id="rmd-amount">$18,868</div>
+      <div class="result-label">Required Minimum Distribution</div>
+      <div class="result-sub" id="rmd-deadline">Must withdraw by December 31</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="rmd-factor">26.5</div><div class="stat-lbl">Life Expectancy Factor</div></div>
+      <div class="stat-card"><div class="stat-num" id="rmd-pct">3.77%</div><div class="stat-lbl">% of Balance</div></div>
+      <div class="stat-card"><div class="stat-num" id="rmd-after-tax">$14,717</div><div class="stat-lbl">After-Tax Amount</div></div>
+    </div>
+    <div class="calc-card">
+      <div class="breakdown-row"><span>Account Balance</span><span class="val" id="rmd-s-bal">$500,000</span></div>
+      <div class="breakdown-row"><span>Your Age</span><span class="val" id="rmd-s-age">73</span></div>
+      <div class="breakdown-row"><span>IRS Life Expectancy Factor</span><span class="val" id="rmd-s-factor">26.5</span></div>
+      <div class="breakdown-row"><span>RMD Amount</span><span class="val" id="rmd-s-rmd">$18,868</span></div>
+      <div class="breakdown-row"><span>Tax Rate</span><span class="val" id="rmd-s-tax">22%</span></div>
+      <div class="breakdown-row"><span>Taxes Owed on RMD</span><span class="val" id="rmd-s-taxes">$4,151</span></div>
+      <div class="highlight-row"><span>After-Tax Amount</span><span id="rmd-s-net">$14,717</span></div>
+    </div>
+    <div id="rmd-exempt-notice" style="display:none;background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:14px;margin-top:12px;font-size:13px;color:#15803d">
+      <strong>No RMD Required:</strong> <span id="rmd-exempt-msg"></span>
+    </div>
+    <div class="calc-card" style="margin-top:12px">
+      <div style="font-size:12px;font-weight:700;color:var(--ink-3);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">RMD Ages (SECURE 2.0)</div>
+      <div class="breakdown-row"><span>Born before 1951</span><span class="val">RMDs started at 70.5 / 72</span></div>
+      <div class="breakdown-row"><span>Born 1951–1959</span><span class="val">RMDs start at age 73</span></div>
+      <div class="breakdown-row"><span>Born 1960 or later</span><span class="val">RMDs start at age 75</span></div>
+    </div>
+  </div>
+</div>
+<div class="calc-article">
+  <h2>What Is a Required Minimum Distribution?</h2>
+  <p>The IRS requires you to withdraw a minimum amount from traditional IRAs and employer retirement plans (401k, 403b) each year starting at age 73 (75 if born after 1959). The purpose is to ensure tax-deferred retirement savings eventually get taxed.</p>
+  <h3>RMD Formula</h3>
+  <p><strong>RMD = Prior year-end balance ÷ IRS life expectancy factor</strong></p>
+  <p>The life expectancy factor comes from the IRS Uniform Lifetime Table (Publication 590-B). At age 73, the factor is 26.5. At 80, it's 20.2. The older you get, the smaller the factor — and the larger the percentage you must withdraw.</p>
+  <h3>Penalty for Missing RMDs</h3>
+  <p>Missing your RMD deadline triggers a 25% excise tax on the amount not withdrawn. If you fix the missed RMD within 2 years (the correction window), the penalty drops to 10%. Always take your RMD before December 31 — first-year RMDs can be delayed to April 1 of the following year.</p>
+  <h3>Strategies to Reduce RMD Tax Impact</h3>
+  <ul>
+    <li><strong>Roth conversions</strong> before RMDs begin — convert pre-tax IRA funds to Roth while in a lower bracket</li>
+    <li><strong>Qualified Charitable Distribution (QCD)</strong> — donate up to $105,000/year from IRA directly to charity; counts toward RMD and is not taxable income</li>
+    <li><strong>Delay Social Security</strong> — lower income in early retirement years can mean lower tax on Roth conversions</li>
+  </ul>
+</div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="footer-logo">FreePayrollCalc</a>
+        <p class="footer-tagline">Free financial &amp; payroll calculators. No sign-up required.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Home &amp; Real Estate</div>
+        <nav class="footer-nav">
+          <a href="/mortgage-calculator">Mortgage Calculator</a>
+          <a href="/home-equity-loan-calculator">Home Equity Loan</a>
+          <a href="/heloc-calculator">HELOC Calculator</a>
+          <a href="/refinance-calculator">Refinance Calculator</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Business &amp; Tax</div>
+        <nav class="footer-nav">
+          <a href="/sba-loan-calculator">SBA Loan Calculator</a>
+          <a href="/capital-gains-tax-calculator">Capital Gains Tax</a>
+          <a href="/business-valuation-calculator">Business Valuation</a>
+          <a href="/mileage-reimbursement-calculator">Mileage Reimbursement</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Retirement</div>
+        <nav class="footer-nav">
+          <a href="/required-minimum-distribution-calculator">RMD Calculator</a>
+          <a href="/401k-withdrawal-calculator">401k Withdrawal</a>
+          <a href="/retirement-calculator">Retirement Calculator</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FreePayrollCalc.com &mdash; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+      <p class="footer-disclaimer">For informational purposes only. Consult a financial professional for advice.</p>
+    </div>
+  </div>
+</footer>
+<script src="/shared/scripts.js?v=6" defer></script>
+<script>
+var ULT={70:27.4,71:26.5,72:25.6,73:24.7,74:23.8,75:22.9,76:22.0,77:21.2,78:20.3,79:19.5,80:18.7,81:17.9,82:17.1,83:16.3,84:15.5,85:14.8,86:14.1,87:13.4,88:12.7,89:12.0,90:11.4,91:10.8,92:10.2,93:9.6,94:9.1,95:8.6,96:8.1,97:7.6,98:7.1,99:6.7,100:6.3,101:5.9,102:5.5,103:5.2,104:4.9,105:4.6,106:4.3,107:4.1,108:3.9,109:3.7,110:3.5,111:3.4,112:3.3,113:3.1,114:3.0,115:2.9};
+function fmt(n){return '
+</html>+Math.round(n).toLocaleString();}
+function calcRMD(){
+  var bal=parseFloat(document.getElementById('rmd-balance').value)||500000;
+  var age=parseInt(document.getElementById('rmd-age').value)||73;
+  var type=document.getElementById('rmd-type').value;
+  var taxRate=parseFloat(document.getElementById('rmd-tax-rate').value)/100;
+  var card=document.getElementById('rmd-main-card');
+  var notice=document.getElementById('rmd-exempt-notice');
+  var msgEl=document.getElementById('rmd-exempt-msg');
+  if(type==='rothira'){
+    notice.style.display='block';msgEl.textContent='Roth IRAs have no RMDs during the owner's lifetime.';
+    card.style.opacity='0.4';return;
+  }
+  if(type==='roth401k'){
+    notice.style.display='block';msgEl.textContent='Roth 401(k) accounts have no RMDs starting in 2024 (SECURE 2.0).';
+    card.style.opacity='0.4';return;
+  }
+  notice.style.display='none';card.style.opacity='1';
+  if(age<73){notice.style.display='block';msgEl.textContent='RMDs do not apply until age 73 (or 75 if born in 1960+). No withdrawal required yet.';card.style.opacity='0.4';return;}
+  var factor=ULT[age]||ULT[115];
+  var rmd=bal/factor;
+  var taxes=rmd*taxRate;
+  var afterTax=rmd-taxes;
+  var pct=rmd/bal*100;
+  document.getElementById('rmd-amount').textContent=fmt(rmd);
+  document.getElementById('rmd-factor').textContent=factor;
+  document.getElementById('rmd-pct').textContent=pct.toFixed(2)+'%';
+  document.getElementById('rmd-after-tax').textContent=fmt(afterTax);
+  document.getElementById('rmd-s-bal').textContent=fmt(bal);
+  document.getElementById('rmd-s-age').textContent=age;
+  document.getElementById('rmd-s-factor').textContent=factor;
+  document.getElementById('rmd-s-rmd').textContent=fmt(rmd);
+  document.getElementById('rmd-s-tax').textContent=Math.round(taxRate*100)+'%';
+  document.getElementById('rmd-s-taxes').textContent=fmt(taxes);
+  document.getElementById('rmd-s-net').textContent=fmt(afterTax);
+  document.getElementById('rmd-deadline').textContent='Must withdraw '+fmt(rmd)+' by December 31';
+}
+document.addEventListener('DOMContentLoaded',calcRMD);
+document.querySelectorAll('#rmd-balance,#rmd-age,#rmd-tax-rate').forEach(function(el){el.addEventListener('input',calcRMD);});
+document.getElementById('rmd-type').addEventListener('change',calcRMD);
+</script></body>
+</html>
