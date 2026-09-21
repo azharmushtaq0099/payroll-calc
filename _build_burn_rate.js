@@ -1,0 +1,212 @@
+/**
+ * Creates burn-rate-calculator.html
+ */
+const fs = require('fs');
+
+const OG_IMAGE = 'https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop';
+
+// Pull nav from a correct page
+const ref = fs.readFileSync('roi-calculator.html', 'utf8');
+const navStart = ref.indexOf('<nav class="site-nav"');
+const navEnd = ref.indexOf('</nav>', navStart) + '</nav>'.length;
+const NAV = ref.substring(navStart, navEnd);
+
+const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Burn Rate Calculator 2026 | Monthly Cash Runway</title>
+<meta name="description" content="Calculate your startup burn rate and cash runway. Enter monthly expenses and cash on hand to see exactly how many months until zero.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/burn-rate-calculator">
+<meta property="og:title" content="Burn Rate Calculator 2026 | Monthly Cash Runway">
+<meta property="og:description" content="Calculate startup burn rate and cash runway. How many months until you run out of money?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.freepayrollcalc.xyz/burn-rate-calculator">
+<meta property="og:image" content="${OG_IMAGE}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${OG_IMAGE}">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/shared/styles.css?v=6">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Burn Rate Calculator 2026","url":"https://www.freepayrollcalc.xyz/burn-rate-calculator","description":"Calculate monthly burn rate, net burn, and cash runway for startups and small businesses.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is burn rate?","acceptedAnswer":{"@type":"Answer","text":"Burn rate is the rate at which a company spends its cash reserves. Gross burn = total monthly expenses. Net burn = monthly expenses minus monthly revenue. Runway = cash on hand divided by monthly net burn."}},{"@type":"Question","name":"What is a good runway for a startup?","acceptedAnswer":{"@type":"Answer","text":"Most investors recommend 18-24 months of runway. 12 months is the danger zone. Under 6 months is a crisis requiring immediate action."}},{"@type":"Question","name":"How do I reduce burn rate?","acceptedAnswer":{"@type":"Answer","text":"The fastest levers: reduce headcount (60-80% of costs for SaaS), renegotiate rent, cut software subscriptions, defer marketing spend, move to variable compensation."}},{"@type":"Question","name":"What is the difference between gross and net burn rate?","acceptedAnswer":{"@type":"Answer","text":"Gross burn is total monthly cash spent. Net burn subtracts monthly revenue. Pre-revenue startups: gross = net. Revenue companies: net burn is lower. Investors focus on net burn for runway calculations."}}]}</script>
+<style>
+.result-card{background:linear-gradient(135deg,rgba(220,38,38,.07),rgba(220,38,38,.02));border:2px solid rgba(220,38,38,.18);border-radius:14px;padding:24px;text-align:center;margin-bottom:16px}
+.result-big{font-family:'JetBrains Mono',monospace;font-size:40px;font-weight:800;color:var(--red);line-height:1;margin-bottom:4px}
+.result-big.safe{color:var(--green)}.result-big.warn{color:var(--amber)}
+.result-label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.result-sub{font-size:12px;color:var(--ink-3);margin-top:4px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:640px){.stat-grid{grid-template-columns:1fr 1fr}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--ink);line-height:1;margin-bottom:3px}
+.stat-lbl{font-size:11px;color:var(--ink-3);font-weight:600}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.breakdown-row:last-child{border-bottom:none}
+.breakdown-row .val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink)}
+.runway-bar{height:12px;border-radius:6px;background:var(--surface-3);margin:16px 0;overflow:hidden}
+.runway-fill{height:100%;border-radius:6px;transition:width .5s ease}
+.runway-safe{background:var(--green)}.runway-warn{background:var(--amber)}.runway-danger{background:var(--red)}
+</style>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools"><div class="cmd-modal"><div class="cmd-search-row"><span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span><input class="cmd-input" id="cmd-input" type="text" placeholder="Search 151+ tools..." autocomplete="off" spellcheck="false"><kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd></div><div class="cmd-body" id="cmd-body"></div><div class="cmd-footer"><span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span><span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span><span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span></div></div></div>
+
+${NAV}
+
+<main class="calc-page">
+  <div class="container">
+    <nav class="calc-breadcrumb"><a href="/">Home</a><span>&rsaquo;</span><span aria-current="page">Burn Rate Calculator</span></nav>
+    <div class="ad-zone ad-zone--leaderboard"></div>
+    <h1 class="calc-title" data-enter>Burn Rate Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <p class="calc-sub" data-enter data-delay="1">Enter monthly expenses and cash on hand to see gross burn, net burn, and exactly how many months of runway you have left.</p>
+
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-group">
+          <label class="input-label" for="br-cash">Current Cash on Hand</label>
+          <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="br-cash" class="calc-input" value="500000" min="0" step="10000"></div>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="br-expenses">Total Monthly Expenses (Gross Burn)</label>
+          <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="br-expenses" class="calc-input" value="50000" min="0" step="1000"></div>
+          <div class="input-hint">Salaries, rent, SaaS, contractors, marketing, etc.</div>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="br-revenue">Monthly Revenue (if any)</label>
+          <div class="input-prefix-wrap"><span class="input-prefix">$</span><input type="number" id="br-revenue" class="calc-input" value="0" min="0" step="1000"></div>
+          <div class="input-hint">Leave 0 for pre-revenue companies</div>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="br-growth">Monthly Revenue Growth Rate (optional)</label>
+          <div class="input-prefix-wrap"><input type="number" id="br-growth" class="calc-input" value="0" min="0" max="100" step="1"><span class="input-suffix">% / mo</span></div>
+        </div>
+        <button class="calc-btn" onclick="calcBurnRate()">Calculate Runway</button>
+      </div>
+
+      <div class="calc-results" id="br-results" style="display:none">
+        <div class="result-card">
+          <div class="result-big" id="br-runway-big">10 mo</div>
+          <div class="result-label">Cash Runway</div>
+          <div class="result-sub" id="br-result-sub">At current burn, cash runs out in 10 months</div>
+        </div>
+        <div class="runway-bar"><div class="runway-fill runway-danger" id="br-bar" style="width:50%"></div></div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-num" id="br-gross">-$50k/mo</div><div class="stat-lbl">Gross Burn</div></div>
+          <div class="stat-card"><div class="stat-num" id="br-net">-$50k/mo</div><div class="stat-lbl">Net Burn</div></div>
+          <div class="stat-card"><div class="stat-num" id="br-default-date">Jul 2026</div><div class="stat-lbl">Out of Cash</div></div>
+        </div>
+        <div class="calc-card">
+          <div class="breakdown-row"><span>Cash on Hand</span><span class="val" id="br-s-cash">$500,000</span></div>
+          <div class="breakdown-row"><span>Monthly Revenue</span><span class="val" id="br-s-rev">$0/mo</span></div>
+          <div class="breakdown-row"><span>Monthly Expenses</span><span class="val" id="br-s-exp">$50,000/mo</span></div>
+          <div class="breakdown-row"><span>Net Burn Rate</span><span class="val" id="br-s-net" style="color:var(--red)">-$50,000/mo</span></div>
+          <div class="breakdown-row"><span>Runway</span><span class="val" id="br-s-months">10 months</span></div>
+          <div class="breakdown-row"><span>Out of Cash</span><span class="val" id="br-s-date">Jul 2026</span></div>
+        </div>
+        <div class="calc-card">
+          <div style="font-weight:700;margin-bottom:8px;font-size:14px">Investor Benchmark</div>
+          <div id="br-advice" style="font-size:13px;color:var(--ink-2);line-height:1.6"></div>
+        </div>
+      </div>
+
+      <div class="calc-results" id="br-placeholder">
+        <div class="calc-card" style="text-align:center;padding:40px 24px">
+          <div style="font-size:32px;margin-bottom:12px">&#128200;</div>
+          <div style="font-weight:700;margin-bottom:6px">Enter your numbers above</div>
+          <div style="font-size:13px;color:var(--ink-3)">Runway, burn rate, and zero-cash date will appear here</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="content-section" data-enter>
+      <h2>How to Calculate Burn Rate</h2>
+      <p><strong>Gross burn rate</strong> is total monthly cash outflow. <strong>Net burn rate</strong> subtracts monthly revenue. <strong>Runway</strong> = cash on hand &divide; net burn rate.</p>
+      <p>Example: $500,000 cash &divide; $50,000 net burn = 10 months runway. With $10,000/month revenue, net burn drops to $40,000 and runway extends to 12.5 months.</p>
+      <h3>Runway Benchmarks</h3>
+      <ul class="content-list">
+        <li><strong>24+ months:</strong> Strong — fundraise from a position of strength</li>
+        <li><strong>18–24 months:</strong> Standard — start fundraising if you need a Series A</li>
+        <li><strong>12–18 months:</strong> Watch closely — cut non-essentials if growth isn't accelerating</li>
+        <li><strong>Under 12 months:</strong> Danger zone — begin cost cutting or fundraising immediately</li>
+        <li><strong>Under 6 months:</strong> Crisis — cut aggressively and explore bridge financing now</li>
+      </ul>
+    </section>
+
+    <div id="related-calculators" class="related-section" data-enter></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free startup and business calculators.</div></div>
+      <div><div class="footer-col-title">Business Tools</div><ul class="footer-links"><li><a href="/roi-calculator">ROI Calculator</a></li><li><a href="/profit-margin-calculator">Profit Margin</a></li><li><a href="/break-even-calculator">Break-Even</a></li><li><a href="/business-valuation-calculator">Business Valuation</a></li></ul></div>
+      <div><div class="footer-col-title">Finance Tools</div><ul class="footer-links"><li><a href="/savings-calculator">Savings</a></li><li><a href="/business-loan-calculator">Business Loan</a></li><li><a href="/">All Calculators</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. For estimation only &mdash; not financial advice.</span><div class="footer-legal"><a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+<script src="/shared/scripts.js?v=4" defer></script>
+<script>
+(function(){
+  'use strict';
+  function fmtK(n){var a=Math.abs(n);return a>=1e6?'$'+(a/1e6).toFixed(1)+'M':a>=1000?'$'+(a/1000).toFixed(0)+'k':'$'+Math.round(a);}
+  function fmt(n){return '$'+Math.round(Math.abs(n)).toLocaleString('en-US');}
+
+  window.calcBurnRate=function(){
+    var cash=parseFloat(document.getElementById('br-cash').value)||0;
+    var expenses=parseFloat(document.getElementById('br-expenses').value)||0;
+    var revenue=parseFloat(document.getElementById('br-revenue').value)||0;
+    var growth=parseFloat(document.getElementById('br-growth').value)||0;
+    if(!cash||!expenses){alert('Enter cash on hand and monthly expenses.');return;}
+    var netBurn=expenses-revenue;
+    var months;
+    if(netBurn<=0){months=999;}
+    else if(growth>0){var c=cash,r=revenue;months=0;while(c>0&&months<500){c-=(expenses-r);r*=(1+growth/100);months++;}}
+    else{months=cash/netBurn;}
+    var runway=Math.round(months*10)/10;
+    var d=new Date();d.setMonth(d.getMonth()+Math.floor(months));
+    var dateStr=months>=999?'Never (profitable)':d.toLocaleDateString('en-US',{month:'short',year:'numeric'});
+    var cls=months>=24?'safe':months>=12?'warn':'';
+    var barCls=months>=24?'runway-safe':months>=12?'runway-warn':'runway-danger';
+    var barPct=Math.min(100,(months/24)*100);
+    var advice=months>=24?'Strong runway. Fundraise from a position of strength or focus on profitability.':
+      months>=18?'Start fundraising now. 18 months is the minimum safe window to close a round.':
+      months>=12?'Caution: cut non-essential costs and start fundraising immediately.':
+      months>=6?'Danger: implement emergency cost cuts and begin bridge financing conversations now.':
+      'Critical: less than 6 months. Immediate action required — cut burn or secure emergency funding.';
+    document.getElementById('br-runway-big').textContent=months>=999?'∞':runway.toFixed(1)+' mo';
+    document.getElementById('br-runway-big').className='result-big '+cls;
+    document.getElementById('br-result-sub').textContent=months>=999?'You are cash-flow positive — no runway risk.':'At current burn, cash runs out in '+Math.ceil(months)+' months ('+dateStr+')';
+    document.getElementById('br-bar').className='runway-fill '+barCls;
+    document.getElementById('br-bar').style.width=barPct+'%';
+    document.getElementById('br-gross').textContent='-'+fmtK(expenses)+'/mo';
+    document.getElementById('br-net').textContent=netBurn<=0?'+'+fmtK(revenue-expenses)+'/mo':'-'+fmtK(netBurn)+'/mo';
+    document.getElementById('br-default-date').textContent=dateStr;
+    document.getElementById('br-s-cash').textContent=fmt(cash);
+    document.getElementById('br-s-rev').textContent=fmt(revenue)+'/mo';
+    document.getElementById('br-s-exp').textContent=fmt(expenses)+'/mo';
+    document.getElementById('br-s-net').textContent=(netBurn<=0?'+':'-')+fmt(netBurn)+'/mo';
+    document.getElementById('br-s-net').style.color=netBurn<=0?'var(--green)':'var(--red)';
+    document.getElementById('br-s-months').textContent=months>=999?'Profitable':runway.toFixed(1)+' months';
+    document.getElementById('br-s-date').textContent=dateStr;
+    document.getElementById('br-advice').textContent=advice;
+    document.getElementById('br-results').style.display='block';
+    document.getElementById('br-placeholder').style.display='none';
+    document.getElementById('br-results').scrollIntoView({behavior:'smooth',block:'start'});
+  };
+})();
+</script>
+</body>
+</html>`;
+
+fs.writeFileSync('burn-rate-calculator.html', html);
+console.log('burn-rate-calculator.html created successfully');
+console.log('File size:', html.length, 'bytes');
