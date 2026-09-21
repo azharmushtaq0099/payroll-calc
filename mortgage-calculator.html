@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Free Mortgage Calculator 2026","url":"https://www.freepayrollcalc.xyz/mortgage-calculator","description":"Calculate monthly mortgage payments including principal, interest, taxes, and insurance. Full amortization schedule included. Free, no sign-up.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
 </script>
@@ -56,6 +56,8 @@
 .dp-toggle button.active{background:var(--accent);color:#fff}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Free Mortgage Calculator","item":"https://www.freepayrollcalc.xyz/mortgage-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/mortgage-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate a Mortgage Payment","description":"Step-by-step calculation of monthly mortgage principal and interest payment.","step":[{"@type":"HowToStep","position":1,"name":"Gather loan details","text":"Note your loan amount (P), annual interest rate (convert to monthly: r = annual rate ÷ 12), and loan term in months (n = years × 12)."},{"@type":"HowToStep","position":2,"name":"Apply the amortization formula","text":"Monthly P&I = P × [r(1+r)^n] ÷ [(1+r)^n − 1]. Example: $400,000 at 6.8% for 30 years = $400,000 × [0.005667 × (1.005667)^360] ÷ [(1.005667)^360 − 1] = $2,612."},{"@type":"HowToStep","position":3,"name":"Add escrow (PITI)","text":"Total monthly payment = P&I + property taxes ÷ 12 + homeowners insurance ÷ 12 + PMI (if down payment < 20%). PMI typically costs 0.5%–1.5% of loan amount annually."},{"@type":"HowToStep","position":4,"name":"Verify with amortization table","text":"In month 1, most payment goes to interest (6.8% ÷ 12 × $400,000 = $2,267 interest, only $345 principal). This reverses over time — by year 25, most goes to principal."}]}</script>
 </head>
 <body>
 <div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
@@ -221,7 +223,11 @@
   <div class="container">
     <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">Mortgage Calculator</span></nav>
     <div class="ad-zone ad-zone--leaderboard"></div>
-    <h1 class="calc-title" data-enter>Free Mortgage Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">Monthly mortgage payment = P × [r(1+r)^n] ÷ [(1+r)^n − 1], where P = principal, r = monthly rate, n = total payments. On a $400,000 loan at 6.8% APR for 30 years, the payment is $2,612/month. Total interest paid over 30 years is $540,320 — more than the original loan amount.</p>
+</div>
+<h1 class="calc-title" data-enter>Free Mortgage Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
     <p class="calc-subtitle" data-enter data-delay="1">Calculate your exact monthly payment, total interest, and full amortization schedule.<br>Includes taxes, insurance, PMI, and HOA fees.</p>
     <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Standard amortization formula (P+I) · PITI breakdown · Full amortization table</div>
 

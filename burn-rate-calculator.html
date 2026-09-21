@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Burn Rate Calculator 2026","url":"https://www.freepayrollcalc.xyz/burn-rate-calculator","description":"Calculate monthly burn rate, net burn, and cash runway for startups and small businesses.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is burn rate?","acceptedAnswer":{"@type":"Answer","text":"Burn rate is the rate at which a company spends its cash reserves. Gross burn = total monthly expenses. Net burn = monthly expenses minus monthly revenue. Runway = cash on hand divided by monthly net burn."}},{"@type":"Question","name":"What is a good runway for a startup?","acceptedAnswer":{"@type":"Answer","text":"Most investors recommend 18-24 months of runway. 12 months is the danger zone. Under 6 months is a crisis requiring immediate action."}},{"@type":"Question","name":"How do I reduce burn rate?","acceptedAnswer":{"@type":"Answer","text":"The fastest levers: reduce headcount (60-80% of costs for SaaS), renegotiate rent, cut software subscriptions, defer marketing spend, move to variable compensation."}},{"@type":"Question","name":"What is the difference between gross and net burn rate?","acceptedAnswer":{"@type":"Answer","text":"Gross burn is total monthly cash spent. Net burn subtracts monthly revenue. Pre-revenue startups: gross = net. Revenue companies: net burn is lower. Investors focus on net burn for runway calculations."}}]}</script>
 <style>
@@ -42,6 +42,7 @@
 .runway-safe{background:var(--green)}.runway-warn{background:var(--amber)}.runway-danger{background:var(--red)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Burn Rate Calculator","item":"https://www.freepayrollcalc.xyz/burn-rate-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/burn-rate-calculator"}</script>
 </head>
 <body>
 <div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools"><div class="cmd-modal"><div class="cmd-search-row"><span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span><input class="cmd-input" id="cmd-input" type="text" placeholder="Search 151+ tools..." autocomplete="off" spellcheck="false"><kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd></div><div class="cmd-body" id="cmd-body"></div><div class="cmd-footer"><span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span><span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span><span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span></div></div></div>
@@ -196,6 +197,11 @@
     <div class="ad-zone ad-zone--leaderboard"></div>
     <h1 class="calc-title" data-enter>Burn Rate Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
     <p class="calc-sub" data-enter data-delay="1">Enter monthly expenses and cash on hand to see gross burn, net burn, and exactly how many months of runway you have left.</p>
+<div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">Net burn rate = monthly expenses − monthly revenue. A startup with $500,000 cash, $60,000 expenses, and $15,000 revenue burns $45,000/month — giving 11.1 months of runway. Investors generally require 18–24 months of runway post-funding. Gross burn measures total cash out before revenue offsets.</p>
+</div>
+
 
     <div class="calc-layout">
       <div class="calc-inputs">

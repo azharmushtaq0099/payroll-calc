@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Free 1099 Tax Calculator 2026","url":"https://www.freepayrollcalc.xyz/1099-tax-calculator","description":"Calculate self-employment tax and federal income tax for 1099 contractors and freelancers. Shows SE tax, income tax, quarterly estimated payments, and effective rate. 2026 IRS rates.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
 </script>
@@ -52,6 +52,7 @@
 .tt-qtr-date{font-size:11px;color:var(--ink-3)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Free 1099 Tax Calculator","item":"https://www.freepayrollcalc.xyz/1099-tax-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/1099-tax-calculator"}</script>
 </head>
 <body>
 <div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools">
@@ -217,7 +218,11 @@
   <div class="container">
     <nav class="calc-breadcrumb"><a href="/">Home</a><span>&#x203A;</span><span aria-current="page">1099 Tax Calculator</span></nav>
     <div class="ad-zone ad-zone--leaderboard"></div>
-    <h1 class="calc-title" data-enter>Free 1099 Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">1099 workers owe 15.3% self-employment tax on net earnings (12.4% Social Security up to $176,100 + 2.9% Medicare), plus regular federal income tax. You can deduct 50% of SE tax from adjusted gross income. Quarterly estimated payments are due April 15, June 15, September 15, and January 15.</p>
+</div>
+<h1 class="calc-title" data-enter>Free 1099 Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
     <p class="calc-subtitle" data-enter data-delay="1">Estimate your total tax bill as a freelancer or 1099 contractor.<br>Includes self-employment tax, federal income tax, and quarterly payment schedule.</p>
     <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SE tax 15.3% on 92.35% of net &#xB7; 2026 IRS brackets &#xB7; Quarterly payment dates</div>
     <div class="calc-card" data-enter data-delay="2">

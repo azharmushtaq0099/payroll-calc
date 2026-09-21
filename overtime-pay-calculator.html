@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -63,6 +63,8 @@
 }
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Overtime Pay Calculator","item":"https://www.freepayrollcalc.xyz/overtime-pay-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/overtime-pay-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate Overtime Pay","description":"How to calculate overtime wages for non-exempt employees under FLSA.","step":[{"@type":"HowToStep","position":1,"name":"Identify the workweek","text":"Confirm your fixed 7-day workweek period (e.g., Sunday–Saturday). Overtime is calculated per workweek — not pay period — under FLSA."},{"@type":"HowToStep","position":2,"name":"Count hours worked over 40","text":"Total all hours worked in the workweek. Hours in excess of 40 are eligible for overtime. California also has daily overtime for 8+ hours/day."},{"@type":"HowToStep","position":3,"name":"Calculate the regular rate","text":"Regular rate = total compensation (excluding OT premiums, gifts, expenses) ÷ total hours worked. Must include all remuneration paid for employment."},{"@type":"HowToStep","position":4,"name":"Apply the 1.5x multiplier","text":"Overtime pay = regular rate × 1.5 × overtime hours. Example: $20/hr regular rate × 1.5 × 5 OT hours = $150 overtime premium."},{"@type":"HowToStep","position":5,"name":"Add straight-time wages","text":"Total pay = (regular rate × 40 hours) + (regular rate × 1.5 × OT hours). Or alternatively: (regular rate × total hours) + (regular rate × 0.5 × OT hours)."}]}</script>
 </head>
 <body>
 
@@ -244,7 +246,11 @@
     <!-- Ad zone: insert AdSense code here when approved -->
 <div class="ad-zone ad-zone--leaderboard"></div>
 
-    <h1 class="calc-title" data-enter>Overtime Pay Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">Under the FLSA, non-exempt employees earn 1.5× their regular rate for all hours over 40 in a workweek. Regular rate includes base wages, most bonuses, and shift differentials — but excludes overtime premiums and certain gifts. California mandates daily overtime (over 8 hrs/day) and double time (over 12 hrs/day or 7th day).</p>
+</div>
+<h1 class="calc-title" data-enter>Overtime Pay Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
     <p class="calc-subtitle" data-enter data-delay="1">
       FLSA-compliant overtime for hourly, salaried, and blended-rate workers.<br>
       Standard 1.5x, California daily overtime, double time — all in one calculator.

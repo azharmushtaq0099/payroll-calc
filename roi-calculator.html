@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"ROI Calculator","url":"https://www.freepayrollcalc.xyz/roi-calculator","description":"Calculate basic ROI, annualized ROI, marketing ROI (ROAS), real estate ROI, and compare multiple investments side by side.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
 </script>
@@ -51,6 +51,8 @@
 .best-row td{background:rgba(5,150,105,.06)!important;font-weight:700}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"ROI Calculator","item":"https://www.freepayrollcalc.xyz/roi-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/roi-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate Return on Investment (ROI)","description":"Step-by-step ROI calculation for business and investment decisions.","step":[{"@type":"HowToStep","position":1,"name":"Calculate total investment cost","text":"Include all direct costs: purchase price, setup fees, training, opportunity cost, and any ongoing costs during the investment period. Don't overlook indirect costs."},{"@type":"HowToStep","position":2,"name":"Determine net profit","text":"Net profit = total revenue generated − total costs (including the original investment). Be precise about the time period covered."},{"@type":"HowToStep","position":3,"name":"Apply the ROI formula","text":"ROI = (Net Profit ÷ Investment Cost) × 100. Example: $8,000 net profit ÷ $5,000 invested × 100 = 160% ROI."},{"@type":"HowToStep","position":4,"name":"Annualize for comparison","text":"For multi-year investments, annualize: Annualized ROI = [(1 + ROI)^(1/years) − 1] × 100. A 160% ROI over 3 years = 37.5% annualized ROI."},{"@type":"HowToStep","position":5,"name":"Compare to benchmark","text":"Compare to your cost of capital or hurdle rate. If you can earn 10% elsewhere, projects below 10% annualized ROI destroy value even if ROI is positive."}]}</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -223,7 +225,11 @@
   <div class="container">
     <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">ROI Calculator</span></nav>
     <div class="ad-zone ad-zone--leaderboard"></div>
-    <h1 class="calc-title" data-enter>ROI Calculator</h1>
+    <div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">ROI = (Net Profit ÷ Cost of Investment) × 100. A $5,000 ad campaign generating $15,000 revenue with $7,000 in costs yields ROI of ($8,000 ÷ $5,000) × 100 = 160%. Annualized ROI accounts for time: a 50% return over 2 years = 22.5% annualized (using compound growth formula). Always include all direct and indirect costs.</p>
+</div>
+<h1 class="calc-title" data-enter>ROI Calculator</h1>
     <p class="calc-subtitle" data-enter data-delay="1">Calculate return on investment, annualized ROI, marketing ROI, and compare multiple investments side by side.</p>
     <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Basic ROI · Annualized ROI · Marketing/ROAS · Real Estate ROI · Investment Comparison</div>
 

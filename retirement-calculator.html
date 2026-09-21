@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Retirement Calculator","url":"https://www.freepayrollcalc.xyz/retirement-calculator","description":"Project retirement savings growth, calculate monthly income using the 4% withdrawal rule, and see inflation-adjusted values. Compare scenarios with different contribution amounts.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
 </script>
@@ -57,6 +57,8 @@
 .milestone-table td:not(:first-child){font-family:'JetBrains Mono',monospace;font-weight:600}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Retirement Calculator","item":"https://www.freepayrollcalc.xyz/retirement-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/retirement-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate How Much You Need to Retire","description":"Step-by-step retirement savings goal calculation using the 4% rule.","step":[{"@type":"HowToStep","position":1,"name":"Estimate annual retirement expenses","text":"Project your annual spending in retirement. Many financial planners use 70–80% of pre-retirement income as a baseline. Include healthcare costs, which average $315,000 per couple in retirement."},{"@type":"HowToStep","position":2,"name":"Subtract guaranteed income","text":"Deduct Social Security (check your estimate at SSA.gov), pension income, and any rental income from your annual expenses. This is your \"income gap\" — what savings must cover."},{"@type":"HowToStep","position":3,"name":"Apply the 4% rule","text":"Divide your annual income gap by 0.04 (multiply by 25) to find your target portfolio. If the gap is $40,000/year, target nest egg = $40,000 ÷ 0.04 = $1,000,000."},{"@type":"HowToStep","position":4,"name":"Calculate monthly savings needed","text":"Use future value formula: PMT = FV × r ÷ [(1+r)^n − 1]. To reach $1M in 30 years at 7% returns, save $984/month."},{"@type":"HowToStep","position":5,"name":"Adjust for inflation","text":"Real (inflation-adjusted) returns average 4–5% historically. For conservative planning, use 5–6% nominal or 3–4% real return in your projections."}]}</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -229,7 +231,11 @@
   <div class="container">
     <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Retirement Calculator</span></nav>
     <div class="ad-zone ad-zone--leaderboard"></div>
-    <h1 class="calc-title" data-enter>Retirement Calculator</h1>
+    <div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">The 4% safe withdrawal rule says you can withdraw 4% of your portfolio annually in retirement with a high probability of funds lasting 30+ years. To retire on $60,000/year, you need $1.5 million (60,000 ÷ 0.04). Saving $1,500/month from age 30 at 7% average return reaches $1.8M by age 65.</p>
+</div>
+<h1 class="calc-title" data-enter>Retirement Calculator</h1>
     <p class="calc-subtitle" data-enter data-delay="1">Project how much your retirement savings will grow and what monthly income you can expect.<br>Includes the 4% withdrawal rule, inflation adjustment, and milestone tracking.</p>
     <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Compound growth · Inflation-adjusted · 4% rule · Savings milestones</div>
 

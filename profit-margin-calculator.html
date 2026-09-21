@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Profit Margin Calculator","url":"https://www.freepayrollcalc.xyz/profit-margin-calculator","description":"Calculate gross profit margin, operating margin, and net profit margin. Find revenue or selling price from target margin. Includes industry benchmark margins.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
 </script>
@@ -56,6 +56,7 @@
 .conv-table td:first-child{font-family:inherit;color:var(--ink-2)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Profit Margin Calculator","item":"https://www.freepayrollcalc.xyz/profit-margin-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/profit-margin-calculator"}</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -228,7 +229,11 @@
   <div class="container">
     <nav class="calc-breadcrumb"><a href="/">Home</a><span>›</span><span aria-current="page">Profit Margin Calculator</span></nav>
     <div class="ad-zone ad-zone--leaderboard"></div>
-    <h1 class="calc-title" data-enter>Profit Margin Calculator</h1>
+    <div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">Gross profit margin = (Revenue − COGS) ÷ Revenue × 100. Net profit margin = Net Income ÷ Revenue × 100. A 20%+ net margin is strong for most businesses; SaaS companies target 20–30%, retail averages 2–5%, and restaurants 3–5%. Operating margin (EBIT ÷ Revenue) excludes financing costs for apples-to-apples comparison.</p>
+</div>
+<h1 class="calc-title" data-enter>Profit Margin Calculator</h1>
     <p class="calc-subtitle" data-enter data-delay="1">Calculate gross, operating, and net profit margin.<br>Find selling price from target margin. Includes industry benchmarks.</p>
     <div class="calc-updated"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Gross · Operating · Net margin · Markup converter · Benchmarks</div>
 

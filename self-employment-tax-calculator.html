@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -101,6 +101,8 @@
 #se-results{display:none}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Self-Employment Tax Calculator","item":"https://www.freepayrollcalc.xyz/self-employment-tax-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/self-employment-tax-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate Self-Employment Tax","description":"Step-by-step calculation of self-employment tax for Schedule SE.","step":[{"@type":"HowToStep","position":1,"name":"Calculate net SE income","text":"Start with gross self-employment income from all 1099s and business income. Subtract business expenses to arrive at net profit from Schedule C."},{"@type":"HowToStep","position":2,"name":"Multiply by 92.35%","text":"Multiply net profit by 0.9235. This accounts for the employer-equivalent deduction. Example: $75,000 × 0.9235 = $69,263 SE income subject to tax."},{"@type":"HowToStep","position":3,"name":"Apply SE tax rates","text":"Apply 15.3% to the first $176,100 of net SE income, then 2.9% on the excess. Example: $69,263 × 15.3% = $10,597 in SE tax."},{"@type":"HowToStep","position":4,"name":"Deduct half of SE tax","text":"You may deduct 50% of SE tax ($5,299 in the example) from adjusted gross income on Form 1040 Schedule 1 — reducing your income tax bill."},{"@type":"HowToStep","position":5,"name":"Calculate quarterly payments","text":"Divide estimated annual SE tax + income tax by 4 for quarterly estimated payments due April 15, June 16, September 15, and January 15."}]}</script>
 </head>
 <body>
 
@@ -283,7 +285,11 @@
 
     <div class="ad-zone ad-zone--leaderboard"></div>
 
-    <h1 class="calc-title" data-enter>Self-Employment Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">Self-employment tax is 15.3% on the first $176,100 of 2026 net SE income, then 2.9% above that (plus 0.9% additional Medicare for income over $200,000 single/$250,000 joint). The IRS allows you to deduct 50% of your total SE tax when calculating adjusted gross income — reducing your income tax bill.</p>
+</div>
+<h1 class="calc-title" data-enter>Self-Employment Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
     <p class="calc-subtitle" data-enter data-delay="1">
       Calculate Schedule SE taxes, the deductible half, federal and state income taxes, and quarterly estimated payments.<br>
       Built for freelancers, 1099 contractors, and sole proprietors.

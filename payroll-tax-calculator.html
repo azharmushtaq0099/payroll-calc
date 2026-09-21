@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=8">
+<link rel="stylesheet" href="/shared/styles.css?v=9">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,6 +58,8 @@
 }
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Payroll Tax Calculator","item":"https://www.freepayrollcalc.xyz/payroll-tax-calculator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/payroll-tax-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate Payroll Taxes in 2026","description":"Step-by-step process for calculating federal payroll taxes for an employee.","step":[{"@type":"HowToStep","position":1,"name":"Determine gross wages","text":"Calculate total gross wages for the pay period: hourly employees × hours worked, or salary ÷ pay periods per year."},{"@type":"HowToStep","position":2,"name":"Subtract pre-tax deductions","text":"Deduct 401(k) contributions, HSA contributions, and pre-tax health insurance premiums. These reduce the taxable wage base."},{"@type":"HowToStep","position":3,"name":"Calculate FICA taxes","text":"Multiply adjusted gross wages by 6.2% for Social Security (up to $176,100 annual wage base) and 1.45% for Medicare. No wage cap on Medicare."},{"@type":"HowToStep","position":4,"name":"Withhold federal income tax","text":"Use IRS Publication 15-T Percentage Method Tables. Find the table matching your payroll period (weekly, bi-weekly, monthly) and employee W-4 filing status."},{"@type":"HowToStep","position":5,"name":"Apply state income tax","text":"Use your state's withholding tables from the state revenue department. Nine states have no income tax: AK, FL, NV, NH, SD, TN, TX, WA, WY."},{"@type":"HowToStep","position":6,"name":"Calculate net pay","text":"Subtract all taxes and post-tax deductions (Roth 401k, garnishments, benefits) from gross wages to arrive at the employee's net take-home pay."}]}</script>
 </head>
 <body>
 
@@ -244,7 +246,11 @@
 <div class="ad-zone ad-zone--leaderboard"></div>
 
     <!-- Title -->
-    <h1 class="calc-title" data-enter>Payroll Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
+    <div class="quick-answer" role="note" aria-label="Quick answer">
+  <span class="qa-label">Quick Answer</span>
+  <p class="qa-text">Payroll taxes in 2026 consist of 6.2% Social Security (on wages up to $176,100), 1.45% Medicare, plus federal income tax withheld per IRS Publication 15-T based on your W-4 filing status and allowances. Both the employee and employer each pay the 7.65% FICA share.</p>
+</div>
+<h1 class="calc-title" data-enter>Payroll Tax Calculator <span style="color:var(--ink-3);font-weight:400;font-size:.65em">2026</span></h1>
     <p class="calc-subtitle" data-enter data-delay="1">
       Federal income tax + Social Security + Medicare + state withholding — calculated per paycheck.<br>
       Based on 2026 IRS Publication 15 rates and SSA wage base.
