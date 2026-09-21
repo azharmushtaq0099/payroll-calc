@@ -582,6 +582,68 @@ label.field-label{
 .footer-legal a{font-size:13px;color:rgba(255,255,255,.35);transition:color var(--transition)}
 .footer-legal a:hover{color:rgba(255,255,255,.7)}
 
+/* ── Legacy form aliases (batch 1-2 pages use calc-input / input-prefix-wrap / calc-btn) ── */
+.calc-sub{font-size:16px;color:var(--ink-2);margin-bottom:36px}
+.calc-inputs{display:flex;flex-direction:column}
+.input-group{margin-bottom:20px}
+.input-label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.1px}
+.input-hint{font-size:12px;color:var(--ink-3);margin-top:4px}
+/* Prefix/suffix wrapper — flex row so prefix/suffix are inline, not absolute */
+.input-prefix-wrap{
+  display:flex;align-items:stretch;
+  border:1.5px solid var(--border-dark);border-radius:9px;
+  overflow:hidden;background:var(--surface);
+  transition:border-color var(--transition),box-shadow var(--transition);
+}
+.input-prefix-wrap:focus-within{
+  border-color:var(--accent);box-shadow:0 0 0 3px rgba(27,79,216,.1);
+}
+.input-prefix-wrap .input-prefix,
+.input-prefix-wrap .input-suffix{
+  display:flex;align-items:center;
+  padding:0 10px;
+  font-size:14px;font-weight:500;color:var(--ink-3);
+  background:var(--surface-2);
+  user-select:none;pointer-events:none;
+  /* override the absolute positioning from the shared rules */
+  position:static;transform:none;top:auto;left:auto;right:auto;
+}
+.input-prefix-wrap .input-prefix{border-right:1px solid var(--border)}
+.input-prefix-wrap .input-suffix{border-left:1px solid var(--border)}
+.input-prefix-wrap .calc-input{
+  flex:1;min-width:0;border:none !important;background:transparent;
+  border-radius:0;box-shadow:none !important;outline:none;
+  height:44px;padding:0 12px;font-size:15px;color:var(--ink);
+}
+/* Standalone calc-input (no prefix wrapper) */
+.calc-input{
+  width:100%;height:44px;padding:0 14px;
+  border:1.5px solid var(--border-dark);border-radius:9px;
+  font-size:15px;color:var(--ink);background:var(--surface);
+  transition:border-color var(--transition),box-shadow var(--transition);
+  -webkit-appearance:none;appearance:none;
+}
+.calc-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(27,79,216,.1)}
+.calc-select{
+  width:100%;height:44px;padding:0 38px 0 14px;
+  border:1.5px solid var(--border-dark);border-radius:9px;
+  font-size:15px;color:var(--ink);background:var(--surface);
+  transition:border-color var(--transition),box-shadow var(--transition);
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;cursor:pointer;
+}
+.calc-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(27,79,216,.1)}
+.calc-btn{
+  width:100%;height:50px;background:var(--accent);color:#fff;
+  font-size:16px;font-weight:700;letter-spacing:-.2px;border:none;
+  border-radius:11px;cursor:pointer;margin-top:4px;
+  transition:background var(--transition),transform var(--transition),box-shadow var(--transition);
+  box-shadow:0 2px 8px rgba(27,79,216,.25);
+}
+.calc-btn:hover{background:var(--accent-hov);transform:translateY(-1px);box-shadow:0 4px 16px rgba(27,79,216,.35)}
+.calc-btn:active{transform:translateY(0)}
+
 /* ── Legacy footer aliases (batch 1-2 pages use footer-grid / footer-nav) ── */
 .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;padding:56px 0 40px}
 .footer-brand,.footer-logo{font-size:17px;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:10px;letter-spacing:-.3px}

@@ -151,7 +151,7 @@ function wrap(slug, title, desc, schemaJson, faqSchemaJson, pageCSS, body) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=7">
+<link rel="stylesheet" href="/shared/styles.css?v=8">
 <script type="application/ld+json">${schemaJson}</script>
 ${faqSchemaJson ? `<script type="application/ld+json">${faqSchemaJson}</script>` : ''}
 <style>
