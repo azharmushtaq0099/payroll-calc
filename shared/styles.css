@@ -582,6 +582,23 @@ label.field-label{
 .footer-legal a{font-size:13px;color:rgba(255,255,255,.35);transition:color var(--transition)}
 .footer-legal a:hover{color:rgba(255,255,255,.7)}
 
+/* ── Legacy footer aliases (batch 1-2 pages use footer-grid / footer-nav) ── */
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;padding:56px 0 40px}
+.footer-brand,.footer-logo{font-size:17px;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:10px;letter-spacing:-.3px}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,.45);line-height:1.65;max-width:260px;margin:0}
+.footer-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+.footer-grid ul a{font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color var(--transition)}
+.footer-grid ul a:hover{color:#fff}
+.footer-nav{display:flex;flex-direction:column;gap:9px}
+.footer-nav a{font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color var(--transition)}
+.footer-nav a:hover{color:#fff}
+.footer-bottom p{font-size:13px;color:rgba(255,255,255,.35);margin:0}
+.footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none;transition:color var(--transition)}
+.footer-bottom a:hover{color:rgba(255,255,255,.7)}
+.footer-disclaimer{font-size:12px;color:rgba(255,255,255,.25)}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+
 /* ── Disclaimer ── */
 .disclaimer{
   background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.18);
