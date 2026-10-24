@@ -1,3 +1,55 @@
 User-agent: *
 Allow: /
 Sitemap: https://www.freepayrollcalc.xyz/sitemap.xml
+
+# AI search and answer engine crawlers — explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Gemini-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: DuckAssistant
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: PetalBot
+Allow: /

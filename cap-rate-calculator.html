@@ -15,12 +15,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Cap Rate Calculator","url":"https://www.freepayrollcalc.xyz/cap-rate-calculator","description":"Calculate capitalization rate (cap rate) from net operating income and property value, or estimate property value from NOI and target cap rate.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Cap Rate Calculator","url":"https://www.freepayrollcalc.xyz/cap-rate-calculator","description":"Calculate capitalization rate (cap rate) from net operating income and property value, or estimate property value from NOI and target cap rate.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is cap rate in real estate?","acceptedAnswer":{"@type":"Answer","text":"Cap rate (capitalization rate) = Net Operating Income ÷ Property Value × 100. It measures the rate of return on a real estate investment based on the income the property generates, independent of financing. A 6% cap rate means the property generates 6 cents for every $1 of value annually."}},{"@type":"Question","name":"What is a good cap rate for investment property?","acceptedAnswer":{"@type":"Answer","text":"It depends on property type and market. Multifamily in prime urban markets: 3–5%. Suburban multifamily: 5–7%. Retail: 5–8%. Industrial: 4–7%. Office: 5–8%. Higher cap rates mean higher risk or lower-demand markets. A 'good' cap rate meets your return requirements while matching the risk profile of the asset."}},{"@type":"Question","name":"How do you calculate net operating income (NOI)?","acceptedAnswer":{"@type":"Answer","text":"NOI = Gross Rental Income − Vacancy Losses − Operating Expenses. Operating expenses include property taxes, insurance, maintenance, property management fees, utilities (if paid by owner), and reserves for replacement. NOI does NOT include mortgage payments (debt service) or capital expenditures."}},{"@type":"Question","name":"What is the difference between cap rate and cash-on-cash return?","acceptedAnswer":{"@type":"Answer","text":"Cap rate is unlevered — it ignores financing. Cash-on-cash return accounts for your actual cash invested and mortgage payments: Annual Cash Flow (after debt service) ÷ Total Cash Invested × 100. Cap rate is used to value the property; cash-on-cash measures your actual return as an investor."}},{"@type":"Question","name":"How do cap rates relate to property values?","acceptedAnswer":{"@type":"Answer","text":"Cap Rate = NOI ÷ Value. So Property Value = NOI ÷ Cap Rate. If a property generates $60,000 NOI and the market cap rate is 6%, the implied value is $1,000,000. As cap rates compress (go down), property values rise. Rising interest rates typically push cap rates up and property values down."}},{"@type":"Question","name":"What does a higher cap rate mean?","acceptedAnswer":{"@type":"Answer","text":"A higher cap rate means higher yield but also higher risk. Distressed properties, secondary markets, and older buildings command higher cap rates. Lower cap rates indicate lower risk, higher quality assets, and stronger location. Cap rate compression over time signals appreciation potential."}}]}
@@ -56,7 +53,25 @@
 .cb-high{background:rgba(220,38,38,.08);color:var(--red)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Cap Rate Calculator","item":"https://www.freepayrollcalc.xyz/cap-rate-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/cap-rate-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/cap-rate-calculator","dateModified":"2026-09-21"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -387,7 +402,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';

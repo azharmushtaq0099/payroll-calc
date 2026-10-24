@@ -15,12 +15,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","url":"https://www.freepayrollcalc.xyz/percentage-calculator","description":"Calculate percentages 6 ways: find X% of Y, find what percent X is of Y, percent change, percent increase/decrease, add or subtract a percent, and percent difference between two values.","applicationCategory":"CalculatorApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","url":"https://www.freepayrollcalc.xyz/percentage-calculator","description":"Calculate percentages 6 ways: find X% of Y, find what percent X is of Y, percent change, percent increase/decrease, add or subtract a percent, and percent difference between two values.","applicationCategory":"CalculatorApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate a percentage of a number?","acceptedAnswer":{"@type":"Answer","text":"To find X% of Y: multiply Y by (X÷100). Example: 15% of 200 = 200 × 0.15 = 30. In other words, divide by 100 first, then multiply. Or multiply Y by X then divide by 100."}},{"@type":"Question","name":"How do I calculate percent change?","acceptedAnswer":{"@type":"Answer","text":"Percent Change = ((New Value − Old Value) ÷ Old Value) × 100. If a price goes from $80 to $100: ((100 − 80) ÷ 80) × 100 = 25% increase. If it goes from $100 to $80: ((80 − 100) ÷ 100) × 100 = −20% decrease."}},{"@type":"Question","name":"What is the difference between percent change and percent difference?","acceptedAnswer":{"@type":"Answer","text":"Percent change compares a new value to an old value and has direction (increase or decrease). Percent difference compares two values without implied direction: |V1 − V2| ÷ ((V1 + V2) ÷ 2) × 100. Use percent change when one value is a reference baseline. Use percent difference when comparing two independent values."}},{"@type":"Question","name":"How do I add or subtract a percentage from a number?","acceptedAnswer":{"@type":"Answer","text":"To add P% to a number N: N × (1 + P/100). To subtract P% from N: N × (1 − P/100). Example: Add 20% to $150 = 150 × 1.20 = $180. Subtract 15% from $200 = 200 × 0.85 = $170. This is used for discounts, markups, tax additions, and tip calculations."}},{"@type":"Question","name":"What percent is X of Y?","acceptedAnswer":{"@type":"Answer","text":"Percent = (X ÷ Y) × 100. Example: what percent is 35 of 140? (35 ÷ 140) × 100 = 25%. What percent is 6 of 24? (6 ÷ 24) × 100 = 25%. Divide the part by the whole, then multiply by 100."}}]}
@@ -47,7 +44,25 @@
 .tip-chip:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Percentage Calculator","item":"https://www.freepayrollcalc.xyz/percentage-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/percentage-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/percentage-calculator","dateModified":"2026-09-21"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -413,7 +428,7 @@
     <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc. Free percentage calculator.</span><div class="footer-legal"><a href="/blog">Blog</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></div></div>
   </div>
 </footer>
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';

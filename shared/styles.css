@@ -3,6 +3,16 @@
    Precision financial tools. Clean. Fast. Authoritative.
    ============================================================ */
 
+/* Size-adjusted fallback so Inter swap causes zero layout shift */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica'), local('sans-serif');
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
 
 /* ── Tokens ── */
 :root {
@@ -13,7 +23,7 @@
   --surface-3:  #EAEAE7;
   --ink:        #111110;
   --ink-2:      #4B4B48;
-  --ink-3:      #8F8F8C;
+  --ink-3:      #6B6B68;
   --accent:     #2563EB;
   --accent-hov: #1D55D4;
   --accent-dim: #EFF4FF;
@@ -32,7 +42,7 @@
   --shadow-sm:  0 1px 2px rgba(0,0,0,.04),0 1px 4px rgba(0,0,0,.03);
   --shadow-md:  0 4px 16px rgba(0,0,0,.07),0 2px 6px rgba(0,0,0,.04);
   --shadow-lg:  0 8px 32px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
-  --font:       'Inter', system-ui, -apple-system, sans-serif;
+  --font:       'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --mono:       'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
   --max-w:      1180px;
   --transition: .16s cubic-bezier(.4,0,.2,1);
@@ -533,7 +543,7 @@ label.field-label{
 .faq-a a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
 
 /* ── Related Tools ── */
-.related-section{padding:64px 0}
+.related-section{padding-top:64px;padding-bottom:8px;padding-inline:24px;max-width:var(--max-w);margin-inline:auto;width:100%;box-sizing:border-box}
 .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:36px}
 
 /* ── How It Works ── */
@@ -566,10 +576,10 @@ label.field-label{
   padding:56px 0 40px;
 }
 .footer-brand-name{font-size:17px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-.3px}
-.footer-brand-desc{font-size:14px;color:rgba(255,255,255,.45);line-height:1.65;max-width:260px}
-.footer-col-title{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-brand-desc{font-size:14px;color:rgba(255,255,255,.65);line-height:1.65;max-width:260px}
+.footer-col-title{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:16px}
 .footer-links{display:flex;flex-direction:column;gap:9px}
-.footer-links a{font-size:14px;color:rgba(255,255,255,.55);transition:color var(--transition)}
+.footer-links a{font-size:14px;color:rgba(255,255,255,.7);transition:color var(--transition)}
 .footer-links a:hover{color:#fff}
 .footer-bottom{
   border-top:1px solid rgba(255,255,255,.07);
@@ -577,10 +587,10 @@ label.field-label{
   display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:10px;
 }
-.footer-copy{font-size:13px;color:rgba(255,255,255,.35)}
+.footer-copy{font-size:13px;color:rgba(255,255,255,.6)}
 .footer-legal{display:flex;gap:20px}
-.footer-legal a{font-size:13px;color:rgba(255,255,255,.35);transition:color var(--transition)}
-.footer-legal a:hover{color:rgba(255,255,255,.7)}
+.footer-legal a{font-size:13px;color:rgba(255,255,255,.6);transition:color var(--transition)}
+.footer-legal a:hover{color:rgba(255,255,255,.9)}
 
 /* ── Legacy form aliases (batch 1-2 pages use calc-input / input-prefix-wrap / calc-btn) ── */
 .calc-sub{font-size:16px;color:var(--ink-2);margin-bottom:36px}
@@ -647,17 +657,17 @@ label.field-label{
 /* ── Legacy footer aliases (batch 1-2 pages use footer-grid / footer-nav) ── */
 .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;padding:56px 0 40px}
 .footer-brand,.footer-logo{font-size:17px;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:10px;letter-spacing:-.3px}
-.footer-tagline{font-size:14px;color:rgba(255,255,255,.45);line-height:1.65;max-width:260px;margin:0}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,.65);line-height:1.65;max-width:260px;margin:0}
 .footer-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
-.footer-grid ul a{font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color var(--transition)}
+.footer-grid ul a{font-size:14px;color:rgba(255,255,255,.7);text-decoration:none;transition:color var(--transition)}
 .footer-grid ul a:hover{color:#fff}
 .footer-nav{display:flex;flex-direction:column;gap:9px}
-.footer-nav a{font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color var(--transition)}
+.footer-nav a{font-size:14px;color:rgba(255,255,255,.7);text-decoration:none;transition:color var(--transition)}
 .footer-nav a:hover{color:#fff}
-.footer-bottom p{font-size:13px;color:rgba(255,255,255,.35);margin:0}
-.footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none;transition:color var(--transition)}
-.footer-bottom a:hover{color:rgba(255,255,255,.7)}
-.footer-disclaimer{font-size:12px;color:rgba(255,255,255,.25)}
+.footer-bottom p{font-size:13px;color:rgba(255,255,255,.6);margin:0}
+.footer-bottom a{color:rgba(255,255,255,.6);text-decoration:none;transition:color var(--transition)}
+.footer-bottom a:hover{color:rgba(255,255,255,.9)}
+.footer-disclaimer{font-size:12px;color:rgba(255,255,255,.55)}
 @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:28px}}
 @media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
 

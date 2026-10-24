@@ -15,12 +15,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Retirement Calculator","url":"https://www.freepayrollcalc.xyz/retirement-calculator","description":"Project retirement savings growth, calculate monthly income using the 4% withdrawal rule, and see inflation-adjusted values. Compare scenarios with different contribution amounts.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Retirement Calculator","url":"https://www.freepayrollcalc.xyz/retirement-calculator","description":"Project retirement savings growth, calculate monthly income using the 4% withdrawal rule, and see inflation-adjusted values. Compare scenarios with different contribution amounts.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much do I need to retire?","acceptedAnswer":{"@type":"Answer","text":"The most common rule is 25× your annual expenses (the '4% rule'). If you spend $60,000/year, you need $1.5M. This assumes a 4% annual withdrawal rate from a diversified portfolio, which historically has lasted 30+ years in most market scenarios. More conservative planners use 3–3.5% withdrawal (requires 28–33× expenses)."}},{"@type":"Question","name":"What is the 4% rule?","acceptedAnswer":{"@type":"Answer","text":"The 4% rule states you can withdraw 4% of your retirement portfolio in the first year, then adjust for inflation each year, and have a high probability of not running out of money over 30 years. It was derived from the 'Trinity Study' (1998) analyzing historical stock/bond portfolio returns. Critics note it may be less reliable in low-return environments."}},{"@type":"Question","name":"How much should I save for retirement?","acceptedAnswer":{"@type":"Answer","text":"Most financial planners recommend saving 15% of gross income (including employer match) for retirement, starting in your 20s. Common milestones: 1× salary by 30, 3× by 40, 6× by 50, 8× by 60, 10× by 67. The earlier you start, the more compound growth does the work."}},{"@type":"Question","name":"What is a realistic retirement investment return?","acceptedAnswer":{"@type":"Answer","text":"Historical S&P 500 average: ~10% nominal, ~7% real (inflation-adjusted). A diversified 80/20 stock/bond portfolio historically returns ~7–8% nominal. The calculator uses 7% as the default real return. Adjust based on your risk tolerance and asset allocation."}},{"@type":"Question","name":"How does compound interest affect retirement savings?","acceptedAnswer":{"@type":"Answer","text":"Compound interest means you earn returns on your returns. $10,000 at 7% per year doubles every ~10 years. After 30 years it grows to ~$76,000 — 7.6× the original. This is why starting early matters enormously: a 25-year-old saving $500/month will have far more at 65 than a 35-year-old saving $1,000/month."}}]}
@@ -57,8 +54,26 @@
 .milestone-table td:not(:first-child){font-family:'JetBrains Mono',monospace;font-weight:600}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Retirement Calculator","item":"https://www.freepayrollcalc.xyz/retirement-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/retirement-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/retirement-calculator","dateModified":"2026-09-21"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate How Much You Need to Retire","description":"Step-by-step retirement savings goal calculation using the 4% rule.","step":[{"@type":"HowToStep","position":1,"name":"Estimate annual retirement expenses","text":"Project your annual spending in retirement. Many financial planners use 70–80% of pre-retirement income as a baseline. Include healthcare costs, which average $315,000 per couple in retirement."},{"@type":"HowToStep","position":2,"name":"Subtract guaranteed income","text":"Deduct Social Security (check your estimate at SSA.gov), pension income, and any rental income from your annual expenses. This is your \"income gap\" — what savings must cover."},{"@type":"HowToStep","position":3,"name":"Apply the 4% rule","text":"Divide your annual income gap by 0.04 (multiply by 25) to find your target portfolio. If the gap is $40,000/year, target nest egg = $40,000 ÷ 0.04 = $1,000,000."},{"@type":"HowToStep","position":4,"name":"Calculate monthly savings needed","text":"Use future value formula: PMT = FV × r ÷ [(1+r)^n − 1]. To reach $1M in 30 years at 7% returns, save $984/month."},{"@type":"HowToStep","position":5,"name":"Adjust for inflation","text":"Real (inflation-adjusted) returns average 4–5% historically. For conservative planning, use 5–6% nominal or 3–4% real return in your projections."}]}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -342,7 +357,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';

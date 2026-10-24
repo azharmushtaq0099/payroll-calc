@@ -15,12 +15,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Budget Calculator","url":"https://www.freepayrollcalc.xyz/budget-calculator","description":"Calculate your monthly budget surplus or deficit. See how your spending compares to the 50/30/20 rule. Categorize needs, wants, and savings.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Budget Calculator","url":"https://www.freepayrollcalc.xyz/budget-calculator","description":"Calculate your monthly budget surplus or deficit. See how your spending compares to the 50/30/20 rule. Categorize needs, wants, and savings.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the 50/30/20 budget rule?","acceptedAnswer":{"@type":"Answer","text":"The 50/30/20 rule allocates after-tax income as: 50% to needs (rent, utilities, groceries, minimum debt payments), 30% to wants (dining out, entertainment, subscriptions, vacations), 20% to savings and debt payoff (emergency fund, retirement, extra debt payments). It was popularized by Senator Elizabeth Warren in her book 'All Your Worth.'"}},{"@type":"Question","name":"How do I make a monthly budget?","acceptedAnswer":{"@type":"Answer","text":"1. Calculate after-tax monthly income. 2. List all fixed expenses (rent, insurance, subscriptions). 3. Estimate variable expenses (food, gas, entertainment). 4. Calculate total expenses. 5. Subtract from income — positive is surplus, negative is deficit. 6. Adjust until you have a positive surplus directed toward savings or debt payoff."}},{"@type":"Question","name":"What is a good monthly savings rate?","acceptedAnswer":{"@type":"Answer","text":"Financial planners generally recommend saving at least 20% of net income. 15% is the minimum for retirement savings alone. Emergency fund goal: 3–6 months of expenses in a savings account. FIRE (Financial Independence) seekers often save 40–70%+ of income."}},{"@type":"Question","name":"What counts as a 'need' vs 'want' in a budget?","acceptedAnswer":{"@type":"Answer","text":"Needs: housing (rent/mortgage), utilities, groceries, transportation to work, minimum debt payments, basic healthcare and insurance. Wants: restaurants, entertainment, streaming subscriptions, gym memberships, vacations, clothing beyond basics, phone upgrades. Some items are mixed — internet may be a need for remote work but a want for entertainment."}}]}
@@ -39,6 +36,9 @@
 .expense-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .expense-label{flex:1;font-size:13px;color:var(--ink-2)}
 .expense-input-wrap{width:120px}
+.form-input{width:100%;height:38px;padding:0 10px;border:1.5px solid var(--border-dark,#ccc);border-radius:8px;font-size:14px;color:var(--ink);background:var(--surface,#fff);-webkit-appearance:none;appearance:none;box-sizing:border-box;}
+.form-input:focus{outline:none;border-color:var(--accent,#1B4FD8);box-shadow:0 0 0 3px rgba(27,79,216,.1);}
+.form-input--prefixed{padding-left:26px;}
 .budget-hero{border-radius:14px;padding:24px 20px;margin-bottom:16px;text-align:center;transition:all .3s}
 .budget-hero.surplus{background:rgba(5,150,105,.06);border:2px solid rgba(5,150,105,.2)}
 .budget-hero.deficit{background:rgba(220,38,38,.06);border:2px solid rgba(220,38,38,.2)}
@@ -76,7 +76,25 @@
 .sb-under{background:rgba(27,79,216,.1);color:var(--accent)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Budget Calculator","item":"https://www.freepayrollcalc.xyz/budget-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/budget-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/budget-calculator","dateModified":"2026-09-21"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -280,14 +298,14 @@
           <span class="cat-total" id="total-needs">$0</span>
         </div>
         <div id="needs-expenses">
-          <div class="expense-row"><div class="expense-label">Rent / Mortgage</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="1400" min="0" step="50"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Utilities (electric, gas, water)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="150" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Groceries</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="400" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Transportation (car payment, gas, transit)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="350" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Health Insurance &amp; Medical</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="200" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Phone</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="80" min="0" step="5"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Minimum Debt Payments</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="200" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Other Necessities</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="0" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Rent / Mortgage</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="1400" value="1400" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Utilities (electric, gas, water)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="150" value="150" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Groceries</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="400" value="400" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Transportation (car payment, gas, transit)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="350" value="350" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Health Insurance &amp; Medical</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="200" value="200" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Phone</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="80" value="80" min="0" step="5"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Minimum Debt Payments</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="200" value="200" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Other Necessities</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="needs" class="form-input form-input--prefixed budget-input" placeholder="0" value="0" min="0" step="10"></div></div></div>
         </div>
       </div>
 
@@ -300,13 +318,13 @@
           <span class="cat-total" id="total-wants">$0</span>
         </div>
         <div id="wants-expenses">
-          <div class="expense-row"><div class="expense-label">Dining Out &amp; Takeout</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="200" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Entertainment &amp; Hobbies</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Streaming &amp; Subscriptions</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="50" min="0" step="5"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Gym &amp; Fitness</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="50" min="0" step="5"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Shopping &amp; Clothing</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Travel &amp; Vacations</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" min="0" step="10"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Other Wants</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="0" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Dining Out &amp; Takeout</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="200" value="200" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Entertainment &amp; Hobbies</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" value="100" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Streaming &amp; Subscriptions</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="50" value="50" min="0" step="5"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Gym &amp; Fitness</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="50" value="50" min="0" step="5"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Shopping &amp; Clothing</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" value="100" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Travel &amp; Vacations</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="100" value="100" min="0" step="10"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Other Wants</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="wants" class="form-input form-input--prefixed budget-input" placeholder="0" value="0" min="0" step="10"></div></div></div>
         </div>
       </div>
 
@@ -319,11 +337,11 @@
           <span class="cat-total" id="total-savings">$0</span>
         </div>
         <div>
-          <div class="expense-row"><div class="expense-label">Emergency Fund Savings</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="200" min="0" step="50"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Retirement (401k / IRA)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="300" min="0" step="50"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Extra Debt Payments</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="100" min="0" step="50"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Investments / Brokerage</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="0" min="0" step="50"></div></div></div>
-          <div class="expense-row"><div class="expense-label">Other Savings Goals</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="0" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Emergency Fund Savings</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="200" value="200" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Retirement (401k / IRA)</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="300" value="300" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Extra Debt Payments</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="100" value="100" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Investments / Brokerage</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="0" value="0" min="0" step="50"></div></div></div>
+          <div class="expense-row"><div class="expense-label">Other Savings Goals</div><div class="expense-input-wrap"><div class="input-wrap"><span class="input-prefix">$</span><input type="number" data-cat="savings" class="form-input form-input--prefixed budget-input" placeholder="0" value="0" min="0" step="50"></div></div></div>
         </div>
       </div>
 
@@ -390,7 +408,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';
@@ -411,6 +429,7 @@
   document.querySelectorAll('.budget-input').forEach(function(inp){inp.addEventListener('input',updateTotals);});
   document.getElementById('inc-primary').addEventListener('input',updateTotals);
   document.getElementById('inc-other').addEventListener('input',updateTotals);
+  updateTotals();
 
   document.getElementById('calc-budget-btn').addEventListener('click',function(){
     var income=(parseFloat(document.getElementById('inc-primary').value)||0)+(parseFloat(document.getElementById('inc-other').value)||0);

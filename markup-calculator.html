@@ -15,12 +15,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Markup Calculator","url":"https://www.freepayrollcalc.xyz/markup-calculator","description":"Calculate markup percentage, selling price, and profit margin. Includes markup vs margin comparison and industry benchmark markups.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Markup Calculator","url":"https://www.freepayrollcalc.xyz/markup-calculator","description":"Calculate markup percentage, selling price, and profit margin. Includes markup vs margin comparison and industry benchmark markups.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between markup and margin?","acceptedAnswer":{"@type":"Answer","text":"Markup is calculated on cost: if a product costs $10 and you add 50% markup, the selling price is $15. Margin is calculated on selling price: that same $5 profit on a $15 selling price is a 33.3% margin. Same dollars — different percentages. Markup is always higher than margin for the same transaction."}},{"@type":"Question","name":"How do I calculate markup percentage?","acceptedAnswer":{"@type":"Answer","text":"Markup % = (Selling Price − Cost) ÷ Cost × 100. Example: cost $40, selling price $60. Markup = ($60 − $40) ÷ $40 × 100 = 50%."}},{"@type":"Question","name":"How do I calculate selling price from markup?","acceptedAnswer":{"@type":"Answer","text":"Selling Price = Cost × (1 + Markup% ÷ 100). Example: cost $40 with 50% markup = $40 × 1.50 = $60."}},{"@type":"Question","name":"What is a good markup percentage?","acceptedAnswer":{"@type":"Answer","text":"It varies widely by industry. Retail clothing: 50–100%. Restaurants: 200–300% on food cost. Software/SaaS: 80–95% gross margin. Wholesale: 20–40%. Construction: 10–25%. A good markup covers your overhead costs and desired profit margin — there is no universal 'correct' percentage."}},{"@type":"Question","name":"How do I convert markup to margin?","acceptedAnswer":{"@type":"Answer","text":"Margin = Markup ÷ (1 + Markup). Example: 50% markup → 50 ÷ (100 + 50) = 33.3% margin. Or: Markup = Margin ÷ (1 − Margin). Example: 33.3% margin → 33.3 ÷ (100 − 33.3) = 50% markup."}}]}
@@ -46,7 +43,25 @@
 .bm-note{font-size:11px;color:var(--ink-3);margin-top:2px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Markup Calculator","item":"https://www.freepayrollcalc.xyz/markup-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/markup-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/markup-calculator","dateModified":"2026-09-21"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -357,7 +372,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';

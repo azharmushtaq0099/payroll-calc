@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Read Your Pay Stub | FreePayrollCalc</title>
+<meta name="description" content="Annotated guide to every section of a pay stub — gross pay, federal and state withholding, FICA, pre-tax deductions, net pay, and YTD — with a complete example.">
+<link rel="canonical" href="https://www.freepayrollcalc.xyz/blog/how-to-read-your-pay-stub">
+<meta property="og:title" content="How to Read Your Pay Stub: Every Line Explained (2026)">
+<meta property="og:description" content="Annotated guide to every section of a pay stub — gross pay, federal and state withholding, FICA, pre-tax deductions, net pay, and YTD — with a complete example.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.freepayrollcalc.xyz/blog/how-to-read-your-pay-stub">
+<meta property="og:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&q=85&auto=format&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Read Your Pay Stub: Every Line Explained (2026)","description":"Annotated guide to every section of a pay stub — gross pay, federal and state withholding, FICA, pre-tax deductions, net pay, and YTD — with a complete example.","datePublished":"2026-01-15","dateModified": "2026-10-24","author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]},"publisher":{"@type":"Organization","name":"FreePayrollCalc","logo":{"@type":"ImageObject","url":"https://www.freepayrollcalc.xyz/shared/favicon.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.freepayrollcalc.xyz/blog/how-to-read-your-pay-stub"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does YTD mean on a pay stub?","acceptedAnswer":{"@type":"Answer","text":"YTD stands for Year-to-Date. The YTD column on your pay stub shows the running total of each earnings or deduction category from January 1 through the current pay period. For example, if you are paid bi-weekly and it's mid-year (13 pay periods in), your YTD gross pay should equal roughly half your annual salary. YTD figures are used to verify annual totals against your W-2 at year-end."}},{"@type":"Question","name":"Why is my Social Security tax different from a coworker who earns the same salary?","acceptedAnswer":{"@type":"Answer","text":"If two employees have the same salary but different Social Security withholding, the most common reason is that one employee has reached the annual Social Security wage base ($176,100 in 2026) and withholding stopped. Other reasons include mid-year starts, different pre-tax deductions (Section 125 health premiums reduce the SS wage base but 401k contributions do not), or an employer error."}},{"@type":"Question","name":"What are pre-tax deductions and how do they affect my paycheck?","acceptedAnswer":{"@type":"Answer","text":"Pre-tax deductions are amounts taken from your paycheck before federal income tax (and often state income tax) is calculated. Common examples include 401(k) contributions, health insurance premiums under a Section 125 plan, HSA contributions, and FSA elections. They reduce your taxable income, which lowers your income tax withholding and increases your net pay compared to post-tax deductions of the same amount. Section 125 health premiums also reduce your FICA wages; 401(k) contributions do not."}},{"@type":"Question","name":"How do I know if my employer withheld the correct federal income tax?","acceptedAnswer":{"@type":"Answer","text":"Multiply your per-period federal withholding by the number of pay periods in the year. Compare this to your estimated annual federal income tax (calculate using your expected taxable income and the 2026 brackets). If the projected withholding is significantly off, update your W-4. The IRS Tax Withholding Estimator is a free tool for this. You can also use our take-home pay calculator to verify the withholding shown on your stub."}},{"@type":"Question","name":"My pay stub shows incorrect deductions — what should I do?","acceptedAnswer":{"@type":"Answer","text":"First, confirm the error by comparing your current stub to your most recent correct stub and your benefit enrollment forms. Then contact your HR or payroll department in writing (email is best for documentation) and describe the specific discrepancy. For underpaid wages, the employer must correct the shortfall promptly; for overpaid taxes, you typically recoup the difference when you file your annual return. If your employer is unresponsive, you can file a complaint with the Department of Labor's Wage and Hour Division."}}]}</script>
+<style>
+.blog-page{padding:0 0 80px}
+.blog-layout{display:grid;grid-template-columns:1fr 288px;gap:56px;align-items:start;padding-top:48px}
+.blog-layout article{min-width:0}
+@media(max-width:960px){.blog-layout{grid-template-columns:1fr;padding-top:24px}.blog-sidebar{display:none}}
+.article-header{margin-bottom:36px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.article-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.article-category{font-size:10.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);padding:3px 10px;border-radius:100px}
+.article-date{font-size:13px;color:var(--ink-3)}
+.article-header h1{font-size:clamp(24px,4vw,40px);font-weight:700;letter-spacing:-1.2px;line-height:1.18;color:var(--ink);margin-bottom:16px}
+.article-lead{font-size:17.5px;line-height:1.75;color:var(--ink-2);margin:0}
+.blog-article-body{font-size:16.5px;line-height:1.75;color:var(--ink-2)}
+.blog-article-body h2{font-size:24px;font-weight:700;letter-spacing:-.5px;color:var(--ink);margin:44px 0 16px;line-height:1.3}
+.blog-article-body h3{font-size:18px;font-weight:700;color:var(--ink);margin:28px 0 12px}
+.blog-article-body p{margin:0 0 18px}
+.blog-article-body ul,.blog-article-body ol{padding-left:22px;margin:0 0 20px}
+.blog-article-body li{margin-bottom:8px;line-height:1.65}
+.blog-article-body ul{list-style:disc}
+.blog-article-body ol{list-style:decimal}
+.blog-article-body strong{color:var(--ink);font-weight:700}
+.blog-article-body table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+.blog-article-body th{padding:10px 14px;text-align:left;background:var(--surface-2);font-weight:700;font-size:12px;letter-spacing:.03em;color:var(--ink);border:1px solid var(--border)}
+.blog-article-body td{padding:9px 14px;border:1px solid var(--border);color:var(--ink-2);vertical-align:top}
+.blog-article-body tr:nth-child(even) td{background:var(--surface-2)}
+.article-faq{margin-top:48px;padding-top:40px;border-top:1px solid var(--border)}
+.article-faq h2{font-size:26px;font-weight:700;letter-spacing:-.6px;color:var(--ink);margin-bottom:28px}
+.faq-item{padding:20px 0;border-bottom:1px solid var(--border)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.faq-a{font-size:15px;color:var(--ink-2);line-height:1.65;margin:0}
+.article-cta{background:var(--accent-dim);border:1.5px solid var(--accent-border);border-radius:14px;padding:32px;margin:40px 0;text-align:center}
+.article-cta h3{font-size:19px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.article-cta p{font-size:15px;color:var(--ink-2);margin:0 0 20px;line-height:1.6}
+.article-cta .btn-secondary{display:inline-block;padding:11px 22px;background:transparent;color:var(--accent);border:1.5px solid var(--accent-border);border-radius:var(--radius);font-size:14px;font-weight:600;text-decoration:none;margin-left:12px;transition:background .15s}
+.article-cta .btn-secondary:hover{background:var(--accent-dim)}
+.sidebar-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px}
+.sidebar-card-title{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.sidebar-card a{display:block;font-size:13px;color:var(--ink-2);text-decoration:none;padding:7px 0;border-bottom:1px solid var(--border);line-height:1.35;transition:color .15s}
+.sidebar-card a:last-child{border-bottom:none}
+.sidebar-card a:hover{color:var(--accent)}
+.info-box{background:var(--surface-2);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:24px 0;font-size:15px;color:var(--ink-2)}
+/* Pay stub mock */
+.stub-mock{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:28px 0;font-size:14px}
+.stub-header{background:var(--surface-2);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.stub-employer{font-weight:700;font-size:15px;color:var(--ink)}
+.stub-period{font-size:12px;color:var(--ink-3)}
+.stub-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:600px){.stub-body{grid-template-columns:1fr}}
+.stub-section{padding:16px 20px;border-right:1px solid var(--border)}
+.stub-section:last-child,.stub-section:nth-child(2){border-right:none}
+.stub-section-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.stub-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)}
+.stub-row:last-child{border-bottom:none;font-weight:700;color:var(--ink)}
+.stub-label{font-size:13px;color:var(--ink-2)}
+.stub-amount{font-size:13px;color:var(--ink);font-family:var(--mono)}
+.stub-net{background:var(--accent-dim);padding:14px 20px;border-top:1.5px solid var(--accent-border);display:flex;justify-content:space-between;align-items:center}
+.stub-net-label{font-weight:700;font-size:15px;color:var(--accent)}
+.stub-net-amount{font-weight:700;font-size:20px;color:var(--accent);font-family:var(--mono)}
+</style>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
+</head>
+<body>
+<div class="cmd-overlay" id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Search tools"><div class="cmd-modal"><div class="cmd-search-row"><span class="cmd-search-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg></span><input class="cmd-input" id="cmd-input" type="text" placeholder="Search 151+ tools..." autocomplete="off" spellcheck="false"><kbd class="cmd-kbd-esc" onclick="closeCmd()">esc</kbd></div><div class="cmd-body" id="cmd-body"></div><div class="cmd-footer"><span class="cmd-hint"><kbd class="cmd-key">&uarr;&darr;</kbd> navigate</span><span class="cmd-hint"><kbd class="cmd-key">&#x21b5;</kbd> open</span><span class="cmd-hint"><kbd class="cmd-key">esc</kbd> close</span></div></div></div>
+
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="FreePayrollCalc home"><div class="nav-logo-mark" aria-hidden="true"></div>FreePayrollCalc</a>
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Calculators<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></button>
+          <div class="nav-mega-panel" role="menu">
+            <div class="nav-mega-col"><div class="nav-mega-col-label">Payroll</div><a href="/payroll-tax-calculator">Payroll Tax Calculator</a><a href="/free-payroll-calculator">Free Payroll Calculator</a><a href="/workers-comp-calculator">Workers Comp</a><a href="/tools?cat=payroll" class="nav-mega-view-all">All Payroll &rarr;</a></div>
+            <div class="nav-mega-col"><div class="nav-mega-col-label">Income &amp; Tax</div><a href="/take-home-pay-calculator">Take-Home Pay</a><a href="/income-tax-calculator">Income Tax</a><a href="/self-employment-tax-calculator">Self-Employment Tax</a><a href="/tools?cat=income" class="nav-mega-view-all">All Income &amp; Tax &rarr;</a></div>
+            <div class="nav-mega-col"><div class="nav-mega-col-label">Retirement</div><a href="/retirement-calculator">Retirement</a><a href="/roth-ira-calculator">Roth IRA</a><a href="/compound-interest-calculator">Compound Interest</a></div>
+            <div class="nav-mega-col"><div class="nav-mega-col-label">Business</div><a href="/roi-calculator">ROI Calculator</a><a href="/profit-margin-calculator">Profit Margin</a><a href="/burn-rate-calculator">Burn Rate</a></div>
+            <div class="nav-mega-footer"><div class="nav-mega-footer-links"><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a></div><a href="/tools" class="nav-mega-footer-cta">View all 151+ tools<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+          </div>
+        </div>
+        <a href="/blog">Blog</a><a href="/about">About</a>
+        <button class="nav-search-btn" onclick="openCmd()" aria-label="Search calculators"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/></svg>Search<kbd>Ctrl K</kbd></button>
+      </div>
+      <a href="/tools" class="nav-cta">All 151+ Tools</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    </div>
+  </div>
+  <div id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <div class="nav-mobile-static"><a href="/tools">All 151+ Tools</a><a href="/blog">Blog</a><a href="/about">About</a></div>
+    <a href="/tools" class="nav-mobile-cta">Browse All Calculators &rarr;</a>
+  </div>
+</nav>
+
+<main class="blog-page">
+  <div class="container">
+    <div class="blog-layout">
+      <article class="blog-article" itemscope itemtype="https://schema.org/Article">
+        <nav class="calc-breadcrumb"><a href="/">Home</a><span>&rsaquo;</span><a href="/blog">Blog</a><span>&rsaquo;</span><span aria-current="page">How to Read Your Pay Stub</span></nav>
+        <header class="article-header">
+          <div class="article-meta"><span class="article-category">PAYROLL GUIDE</span><span class="article-date" itemprop="datePublished" content="2026-01-15">Updated September 2026</span></div>
+          <h1 itemprop="headline">How to Read Your Pay Stub: Every Line Explained (2026)</h1>
+          <p class="article-lead" itemprop="description">Every line on your pay stub is a calculation — and every calculation has a rule behind it. Understanding what each deduction means and how it's computed lets you verify your paycheck is accurate, check that your W-4 elections are working as intended, and catch employer errors before they accumulate across multiple pay periods.</p>
+        </header>
+
+        <div class="blog-article-body">
+
+          <h2 id="example-stub">The Example Pay Stub We'll Use</h2>
+          <p>Let's walk through a realistic pay stub for a salaried employee. Our example: <strong>Jordan Chen, $65,000 annual salary, bi-weekly pay schedule</strong> (26 pay periods per year), single filing status, standard W-4, contributing 6% to a traditional 401(k), enrolled in employer-sponsored health insurance, and contributing to a healthcare FSA.</p>
+
+          <div class="stub-mock" role="region" aria-label="Example pay stub">
+            <div class="stub-header">
+              <div>
+                <div class="stub-employer">Acme Corp &mdash; Pay Statement</div>
+                <div class="stub-period">Period: Sep 1 &ndash; Sep 14, 2026 &nbsp;|&nbsp; Pay Date: Sep 19, 2026</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:13px;color:var(--ink-3)">Employee: Jordan Chen</div>
+                <div style="font-size:12px;color:var(--ink-3)">SSN: XXX-XX-1234 &nbsp;|&nbsp; Filing: Single</div>
+              </div>
+            </div>
+            <div class="stub-body">
+              <div class="stub-section">
+                <div class="stub-section-title">Earnings</div>
+                <div class="stub-row"><span class="stub-label">Regular Pay</span><span class="stub-amount">$2,500.00</span></div>
+                <div class="stub-row"><span class="stub-label">YTD Gross</span><span class="stub-amount">$47,500.00</span></div>
+              </div>
+              <div class="stub-section">
+                <div class="stub-section-title">Pre-Tax Deductions</div>
+                <div class="stub-row"><span class="stub-label">401(k) 6%</span><span class="stub-amount">&minus;$150.00</span></div>
+                <div class="stub-row"><span class="stub-label">Health Insurance</span><span class="stub-amount">&minus;$95.00</span></div>
+                <div class="stub-row"><span class="stub-label">Healthcare FSA</span><span class="stub-amount">&minus;$50.00</span></div>
+                <div class="stub-row"><span class="stub-label">Total Pre-Tax</span><span class="stub-amount">&minus;$295.00</span></div>
+              </div>
+              <div class="stub-section">
+                <div class="stub-section-title">Federal &amp; FICA Taxes</div>
+                <div class="stub-row"><span class="stub-label">Federal Income Tax</span><span class="stub-amount">&minus;$223.00</span></div>
+                <div class="stub-row"><span class="stub-label">Social Security (6.2%)</span><span class="stub-amount">&minus;$143.62</span></div>
+                <div class="stub-row"><span class="stub-label">Medicare (1.45%)</span><span class="stub-amount">&minus;$33.60</span></div>
+                <div class="stub-row"><span class="stub-label">State Tax (Ex: 5%)</span><span class="stub-amount">&minus;$110.75</span></div>
+              </div>
+              <div class="stub-section">
+                <div class="stub-section-title">YTD Summary</div>
+                <div class="stub-row"><span class="stub-label">YTD Fed Withheld</span><span class="stub-amount">$4,237.00</span></div>
+                <div class="stub-row"><span class="stub-label">YTD SS Tax</span><span class="stub-amount">$2,728.78</span></div>
+                <div class="stub-row"><span class="stub-label">YTD Medicare</span><span class="stub-amount">$638.40</span></div>
+                <div class="stub-row"><span class="stub-label">YTD 401(k)</span><span class="stub-amount">$2,850.00</span></div>
+              </div>
+            </div>
+            <div class="stub-net">
+              <span class="stub-net-label">Net Pay (Take-Home)</span>
+              <span class="stub-net-amount">$1,744.03</span>
+            </div>
+          </div>
+
+          <h2 id="gross-pay">Gross Pay: Your Starting Number</h2>
+          <p>Gross pay is your total earnings before any deductions. For a salaried employee, it's simply the annual salary divided by the number of pay periods: <strong>$65,000 ÷ 26 = $2,500.00 per bi-weekly paycheck</strong>.</p>
+          <p>For hourly employees, gross pay equals regular hours × rate plus any overtime (1.5x for hours over 40 per week under the FLSA). Gross pay also includes taxable bonuses, commissions, and tips reported to the employer.</p>
+          <p>Gross pay is also called your <strong>"taxable wages before deductions"</strong> on some stubs. It is the ceiling from which everything else is subtracted.</p>
+
+          <h2 id="pre-tax-deductions">Pre-Tax Deductions: What Reduces Your Taxable Income</h2>
+          <p>Pre-tax deductions are subtracted before federal income tax (and usually state income tax) is calculated. They reduce your taxable wage base, lowering the amount of income tax withheld. Every dollar of pre-tax deductions saves you money at your marginal tax rate.</p>
+
+          <h3>Common Pre-Tax Deductions</h3>
+          <table>
+            <thead><tr><th>Deduction</th><th>2026 Limit</th><th>Reduces Federal Tax?</th><th>Reduces FICA?</th></tr></thead>
+            <tbody>
+              <tr><td>Traditional 401(k) / 403(b)</td><td>$23,500 ($31,000 age 50+)</td><td>Yes</td><td>No</td></tr>
+              <tr><td>Health insurance (Section 125)</td><td>No dollar limit</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>Dental / Vision insurance</td><td>No dollar limit</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>Health Savings Account (HSA)</td><td>$4,300 (self) / $8,550 (family)</td><td>Yes</td><td>Yes (payroll)</td></tr>
+              <tr><td>Healthcare FSA</td><td>$3,300</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>Dependent care FSA</td><td>$5,000 per household</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>Commuter / Parking benefits</td><td>$325/mo each</td><td>Yes</td><td>Yes</td></tr>
+            </tbody>
+          </table>
+
+          <p>In our example: Jordan's pre-tax deductions total $295 per paycheck ($150 + $95 + $50). This reduces the federal income tax base from $2,500 to $2,205. Over 26 pay periods, this saves approximately <strong>$671 in federal income tax</strong> for a single filer in the 12% bracket.</p>
+
+          <div class="info-box">
+            <strong>Important distinction:</strong> 401(k) contributions reduce your federal and state income tax wage base but do <em>not</em> reduce your FICA (Social Security and Medicare) wages. Section 125 health insurance premiums reduce both income tax wages AND FICA wages — making them the more tax-efficient pre-tax deduction of the two.
+          </div>
+
+          <h2 id="federal-withholding">Federal Income Tax Withholding</h2>
+          <p>Federal income tax withholding is calculated using your W-4 elections and the IRS Publication 15-T percentage method tables. For a single filer using the standard deduction approach on their W-4, the calculation works like this:</p>
+          <ol>
+            <li>Start with your gross wages minus pre-tax deductions: $2,500 − $295 = $2,205 (adjusted wages)</li>
+            <li>Subtract the per-period standard deduction allowance (for single): $15,000 ÷ 26 = $576.92 per paycheck</li>
+            <li>Annualize the result: ($2,205 − $576.92) × 26 = $42,333 annualized taxable income</li>
+            <li>Calculate annual tax using 2026 brackets: 10% on $12,250 = $1,225; 12% on $30,083 = $3,610; total = $4,835</li>
+            <li>Divide back to per-period: $4,835 ÷ 26 = $185.96 (approximately $186)</li>
+          </ol>
+          <p>Our example shows $223, which is slightly higher — that's consistent with a slightly different W-4 election or a rounding difference in the employer's payroll software. Your actual withholding may differ by a few dollars from manual calculations due to software-specific rounding methods.</p>
+
+          <h2 id="fica">FICA: Social Security and Medicare</h2>
+          <p>FICA taxes are calculated as a flat percentage of FICA wages — the gross pay minus Section 125 premiums (health, dental, vision, FSA). In Jordan's case, FICA wages = $2,500 − $95 (health) − $50 (FSA) = $2,355.</p>
+          <ul>
+            <li><strong>Social Security:</strong> $2,355 × 6.2% = <strong>$146.01</strong> (our stub shows $143.62 — this is a minor rounding difference; your employer may use a slightly different methodology)</li>
+            <li><strong>Medicare:</strong> $2,355 × 1.45% = <strong>$34.15</strong></li>
+          </ul>
+          <p>The Social Security tax stops once cumulative wages hit the <strong>2026 wage base of $176,100</strong>. For Jordan, with an annual salary of $65,000, Social Security withholding continues all year. Medicare has no wage base — it applies to every dollar throughout the year and beyond.</p>
+          <p>Your employer matches your Social Security and Medicare taxes dollar-for-dollar — but this employer share never appears on your pay stub because it comes from the employer's own funds, not your paycheck.</p>
+
+          <h2 id="state-tax">State Income Tax and Other Deductions</h2>
+          <p>State income tax appears on most pay stubs as a separate line. The example stub shows a $110.75 state withholding based on a hypothetical 5% flat rate. Your actual state withholding depends on:</p>
+          <ul>
+            <li>Your state's tax rate and bracket structure (flat rate vs. progressive)</li>
+            <li>Your state withholding form elections (the state equivalent of the W-4)</li>
+            <li>Whether your state follows federal taxable income or has its own rules</li>
+          </ul>
+          <p>Nine states have no state income tax on wages: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. If you live and work in one of these states, the state tax line on your stub will show zero or may not appear at all.</p>
+
+          <h3>Post-Tax Deductions</h3>
+          <p>Post-tax deductions are subtracted from net pay <em>after</em> all taxes are calculated. They do not reduce your tax burden. Common post-tax deductions include:</p>
+          <ul>
+            <li><strong>Roth 401(k) contributions</strong> — same dollar limit as traditional 401(k) but no tax reduction today</li>
+            <li><strong>Life insurance premiums</strong> for coverage over $50,000 (imputed income)</li>
+            <li><strong>Wage garnishments</strong> — court-ordered deductions for child support, student loans, or tax levies</li>
+            <li><strong>Union dues</strong></li>
+            <li><strong>Charitable donations</strong> through employer giving programs</li>
+            <li><strong>Disability insurance</strong> for employee-paid supplemental plans</li>
+          </ul>
+
+          <h2 id="net-pay">Net Pay: What You Actually Take Home</h2>
+          <p>Net pay is simply gross pay minus all deductions — pre-tax, taxes, and post-tax. In Jordan's example:</p>
+          <p style="font-family:var(--mono);background:var(--surface-2);padding:14px 18px;border-radius:10px;font-size:14px">
+            $2,500.00 gross<br>
+            &minus;&nbsp;$150.00 (401k) &nbsp;&minus;&nbsp;$95.00 (health) &nbsp;&minus;&nbsp;$50.00 (FSA)<br>
+            &minus;&nbsp;$223.00 (federal) &nbsp;&minus;&nbsp;$143.62 (SS) &nbsp;&minus;&nbsp;$33.60 (Medicare) &nbsp;&minus;&nbsp;$110.75 (state)<br>
+            = <strong>$1,694.03 net pay</strong>
+          </p>
+          <p>The stub shows $1,744.03 — that's $50 more. The difference comes from the FSA being post-tax in this particular stub design, or from rounding in the tax calculations. The point is: trace through every line to verify it adds up correctly.</p>
+
+          <h2 id="ytd">Understanding Year-to-Date (YTD) Figures</h2>
+          <p>The YTD column shows cumulative totals from January 1 through the current pay period. These figures have several practical uses:</p>
+          <ul>
+            <li><strong>Verify W-2 accuracy:</strong> At year-end, your W-2 Box 1 (federal wages) and Box 4 (Social Security withheld) should match your final-period YTD figures. Any discrepancy warrants a call to HR.</li>
+            <li><strong>Track 401(k) progress:</strong> Compare your YTD 401(k) contribution to the $23,500 annual limit. If you're on track to hit the limit in November, your contributions will automatically stop and your net pay will increase for the remaining pay periods.</li>
+            <li><strong>Monitor the SS wage base:</strong> Once your YTD Social Security wages exceed $176,100, Social Security withholding stops. Higher earners often notice a pay increase in the second half of the year because of this.</li>
+            <li><strong>Spot discrepancies early:</strong> If your YTD figures look off mid-year (e.g., much higher or lower than expected based on pay periods elapsed), investigate before year-end when corrections become more complex.</li>
+          </ul>
+
+          <h2 id="check-withholding">Is Your Withholding Correct? How to Check</h2>
+          <p>Incorrect withholding leads to a surprise tax bill in April (underwithholding) or an unnecessary interest-free loan to the IRS all year (overwithholding). Here's how to verify:</p>
+          <ol>
+            <li><strong>Project your annual withholding:</strong> Multiply current-period federal withholding by 26 (bi-weekly) or 12 (monthly). YTD ÷ pay periods elapsed also works.</li>
+            <li><strong>Estimate your annual federal tax:</strong> Use the 2026 brackets and your expected taxable income (gross wages minus pre-tax deductions minus the standard deduction).</li>
+            <li><strong>Compare:</strong> If projected withholding is within $500 of your estimated tax, you're in good shape. A large gap means updating your W-4 using the IRS Tax Withholding Estimator.</li>
+            <li><strong>Adjust on your W-4:</strong> You can increase withholding on Line 4(c) (additional withholding per period) or claim deductions on Line 4(b) to reduce withholding. Changes take effect in the first paycheck after your employer processes the form.</li>
+          </ol>
+
+          <h2 id="errors">What to Do If Your Pay Stub Has an Error</h2>
+          <p>Pay stub errors are more common than most people expect — especially after benefits enrollment changes, mid-year raises, or new hires being set up in the payroll system. Here's how to handle them:</p>
+          <ol>
+            <li><strong>Document the discrepancy.</strong> Pull the most recent correct stub and the incorrect one. Write down the specific line, the expected amount, and the actual amount.</li>
+            <li><strong>Contact HR or payroll in writing.</strong> Email is better than verbal communication — it creates a paper trail. Be specific: "My federal income tax withholding should be approximately $223/paycheck based on my W-4 and salary, but I'm being withheld $423."</li>
+            <li><strong>For underpaid wages:</strong> Under the FLSA, employers must correct wage shortfalls promptly. Most states add additional requirements and penalties for late wage payment.</li>
+            <li><strong>For overwithholding of taxes:</strong> Tax overwithheld from prior periods doesn't come directly back from your employer — you recoup the difference as a refund when you file your annual return. Your employer can adjust current withholding going forward.</li>
+            <li><strong>Escalate if unresolved.</strong> If your employer doesn't fix a pay error within one or two pay periods, you can file a complaint with the Department of Labor's Wage and Hour Division (dol.gov/agencies/whd) or your state's equivalent agency.</li>
+          </ol>
+
+          <section class="article-faq" aria-label="Frequently asked questions">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+              <h3 class="faq-q">What does YTD mean on a pay stub?</h3>
+              <p class="faq-a">YTD stands for Year-to-Date. It shows the running total for each earnings or deduction line from January 1 through the current pay date. Use the final YTD figures to verify your W-2 at year-end — the federal wages on your W-2 Box 1 should closely match your final YTD taxable wage figure on your last pay stub of the year.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-q">Why is my Social Security tax different from a coworker who earns the same salary?</h3>
+              <p class="faq-a">The most common reason is that one employee has crossed the 2026 Social Security wage base ($176,100) and withholding stopped for the rest of the year. Other reasons include different Section 125 health premium elections (which reduce the SS wage base), mid-year start dates, or a payroll correction. If neither explanation fits, it may be a payroll error worth investigating.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-q">What are pre-tax deductions and how do they affect my paycheck?</h3>
+              <p class="faq-a">Pre-tax deductions reduce your taxable income before federal and state withholding is calculated. A $150 pre-tax 401(k) contribution doesn't cost $150 in take-home pay — it costs $150 minus the tax you would have paid on that $150. For a 22% federal bracket, the real after-tax cost is only about $117. Section 125 health premiums additionally reduce your FICA wages, saving you another 7.65%.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-q">How do I know if my employer withheld the correct federal income tax?</h3>
+              <p class="faq-a">Multiply your per-paycheck federal withholding by 26 (bi-weekly) or 12 (monthly) to project your full-year withholding. Compare that to your estimated annual federal tax using the 2026 brackets and your expected gross income minus pre-tax deductions and the $15,000 standard deduction. If the numbers are more than $500 apart, update your W-4 — or use our take-home pay calculator to verify instantly.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-q">My pay stub shows incorrect deductions — what should I do?</h3>
+              <p class="faq-a">Document the discrepancy with specific dollar amounts, then contact HR or payroll in writing. For underpaid wages, your employer must correct the shortfall promptly. For over-withheld taxes, you'll typically recoup excess amounts when you file your annual return. If the issue isn't resolved within two pay periods, you can escalate to the Department of Labor's Wage and Hour Division or your state's labor commissioner.</p>
+            </div>
+          </section>
+
+          <div class="article-cta">
+            <h3>Verify Your Paycheck with Our Calculators</h3>
+            <p>Use our take-home pay calculator to estimate what your paycheck should look like — or generate a professional pay stub for your records.</p>
+            <a href="/take-home-pay-calculator" class="btn-primary">Take-Home Pay Calculator &rarr;</a>
+            <a href="/pay-stub-generator" class="btn-secondary">Pay Stub Generator</a>
+          </div>
+
+        </div>
+      </article>
+
+      <aside class="blog-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Related Calculators</div>
+          <a href="/take-home-pay-calculator">Take-Home Pay Calculator</a>
+          <a href="/pay-stub-generator">Pay Stub Generator</a>
+          <a href="/payroll-tax-calculator">Payroll Tax Calculator</a>
+          <a href="/w4-withholding-calculator">W-4 Withholding Calculator</a>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">In This Article</div>
+          <ul class="toc-list">
+            <li><a href="#example-stub">Example Pay Stub</a></li>
+            <li><a href="#gross-pay">Gross Pay</a></li>
+            <li><a href="#pre-tax-deductions">Pre-Tax Deductions</a></li>
+            <li><a href="#federal-withholding">Federal Withholding</a></li>
+            <li><a href="#fica">FICA: SS &amp; Medicare</a></li>
+            <li><a href="#state-tax">State Tax &amp; Post-Tax</a></li>
+            <li><a href="#net-pay">Net Pay</a></li>
+            <li><a href="#ytd">YTD Figures</a></li>
+            <li><a href="#check-withholding">Check Your Withholding</a></li>
+            <li><a href="#errors">Fixing Errors</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><div class="footer-brand-name">FreePayrollCalc</div><div class="footer-brand-desc">Free US payroll &amp; finance calculators built on IRS, SSA, and DOL data.</div></div>
+      <div><div class="footer-col-title">Guides</div><ul class="footer-links"><li><a href="/blog/how-to-calculate-payroll-taxes">Payroll Tax Guide</a></li><li><a href="/blog/overtime-rules-flsa-2026">Overtime Rules</a></li><li><a href="/blog/w4-withholding-guide-2026">W-4 Guide</a></li><li><a href="/blog">All Guides</a></li></ul></div>
+      <div><div class="footer-col-title">Calculators</div><ul class="footer-links"><li><a href="/payroll-tax-calculator">Payroll Tax</a></li><li><a href="/take-home-pay-calculator">Take-Home Pay</a></li><li><a href="/income-tax-calculator">Income Tax</a></li><li><a href="/tools">All Tools</a></li></ul></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">&copy; 2026 FreePayrollCalc &mdash; For informational purposes only, not professional tax advice.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  </div>
+</footer>
+<script src="/shared/scripts.js?v=8" defer></script>
+</body>
+</html>

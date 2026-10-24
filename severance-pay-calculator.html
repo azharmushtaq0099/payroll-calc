@@ -17,12 +17,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Severance Pay Calculator 2026","url":"https://www.freepayrollcalc.xyz/severance-pay-calculator","description":"Calculate severance pay based on years of service and salary. Shows weeks of severance, gross amount, federal tax withholding (22% supplemental rate), state tax estimate, and net payout.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Severance Pay Calculator 2026","url":"https://www.freepayrollcalc.xyz/severance-pay-calculator","description":"Calculate severance pay based on years of service and salary. Shows weeks of severance, gross amount, federal tax withholding (22% supplemental rate), state tax estimate, and net payout.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is severance pay calculated?","acceptedAnswer":{"@type":"Answer","text":"Severance pay is typically calculated as a set number of weeks of pay per year of service. The most common formula is 1–2 weeks of pay per year worked. For example, if you earned $75,000/year and worked 5 years at 2 weeks per year, your severance would be (75,000÷52) × 10 weeks = $14,423 gross before taxes."}},{"@type":"Question","name":"Is severance pay taxed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Severance pay is fully taxable as ordinary income. If paid as a lump sum, employers typically withhold at the 22% federal supplemental rate (2026) plus state income tax and FICA taxes. Your actual tax rate depends on your total income for the year and your tax bracket."}},{"@type":"Question","name":"Is there a legal requirement to pay severance?","acceptedAnswer":{"@type":"Answer","text":"No federal law in the US requires employers to pay severance. However, severance may be required if: (1) your employment contract specifies it, (2) company policy or handbook promises it, or (3) a collective bargaining agreement mandates it. The WARN Act may require 60 days' notice or pay for mass layoffs."}},{"@type":"Question","name":"How long does severance pay last?","acceptedAnswer":{"@type":"Answer","text":"Severance pay duration depends on the employer's policy. Common packages are 1–4 weeks per year of service, with a minimum of 2 weeks and a maximum cap (often 26 weeks for executives). The duration is usually paid as either a lump sum or in regular installments."}},{"@type":"Question","name":"Does severance affect unemployment benefits?","acceptedAnswer":{"@type":"Answer","text":"It depends on your state. Some states count severance as wages and delay or reduce unemployment benefits. Others do not. If you receive severance as salary continuation (weekly payments), most states will delay unemployment eligibility until the severance period ends."}}]}
@@ -49,7 +46,25 @@
 .notice-box{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--ink-2);line-height:1.65;margin-top:16px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Severance Pay Calculator","item":"https://www.freepayrollcalc.xyz/severance-pay-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/severance-pay-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/severance-pay-calculator","dateModified":"2026-09-21"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -351,7 +366,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';

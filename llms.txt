@@ -1,0 +1,99 @@
+# FreePayrollCalc
+
+> FreePayrollCalc (freepayrollcalc.xyz) is a free US payroll, tax, and financial calculator hub with 151+ tools. All calculators use current 2026 IRS data, SSA wage bases, and state-specific tax rates. Updated monthly. No signup required. Built for employees, employers, freelancers, and small business owners.
+
+## Core Payroll Calculators
+
+- [Payroll Tax Calculator](https://www.freepayrollcalc.xyz/payroll-tax-calculator): Calculate federal income tax, Social Security (6.2%), Medicare (1.45%), and state withholding for any US employee. All 50 states, all pay periods.
+- [Free Payroll Calculator](https://www.freepayrollcalc.xyz/free-payroll-calculator): Full gross-to-net paycheck calculator with pre-tax deductions, benefits, and employer costs.
+- [Hourly Paycheck Calculator](https://www.freepayrollcalc.xyz/hourly-paycheck-calculator): Convert hourly wage to net take-home pay after all taxes and deductions.
+- [Salary Paycheck Calculator](https://www.freepayrollcalc.xyz/salary-paycheck-calculator): Annual salary to monthly/bi-weekly/weekly net pay with full tax breakdown.
+- [Overtime Pay Calculator](https://www.freepayrollcalc.xyz/overtime-pay-calculator): Calculate FLSA overtime at 1.5x rate with weekly, daily, and California overtime rules.
+- [Bonus Tax Calculator](https://www.freepayrollcalc.xyz/bonus-tax-calculator): Federal and state tax on bonuses using the flat 22% supplemental rate or aggregate method.
+- [Commission Pay Calculator](https://www.freepayrollcalc.xyz/commission-pay-calculator): Net take-home on commission income after federal and state taxes.
+- [1099 Tax Calculator](https://www.freepayrollcalc.xyz/1099-tax-calculator): Quarterly estimated taxes for self-employed contractors including self-employment tax.
+- [1099 vs W2 Calculator](https://www.freepayrollcalc.xyz/1099-vs-w2-calculator): Compare true cost of contractor vs employee compensation.
+- [Self-Employment Tax Calculator](https://www.freepayrollcalc.xyz/self-employment-tax-calculator): Calculate 15.3% SE tax and the deductible half for Schedule SE filers.
+- [Employer Tax Calculator](https://www.freepayrollcalc.xyz/employer-tax-calculator): Full employer cost per employee including FUTA, SUTA, and matching FICA.
+- [Employee Cost Calculator](https://www.freepayrollcalc.xyz/employee-cost-calculator): Total true cost of hiring an employee including benefits, overhead, and taxes.
+- [Final Paycheck Calculator](https://www.freepayrollcalc.xyz/final-paycheck-calculator): Calculate final paycheck with unused PTO payout by state law.
+
+## State Payroll Calculators (All 50 States)
+
+- [California Payroll Tax Calculator](https://www.freepayrollcalc.xyz/california-payroll-tax-calculator): CA state income tax, SDI (1.1%), and CA withholding tables.
+- [Texas Payroll Tax Calculator](https://www.freepayrollcalc.xyz/texas-payroll-tax-calculator): No state income tax. Federal withholding and FICA only.
+- [New York Payroll Tax Calculator](https://www.freepayrollcalc.xyz/new-york-payroll-tax-calculator): NY + NYC local income tax, MTA surcharge, and NYPFL (0.373%).
+- [Florida Payroll Tax Calculator](https://www.freepayrollcalc.xyz/florida-payroll-tax-calculator): No state income tax. Federal withholding and FICA only.
+- [Illinois Payroll Tax Calculator](https://www.freepayrollcalc.xyz/illinois-payroll-tax-calculator): Illinois flat 4.95% state income tax.
+- [Pennsylvania Payroll Tax Calculator](https://www.freepayrollcalc.xyz/pennsylvania-payroll-tax-calculator): PA flat 3.07% state income tax plus local earned income tax.
+- [Ohio Payroll Tax Calculator](https://www.freepayrollcalc.xyz/ohio-payroll-tax-calculator): Ohio graduated state income tax brackets.
+- [Georgia Payroll Tax Calculator](https://www.freepayrollcalc.xyz/georgia-payroll-tax-calculator): Georgia state income tax rates.
+- [Washington Payroll Tax Calculator](https://www.freepayrollcalc.xyz/washington-payroll-tax-calculator): No state income tax. WA Cares Fund (0.58%) and PFML.
+- [All State Calculators](https://www.freepayrollcalc.xyz/): All 50 state-specific payroll tax calculators available.
+
+## Tax Calculators
+
+- [Income Tax Calculator](https://www.freepayrollcalc.xyz/income-tax-calculator): Federal income tax liability for 2026 using current IRS brackets.
+- [Effective Tax Rate Calculator](https://www.freepayrollcalc.xyz/effective-tax-rate-calculator): Calculate your average effective federal tax rate vs marginal rate.
+- [Capital Gains Tax Calculator](https://www.freepayrollcalc.xyz/capital-gains-tax-calculator): Short-term vs long-term capital gains tax for 2026 (0%, 15%, 20% brackets).
+- [Estate Tax Calculator](https://www.freepayrollcalc.xyz/estate-tax-calculator): Federal estate tax with 2026 exemption threshold.
+- [Self-Employment Tax Calculator](https://www.freepayrollcalc.xyz/self-employment-tax-calculator): SE tax at 15.3% with deductible half.
+
+## Retirement Calculators
+
+- [Retirement Calculator](https://www.freepayrollcalc.xyz/retirement-calculator): Project retirement savings growth with contribution rate, employer match, and rate of return.
+- [401k Calculator](https://www.freepayrollcalc.xyz/401k-calculator): 2026 contribution limits ($23,500 employee, $70,000 total) with employer match modeling.
+- [401k Loan Calculator](https://www.freepayrollcalc.xyz/401k-loan-calculator): Calculate payments and opportunity cost of borrowing from your 401(k).
+- [IRA Rollover Calculator](https://www.freepayrollcalc.xyz/ira-rollover-calculator): Model tax implications of rolling over retirement accounts.
+- [529 College Savings Calculator](https://www.freepayrollcalc.xyz/529-college-savings-calculator): Project college savings with state deduction benefits.
+
+## Mortgage & Real Estate Calculators
+
+- [Mortgage Calculator](https://www.freepayrollcalc.xyz/mortgage-calculator): Monthly payment, amortization schedule, total interest for any mortgage.
+- [Refinance Calculator](https://www.freepayrollcalc.xyz/refinance-calculator): Break-even analysis for mortgage refinancing decisions.
+- [Extra Mortgage Payment Calculator](https://www.freepayrollcalc.xyz/extra-mortgage-payment-calculator): Interest saved and years off mortgage from extra principal payments.
+- [HELOC Calculator](https://www.freepayrollcalc.xyz/heloc-calculator): Home equity line of credit payment and interest calculation.
+- [Cap Rate Calculator](https://www.freepayrollcalc.xyz/cap-rate-calculator): Capitalization rate for rental property investment analysis.
+- [Closing Costs Calculator](https://www.freepayrollcalc.xyz/closing-costs-calculator): Estimate total closing costs by state and loan amount.
+
+## Personal Finance Calculators
+
+- [Compound Interest Calculator](https://www.freepayrollcalc.xyz/compound-interest-calculator): Investment growth with compound interest over time.
+- [Debt Payoff Calculator](https://www.freepayrollcalc.xyz/debt-payoff-calculator): Avalanche vs snowball debt elimination strategies.
+- [Budget Calculator](https://www.freepayrollcalc.xyz/budget-calculator): Monthly budget planner based on the 50/30/20 rule.
+- [Cost of Living Calculator](https://www.freepayrollcalc.xyz/cost-of-living-calculator): Compare cost of living between US cities.
+- [Personal Loan Calculator](https://www.freepayrollcalc.xyz/personal-loan-calculator): Monthly payment and total interest on personal loans.
+
+## Business Calculators
+
+- [Break-Even Calculator](https://www.freepayrollcalc.xyz/break-even-calculator): Units and revenue needed to break even with fixed and variable costs.
+- [Business Loan Calculator](https://www.freepayrollcalc.xyz/business-loan-calculator): Monthly SBA and commercial loan payments with amortization.
+- [Burn Rate Calculator](https://www.freepayrollcalc.xyz/burn-rate-calculator): Monthly burn rate and runway calculation for startups.
+- [ROI Calculator](https://www.freepayrollcalc.xyz/roi-calculator): Return on investment percentage for business decisions.
+- [Markup Calculator](https://www.freepayrollcalc.xyz/markup-calculator): Price markup and gross margin calculation.
+
+## HR & Employment Calculators
+
+- [PTO Accrual Calculator](https://www.freepayrollcalc.xyz/pto-calculator): Calculate PTO accrual rate by pay period and balance tracking.
+- [FMLA Leave Calculator](https://www.freepayrollcalc.xyz/fmla-leave-calculator): 12-week FMLA eligibility and intermittent leave tracking.
+- [Hours Worked Calculator](https://www.freepayrollcalc.xyz/hours-worked-calculator): Weekly hours, overtime detection, and time card calculation.
+- [Mileage Reimbursement Calculator](https://www.freepayrollcalc.xyz/mileage-reimbursement-calculator): IRS standard mileage rate reimbursement for business travel.
+- [COBRA Insurance Calculator](https://www.freepayrollcalc.xyz/cobra-insurance-calculator): Estimate COBRA continuation coverage premium costs.
+
+## Reference Data
+
+- [Minimum Wage by State 2026](https://www.freepayrollcalc.xyz/minimum-wage-by-state): Current minimum wage rates for all 50 states and DC, updated for 2026.
+- [About FreePayrollCalc](https://www.freepayrollcalc.xyz/about): Methodology, data sources, update schedule, and editorial standards.
+
+## Blog
+
+- [2026 Federal Income Tax Brackets](https://www.freepayrollcalc.xyz/blog/2026-federal-income-tax-brackets.html): Complete guide to 2026 federal tax brackets with calculation examples.
+- [Roth IRA vs Traditional IRA 2026](https://www.freepayrollcalc.xyz/blog/roth-ira-vs-traditional-ira-2026.html): Full comparison of contribution limits, income limits, and tax treatment.
+- [How to Calculate Payroll Taxes](https://www.freepayrollcalc.xyz/blog/how-to-calculate-payroll-taxes.html): Step-by-step payroll tax calculation guide with worked examples.
+- [Self-Employment Tax Guide 2026](https://www.freepayrollcalc.xyz/blog/self-employment-tax-guide-2026.html): Complete SE tax guide for freelancers and independent contractors.
+- [W-4 Withholding Guide 2026](https://www.freepayrollcalc.xyz/blog/w4-withholding-guide-2026.html): How to complete Form W-4 to minimize over- or under-withholding.
+- [Minimum Wage by State 2026](https://www.freepayrollcalc.xyz/blog/minimum-wage-by-state-2026.html): State-by-state minimum wage rates with 2026 scheduled increases.
+
+## Data & Methodology
+
+FreePayrollCalc sources all tax rates from primary government sources: IRS Publication 15 (Circular E) for federal withholding, SSA for Social Security wage base, and each state's department of revenue for state withholding tables. Calculators are reviewed and updated within 30 days of any rate change announcement. All results are for estimation purposes; consult a CPA or tax professional for specific advice.

@@ -17,10 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
 <meta name="robots" content="index,follow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -132,6 +129,24 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 
@@ -218,7 +233,7 @@
             <div class="nav-mega-footer">
               <div class="nav-mega-footer-links">
                 <a href="/about">About</a>
-                <a href="/privacy">Privacy</a>
+                <a href="/contact">Contact</a><a href="/privacy">Privacy</a>
                 <a href="/terms">Terms</a>
               </div>
               <a href="/tools" class="nav-mega-footer-cta">
@@ -303,6 +318,7 @@
     <a href="/tools" class="nav-mobile-cta">Browse All Calculators →</a>
   </div>
 </nav>
+<main>
 
 <!-- HERO -->
 <section class="hp-hero">
@@ -310,7 +326,11 @@
     <div class="hp-hero-animate hp-fade-1">
       <div class="hp-hero-eyebrow"><span></span> Updated for 2026 IRS &amp; FLSA rates</div>
     </div>
-    <h1 class="hp-hero-animate hp-fade-2">Tools for real-life<br>financial decisions.</h1>
+    <h1 class="hp-hero-animate hp-fade-2">Free Payroll Calculator —<br>2026 IRS Rates, All 50 States.</h1>
+    <div class="calc-updated">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Last updated: September 2026 · 2026 IRS &amp; state tax rates
+    </div>
     <p class="hp-hero-sub hp-hero-animate hp-fade-3">Calculate. Compare. Get the number you need — free, instant, no signup.</p>
     <div class="hp-search-bar hp-hero-animate hp-fade-4" onclick="openCmd()" role="button" aria-label="Search tools — press Ctrl K">
       <span class="hp-search-icon">
@@ -368,7 +388,7 @@
   <div class="container">
     <div class="hp-section-row" data-enter>
       <span class="hp-section-title">Popular tools</span>
-      <a href="/tools" class="hp-section-link">View all 41
+      <a href="/tools" class="hp-section-link">View all 151+
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
@@ -520,7 +540,7 @@
         <div class="stat-label">Calculations run this year (est.)</div>
       </div>
       <div data-enter data-delay="3">
-        <div class="stat-value">41<em>+</em></div>
+        <div class="stat-value">151<em>+</em></div>
         <div class="stat-label">Free tools — payroll, income, HR &amp; business</div>
       </div>
     </div>
@@ -612,19 +632,19 @@
   <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px" id="featured-grid">
     <a href="/social-security-benefits-calculator" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:border-color .15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
       <div style="width:36px;height:36px;border-radius:8px;background:rgba(27,79,216,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div><div style="font-size:13px;font-weight:600;color:var(--ink-1)">Social Security Benefits</div><div style="font-size:11px;color:var(--ink-3)">60,500 searches/mo</div></div>
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink-1)">Social Security Benefits</div><div style="font-size:11px;color:var(--ink-3)">Retirement &amp; survivor benefits</div></div>
     </a>
     <a href="/student-loan-repayment-calculator" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:border-color .15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
       <div style="width:36px;height:36px;border-radius:8px;background:rgba(22,163,74,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#16a34a"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-      <div><div style="font-size:13px;font-weight:600;color:var(--ink-1)">Student Loan Repayment</div><div style="font-size:11px;color:var(--ink-3)">40,500 searches/mo</div></div>
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink-1)">Student Loan Repayment</div><div style="font-size:11px;color:var(--ink-3)">Federal &amp; private loan payoff</div></div>
     </a>
     <a href="/debt-consolidation-calculator" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:border-color .15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
       <div style="width:36px;height:36px;border-radius:8px;background:rgba(245,158,11,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#d97706"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-      <div><div style="font-size:13px;font-weight:600;color:var(--ink-1)">Debt Consolidation</div><div style="font-size:11px;color:var(--ink-3)">$13.98 avg CPC</div></div>
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink-1)">Debt Consolidation</div><div style="font-size:11px;color:var(--ink-3)">Compare loan vs. balance transfer</div></div>
     </a>
     <a href="/how-long-will-my-money-last-calculator" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:border-color .15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
       <div style="width:36px;height:36px;border-radius:8px;background:rgba(27,79,216,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div><div style="font-size:13px;font-weight:600;color:var(--ink-1)">How Long Will Money Last</div><div style="font-size:11px;color:var(--ink-3)">18,100 searches/mo</div></div>
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink-1)">How Long Will Money Last</div><div style="font-size:11px;color:var(--ink-3)">Retirement withdrawal planning</div></div>
     </a>
   </div>
   <style>@media(min-width:640px){#featured-grid{grid-template-columns:repeat(4,1fr)}}</style>
@@ -694,6 +714,7 @@
 </section>
 
 <!-- FOOTER -->
+</main>
 <footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-top">
@@ -740,7 +761,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   var SEED = 52847;

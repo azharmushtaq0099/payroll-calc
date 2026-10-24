@@ -17,12 +17,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Employee Cost Calculator 2026","url":"https://www.freepayrollcalc.xyz/employee-cost-calculator","description":"Calculate the true total cost of an employee including salary, employer payroll taxes (FICA, FUTA, SUTA), workers comp, health insurance, 401k match, PTO value, and overhead. Shows cost per hour and employer burden percentage.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Employee Cost Calculator 2026","url":"https://www.freepayrollcalc.xyz/employee-cost-calculator","description":"Calculate the true total cost of an employee including salary, employer payroll taxes (FICA, FUTA, SUTA), workers comp, health insurance, 401k match, PTO value, and overhead. Shows cost per hour and employer burden percentage.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does an employee actually cost?","acceptedAnswer":{"@type":"Answer","text":"An employee typically costs 1.25x to 1.4x their base salary when you include employer payroll taxes and benefits. For example, a $60,000/year employee often costs $75,000–$85,000 total when you add employer FICA (7.65%), FUTA, SUTA, workers comp, health insurance contribution, and any retirement match. This calculator shows the exact breakdown."}},{"@type":"Question","name":"What is employer FICA tax in 2026?","acceptedAnswer":{"@type":"Answer","text":"Employers match the employee FICA taxes: 6.2% Social Security on wages up to the SSA wage base ($176,100 for 2026) and 1.45% Medicare on all wages — a total of 7.65% for most employees. Unlike the employee's Additional Medicare Tax (0.9% over $200K), employers do not pay the additional Medicare tax."}},{"@type":"Question","name":"What is FUTA tax?","acceptedAnswer":{"@type":"Answer","text":"FUTA (Federal Unemployment Tax) is an employer-only tax of 6% on the first $7,000 of each employee's wages per year. However, employers in states with no outstanding federal loans receive a 5.4% credit, making the effective FUTA rate 0.6% — a maximum of $42 per employee annually."}},{"@type":"Question","name":"What does employee burden rate mean?","acceptedAnswer":{"@type":"Answer","text":"The employee burden rate is the percentage of additional cost above the base salary. If a $60,000 salary employee costs $78,000 total, the burden rate is 30%. It includes employer payroll taxes, benefits, workers comp, and overhead. Most small businesses see burden rates between 20% and 40%."}},{"@type":"Question","name":"How do I calculate cost per hour for an employee?","acceptedAnswer":{"@type":"Answer","text":"Divide total annual employee cost by actual productive hours worked. A standard year has 2,080 hours (40 hours × 52 weeks), but subtract PTO days, holidays, and sick days — leaving roughly 1,800–1,950 productive hours. Dividing total cost by productive hours gives the true hourly cost to the employer."}}]}
@@ -49,7 +46,25 @@
 .hr-metric-label{font-size:11px;color:var(--ink-3);margin-top:3px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Employee Cost Calculator","item":"https://www.freepayrollcalc.xyz/employee-cost-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/employee-cost-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/employee-cost-calculator","dateModified":"2026-09-21"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 <!-- COMMAND PALETTE -->
@@ -411,7 +426,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';

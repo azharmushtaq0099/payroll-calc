@@ -16,10 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
 <meta name="robots" content="index,follow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,7 +28,9 @@
   "operatingSystem": "Any",
   "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
   "featureList": ["Flat 22% supplemental rate","Aggregate method calculation","All 50 states + DC","Social Security and Medicare withholding","2026 IRS Publication 15 rates"],
-  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}
+  "author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]},
+  "datePublished": "2024-01-15",
+  "dateModified": "2026-10-24"
 }
 </script>
 <script type="application/ld+json">
@@ -63,12 +62,45 @@
       "@type": "Question",
       "name": "What is the bonus tax rate for 2026?",
       "acceptedAnswer": {"@type":"Answer","text":"For 2026, the federal supplemental withholding rate is 22% for bonus amounts up to $1,000,000 and 37% for any portion exceeding $1 million in the same calendar year. Social Security tax of 6.2% (up to the $176,100 wage base) and Medicare tax of 1.45% also apply to bonus pay. State supplemental withholding rates vary from 0% in the nine no-income-tax states to over 10% in states like California and New York."}
+    },
+    {
+      "@type": "Question",
+      "name": "What was the IRS bonus tax rate in 2023?",
+      "acceptedAnswer": {"@type":"Answer","text":"The IRS bonus tax rate for 2023 was 22% for federal supplemental wages under $1 million and 37% above $1 million — the same flat rate as 2022, 2024, 2025, and 2026. The only significant change in 2023 was the Social Security wage base, which increased from $147,000 (2022) to $160,200 (2023). Source: IRS Revenue Procedure 2022-38."}
+    },
+    {
+      "@type": "Question",
+      "name": "What was the bonus tax rate in 2022?",
+      "acceptedAnswer": {"@type":"Answer","text":"The bonus withholding rate in 2022 was 22% federal (for amounts under $1 million) and 37% above $1 million. Social Security applied at 6.2% up to the $147,000 wage base. Medicare applied at 1.45% with no cap. These are withholding rates — your actual tax owed on the bonus depends on your total 2022 income and marginal bracket."}
+    },
+    {
+      "@type": "Question",
+      "name": "What was the IRS bonus tax rate in 2024?",
+      "acceptedAnswer": {"@type":"Answer","text":"For 2024, the IRS supplemental wage withholding rate was 22% (for bonuses under $1 million) and 37% (above $1 million). The Social Security wage base for 2024 was $168,600, increased from $160,200 in 2023. Medicare remained 1.45% with no wage cap. Source: IRS Publication 15 (Rev. January 2024)."}
     }
   ]
 }
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Bonus Tax Calculator","item":"https://www.freepayrollcalc.xyz/bonus-tax-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/bonus-tax-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/bonus-tax-calculator","dateModified": "2026-10-24"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 
@@ -427,7 +459,31 @@
           <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Regardless of which federal income tax withholding method your employer uses, Social Security (6.2%) and Medicare (1.45%) taxes are always withheld from bonus pay. Social Security only applies up to the 2026 wage base of $176,100 — if your year-to-date W-2 wages have already surpassed that limit, no Social Security tax will be withheld from your bonus. State income taxes also apply based on your state's supplemental wage rate, which ranges from 0% in the nine no-income-tax states (Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, Wyoming) to over 10% in California and New Jersey.</p>
 
           <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">How to reduce bonus tax withholding</h3>
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">If your employer allows bonus-to-retirement contributions, directing your bonus into a traditional 401(k) or 403(b) reduces both federal and state income tax withholding — though FICA taxes still apply. The 2026 401(k) elective deferral limit is $23,500 ($31,000 for those age 50 and older with catch-up contributions). You can also update your W-4 to request additional withholding on regular paychecks throughout the year, smoothing out the gap between what is withheld from your bonus and your actual tax liability. If you receive bonus-type payments as a <a href="/1099-vs-w2-calculator" style="color:var(--accent)">1099 contractor</a>, self-employment tax (15.3%) applies in addition to income tax — use the 1099 vs W-2 calculator to see the full comparison.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">If your employer allows bonus-to-retirement contributions, directing your bonus into a traditional 401(k) or 403(b) reduces both federal and state income tax withholding — though FICA taxes still apply. The 2026 401(k) elective deferral limit is $23,500 ($31,000 for those age 50 and older with catch-up contributions). You can also update your W-4 to request additional withholding on regular paychecks throughout the year, smoothing out the gap between what is withheld from your bonus and your actual tax liability. If you receive bonus-type payments as a <a href="/1099-vs-w2-calculator" style="color:var(--accent)">1099 contractor</a>, self-employment tax (15.3%) applies in addition to income tax — use the 1099 vs W-2 calculator to see the full comparison.</p>
+
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin:28px 0 12px">Bonus Tax Rate by Year: 2021, 2022, 2023, 2024, 2025, 2026</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">The federal supplemental withholding rate for bonuses has been <strong>22%</strong> (for amounts under $1 million) since 2018. It has not changed from year to year. What changes is the Social Security wage base:</p>
+
+          <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0">
+            <thead>
+              <tr style="background:var(--surface-2)">
+                <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Tax Year</th>
+                <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Federal Bonus Rate</th>
+                <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Rate &gt; $1M</th>
+                <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">SS Wage Base</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)"><strong>2026</strong></td><td style="padding:8px 12px;border:1px solid var(--border)">22%</td><td style="padding:8px 12px;border:1px solid var(--border)">37%</td><td style="padding:8px 12px;border:1px solid var(--border)">$176,100</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)"><strong>2025</strong></td><td style="padding:8px 12px;border:1px solid var(--border)">22%</td><td style="padding:8px 12px;border:1px solid var(--border)">37%</td><td style="padding:8px 12px;border:1px solid var(--border)">$176,100</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)"><strong>2024</strong></td><td style="padding:8px 12px;border:1px solid var(--border)">22%</td><td style="padding:8px 12px;border:1px solid var(--border)">37%</td><td style="padding:8px 12px;border:1px solid var(--border)">$168,600</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)"><strong>2023</strong></td><td style="padding:8px 12px;border:1px solid var(--border)">22%</td><td style="padding:8px 12px;border:1px solid var(--border)">37%</td><td style="padding:8px 12px;border:1px solid var(--border)">$160,200</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)"><strong>2022</strong></td><td style="padding:8px 12px;border:1px solid var(--border)">22%</td><td style="padding:8px 12px;border:1px solid var(--border)">37%</td><td style="padding:8px 12px;border:1px solid var(--border)">$147,000</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)"><strong>2021</strong></td><td style="padding:8px 12px;border:1px solid var(--border)">22%</td><td style="padding:8px 12px;border:1px solid var(--border)">37%</td><td style="padding:8px 12px;border:1px solid var(--border)">$142,800</td></tr>
+            </tbody>
+          </table>
+
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">The <strong>bonus tax rate for 2022, 2023, 2024</strong> is the same 22% flat rate as 2026. If you are looking up a prior-year bonus tax rate to check your W-2 or amend a return, the federal percentage has not changed since 2018. State supplemental rates vary by state and year. Use this calculator above to model any year's net bonus by adjusting the state and verifying your state's current supplemental rate.</p>
         </article>
 
       </div><!-- /calc-main -->
@@ -687,7 +743,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 /* ── 2026 Bonus Tax Engine ── */
 (function(){

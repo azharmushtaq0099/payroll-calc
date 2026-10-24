@@ -16,10 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
 <meta name="robots" content="index,follow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,7 +28,9 @@
   "operatingSystem": "Any",
   "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
   "featureList": ["Employer SS match (6.2%)","Employer Medicare match (1.45%)","FUTA calculation (0.6% on $7,000)","SUTA new employer estimate (2.7%)","Workers comp premium estimate","Multi-employee total cost"],
-  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}
+  "author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]},
+  "datePublished": "2024-01-15",
+  "dateModified": "2026-10-24"
 }
 </script>
 <script type="application/ld+json">
@@ -63,7 +62,25 @@
 }
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Employer Payroll Tax Calculator","item":"https://www.freepayrollcalc.xyz/employer-tax-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/employer-tax-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/employer-tax-calculator","dateModified": "2026-10-24"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 
@@ -377,11 +394,51 @@
         <div class="ad-zone ad-zone--in-content"></div>
 
         <article style="margin-top:40px" data-enter>
-          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">What employers actually pay in payroll taxes in 2026</h2>
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">A $60,000 salary does not cost an employer $60,000 per year. Mandatory employer-side payroll taxes add 7–12% on top of wages — meaning the true all-in cost is typically $64,000–$68,000+ for a $60,000 employee before health benefits, retirement matching, or other perks.</p>
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>Employer FICA</strong> is a dollar-for-dollar match of the employee's Social Security (6.2% up to the $176,100 wage base) and Medicare (1.45% on all wages). Combined, the employer FICA obligation is 7.65% of wages up to the SS wage base, then 1.45% on wages above it.</p>
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>FUTA and SUTA</strong> fund unemployment insurance. Net FUTA is a flat $42 maximum per employee per year (0.6% on first $7,000). SUTA varies by state and employer experience rating; new employers typically pay 2.7% on the first $7,000–$12,000 of wages.</p>
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">For an accurate workers comp estimate by job class, see the <a href="/workers-comp-calculator" style="color:var(--accent)">Workers Comp Calculator</a>. For the employee's take-home pay, see the <a href="/payroll-tax-calculator" style="color:var(--accent)">Payroll Tax Calculator</a>.</p>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">What Employers Pay in Payroll Taxes in 2026</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">A $60,000 salary does not cost an employer $60,000 per year. Mandatory employer-side payroll taxes add roughly 8–10% on top of wages — meaning the true cost before benefits is $64,800–$66,000 for a $60,000 employee. Add health insurance, retirement matching, and PTO, and the total can reach $75,000–$85,000.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">Employer Payroll Tax Breakdown (2026)</h3>
+          <table style="width:100%;border-collapse:collapse;font-size:14px;margin:0 0 16px">
+            <thead><tr style="background:var(--surface-2)">
+              <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Tax</th>
+              <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Rate</th>
+              <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Wage Limit</th>
+              <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Max per Employee</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)">Social Security (OASDI)</td><td style="padding:8px 12px;border:1px solid var(--border)">6.2%</td><td style="padding:8px 12px;border:1px solid var(--border)">$176,100</td><td style="padding:8px 12px;border:1px solid var(--border)">$10,918.20/yr</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)">Medicare (HI)</td><td style="padding:8px 12px;border:1px solid var(--border)">1.45%</td><td style="padding:8px 12px;border:1px solid var(--border)">No limit</td><td style="padding:8px 12px;border:1px solid var(--border)">No cap</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)">FUTA (federal unemployment)</td><td style="padding:8px 12px;border:1px solid var(--border)">6.0% (net 0.6%*)</td><td style="padding:8px 12px;border:1px solid var(--border)">$7,000</td><td style="padding:8px 12px;border:1px solid var(--border)">$42/yr net</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)">SUTA (state unemployment)</td><td style="padding:8px 12px;border:1px solid var(--border)">Varies by state + history</td><td style="padding:8px 12px;border:1px solid var(--border)">$7,000–$56,500</td><td style="padding:8px 12px;border:1px solid var(--border)">Varies widely</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:13px;color:var(--ink-3);margin-bottom:16px">* Net FUTA is 0.6% after the standard 5.4% state unemployment credit. Employers in states with FUTA credit reduction (outstanding federal loans) pay a higher rate.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">True Total Cost of an Employee: Worked Example</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:12px">For a $65,000/year employee in Texas (no state income tax, new employer SUTA rate 2.7%):</p>
+          <ul style="font-size:15px;color:var(--ink-2);line-height:1.75;margin:0 0 14px 20px">
+            <li style="margin-bottom:5px">Base salary: <strong>$65,000</strong></li>
+            <li style="margin-bottom:5px">Employer Social Security (6.2% × $65,000): <strong>$4,030</strong></li>
+            <li style="margin-bottom:5px">Employer Medicare (1.45% × $65,000): <strong>$943</strong></li>
+            <li style="margin-bottom:5px">FUTA net (0.6% × $7,000): <strong>$42</strong></li>
+            <li style="margin-bottom:5px">SUTA (2.7% × $9,000 TX wage base): <strong>$243</strong></li>
+            <li style="margin-bottom:5px"><strong>Total mandatory taxes: $5,258 (8.1% of salary)</strong></li>
+            <li style="margin-bottom:5px">Total employer payroll cost: <strong>$70,258</strong></li>
+          </ul>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Add average benefits: health insurance (~$7,000 employer contribution), 3% 401(k) match ($1,950), and PTO (15 days × $250/day = $3,750), and total compensation cost reaches approximately <strong>$82,958/year</strong> for a $65,000 salary.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">FUTA vs SUTA: Key Differences</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>FUTA</strong> (Federal Unemployment Tax Act) is paid entirely by the employer at 6.0% on the first $7,000 of each employee's wages. Employers that pay state unemployment taxes on time receive a 5.4% credit, making the net FUTA rate just 0.6% — a maximum of $42 per employee per year. FUTA is the same rate in every state.</p>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>SUTA</strong> (State Unemployment Tax Act) varies by state wage base ($7,000–$56,500), new employer rate (typically 1%–3.5%), and your experience rating after 3 years of claims history. High-turnover businesses or those with significant layoff history pay higher rates; businesses with few claims are rewarded with lower rates.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">How to Reduce Employer Payroll Tax Cost</h3>
+          <ul style="font-size:15px;color:var(--ink-2);line-height:1.75;margin:0 0 14px 20px">
+            <li style="margin-bottom:6px"><strong>Hire contractors (1099)</strong> — contractors handle their own FICA taxes (15.3% self-employment tax), and you pay no FUTA, SUTA, or employer FICA. However, misclassification carries significant penalties — only use 1099 for genuinely independent contractors.</li>
+            <li style="margin-bottom:6px"><strong>Reduce SUTA rate through low turnover</strong> — your experience rating improves over 3 years of low claims. Voluntary contributions to your SUTA account can also lower your rate in some states.</li>
+            <li style="margin-bottom:6px"><strong>Use pre-tax benefit plans</strong> — employer contributions to health insurance, HSA, and 401(k) are not subject to FICA. Offering richer benefits in lieu of wages reduces the FICA-taxable wage base.</li>
+            <li style="margin-bottom:6px"><strong>Section 125 cafeteria plans</strong> — employee pre-tax benefit elections (health, dental, FSA) reduce the employee's FICA wage base, which also reduces the employer's matching FICA obligation.</li>
+          </ul>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75">For an accurate workers comp estimate by job class, see the <a href="/workers-comp-calculator" style="color:var(--accent)">Workers Comp Calculator</a>. For employee take-home pay, see the <a href="/payroll-tax-calculator" style="color:var(--accent)">Payroll Tax Calculator</a>. For the full cost including benefits, see the <a href="/employee-cost-calculator" style="color:var(--accent)">Employee Cost Calculator</a>.</p>
         </article>
 
       </div>
@@ -623,7 +680,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';

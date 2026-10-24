@@ -16,10 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1746221331496-a87689fc8eb9?w=1200&h=630&q=85&auto=format&fit=crop">
 <meta name="robots" content="index,follow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/shared/styles.css?v=9">
+<link rel="stylesheet" href="/shared/styles.css?v=12">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,7 +28,9 @@
   "operatingSystem": "Any",
   "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
   "featureList": ["8 common job classifications","All 50 states","NCCI-based rate estimates","Annual and monthly premium output","Premium as % of payroll"],
-  "author": {"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz"}
+  "author":{"@type":"Organization","name":"FreePayrollCalc","url":"https://www.freepayrollcalc.xyz","sameAs":["https://www.freepayrollcalc.xyz/about"]},
+  "datePublished": "2024-01-15",
+  "dateModified": "2026-10-24"
 }
 </script>
 <script type="application/ld+json">
@@ -58,12 +57,40 @@
       "@type": "Question",
       "name": "What is an experience modification factor (E-Mod)?",
       "acceptedAnswer": {"@type":"Answer","text":"An experience modification factor (E-Mod or EMR) adjusts your workers comp premium based on your actual claims history versus industry average. A 1.0 E-Mod means average claims history; a 0.85 means 15% better than average (you pay less); a 1.25 means 25% worse (you pay more). New businesses start at 1.0. E-Mod is calculated by your state's rating bureau and applies once you have 3 years of loss history. This calculator uses an E-Mod of 1.0 — multiply the result by your E-Mod for an adjusted estimate."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the workers comp cost for a $50,000 payroll at EMR 1.0?",
+      "acceptedAnswer": {"@type":"Answer","text":"For a $50,000 payroll with an EMR of 1.0 (industry average), your workers comp cost depends entirely on the job classification. Examples: Clerical worker at $0.50/100 = $250/year. Retail at $2.00/100 = $1,000/year. Carpentry at $10.00/100 = $5,000/year. Roofing at $25.00/100 = $12,500/year. Formula: ($50,000 ÷ 100) × rate = premium. With EMR 1.0, no adjustment is made — you pay the base rate."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the workers compensation insurance cost for a small business?",
+      "acceptedAnswer": {"@type":"Answer","text":"Workers compensation insurance cost for small businesses varies by industry and state. A small office with 5 employees at $50,000 average salary ($250,000 total payroll) pays approximately $875–$1,875/year for clerical workers. A 5-person construction crew with the same payroll pays $20,000–$35,000/year. The national average across all industries is approximately $1.00–$1.50 per $100 of payroll, but this average is meaningless without knowing your specific classification codes."}
     }
   ]
 }
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freepayrollcalc.xyz/"},{"@type":"ListItem","position":2,"name":"Workers Comp Calculator","item":"https://www.freepayrollcalc.xyz/workers-comp-calculator"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/workers-comp-calculator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1.calc-title","h1","p.calc-sub",".quick-answer",".qa-text"]},"url":"https://www.freepayrollcalc.xyz/workers-comp-calculator","dateModified": "2026-10-24"}</script>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<script>
+(function(){
+  function loadAds(){
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8414597986244852";
+    s.crossOrigin="anonymous";
+    document.head.appendChild(s);
+  }
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadAds,{timeout:4000});
+  } else {
+    window.addEventListener("load",function(){setTimeout(loadAds,1000);});
+  }
+})();
+</script>
 </head>
 <body>
 
@@ -400,9 +427,62 @@
         <div class="ad-zone ad-zone--in-content"></div>
 
         <article style="margin-top:40px" data-enter>
-          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">How workers comp premiums are calculated in 2026</h2>
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Workers compensation insurance premiums are calculated per $100 of annual payroll, using class code rates set by NCCI (National Council on Compensation Insurance) or state-specific rating bureaus. The formula is: <strong>(Annual Payroll ÷ 100) × Rate × E-Mod = Premium</strong>.</p>
-          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Rates vary enormously by risk level. A $250,000 clerical payroll costs roughly $450/year in workers comp; a $250,000 construction payroll costs roughly $21,250/year at the same base rates. High-risk industries like roofing, logging, and demolition can exceed $20–$30 per $100 payroll.</p>
+          <h2 style="font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px">How Workers Comp Premiums Are Calculated in 2026</h2>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">Workers compensation insurance premiums are calculated per $100 of annual payroll, using class code rates set by NCCI (National Council on Compensation Insurance) or state-specific rating bureaus. The formula is: <strong>(Annual Payroll ÷ 100) × Base Rate × E-Mod = Premium</strong>. Each variable in this formula is explained below.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">Workers Comp Rates by Industry (Approximate 2026 Base Rates)</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:12px">Rates vary enormously by job classification code. These are approximate NCCI national base rates — actual rates vary by state:</p>
+          <table style="width:100%;border-collapse:collapse;font-size:14px;margin:0 0 16px">
+            <thead>
+              <tr style="background:var(--surface-2)">
+                <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Job Class</th>
+                <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Typical Rate per $100</th>
+                <th style="padding:9px 12px;text-align:left;font-weight:700;border:1px solid var(--border)">Cost on $50,000 Payroll</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)">Clerical / office (8810)</td><td style="padding:8px 12px;border:1px solid var(--border)">$0.35–$0.75</td><td style="padding:8px 12px;border:1px solid var(--border)">$175–$375/yr</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)">Retail store (8017)</td><td style="padding:8px 12px;border:1px solid var(--border)">$1.50–$2.50</td><td style="padding:8px 12px;border:1px solid var(--border)">$750–$1,250/yr</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)">Warehouse / freight</td><td style="padding:8px 12px;border:1px solid var(--border)">$3.00–$5.00</td><td style="padding:8px 12px;border:1px solid var(--border)">$1,500–$2,500/yr</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)">Carpentry / general construction</td><td style="padding:8px 12px;border:1px solid var(--border)">$8.00–$14.00</td><td style="padding:8px 12px;border:1px solid var(--border)">$4,000–$7,000/yr</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)">Roofing (5551)</td><td style="padding:8px 12px;border:1px solid var(--border)">$20.00–$35.00</td><td style="padding:8px 12px;border:1px solid var(--border)">$10,000–$17,500/yr</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)">Trucking / delivery drivers</td><td style="padding:8px 12px;border:1px solid var(--border)">$5.00–$9.00</td><td style="padding:8px 12px;border:1px solid var(--border)">$2,500–$4,500/yr</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid var(--border)">Restaurant / food service</td><td style="padding:8px 12px;border:1px solid var(--border)">$1.50–$3.50</td><td style="padding:8px 12px;border:1px solid var(--border)">$750–$1,750/yr</td></tr>
+              <tr style="background:var(--surface-2)"><td style="padding:8px 12px;border:1px solid var(--border)">Healthcare / nursing</td><td style="padding:8px 12px;border:1px solid var(--border)">$2.00–$5.00</td><td style="padding:8px 12px;border:1px solid var(--border)">$1,000–$2,500/yr</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">What Is the Experience Modification Rate (EMR / E-Mod)?</h3>
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">The Experience Modification Rate (EMR, also called E-Mod or Experience Mod) is a multiplier applied to your workers comp base premium based on your actual claims history compared to similar businesses in your industry. An EMR of <strong>1.0 is the industry average</strong>. If you have fewer claims than average, your EMR drops below 1.0 and you pay less; more claims push it above 1.0 and you pay more.</p>
+
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>EMR calculation example for a $50,000 payroll at EMR 1.0:</strong></p>
+          <ul style="font-size:15px;color:var(--ink-2);line-height:1.75;margin:0 0 14px 20px">
+            <li>Base rate (clerical): $0.50 per $100 payroll</li>
+            <li>($50,000 ÷ 100) × $0.50 = <strong>$250 base premium</strong></li>
+            <li>$250 × 1.0 (EMR) = <strong>$250 final premium</strong></li>
+          </ul>
+
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>Same payroll at EMR 1.5 (above average claims):</strong></p>
+          <ul style="font-size:15px;color:var(--ink-2);line-height:1.75;margin:0 0 14px 20px">
+            <li>$250 × 1.5 (EMR) = <strong>$375 final premium</strong> — 50% more expensive</li>
+          </ul>
+
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px"><strong>At EMR 0.75 (better than average):</strong></p>
+          <ul style="font-size:15px;color:var(--ink-2);line-height:1.75;margin:0 0 14px 20px">
+            <li>$250 × 0.75 (EMR) = <strong>$187.50 final premium</strong> — 25% savings</li>
+          </ul>
+
+          <p style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px">EMR is calculated by your state's workers comp rating bureau (NCCI in most states) using 3 years of claims data, excluding the most recent policy year. It applies to businesses with $5,000 or more in premium and is recalculated annually. New businesses default to EMR 1.0.</p>
+
+          <h3 style="font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.3px;margin:20px 0 8px">How to Reduce Your Workers Comp Premium</h3>
+          <ul style="font-size:15px;color:var(--ink-2);line-height:1.75;margin:0 0 14px 20px">
+            <li><strong>Implement a safety program</strong> — documented safety training, PPE requirements, and incident reporting reduce claims and lower your EMR over 3 years</li>
+            <li><strong>Return-to-work programs</strong> — light duty assignments for injured workers reduce claim costs, which directly lowers your EMR</li>
+            <li><strong>Audit your class codes</strong> — misclassified employees (e.g., office staff coded as field workers) overpay significantly. Review your payroll audit annually</li>
+            <li><strong>Pay-as-you-go programs</strong> — some insurers offer premiums based on actual payroll each period rather than estimated annual payroll, eliminating large audit adjustments</li>
+            <li><strong>Shop carriers</strong> — different insurers apply different state adjustment factors to the same base rates. Get 3+ quotes annually</li>
+          </ul>
+
           <p style="font-size:15px;color:var(--ink-2);line-height:1.75">For total employer payroll costs including FICA match, FUTA, and SUTA, see the <a href="/employer-tax-calculator" style="color:var(--accent)">Employer Tax Calculator</a>. For employee take-home calculations, see the <a href="/payroll-tax-calculator" style="color:var(--accent)">Payroll Tax Calculator</a>.</p>
         </article>
 
@@ -615,7 +695,7 @@
   </div>
 </footer>
 
-<script src="/shared/scripts.js?v=4" defer></script>
+<script src="/shared/scripts.js?v=6" defer></script>
 <script>
 (function(){
   'use strict';
