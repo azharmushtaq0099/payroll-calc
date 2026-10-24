@@ -1339,7 +1339,7 @@
       items.forEach(function(i){ i.classList.remove('active'); });
       item.classList.add('active');
       applyFilter(filter);
-      history.replaceState(null,'', filter === 'all' ? '/tools' : '/tools?cat=' + filter);
+      history.replaceState(null,'', filter === 'all' ? '/tools' : '/tools#cat-' + filter);
     });
   });
 
