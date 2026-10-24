@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /tools?
+Disallow: /payroll-tax-calculator?
 Sitemap: https://www.freepayrollcalc.xyz/sitemap.xml
 
 # AI search and answer engine crawlers — explicitly allowed
