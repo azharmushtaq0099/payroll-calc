@@ -1,6 +1,12 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/blog/overtime-pay-rules-2026", "destination": "/blog/overtime-rules-flsa-2026", "permanent": true },
+    { "source": "/blog/overtime-pay-rules-explained", "destination": "/blog/overtime-rules-flsa-2026", "permanent": true },
+    { "source": "/blog/self-employment-tax-guide", "destination": "/blog/self-employment-tax-guide-2026", "permanent": true },
+    { "source": "/blog/w4-withholding-guide", "destination": "/blog/w4-withholding-guide-2026", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
